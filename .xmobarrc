@@ -1,0 +1,17 @@
+Config { font = "xft:Inconsolata:size=8"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = Top
+       , lowerOnStart = True
+       , commands = [ Run Weather "EGPF" ["-t","<station>: <tempC>C ","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 36000
+                    , Run Weather "EFHF" ["-t","<station>: <tempC>C, wind <wind>","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 36000
+    		            , Run Date "%a %b %_d %Y %H:%M:%S" "date" 7
+                    , Run Com "sh" ["~/local/bin/cpu.sh"] "cpu" 7
+                    , Run Com "sh" ["~/local/bin/mem.sh"] "mem" 7
+                    , Run Com "sh" ["~/local/bin/net.sh"] "net" 30
+                    , Run Com "uname" ["-s","-r"] "" 36000
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "<fc=#ee9a00>%cpu%</fc> | <fc=#ee9a00>%mem%</fc> | <fc=#ee9a00>%net%</fc> }{ <fc=#ee9a00>%date%</fc> | %EFHF% | %uname%"
+       }
