@@ -17,7 +17,7 @@ urxvtd -q -o -f
 urxvtc -e screen -U -D -RR  -s /bin/tcsh -m &
 xscrennsaver -no-splash &
 #while true; do date; dmesg | tail -n 10; sleep 10; done | dzen2 -l 10 -u -e '' -x 200 -w 1280 -ta r  -p &
-tint2 &
-trayer --edge bottom --align right --SetDockType true --SetPartialStrut true --expand true --width 15 --height 12 --transparent true --tint 0x000000 &
+#tint2 &
+#trayer --edge bottom --align right --SetDockType true --SetPartialStrut true --expand true --width 15 --height 12 --transparent true --tint 0x000000 &
 exec /usr/local/bin/xmonad
 
