@@ -44,18 +44,18 @@ alias cwdcmd ls-F
 alias quit 'sync;sync;sync;sudo shutdown -p now'
 alias res 'sync;sync;sync;sudo reboot'
 #alias pup 'sudo portsnap fetch update && sudo portmaster -Bdfav --clean-packages --clean-distfiles && sudo portaudit -av'
-alias pup 'sudo portsnap fetch update && sudo pkg_replace -Bcav && sudo portaudit -av'
+alias pup 'sudo portsnap fetch update && sudo pkg_replace -Bcav && sudo portaudit -av && rehash'
 alias cup 'cpan-outdated && cpan-outdated | xargs cpanm -Sv'
 alias sc screen -U -D -RR  -s /bin/tcsh -m 
 alias la gls -a --color=auto
 alias lf gls -FA --color=auto
 alias ll gls -lA --color=auto
-alias vi vim
 alias find gfind
-alias pinst sudo make  install clean distclean
+alias pinst "sudo make  install clean distclean && rehash"
 alias pconf sudo make config-recursive
 alias pclean sudo make clean distclean
 alias awk gawk
+alias vi  vim
 
 complete cd 'p/1/d/'
 complete make 'p/1/(all clean distclean depend  install install.man Makefiles buildworld installworld config-recursive)/'

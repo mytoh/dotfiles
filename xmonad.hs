@@ -2,7 +2,8 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Util.Run(spawnPipe)
+import XMonad.Hooks.UrgencyHook
+import XMonad.Util.Run
 import XMonad.Util.EZConfig(additionalKeys)
 import Data.Monoid
 import System.Exit
@@ -38,23 +39,36 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
     ]
 
-myLayout = tiled ||| Mirror tiled ||| Full
+
+myLayout = avoidStruts $  tiled ||| Mirror tiled ||| Full
   where
      tiled   = Tall nmaster delta ratio
-
      nmaster = 1
-
      ratio   = 1/2
-
      delta   = 3/100
 
 
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    [ className =? "MPlayer"        --> doFloat,
+      className =? "Gimp"           --> doFloat,
+      resource  =? "desktop_window" --> doIgnore,
+      resource  =? "kdesktop"       --> doIgnore 
+    ] <+> manageDocks <+> manageHook defaultConfig 
 
+myLogHook h = dynamicLogWithPP $ defaultPP { 
+                ppCurrent         = dzenColor "#303030" "#909090" . pad,
+                ppHidden          = dzenColor "#909090" "" .pad,
+                ppHiddenNoWindows = dzenColor "#606060" "" . pad,
+                ppLayout          = dzenColor "#909090" "" . pad,
+                ppUrgent          = wrap (dzenColor "#ff0000" "" "{") (dzenColor "#ff0000" "" "}") . pad,
+                ppTitle           = wrap "^fg(#909090)[ " " ]^fg()" . shorten 40,
+                ppWsSep           = "",
+                ppSep             = "  ",
+                ppOutput          = hPutStrLn h
+                }
+
+myStatusBar = "dzen2 -p -ta l  -x 0 -y 0 -w 500 -h 15 -fg '#606060' -bg '#303030' -e 'onexit=ungrabmouse'"
+myOtherBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 500 -y 0 -w 780 -h 15 -fg '#606060' -bg '#303030' -e 'onexit=ungrabmouse'"
 
 myEventHook = mempty
 
@@ -62,8 +76,9 @@ myStartupHook = return ()
 
 
 main = do 
-      xmproc <- spawnPipe "xmobar"
-      xmonad $ defaultConfig {
+      d <- spawnPipe myStatusBar
+      spawn myOtherBar
+      xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
         borderWidth        = myBorderWidth,
@@ -75,12 +90,9 @@ main = do
      -- keys               = myKeys,
         mouseBindings      = myMouseBindings,
 
-        layoutHook         = avoidStruts $ myLayout ,
-        manageHook         = manageDocks <+> myManageHook <+> manageHook defaultConfig,
+        layoutHook         = myLayout,
+        manageHook         = manageDocks ,
         handleEventHook    = myEventHook,
-        logHook            = dynamicLogWithPP $ xmobarPP
-                                 { ppOutput = hPutStrLn xmproc,
-                                   ppTitle = xmobarColor "green" "" . shorten 50
-                                 },
+        logHook            = myLogHook d,
         startupHook        = myStartupHook
     }
