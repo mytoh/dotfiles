@@ -13,5 +13,4 @@ mpd_port 6600
 
 TEXT
 cpu: ^fg(\#909090)${cpu}%^fg()  mem: ^fg(\#909090)${memperc}%^fg()  net: ^fg(\#909090)${downspeedf em0} / ${upspeedf em0}^fg()  ^fg(\#909090)${loadavg} ^fg(\#909090)${time %a %b %d %H:%M} 
-
-## temp: ^fg(\#909090)${weather http://weather.noaa.gov/pub/data/observations/metar/stations EFRO temperature} 
+#temp: ^fg(\#909090)${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ EFRO weather}
