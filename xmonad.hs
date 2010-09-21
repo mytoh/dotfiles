@@ -3,6 +3,7 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.ManageHelpers ((/=?))
 import XMonad.Util.Run
 import XMonad.Util.EZConfig(additionalKeys)
 import Data.Monoid
@@ -19,12 +20,6 @@ myModMask       = mod1Mask
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#0066ff"
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w,
-      ((modm, button2), (\w -> focus w >> windows W.shiftMaster)),
-      ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
-    ]
 myLayout = avoidStruts $  tiled ||| Mirror tiled ||| Full
   where
      tiled   = Tall nmaster delta ratio
@@ -34,9 +29,10 @@ myLayout = avoidStruts $  tiled ||| Mirror tiled ||| Full
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat,
       className =? "Gimp"           --> doFloat,
+      className =? "thunar"         --> doFloat,
       resource  =? "desktop_window" --> doIgnore,
       resource  =? "kdesktop"       --> doIgnore 
-    ] <+> manageDocks <+> manageHook defaultConfig 
+      ] <+> manageDocks <+> manageHook defaultConfig 
 myLogHook h = dynamicLogWithPP $ defaultPP { 
                 ppCurrent         = dzenColor "#303030" "#909090" . pad,
                 ppHidden          = dzenColor "#909090" "" .pad,
@@ -65,12 +61,8 @@ main = do
         workspaces         = myWorkspaces,
         normalBorderColor  = myNormalBorderColor,
         focusedBorderColor = myFocusedBorderColor,
-
-     -- keys               = myKeys,
-        mouseBindings      = myMouseBindings,
-
         layoutHook         = myLayout,
-        manageHook         = manageDocks ,
+        manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook d,
         startupHook        = myStartupHook
