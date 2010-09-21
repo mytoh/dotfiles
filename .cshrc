@@ -1,4 +1,3 @@
-
 set promptchars=">,#"
 set prompt="%c2 %# "
 set history=100000
@@ -63,7 +62,8 @@ complete sudo 'p/1/(make vim portsnap)/'
 complete tar      'n/{,-}[crtux]*z*f/f:*.{tar.gz,tar.Z,tgz,TGZ}/' \
                   'n/{,-}[crtux]*f/f:*.tar/'  \
                           'n/*/f/'
-                          
+
+
 source ~/perl5/perlbrew/etc/cshrc 
 
 
