@@ -62,11 +62,7 @@ complete sudo 'p/1/(make vim portsnap)/'
 complete tar      'n/{,-}[crtux]*z*f/f:*.{tar.gz,tar.Z,tgz,TGZ}/' \
                   'n/{,-}[crtux]*f/f:*.tar/'  \
                           'n/*/f/'
-
-
 source ~/perl5/perlbrew/etc/cshrc 
-
-
 alias base64 gbase64
 alias basename gbasename
 alias cat gcat
