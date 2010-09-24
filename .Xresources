@@ -11,7 +11,7 @@ urxvt*depth: 32
 urxvt*saveLines: 100000
 
 urxvt*font: \
-    xft:Inconsolata:size=10:antialias=true,\
+    xft:Inconsolata:size=8:antialias=true,\
     xft:M+ 1p:size=9:style=regular:antialias=true
 urxvt*boldFont: xft:Inconsolata:style=Bold:size=10:antialias=true
  
