@@ -44,15 +44,15 @@ myLogHook h = dynamicLogWithPP $ defaultPP {
                 ppSep             = "  ",
                 ppOutput          = hPutStrLn h
                 }
-myStatusBar = "dzen2 -p -ta l  -x 0 -y 0 -w 500 -h 15 -fg '#606060' -bg '#303030' -e 'onexit=ungrabmouse'"
-myOtherBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 500 -y 0 -w 780 -h 15 -fg '#606060' -bg '#303030' -e 'onexit=ungrabmouse'"
+myDzenBar = "dzen2 -p -ta l  -x 0 -y 0 -w 500 -h 15 -fg '#606060' -bg '#303030' -e 'onexit=ungrabmouse'"
+myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 500 -y 0 -w 780 -h 15 -fg '#606060' -bg '#303030' -e 'onexit=ungrabmouse'"
 
 myEventHook = mempty
 myStartupHook = return ()
 
 main = do 
-      d <- spawnPipe myStatusBar
-      spawn myOtherBar
+      d <- spawnPipe myDzenBar
+      spawn myConkyBar
       xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
