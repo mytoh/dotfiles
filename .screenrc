@@ -1,24 +1,24 @@
+
+escape z
 defutf8 on
 encoding utf-8 utf-8
 defencoding utf-8
-
-escape z
 vbell off
 bell_msg "Bell in window %"
 startup_message off
 autodetach on
-defscrollback 10000
 bind q quit
 bind k kill
 bindkey  prev
 bindkey  next
 defmonitor off
+defscrollback 10000
 defbce on
-
-term xterm-256color
-termcapinfo xterm-256color 'is=rmJH?7h?1;4;6l'
-termcapinfo xterm* ti@:te@
 altscreen on
+
+term xterm
+termcapinfo xterm 'Co#256:pa#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm:'
+attrcolor b ".I"
 hardstatus alwayslastline "%`%-w%{=b bw}%n %t%{-}%+w [%02c]"
 
 
