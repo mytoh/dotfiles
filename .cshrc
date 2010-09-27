@@ -24,7 +24,6 @@ set time=(8 "\
     Times of major page faults              : %R")
 
 limit coredumpsize 0
-setenv TERM xterm-256color
 setenv LANG en_US.UTF-8
 setenv EDITOR vim
 setenv PAGER less
