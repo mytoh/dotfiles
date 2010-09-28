@@ -44,8 +44,8 @@ myLogHook h = dynamicLogWithPP $ defaultPP {
                 ppSep             = "  ",
                 ppOutput          = hPutStrLn h
                 }
-myDzenBar = "dzen2 -p -ta l  -x 0 -y 0 -w 500 -h 15 -fg '#606060' -bg '#303030' -e 'onexit=ungrabmouse'"
-myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 500 -y 0 -w 780 -h 15 -fg '#606060' -bg '#303030' -e 'onexit=ungrabmouse'"
+myDzenBar = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 16 -fg '#606060' -bg '#303030' -e 'onexit=ungrabmouse'"
+myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 680 -h 16 -fg '#606060' -bg '#303030' -e 'onexit=ungrabmouse'"
 
 myEventHook = mempty
 myStartupHook = return ()

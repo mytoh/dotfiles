@@ -24,7 +24,7 @@ set time=(8 "\
     Times of major page faults              : %R")
 
 limit coredumpsize 0
-setenv LANG en_US.UTF-8
+setenv LANG en_GB.UTF-8
 setenv EDITOR vim
 setenv PAGER less
 setenv FTP_PASSIVE_MODE true
