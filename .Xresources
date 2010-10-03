@@ -1,11 +1,13 @@
 
-urxvt*background: black
+urxvt*termName: xterm
+urxvt*background: rgba:0000/0000/0000/dddd/
 urxvt*foreground: snow
-urxvt*scrollBar: False
-urxvt*transparent: True
-urxvt*inheritPixmap: True
+urxvt*depth: 32
+urxvt*scrollBar: false
+urxvt*transparent: true
+urxvt*inheritPixmap: true
+urxvt*tintColor: #000000
 urxvt*saveLines: 100000
-urxvt*termName: xterm-256color
 
 urxvt*font: \
     xft:Inconsolata:size=8:antialias=true,\
