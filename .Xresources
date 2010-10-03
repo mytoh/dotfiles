@@ -9,11 +9,15 @@ urxvt*inheritPixmap: true
 urxvt*tintColor: #000000
 urxvt*saveLines: 100000
 
+urxvt*perl-ext-common: default,master
+urxvt*urlLauncher: firefox3
+urxvt*matcher.button: 2
+urxvt*matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+
 urxvt*font: \
     xft:Inconsolata:size=8:antialias=true,\
     xft:M+ 1p:size=9:style=regular:antialias=true
 urxvt*boldFont: xft:Inconsolata:style=Bold:size=10:antialias=true
- 
 
 urxvt*color0: #000000
 urxvt*color1: #CD0000
