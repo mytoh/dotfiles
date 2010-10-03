@@ -6,7 +6,7 @@ urxvt*depth: 32
 urxvt*scrollBar: false
 urxvt*transparent: true
 urxvt*inheritPixmap: true
-urxvt*tintColor: #000000
+urxvt*tintColor: green
 urxvt*saveLines: 100000
 
 urxvt*perl-ext-common: default,master
