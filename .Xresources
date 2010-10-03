@@ -1,11 +1,10 @@
-#--------------urxvt---------
 
-urxvt*background: black
+urxvt*background: rgba:0000/0000/0000/dddd
 urxvt*foreground: snow
 urxvt*scrollBar: False
 urxvt*transparent: true
-urxvt*inheritPixmap: True
-urxvt*tintColor: pink
+urxvt*inheritPixmap: true
+urxvt*tintColor: #000000
 urxvt*shading: 15
 urxvt*preeditType: root
 urxvt*depth: 32
@@ -35,7 +34,6 @@ urxvt*color13: #FF00FF
 urxvt*color14: #00FFFF
 urxvt*color15: #FFFFFF
 
-#-----------------dzen2----------------------
 
 dzen2.font:       -*-fixed-*-*-*-*-*-*-*-*-*-*-*-*
 dzen2.foreground: #22EEll
