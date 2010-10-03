@@ -1,13 +1,9 @@
 
-urxvt*background: rgba:0000/0000/0000/dddd
+urxvt*background: black
 urxvt*foreground: snow
 urxvt*scrollBar: False
-urxvt*transparent: true
-urxvt*inheritPixmap: true
-urxvt*tintColor: #000000
-urxvt*shading: 15
-urxvt*preeditType: root
-urxvt*depth: 32
+urxvt*transparent: True
+urxvt*inheritPixmap: True
 urxvt*saveLines: 100000
 urxvt*termName: xterm-256color
 
