@@ -1,40 +1,41 @@
 
-urxvt*termName: xterm
-urxvt*background: rgba:0000/0000/0000/dddd/
-urxvt*foreground: snow
-urxvt*depth: 32
-urxvt*scrollBar: false
-urxvt*transparent: true
-urxvt*inheritPixmap: true
-urxvt*tintColor: green
-urxvt*saveLines: 100000
+urxvt.termName: xterm
+urxvt.background: rgba:0000/0000/0000/dddd/
+urxvt.foreground: snow
+urxvt.depth: 32
+urxvt.scrollBar: false
+urxvt.transparent: true
+urxvt.shading: 20
+urxvt.tintColor: #0000ff
+urxvt.saveLines: 100000
+urxvt.mouseWheelScrollPage: true
 
-urxvt*perl-ext-common: default,master
-urxvt*urlLauncher: firefox3
-urxvt*matcher.button: 2
-urxvt*matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+urxvt.perl-ext-common: default,matcher
+urxvt.urlLauncher: firefox3
+urxvt.matcher.button: 2
+urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
-urxvt*font: \
+urxvt.font: \
     xft:Inconsolata:size=8:antialias=true,\
     xft:M+ 1p:size=9:style=regular:antialias=true
-urxvt*boldFont: xft:Inconsolata:style=Bold:size=10:antialias=true
+urxvt.boldFont: xft:Inconsolata:style=Bold:size=10:antialias=true
 
-urxvt*color0: #000000
-urxvt*color1: #CD0000
-urxvt*color2: #00CD00
-urxvt*color3: #CDCD00
-urxvt*color4: #1E90FF
-urxvt*color5: #CD00CD
-urxvt*color6: #00CDCD
-urxvt*color7: #E5E5E5
-urxvt*color8: #4C4C4C
-urxvt*color9: #FF0000
-urxvt*color10: #00FF00
-urxvt*color11: #FFFF00
-urxvt*color12: #4682B4
-urxvt*color13: #FF00FF
-urxvt*color14: #00FFFF
-urxvt*color15: #FFFFFF
+urxvt.color0: #000000
+urxvt.color1: #CD0000
+urxvt.color2: #00CD00
+urxvt.color3: #CDCD00
+urxvt.color4: #1E90FF
+urxvt.color5: #CD00CD
+urxvt.color6: #00CDCD
+urxvt.color7: #E5E5E5
+urxvt.color8: #4C4C4C
+urxvt.color9: #FF0000
+urxvt.color10: #00FF00
+urxvt.color11: #FFFF00
+urxvt.color12: #4682B4
+urxvt.color13: #FF00FF
+urxvt.color14: #00FFFF
+urxvt.color15: #FFFFFF
 
 
 dzen2.font:       -*-fixed-*-*-*-*-*-*-*-*-*-*-*-*

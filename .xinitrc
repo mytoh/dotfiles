@@ -11,7 +11,7 @@ xsetroot -cursor_name left_ptr -solid black &
 xmodmap .Xmodmap
 feh --bg-scale ~/local/var/pic/eilanya.png &
 urxvtd -q -o -f 
-urxvtc -tint white -sh 35 -e screen -U -D -RR  -s /bin/tcsh -m &
+urxvtc -e screen -U -D -RR  -s /bin/tcsh -m &
 xscrennsaver -no-splash &
 exec startxfce4
 
