@@ -9,7 +9,7 @@ colorscheme abyss
 set go-=rb
 set hintchars=hjklasdf
 set wildoptions=auto
-set complete=sSb
+set complete=sb
 set defsearch="google"
 
 "delicious_search
