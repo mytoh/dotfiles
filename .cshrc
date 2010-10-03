@@ -54,6 +54,7 @@ alias pconf sudo make config-recursive
 alias pclean sudo make clean distclean
 alias awk gawk
 alias vi  vim
+alias view "vim -R -"
 
 complete cd 'p/1/d/'
 complete make 'p/1/(all clean distclean depend  install install.man Makefiles buildworld installworld config-recursive)/'
@@ -61,7 +62,7 @@ complete sudo 'p/1/(make vim portsnap)/'
 complete tar      'n/{,-}[crtux]*z*f/f:*.{tar.gz,tar.Z,tgz,TGZ}/' \
                   'n/{,-}[crtux]*f/f:*.tar/'  \
                           'n/*/f/'
-source ~/perl5/perlbrew/etc/cshrc 
+                          #source ~/perl5/perlbrew/etc/cshrc 
 alias base64 gbase64
 alias basename gbasename
 alias cat gcat
