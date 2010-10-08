@@ -25,6 +25,7 @@ set time=(8 "\
 
 limit coredumpsize 0
 setenv LANG en_GB.UTF-8
+setenv LC_ALL C
 setenv EDITOR vim
 setenv PAGER less
 setenv FTP_PASSIVE_MODE true

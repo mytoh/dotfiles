@@ -5,8 +5,9 @@ urxvt.foreground: snow
 urxvt.depth: 32
 urxvt.scrollBar: false
 urxvt.transparent: true
-urxvt.shading: 20
-urxvt.tintColor: #0000ff
+urxvt.shading: 50
+urxvt.tintColor: #000000
+urxvt.preeditType: root
 urxvt.saveLines: 100000
 urxvt.mouseWheelScrollPage: true
 

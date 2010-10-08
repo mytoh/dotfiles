@@ -13,5 +13,6 @@ feh --bg-scale ~/local/var/pic/eilanya.png &
 urxvtd -q -o -f 
 urxvtc -e screen -U -D -RR  -s /bin/tcsh -m &
 xscrennsaver -no-splash &
-exec startxfce4
+exec xmonad.hs
+
 
