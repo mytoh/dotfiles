@@ -6,6 +6,7 @@ import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.ManageHelpers ((/=?))
 import XMonad.Util.Run
 import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Hooks.EwmhDesktops
 import Data.Monoid
 import System.Exit
 import System.IO
@@ -20,7 +21,7 @@ myModMask       = mod1Mask
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#0066ff"
-myLayout = avoidStruts $  tiled ||| Mirror tiled ||| Full
+myLayout =  avoidStruts $  tiled ||| Mirror tiled ||| Full
   where
      tiled   = Tall nmaster delta ratio
      nmaster = 1
@@ -53,7 +54,7 @@ myStartupHook = return ()
 main = do 
       d <- spawnPipe myDzenBar
       spawn myConkyBar
-      xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
+      xmonad $ ewmh $ withUrgencyHook NoUrgencyHook $ defaultConfig {
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
         borderWidth        = myBorderWidth,
