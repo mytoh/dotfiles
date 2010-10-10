@@ -79,7 +79,7 @@ alias csplit gcsplit
 alias cut gcut
 alias date gdate
 alias dd gdd
-alias df gdf
+alias df gdf -h
 alias dir gdir
 alias dircolors gdircolors
 alias dirname gdirname
