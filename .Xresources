@@ -1,12 +1,12 @@
 
 urxvt.termName: xterm
 urxvt.background: rgba:0000/0000/0000/dddd/
-urxvt.foreground: snow
+urxvt.foreground: [90]snow
 urxvt.depth: 32
 urxvt.scrollBar: false
 urxvt.transparent: true
-urxvt.shading: 50
-urxvt.tintColor: #000000
+urxvt.shading: 60
+urxvt.tintColor: #dddddd
 urxvt.preeditType: root
 urxvt.saveLines: 100000
 urxvt.mouseWheelScrollPage: true
@@ -39,6 +39,3 @@ urxvt.color14: #00FFFF
 urxvt.color15: #FFFFFF
 
 
-dzen2.font:       -*-fixed-*-*-*-*-*-*-*-*-*-*-*-*
-dzen2.foreground: #22EEll
-dzen2.background: black

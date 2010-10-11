@@ -42,8 +42,8 @@ bindkey "" history-search-forward
 alias cwdcmd ls-F
 alias quit 'sync;sync;sync;sudo shutdown -p now'
 alias res 'sync;sync;sync;sudo reboot'
-#alias pup 'sudo portsnap fetch update && sudo portmaster -Bdfav --clean-packages --clean-distfiles && sudo portaudit -Fdav'
-alias pup 'sudo portsnap fetch update && sudo pkg_replace -Bcav && sudo portaudit -av && rehash'
+alias pup 'sudo portsnap fetch update && sudo portmaster -Bdav --clean-packages --clean-distfiles && sudo portaudit -Fdav'
+#alias pup 'sudo portsnap fetch update && sudo pkg_replace -Bcav && sudo portaudit -av && rehash'
 alias cup 'cpan-outdated && cpan-outdated | xargs cpanm -Sv'
 alias sc screen -U -D -RR  -s /bin/tcsh -m 
 alias la gls -a --color=auto
@@ -63,6 +63,7 @@ complete sudo 'p/1/(make vim portsnap)/'
 complete tar      'n/{,-}[crtux]*z*f/f:*.{tar.gz,tar.Z,tgz,TGZ}/' \
                   'n/{,-}[crtux]*f/f:*.tar/'  \
                           'n/*/f/'
+complete {pkg_*,port*} 'n...@*@D:/var/db/pkg@ @'
                           #source ~/perl5/perlbrew/etc/cshrc 
 alias base64 gbase64
 alias basename gbasename

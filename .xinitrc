@@ -7,13 +7,15 @@ export XIM_PROGRAM="ibus-daemon"
 export XIM_ARGS="-r --daemonize --xim"
 ibus-daemon -d -x &
 xrdb -merge .Xresources
-xsetroot -cursor_name left_ptr -solid black &
 xmodmap .Xmodmap
-feh --bg-scale ~/local/var/pic/eilanya.png &
+xsetroot -cursor_name left_ptr -solid black &
+feh --bg-scale ~/local/var/pic/back.jpg &
 urxvtd -q -o -f 
 urxvtc -e screen -U -D -RR  -s /bin/tcsh -m &
 xscrennsaver -no-splash &
-tint2 & 
+#tint2 & 
 exec xmonad
+
+
 
 
