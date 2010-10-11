@@ -5,7 +5,7 @@ urxvt.foreground: [90]snow
 urxvt.depth: 32
 urxvt.scrollBar: false
 urxvt.transparent: true
-urxvt.shading: 60
+urxvt.shading: 50
 urxvt.tintColor: #dddddd
 urxvt.preeditType: root
 urxvt.saveLines: 100000
