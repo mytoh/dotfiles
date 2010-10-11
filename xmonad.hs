@@ -1,12 +1,14 @@
 
 import XMonad
+import XMonad.ManageHook
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers 
 import XMonad.Hooks.UrgencyHook
-import XMonad.Hooks.ManageHelpers ((/=?))
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Layout.NoBorders
 import XMonad.Util.Run
 import XMonad.Util.EZConfig(additionalKeys)
-import XMonad.Hooks.EwmhDesktops
 import Data.Monoid
 import System.Exit
 import System.IO
@@ -21,16 +23,17 @@ myModMask       = mod1Mask
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#0066ff"
-myLayout =  avoidStruts $  tiled ||| Mirror tiled ||| Full
+myLayout =  smartBorders $ avoidStruts $  tiled ||| Mirror tiled ||| Full
   where
      tiled   = Tall nmaster delta ratio
      nmaster = 1
      ratio   = 1/2
      delta   = 3/100
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat,
+    [ isFullscreen                  --> (doF W.focusDown <+> doFullFloat),
+      className =? "MPlayer"        --> doFloat,
       className =? "Gimp"           --> doFloat,
-      className =? "thunar"         --> doFloat,
+      className =? "Thunar"         --> doFloat,
       resource  =? "desktop_window" --> doIgnore,
       resource  =? "kdesktop"       --> doIgnore 
       ] <+> manageDocks <+> manageHook defaultConfig 

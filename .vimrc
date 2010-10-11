@@ -15,6 +15,7 @@ set smartcase
 set hlsearch
 set incsearch
 set showmode
+set nomodeline
 set history=10000
 set autoindent
 set smartindent
