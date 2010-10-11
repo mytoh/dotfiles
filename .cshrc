@@ -41,9 +41,15 @@ bindkey "" history-search-forward
 
 alias cwdcmd ls-F
 alias quit 'sync;sync;sync;sudo shutdown -p now'
+<<<<<<< HEAD
 alias res 'sync;sync;sync;sudo reboot'
 alias pup 'sudo portsnap fetch update && sudo portmaster -Bdav --clean-packages --clean-distfiles && sudo portaudit -Fdav'
 #alias pup 'sudo portsnap fetch update && sudo pkg_replace -Bcav && sudo portaudit -av && rehash'
+=======
+alias res 'sync;sync;sync;sudo shutdown -r now'
+#alias pup 'sudo portsnap fetch update && sudo portmaster -Bdfav --clean-packages --clean-distfiles && sudo portaudit -Fdav'
+alias pup 'sudo portsnap fetch update && sudo pkg_replace -Bcav && sudo portaudit -av && rehash'
+>>>>>>> 8a4332419a683c7b0e504c11308c4b27fe0dff03
 alias cup 'cpan-outdated && cpan-outdated | xargs cpanm -Sv'
 alias sc screen -U -D -RR  -s /bin/tcsh -m 
 alias la gls -a --color=auto
