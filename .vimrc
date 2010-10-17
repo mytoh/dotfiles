@@ -42,7 +42,7 @@ set t_Co=256
 colorscheme xoria256
 
 " encodings
-"set enc=utf-8
+set enc=utf-8
 "set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
 
 "keymaps
