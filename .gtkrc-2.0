@@ -1,4 +1,5 @@
 
-gtk-theme-name = "Clearlooks"
-gtk-icon-theme-name = "Tango"
+gtk-theme-name = "Neon"
+gtk-icon-theme-name = "gnome-carbonate"
+gtk-font-name = "Inconsolata"
 

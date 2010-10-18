@@ -20,7 +20,7 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 myBorderWidth   = 1
 myModMask       = mod1Mask
-myWorkspaces    =  ["yk", "ka" ,"ko", "ne", "vi", "ku", "se", "kasi", "ysi"] 
+myWorkspaces    =  ["&#945", "ka" ,"ko", "ne", "vi", "ku", "se", "kasi", "ysi"] 
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#0066ff"
 
@@ -55,6 +55,7 @@ myLogHook h = dynamicLogWithPP $ defaultPP {
                 ppSep             = "  ",
                 ppOutput          = hPutStrLn h
                 }
+
 myDzenBar = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 
