@@ -20,7 +20,7 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 myBorderWidth   = 1
 myModMask       = mod1Mask
-myWorkspaces    =  ["&#945", "ka" ,"ko", "ne", "vi", "ku", "se", "kasi", "ysi"] 
+myWorkspaces    =  ["a", "b", "c", "d", "e", "f", "g", "h", "i"] 
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#0066ff"
 
