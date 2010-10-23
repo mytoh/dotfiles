@@ -54,6 +54,9 @@ noremap <CR> o<ESC>
 nmap n nzz
 nmap N Nzz
 
+"abbrev
+cabbrev e tabe
+
 "helptags $HOME/.vim/doc/
 
 autocmd BufWritePost .vimrc source $MYVIMRC
@@ -81,5 +84,5 @@ let g:fuf_file_exclude = '\v\~$|\.(o|exe|bak|swp|gif|jpg|png|)$|(^|[/\\])\.(hg|g
 let g:fuf_enumeratingLimit = 20
 let g:fuf_keyPreview = '>'
 
-
-
+" vimfiler ----------------------
+let g:vimfiler_as_default_explorer = 1
