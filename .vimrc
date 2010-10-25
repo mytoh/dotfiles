@@ -51,6 +51,7 @@ set enc=utf-8
 noremap ; :
 noremap : ;
 noremap <CR> o<ESC>
+noremap <SPACE> i<SPACE><ESC>
 nmap n nzz
 nmap N Nzz
 
