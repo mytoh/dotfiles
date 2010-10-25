@@ -1,5 +1,5 @@
 set promptchars=">,#"
-set prompt="%c2 %# "
+set prompt="[%n@%m] %c2 %# "
 set history=100000
 set savehist=(100000 merge)
 set autolist = ambiguous

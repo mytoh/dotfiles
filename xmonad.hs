@@ -1,14 +1,20 @@
 
 import XMonad
 import XMonad.ManageHook
+
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers 
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.EwmhDesktops
+
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Tabbed
+
 import XMonad.Util.Run
 import XMonad.Util.EZConfig
+import XMonad.Util.Themes
+
 import Data.Monoid
 import System.Exit
 import System.IO
@@ -27,12 +33,7 @@ myFocusedBorderColor = "#0066ff"
 -- myKeys = \c -> mkKeymap c $
 --                 [ ("M-p", spawn "exe=`dmenu_path | dmenu -l 7 -nb black -nf darkgrey -fn 'terminus-8' ` && eval \"exec $exe\"") ]
 
-myLayout =  smartBorders $ avoidStruts $  (tiled ||| Mirror tiled ||| Full)
-  where
-     tiled   = Tall nmaster delta ratio
-     nmaster = 1
-     ratio   = 1/2
-     delta   = 3/100
+myLayout = avoidStruts $ smartBorders $ (tabbedBottom shrinkText (theme smallClean) ||| Full)
      
 myManageHook = composeAll
     [ isFullscreen                  --> (doF W.focusDown <+> doFullFloat),
