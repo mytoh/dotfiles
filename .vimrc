@@ -2,8 +2,8 @@
 "pathogen
 call pathogen#runtime_append_all_bundles()
 
-filetype plugin  on
-filetype indent on
+filetype on
+filetype plugin indent on
 syntax on
 
 set nobackup
