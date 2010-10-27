@@ -33,7 +33,7 @@ myFocusedBorderColor = "#0066ff"
 -- myKeys = \c -> mkKeymap c $
 --                 [ ("M-p", spawn "exe=`dmenu_path | dmenu -l 7 -nb black -nf darkgrey -fn 'terminus-8' ` && eval \"exec $exe\"") ]
 
-myLayout = avoidStruts $ smartBorders $ (tabbed shrinkText (theme smallClean) ||| Full)
+myLayout = avoidStruts $ smartBorders $ (tallTabbed shrinkText (theme smallClean) ||| Full)
      
 myManageHook = composeAll
     [ isFullscreen                  --> (doF W.focusDown <+> doFullFloat),
@@ -58,7 +58,7 @@ myLogHook h = dynamicLogWithPP $ dzenPP {
                 }
 
 myLeftBar = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
-myRightBar = "~/local/bin/dzen.sh | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
+myRightBar = "~/local/bin/dzen.sh" 
 -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 
 myEventHook = ewmhDesktopsEventHook
