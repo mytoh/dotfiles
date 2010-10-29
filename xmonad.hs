@@ -58,7 +58,7 @@ myLogHook h = dynamicLogWithPP $ dzenPP {
                 }
 
 myLeftBar = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
-myRightBar = "~/local/bin/dzen.sh" 
+myRightBar = "~/.dzen/bin/dzen.sh" 
 -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 
 myEventHook = ewmhDesktopsEventHook
