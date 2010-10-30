@@ -15,10 +15,12 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers 
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.InsertPosition
 
 import XMonad.Layout.NoBorders
-import XMonad.Layout.DecorationMadness
+import XMonad.Layout.Tabbed
 import XMonad.Layout.LayoutCombinators
+import XMonad.Layout.Decoration
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell
@@ -39,7 +41,20 @@ myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#0066ff"
 
 -- Layouts
-myLayout = avoidStruts $ smartBorders $ (tallTabbed shrinkText (theme smallClean) ||| Full)
+myLayout =  avoidStruts $ smartBorders $ addTabsBottomAlways shrinkText myTheme tiled ||| Full
+              where
+                tiled   = Tall nmaster delta ratio
+                nmaster = 1
+                ratio   = 1/2
+                delta   = 3/100
+
+-- theme config
+myTheme = defaultTheme {
+                activeTextColor     = "#303030",
+                activeColor         = "#909090",
+                fontName            = "xft:Inconsolata:size=8",
+                decoHeight          = 14
+}
 
 -- keybindings
 myKeys = [
@@ -51,7 +66,7 @@ myKeys = [
      where
         notSP = (return $ ("SP" /=) . W.tag) :: X (WindowSpace -> Bool)
 
--- prompt configuration
+-- prompt config
 myXPConfig = defaultXPConfig {
               position        = Bottom,
               promptBorderWidth = 0,
@@ -64,8 +79,9 @@ myXPConfig = defaultXPConfig {
               }
 
 
+
      
-myManageHook = composeAll
+myManageHook = insertPosition End Newer <+> composeAll
     [ isFullscreen                  --> (doF W.focusDown <+> doFullFloat),
       isDialog                      --> doCenterFloat,
       className =? "MPlayer"        --> doFloat,
