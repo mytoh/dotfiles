@@ -1,11 +1,11 @@
 
 urxvt.termName: xterm
-urxvt.background: rgba:0000/0000/0000/dddd/
+urxvt.background: rgba:0000/0000/0000/4444/
 urxvt.foreground: [90]snow
 urxvt.depth: 32
 urxvt.scrollBar: false
 urxvt.transparent: true
-urxvt.shading: 50
+urxvt.shading: 30
 urxvt.tintColor: #dddddd
 urxvt.preeditType: root
 urxvt.saveLines: 100000
