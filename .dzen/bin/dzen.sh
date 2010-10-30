@@ -1,7 +1,7 @@
 #!/bin/sh
 
 date_format='%a %b %d %H:%M'
-icons="/home/mytoh/.dzen/icons"
+icons="$HOME/.dzen/icons"
 byte=`expr 1024 \* 1024`
 interval=2
 
