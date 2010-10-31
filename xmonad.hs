@@ -16,6 +16,7 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.InsertPosition
+import XMonad.Hooks.FadeInactive
 
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
@@ -28,8 +29,8 @@ import XMonad.Prompt.Shell
 import XMonad.Util.Run
 import XMonad.Util.EZConfig
 import XMonad.Util.Themes
-import XMonad.Util.Scratchpad
 import XMonad.Util.WorkspaceCompare
+import XMonad.Util.NamedScratchpad
 
 myTerminal    = "urxvtc "
 myFocusFollowsMouse :: Bool
@@ -39,39 +40,44 @@ myModMask       = mod1Mask
 myWorkspaces    =  ["a", "b", "c", "d", "e", "f", "g", "h", "i"] 
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#0066ff"
+myXftFont = "xft:Inconsolata:size=7"
+-- myDzenFont = "-mplus-sys-medium-r-normal--10-100-75-75-p-60-iso8859-15"
 
 -- Layouts
 myLayout =  avoidStruts $ smartBorders $ addTabsBottomAlways shrinkText myTheme tiled ||| Full
               where
                 tiled   = Tall nmaster delta ratio
                 nmaster = 1
-                ratio   = 1/2
-                delta   = 3/100
+                ratio   = 3/5
+                delta   = 2/100
 
 -- theme config
 myTheme = defaultTheme {
                 activeTextColor     = "#303030",
                 activeColor         = "#909090",
-                fontName            = "xft:Inconsolata:size=8",
-                decoHeight          = 14
+                fontName            = myXftFont,
+                decoHeight          = 13
 }
 
 -- keybindings
 myKeys = [
-     ("M-p", shellPrompt myXPConfig),
+     ("M-s", shellPrompt myXPConfig),
      ("M-f", sendMessage $ JumpToLayout "Full"),
-     ("M-<R>", moveTo Next (WSIs notSP)),
-     ("M-<L>" , moveTo Prev (WSIs notSP)) 
+     ("M-n", moveTo Next (WSIs notSP)),
+     ("M-p", moveTo Prev (WSIs notSP)),
+     ("M-t", scratchFiler)
      ]
      where
         notSP = (return $ ("SP" /=) . W.tag) :: X (WindowSpace -> Bool)
+
+        scratchFiler = namedScratchpadAction myScratchPads "thunar"
 
 -- prompt config
 myXPConfig = defaultXPConfig {
               position        = Bottom,
               promptBorderWidth = 0,
               height            = 14,
-              font              = "--adobe-helvetica-medium-r-normal--11-*",
+              font              = myXftFont,
               bgColor           = "#2a2733",
               fgColor           = "#aa9dcf",
               bgHLight          = "#6b6382",
@@ -80,28 +86,44 @@ myXPConfig = defaultXPConfig {
 
 
 
-     
+-- manage hooks     
 myManageHook = insertPosition End Newer <+> composeAll
     [ isFullscreen                  --> (doF W.focusDown <+> doFullFloat),
-      isDialog                      --> doCenterFloat,
-      className =? "MPlayer"        --> doFloat,
-      className =? "Main.py"        --> doFloat,
-      className =? "Gimp"           --> doFloat,
-      className =? "DTA"            --> doFloat,
-      className =? "Firefox" <&&> resource /=? "Navigator"  --> doFloat,
-      className =? "Thunar"         --> doCenterFloat,
-      resource  =? "desktop_window" --> doIgnore
-      ] <+> manageDocks <+> manageHook defaultConfig 
+      isDialog                      --> doFloat,
+      className =? "MPlayer" --> doFloat,
+      className =? "Main.py" --> doFloat,
+      className =? "Gimp"    --> doFloat,
+      className =? "DTA"     --> doFloat,
+      (className =? "Firefox" <&&> resource =? "Dialog")  --> doFloat
+      ] 
+        <+> manageDocks 
+        <+> manageHook defaultConfig 
+        <+> namedScratchpadManageHook myScratchPads
+
+myScratchPads = [ NS "thunar" spawnFiler findFiler manageFiler
+                ]
+    where
+      spawnFiler  = "thunar"
+      findFiler   = className =? "Thunar"
+      manageFiler = customFloating $ W.RationalRect l t w h
+        
+        where
+          h = 0.6
+          w = 0.6
+          t = (1 - h)/2
+          l = (1 - w)/2
+
       
-myLogHook h = dynamicLogWithPP $ dzenPP { 
+myLogHook h =  dynamicLogWithPP $ dzenPP { 
                 ppCurrent         = dzenColor "#303030" "#909090" . pad,
                 ppHidden          = dzenColor "#909090" "" .pad,
                 ppHiddenNoWindows = dzenColor "#606060" "" . pad,
                 ppLayout          = dzenColor "#909090" "" . pad,
                 ppUrgent          = wrap (dzenColor "#ff0000" "" "{") (dzenColor "#ff0000" "" "}") . pad,
-                ppTitle           = wrap "^fg(#909090)[ " " ]^fg()" . shorten 40,
+                ppTitle           = wrap "^fg(#909090)[ " " ]^fg()" . shorten 50,
+                ppVisible         = wrap "{" "}",
                 ppWsSep           = "",
-                ppSep             = "  ",
+                ppSep             = "  |  ",
                 ppOutput          = hPutStrLn h
                 }
 

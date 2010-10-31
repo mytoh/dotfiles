@@ -3,7 +3,7 @@
 date_format='%a %b %d %H:%M'
 icons="$HOME/.dzen/icons"
 byte=`expr 1024 \* 1024`
-interval=2
+interval=1
 
 
 while :; do
@@ -11,9 +11,9 @@ while :; do
 
   cpu=`top -b -d 2 | grep ^CPU | gawk '{print $2,$6}'`
 
-  rx=`bwm-ng -o plain -c 1 -I em0 -t 1 -T avg| grep em0 | gawk '{print $2,$3}'`
+  rx=`bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | gawk '{print $2,$3}'`
 
-  tx=`bwm-ng -o plain -c 1 -I em0 -t 1 -T avg| grep em0 | gawk '{print $4,$5}'`
+  tx=`bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | gawk '{print $4,$5}'`
 
   free=`sysctl -n vm.stats.vm.v_free_count` 
   count=`sysctl -n vm.stats.vm.v_page_count`

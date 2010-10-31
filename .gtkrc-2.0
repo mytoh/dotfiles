@@ -1,6 +1,41 @@
 
-gtk-theme-name = "Murrina-Black"
-gtk-icon-theme-name = "gnome-carbonate"
+gtk-theme-name = "deviantArt"
+gtk-icon-theme-name = "gnome-sublime"
 gtk-cursor-theme-name = "Blackcat"
 gtk-font-name = "M+ 1c 8"
 
+# Ambiance
+# Ambiance-CSD
+# AmbianceRefinedIII
+# AmbianceRefinedIIIClassic
+# AmbianceRefinedIIIRight
+# Equinox
+# Equinox Classic
+# Equinox Classic Glass
+# Equinox Evolution
+# Equinox Evolution Dark
+# Equinox Evolution Light
+# Equinox Evolution Rounded
+# Equinox Evolution Squared
+# Equinox Glass
+# Equinox Light
+# Equinox Light Glass
+# Equinox Wide
+# Flow-Aqua
+# Flow-Brave
+# Flow-Common
+# Flow-Dust
+# Flow-Element
+# Flow-Human
+# Flow-Illustrious
+# Flow-Noble
+# Flow-Radiance
+# Flow-Seafoam
+# Flow-Shade
+# Flow-Sublime
+# Flow-Wine
+# Flow-Wise
+# Murrina-Black
+# Radiance
+# Stand_Alone_Complex
+# deviantArt
