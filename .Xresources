@@ -6,14 +6,14 @@ urxvt.depth: 32
 urxvt.scrollBar: false
 urxvt.transparent: true
 urxvt.shading: 30
-urxvt.tintColor: #0000ff
+urxvt.tintColor: #ffffff
 urxvt.preeditType: root
 urxvt.saveLines: 100000
 urxvt.mouseWheelScrollPage: true
 
 urxvt.perl-ext-common: default,matcher
 urxvt.urlLauncher: firefox3
-urxvt.matcher.button: 2
+urxvt.matcher.button: 1
 urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
 urxvt.font: \
