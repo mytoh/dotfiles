@@ -6,7 +6,7 @@ urxvt.depth: 32
 urxvt.scrollBar: false
 urxvt.transparent: true
 urxvt.shading: 30
-urxvt.tintColor: #dddddd
+urxvt.tintColor: #0000ff
 urxvt.preeditType: root
 urxvt.saveLines: 100000
 urxvt.mouseWheelScrollPage: true
