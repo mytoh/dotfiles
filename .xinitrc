@@ -9,7 +9,7 @@ ibus-daemon -d -x &
 xrdb -merge .Xresources
 xmodmap .Xmodmap
 xsetroot -cursor_name left_ptr -solid black &
-feh --bg-scale ~/local/var/pic/back.png &
+feh --bg-scale ~/local/var/pic/back.jpg &
 urxvtd -q -o -f 
 urxvtc -e screen -U -D -RR  -s /bin/tcsh -m &
 xscrennsaver -no-splash &
