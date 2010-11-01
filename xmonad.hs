@@ -17,6 +17,7 @@ import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.FadeInactive
+import XMonad.Hooks.XPropManage
 
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
@@ -105,13 +106,13 @@ myScratchPads = [ NS "thunar" spawnFiler findFiler manageFiler
     where
       spawnFiler  = "thunar"
       findFiler   = className =? "Thunar"
-      manageFiler = customFloating $ W.RationalRect l t w h
-        
-        where
-          h = 0.6
-          w = 0.6
-          t = (1 - h)/2
-          l = (1 - w)/2
+      manageFiler = defaultFloating
+--    manageFiler = customFloating $ W.RationalRect l t w h
+--      where
+--          h = 0.6
+--          w = 0.6
+--          t = (1 - h)/2
+--          l = (1 - w)/2
 
       
 myLogHook h =  dynamicLogWithPP $ dzenPP { 
@@ -124,6 +125,7 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
                 ppVisible         = wrap "{" "}",
                 ppWsSep           = "",
                 ppSep             = "  |  ",
+                ppSort            = fmap (namedScratchpadFilterOutWorkspace.) (ppSort dzenPP),
                 ppOutput          = hPutStrLn h
                 }
 

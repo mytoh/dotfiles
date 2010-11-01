@@ -11,6 +11,7 @@ set hintchars=hjklasdf
 set wildoptions=auto
 set complete=bs
 set defsearch="google"
+set newtab=help,addons,extoptions
 
 "delicious_search
 autocmd VimperatorEnter ".*" :set complete+=D
