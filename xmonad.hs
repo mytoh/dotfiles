@@ -31,6 +31,17 @@ import XMonad.Layout.LayoutHints
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
+import XMonad.Layout.OneBig
+import XMonad.Layout.TwoPane
+import XMonad.Layout.MosaicAlt
+import XMonad.Layout.Spiral
+import XMonad.Layout.Master
+import XMonad.Layout.LimitWindows
+import XMonad.Layout.Reflect
+import XMonad.Layout.Named
+import XMonad.Layout.WindowNavigation
+
+
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell
@@ -49,26 +60,37 @@ myModMask       = mod1Mask
 myWorkspaces    =  ["a", "b", "c", "d", "e", "f", "g", "h", "i"] 
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#0066ff"
-myXftFont = "xft:Inconsolata:size=9"
+myXftFont = "xft: fixed-9"
 myDzenFont = "-adobe-helvetica-medium-r-normal--11-*"
 
 -- Layouts
-myLayout =  avoidStruts $ mkToggle (single NBFULL) $ smartBorders (addTabsBottomAlways shrinkText myTheme tiled) ||| full
-              where
-                tiled   = (ResizableTall nmaster delta ratio [])
-                nmaster = 1
-                delta   = 2/100
-                ratio   = toRational (2/(1 + sqrt 5 :: Double))
+myLayout =  avoidStruts $ 
+            windowNavigation $
+            mkToggle (single NBFULL) $ 
+            mkToggle (single REFLECTX) $
+            mkToggle (single REFLECTY) $
+            (collectiveLayouts)
 
-                full    = noBorders Full
-                
+              where
+                collectiveLayouts = myFull ||| myTwoP ||| myTabD ||| myTile ||| myOneB ||| myMosC ||| mySprL
+
+                myFull = named "*" (smartBorders (noBorders Full))
+                myTile = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
+                myTabD = named "=" (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedAlways shrinkText myTheme)))
+                myTwoP = named "-" (smartBorders (withBorder 1 (TwoPane 0.02 0.4)))
+                myMosC = named "%" (smartBorders (withBorder 1 (MosaicAlt M.empty)))
+                mySprL = named "@" (smartBorders (withBorder 1 (limitWindows 5 (spiral gRatio))))
+                myOneB = named "#" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
+
+                gRatio =toRational goldenRatio
+                goldenRatio = 2/(1+sqrt(5)::Double);
 
 -- theme config
 myTheme = defaultTheme {
-                activeTextColor     = "#909090",
+            --  activeTextColor     = "#909090",
             --  activeColor         = "#909090",
                 fontName            = myXftFont,
-                decoHeight          = 14
+                decoHeight          = 13
 }
 
 -- keybindings
@@ -134,7 +156,30 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
                 ppCurrent         = dzenColor "#303030" "#909090" . pad,
                 ppHidden          = dzenColor "#909090" "" .pad,
                 ppHiddenNoWindows = dzenColor "#606060" "" . pad,
-                ppLayout          = dzenColor "#77a8bf" "" . pad,
+                ppLayout          = dzenColor "#77a8bf" "" .
+                                    (\x -> case x of
+                                        "Full" -> "*"
+                                        "ReflectX *" -> "*"
+                                        "ReflectX +" -> "+"
+                                        "ReflectX =" -> "="
+                                        "ReflectX -" -> "-"
+                                        "ReflectX %" -> "%"
+                                        "ReflectX @" -> "@"
+                                        "ReflectY *" -> "*"
+                                        "ReflectY +" -> "+"
+                                        "ReflectY =" -> "="
+                                        "ReflectY -" -> "-"
+                                        "ReflectY %" -> "%"
+                                        "ReflectY @" -> "@"
+                                        "ReflectX ReflectY *" -> "*"
+                                        "ReflectX ReflectY +" -> "+"
+                                        "ReflectX ReflectY =" -> "="
+                                        "ReflectX ReflectY -" -> "-"
+                                        "ReflectX ReflectY %" -> "%"
+                                        "ReflectX ReflectY @" -> "@"
+                                        _     -> x
+                                        ),
+
                 ppUrgent          = wrap (dzenColor "#ff0000" "" "{") (dzenColor "#ff0000" "" "}") . pad,
                 ppTitle           = wrap "^fg(#909090)[ " " ]^fg()" . shorten 30,
                 ppVisible         = wrap "{" "}",
