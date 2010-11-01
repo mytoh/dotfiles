@@ -29,6 +29,8 @@ import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.Decoration
 import XMonad.Layout.LayoutHints
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell
@@ -47,11 +49,11 @@ myModMask       = mod1Mask
 myWorkspaces    =  ["a", "b", "c", "d", "e", "f", "g", "h", "i"] 
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#0066ff"
-myXftFont = "xft:Inconsolata:size=7"
+myXftFont = "xft:Inconsolata:size=9"
 myDzenFont = "-adobe-helvetica-medium-r-normal--11-*"
 
 -- Layouts
-myLayout =  avoidStruts $ smartBorders (addTabsBottomAlways shrinkText myTheme tiled) ||| full
+myLayout =  avoidStruts $ mkToggle (single NBFULL) $ smartBorders (addTabsBottomAlways shrinkText myTheme tiled) ||| full
               where
                 tiled   = (ResizableTall nmaster delta ratio [])
                 nmaster = 1
@@ -63,16 +65,17 @@ myLayout =  avoidStruts $ smartBorders (addTabsBottomAlways shrinkText myTheme t
 
 -- theme config
 myTheme = defaultTheme {
-                activeTextColor     = "#303030",
-                activeColor         = "#909090",
+                activeTextColor     = "#909090",
+            --  activeColor         = "#909090",
                 fontName            = myXftFont,
-                decoHeight          = 13
+                decoHeight          = 14
 }
 
 -- keybindings
 myKeys = [
      ("M-s", shellPrompt myXPConfig),
-     ("M-f", sendMessage $ JumpToLayout "Full"),
+  -- ("M-f", sendMessage $ JumpToLayout "Full"),
+     ("M-f", sendMessage $ Toggle NBFULL),
      ("M-n", moveTo Next (WSIs notSP)),
      ("M-p", moveTo Prev (WSIs notSP)),
      ("M-t", scratchFiler),
@@ -93,7 +96,7 @@ myXPConfig = defaultXPConfig {
               height            = 14,
               font              = myXftFont,
               bgColor           = "#2a2733",
-              fgColor           = "#aa9dcf",
+              fgColor           = "#909090",
               bgHLight          = "#6b6382",
               fgHLight          = "#4a4459"
               }
