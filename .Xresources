@@ -1,9 +1,12 @@
+Xcursor.theme: whiteglass
 
 urxvt.termName: xterm
 urxvt.background: rgba:0000/0000/0000/4444/
 urxvt.foreground: [90]snow
 urxvt.depth: 32
 urxvt.scrollBar: false
+!urxvt.borderLess: true
+urxvt.internalBorder: 1
 urxvt.transparent: true
 urxvt.shading: 30
 urxvt.tintColor: #ffffff

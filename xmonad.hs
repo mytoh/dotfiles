@@ -4,7 +4,10 @@ import XMonad.ManageHook
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
+
 import Data.Monoid
+import Data.Ratio
+
 import System.Exit
 import System.IO
 
@@ -13,16 +16,19 @@ import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers 
-import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.UrgencyHook hiding (Never)
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.XPropManage
+import XMonad.Hooks.SetWMName
 
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.Decoration
+import XMonad.Layout.LayoutHints
+import XMonad.Layout.ResizableTile
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell
@@ -42,15 +48,18 @@ myWorkspaces    =  ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#0066ff"
 myXftFont = "xft:Inconsolata:size=7"
--- myDzenFont = "-mplus-sys-medium-r-normal--10-100-75-75-p-60-iso8859-15"
+myDzenFont = "-adobe-helvetica-medium-r-normal--11-*"
 
 -- Layouts
-myLayout =  avoidStruts $ smartBorders $ addTabsBottomAlways shrinkText myTheme tiled ||| Full
+myLayout =  avoidStruts $ smartBorders (addTabsBottomAlways shrinkText myTheme tiled) ||| full
               where
-                tiled   = Tall nmaster delta ratio
+                tiled   = (ResizableTall nmaster delta ratio [])
                 nmaster = 1
-                ratio   = 3/5
                 delta   = 2/100
+                ratio   = toRational (2/(1 + sqrt 5 :: Double))
+
+                full    = noBorders Full
+                
 
 -- theme config
 myTheme = defaultTheme {
@@ -66,12 +75,16 @@ myKeys = [
      ("M-f", sendMessage $ JumpToLayout "Full"),
      ("M-n", moveTo Next (WSIs notSP)),
      ("M-p", moveTo Prev (WSIs notSP)),
-     ("M-t", scratchFiler)
+     ("M-t", scratchFiler),
+     ("M-q", spawn myRestart)
      ]
      where
         notSP = (return $ ("SP" /=) . W.tag) :: X (WindowSpace -> Bool)
 
         scratchFiler = namedScratchpadAction myScratchPads "thunar"
+
+
+myRestart = "for pid in `pgrep dzen2`; do kill -9 $pid; done && xmonad --recompile && xmonad --restart"
 
 -- prompt config
 myXPConfig = defaultXPConfig {
@@ -106,22 +119,21 @@ myScratchPads = [ NS "thunar" spawnFiler findFiler manageFiler
     where
       spawnFiler  = "thunar"
       findFiler   = className =? "Thunar"
-      manageFiler = defaultFloating
---    manageFiler = customFloating $ W.RationalRect l t w h
---      where
---          h = 0.6
---          w = 0.6
---          t = (1 - h)/2
---          l = (1 - w)/2
+      manageFiler = customFloating $ W.RationalRect l t w h
+        where
+            h = 0.6
+            w = 0.6
+            t = (1 - h)/2
+            l = (1 - w)/2
 
       
 myLogHook h =  dynamicLogWithPP $ dzenPP { 
                 ppCurrent         = dzenColor "#303030" "#909090" . pad,
                 ppHidden          = dzenColor "#909090" "" .pad,
                 ppHiddenNoWindows = dzenColor "#606060" "" . pad,
-                ppLayout          = dzenColor "#909090" "" . pad,
+                ppLayout          = dzenColor "#77a8bf" "" . pad,
                 ppUrgent          = wrap (dzenColor "#ff0000" "" "{") (dzenColor "#ff0000" "" "}") . pad,
-                ppTitle           = wrap "^fg(#909090)[ " " ]^fg()" . shorten 50,
+                ppTitle           = wrap "^fg(#909090)[ " " ]^fg()" . shorten 30,
                 ppVisible         = wrap "{" "}",
                 ppWsSep           = "",
                 ppSep             = "  |  ",
@@ -129,13 +141,13 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
                 ppOutput          = hPutStrLn h
                 }
 
-myLeftBar = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
+myLeftBar = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 12 -e 'onexit=ungrabmouse' -fn " ++ myDzenFont  
 myRightBar = "~/.dzen/bin/dzen.sh" 
 -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 
 myEventHook = ewmhDesktopsEventHook
 
-myStartupHook = return () 
+myStartupHook = return ()
 
 main = myConfig
 myConfig = do
