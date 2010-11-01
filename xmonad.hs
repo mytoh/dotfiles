@@ -59,7 +59,7 @@ myBorderWidth   = 1
 myModMask       = mod1Mask
 myWorkspaces    =  ["a", "b", "c", "d", "e", "f", "g", "h", "i"] 
 myNormalBorderColor  = "#000000"
-myFocusedBorderColor = "#0066ff"
+myFocusedBorderColor = "#1177ff"
 myXftFont = "xft: fixed-9"
 myDzenFont = "-adobe-helvetica-medium-r-normal--11-*"
 
@@ -74,7 +74,7 @@ myLayout =  avoidStruts $
               where
                 collectiveLayouts = myFull ||| myTwoP ||| myTabD ||| myTile ||| myOneB ||| myMosC ||| mySprL
 
-                myFull = named "*" (smartBorders (noBorders Full))
+                myFull = named "*" (smartBorders (noBorders (addTabsBottom shrinkText myTheme Full)))
                 myTile = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
                 myTabD = named "=" (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedAlways shrinkText myTheme)))
                 myTwoP = named "-" (smartBorders (withBorder 1 (TwoPane 0.02 0.4)))
