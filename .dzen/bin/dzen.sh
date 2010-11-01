@@ -20,7 +20,7 @@ while :; do
   size=`sysctl -n hw.pagesize`
   freemem=`expr ${free} \* ${size} / ${byte}`
 
-  echo "^fg(#93ab39)^i(${icons}/cpu.xbm)^fg() ${cpu}  ^fg(#f9a82fd)^i(${icons}/mem.xbm)^fg() ${freemem}M  ^i(${icons}/net_up_02.xbm) ${tx} ^i(${icons}/net_down_02.xbm) ${rx}    ^i(${icons}/cat.xbm) ${date}"
+  echo "^fg(#93ab39)^i(${icons}/cpu.xbm)^fg() ${cpu}  ^fg(#937473)^i(${icons}/mem.xbm)^fg() ${freemem}M  ^fg(#fa3b99)^i(${icons}/net_up_02.xbm)^fg() ${tx} ^fg(#d9c7b3)^i(${icons}/net_down_02.xbm)^fg() ${rx}    ^fg(#7db34e)^i(${icons}/cat.xbm)^fg() ${date}"
 
   sleep ${interval}
 
