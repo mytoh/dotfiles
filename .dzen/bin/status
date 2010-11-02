@@ -1,7 +1,7 @@
 #!/bin/sh
 
 date_format='%a %b %d %H:%M'
-icons="$HOME/.dzen/icons"
+icons="$HOME/.dzen/icons/sm4tik"
 byte=`expr 1024 \* 1024`
 interval=1
 
@@ -20,7 +20,7 @@ while :; do
   size=`sysctl -n hw.pagesize`
   freemem=`expr ${free} \* ${size} / ${byte}`
 
-  echo "^fg(#93ab39)^i(${icons}/cpu.xbm)^fg() ${cpu}  ^fg(#937473)^i(${icons}/mem.xbm)^fg() ${freemem}M  ^fg(#fa3b99)^i(${icons}/net_up_02.xbm)^fg() ${tx} ^fg(#d9c7b3)^i(${icons}/net_down_02.xbm)^fg() ${rx}    ^fg(#7db34e)^i(${icons}/cat.xbm)^fg() ${date}"
+  echo "^fg(#93ab39)^i(${icons}/cpu.xbm)^fg() ${cpu}  ^fg(#937473)^i(${icons}/mem.xbm)^fg() ${freemem}M  ^fg(#fa3b99)^i(${icons}/net_up_02.xbm)^fg() ${tx} ^fg(#d9c7b3)^i(${icons}/net_down_02.xbm)^fg() ${rx}    ^fg(#7db34e)^i(${icons}/clock.xbm)^fg() ${date}"
 
   sleep ${interval}
 
