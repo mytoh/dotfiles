@@ -1,15 +1,16 @@
 
 import XMonad hiding ( (|||) )
 import XMonad.ManageHook
-
 import qualified XMonad.StackSet as W
-import qualified Data.Map        as M
-
-import Data.Monoid
-import Data.Ratio
 
 import System.Exit
 import System.IO
+
+import Data.Monoid
+import Data.Ratio
+import qualified Data.Map        as M
+import Graphics.X11.Xlib
+
 
 import XMonad.Actions.CycleWS
 
@@ -57,7 +58,24 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 myBorderWidth   = 1
 myModMask       = mod1Mask
-myWorkspaces    =  ["a", "b", "c", "d", "e", "f", "g", "h", "i"] 
+
+myIcons         = "/home/mytoh/.dzen/icons/"
+
+myWorkspaces    =  
+    [
+      wrapBitmap "sm4tik/bug_01.xbm",
+      wrapBitmap "sm4tik/fox.xbm",
+      wrapBitmap "sm4tik/dish.xbm",
+      wrapBitmap "sm4tik/cat.xbm",
+      wrapBitmap "sm4tik/empty.xbm",
+      wrapBitmap "sm4tik/shroom.xbm",
+      wrapBitmap "sm4tik/bug_02.xbm",
+      wrapBitmap "sm4tik/scorpio.xbm",
+      wrapBitmap "sm4tik/ac.xbm"
+     ] 
+     where
+        wrapBitmap bitmap = "^i(" ++ myIcons ++ bitmap ++ ")"
+
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#1177ff"
 myXftFont = "xft: fixed-9"
