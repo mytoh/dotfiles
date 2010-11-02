@@ -13,6 +13,7 @@ urxvt.tintColor: #ffffff
 urxvt.preeditType: root
 urxvt.saveLines: 100000
 urxvt.mouseWheelScrollPage: true
+urxvt.urgentOnBell: true
 
 urxvt.perl-ext-common: default,matcher
 urxvt.urlLauncher: firefox3
