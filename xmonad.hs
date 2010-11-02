@@ -40,6 +40,7 @@ import XMonad.Layout.LimitWindows
 import XMonad.Layout.Reflect
 import XMonad.Layout.Named
 import XMonad.Layout.WindowNavigation
+import XMonad.Layout.DwmStyle
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell
@@ -63,26 +64,27 @@ myXftFont = "xft: fixed-9"
 myDzenFont = "-adobe-helvetica-medium-r-normal--11-*"
 
 -- Layouts ------------------------------------------
-myLayout =  avoidStruts $ 
-            windowNavigation $
-            mkToggle (single NBFULL) $ 
+myLayout =  avoidStruts                $ 
+            windowNavigation           $
+            mkToggle (single NBFULL)   $ 
             mkToggle (single REFLECTX) $
             mkToggle (single REFLECTY) $
             (collectiveLayouts)
 
               where
-                collectiveLayouts = myFull ||| myTwoP ||| myTabD ||| myTile ||| myOneB ||| myMosC ||| mySprL
 
-                myFull = named "*" (smartBorders (noBorders (addTabsBottom shrinkText myTheme Full)))
-                myTile = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
-                myTabD = named "=" (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedAlways shrinkText myTheme)))
-                myTwoP = named "-" (smartBorders (withBorder 1 (TwoPane 0.02 0.4)))
-                myMosC = named "%" (smartBorders (withBorder 1 (MosaicAlt M.empty)))
-                mySprL = named "@" (smartBorders (withBorder 1 (limitWindows 5 (spiral gRatio))))
-                myOneB = named "#" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
+                collectiveLayouts = full ||| twopane ||| tabbed ||| tile ||| onebig ||| mosaic ||| sprl
 
-                gRatio =toRational goldenRatio
-                goldenRatio = 2/(1+sqrt(5)::Double);
+                full    = named "*" (smartBorders (noBorders (dwmStyle shrinkText myTheme Full)))
+                tile    = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
+                tabbed  = named "=" (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedAlways shrinkText myTheme)))
+                twopane = named "-" (smartBorders (withBorder 1 (TwoPane 0.02 0.4)))
+                mosaic  = named "%" (smartBorders (withBorder 1 (MosaicAlt M.empty)))
+                sprl    = named "@" (smartBorders (withBorder 1 (limitWindows 5 (spiral gratio))))
+                onebig  = named "#" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
+
+                gratio      = toRational goldenratio
+                goldenratio = 2/(1+sqrt(5)::Double);
 
 -- tabbar theme config ----------------------------------------
 myTheme = defaultTheme {
@@ -94,25 +96,25 @@ myTheme = defaultTheme {
 
 -- keybindings --------------------------------------------
 myKeys = [
-     ("M-s", shellPrompt myXPConfig),
-  -- ("M-f", sendMessage $ JumpToLayout "Full"),
-     ("M-f", sendMessage $ Toggle NBFULL),
-     ("M-n", moveTo Next (WSIs notSP)),
-     ("M-p", moveTo Prev (WSIs notSP)),
-     ("M-t", scratchFiler),
-     ("M-q", spawn myRestart)
-     ]
-     where
-        notSP = (return $ ("SP" /=) . W.tag) :: X (WindowSpace -> Bool)
+         ("M-s", shellPrompt myXPConfig),
+      -- ("M-f", sendMessage $ JumpToLayout "Full"),
+         ("M-f", sendMessage $ Toggle NBFULL),
+         ("M-n", moveTo Next (WSIs notSP)),
+         ("M-p", moveTo Prev (WSIs notSP)),
+         ("M-t", scratchFiler),
+         ("M-q", spawn myRestart)
+         ]
+          where
+             notSP = (return $ ("SP" /=) . W.tag) :: X (WindowSpace -> Bool)
 
-        scratchFiler = namedScratchpadAction myScratchPads "thunar"
+             scratchFiler = namedScratchpadAction myScratchPads "thunar"
 
 
 myRestart = "for pid in `pgrep dzen2`; do kill -9 $pid; done && xmonad --recompile && xmonad --restart"
 
 -- shell prompt config ---------------------------------------------
 myXPConfig = defaultXPConfig {
-              position        = Bottom,
+              position          = Bottom,
               promptBorderWidth = 0,
               height            = 14,
               font              = myXftFont,
@@ -126,12 +128,12 @@ myXPConfig = defaultXPConfig {
 
 -- manage hooks -------------------------------------------------------    
 myManageHook = insertPosition End Newer <+> composeAll
-    [ isFullscreen                  --> (doF W.focusDown <+> doFullFloat),
-      isDialog                      --> doFloat,
-      className =? "MPlayer" --> doFloat,
-      className =? "Main.py" --> doFloat,
-      className =? "Gimp"    --> doFloat,
-      className =? "DTA"     --> doFloat,
+    [ isFullscreen                                        --> (doF W.focusDown <+> doFullFloat),
+      isDialog                                            --> doFloat,
+      className  =? "MPlayer"                             --> doFloat,
+      className  =? "Main.py"                             --> doFloat,
+      className  =? "Gimp"                                --> doFloat,
+      className  =? "DTA"                                 --> doFloat,
       (className =? "Firefox" <&&> resource =? "Dialog")  --> doFloat
       ] 
         <+> manageDocks 
@@ -140,15 +142,15 @@ myManageHook = insertPosition End Newer <+> composeAll
 
 myScratchPads = [ NS "thunar" spawnFiler findFiler manageFiler
                 ]
-    where
-      spawnFiler  = "thunar"
-      findFiler   = className =? "Thunar"
-      manageFiler = customFloating $ W.RationalRect l t w h
-        where
-            h = 0.6
-            w = 0.6
-            t = (1 - h)/2
-            l = (1 - w)/2
+                   where
+                     spawnFiler  = "thunar"
+                     findFiler   = className =? "Thunar"
+                     manageFiler = customFloating $ W.RationalRect l t w h
+                       where
+                           h = 0.6
+                           w = 0.6
+                           t = (1 - h)/2
+                           l = (1 - w)/2
 
 -- log hooks --------------------------------------------------------------      
 myLogHook h =  dynamicLogWithPP $ dzenPP { 
@@ -200,7 +202,7 @@ myStartupHook = return ()
 -- main config ---------------------------------------------------------------------
 main = myConfig
 myConfig = do
-      d <- spawnPipe myLeftBar
+      d  <- spawnPipe myLeftBar
       spawn myRightBar
       xmonad $ ewmh $ withUrgencyHook dzenUrgencyHook $ defaultConfig {
         terminal           = myTerminal,
