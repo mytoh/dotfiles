@@ -4,7 +4,6 @@ import XMonad.ManageHook
 import qualified XMonad.StackSet as W
 
 import System.Exit
-import System.IO
 
 import Data.Monoid
 import Data.Ratio
@@ -42,6 +41,7 @@ import XMonad.Layout.Reflect
 import XMonad.Layout.Named
 import XMonad.Layout.WindowNavigation
 import XMonad.Layout.DwmStyle
+import XMonad.Layout.Roledex
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell
@@ -82,27 +82,27 @@ myXftFont = "xft: fixed-9"
 myDzenFont = "-adobe-helvetica-medium-r-normal--11-*"
 
 -- Layouts ------------------------------------------
-myLayout =  avoidStruts                $ 
-            windowNavigation           $
-            mkToggle (single NBFULL)   $ 
-            mkToggle (single REFLECTX) $
-            mkToggle (single REFLECTY) $
-            (collectiveLayouts)
+myLayoutHook =  avoidStruts                $ 
+                windowNavigation           $
+                mkToggle (single NBFULL)   $ 
+                mkToggle (single REFLECTX) $
+                mkToggle (single REFLECTY) $
+                (collectiveLayouts)
 
-              where
+                 where
 
-                collectiveLayouts = full ||| twopane ||| tabbed ||| tile ||| onebig ||| mosaic ||| sprl
+                   collectiveLayouts = full ||| twopane ||| tabbed ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex 
 
-                full    = named "*" (smartBorders (noBorders (dwmStyle shrinkText myTheme Full)))
-                tile    = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
-                tabbed  = named "=" (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedAlways shrinkText myTheme)))
-                twopane = named "-" (smartBorders (withBorder 1 (TwoPane 0.02 0.4)))
-                mosaic  = named "%" (smartBorders (withBorder 1 (MosaicAlt M.empty)))
-                sprl    = named "@" (smartBorders (withBorder 1 (limitWindows 5 (spiral gratio))))
-                onebig  = named "#" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
+                   full    = named "*" (smartBorders (noBorders (dwmStyle shrinkText myTheme Full)))
+                   tile    = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
+                   tabbed  = named "=" (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedAlways shrinkText myTheme)))
+                   twopane = named "-" (smartBorders (withBorder 1 (TwoPane 0.02 0.4)))
+                   mosaic  = named "%" (smartBorders (withBorder 1 (MosaicAlt M.empty)))
+                   sprl    = named "@" (smartBorders (withBorder 1 (limitWindows 5 (spiral gratio))))
+                   onebig  = named "#" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
 
-                gratio      = toRational goldenratio
-                goldenratio = 2/(1+sqrt(5)::Double);
+                   gratio      = toRational goldenratio
+                   goldenratio = 2/(1+sqrt(5)::Double);
 
 -- tabbar theme config ----------------------------------------
 myTheme = defaultTheme {
@@ -115,20 +115,21 @@ myTheme = defaultTheme {
 -- keybindings --------------------------------------------
 myKeys = [
          ("M-s", shellPrompt myXPConfig),
-      -- ("M-f", sendMessage $ JumpToLayout "Full"),
          ("M-f", sendMessage $ Toggle NBFULL),
+         ("M-x", sendMessage $ Toggle REFLECTX),
+         ("M-y", sendMessage $ Toggle REFLECTY),
          ("M-n", moveTo Next (WSIs notSP)),
          ("M-p", moveTo Prev (WSIs notSP)),
          ("M-t", scratchFiler),
-         ("M-q", spawn myRestart)
+         ("M-q", spawn myRestart),
+         ("M-S-p", unsafeSpawn "import -window root $HOME/xwd-$(date +%s)$$.png")
          ]
           where
              notSP = (return $ ("SP" /=) . W.tag) :: X (WindowSpace -> Bool)
 
              scratchFiler = namedScratchpadAction myScratchPads "thunar"
 
-
-myRestart = "for pid in `pgrep dzen2`; do kill -9 $pid; done && xmonad --recompile && xmonad --restart"
+             myRestart = "for pid in `pgrep dzen2`; do kill -9 $pid; done && xmonad --recompile && xmonad --restart"
 
 -- shell prompt config ---------------------------------------------
 myXPConfig = defaultXPConfig {
@@ -177,25 +178,30 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
                 ppHiddenNoWindows = dzenColor "#606060" "" . pad,
                 ppLayout          = dzenColor "#77a8bf" "" .
                                     (\x -> case x of
-                                        "Full" -> "*"
-                                        "ReflectX *" -> "*"
-                                        "ReflectX +" -> "+"
+                                        "Full" -> wrapBitmap "sm4tik/full.xbm"
+                                        "*"          -> wrapBitmap "rob/full.xbm"
+                                        "+"          -> wrapBitmap "rob/tall.xbm"
+                                        "ReflectX *" -> wrapBitmap "rob/full.xbm"
+                                        "ReflectX +" -> wrapBitmap "rob/tall.xbm"
                                         "ReflectX =" -> "="
                                         "ReflectX -" -> "-"
                                         "ReflectX %" -> "%"
                                         "ReflectX @" -> "@"
-                                        "ReflectY *" -> "*"
-                                        "ReflectY +" -> "+"
+                                        "ReflectX #" -> "#"
+                                        "ReflectY *" -> wrapBitmap "rob/full.xbm"
+                                        "ReflectY +" -> wrapBitmap "rob/tall.xbm" 
                                         "ReflectY =" -> "="
                                         "ReflectY -" -> "-"
                                         "ReflectY %" -> "%"
                                         "ReflectY @" -> "@"
-                                        "ReflectX ReflectY *" -> "*"
-                                        "ReflectX ReflectY +" -> "+"
+                                        "ReflectY #" -> "#"
+                                        "ReflectX ReflectY *" -> wrapBitmap "rob/full.xbm"
+                                        "ReflectX ReflectY +" -> wrapBitmap "rob/tall.xbm" 
                                         "ReflectX ReflectY =" -> "="
                                         "ReflectX ReflectY -" -> "-"
                                         "ReflectX ReflectY %" -> "%"
                                         "ReflectX ReflectY @" -> "@"
+                                        "ReflectX ReflectY #" -> "#"
                                         _     -> x
                                         ),
 
@@ -207,6 +213,8 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
                 ppSort            = fmap (namedScratchpadFilterOutWorkspace.) (ppSort dzenPP),
                 ppOutput          = hPutStrLn h
                 }
+                where
+                  wrapBitmap bitmap = "^i(" ++ myIcons ++ bitmap ++ ")"
 
 -- dzen bars ----------------------------------------------------------------------
 myLeftBar = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 12 -e 'onexit=ungrabmouse' -fn " ++ myDzenFont  
@@ -230,7 +238,7 @@ myConfig = do
         workspaces         = myWorkspaces,
         normalBorderColor  = myNormalBorderColor,
         focusedBorderColor = myFocusedBorderColor,
-        layoutHook         = myLayout,
+        layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook d,
