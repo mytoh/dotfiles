@@ -122,7 +122,7 @@ myKeys = [
          ("M-p", moveTo Prev (WSIs notSP)),
          ("M-t", scratchFiler),
          ("M-q", spawn myRestart),
-         ("M-S-p", unsafeSpawn "import -window root $HOME/xwd-$(date +%s)$$.png")
+         ("M-S-p", unsafeSpawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/local/tmp/'")
          ]
           where
              notSP = (return $ ("SP" /=) . W.tag) :: X (WindowSpace -> Bool)
