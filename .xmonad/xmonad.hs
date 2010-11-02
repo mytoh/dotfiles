@@ -79,7 +79,7 @@ myWorkspaces    =
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#1177ff"
 myXftFont = "xft: fixed-9"
-myDzenFont = "-adobe-helvetica-medium-r-normal--11-*"
+myDzenFont = "-adobe-helvetica-medium-r-normal--12-*"
 
 -- Layouts ------------------------------------------
 myLayoutHook =  avoidStruts                $ 
@@ -217,8 +217,8 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
                   wrapBitmap bitmap = "^i(" ++ myIcons ++ bitmap ++ ")"
 
 -- dzen bars ----------------------------------------------------------------------
-myLeftBar = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 12 -e 'onexit=ungrabmouse' -fn " ++ myDzenFont  
-myRightBar = "~/.dzen/bin/status| dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -e 'onexit=ungrabmouse' -fn " ++ myDzenFont
+myLeftBar = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 12 -fn " ++ myDzenFont  
+myRightBar = "~/.dzen/bin/status | dzen2 -p -ta r -x 400 -y 0 -w 800 -h 13 -fn " ++ myDzenFont
 -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 
 myEventHook = ewmhDesktopsEventHook

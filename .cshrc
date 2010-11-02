@@ -51,7 +51,7 @@ alias la gls -a --color=auto
 alias lf gls -FA --color=auto
 alias ll gls -lA --color=auto
 alias find gfind
-alias pinst "sudo make  install clean distclean && rehash"
+alias pinst "sudo make  install clean distclean; rehash"
 alias pconf sudo make config-recursive
 alias pclean sudo make clean distclean
 alias awk gawk

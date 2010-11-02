@@ -1,6 +1,6 @@
 #!/bin/sh
 
-date_format='%a %b %d %H:%M'
+date_format='%a %d/%m %H:%M'
 icons="$HOME/.dzen/icons/sm4tik"
 byte=`expr 1024 \* 1024`
 interval=1

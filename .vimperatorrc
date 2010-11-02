@@ -13,6 +13,7 @@ set complete=bs
 set defsearch="google"
 set newtab=help,addons,extoptions
 
+
 "delicious_search
 autocmd VimperatorEnter ".*" :set complete+=D
 
@@ -20,3 +21,5 @@ autocmd VimperatorEnter ".*" :set complete+=D
 let g:direct_sbm_use_services_by_tag = "hd"
 let g:direct_sbm_use_services_by_post = "hd"
 
+"clock.js
+let clock_format = '(%t %d)'
