@@ -1,0 +1,21 @@
+# Write your default config options here!
+
+vo  = x11
+ao  = oss
+cache = 8192
+cache-min = 2
+autosync = 100
+speed = 0.85
+af = scaletempo
+softvol = yes
+volume = 100
+double = yes
+
+
+
+[gnome-mplayer]
+vo=gl2
+ao=oss
+msglevel=all=5
+
+
