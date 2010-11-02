@@ -10,7 +10,7 @@ set nobackup
 set clipboard+=unnamed
 set showmatch
 set title
-set cindent
+set scrolloff=3
 set ruler
 set ignorecase
 set smartcase
@@ -21,9 +21,14 @@ set nomodeline
 set history=10000
 set autoindent
 set smartindent
+set cindent
 set showcmd
 set wrapscan
 set autoread
+set hidden
+set wildmenu
+set wildmode=list:longest
+set shortmess=atI
 set backspace=indent,eol,start
 set fileformat=unix
 set fileformats=unix,mac,dos
@@ -54,9 +59,22 @@ noremap <CR> o<ESC>
 noremap <SPACE> i<SPACE><ESC>
 nmap n nzz
 nmap N Nzz
+"" tabpages
+let mapleader = ","
+nnoremap [TABCMD] <nop>
+nmap    <Leader>t [TABCMD]
+noremap <silent> [TABCMD]f :<c-u>tabfirst<CR>
+noremap <silent> [TABCMD]l :<c-u>tablast<CR>
+noremap <silent> [TABCMD]n :<c-u>tabnext<CR>
+noremap <silent> [TABCMD]N :<c-u>tabNext<CR>
+noremap <silent> [TABCMD]p :<c-u>tabprevious<CR>
+noremap <silent> [TABCMD]e :<c-u>tabedit<CR>
+noremap <silent> [TABCMD]c :<c-u>tabclose<CR>
+noremap <silent> [TABCMD]o :<c-u>tabonly<CR>
+noremap <silent> [TABCMD]s :<c-u>tabs<CR>
 
 "abbrev
-cabbrev e tabe
+cabbrev h tab help
 
 "helptags $HOME/.vim/doc/
 

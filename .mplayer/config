@@ -2,11 +2,11 @@
 
 vo  = x11
 ao  = oss
-cache = 8192
-cache-min = 2
+cache = 4096
+#cache-min = 6
 autosync = 100
-speed = 0.85
-af = scaletempo
+speed = 0.80
+#af = scaletempo
 softvol = yes
 volume = 100
 double = yes

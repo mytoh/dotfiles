@@ -230,7 +230,7 @@ main = myConfig
 myConfig = do
       d  <- spawnPipe myLeftBar
       spawn myRightBar
-      xmonad $ ewmh $ withUrgencyHook dzenUrgencyHook $ defaultConfig {
+      xmonad $ ewmh $ withUrgencyHook NoUrgencyHook $ defaultConfig {
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
         borderWidth        = myBorderWidth,

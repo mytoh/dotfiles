@@ -3,7 +3,7 @@ escape z
 defutf8 on
 encoding utf-8 utf-8
 defencoding utf-8
-vbell off
+vbell on
 bell_msg "bell: %n (%t) [%w:%s]"
 startup_message off
 autodetach on
