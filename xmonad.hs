@@ -41,8 +41,6 @@ import XMonad.Layout.Reflect
 import XMonad.Layout.Named
 import XMonad.Layout.WindowNavigation
 
-
-
 import XMonad.Prompt
 import XMonad.Prompt.Shell
 
@@ -52,6 +50,7 @@ import XMonad.Util.Themes
 import XMonad.Util.WorkspaceCompare
 import XMonad.Util.NamedScratchpad
 
+---------------------------------------------------
 myTerminal    = "urxvtc "
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
@@ -63,7 +62,7 @@ myFocusedBorderColor = "#1177ff"
 myXftFont = "xft: fixed-9"
 myDzenFont = "-adobe-helvetica-medium-r-normal--11-*"
 
--- Layouts
+-- Layouts ------------------------------------------
 myLayout =  avoidStruts $ 
             windowNavigation $
             mkToggle (single NBFULL) $ 
@@ -85,7 +84,7 @@ myLayout =  avoidStruts $
                 gRatio =toRational goldenRatio
                 goldenRatio = 2/(1+sqrt(5)::Double);
 
--- theme config
+-- tabbar theme config ----------------------------------------
 myTheme = defaultTheme {
             --  activeTextColor     = "#909090",
             --  activeColor         = "#909090",
@@ -93,7 +92,7 @@ myTheme = defaultTheme {
                 decoHeight          = 13
 }
 
--- keybindings
+-- keybindings --------------------------------------------
 myKeys = [
      ("M-s", shellPrompt myXPConfig),
   -- ("M-f", sendMessage $ JumpToLayout "Full"),
@@ -111,7 +110,7 @@ myKeys = [
 
 myRestart = "for pid in `pgrep dzen2`; do kill -9 $pid; done && xmonad --recompile && xmonad --restart"
 
--- prompt config
+-- shell prompt config ---------------------------------------------
 myXPConfig = defaultXPConfig {
               position        = Bottom,
               promptBorderWidth = 0,
@@ -125,7 +124,7 @@ myXPConfig = defaultXPConfig {
 
 
 
--- manage hooks     
+-- manage hooks -------------------------------------------------------    
 myManageHook = insertPosition End Newer <+> composeAll
     [ isFullscreen                  --> (doF W.focusDown <+> doFullFloat),
       isDialog                      --> doFloat,
@@ -151,7 +150,7 @@ myScratchPads = [ NS "thunar" spawnFiler findFiler manageFiler
             t = (1 - h)/2
             l = (1 - w)/2
 
-      
+-- log hooks --------------------------------------------------------------      
 myLogHook h =  dynamicLogWithPP $ dzenPP { 
                 ppCurrent         = dzenColor "#303030" "#909090" . pad,
                 ppHidden          = dzenColor "#909090" "" .pad,
@@ -189,6 +188,7 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
                 ppOutput          = hPutStrLn h
                 }
 
+-- dzen bars ----------------------------------------------------------------------
 myLeftBar = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 12 -e 'onexit=ungrabmouse' -fn " ++ myDzenFont  
 myRightBar = "~/.dzen/bin/status| dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -e 'onexit=ungrabmouse' -fn " ++ myDzenFont
 -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
@@ -197,6 +197,7 @@ myEventHook = ewmhDesktopsEventHook
 
 myStartupHook = return ()
 
+-- main config ---------------------------------------------------------------------
 main = myConfig
 myConfig = do
       d <- spawnPipe myLeftBar
