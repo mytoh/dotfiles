@@ -76,7 +76,7 @@ myWorkspaces    =
      where
         wrapBitmap bitmap = "^i(" ++ myIcons ++ bitmap ++ ")"
 
-myNormalBorderColor  = "#000000"
+myNormalBorderColor  = "#111111"
 myFocusedBorderColor = "#1177ff"
 myXftFont = "xft: fixed-9"
 myDzenFont = "-adobe-helvetica-medium-r-normal--12-*"
@@ -106,8 +106,8 @@ myLayoutHook =  avoidStruts                $
 
 -- tabbar theme config ----------------------------------------
 myTheme = defaultTheme {
-            --  activeTextColor     = "#909090",
-            --  activeColor         = "#909090",
+                activeTextColor     = "#909090",
+                activeColor         = "#303030",
                 fontName            = myXftFont,
                 decoHeight          = 13
 }
@@ -129,7 +129,7 @@ myKeys = [
 
              scratchFiler = namedScratchpadAction myScratchPads "thunar"
 
-             myRestart = "for pid in `pgrep dzen2`; do kill -9 $pid; done && xmonad --recompile && xmonad --restart"
+             myRestart = "~/.xmonad/restart.sh"
 
 -- shell prompt config ---------------------------------------------
 myXPConfig = defaultXPConfig {
@@ -217,8 +217,8 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
                   wrapBitmap bitmap = "^i(" ++ myIcons ++ bitmap ++ ")"
 
 -- dzen bars ----------------------------------------------------------------------
-myLeftBar = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 12 -fn " ++ myDzenFont  
-myRightBar = "~/.dzen/bin/status | dzen2 -p -ta r -x 400 -y 0 -w 800 -h 13 -fn " ++ myDzenFont
+myLeftBar = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 16 -fn " ++ myDzenFont  
+myRightBar = "~/.dzen/bin/status | dzen2 -p -ta r -x 400 -y 0 -w 800 -h 16 -fn " ++ myDzenFont
 -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 
 myEventHook = ewmhDesktopsEventHook

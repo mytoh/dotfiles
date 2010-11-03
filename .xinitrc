@@ -14,8 +14,9 @@ urxvtd -q -o -f
 urxvtc -e screen -U -D -RR  -s /bin/tcsh -m &
 xscrennsaver -no-splash &
 vnstatd -ds &
-#tint2 & 
-(sleep 2s && trayer --expand true --alpha 255 --edge top --align right --SetDockType true --width 10) &
+parcellite &
+# tint2 & 
+(sleep 1s && trayer --expand false --alpha 255  --tint 0xffffff --transparent false --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 9 --widthtype pixel --width 80 ) &
 exec xmonad
 
 
