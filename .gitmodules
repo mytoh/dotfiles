@@ -1,0 +1,18 @@
+[submodule ".vim/vim-pathogen"]
+	path = .vim/vim-pathogen
+	url = git://github.com/tpope/vim-pathogen.git
+[submodule ".vim/bundle/vim-fugitive"]
+	path = .vim/bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git
+[submodule ".vim/vimfiler"]
+	path = .vim/vimfiler
+	url = git://github.com/Shougo/vimfiler.git
+[submodule ".vim/neocomplcache"]
+	path = .vim/neocomplcache
+	url = git://github.com/Shougo/neocomplcache.git
+[submodule ".vim/unite.vim"]
+	path = .vim/unite.vim
+	url = git://github.com/Shougo/unite.vim.git
+[submodule ".vim/vinarise"]
+	path = .vim/vinarise
+	url = git://github.com/Shougo/vinarise.git
