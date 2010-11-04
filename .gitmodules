@@ -16,3 +16,6 @@
 [submodule ".vim/bundle/vimfiler"]
 	path = .vim/bundle/vimfiler
 	url = git://github.com/Shougo/vimfiler.git
+[submodule ".vim/bundle/vim-surround"]
+	path = .vim/bundle/vim-surround
+	url = git://github.com/tpope/vim-surround.git
