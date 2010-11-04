@@ -15,6 +15,8 @@ urxvtc -e screen -U -D -RR  -s /bin/tcsh -m &
 xscrennsaver -no-splash &
 vnstatd -ds &
 parcellite &
+gnome-keyring-daemon -d &
+mail-notification &
 # tint2 & 
 (sleep 1s && trayer --expand false --alpha 255  --tint 0xffffff --transparent false --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 9 --widthtype pixel --width 80 ) &
 exec xmonad
