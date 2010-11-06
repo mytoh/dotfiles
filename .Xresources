@@ -8,7 +8,7 @@ urxvt.scrollBar: false
 !urxvt.borderLess: true
 urxvt.internalBorder: 1
 urxvt.transparent: true
-urxvt.shading: 30
+urxvt.shading: 40
 urxvt.tintColor: #ffffff
 urxvt.preeditType: root
 urxvt.saveLines: 100000
