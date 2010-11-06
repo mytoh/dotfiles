@@ -25,3 +25,6 @@
 [submodule ".vim/bundle/vim-pathogen"]
 	path = .vim/bundle/vim-pathogen
 	url = git://github.com/tpope/vim-pathogen.git
+[submodule ".vim/bundle/minibufexpl.vim"]
+	path = .vim/bundle/minibufexpl.vim
+	url = git://github.com/vim-scripts/minibufexpl.vim.git
