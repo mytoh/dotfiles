@@ -1,6 +1,10 @@
 
+"turn filetype off to load ftdetect by pathogen.vim
+filetype off
+
 "pathogen
 call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
 filetype on
 filetype plugin indent on

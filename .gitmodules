@@ -22,3 +22,6 @@
 [submodule ".vim/bundle/vim-afterimage"]
 	path = .vim/bundle/vim-afterimage
 	url = git://github.com/tpope/vim-afterimage.git
+[submodule ".vim/bundle/vim-pathogen"]
+	path = .vim/bundle/vim-pathogen
+	url = git://github.com/tpope/vim-pathogen.git
