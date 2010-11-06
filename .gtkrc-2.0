@@ -1,7 +1,7 @@
 
 gtk-theme-name = "deviantArt"
 gtk-icon-theme-name = "gnome-carbonate"
-gtk-cursor-theme-name = "Blackcat"
+#gtk-cursor-theme-name = "Blackcat"
 gtk-font-name = "M+ 1c 8"
 
 # Ambiance
