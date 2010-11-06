@@ -25,6 +25,7 @@ set nomodeline
 set history=10000
 set autoindent
 set smartindent
+set paste
 set cindent
 set showcmd
 set wrapscan
@@ -41,18 +42,22 @@ set fileformats=unix,mac,dos
 set laststatus=2
 set statusline=%<%f\ %m%r%h%w%=%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P
 
-" tabs
+"tabs
 set smarttab
 set tabstop=2
 set expandtab
 set softtabstop=2
 set shiftwidth=2
 
+"set mouse
+set mouse=a
+set ttymouse=xterm2
+
 "colors
 set t_Co=256
 colorscheme xoria256
 
-" encodings
+"encodings
 set enc=utf-8
 "set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
 
@@ -63,19 +68,6 @@ noremap <CR> o<ESC>
 noremap <SPACE> i<SPACE><ESC>
 nmap n nzz
 nmap N Nzz
-"" tabpages
-let mapleader = ","
-nnoremap [TABCMD] <nop>
-nmap    <Leader>t [TABCMD]
-noremap <silent> [TABCMD]f :<c-u>tabfirst<CR>
-noremap <silent> [TABCMD]l :<c-u>tablast<CR>
-noremap <silent> [TABCMD]n :<c-u>tabnext<CR>
-noremap <silent> [TABCMD]N :<c-u>tabNext<CR>
-noremap <silent> [TABCMD]p :<c-u>tabprevious<CR>
-noremap <silent> [TABCMD]e :<c-u>tabedit<CR>
-noremap <silent> [TABCMD]c :<c-u>tabclose<CR>
-noremap <silent> [TABCMD]o :<c-u>tabonly<CR>
-noremap <silent> [TABCMD]s :<c-u>tabs<CR>
 
 "abbrev
 cabbrev h tab help
@@ -83,6 +75,10 @@ cabbrev h tab help
 "helptags $HOME/.vim/doc/
 
 autocmd BufWritePost .vimrc source $MYVIMRC
+
+"------------------------------------
+" plugins
+"------------------------------------
 
 " Chalice for vim -------------------
 set runtimepath+=$HOME/.vim/chalice
@@ -109,3 +105,21 @@ let g:fuf_keyPreview = '>'
 
 " vimfiler ----------------------
 let g:vimfiler_as_default_explorer = 1
+
+" minibufexplorer ---------------------
+let g:miniBufExplMapWindowNavVim = 1 "move with keys hjkl
+let g:miniBufExplSplitBelow = 0
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+let g:miniBufExplSplitToEdge = 0
+let g:miniBufExplMaxSize = 10
+
+
+"--------------------------------------
+" I stole settings from these urls
+"--------------------------------------
+
+" minibufexplorer and many useful plugins
+" http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
+"
