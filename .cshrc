@@ -1,3 +1,4 @@
+
 set promptchars=">,#"
 set prompt="[%{\e[34m%n\e[37m@\e[32m%m\e[m%}] %c2 %# "
 set history=100000
@@ -31,7 +32,7 @@ setenv PAGER less
 setenv FTP_PASSIVE_MODE true
 setenv MYVIMRC ~/.vimrc
 setenv NLSPATH ~/local/lib/tcsh/%N
-setenv G_FILENAME_ENCODING en_GB.UTF-8
+#setenv G_FILENAME_ENCODING en_GB.UTF-8
 set catalog=ja.ayanami.cat
 
 bindkey -v
