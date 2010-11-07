@@ -10,8 +10,8 @@ import Data.Ratio
 import qualified Data.Map        as M
 import Graphics.X11.Xlib
 
-
 import XMonad.Actions.CycleWS
+import XMonad.Actions.WindowGo (runOrRaise)
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -217,22 +217,26 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
                 where
                   wrapBitmap bitmap = "^i(" ++ myIcons ++ bitmap ++ ")"
 
+
+myEventHook = ewmhDesktopsEventHook
+
 -- dzen bars ----------------------------------------------------------------------
 myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 16 -fn " ++ myDzenFont  
 myRightBar  = "~/.dzen/bin/status | exec dzen2 -p -ta r -x 400 -y 0 -w 800 -h 16 -fn " ++ myDzenFont
 trayer      = "exec trayer --expand false --alpha 200  --tint 0xffffff --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype pixel --width 80 "
+mail        = "gmail-notifier"
 -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 
-myEventHook = ewmhDesktopsEventHook
-
-myStartupHook = return ()
+myStartupHook :: X () 
+myStartupHook = do
+                spawn myRightBar
+                spawn trayer
+                spawn mail
 
 -- main config ---------------------------------------------------------------------
 main = myConfig
 myConfig = do
       d  <- spawnPipe myLeftBar
-      spawn myRightBar
-      spawn trayer
       xmonad $ ewmh $ withUrgencyHook NoUrgencyHook $ defaultConfig {
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
