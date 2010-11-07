@@ -32,7 +32,7 @@ setenv PAGER less
 setenv FTP_PASSIVE_MODE true
 setenv MYVIMRC ~/.vimrc
 setenv NLSPATH ~/local/lib/tcsh/%N
-#setenv G_FILENAME_ENCODING en_GB.UTF-8
+setenv G_FILENAME_ENCODING @locale
 set catalog=ja.ayanami.cat
 
 bindkey -v
