@@ -10,6 +10,7 @@ filetype on
 filetype plugin indent on
 syntax on
 
+set nocompatible
 set nobackup
 set clipboard+=unnamed
 set showmatch
