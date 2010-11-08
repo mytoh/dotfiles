@@ -66,11 +66,10 @@ noremap ; :
 noremap : ;
 noremap <CR> o<ESC>
 noremap <SPACE> i<SPACE><ESC>
+noremap <C-w>j <ESC>:bn<CR>
+noremap <C-w>k <ESC>:bp<CR>
 nmap n nzz
 nmap N Nzz
-
-"abbrev
-cabbrev h tab help
 
 "helptags $HOME/.vim/doc/
 
