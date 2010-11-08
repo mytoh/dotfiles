@@ -1,0 +1,1 @@
+/home/mytoh/.vim/bundle/neocomplcache/doc/neocomplcache.txt
