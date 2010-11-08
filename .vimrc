@@ -4,7 +4,7 @@ filetype off
 
 "pathogen
 call pathogen#runtime_append_all_bundles()
-call pathogen#helptags() "remove temporarily, it makes untracked contents in git status(doc/tags)
+"call pathogen#helptags() "remove temporarily, it makes untracked contents in git status(doc/tags)
 
 filetype plugin indent on
 syntax on
