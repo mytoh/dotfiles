@@ -97,12 +97,6 @@ let g:neocomplcache_enable_camle_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_auto_select = 1 
 
-" fuf.vim ------------------------
-let g:fuf_modesDisable = [ 'mrucmd', ]
-let g:fuf_file_exclude = '\v\~$|\.(o|exe|bak|swp|gif|jpg|png|)$|(^|[/\\])\.(hg|git|bzr)($|[/\\]'
-let g:fuf_enumeratingLimit = 20
-let g:fuf_keyPreview = '>'
-
 " vimfiler ----------------------
 let g:vimfiler_as_default_explorer = 1
 
