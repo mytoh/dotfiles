@@ -4,9 +4,8 @@ filetype off
 
 "pathogen
 call pathogen#runtime_append_all_bundles()
-"call pathogen#helptags() "remove temporarily, it makes untracked contents in git status(doc/tags)
+call pathogen#helptags() "remove temporarily, it makes untracked contents in git status(doc/tags)
 
-filetype on
 filetype plugin indent on
 syntax on
 
@@ -33,7 +32,7 @@ set wrapscan
 set autoread
 set hidden
 set wildmenu
-set wildmode=list:longest
+set wildmode=list:full
 set shortmess=atI
 set backspace=indent,eol,start
 set fileformat=unix
@@ -67,12 +66,10 @@ noremap ; :
 noremap : ;
 noremap <CR> o<ESC>
 noremap <SPACE> i<SPACE><ESC>
-noremap <C-w>j <ESC>:bn<CR>
-noremap <C-w>k <ESC>:bp<CR>
 nmap n nzz
+
 nmap N Nzz
 
-"helptags $HOME/.vim/doc/
 
 autocmd BufWritePost .vimrc source $MYVIMRC
 
@@ -95,7 +92,6 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1 
 let g:neocomplcache_enable_camle_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_enable_auto_select = 1 
 
 " vimfiler ----------------------
 let g:vimfiler_as_default_explorer = 1

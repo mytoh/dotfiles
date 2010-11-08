@@ -24,6 +24,7 @@ set time=(8 "\
     Times of major page faults              : %F\
     Times of major page faults              : %R")
 
+umask 022
 limit coredumpsize 0
 setenv LANG en_GB.UTF-8
 setenv LC_ALL C
