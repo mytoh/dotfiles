@@ -24,10 +24,10 @@ set time=(8 "\
     Times of major page faults              : %F\
     Times of major page faults              : %R")
 
-umask 022
+#umask 022
 limit coredumpsize 0
 setenv LANG en_GB.UTF-8
-setenv LC_ALL C
+#setenv LC_ALL ja_JP.UTF-8
 setenv EDITOR vim
 setenv PAGER less
 setenv FTP_PASSIVE_MODE true
@@ -68,7 +68,7 @@ complete tar      'n/{,-}[crtux]*z*f/f:*.{tar.gz,tar.Z,tgz,TGZ}/' \
                   'n/{,-}[crtux]*f/f:*.tar/'  \
                           'n/*/f/'
 complete {pkg_*,port*} 'n...@*@D:/var/db/pkg@ @'
-#source ~/perl5/perlbrew/etc/cshrc 
+source ~/perl5/perlbrew/etc/cshrc 
 
 #--------- gnu coreutils aliases -------------
 alias base64 gbase64

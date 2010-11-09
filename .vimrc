@@ -5,7 +5,6 @@ filetype off
 "pathogen
 call pathogen#runtime_append_all_bundles()
 "call pathogen#helptags() "remove temporarily, it makes untracked contents in git status(doc/tags)
-helptags $HOME/.vim/doc
 
 filetype on
 filetype plugin indent on
@@ -59,7 +58,9 @@ set t_Co=256
 colorscheme xoria256
 
 "encodings
+set termencoding=utf-8
 set enc=utf-8
+set fenc=utf-8
 "set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
 
 "keymaps
@@ -68,9 +69,9 @@ noremap : ;
 noremap <CR> o<ESC>
 noremap <SPACE> i<SPACE><ESC>
 nmap n nzz
-
 nmap N Nzz
 
+helptags $HOME/.vim/doc
 
 autocmd BufWritePost .vimrc source $MYVIMRC
 
@@ -89,7 +90,7 @@ let chalice_previewflags = 'autoclose'
 let chalice_reloadinterval_threadlist = 0
 
 " neocomplcache ------------------------
-let g:neocomplcache_enable_at_startup = 1 
+let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1 
 let g:neocomplcache_enable_camle_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1

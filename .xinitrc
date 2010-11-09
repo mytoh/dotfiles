@@ -15,7 +15,6 @@ urxvtc -e screen -U -D -RR  -s /bin/tcsh -m &
 xscrennsaver -no-splash &
 vnstatd -ds &
 parcellite &
-gmail-notifier &
 # tint2 & 
 exec xmonad
 

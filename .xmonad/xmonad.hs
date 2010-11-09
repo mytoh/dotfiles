@@ -78,7 +78,7 @@ myWorkspaces    =
 
 myNormalBorderColor  = "#111111"
 myFocusedBorderColor = "#1177ff"
-myXftFont = "xft: fixed-9"
+myXftFont = "xft: Inconsolata-8"
 myDzenFont = "-adobe-helvetica-medium-r-normal--12-*"
 
 -- Layouts ------------------------------------------
@@ -91,7 +91,7 @@ myLayoutHook =  avoidStruts                $
 
                  where
 
-                   collectiveLayouts = full ||| twopane ||| tabbed ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex 
+                   collectiveLayouts = tabbed ||| twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex 
 
                    full    = named "*" (smartBorders (noBorders (dwmStyle shrinkText myTheme Full)))
                    tile    = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
@@ -121,6 +121,7 @@ myKeys = [
          ("M-n", moveTo Next (WSIs notSP)),
          ("M-p", moveTo Prev (WSIs notSP)),
          ("M-t", scratchFiler),
+         ("M-b", withFocused $ windows . W.sink),
          ("M-q", spawn myRestart),
          ("M-S-p", unsafeSpawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/local/tmp/'")
          ]
