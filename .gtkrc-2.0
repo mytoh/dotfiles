@@ -1,8 +1,8 @@
 
-gtk-theme-name = "Equinox Speciation"
-gtk-icon-theme-name = "gnome-carbonate"
-gtk-cursor-theme-name = "ComixCursors-Orange-Small-Slim"
-gtk-font-name = "M+ 1c 8"
+gtk-theme-name = "deviantArt"
+gtk-icon-theme-name = "FinalOrder"
+gtk-cursor-theme-name = "ComixCursors-Ghost"
+gtk-font-name = "M+ 1c 10"
 
 # Ambiance
 # Ambiance-CSD

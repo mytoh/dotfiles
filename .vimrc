@@ -21,11 +21,10 @@ set smartcase
 set hlsearch
 set incsearch
 set showmode
-set nomodeline
+set modeline
 set history=10000
 set autoindent
 set smartindent
-set paste
 set cindent
 set showcmd
 set wrapscan
@@ -63,13 +62,16 @@ set enc=utf-8
 set fenc=utf-8
 "set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
 
-"keymaps
+" keymaps ---------------
 noremap ; :
 noremap : ;
 noremap <CR> o<ESC>
 noremap <SPACE> i<SPACE><ESC>
 nmap n nzz
 nmap N Nzz
+" ncc keymap
+" <CR>: close popup and save indent.
+inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 
 helptags $HOME/.vim/doc
 
@@ -94,18 +96,16 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1 
 let g:neocomplcache_enable_camle_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_enable_auto_select = 0
 
 " vimfiler ----------------------
 let g:vimfiler_as_default_explorer = 1
 
-" minibufexplorer ---------------------
+" minibufexplorerpp ---------------------
 let g:miniBufExplMapWindowNavVim = 1 "move with keys hjkl
-let g:miniBufExplSplitBelow = 0
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
-let g:miniBufExplSplitToEdge = 0
-let g:miniBufExplMaxSize = 10
 
 
 "--------------------------------------
