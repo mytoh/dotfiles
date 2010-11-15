@@ -1,29 +1,36 @@
-#!/bin/sh
+#!/bin/tcsh
 
-date_format='%a %d/%m %H:%M'
-icons="$HOME/.dzen/icons"
-byte=`expr 1024 \* 1024`
-interval=1
+set date_format = '%a %d/%m %H:%M'
+set icons = $HOME/.dzen/icons
+set interval = 1
 
 
-while :; do
-  date=`date +"${date_format}"`
+while (1)
+  set date = `date +"$date_format"`
 
-  cpu=`top -b -d 2 | grep ^CPU | gawk '{print $2,$6}'`
+  set cpu = `top -b -d 2 | grep ^CPU | gawk '{print $2,$6}'`
 
-  rx=`bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | gawk '{print $2,$3}'`
+  set rx = `bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | gawk '{print $2,$3}'`
 
-  tx=`bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | gawk '{print $4,$5}'`
+  set tx = `bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | gawk '{print $4,$5}'`
 
-  free=`sysctl -n vm.stats.vm.v_free_count` 
-  count=`sysctl -n vm.stats.vm.v_page_count`
-  size=`sysctl -n hw.pagesize`
-  freemem=`expr ${free} \* ${size} / ${byte}`
+  set freemem = `vmstat -h |grep -n 2| gawk '{print $6}'`
 
-  echo "^fg(#93ab39)^i(${icons}/sm4tik/cpu.xbm)^fg() ${cpu}  ^fg(#937473)^i(${icons}/sm4tik/mem.xbm)^fg() ${freemem}M  ^fg(#fa3b99)^i(${icons}/sm4tik/net_up_02.xbm)^fg() ${tx} ^fg(#ff8600)^i(${icons}//sm4tik/net_down_02.xbm)^fg() ${rx}  ^fg(#2717fc)^i(${icons}/sm4tik/clock.xbm)^fg() ${date} "
+  set battery = `sysctl -n hw.acpi.battery.life`
 
-  sleep ${interval}
+  if ( $battery <= 100 && $battery > 50 ) then 
+   set baticon = "$icons/sm4tik/bat_full_01.xbm";
+  else if ( $battery >= 10 && $battery <= 50 ) then 
+   set baticon = "$icons/sm4tik/bat_low_01.xbm";
+  else 
+   set baticon = "$icons/sm4tik/bat_empty_01.xbm";
+  endif
 
-done  
+  echo "^fg(#93ab39)^i($icons/sm4tik/cpu.xbm)^fg() $cpu  ^fg(#937473)^i($icons/sm4tik/mem.xbm)^fg() $freemem  ^fg(#fa3b99)^i($icons/sm4tik/net_up_02.xbm)^fg() $tx ^fg(#ff8600)^i($icons/sm4tik/net_down_02.xbm)^fg() $rx  ^fg(#6d2bac)^i($baticon)^fg() $battery% ^fg(#2717fc)^i($icons/sm4tik/clock.xbm)^fg() $date "
+
+  sleep $interval
+
+end 
+
 ##dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'
 

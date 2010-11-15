@@ -11,7 +11,8 @@ xmodmap .Xmodmap
 xsetroot -cursor_name left_ptr -solid black &
 nitrogen --restore &
 urxvtd -q -o -f 
-urxvtc -e screen -U -D -RR  -s /bin/tcsh -m &
+# urxvtc -e screen -U -D -RR  -s /bin/tcsh -m &
+urxvtc -e screenie -s /bin/tcsh -m &
 xscrennsaver -no-splash &
 vnstatd -ds &
 parcellite &

@@ -73,7 +73,7 @@ if ( -d /home/mytoh/perl5 ) then
 source ~/perl5/perlbrew/etc/cshrc 
 endif
 
-if ( $SHLVL == 1 ) then
+if ( $SHLVL == 1 && $TERM != "xterm" ) then
   jfbterm
 endif
 

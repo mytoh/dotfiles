@@ -78,7 +78,8 @@ myWorkspaces    =
 
 myNormalBorderColor  = "#111111"
 myFocusedBorderColor = "#1177ff"
-myXftFont = "xft: Inconsolata-8"
+myTabFont = "xft: Inconsolata-8"
+myXPFont = "xft: Inconsolata-10"
 myDzenFont = "-adobe-helvetica-medium-r-normal--12-*"
 
 -- Layouts ------------------------------------------
@@ -108,7 +109,7 @@ myLayoutHook =  avoidStruts                $
 myTheme = defaultTheme {
                 activeTextColor     = "#909090",
                 activeColor         = "#303030",
-                fontName            = myXftFont,
+                fontName            = myTabFont,
                 decoHeight          = 13
 }
 
@@ -137,7 +138,7 @@ myXPConfig = defaultXPConfig {
               position          = Bottom,
               promptBorderWidth = 0,
               height            = 14,
-              font              = myXftFont,
+              font              = myXPFont,
               bgColor           = "#2a2733",
               fgColor           = "#909090",
               bgHLight          = "#6b6382",
