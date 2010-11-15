@@ -26,7 +26,16 @@ while (1)
    set baticon = "$icons/sm4tik/bat_empty_01.xbm";
   endif
 
-  echo "^fg(#93ab39)^i($icons/sm4tik/cpu.xbm)^fg() $cpu  ^fg(#937473)^i($icons/sm4tik/mem.xbm)^fg() $freemem  ^fg(#fa3b99)^i($icons/sm4tik/net_up_02.xbm)^fg() $tx ^fg(#ff8600)^i($icons/sm4tik/net_down_02.xbm)^fg() $rx  ^fg(#6d2bac)^i($baticon)^fg() $battery% ^fg(#2717fc)^i($icons/sm4tik/clock.xbm)^fg() $date "
+  set batcolour = `sysctl -n hw.acpi.battery.state`
+
+  if ( $batcolour == 1 ) then
+      set batcolour = "#303030";
+  else if ( $batcolour == 2 ) then
+      set batcolour = "#00dddd";
+  endif
+
+
+  echo "^fg(#93ab39)^i($icons/sm4tik/cpu.xbm)^fg() $cpu  ^fg(#937473)^i($icons/sm4tik/mem.xbm)^fg() $freemem  ^fg(#fa3b99)^i($icons/sm4tik/net_up_02.xbm)^fg() $tx ^fg(#ff8600)^i($icons/sm4tik/net_down_02.xbm)^fg() $rx  ^fg($batcolour)^i($baticon)^fg() $battery% ^fg(#2717fc)^i($icons/sm4tik/clock.xbm)^fg() $date "
 
   sleep $interval
 
