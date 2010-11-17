@@ -37,7 +37,7 @@ while (1)
 
   echo "^fg(#93ab39)^i($icons/sm4tik/cpu.xbm)^fg() $cpu  ^fg(#937473)^i($icons/sm4tik/mem.xbm)^fg() $freemem  ^fg(#fa3b99)^i($icons/sm4tik/net_up_02.xbm)^fg() $tx ^fg(#ff8600)^i($icons/sm4tik/net_down_02.xbm)^fg() $rx  ^fg($batcolour)^i($baticon)^fg() $battery% ^fg(#2717fc)^i($icons/sm4tik/clock.xbm)^fg() $date "
 
-  sleep $interval
+  #  sleep $interval
 
 end 
 
