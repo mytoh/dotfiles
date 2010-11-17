@@ -209,7 +209,8 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
                                         ),
 
                 ppUrgent          = wrap (dzenColor "#ff0000" "" "{") (dzenColor "#ff0000" "" "}") . pad,
-                ppTitle           = wrap "^fg(#909090)[ " " ]^fg()" . shorten 100,
+            --  ppTitle           = wrap "^fg(#909090)[ " " ]^fg()" . shorten 100,
+                ppTitle           = wrap "^fg(#909090)[ " " ]^fg()" ,
                 ppVisible         = wrap "{" "}",
                 ppWsSep           = "",
                 ppSep             = "  |  ",
