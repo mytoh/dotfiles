@@ -69,12 +69,12 @@ complete tar      'n/{,-}[crtux]*z*f/f:*.{tar.gz,tar.Z,tgz,TGZ}/' \
                           'n/*/f/'
 complete {pkg_*,port*} 'n...@*@D:/var/db/pkg@ @'
 
-if ( -d /home/mytoh/perl5 ) then
-source ~/perl5/perlbrew/etc/cshrc 
+if ( -e $home/perl5/perlbrew/etc/cshrc ) then
+  source $home/perl5/perlbrew/etc/cshrc 
 endif
 
 if ( $SHLVL == 1 && $TERM != "xterm" ) then
-  jfbterm
+  set term=jfbterm && jfbterm
 endif
 
 #--------- gnu coreutils aliases -------------
