@@ -11,7 +11,7 @@ urxvt.transparent: true
 urxvt.shading: 40
 urxvt.tintColor: #ffffff
 urxvt.preeditType: root
-urxvt.saveLines: 100000
+urxvt.saveLines: 2000
 urxvt.mouseWheelScrollPage: true
 urxvt.urgentOnBell: true
 
