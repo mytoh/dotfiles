@@ -36,6 +36,7 @@ set shortmess=atI
 set backspace=indent,eol,start
 set fileformat=unix
 set fileformats=unix,mac,dos
+set splitright
 
 "statusline
 set laststatus=2
@@ -69,13 +70,14 @@ noremap <CR> o<ESC>
 noremap <SPACE> i<SPACE><ESC>
 nmap n nzz
 nmap N Nzz
-" ncc keymap
+" neocomplcache keymap
 " <CR>: close popup and save indent.
 inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 
 helptags $HOME/.vim/doc
 
-autocmd BufWritePost .vimrc source $MYVIMRC
+au BufWritePost .vimrc source $MYVIMRC
+
 
 "------------------------------------
 " plugins
@@ -107,6 +109,9 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
+" quickrun ---------------------------
+let g:quickrun_config = { '*': { 'split': 'vertical'}}
+let g:quickrun_config = { 'scheme': { 'command': 'petite --script'}}
 
 "--------------------------------------
 " I stole settings from these urls
@@ -115,3 +120,5 @@ let g:miniBufExplModSelTarget = 1
 " minibufexplorer and many useful plugins
 " http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 "
+
+
