@@ -16,6 +16,7 @@ urxvtc -e screen -U -D -RR  -s /bin/tcsh -m &
 xscrennsaver -no-splash &
 vnstatd -ds &
 parcellite &
+oneko -sakura &
 # tint2 & 
 exec xmonad
 
