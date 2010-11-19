@@ -77,6 +77,11 @@ inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 helptags $HOME/.vim/doc
 
 au BufWritePost .vimrc source $MYVIMRC
+augroup Scheme
+  au!
+  au FileType scheme setl cindent& lispwords=define,lambda,call-with-*
+augroup END
+
 
 
 "------------------------------------

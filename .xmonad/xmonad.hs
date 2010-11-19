@@ -45,6 +45,7 @@ import XMonad.Layout.Roledex
 
 import XMonad.Prompt
 import XMonad.Prompt.Shell
+import XMonad.Prompt.RunOrRaise
 
 import XMonad.Util.Run
 import XMonad.Util.EZConfig
@@ -58,7 +59,6 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 myBorderWidth   = 1
 myModMask       = mod1Mask
-
 myIcons         = "/home/mytoh/.dzen/icons/"
 
 myWorkspaces    =  
@@ -79,7 +79,7 @@ myWorkspaces    =
 myNormalBorderColor  = "#111111"
 myFocusedBorderColor = "#1177ff"
 myTabFont = "xft: Inconsolata-8"
-myXPFont = "xft: Inconsolata-10"
+myXPFont = "xft: Inconsolata-11"
 myDzenFont = "-adobe-helvetica-medium-r-normal--12-*"
 
 -- Layouts ------------------------------------------
@@ -137,7 +137,7 @@ myKeys = [
 myXPConfig = defaultXPConfig {
               position          = Bottom,
               promptBorderWidth = 0,
-              height            = 14,
+              height            = 15,
               font              = myXPFont,
               bgColor           = "#2a2733",
               fgColor           = "#909090",
