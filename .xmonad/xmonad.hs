@@ -155,12 +155,12 @@ myManageHook = insertPosition End Newer <+> composeAll
       className  =? "Main.py"                             --> doFloat,
       className  =? "Gimp"                                --> doFloat,
       className  =? "DTA"                                 --> doFloat,
-      className  =? "Gcolor2"                            --> doFloat,
+      className  =? "Gcolor2"                             --> doFloat,
       (className =? "Firefox" <&&> resource =? "Dialog")  --> doFloat
       ] 
+        <+> namedScratchpadManageHook myScratchPads
         <+> manageDocks 
         <+> manageHook defaultConfig 
-        <+> namedScratchpadManageHook myScratchPads
 
 myScratchPads = [ NS "thunar" spawnFiler findFiler manageFiler
                 ]
@@ -226,7 +226,7 @@ myEventHook = ewmhDesktopsEventHook
 -- dzen bars ----------------------------------------------------------------------
 myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 16 -fn " ++ myDzenFont  
 myRightBar  = "~/.dzen/bin/status | exec dzen2 -p -ta r -x 400 -y 0 -w 800 -h 16 -fn " ++ myDzenFont
-trayer      = "exec trayer --expand false --alpha 200  --tint 0xffffff --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype pixel --width 80 "
+trayer      = "exec trayer --expand false --alpha 200  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype pixel --width 80 "
 mail        = "gmail-notifier"
 -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 

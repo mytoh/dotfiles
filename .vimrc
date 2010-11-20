@@ -37,6 +37,7 @@ set backspace=indent,eol,start
 set fileformat=unix
 set fileformats=unix,mac,dos
 set splitright
+set splitbelow
 
 "statusline
 set laststatus=2
@@ -77,6 +78,7 @@ inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 helptags $HOME/.vim/doc
 
 au BufWritePost .vimrc source $MYVIMRC
+
 augroup Scheme
   au!
   au FileType scheme setl cindent& lispwords=define,lambda,call-with-*
@@ -115,8 +117,7 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
 " quickrun ---------------------------
-let g:quickrun_config = { '*': { 'split': 'vertical'}}
-let g:quickrun_config = { 'scheme': { 'command': 'petite --script'}}
+let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'petite --script'}}
 
 "--------------------------------------
 " I stole settings from these urls
