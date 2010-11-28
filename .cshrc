@@ -1,4 +1,5 @@
 
+set term=xterm
 set promptchars=">,#"
 set prompt="[%{\e[34m%n\e[37m@\e[32m%m\e[m%}] %c2 %# "
 set history=100000
@@ -43,6 +44,8 @@ bindkey "" history-search-forward
 
 
 alias cwdcmd ls-F
+#alias jobcmd 'echo -n "]2\;\!#"'
+alias precmd rehash
 alias quit 'sync;sync;sync;sudo shutdown -p now'
 alias res 'sync;sync;sync;sudo shutdown -r now'
 alias pup 'sudo portsnap fetch update && sudo portmaster -Bdav --force-config --no-confirm&& sudo portaudit -Fdav && sudo portmaster --clean-packages --clean-distfiles '
@@ -53,7 +56,8 @@ alias la gls -a --color=auto
 alias lf gls -FA --color=auto
 alias ll gls -lA --color=auto
 alias find gfind
-alias pinst "sudo make  install clean distclean; rehash"
+alias pfetch 'sudo make fetch-recursive'
+alias pinst "sudo make install clean distclean; rehash"
 alias pconf sudo make config-recursive
 alias pclean sudo make clean distclean
 alias awk gawk
@@ -73,7 +77,7 @@ if ( -e $home/perl5/perlbrew/etc/cshrc ) then
   source $home/perl5/perlbrew/etc/cshrc 
 endif
 
-if ( $SHLVL == 1 && $TERM != "xterm" ) then
+if ( $SHLVL == 1 && $term != "xterm" ) then
   set term=jfbterm && jfbterm
 endif
 

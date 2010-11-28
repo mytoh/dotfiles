@@ -9,6 +9,7 @@ urxvt.scrollBar: false
 urxvt.internalBorder: 1
 urxvt.transparent: true
 urxvt.shading: 40
+urxvt.blurRadius: 5
 urxvt.tintColor: #ffffff
 urxvt.preeditType: root
 urxvt.saveLines: 2000
