@@ -29,9 +29,9 @@ while (1)
   set batcolour = `sysctl -n hw.acpi.battery.state`
 
   if ( $batcolour == 1 ) then
-      set batcolour = "#303030";
+      set batcolour = "#ff4500";
   else if ( $batcolour == 2 ) then
-      set batcolour = "#00dddd";
+      set batcolour = "#00ff00";
   endif
 
 # set diskusr = `df -h | grep ad4s1f | gawk '{print $4}'`

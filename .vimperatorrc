@@ -3,7 +3,7 @@ noremap l gt
 noremap : ;
 noremap ; :
 
-colorscheme abyss
+colorscheme sweets
 
 
 set go-=rb

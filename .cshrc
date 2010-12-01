@@ -33,9 +33,10 @@ setenv EDITOR vim
 setenv PAGER less
 setenv FTP_PASSIVE_MODE true
 setenv MYVIMRC ~/.vimrc
-setenv NLSPATH ~/local/lib/tcsh/%N
 setenv G_FILENAME_ENCODING @locale
+setenv SCSH_LIB_DIRS ' "." "/usr/home/mytoh/.scsh" "/usr/local/lib/scsh/" "/usr/local/lib/scsh/0.6"'
 set catalog=ja.ayanami.cat
+setenv NLSPATH ~/local/lib/tcsh/%N
 
 bindkey -v
 bindkey "" backward-delete-word
@@ -57,7 +58,7 @@ alias lf gls -FA --color=auto
 alias ll gls -lA --color=auto
 alias find gfind
 alias pfetch 'sudo make fetch-recursive'
-alias pinst "sudo make install clean distclean; rehash"
+alias pinst "sudo make install distclean; rehash"
 alias pconf sudo make config-recursive
 alias pclean sudo make clean distclean
 alias awk gawk

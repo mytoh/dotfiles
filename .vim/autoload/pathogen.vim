@@ -1,1 +1,1 @@
-/home/mytoh/local/git/dotfiles/.vim/bundle/vim-pathogen/autoload/pathogen.vim
+../bundle/vim-pathogen/autoload/pathogen.vim
