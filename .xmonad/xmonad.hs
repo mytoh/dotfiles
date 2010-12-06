@@ -56,7 +56,7 @@ import XMonad.Util.NamedScratchpad
 ---------------------------------------------------
 myTerminal    = "urxvtc "
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 myBorderWidth   = 1
 myModMask       = mod1Mask
 myIcons         = "/home/mytoh/.dzen/icons/"
