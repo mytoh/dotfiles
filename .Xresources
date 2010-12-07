@@ -9,7 +9,7 @@ urxvt.scrollBar: false
 urxvt.internalBorder: 1
 urxvt.transparent: true
 urxvt.shading: 40
-urxvt.blurRadius: 5
+urxvt.blurRadius: 2
 urxvt.tintColor: #ffffff
 urxvt.preeditType: root
 urxvt.saveLines: 2000
@@ -18,8 +18,8 @@ urxvt.urgentOnBell: true
 
 urxvt.perl-ext-common: default,matcher
 urxvt.urlLauncher: firefox3
-!urxvt.matcher.button: 1
-!urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
+urxvt.matcher.button: 1
+urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
 urxvt.font: \
     xft:Inconsolata:size=8:antialias=true,\
