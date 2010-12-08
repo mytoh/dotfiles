@@ -14,6 +14,7 @@ set colorcat
 set autoexpand
 set complete=enhance
 set path = (~/local/bin ~/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin /usr/local/sbin )
+set cdpath = (~/local/ ~/local/var/)
 set noclobber
 set notify
 set time=(8 "\
@@ -43,6 +44,7 @@ bindkey "" backward-delete-word
 bindkey "" history-search-backward
 bindkey "" history-search-forward
 
+stty kill 
 
 alias cwdcmd ls-F
 #alias jobcmd 'echo -n "]2\;\!#"'

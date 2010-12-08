@@ -57,7 +57,7 @@ import XMonad.Util.NamedScratchpad
 myTerminal    = "urxvtc "
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
-myBorderWidth   = 1
+myBorderWidth   = 2
 myModMask       = mod1Mask
 myIcons         = "/home/mytoh/.dzen/icons/"
 
@@ -76,8 +76,9 @@ myWorkspaces    =
      where
         wrapBitmap bitmap = "^i(" ++ myIcons ++ bitmap ++ ")"
 
+-- Colors ------------------------------------------
 myNormalBorderColor  = "#111111"
-myFocusedBorderColor = "#1177ff"
+myFocusedBorderColor = "#ad9dc5"
 myTabFont = "xft: Inconsolata-8"
 myXPFont = "xft: Inconsolata-11"
 myDzenFont = "-adobe-helvetica-medium-r-normal--12-*"
@@ -176,7 +177,7 @@ myScratchPads = [ NS "thunar" spawnFiler findFiler manageFiler
 
 -- log hooks --------------------------------------------------------------      
 myLogHook h =  dynamicLogWithPP $ dzenPP { 
-                ppCurrent         = dzenColor "#303030" "#909090" . pad,
+                ppCurrent         = dzenColor "#ffffff" "#ad9dc5" . pad,
                 ppHidden          = dzenColor "#909090" "" .pad,
                 ppHiddenNoWindows = dzenColor "#606060" "" . pad,
                 ppLayout          = dzenColor "#77a8bf" "" .
