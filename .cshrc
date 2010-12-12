@@ -35,7 +35,7 @@ setenv PAGER less
 setenv FTP_PASSIVE_MODE true
 setenv MYVIMRC ~/.vimrc
 setenv G_FILENAME_ENCODING @locale
-setenv SCSH_LIB_DIRS ' "." "/usr/home/mytoh/.scsh" "/usr/local/lib/scsh/" "/usr/local/lib/scsh/0.6"'
+setenv SCSH_LIB_DIRS ' "." "/usr/home/mytoh/.scsh" "/usr/local/lib/scsh/" "/usr/local/lib/scsh/0.6" "#f"'
 set catalog=ja.ayanami.cat
 setenv NLSPATH ~/local/lib/tcsh/%N
 
@@ -46,18 +46,19 @@ bindkey "" history-search-forward
 
 stty kill 
 
-alias cwdcmd ls-F
+alias cwdcmd ls -F
 #alias jobcmd 'echo -n "]2\;\!#"'
 alias precmd rehash
 alias quit 'sync;sync;sync;sudo shutdown -p now'
 alias res 'sync;sync;sync;sudo shutdown -r now'
-alias pup 'sudo portsnap fetch update && sudo portmaster -Bdav --force-config --no-confirm&& sudo portaudit -Fdav && sudo portmaster --clean-packages --clean-distfiles '
+alias pup 'sudo portsnap fetch update '
+alias pcheck 'sudo portmaster -Bdav && sudo portaudit -Fdav && sudo portmaster --clean-packages --clean-distfiles'
 #alias pup 'sudo portsnap fetch update && sudo pkg_replace -Bcav && sudo portaudit -av && rehash'
 alias cup 'cpan-outdated && cpan-outdated | xargs cpanm -Sv'
 alias sc screen -U -D -RR  -s /bin/tcsh -m 
-alias la gls -a --color=auto
+alias la gls -Fa --color=auto
 alias lf gls -FA --color=auto
-alias ll gls -lA --color=auto
+alias ll gls -FlA --color=auto
 alias find gfind
 alias pfetch 'sudo make fetch-recursive'
 alias pinst "sudo make install distclean; rehash"

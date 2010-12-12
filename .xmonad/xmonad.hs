@@ -79,8 +79,10 @@ myWorkspaces    =
 -- Colors ------------------------------------------
 myNormalBorderColor  = "#111111"
 myFocusedBorderColor = "#ad9dc5"
+
+-- Fonts -------------------------------------------
 myTabFont = "xft: Inconsolata-8"
-myXPFont = "xft: Inconsolata-11"
+myXPFont = "xft: Inconsolata-21"
 myDzenFont = "-adobe-helvetica-medium-r-normal--12-*"
 
 -- Layouts ------------------------------------------
@@ -138,7 +140,7 @@ myKeys = [
 myXPConfig = defaultXPConfig {
               position          = Bottom,
               promptBorderWidth = 0,
-              height            = 15,
+              height            = 27,
               font              = myXPFont,
               bgColor           = "#2a2733",
               fgColor           = "#909090",
@@ -149,10 +151,11 @@ myXPConfig = defaultXPConfig {
 
 
 -- manage hooks -------------------------------------------------------    
-myManageHook = insertPosition End Newer <+> composeAll
+myManageHook = -- insertPosition End Newer <+> composeAll
+              composeAll
     [ isFullscreen                                        --> (doF W.focusDown <+> doFullFloat),
       isDialog                                            --> doFloat,
-      className  =? "MPlayer"                             --> doFloat,
+      className  =? "MPlayer"                             --> doFullFloat,
       className  =? "Main.py"                             --> doFloat,
       className  =? "Gimp"                                --> doFloat,
       className  =? "DTA"                                 --> doFloat,

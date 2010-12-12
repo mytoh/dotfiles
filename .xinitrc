@@ -13,12 +13,14 @@ nitrogen --restore &
 urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
 #urxvtc -e screenie -s /bin/tcsh -m &
 xscrennsaver -no-splash &
-vnstatd -ds &
 parcellite &
 #oneko -sakura &
 #xfce4-panel &
 # tint2 & 
-exec xmonad
+#exec xmonad
+exec sawfish
+
+
 
 
 
