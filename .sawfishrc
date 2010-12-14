@@ -1,0 +1,14 @@
+;; sawfish user customization -- do not edit by hand!
+;; sawfish version 1.5.2, written Mon Dec 13 01:09:02 2010
+
+(custom-set-typed-variable (quote default-frame-style) (quote Dust) (quote frame-style))
+(custom-set-typed-variable (quote Crux:button-theme) (quote next) (quote (choice (default "Default") (platinum "Mac OS Platinum") (macos-x "Mac OS X") (windows "MS Windows") (next "NeXTSTEP") (complete "Complete") (complete-inverse "Complete (Inverse)"))))
+(custom-set-typed-variable (quote Crux:show-window-icons) (quote t) (quote boolean))
+(custom-set-typed-variable (quote tooltips-enabled) (quote t) (quote boolean) (quote sawfish.wm.ext.tooltips))
+
+;; ------------
+
+(require 'sawfish.wm.ext.pager)
+(setq pager-executable "pager")
+(add-hook 'after-initialization-hook pager t)
+
