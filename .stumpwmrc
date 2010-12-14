@@ -1,0 +1,31 @@
+;; -*- lisp -*-
+
+(in-package :stumpwm)
+
+(load-module "/usr/local/share/stumpwm/disk.lisp")
+(load-module "/usr/local/share/stumpwm/cpu.lisp")
+
+(set-font "-kochi-gothic-medium-r-normal-*-*-110-*-*-p-*-iso10646-1")
+
+(define-key *root-map* (kbd "c") "urxvtcd")
+(define-key *root-map* (kbd "f") "firefox3")
+
+(define-key *top-map* (kbd "M-h") "move-focus left")
+(define-key *top-map* (kbd "M-l") "move-focus right")
+(define-key *top-map* (kbd "M-k") "move-focus up")
+(define-key *top-map* (kbd "M-j") "move-focus down")
+(define-key *top-map* (kbd "M-s") "vsplit")
+(define-key *top-map* (kbd "M-s") "hsplit")
+(define-key *top-map* (kbd "M-r") "remove")
+(define-key *top-map* (kbd "M-f") "fullscreen")
+
+(setf *mouse-focus-policy* :sloppy)
+
+(setq *input-window-gravity* :center)
+
+;; modeline
+(toggle-mode-line (current-screen) (current-head))
+
+(setf *screen-mode-line-format*
+      (list "%w |"
+            '(:eval (stumpwm:run-shell-command "date" t))))
