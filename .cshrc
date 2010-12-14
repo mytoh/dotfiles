@@ -46,13 +46,13 @@ bindkey "" history-search-forward
 
 stty kill 
 
-alias cwdcmd ls -F
+alias cwdcmd gls -F --color=auto
 #alias jobcmd 'echo -n "]2\;\!#"'
 alias precmd rehash
 alias quit 'sync;sync;sync;sudo shutdown -p now'
 alias res 'sync;sync;sync;sudo shutdown -r now'
 alias pup 'sudo portsnap fetch update '
-alias pcheck 'sudo portmaster -Bdav && sudo portaudit -Fdav && sudo portmaster --clean-packages --clean-distfiles'
+alias pcheck 'sudo portmaster -Bidav && sudo portaudit -Fdav && sudo portmaster --clean-packages --clean-distfiles'
 #alias pup 'sudo portsnap fetch update && sudo pkg_replace -Bcav && sudo portaudit -av && rehash'
 alias cup 'cpan-outdated && cpan-outdated | xargs cpanm -Sv'
 alias sc screen -U -D -RR  -s /bin/tcsh -m 
@@ -126,7 +126,7 @@ if ( "`uname`" == "FreeBSD") then
   alias link glink
   alias ln gln
   alias logname glogname
-  alias ls gls --color=auto
+  alias ls gls -F --color=auto
   alias md5sum gmd5sum
   alias mkdir gmkdir
   alias mkfifo gmkfifo
