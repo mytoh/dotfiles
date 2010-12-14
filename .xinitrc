@@ -18,7 +18,8 @@ parcellite &
 #xfce4-panel &
 # tint2 & 
 #exec xmonad
-exec sawfish
+exec stumpwm
+
 
 
 
