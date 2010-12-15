@@ -58,7 +58,7 @@ alias cup 'cpan-outdated && cpan-outdated | xargs cpanm -Sv'
 alias sc screen -U -D -RR  -s /bin/tcsh -m 
 alias la gls -Fa --color=auto
 alias lf gls -FA --color=auto
-alias ll gls -FlA --color=auto
+alias ll gls -FhlA --color=auto
 alias find gfind
 alias pfetch 'sudo make fetch-recursive'
 alias pinst "sudo make install distclean; rehash"

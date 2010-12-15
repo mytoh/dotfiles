@@ -2,13 +2,24 @@
 
 (in-package :stumpwm)
 
-(load-module "/usr/local/share/stumpwm/disk.lisp")
-(load-module "/usr/local/share/stumpwm/cpu.lisp")
+(setf *debug-level* 10)
+
+;; hide mouse
+(run-with-timer 5 5 'banish-pointer)
 
 (set-font "-kochi-gothic-medium-r-normal-*-*-110-*-*-p-*-iso10646-1")
 
-(define-key *root-map* (kbd "c") "urxvtcd")
+(run-shell-command " ~/.dzen/bin/status | exec dzen2 -p 1 -ta r -x 400 -y 0 -w 800 -h 16 ")
+(run-shell-command "exec trayer --expand false --alpha 200  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype pixel --width 80 " )
+
+(defcommand urxvtc () () (run-shell-command "urxvtc"))
+(defcommand firefox3 () () (run-or-raise "firefox3" '(:class "Firefox")))
+(defcommand thunar () () (run-shell-command "thunar"))
+
+
+(define-key *root-map* (kbd "c") "urxvtc")
 (define-key *root-map* (kbd "f") "firefox3")
+(define-key *root-map* (kbd "C-t") "thunar")
 
 (define-key *top-map* (kbd "M-h") "move-focus left")
 (define-key *top-map* (kbd "M-l") "move-focus right")
@@ -21,11 +32,17 @@
 
 (setf *mouse-focus-policy* :sloppy)
 
-(setq *input-window-gravity* :center)
+(setq *input-window-gravity* :bottom-left)
+
+(setf *normal-border-width* 1) 
+(setf *transient-border-width* 1)
+(setf *window-border-style* :tight)
 
 ;; modeline
 (toggle-mode-line (current-screen) (current-head))
-
+(setf *mode-line-border-width* 1)
+(setf *mode-line-pad-x* 2)
+(setf *mode-line-pad-y* 2)
 (setf *screen-mode-line-format*
-      (list "%w |"
+      (list "%g | %w | "
             '(:eval (stumpwm:run-shell-command "date" t))))

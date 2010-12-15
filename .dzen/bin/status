@@ -1,5 +1,7 @@
 #!/bin/tcsh
 
+# this script depend on system FreeBSD, gawk, bwm-ng, and some xbm icon files
+
 set date_format = '%a %d/%m %H:%M'
 set icons = $HOME/.dzen/icons
 set interval = 1
