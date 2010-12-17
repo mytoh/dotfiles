@@ -30,19 +30,24 @@
 (define-key *top-map* (kbd "M-r") "remove")
 (define-key *top-map* (kbd "M-f") "fullscreen")
 
-(setf *mouse-focus-policy* :sloppy)
+(setf *mouse-focus-policy* :click)
 
 (setq *input-window-gravity* :bottom-left)
 
 (setf *normal-border-width* 1) 
 (setf *transient-border-width* 1)
-(setf *window-border-style* :tight)
+(setf *window-border-style* :thin)
+
+;;frame
+(set-frame-outline-width 1)
+(setf *new-window-preferred-frame* '(:empty :focused))
 
 ;; modeline
-(toggle-mode-line (current-screen) (current-head))
-(setf *mode-line-border-width* 1)
-(setf *mode-line-pad-x* 2)
-(setf *mode-line-pad-y* 1)
-(setf *screen-mode-line-format*
-      (list "%g | %w | "
-            '(:eval (stumpwm:run-shell-command "date" t))))
+(if (not (head-mode-line (current-head)))
+    (toggle-mode-line (current-screen) (current-head)))
+
+(setf *mode-line-border-width* 0
+      *mode-line-pad-x* 0
+      *mode-line-pad-y* 0
+      *screen-mode-line-format*
+      (list "%g | %w | " '(:eval (stumpwm:run-shell-command "date" t))))
