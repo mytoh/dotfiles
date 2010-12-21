@@ -14,17 +14,17 @@
 
 (defcommand urxvtc () () (run-shell-command "urxvtc"))
 (defcommand firefox3 () () (run-or-raise "firefox3" '(:class "Firefox")))
-(defcommand thunar () () (run-shell-command "thunar"))
-
+(defcommand thunar () () (run-or-raise "thunar"))
+(defcommand dmenu () () (run-shell-command "dmenu_run"))
 
 (define-key *root-map* (kbd "c") "urxvtc")
 (define-key *root-map* (kbd "f") "firefox3")
-(define-key *root-map* (kbd "C-t") "thunar")
+(define-key *root-map* (kbd "t") "thunar")
+(define-key *root-map* (kbd "d") "dmenu")
 
 (define-key *top-map* (kbd "M-j") "next-in-frame")
 (define-key *top-map* (kbd "M-k") "prev-in-frame")
-(define-key *top-map* (kbd "M-n") "next")
-(define-key *top-map* (kbd "M-p") "prev")
+(define-key *top-map* (kbd "M-n") "fnext")
 (define-key *top-map* (kbd "M-s") "vsplit")
 (define-key *top-map* (kbd "M-S") "hsplit")
 (define-key *top-map* (kbd "M-r") "remove")
@@ -34,11 +34,11 @@
 
 (setq *input-window-gravity* :bottom-left)
 
-(setf *normal-border-width* 1) 
-(setf *transient-border-width* 1)
-(setf *window-border-style* :thin)
+(setf *normal-border-width* 1 
+      *transient-border-width* 1
+      *window-border-style* :thin)
 
-;;frame
+;; frame
 (set-frame-outline-width 1)
 (setf *new-window-preferred-frame* '(:empty :focused))
 
@@ -46,8 +46,11 @@
 (if (not (head-mode-line (current-head)))
     (toggle-mode-line (current-screen) (current-head)))
 
-(setf *mode-line-border-width* 0
-      *mode-line-pad-x* 0
-      *mode-line-pad-y* 0
+(setf *mode-line-screen-position* :top
+      *mode-line-border-width* 1
+      *mode-line-pad-x* 2
+      *mode-line-pad-y* 2
+      *mode-line-timeout* 1
+      *window-format* "<%n%s%m%15t>"
       *screen-mode-line-format*
-      (list "%g | %w | " '(:eval (stumpwm:run-shell-command "date" t))))
+      (list "%g | %w | " '(:eval (run-shell-command "date +'%a %d %m %T' | tr -d '[:cntrl:]'" t))))
