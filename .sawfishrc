@@ -7,23 +7,30 @@
 
 (setq *workspace-count* 4)
 
+;; Application Keymacros
+(define apps-keymap ( make-keymap ))
+(bind-keys global-keymap "C-t" apps-keymap)
+
+(bind-keys apps-keymap 
+  "d" `(jump-or-exec "dmenu" "dmenu_run" t)) 
+
 ;; sawfish user customization -- do not edit by hand!
 ;; sawfish version 1.5.2, written Wed Dec 15 20:28:20 2010
 
-(custom-set-typed-variable (quote pager-workspaces-per-column) (quote 1) (quote number))
-(custom-set-typed-variable (quote pager-show-ignored-windows) (quote t) (quote boolean))
-(custom-set-typed-variable (quote resize-show-dimensions) (quote ()) (quote boolean))
-(custom-set-typed-variable (quote move-show-position) (quote ()) (quote boolean))
-(custom-set-typed-variable (quote ignore-program-positions) (quote ()) (quote boolean))
-(custom-set-typed-variable (quote place-window-mode) (quote top-left) (quote symbol))
-(custom-set-typed-variable (quote window-history-auto-save-dimensions) (quote ()) (quote boolean) (quote sawfish.wm.ext.window-history))
-(custom-set-typed-variable (quote Dust:icon-mode) (quote if-available) (quote (choice (always "Always (use default icon where necessary)") (if-available "If available (don't use the default icon)") (never "Never"))))
-(custom-set-typed-variable (quote Dust:show-resize-triangle) (quote t) (quote boolean))
-(custom-set-typed-variable (quote tooltips-enabled) (quote ()) (quote boolean) (quote sawfish.wm.ext.tooltips))
-(custom-set-typed-variable (quote default-window-animator) (quote none) (quote (choice none solid wireframe cross elliptical draft)))
-(custom-set-typed-variable (quote resize-outline-mode) (quote opaque) (quote (choice opaque box cross elliptical draft)))
-(custom-set-typed-variable (quote move-outline-mode) (quote opaque) (quote (choice opaque box cross elliptical draft)))
-(custom-set-typed-variable (quote default-frame-style) (quote Dust) (quote frame-style))
-(custom-set-typed-variable (quote default-font) (quote ("Pango" . "Inconsolata Medium 10")) (quote font))
-(custom-set-typed-variable (quote Crux:button-theme) (quote next) (quote (choice (default "Default") (platinum "Mac OS Platinum") (macos-x "Mac OS X") (windows "MS Windows") (next "NeXTSTEP") (complete "Complete") (complete-inverse "Complete (Inverse)"))))
-(custom-set-typed-variable (quote Crux:show-window-icons) (quote t) (quote boolean))
+(define-special-variable   pager-workspaces-per-column 1)
+(define-special-variable   pager-show-ignored-windows t)
+(define-special-variable   resize-show-dimensions '())
+(define-special-variable   move-show-position '())
+(define-special-variable   ignore-program-positions '())
+(define-special-variable   place-window-mode 'top-left)
+(define-special-variable   window-history-auto-save-dimensions '())
+(define-special-variable   Dust:icon-mode 'if-available) 
+(define-special-variable   Dust:show-resize-triangle 't)
+(define-special-variable   tooltips-enabled '())
+(define-special-variable   default-window-animator 'none)
+(define-special-variable   resize-outline-mode 'opaque)
+(define-special-variable   move-outline-mode 'opaque)
+(define-special-variable   default-frame-style 'Dust)
+(define-special-variable   default-font '("Pango" . "Inconsolata Medium 10"))
+(define-special-variable   Crux:button-theme 'next)
+(define-special-variable   Crux:show-window-icons t)
