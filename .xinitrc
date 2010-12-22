@@ -12,18 +12,12 @@ xsetroot -cursor_name left_ptr -solid black &
 nitrogen --restore &
 urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
 #urxvtc -e screenie -s /bin/tcsh -m &
-xscrennsaver -no-splash &
+xscreensaver -no-splash &
 parcellite &
+#xsnow &
 #oneko -sakura &
 #xfce4-panel &
 # tint2 & 
 #exec xmonad
 exec stumpwm
-
-
-
-
-
-
-
 
