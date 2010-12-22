@@ -14,13 +14,12 @@
 
 (defcommand urxvtc () () (run-shell-command "urxvtc"))
 (defcommand firefox3 () () (run-or-raise "firefox3" '(:class "Firefox")))
-(defcommand thunar () () (run-or-raise "thunar"))
+(defcommand thunar () () (run-or-raise "thunar" '(:class "Thunar")))
 (defcommand dmenu () () (run-shell-command "dmenu_run"))
 
 (define-key *root-map* (kbd "c") "urxvtc")
 (define-key *root-map* (kbd "f") "firefox3")
 (define-key *root-map* (kbd "t") "thunar")
-(define-key *root-map* (kbd "d") "dmenu")
 
 (define-key *top-map* (kbd "M-j") "next-in-frame")
 (define-key *top-map* (kbd "M-k") "prev-in-frame")
@@ -29,8 +28,10 @@
 (define-key *top-map* (kbd "M-S") "hsplit")
 (define-key *top-map* (kbd "M-r") "remove")
 (define-key *top-map* (kbd "M-f") "fullscreen")
+(define-key *top-map* (kbd "M-d") "dmenu")
+(define-key *top-map* (kbd "M-TAB") "next")
 
-(setf *mouse-focus-policy* :click)
+(setf *mouse-focus-policy* :sloppy)
 
 (setq *input-window-gravity* :bottom-left)
 
