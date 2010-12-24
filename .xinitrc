@@ -19,5 +19,21 @@ parcellite &
 #xfce4-panel &
 # tint2 & 
 #exec xmonad
-exec stumpwm
+
+DEFAULT_SESSION="stumpwm"
+case $1 in
+stumpwm)
+        exec stumpwm
+        ;;
+sawfish)
+        exec sawfish
+        ;;
+xmonad)
+        exec xmonad
+        ;;
+*)
+        exec $DEFAULT_SESSION
+        ;;
+esac
+
 
