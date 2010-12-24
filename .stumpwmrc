@@ -16,7 +16,7 @@
 (set-fg-color "orange")
 (set-border-color "grey10")
 (set-msg-border-width 1)
-(setf *message-window-gravity* :center
+(setf *message-window-gravity* :top-right
       *input-window-gravity* :bottom-left)
 
 
@@ -35,6 +35,8 @@
 (define-key *top-map* (kbd "M-j") "next-in-frame")
 (define-key *top-map* (kbd "M-k") "prev-in-frame")
 (define-key *top-map* (kbd "M-n") "fnext")
+(define-key *top-map* (kbd "M-h") "gprev")
+(define-key *top-map* (kbd "M-l") "gnext")
 (define-key *top-map* (kbd "M-s") "vsplit")
 (define-key *top-map* (kbd "M-S") "hsplit")
 (define-key *top-map* (kbd "M-R") "remove")
@@ -44,24 +46,42 @@
 
 (setf *mouse-focus-policy* :sloppy)
 
-
+;;;; windows
 (setf *normal-border-width* 1 
+      *maxsize-border-width* 3
       *transient-border-width* 1
-      *window-border-style* :thin)
-
-;; frame
+      *window-border-style* :thin) ;; thick,thin,none,tight
+(set-focus-color "dimgrey")
+(set-unfocus-color "grey10")
+(set-normal-gravity :center)
 (set-frame-outline-width 1)
 (setf *new-window-preferred-frame* '(:empty :focused))
 
-;; modeline
-(if (not (head-mode-line (current-head)))
-    (toggle-mode-line (current-screen) (current-head)))
+;;;; set the two remaining color slots
+(setf *colors* (append *colors*
+                (list "orange"  
+                      "coral")))
+(update-color-map (current-screen))
 
-(setf *mode-line-screen-position* :top
+;; modeline
+(enable-mode-line (current-screen) (current-head) t)
+
+(setf *mode-line-background-color* "grey20"
+      *mode-line-foreground-color* "orange"
+      *mode-line-position* :top
       *mode-line-border-width* 1
       *mode-line-pad-x* 2
       *mode-line-pad-y* 2
       *mode-line-timeout* 1
-      *window-format* "<%n%s%m%15t>"
-      *screen-mode-line-format*
-      (list "%g | %w | " '(:eval (run-shell-command "date +'%a %d %m %T' | tr -d '[:cntrl:]'" t))))
+      *window-format* "^5*(%n%s%m%15t)^n" ;;^5* color pink
+      *group-format*  "^7*%t%s ^n" ;;^7* color white
+      *screen-mode-line-format*  ;; ^n change color default
+      (list "%g ^9*|^n %w ^9*|^n " '(:eval (run-shell-command "date +'%a %d %m %T' | tr -d '[:cntrl:]'" t))))
+
+
+;;;; groups
+;; rename the first group to main
+;;(setf (group-name (first (screen (current-screen)))) "main")
+;; create the other group
+(run-commands "gnewbg www" "gnew media")
+
