@@ -9,7 +9,8 @@
 ;; hide mouse
 ;; (run-with-timer 5 5 'banish-pointer)
 
-(set-font "-kochi-gothic-medium-r-normal-*-*-110-*-*-p-*-iso10646-1")
+;;(set-font "-kochi-gothic-medium-r-normal-*-*-110-*-*-p-*-iso10646-1")
+(set-font "-adobe-helvetica-medium-r-normal--12-*")
 
 ;;;; message window
 (set-bg-color "grey20")
