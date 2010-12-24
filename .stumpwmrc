@@ -4,10 +4,19 @@
 
 (setf *debug-level* 10)
 
+(setf *startup-message* nil)
+
 ;; hide mouse
 (run-with-timer 5 5 'banish-pointer)
 
 (set-font "-kochi-gothic-medium-r-normal-*-*-110-*-*-p-*-iso10646-1")
+
+;;;; message window
+(set-bg-color "grey20")
+(set-fg-color "orange")
+(set-border-color "grey10")
+(set-msg-border-width 1)
+
 
 ;; (run-shell-command " ~/.dzen/bin/status | exec dzen2 -p 1 -ta r -x 400 -y 0 -w 800 -h 16 ")
 ;; (run-shell-command "exec trayer --expand false --alpha 200  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype pixel --width 80 " )
@@ -15,7 +24,7 @@
 (defcommand urxvtc () () (run-shell-command "urxvtc"))
 (defcommand firefox3 () () (run-or-raise "firefox3" '(:class "Firefox")))
 (defcommand thunar () () (run-or-raise "thunar" '(:class "Thunar")))
-(defcommand dmenu () () (run-shell-command "dmenu_run"))
+(defcommand dmenu () () (run-shell-command "dmenu_run -nb grey20 -nf orange"))
 
 (define-key *root-map* (kbd "c") "urxvtc")
 (define-key *root-map* (kbd "f") "firefox3")
