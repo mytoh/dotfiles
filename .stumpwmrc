@@ -26,7 +26,7 @@
 (define-key *top-map* (kbd "M-n") "fnext")
 (define-key *top-map* (kbd "M-s") "vsplit")
 (define-key *top-map* (kbd "M-S") "hsplit")
-(define-key *top-map* (kbd "M-r") "remove")
+(define-key *top-map* (kbd "M-R") "remove")
 (define-key *top-map* (kbd "M-f") "fullscreen")
 (define-key *top-map* (kbd "M-d") "dmenu")
 (define-key *top-map* (kbd "M-TAB") "next")
