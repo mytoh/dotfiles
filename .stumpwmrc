@@ -16,6 +16,8 @@
 (set-fg-color "orange")
 (set-border-color "grey10")
 (set-msg-border-width 1)
+(setf *message-window-gravity* :center
+      *input-window-gravity* :bottom-left)
 
 
 ;; (run-shell-command " ~/.dzen/bin/status | exec dzen2 -p 1 -ta r -x 400 -y 0 -w 800 -h 16 ")
@@ -42,7 +44,6 @@
 
 (setf *mouse-focus-policy* :sloppy)
 
-(setq *input-window-gravity* :bottom-left)
 
 (setf *normal-border-width* 1 
       *transient-border-width* 1
