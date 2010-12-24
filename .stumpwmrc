@@ -1,7 +1,8 @@
 ;; -*- lisp -*-
 
-(in-package :stumpwm)
+;; settings taken from "http://aperturefever.wordpress.com/2010/05/10/updating-stumpwm-conf/"
 
+(in-package :stumpwm)
 
 (setf *startup-message* nil)
 
