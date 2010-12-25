@@ -1,0 +1,16 @@
+(autoload 'w3m "w3m" "Interface for w3m on Emacs." t)
+; brouse-url
+; open url like string by press 'C-x m'
+(setq brouse-url-browser-function 'w3m-browse-url)
+(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+(global-set-key "\C-xm" 'browser-url-at-point)
+; home page
+(setq w3m-home-page "http://google.co.jp/")
+; enable cookies to login site , hatena
+(setq w3m-use-cookies t)
+; don't delete favicon cache
+(setq w3m-favicon-cache-expire-wait nil)
+; enable display image
+(auto-image-file-mode t)
+(setq w3m-default-display-inline-images t)
+
