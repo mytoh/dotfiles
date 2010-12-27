@@ -34,18 +34,17 @@
 (setq display-time-day-and-date t)
 (display-time)
 ;; disable tool bar
-(tool-bar-mode -1)
+(tool-bar-mode nil)
 ;; enable versioning for backup-files
 (setq version-control t)
 ;; save all backup file in this directory
 (setq backup-directory-alist (quote ((".*" . "~/.emacs.d/backup/"))))
 
-;;;;;;;;;;;;;;;;;;  
-;;;;; colors ;;;;;
-;;;;;;;;;;;;;;;;;;
+
+;;;;; faces  ;;;;;
 (custom-set-faces
  '(default ((t
-	     (:background "#1c1c1c" :foreground "#d0d0d0")
+	     (:background "#1c1c1c" :foreground "#d0d0d0" :height 80) ;; height is font size
 	     )))
  '(cursor ((((class color)
              (background dark))
@@ -54,6 +53,9 @@
 	     (background light))
             (:background "#999999"))
 	   (t ())
+ '(linum ((t
+	   (:inherit shadow :background "gray45")
+	   )))
 	   )))
 
 ;; scheme program
@@ -65,8 +67,6 @@
 (autoload 'scheme-mode "cmuscheme" "Major mode for Schem." t)
 (autoload 'run-scheme "cmuscheme" "Run an inferior Scheme process." t)
 
-;; startup 
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; elisp packages ;;;;;
@@ -75,7 +75,6 @@
 ;; auto-install
 ;; original setting see
 ;; http://d.hatena.ne.jp/xorphitus/20101103/1288776927
-;; M-x install-elisp
 (when (require 'auto-install nil t)
   (setq auto-install-directory "~/.emacs.d/elisp/")
   ;; update package names
@@ -88,13 +87,6 @@
 (global-auto-complete-mode t)
 
 ;; w3m 
-;; for cvs version, following command
-;; cvs -d :pserver:anonymous@cvs.namazu.org:/storage/cvsroot login
-;; cvs -d :pserver:anonymous@cvs.namazu.org:/storage/cvsroot co emacs-w3m
-;; cd emacs-w3m
-;; autoconf
-;; ./configure --with-lispdir=/home/mytoh/.emacs.d/elisp/w3m --with-icondir=/home/mytoh/.emacs.d/icons
-;; make && sudo make install && sudo make install-icons30
 (require 'w3m-load)
 
 (cd "~/")
