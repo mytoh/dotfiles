@@ -34,7 +34,7 @@
 (setq display-time-day-and-date t)
 (display-time)
 ;; disable tool bar
-(tool-bar-mode nil)
+(tool-bar-mode -1)
 ;; enable versioning for backup-files
 (setq version-control t)
 ;; save all backup file in this directory
@@ -75,6 +75,7 @@
 ;; auto-install
 ;; original setting see
 ;; http://d.hatena.ne.jp/xorphitus/20101103/1288776927
+;; M-x install-elisp
 (when (require 'auto-install nil t)
   (setq auto-install-directory "~/.emacs.d/elisp/")
   ;; update package names
@@ -87,6 +88,13 @@
 (global-auto-complete-mode t)
 
 ;; w3m 
+;; for cvs version, following command
+;; cvs -d :pserver:anonymous@cvs.namazu.org:/storage/cvsroot login
+;; cvs -d :pserver:anonymous@cvs.namazu.org:/storage/cvsroot co emacs-w3m
+;; cd emacs-w3m
+;; autoconf
+;; ./configure --with-lispdir=/home/mytoh/.emacs.d/elisp/w3m --with-icondir=/home/mytoh/.emacs.d/icons
+;; make && sudo make install && sudo make install-icons30
 (require 'w3m-load)
 
 (cd "~/")
