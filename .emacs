@@ -34,7 +34,7 @@
 (setq display-time-day-and-date t)
 (display-time)
 ;; disable tool bar
-(tool-bar-mode nil)
+(tool-bar-mode -1)
 ;; enable versioning for backup-files
 (setq version-control t)
 ;; save all backup file in this directory
