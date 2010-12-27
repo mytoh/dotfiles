@@ -40,6 +40,17 @@
 ;; save all backup file in this directory
 (setq backup-directory-alist (quote ((".*" . "~/.emacs.d/backup/"))))
 
+;; set initial frame size, place, font
+(setq initial-frame-alist
+      (append (list
+	       '(width . 176)
+	       '(height . 52)
+	       '(top . 0)
+	       '(left . 0)
+;	       '(font . "Inconsolata 11")
+	       )
+	      initial-frame-alist))
+(setq default-frame-alist initial-frame-alist)
 
 ;;;;; faces  ;;;;;
 (custom-set-faces
@@ -88,5 +99,8 @@
 
 ;; w3m 
 (require 'w3m-load)
+
+;; anything
+(require 'anything-startup)
 
 (cd "~/")
