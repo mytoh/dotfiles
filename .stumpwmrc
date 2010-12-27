@@ -49,7 +49,7 @@
 
 ;;;; windows
 (setf *normal-border-width* 1 
-      *maxsize-border-width* 3
+      *maxsize-border-width* 2
       *transient-border-width* 1
       *window-border-style* :thin) ;; thick,thin,none,tight
 (set-focus-color "dimgrey")
@@ -74,8 +74,8 @@
       *mode-line-pad-x* 2
       *mode-line-pad-y* 2
       *mode-line-timeout* 1
-      *window-format* "^5*grey(%n%s%m%15t)^n" ;;^5 magenta
-      *group-format*  "^7*%t%s ^n" ;;^7 white
+      *window-format* "^5*(%n%s%m%15t)^n" ;;^5 magenta
+      *group-format*  "^7*%t%s^n" ;;^7 white
       *screen-mode-line-format*  ;; ^n use the normal bg and fg color
       (list "%g ^9*|^n %w ^9*|^n " 
        '(:eval (run-shell-command "top -b -d 2 | grep ^CPU |gawk '{print $2,$6}'"))
