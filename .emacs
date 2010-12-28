@@ -3,6 +3,16 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/w3m/")
 (setq default-directory "~/")
 
+;;; This was installed by package-install.el.
+;;; This provides support for the package system and
+;;; interfacing with ELPA, the package archive.
+;;; Move this code earlier if you want to reference
+;;; packages in your .emacs.
+(when
+    (load
+     (expand-file-name "~/.emacs.d/elpa/package.el"))
+  (package-initialize))
+
 ;; encodings
 (set-language-environment "Japanese")
 (set-default-coding-systems 'utf-8)
@@ -126,3 +136,4 @@
 (setq anything-display-function 'display-buffer-function--split-root)
 
 (cd "~/")
+
