@@ -135,5 +135,31 @@
 ;for anything window
 (setq anything-display-function 'display-buffer-function--split-root)
 
+;; emms
+(require 'emms-setup)
+(require 'emms-i18n)
+(require 'emms-mode-line)
+(emms-mode-line 1)
+(emms-standard)
+(emms-all)
+(emms-default-players)
+(setq emms-repeat-playlist t)
+(setq emms-player-list '(emms-player-mplayer))
+(setq emms-source-file-default-directory "/Volumes/My Passport/var/musica/")
+;; Show the current track each time EMMS
+;; starts to play a track with "NP : "
+(add-hook 'emms-player-started-hook 'emms-show)
+(setq emms-show-format "NP: %s")
+;; show time 
+(require 'emms-playing-time)
+(emms-playing-time 1)
+;; keybindings from emacswiki
+(global-set-key (kbd "C-c <SPC>") 'emms-pause) 
+(global-set-key (kbd "C-c p") 'emms-previous)
+(global-set-key (kbd "C-c n") 'emms-next)
+(global-set-key (kbd "C-c s") 'emms-stop)
+(global-set-key (kbd "C-c f") 'emms-show)
+(emms-add-playlist "~/.emacs.d/emms.playlist")
+
 (cd "~/")
 
