@@ -69,6 +69,7 @@ alias vi  vim
 alias view "vim -R -"
 alias .. 'cd ..'
 alias scsh 'rlwrap scsh'
+alias ew 'emacs -f w3m'
 
 complete cd 'p/1/d/'
 complete make 'p/1/(all clean distclean depend  install install.man Makefiles buildworld installworld config-recursive)/'
