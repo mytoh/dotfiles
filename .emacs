@@ -214,6 +214,7 @@
 (global-set-key (kbd "C-c n") 'emms-next)
 (global-set-key (kbd "C-c s") 'emms-stop)
 (global-set-key (kbd "C-c f") 'emms-show)
+(global-set-key (kbd "C-c m") 'emms-playlist-mode-go)
 (emms-add-playlist "~/.emacs.d/emms.playlist")
 
 ;;; navi2ch
