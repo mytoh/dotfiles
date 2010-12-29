@@ -51,8 +51,6 @@
 (setq delete-auto-save-files t)
 ;; search incase-sensitive
 (setq completion-ignore-case t)
-;; completion
-(partial-completion-mode 1)
 ;; always show possible completion-mode
 (icomplete-mode 1)
 ;; don't flach cursor
