@@ -57,6 +57,8 @@
 (blink-cursor-mode 0)
 ;; share clipboard with x
 (setq x-select-enable-clipboard t)
+;; disable follow link question
+(setq rc-follow-symlimks t)
 ;; clock in modeline
 (setq display-time-day-and-date t)
 (display-time)
