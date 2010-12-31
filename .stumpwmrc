@@ -78,7 +78,6 @@
       *group-format*  "^7*%t%s^n" ;;^7 white
       *screen-mode-line-format*  ;; ^n use the normal bg and fg color
       (list "%g ^9*|^n %w ^9*|^n " 
-     ; '(:eval (run-shell-command "top -b -d 2 | grep ^CPU |gawk '{print $2,$6}'"))
        '(:eval (run-shell-command "date +'%a %d %m %T' | tr -d '[:cntrl:]'" t))))
 
 
