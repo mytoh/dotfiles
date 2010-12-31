@@ -192,7 +192,7 @@
 ;; $gcc -I/path/to/include/taglib -L/path/to/lib -ltag_c file -o newfile
 (setq emms-info-functions '(emms-info-libtag))
 (emms-cache-sync)
-
+(emms-add-directory-tree "~/local/var/musica/")
 (add-hook 'emms-player-paused-hook 'emms-show)
 
 ;; Show the current track each time EMMS
