@@ -2,6 +2,7 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 (add-to-list 'load-path "~/.emacs.d/elisp/w3m/")
 (add-to-list 'load-path "~/.emacs.d/elisp/navi2ch/")
+(add-to-list 'load-path "~/.emacs.d/elisp/emms/")
 (setq default-directory "~/")
 
 ;;; This was installed by package-install.el.
@@ -61,6 +62,7 @@
 (setq rc-follow-symlimks t)
 ;; clock in modeline
 (setq display-time-day-and-date t)
+(setq display-time-24hr-format t)
 (display-time)
 ;; tool bar
 (tool-bar-mode -1)
@@ -151,6 +153,7 @@
 
 ;; w3m 
 (require 'w3m-load)
+(global-set-key (kbd "C-c w") 'w3m)
 
 ;; anything
 (require 'anything-startup)
@@ -171,50 +174,62 @@
 ;; emms
 (require 'emms)
 (require 'emms-setup)
-(require 'emms-i18n)
-(require 'emms-mode-line)
-(require 'emms-player-simple)
-(require 'emms-source-file)
-(require 'emms-source-playlist)
-
+(require 'emms-mode-line-icon)
+(require 'emms-info-libtag)
 (emms-devel)
-(emms-all)
 (emms-default-players)
-(setq emms-repeat-playlist t)
-(setq emms-info-asynchronously t)
-(setq emms-player-list '(emms-player-mplayer))
-(setq emms-source-file-default-directory "/Volumes/My Passport/var/musica/")
-(setq emms-playlist-buffer-name "*music*")
+(setq emms-repeat-playlist t
+      emms-info-asynchronously t
+      emms-info-auto-update t
+      later-do-interval 0.0001
+      emms-player-list '(emms-player-mplayer)
+      emms-source-file-default-directory "/Volumes/My Passport/var/musica/"
+      emms-playlist-buffer-name "*music*")
+;; for emms-print-metadata in emms-info-libtag
+;; install taglib
+;; $git clone git://git.sv.gnu.org/emms.git
+;; move src directory 
+;; $gcc -I/path/to/include/taglib -L/path/to/lib -ltag_c file -o newfile
+(setq emms-info-functions '(emms-info-libtag))
+(emms-cache-sync)
+
+(add-hook 'emms-player-paused-hook 'emms-show)
+
 ;; Show the current track each time EMMS
 ;; starts to play a track with "NP : "
 (add-hook 'emms-player-started-hook 'emms-show)
 (setq emms-show-format "NP: %s")
-;; show time 
-(require 'emms-playing-time)
-(emms-playing-time 1)
-;(emms-mode-line 1)
+;; icon setup
+(setq emms-mode-line-icon-before-format "("
+      emms-mode-line-format "%s)"
+      emms-mode-line-icon-color "blue")
+(emms-mode-line 1)
 ;; this function from "http://unixforever.blogspot.com/2010/06/sample-emms-emacs-configuration.html"
-(setq emms-mode-line-mode-line-function
-  (lambda nil
-    (let ((track (emms-playlist-current-selected-track)))
-      (let ((title (emms-track-get track 'info-title)))
-	(let ((name (emms-track-get track 'name)))
-	  (if (not (null title))
-	      (format emms-mode-line-format title)
-	    (if (not (null (string-match "^url: " (emms-track-simple-description track))))
-		(format emms-mode-line-format "Internet Radio")
-	      (setq name2 (replace-regexp-in-string ".*.\/" "" name))
-	      (format emms-mode-line-format name2))))))))
-(emms-mode-line-disable)
-(emms-mode-line-enable)
-(load "emms")
+;; to use this disable emms-mode-line
+;(setq emms-mode-line-mode-line-function
+;  (lambda nil
+;    (let ((track (emms-playlist-current-selected-track)))
+;      (let ((title (emms-track-get track 'info-title)))
+;        (let ((name (emms-track-get track 'name)))
+;          (if (not (null title))
+;                (format emms-mode-line-format title)
+;                (if (not (null (string-match "^url: " (emms-track-simple-description track))))
+;                      (format emms-mode-line-format "Internet Radio")
+;      (setq name2 (replace-regexp-in-string ".*.\/" "" name))
+;      (format emms-mode-line-format name2))))))))
+;(emms-mode-line-disable)
+;(emms-mode-line-enable)
+;(load "emms")
+;; show time 
+(emms-playing-time 1)
 ;; keybindings from emacswiki
 (global-set-key (kbd "C-c <SPC>") 'emms-pause) 
 (global-set-key (kbd "C-c p") 'emms-previous)
 (global-set-key (kbd "C-c n") 'emms-next)
 (global-set-key (kbd "C-c s") 'emms-stop)
 (global-set-key (kbd "C-c f") 'emms-show)
-(emms-add-playlist "~/.emacs.d/emms.playlist")
+(global-set-key (kbd "C-c m") 'emms-browse-by-artist)
+(emms-add-playlist "~/.emacs.d/playlist.ems")
 
 ;;; navi2ch
 (autoload 'navi2ch' "navi2ch" "Navigator for 2ch for Emacs" t)
