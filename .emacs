@@ -4,7 +4,7 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/navi2ch/")
 (add-to-list 'load-path "~/.emacs.d/elisp/emms/")
 (setq default-directory "~/")
-(add-to-list 'Info-directory-list "~/.emacs.d/info")
+(setq Info-directory-list "~/.emacs.d/info")
 
 ;;; This was installed by package-install.el.
 ;;; This provides support for the package system and
