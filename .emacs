@@ -4,6 +4,7 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/navi2ch/")
 (add-to-list 'load-path "~/.emacs.d/elisp/emms/")
 (setq default-directory "~/")
+(add-to-list 'Info-directory-list "~/.emacs.d/info")
 
 ;;; This was installed by package-install.el.
 ;;; This provides support for the package system and
@@ -17,15 +18,17 @@
 
 ;; encodings
 (set-language-environment "Japanese")
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(setq file-name-coding-system 'utf-8)
-(set-clipboard-coding-system 'utf-8)
-(setq default-buffer-file-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8-unix)
+(set-terminal-coding-system 'utf-8-unix)
+(setq file-name-coding-system 'utf-8-unix)
+(set-clipboard-coding-system 'utf-8-unix)
+(setq default-buffer-file-coding-system 'utf-8-unix)
+(prefer-coding-system 'utf-8-unix)
+(set-keyboard-coding-system 'utf-8-unix)
 (set-buffer-file-coding-system 'utf-8-unix)
 ;(utf-translate-cjk-mode t)
+;; server for emacsclient
+(server-start)
 ;; truncate lines
 (setq truncate-lines nil)
 (setq truncate-partial-width-windows nil)
@@ -35,6 +38,14 @@
 ;; first, press M-x desktop-save
 (desktop-load-default)
 (desktop-read)
+(line-number-mode t)
+(column-number-mode t)
+;;
+(setq-default indicate-empty-lines t)
+;; function name in modeline
+(which-function-mode 1)
+;; backspace with C-h
+(global-set-key "\C-h" 'backward-delete-char)
 ;; show images
 (auto-image-file-mode t)
 ;; highlight region
@@ -46,6 +57,8 @@
 ;; line by line scrolling
 (setq scroll-step 1 
       scroll-conservatively 10000) 
+;;
+
 ;; no backup file 
 (setq backup-inhibited t)
 ;; delete autosave file when quit
@@ -71,7 +84,8 @@
 ;; highlight
 (global-font-lock-mode t)
 (setq font-lock-maximus-decoration t)
-
+;; 
+(auto-compression-mode t)
 ;; set initial frame size, place, font
 (if (boundp 'window-system)
     (setq initial-frame-alist
@@ -233,6 +247,10 @@
 
 ;;; navi2ch
 (autoload 'navi2ch' "navi2ch" "Navigator for 2ch for Emacs" t)
+
+;;; icicles
+(require 'icicles)
+(icy-mode 1)
 
 (cd "~/")
 
