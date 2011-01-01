@@ -205,7 +205,7 @@
 ;; move src directory 
 ;; $gcc -I/path/to/include/taglib -L/path/to/lib -ltag_c file -o newfile
 (setq emms-info-functions '(emms-info-libtag))
-(emms-cache-sync)
+
 (emms-add-directory-tree "~/local/var/musica/")
 (add-hook 'emms-player-paused-hook 'emms-show)
 
@@ -242,9 +242,11 @@
 (global-set-key (kbd "C-c n") 'emms-next)
 (global-set-key (kbd "C-c s") 'emms-stop)
 (global-set-key (kbd "C-c f") 'emms-show)
-(global-set-key (kbd "C-c b") 'emms-browse-by-artist)
-(global-set-key (kbd "C-c m") 'emms-browser-display-playlist)
+(global-set-key (kbd "C-c a") 'emms-browse-by-artist)
+(global-set-key (kbd "C-c b") 'emms-browser-display-playlist)
 (emms-add-playlist "~/.emacs.d/playlist.ems")
+
+(emms-cache-sync)
 
 ;;; navi2ch
 (autoload 'navi2ch' "navi2ch" "Navigator for 2ch for Emacs" t)
