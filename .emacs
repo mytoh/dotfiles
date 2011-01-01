@@ -45,7 +45,7 @@
 ;; function name in modeline
 (which-function-mode 1)
 ;; backspace with C-h
-(global-set-key "\C-h" 'backward-delete-char)
+;(global-set-key "\C-h" 'backward-delete-char)
 ;; show images
 (auto-image-file-mode t)
 ;; highlight region
