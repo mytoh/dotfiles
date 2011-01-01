@@ -242,7 +242,8 @@
 (global-set-key (kbd "C-c n") 'emms-next)
 (global-set-key (kbd "C-c s") 'emms-stop)
 (global-set-key (kbd "C-c f") 'emms-show)
-(global-set-key (kbd "C-c m") 'emms-browse-by-artist)
+(global-set-key (kbd "C-c b") 'emms-browse-by-artist)
+(global-set-key (kbd "C-c m") 'emms-browser-display-playlist)
 (emms-add-playlist "~/.emacs.d/playlist.ems")
 
 ;;; navi2ch
