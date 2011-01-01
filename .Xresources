@@ -1,7 +1,7 @@
 Xcursor.theme: whiteglass
 
 urxvt.termName: xterm
-urxvt.background: rgba:0000/0000/0000/aaaa/
+urxvt.background: rgba:3f00/3f00/3d00/dddd/
 urxvt.foreground: [90]snow
 urxvt.depth: 32
 urxvt.scrollBar: false
