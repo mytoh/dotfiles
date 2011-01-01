@@ -4,7 +4,7 @@
 (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
 (global-set-key "\C-xm" 'browser-url-at-point)
 ; home page
-(setq w3m-home-page "http://google.co.jp/")
+(setq w3m-home-page "http://www.google.com")
 ; enable cookies to login site , hatena
 (setq w3m-use-cookies t)
 ; don't delete favicon cache
