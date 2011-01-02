@@ -309,6 +309,8 @@
 (setq skk-jisyo-code 'utf-8-unix)
 (setq skk-henkan-show-candidates-keys '(?a ?o ?e ?u ?h ?t ?n))
 (setq skk-kakutei-when-unique-candidate t)
+(setq skk-large-jisyo "~/.skk-jisyo.mine")
+
 ;; azik 
 (setq skk-use-azik t)
 (setq skk-azik-keyboard-type 'en)
