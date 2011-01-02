@@ -278,8 +278,11 @@
 (add-hook 'after-init-hook 'session-initialize)
 
 ;; tumme
-(require 'tumme)
-(tumme-setup-dired-keybindings)
+;(require 'tumme)
+;(tumme-setup-dired-keybindings)
+
+;; minibuf-electric-gnuemacs
+(require 'minibuf-electric-gnuemacs)
 
 (cd "~/")
 
