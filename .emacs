@@ -32,6 +32,13 @@
 ;; truncate lines
 (setq truncate-lines nil)
 (setq truncate-partial-width-windows nil)
+;; use space instead tab
+(setq-default tab-width 4 indent-tabs-mode nil)
+(setq indent-line-function 'indent-relative-maybe)
+;; delete whole line with C-k
+(setq kill-whole-line t)
+;; change yes-no to y-n
+(fset 'yes-or-no-p 'y-or-n-p)
 ;;disable startup message
 (setq inhibit-startup-screen -1)
 ;; save session
@@ -40,7 +47,7 @@
 (desktop-read)
 (line-number-mode t)
 (column-number-mode t)
-;;
+;; show empty line
 (setq-default indicate-empty-lines t)
 ;; function name in modeline
 (which-function-mode 1)
@@ -57,7 +64,9 @@
 ;; line by line scrolling
 (setq scroll-step 1 
       scroll-conservatively 10000) 
-;;
+;; 
+(setq-default scroll-down-aggressively 0.4
+              scroll-up-aggressively   0.4)
 
 ;; no backup file 
 (setq backup-inhibited t)
@@ -95,7 +104,7 @@
 	           '(height . 52) ;; window height
 	           '(top . 0)     ;; window placement
 	           '(left . 0)    ;; window placement
-	           '(font . "aquafont 11")
+	           '(font . "aquafont 10")
 	           )
 	      initial-frame-alist)))
 (setq default-frame-alist initial-frame-alist)
@@ -105,7 +114,7 @@
 ;;;;; faces  ;;;;;
 (custom-set-faces
  '(default   ((t
-	      (:background "#1c1c1c" 
+	      (:background "gray11" 
 	       :foreground "#d0d0d0" 
 	       :height 80
 	       ))))
@@ -113,8 +122,8 @@
                (:background "white"
                ))))
  '(highlight ((t
-	       (:background "HotPink2"
-                        :foreground "midnight blue"
+               (:background "HotPink2"
+                :foreground "midnight blue"
 	       ))))
  '(region    ((t
 	       (:background "dark slate blue"
@@ -123,6 +132,10 @@
 	      (:background "gray30"
 	       :foreground "white"
 	      ))))
+ '(mode-line-buffer-id ((t
+                         (:background "gray9"
+                          :foreground "linen"
+                          ))))
  '(linum    ((t
 	      (:inherit shadow :background "gray45"
 	      )))))
@@ -190,6 +203,7 @@
 (require 'emms-setup)
 (require 'emms-mode-line-icon)
 (require 'emms-info-libtag)
+(require 'emms-history)
 (emms-devel)
 (emms-default-players)
 (setq emms-repeat-playlist t
@@ -197,7 +211,7 @@
       emms-info-auto-update t
       later-do-interval 0.0001
       emms-player-list '(emms-player-mplayer)
-      emms-source-file-default-directory "/Volumes/My Passport/var/musica/"
+      emms-source-file-default-directory "~/local/var/musica/"
       emms-playlist-buffer-name "*music*")
 ;; for emms-print-metadata in emms-info-libtag
 ;; install taglib
@@ -206,12 +220,18 @@
 ;; $gcc -I/path/to/include/taglib -L/path/to/lib -ltag_c file -o newfile
 (setq emms-info-functions '(emms-info-libtag))
 
-(emms-add-directory-tree "~/local/var/musica/")
-(add-hook 'emms-player-paused-hook 'emms-show)
+;; load history file on startup 
+;; default ~/.emacs.d/emms-history
+(emms-history-load)
+
+;(emms-add-directory-tree "~/local/var/musica/")
+(emms-add-playlist "~/.emacs.d/playlist.ems")
+(setq emms-source-playlist-native "~/.emacs.d/playlist.ems")
 
 ;; Show the current track each time EMMS
 ;; starts to play a track with "NP : "
 (add-hook 'emms-player-started-hook 'emms-show)
+(add-hook 'emms-player-paused-hook 'emms-show)
 (setq emms-show-format "NP: %s")
 ;; icon setup
 (setq emms-mode-line-icon-before-format "("
@@ -242,9 +262,7 @@
 (global-set-key (kbd "C-c n") 'emms-next)
 (global-set-key (kbd "C-c s") 'emms-stop)
 (global-set-key (kbd "C-c f") 'emms-show)
-(global-set-key (kbd "C-c a") 'emms-browse-by-artist)
-(global-set-key (kbd "C-c b") 'emms-browser-display-playlist)
-(emms-add-playlist "~/.emacs.d/playlist.ems")
+(global-set-key (kbd "C-c b") 'emms-smart-browse)
 
 (emms-cache-sync)
 
@@ -254,6 +272,14 @@
 ;;; icicles
 (require 'icicles)
 (icy-mode 1)
+
+;;; sessin.el
+(require 'session)
+(add-hook 'after-init-hook 'session-initialize)
+
+;; tumme
+(require 'tumme)
+(tumme-setup-dired-keybindings)
 
 (cd "~/")
 
