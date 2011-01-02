@@ -114,7 +114,7 @@
 ;; reload face setting for first fram
 (add-hook 'window-setup-hook
           '(lambda ()
-             (face-set-before-frame-default (selected-frame))))
+             (face-set-after-frame-default (selected-frame))))
 
 (setq initial-scratch-message ";; *scratch buffer*
 
