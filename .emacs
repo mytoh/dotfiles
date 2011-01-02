@@ -256,7 +256,7 @@
 ;(load "emms")
 ;; show time 
 (emms-playing-time 1)
-;; keybindings from emacswiki
+;; keybindings 
 (global-set-key (kbd "C-c <SPC>") 'emms-pause) 
 (global-set-key (kbd "C-c p") 'emms-previous)
 (global-set-key (kbd "C-c n") 'emms-next)
@@ -283,6 +283,13 @@
 
 ;; minibuf-electric-gnuemacs
 (require 'minibuf-electric-gnuemacs)
+
+;;; skk
+(require 'skk-autoloads)
+(global-set-key "\C-x\C-j" 'skk-mode)
+(setq skk-server-host "localhost")
+(setq skk-jisyo-code 'utf-8-unix)
+(setq skk-henkan-show-candidates-keys '(?a ?o ?e ?u ?h ?t ?n))
 
 (cd "~/")
 
