@@ -61,7 +61,7 @@
 ;;;; set the two remaining color slots
 (setf *colors* (append *colors*
                 (list "orange"  
-                      "coral")))
+                      "pink")))
 (update-color-map (current-screen))
 
 ;; modeline
@@ -74,10 +74,10 @@
       *mode-line-pad-x* 2
       *mode-line-pad-y* 2
       *mode-line-timeout* 1
-      *window-format* "^5*(%n%s%m%15t)^n" ;;^5 magenta
+      *window-format* "^9*(%n%s%m%15t)^n" ;;^5 magenta
       *group-format*  "^7*%t%s^n" ;;^7 white
       *screen-mode-line-format*  ;; ^n use the normal bg and fg color
-      (list "%g ^9*|^n %w ^9*|^n " 
+      (list "%g ^8*|^n %w ^8*|^n " 
        '(:eval (run-shell-command "date +'%a %d %m %T' | tr -d '[:cntrl:]'" t))))
 
 
