@@ -1,8 +1,11 @@
+(setq load-path
+      (append '("~/.emacs.d/elisp/"
+                "~/.emacs.d/elisp/w3m/"
+                "~/.emacs.d/elisp/navi2ch/"
+                "~/.emacs.d/elisp/emms/"
+                "~/.emacs.d/elisp/skk/")
+                load-path))
 
-(add-to-list 'load-path "~/.emacs.d/elisp/")
-(add-to-list 'load-path "~/.emacs.d/elisp/w3m/")
-(add-to-list 'load-path "~/.emacs.d/elisp/navi2ch/")
-(add-to-list 'load-path "~/.emacs.d/elisp/emms/")
 (setq default-directory "~/")
 (setq Info-additional-directory-list '("~/.emacs.d/info"))
 
@@ -41,10 +44,6 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 ;;disable startup message
 (setq inhibit-startup-screen -1)
-;; save session
-;; first, press M-x desktop-save
-(desktop-load-default)
-(desktop-read)
 (line-number-mode t)
 (column-number-mode t)
 ;; show empty line
@@ -95,10 +94,13 @@
 (setq font-lock-maximus-decoration t)
 ;; 
 (auto-compression-mode t)
+;; iswitch mode in C-x b
+(iswitchb-mode t)
 ;; set initial frame size, place, font
 (if (boundp 'window-system)
     (setq initial-frame-alist
 	  (append (list
+                  '(alpha . 75) ;; tranparency for defalt
 	           '(vertical-scroll-bars . nil) ;; scroll bars
 	           '(width . 179) ;; window width
 	           '(height . 52) ;; window height
@@ -109,12 +111,20 @@
 	      initial-frame-alist)))
 (setq default-frame-alist initial-frame-alist)
 
-;;(setq initial-scratch-message "")
+;; reload face setting for first fram
+(add-hook 'window-setup-hook
+          '(lambda ()
+             (face-set-before-frame-default (selected-frame))))
+
+(setq initial-scratch-message ";; *scratch buffer*
+
+")
+
 
 ;;;;; faces  ;;;;;
 (custom-set-faces
  '(default   ((t
-	      (:background "gray11" 
+	      (:background "gray7" 
 	       :foreground "#d0d0d0" 
 	       :height 80
 	       ))))
@@ -123,7 +133,7 @@
                ))))
  '(highlight ((t
                (:background "HotPink2"
-                :foreground "midnight blue"
+                :foreground "gray11"
 	       ))))
  '(region    ((t
 	       (:background "dark slate blue"
@@ -133,9 +143,12 @@
 	       :foreground "white"
 	      ))))
  '(mode-line-buffer-id ((t
-                         (:background "gray9"
+                         (:background "gray15"
                           :foreground "linen"
                           ))))
+ '(font-lock-comment-face ((t
+                            (:foreground "gray35"
+                            ))))
  '(linum    ((t
 	      (:inherit shadow :background "gray45"
 	      )))))
@@ -147,7 +160,7 @@
       (cons '("gosh" utf-8 . utf-8) process-coding-system-alist))
 ; load cmuscheme.el for scheme program
 (autoload 'scheme-mode "cmuscheme" "Major mode for Schem." t)
-(autoload 'run-scheme "cmuscheme" "Run an inferior Scheme process." t)
+(autoload 'run-schapeme "cmuscheme" "Run an inferior Scheme process." t)
 ;; split window
 ;; run scheme in one window
 (defun scheme-other-window ()
@@ -270,8 +283,8 @@
 (autoload 'navi2ch' "navi2ch" "Navigator for 2ch for Emacs" t)
 
 ;;; icicles
-(require 'icicles)
-(icy-mode 1)
+;(require 'icicles)
+;(icy-mode 1)
 
 ;;; sessin.el
 (require 'session)
@@ -285,14 +298,35 @@
 (require 'minibuf-electric-gnuemacs)
 
 ;;; skk
+(require 'skk-setup)
+(require 'skk-study)
 (require 'skk-autoloads)
-(global-set-key "\C-x\C-j" 'skk-mode)
+
+;; Skk-Server Aquaskk
+(setq skk-server-portnum 1178)
 (setq skk-server-host "localhost")
+(global-set-key "\C-x\C-j" 'skk-mode)
 (setq skk-jisyo-code 'utf-8-unix)
 (setq skk-henkan-show-candidates-keys '(?a ?o ?e ?u ?h ?t ?n))
+(setq skk-kakutei-when-unique-candidate t)
+;; azik 
+(setq skk-use-azik t)
+(setq skk-azik-keyboard-type 'en)
+
+;;; http://d.hatena.ne.jp/tagomoris/20101209/1291900492
+(add-hook 'isearch-mode-hook
+          (function (lambda ()
+                      (and (boundp 'skk-mode) skk-mode
+                           (skk-isearch-mode-setup)))))
+(add-hook 'isearch-mode-end-hook
+          (function (lambda ()
+                      (and (boundp 'skk-mode) skk-mode (skk-isearch-mode-cleanup))
+                      (and (boundp 'skk-mode-invoked) skk-mode-invoked
+                           (skk-set-cursor-properly)))))
+;;; for mac
+(setq mac-pass-control-to-system nil)
 
 (cd "~/")
-
 
 
 
