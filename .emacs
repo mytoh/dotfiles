@@ -303,8 +303,8 @@
 (require 'skk-autoloads)
 (require 'skk-hint)
 ;; Skk-Server Aquaskk
-(setq skk-server-portnum 1178)
-(setq skk-server-host "localhost")
+;(setq skk-server-portnum 1178)
+;(setq skk-server-host "localhost")
 (global-set-key "\C-x\C-j" 'skk-mode)
 (setq skk-kakutei-when-unique-candidate t)
 (setq skk-aux-large-jisyo "~/.skk-jisyo.mine")
