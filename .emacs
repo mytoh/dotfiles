@@ -301,30 +301,35 @@
 (require 'skk-setup)
 (require 'skk-study)
 (require 'skk-autoloads)
-
+(require 'skk-hint)
 ;; Skk-Server Aquaskk
 (setq skk-server-portnum 1178)
 (setq skk-server-host "localhost")
 (global-set-key "\C-x\C-j" 'skk-mode)
-(setq skk-jisyo-code 'utf-8-unix)
-(setq skk-henkan-show-candidates-keys '(?a ?o ?e ?u ?h ?t ?n))
 (setq skk-kakutei-when-unique-candidate t)
-(setq skk-large-jisyo "~/.skk-jisyo.mine")
-
+(setq skk-aux-large-jisyo "~/.skk-jisyo.mine")
+(setq skk-preload t)
+(setq skk-show-annotation t)
+(setq skk-show-tooltip t)
+(setq skk-show-inline t)
+(setq skk-egg-like-newline t)
+(setq skk-dcomp-activate t)
+(setq skk-dcomp-multiple-activate t)
 ;; azik 
 (setq skk-use-azik t)
 (setq skk-azik-keyboard-type 'en)
-
-;;; http://d.hatena.ne.jp/tagomoris/20101209/1291900492
+;;; from skk info
 (add-hook 'isearch-mode-hook
-          (function (lambda ()
-                      (and (boundp 'skk-mode) skk-mode
-                           (skk-isearch-mode-setup)))))
+          #'(lambda ()
+              (when (and (boundp 'skk-mode)
+                         skk-mode
+                         skk-isearch-mode-enable)
+                (skk-isearch-mode-cleanup))))
 (add-hook 'isearch-mode-end-hook
-          (function (lambda ()
-                      (and (boundp 'skk-mode) skk-mode (skk-isearch-mode-cleanup))
-                      (and (boundp 'skk-mode-invoked) skk-mode-invoked
-                           (skk-set-cursor-properly)))))
+          #'(lambda ()
+              (when (and (featurep 'skk-isearch)
+                         skk-isearch-mode-enable)
+                (skk-isearch-mode-cleanup))))
 ;;; for mac
 (setq mac-pass-control-to-system nil)
 
