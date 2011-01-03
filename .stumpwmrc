@@ -85,7 +85,7 @@
 ;; rename the first group to main
 ;;(setf (group-name (first (screen (current-screen)))) "main")
 ;; create the other group
-(run-commands  "gnewbg www" "gnewbg media" "gselect Default" "grename main" "gselect main")
+(run-commands  "gnewbg β" "gnewbg γ" "gselect Default" "grename α" "gselect α")
 
 
 ;;;; window placement rules
