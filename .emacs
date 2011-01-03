@@ -80,7 +80,7 @@
 ;; share clipboard with x
 (setq x-select-enable-clipboard t)
 ;; disable follow link question
-(setq rc-follow-symlimks t)
+(setq vc-follow-symlinks t)
 ;; clock in modeline
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
