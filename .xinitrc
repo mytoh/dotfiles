@@ -8,6 +8,7 @@ export XIM_ARGS="-r --daemonize --xim"
 ibus-daemon -d -x &
 xrdb -merge .Xresources
 xmodmap .Xmodmap
+setxkbmap dvorak
 xsetroot -cursor_name left_ptr -solid black &
 nitrogen --restore &
 urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &

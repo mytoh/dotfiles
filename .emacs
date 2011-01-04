@@ -196,7 +196,8 @@
 (global-set-key (kbd "C-c w") 'w3m)
 (add-hook 'w3m-mode-hook
          '(lambda ()
-            (local-set-key (kbd "f") 'w3m-go-to-linknum)))
+            (local-set-key (kbd "f") 'w3m-go-to-linknum)
+            ( message "starting  w3m")))
 ;; anything
 (require 'anything-startup)
 
@@ -318,8 +319,12 @@
 (setq skk-dcomp-activate t)
 (setq skk-dcomp-multiple-activate t)
 ;; azik 
-(setq skk-use-azik t)
-(setq skk-azik-keyboard-type 'en)
+;(setq skk-use-azik t)
+;(setq skk-azik-keyboard-type 'en)
+;; act
+(require 'skk)
+(setq skk-act-use-normal-y t)
+(setq skk-use-act t)
 ;;; from skk info
 ;(add-hook 'isearch-mode-hook
 ;          #'(lambda ()

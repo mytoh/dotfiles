@@ -8,7 +8,7 @@ urxvt.scrollBar: false
 !urxvt.borderLess: true
 urxvt.internalBorder: 1
 urxvt.transparent: true
-urxvt.shading: 40
+urxvt.shading: 60
 urxvt.blurRadius: 2
 urxvt.tintColor: #ffffff
 urxvt.preeditType: root
@@ -22,7 +22,7 @@ urxvt.matcher.button: 1
 urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
 urxvt.font: \
-    xft:Inconsolata:size=8:antialias=true,\
+    xft:aqua_pfont:size=8:antialias=true,\
     xft:M+ 1p:size=9:style=regular:antialias=true
 urxvt.boldFont: xft:Inconsolata:style=Bold:size=10:antialias=true
 
