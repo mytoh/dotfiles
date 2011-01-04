@@ -74,7 +74,7 @@
 ;; search incase-sensitive
 (setq completion-ignore-case t)
 ;; always show possible completion-mode
-(icomplete-mode 1)
+;(icomplete-mode 1)
 ;; don't flach cursor
 (blink-cursor-mode 0)
 ;; share clipboard with x
@@ -194,7 +194,9 @@
 ;; w3m 
 (require 'w3m-load)
 (global-set-key (kbd "C-c w") 'w3m)
-
+(add-hook 'w3m-mode-hook
+         '(lambda ()
+            (local-set-key (kbd "f") 'w3m-go-to-linknum)))
 ;; anything
 (require 'anything-startup)
 
@@ -283,8 +285,8 @@
 (autoload 'navi2ch' "navi2ch" "Navigator for 2ch for Emacs" t)
 
 ;;; icicles
-;(require 'icicles)
-;(icy-mode 1)
+(require 'icicles)
+(icy-mode 1)
 
 ;;; sessin.el
 (require 'session)
@@ -319,17 +321,17 @@
 (setq skk-use-azik t)
 (setq skk-azik-keyboard-type 'en)
 ;;; from skk info
-(add-hook 'isearch-mode-hook
-          #'(lambda ()
-              (when (and (boundp 'skk-mode)
-                         skk-mode
-                         skk-isearch-mode-enable)
-                (skk-isearch-mode-cleanup))))
-(add-hook 'isearch-mode-end-hook
-          #'(lambda ()
-              (when (and (featurep 'skk-isearch)
-                         skk-isearch-mode-enable)
-                (skk-isearch-mode-cleanup))))
+;(add-hook 'isearch-mode-hook
+;          #'(lambda ()
+;              (when (and (boundp 'skk-mode)
+;                         skk-mode
+;                         skk-isearch-mode-enable)
+;                (skk-isearch-mode-cleanup))))
+;(add-hook 'isearch-mode-end-hook
+;          #'(lambda ()
+;              (when (and (featurep 'skk-isearch)
+;                         skk-isearch-mode-enable)
+;                (skk-isearch-mode-cleanup))))
 ;;; for mac
 (setq mac-pass-control-to-system nil)
 
