@@ -1,11 +1,9 @@
-(setq load-path
-      (append '("~/.emacs.d/elisp/"
-                "~/.emacs.d/elisp/w3m/"
-                "~/.emacs.d/elisp/navi2ch/"
-                "~/.emacs.d/elisp/emms/"
-                "~/.emacs.d/elisp/skk/")
-                load-path))
-
+;; from emacs wiki, load path section
+(let ((default-directory "~/.emacs.d/elisp/"))
+  (normal-top-level-add-to-load-path '("."))
+  (normal-top-level-add-subdirs-to-load-path))
+(concat user-emacs-directory
+        (convert-standard-filename "elisp/"))
 (setq default-directory "~/")
 (setq Info-additional-directory-list '("~/.emacs.d/info"))
 
