@@ -32,6 +32,9 @@ sawfish)
 xmonad)
         exec xmonad
         ;;
+twm)
+        exec twm -v
+        ;;
 *)
         exec $DEFAULT_SESSION
         ;;
