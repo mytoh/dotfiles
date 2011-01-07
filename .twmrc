@@ -15,19 +15,19 @@
 NoGrabServer
 RestartPreviousState
 DecorateTransients
-TitleFont "-adobe-helvetica-bold-r-normal--*-100-*-*-*-*-*-*"
-ResizeFont "-adobe-helvetica-bold-r-normal--*-100-*-*-*-*-*-*"
-MenuFont "-adobe-helvetica-bold-r-normal--*-100-*-*-*-*-*-*"
-IconFont "-adobe-helvetica-bold-r-normal--*-100-*-*-*-*-*-*"
-IconManagerFont "-adobe-helvetica-bold-r-normal--*-100-*-*-*"
+TitleFont "-adobe-helvetica-bold-r-normal--*-90-*-*-*-*-*-*"
+ResizeFont "-adobe-helvetica-bold-r-normal--*-90-*-*-*-*-*-*"
+MenuFont "-adobe-helvetica-bold-r-normal--*-90-*-*-*-*-*-*"
+IconFont "-adobe-helvetica-bold-r-normal--*-90-*-*-*-*-*-*"
+IconManagerFont "-adobe-helvetica-bold-r-normal--*-90-*-*-*"
 #ClientBorderWidth
 
 UsePPosition "on"
 AutoRelativeResize
 WarpUnmapped
-LeftTitleButton "black" = f.delete
+
 OpaqueMove
-RamdomPlacement
+RamdomPlacement "on"
 ShowIconManager
 IconManagerGeometry "+0+0"
 TitlePadding 6
@@ -50,18 +50,18 @@ Color
     BorderColor "gray65"
     DefaultBackground "white"
     DefaultForeground "deepskyblue2"
-    TitleBackground "gainsboro"
-    TitleForeground "deepskyblue2"
-    MenuBackground "gainboro"
-    MenuForeground "deepskyblue2"
+    TitleBackground "gray15"
+    TitleForeground "orange"
+    MenuBackground "gray15"
+    MenuForeground "orange"
     MenuBorderColor "slategrey"
     MenuTitleBackground "steelblue2"
     MenuTitleForeground "black"
-    IconBackground "gainsboro"
-    IconForeground "deepskyblue2"
+    IconBackground "gray15"
+    IconForeground "orange"
     IconBorderColor "lightslategrey"
-    IconManagerBackground "gaisboro"
-    IconManagerForeground "turquoise3"
+    IconManagerBackground "gray15"
+    IconManagerForeground "orange"
 }
 
 #
@@ -92,7 +92,19 @@ Button2 = : icon : f.iconify
 Button1 = : iconmgr : f.iconify
 Button2 = : iconmgr : f.iconify
 
+Button1 = : window : f.lower
 "Tab" = m : all : f.raiselower
+LeftTitleButton ":xlogo" = f.delete
+LeftTitleButton ":menu" = f.fullzoom
+
+WindowRing
+{
+  "Emacs"
+  "URxvt"
+  "screen"
+  "emacs"
+  "urxvt"  
+}
 
 #
 # And a menus with the usual things
@@ -126,5 +138,6 @@ menu "Apps."
 "urxvt" f.exec "exec urxvtdc &"
 "emacs" f.exec "exec emacs &"
 "firefox" f.exec "exec firefox3 &"
+"nitrogen" f.exec "exec nitrogen &"
 }
 
