@@ -171,6 +171,13 @@
 (define-key global-map
   "\C-cS" 'scheme-other-window)
 
+;; changelog 
+(defun memo ()
+  (interactive)
+    (add-change-log-entry
+     nil
+     (expand-file-name "~/.changelog")))
+(define-key global-map (kbd "C-x M") 'memo)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; elisp packages ;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
