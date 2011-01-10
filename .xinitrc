@@ -9,7 +9,7 @@ ibus-daemon -d -x &
 xrdb -merge .Xresources
 xmodmap .Xmodmap
 setxkbmap dvorak
-xsetroot -cursor_name left_ptr -solid black &
+xsetroot -cursor_name right_ptr -solid black &
 nitrogen --restore &
 urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
 #urxvtc -e screenie -s /bin/tcsh -m &
@@ -21,7 +21,7 @@ parcellite &
 # tint2 & 
 #exec xmonad
 
-DEFAULT_SESSION="stumpwm"
+DEFAULT_SESSION="twm"
 case $1 in
 stumpwm)
         exec stumpwm
