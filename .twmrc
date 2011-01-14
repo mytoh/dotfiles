@@ -15,10 +15,10 @@ WarpUnmapped
 OpaqueMove
 RandomPlacement 
 ShowIconManager
-IconManagerGeometry "+0+0"
+IconManagerGeometry "+0+20"
 TitlePadding 6
 FramePadding 1
-BorderWidth 1
+BorderWidth 0
 IconManagerDontShow
 {
     "xclock"
@@ -42,7 +42,7 @@ Color
     TitleForeground "orange"
     MenuBackground "gray15"
     MenuForeground "orange"
-    MenuBorderColor "slategrey"
+    MenuBorderColor "orange"
     MenuTitleBackground "orange"
     MenuTitleForeground "gray20"
     IconBackground "gray15"

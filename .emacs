@@ -98,7 +98,7 @@
 (if (boundp 'window-system)
     (setq initial-frame-alist
 	  (append (list
-                  '(alpha . 75) ;; tranparency for defalt
+                  '(alpha . 93) ;; tranparency for defalt
 	           '(vertical-scroll-bars . nil) ;; scroll bars
 	           '(width . 179) ;; window width
 	           '(height . 52) ;; window height

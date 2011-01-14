@@ -1,16 +1,19 @@
 Xcursor.theme: whiteglass
 
 urxvt.termName: xterm
-urxvt.background: rgba:3f00/3f00/3d00/aaaa/
+urxvt.background: rgba:0000/0000/0000/dddd/
 urxvt.foreground: [90]snow
 urxvt.depth: 32
 urxvt.scrollBar: false
+urxvt.buffered: true
 !urxvt.borderLess: true
 urxvt.internalBorder: 1
 urxvt.transparent: true
+urxvt.fade: 2%
+urxvt.fadeColor: grey
 urxvt.shading: 60
 urxvt.blurRadius: 2
-urxvt.tintColor: #ffffff
+!urxvt.tintColor: #ffffff
 urxvt.preeditType: root
 urxvt.saveLines: 2000
 urxvt.mouseWheelScrollPage: true
@@ -22,7 +25,7 @@ urxvt.matcher.button: 1
 urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
 urxvt.font: \
-    xft:aqua_pfont:size=8:antialias=true,\
+    xft:aqua_pfont:size=9:antialias=true,\
     xft:M+ 1p:size=9:style=regular:antialias=true
 urxvt.boldFont: xft:Inconsolata:style=Bold:size=10:antialias=true
 

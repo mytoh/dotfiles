@@ -15,27 +15,31 @@ urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
 #urxvtc -e screenie -s /bin/tcsh -m &
 xscreensaver -no-splash &
 parcellite &
+xcompmgr -c -C&
+xfce4-panel &
 #xsnow &
 #oneko -sakura &
-#xfce4-panel &
 # tint2 & 
 #exec xmonad
 
 DEFAULT_SESSION="twm"
 case $1 in
-stumpwm)
+  stumpwm)
         exec stumpwm
         ;;
-sawfish)
+  sawfish)
         exec sawfish
         ;;
-xmonad)
+  xmonad)
         exec xmonad
         ;;
-twm)
+  twm)
         exec twm -v
         ;;
-*)
+  xfce)
+        exec startxfce4
+        ;;
+  *)
         exec $DEFAULT_SESSION
         ;;
 esac
