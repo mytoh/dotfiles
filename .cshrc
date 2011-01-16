@@ -52,7 +52,7 @@ alias precmd rehash
 alias quit 'sync;sync;sync;sudo shutdown -p now'
 alias res 'sync;sync;sync;sudo shutdown -r now'
 alias pup 'sudo portsnap fetch update '
-alias pcheck 'sudo portmaster -Bidav && sudo portaudit -Fdav && sudo portmaster --clean-packages --clean-distfiles'
+alias pcheck 'sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster --clean-packages --clean-distfiles'
 #alias pup 'sudo portsnap fetch update && sudo pkg_replace -Bcav && sudo portaudit -av && rehash'
 alias cup 'cpan-outdated && cpan-outdated | xargs cpanm -Sv'
 alias sc screen -U -D -RR  -s /bin/tcsh -m 
@@ -69,6 +69,7 @@ alias vi  vim
 alias view "vim -R -"
 alias .. 'cd ..'
 alias scsh 'rlwrap scsh'
+alias gosh 'rlwrap gosh'
 alias ew 'emacs -f w3m'
 
 complete cd 'p/1/d/'

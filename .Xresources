@@ -1,7 +1,7 @@
 Xcursor.theme: whiteglass
 
 urxvt.termName: xterm
-urxvt.background: rgba:0000/0000/0000/dddd/
+urxvt.background: rgba:5555/5555/5555/dddd/
 urxvt.foreground: [90]snow
 urxvt.depth: 32
 urxvt.scrollBar: false
@@ -9,8 +9,8 @@ urxvt.buffered: true
 !urxvt.borderLess: true
 urxvt.internalBorder: 1
 urxvt.transparent: true
-urxvt.fade: 2%
-urxvt.fadeColor: grey
+urxvt.fade: 10%
+urxvt.fadeColor: black
 urxvt.shading: 60
 urxvt.blurRadius: 2
 !urxvt.tintColor: #ffffff

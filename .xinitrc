@@ -16,7 +16,7 @@ urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
 xscreensaver -no-splash &
 parcellite &
 xcompmgr -c -C&
-xfce4-panel &
+#xfce4-panel &
 #xsnow &
 #oneko -sakura &
 # tint2 & 

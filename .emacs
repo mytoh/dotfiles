@@ -345,6 +345,9 @@
 ;;; for mac
 (setq mac-pass-control-to-system nil)
 
+;;; gosh-mode
+;;(require 'gosh-config)
+
 (cd "~/")
 
 

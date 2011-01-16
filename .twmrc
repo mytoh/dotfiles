@@ -2,23 +2,30 @@
 NoGrabServer
 RestartPreviousState
 DecorateTransients
-TitleFont "-adobe-helvetica-bold-r-normal--*-90-*-*-*-*-*-*"
-ResizeFont "-adobe-helvetica-bold-r-normal--*-90-*-*-*-*-*-*"
-MenuFont "-adobe-helvetica-bold-r-normal--*-90-*-*-*-*-*-*"
-IconFont "-adobe-helvetica-bold-r-normal--*-90-*-*-*-*-*-*"
-IconManagerFont "-adobe-helvetica-bold-r-normal--*-90-*-*-*"
+TitleFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*-*-*-*"
+ResizeFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*-*-*-*"
+MenuFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*-*-*-*"
+IconFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*-*-*-*"
+IconManagerFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*"
 
+ClientBorderWidth
+NoSaveUnders
+NoTitleHighlight
+ButtonIndent 1
+NobackingStore
 UsePPosition "on"
 AutoRelativeResize
 WarpUnmapped
-
+AutoRaise
 OpaqueMove
 RandomPlacement 
 ShowIconManager
 IconManagerGeometry "+0+20"
-TitlePadding 6
+TitleButtonBorderWidth 1
+TitlePadding 4
 FramePadding 1
 BorderWidth 0
+
 IconManagerDontShow
 {
     "xclock"
@@ -26,9 +33,10 @@ IconManagerDontShow
     "xfce4-panel"
 }
 
-Notitle
+NoTitle
 {
     "xclock"
+    "Mplayer"
     "xlogo"
     "xfce4-panel"
 }
@@ -39,17 +47,17 @@ Color
     DefaultBackground "white"
     DefaultForeground "deepskyblue2"
     TitleBackground "gray15"
-    TitleForeground "orange"
+    TitleForeground "gray70"
     MenuBackground "gray15"
-    MenuForeground "orange"
-    MenuBorderColor "orange"
-    MenuTitleBackground "orange"
-    MenuTitleForeground "gray20"
+    MenuForeground "gray70"
+    MenuBordercolor "gray30"
+    MenuTitleBackground "gray40"
+    MenuTitleForeground "gray70"
     IconBackground "gray15"
-    IconForeground "orange"
-    IconBorderColor "lightslategrey"
+    IconForeground "gray70"
+    IconBordercolor "lightslategrey"
     IconManagerBackground "gray15"
-    IconManagerForeground "orange"
+    IconManagerForeground "gray70"
 }
 
 MoveDelta 3
@@ -59,7 +67,7 @@ Function "move-or-iconify" { f.move f.deltastop f.iconify }
 
 Button1 = : root : f.menu "defops"
 
-Button3 = : root : f.menu "Apps."
+Button3 = : root : f.menu "apps."
 
 Button1 = m : window|icon : f.function "move-or-lower"
 Button2 = m : window|icon : f.iconify
@@ -74,10 +82,12 @@ Button2 = : icon : f.iconify
 Button1 = : iconmgr : f.iconify
 Button2 = : iconmgr : f.iconify
 
-Button1 = : window : f.lower
-"Tab" = m : all : f.move-or-lower
+Function "prev-window" { f.circleup }
+"Tab" = mod3 : all : f.raiselower
+
 LeftTitleButton ":xlogo" = f.delete
-LeftTitleButton ":menu" = f.fullzoom
+LeftTitleButton ":resize" = f.fullzoom
+LeftTitleButton ":menu" = f.menu "defops"
 
 WindowRing
 {
@@ -88,7 +98,7 @@ WindowRing
   "urxvt"  
 }
 
-menu "defops"
+Menu "defops"
 {
 "Twm"	f.title
 "Iconify"	f.iconify
@@ -96,26 +106,41 @@ menu "defops"
 "Move"		f.move
 "Raise"		f.raise
 "Lower"		f.lower
-""		f.nop
+"------------"		f.nop
 "Focus"		f.focus
 "Unfocus"	f.unfocus
 "Show Iconmgr"	f.showiconmgr
 "Hide Iconmgr"	f.hideiconmgr
-""		f.nop
+"------------"		f.nop
 "Xterm"		f.exec "exec xterm &"
-""		f.nop
+"------------"		f.nop
 "Kill"		f.destroy
 "Delete"	f.delete
-""		f.nop
+"------------"		f.nop
 "Restart"	f.restart
 "Exit"		f.quit
 }
 
-menu "Apps."
+Menu "apps."
 {
 "Apps." f.title
 "urxvt" f.exec "exec urxvtdc &"
 "emacs" f.exec "exec emacs &"
 "firefox" f.exec "exec firefox3 &"
 "nitrogen" f.exec "exec nitrogen &"
+}
+
+Cursors
+{
+    Frame   "right_ptr"
+    Title   "right_ptr"
+    Icon    "right_ptr"
+    IconMgr "right_ptr"
+    Move    "fleur"
+    Resize  "fleur"
+    Menu    "hand1"
+    Button  "hand2"
+    Wait    "clock"
+    Select  "dot"
+    Destroy "pirate"
 }
