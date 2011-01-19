@@ -225,7 +225,7 @@
 (require 'emms-mode-line-icon)
 (require 'emms-info-libtag)
 (require 'emms-history)
-(require 'anything-emms)
+;(require 'anything-emms)
 (emms-devel)
 (emms-default-players)
 (setq emms-repeat-playlist t
