@@ -104,7 +104,7 @@
 	           '(height . 52) ;; window height
 	           '(top . 0)     ;; window placement
 	           '(left . 0)    ;; window placement
-	           '(font . "aquafont 10")
+	           '(font . "Inconsolata 10")
 	           )
 	      initial-frame-alist)))
 (setq default-frame-alist initial-frame-alist)
@@ -330,7 +330,7 @@
 (require 'skk)
 (setq skk-act-use-normal-y t)
 (setq skk-use-act t)
-;;; from skk info
+;;;ppp from skk info
 ;(add-hook 'isearch-mode-hook
 ;          #'(lambda ()
 ;              (when (and (boundp 'skk-mode)

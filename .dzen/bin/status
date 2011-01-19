@@ -39,7 +39,7 @@ while (1)
 # set diskusr = `df -h | grep ad4s1f | gawk '{print $4}'`
   set diskused = `gdf | gawk '{if ( $3 !~ /Used/ ) { a += $3} } END {a=a/(1024*1024);print int(a)}'`
 
-  echo "^fg(#93ab39)^i($icons/sm4tik/cpu.xbm)^fg() $cpu  ^fg(#937473)^i($icons/sm4tik/mem.xbm)^fg() $freemem  ^fg(#fa3b99)^i($icons/sm4tik/net_up_02.xbm)^fg() $tx ^fg(#ff8600)^i($icons/sm4tik/net_down_02.xbm)^fg() $rx  ^fg(#cdcdcd)^i($icons/sm4tik/fs_01.xbm)^fg() ${diskused}GB ^fg($batcolour)^i($baticon)^fg() ${battery}% ^fg(#2717fc)^i($icons/sm4tik/clock.xbm)^fg() $date "
+  echo "  ^fg(#93ab39)^i($icons/sm4tik/cpu.xbm)^fg() $cpu  ^fg(#937473)^i($icons/sm4tik/mem.xbm)^fg() $freemem  ^fg(#fa3b99)^i($icons/sm4tik/net_up_02.xbm)^fg() $tx ^fg(#ff8600)^i($icons/sm4tik/net_down_02.xbm)^fg() $rx  ^fg(#cdcdcd)^i($icons/sm4tik/fs_01.xbm)^fg() ${diskused}GB ^fg($batcolour)^i($baticon)^fg() ${battery}% ^fg(#2717fc)^i($icons/sm4tik/clock.xbm)^fg() $date "
 
 #  sleep $interval
 

@@ -15,12 +15,16 @@ urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
 #urxvtc -e screenie -s /bin/tcsh -m &
 xscreensaver -no-splash &
 parcellite &
-xcompmgr -c -C&
+xcompmgr -n &   
 #xfce4-panel &
 #xsnow &
 #oneko -sakura &
 # tint2 & 
 #exec xmonad
+if [ "$1" = "twm" ]; then
+/home/mytoh/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 16 -bg gray15 -fn 'Inconsolata:size=10' -e 'onexit=ungrabmouse' &
+trayer --expand false --alpha 40  --tint 0x606060 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 7 --widthtype pixel --width 120 &
+fi
 
 DEFAULT_SESSION="twm"
 case $1 in
@@ -34,7 +38,8 @@ case $1 in
         exec xmonad
         ;;
   twm)
-        exec twm -v
+       
+       exec twm -v
         ;;
   xfce)
         exec startxfce4

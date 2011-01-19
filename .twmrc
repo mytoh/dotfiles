@@ -1,13 +1,13 @@
 
-NoGrabServer
-RestartPreviousState
-DecorateTransients
 TitleFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*-*-*-*"
 ResizeFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*-*-*-*"
 MenuFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*-*-*-*"
 IconFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*-*-*-*"
 IconManagerFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*"
 
+NoGrabServer
+RestartPreviousState
+DecorateTransients
 ClientBorderWidth
 NoSaveUnders
 NoTitleHighlight
@@ -31,6 +31,8 @@ IconManagerDontShow
     "xclock"
     "xlogo"
     "xfce4-panel"
+    "panel"
+    "trayer"
 }
 
 NoTitle
@@ -39,6 +41,8 @@ NoTitle
     "Mplayer"
     "xlogo"
     "xfce4-panel"
+    "trayer"
+    "panel"
 }
 
 Color
@@ -83,7 +87,7 @@ Button1 = : iconmgr : f.iconify
 Button2 = : iconmgr : f.iconify
 
 Function "prev-window" { f.circleup }
-"Tab" = mod3 : all : f.raiselower
+"Tab" = c : all : f.circledown
 
 LeftTitleButton ":xlogo" = f.delete
 LeftTitleButton ":resize" = f.fullzoom
