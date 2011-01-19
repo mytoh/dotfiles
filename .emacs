@@ -225,6 +225,7 @@
 (require 'emms-mode-line-icon)
 (require 'emms-info-libtag)
 (require 'emms-history)
+(require 'anything-emms)
 (emms-devel)
 (emms-default-players)
 (setq emms-repeat-playlist t
@@ -347,6 +348,10 @@
 
 ;;; gosh-mode
 ;;(require 'gosh-config)
+
+;; moccur
+(require 'color-moccur)
+(require 'moccur-edit)
 
 (cd "~/")
 
