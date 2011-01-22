@@ -127,11 +127,12 @@ Menu "defops"
 
 Menu "apps."
 {
-"Apps." f.title
+"apps" f.title
 "urxvt" f.exec "exec urxvtdc &"
 "emacs" f.exec "exec emacs &"
 "firefox" f.exec "exec firefox3 &"
 "nitrogen" f.exec "exec nitrogen &"
+"comix"  f.exec "exec comix &"
 }
 
 Cursors

@@ -353,6 +353,11 @@
 (require 'color-moccur)
 (require 'moccur-edit)
 
+;; popwin
+(require 'popwin)
+(setq display-buffer-function 'popwin:display-buffer)
+
+
 (cd "~/")
 
 
