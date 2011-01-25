@@ -5,29 +5,29 @@
 
 (define-syntax ls
   (syntax-rules ()
-    ((ls)
+    ((_)
      (run (ls)))
     ((ls arg ...)
      (run (gls arg ...)))))
 
 (define-syntax ll
   (syntax-rules ()
-    ((ll arg ...)
+    ((_ arg ...)
      (run (gls -lh --color=auto arg ...)))))
 
 (define-syntax la 
   (syntax-rules ()
-    ((la arg ...)
+    ((_ arg ...)
      (run (gls -lah --color=auto arg ...)))))
 
 (define-syntax cd 
   (syntax-rules ()
-    ((cd)
+    ((_)
      (begin
        (setenv "OLDPWD" (cwd))
        (chdir)
        (setenv "PWD" (cwd))))
-    ((cd dir)
+    ((_ dir)
      (let ((oldpwd (getenv "OLDPWD")))
        (setenv "OLDPWD" (cwd))
        (chdir (if (eq? '- 'dir)
@@ -37,7 +37,7 @@
 
 (define-syntax pwd
   (syntax-rules ()
-    ((pwd)
+    ((_)
      (run (pwd)))))
 
 (define-syntax forever
