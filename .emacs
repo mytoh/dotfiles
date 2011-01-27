@@ -55,7 +55,7 @@
 ;; highlight region
 (transient-mark-mode t)
 ;; highlight current line
-(global-hl-line-mode nil)
+;(global-hl-line-mode nil)
 ;; flash parens
 (show-paren-mode t)
 ;; line by line scrolling
@@ -98,18 +98,18 @@
 (if (boundp 'window-system)
     (setq initial-frame-alist
 	  (append (list
-                  '(alpha . 93) ;; tranparency for defalt
+               '(alpha . 95) ;; tranparency for default
 	           '(vertical-scroll-bars . nil) ;; scroll bars
 	           '(width . 179) ;; window width
 	           '(height . 52) ;; window height
-	           '(top . 0)     ;; window placement
-	           '(left . 0)    ;; window placement
-	           '(font . "Inconsolata 10")
+	           '(top . 15)     ;; window placement
+	           '(left . 10)    ;; window placement
+	           '(font . "Inconsolata 13")
 	           )
-	      initial-frame-alist)))
+              initial-frame-alist)))
 (setq default-frame-alist initial-frame-alist)
 
-;; reload face setting for first fram
+;; reload face setting for first frame
 (add-hook 'window-setup-hook
           '(lambda ()
              (face-set-after-frame-default (selected-frame))))
@@ -152,10 +152,10 @@
 	      )))))
 
 ;; scheme program
-(setq scheme-program-name "gosh")
+(setq scheme-program-name "scsh -l ~/.scsh/lib.scm")
 ; set encoding to utf-8 
 (setq process-coding-system-alist
-      (cons '("gosh" utf-8 . utf-8) process-coding-system-alist))
+      (cons '("scsh" utf-8 . utf-8) process-coding-system-alist))
 ; load cmuscheme.el for scheme program
 (autoload 'scheme-mode "cmuscheme" "Major mode for Schem." t)
 (autoload 'run-schapeme "cmuscheme" "Run an inferior Scheme process." t)

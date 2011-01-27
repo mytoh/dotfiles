@@ -135,6 +135,9 @@ Menu "apps."
 "comix"  f.exec "exec comix &"
 "gcolor" f.exec "exec gcolor2 &"
 "thunar" f.exec "exec thunar &"
+"gimv"   f.exec "exec gimv &"
+"enfle"  f.exec "exec enfle &"
+"grsync" f.exec "exec grsync &"
 }
 
 Cursors
