@@ -21,7 +21,7 @@ xcompmgr -n &
 #oneko -sakura &
 # tint2 & 
 #exec xmonad
-if [ "$1" = "twm" ]; then
+if [ "$1" = "twm" -o "$*" = "" ]; then
 /home/mytoh/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 16 -bg gray15 -fn 'Inconsolata:size=10' -e 'onexit=ungrabmouse' &
 trayer --expand false --alpha 20  --tint 0x606060 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 7 --widthtype pixel --width 120 &
 fi
@@ -38,11 +38,13 @@ case $1 in
         exec xmonad
         ;;
   twm)
-       
-       exec twm -v
+        exec twm -v
         ;;
   xfce)
         exec startxfce4
+        ;;
+  swm)
+        exec swm
         ;;
   *)
         exec $DEFAULT_SESSION
