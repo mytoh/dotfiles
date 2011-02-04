@@ -86,8 +86,9 @@ Button2 = : icon : f.iconify
 Button1 = : iconmgr : f.iconify
 Button2 = : iconmgr : f.iconify
 
-Function "prev-window" { f.circleup }
-"Tab" = c : all : f.circledown
+Button1 = : window : f.raise
+Button1 = : frame : f.function "move-or-raise"
+"Tab" = m3 : all : f.raiselower
 
 LeftTitleButton ":xlogo" = f.delete
 LeftTitleButton ":resize" = f.fullzoom
@@ -124,6 +125,7 @@ Menu "defops"
 "Restart"	f.restart
 "Exit"		f.quit
 }
+# f.startwm not work
 
 Menu "apps."
 {

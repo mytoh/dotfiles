@@ -46,7 +46,7 @@ bindkey "" history-search-forward
 
 stty kill 
 
-alias cwdcmd gls -F --color=auto
+alias cwdcmd ls -F 
 #alias jobcmd 'echo -n "]2\;\!#"'
 alias precmd rehash
 alias quit 'sync;sync;sync;sudo shutdown -p now'
@@ -56,16 +56,15 @@ alias pcheck 'sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster
 #alias pup 'sudo portsnap fetch update && sudo pkg_replace -Bcav && sudo portaudit -av && rehash'
 alias cup 'cpan-outdated && cpan-outdated | xargs cpanm -Sv'
 alias sc screen -U -D -RR  -s /bin/tcsh -m 
-alias la gls -Fa --color=auto
-alias lf gls -FA --color=auto
-alias ll gls -FhlA --color=auto
+alias la ls -Fa
+alias lf ls -FA 
+alias ll ls -FhlA 
 alias find gfind
 alias pfetch 'sudo make fetch-recursive'
 alias pinst "sudo make install distclean; rehash"
 alias pconf sudo make config-recursive
 alias pclean sudo make clean distclean
 alias awk gawk
-alias vi  vim
 alias view "vim -R -"
 alias .. 'cd ..'
 alias scsh 'rlwrap scsh'
@@ -88,110 +87,5 @@ if ( $SHLVL == 1 && $term != "xterm" ) then
   set term=jfbterm && jfbterm
 endif
 
-#--------- gnu coreutils aliases -------------
-if ( "`uname`" == "FreeBSD") then
-
-  alias base64 gbase64
-  alias basename gbasename
-  alias cat gcat
-  alias chcon gchcon
-  alias chgrp gchgrp
-  alias chmod gchmod
-  alias chown gchown
-  alias chroot gchroot
-  alias cksum gcksum
-  alias comm gcomm
-  alias cp gcp -iv
-  alias csplit gcsplit
-  alias cut gcut
-  alias date gdate
-  alias dd gdd
-  alias df gdf -h
-  alias dir gdir
-  alias dircolors gdircolors
-  alias dirname gdirname
-  alias du gdu -k
-  alias echo gecho
-  alias env genv
-  alias expand gexpand
-  alias expr gexpr
-  alias factor gfactor
-  alias false gfalse
-  alias fmt gfmt
-  alias fold gfold
-  alias groups ggroups
-  alias head ghead
-  alias hostid ghostid
-  alias id gid
-  alias install ginstall
-  alias join gjoin
-  alias kill gkill
-  alias link glink
-  alias ln gln
-  alias logname glogname
-  alias ls gls -F --color=auto
-  alias md5sum gmd5sum
-  alias mkdir gmkdir
-  alias mkfifo gmkfifo
-  alias mknod gmknod
-  alias mktemp gmktemp
-  alias mv gmv -iv
-  alias nice gnice
-  alias nl gnl
-  alias nohup gnohup
-  alias nproc gnproc
-  alias od god
-  alias paste gpaste
-  alias pathchk gpathchk
-  alias pinky gpinky
-  alias pr gpr
-  alias printenv gprintenv
-  alias printf gprintf
-  alias ptx gptx
-  alias pwd gpwd
-  alias readlink greadlink
-  alias rm grm 
-  alias rmdir grmdir
-  alias roups groups
-  alias runcon gruncon
-  alias seq gseq
-  alias sha1sum gsha1sum
-  alias sha224sum gsha224sum
-  alias sha256sum gsha256sum
-  alias sha384sum gsha384sum
-  alias sha512sum gsha512sum
-  alias shred gshred
-  alias shuf gshuf
-  alias sleep gsleep
-  alias sort gsort
-  alias split gsplit
-  alias stat gstat
-  alias stty gstty
-  alias sum gsum
-  alias sync gsync
-  alias tac gtac
-  alias tail gtail
-  alias tee gtee
-  alias test gtest
-  alias timeout gtimeout
-  alias touch gtouch
-  alias tr gtr
-  alias true gtrue
-  alias truncate gtruncate
-  alias tsort gtsort
-  alias tty gtty
-  alias uname guname
-  alias unexpand gunexpand
-  alias uniq guniq
-  alias unlink gunlink
-  alias uptime guptime
-  alias users gusers
-  alias vdir gvdir
-  alias wc gwc
-  alias who gwho
-  alias whoami gwhoami
-  alias yes gyes
-
-endif
 
 
