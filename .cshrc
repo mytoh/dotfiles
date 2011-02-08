@@ -46,7 +46,7 @@ bindkey "" history-search-forward
 
 stty kill 
 
-alias cwdcmd ls -F 
+alias cwdcmd ls-F 
 #alias jobcmd 'echo -n "]2\;\!#"'
 alias precmd rehash
 alias quit 'sync;sync;sync;sudo shutdown -p now'
@@ -56,9 +56,9 @@ alias pcheck 'sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster
 #alias pup 'sudo portsnap fetch update && sudo pkg_replace -Bcav && sudo portaudit -av && rehash'
 alias cup 'cpan-outdated && cpan-outdated | xargs cpanm -Sv'
 alias sc screen -U -D -RR  -s /bin/tcsh -m 
-alias la ls -Fa
-alias lf ls -FA 
-alias ll ls -FhlA 
+alias la ls-F -a
+alias ll ls-F -hlA 
+alias vi vim
 alias find gfind
 alias pfetch 'sudo make fetch-recursive'
 alias pinst "sudo make install distclean; rehash"
@@ -87,5 +87,6 @@ if ( $SHLVL == 1 && $term != "xterm" ) then
   set term=jfbterm && jfbterm
 endif
 
+source .complete.tcsh
 
 
