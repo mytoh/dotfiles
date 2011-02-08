@@ -1,11 +1,10 @@
 #!/bin/tcsh
 
-# this script depend on system FreeBSD, gawk, bwm-ng, and some xbm icon files
+# this script depends on system FreeBSD, gawk, bwm-ng, and some xbm icon files
 
 set date_format = '%a %d/%m %H:%M'
 set icons = $HOME/.dzen/icons
 set interval = 1
-
 
 while (1)
   set date = `date +"$date_format"`
@@ -28,18 +27,20 @@ while (1)
    set baticon = "$icons/sm4tik/bat_empty_01.xbm";
   endif
 
-  set batcolour = `sysctl -n hw.acpi.battery.state`
-
-  if ( $batcolour == 1 ) then
+  set batstate = `sysctl -n hw.acpi.battery.state`
+  set batcolour = "#ffffff"
+  if ( $batstate == 1 ) then
       set batcolour = "#ff4500";
-  else if ( $batcolour == 2 ) then
+  else if ( $batstate == 2 ) then
       set batcolour = "#00ff00";
   endif
 
-# set diskusr = `df -h | grep ad4s1f | gawk '{print $4}'`
-  set diskused = `gdf | gawk '{if ( $3 !~ /Used/ ) { a += $3} } END {a=a/(1024*1024);print int(a)}'`
+  set diskused = `df -ch | grep total | awk '{print $3}' | cut -c 1-3`
+  set disktotal = `df -ch | grep total | awk '{print $2}'`
 
-  echo "  ^fg(#93ab39)^i($icons/sm4tik/cpu.xbm)^fg(#73f0ff) $cpu ^fg(#937473)^i($icons/sm4tik/mem.xbm)^fg(#73f0ff) $freemem  ^fg(#fa3b99)^i($icons/sm4tik/net_up_02.xbm)^fg(#73f0ff) $tx ^fg(#ff8600)^i($icons/sm4tik/net_down_02.xbm)^fg(#73f0ff) $rx  ^fg(#cdcdcd)^i($icons/sm4tik/fs_01.xbm)^fg(#73f0ff) ${diskused}GB ^fg($batcolour)^i($baticon)^fg(#73f0ff) ${battery}% ^fg(#2717fc)^i($icons/sm4tik/clock.xbm)^fg(#73f0ff) $date "
+  set iconcolour = "#ffffff"
+
+  echo "  ^fg($iconcolour)^i($icons/sm4tik/cpu.xbm)^fg(#73f0ff) $cpu ^fg($iconcolour)^i($icons/sm4tik/mem.xbm)^fg(#73f0ff) $freemem  ^fg($iconcolour)^i($icons/sm4tik/net_up_02.xbm)^fg(#73f0ff) $tx ^fg($iconcolour)^i($icons/sm4tik/net_down_02.xbm)^fg(#73f0ff) $rx  ^fg(#cdcdcd)^i($icons/sm4tik/fs_01.xbm)^fg(#73f0ff) ${diskused}/${disktotal}B ^fg($batcolour)^i($baticon)^fg(#73f0ff) ${battery}% ^fg($iconcolour)^i($icons/sm4tik/clock.xbm)^fg(#73f0ff) $date "
 
 #  sleep $interval
 
