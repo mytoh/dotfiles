@@ -33,6 +33,7 @@ IconManagerDontShow
     "xfce4-panel"
     "panel"
     "trayer"
+    "TWM Icon Manager"
 }
 
 NoTitle
@@ -86,8 +87,6 @@ Button2 = : icon : f.iconify
 Button1 = : iconmgr : f.iconify
 Button2 = : iconmgr : f.iconify
 
-Button1 = : window : f.raise
-Button1 = : frame : f.function "move-or-raise"
 "Tab" = m3 : all : f.raiselower
 
 LeftTitleButton ":xlogo" = f.delete
