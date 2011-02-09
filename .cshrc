@@ -87,6 +87,6 @@ if ( $SHLVL == 1 && $term != "xterm" ) then
   set term=jfbterm && jfbterm
 endif
 
-source .complete.tcsh
+source $HOME/.complete.tcsh
 
 
