@@ -53,7 +53,9 @@ complete tar	'c/-[Acru]*/(b B C f F g G h i l L M N o P \
         			'N/{-C,--directory}/`\ls $:-1`/' \
         			'n/-[0-7]/"(l m h)"/'
 
-complete {pkg_*,port*} 'n...@*@D:/var/db/pkg@ @'
+complete pkg_info         'n@-[cdorLR]*@` \
+                          \ls -1 /var/db/pkg | sed "s%/var/db/pkg/%%"`@'
+complete pkg_delete       'n@*@` \ls -1 /var/db/pkg | sed "s%/var/db/pkg/%%"`@'
 
 complete ps               'n/-*U/u/'
 
