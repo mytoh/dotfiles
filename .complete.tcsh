@@ -93,6 +93,29 @@ complete find 	'n/-fstype/"(nfs 4.2)"/'  \
 			                print0 printf not a and o or)/' \
 			          'n/*/d/'
 
+complete ln    'c/-/(b d F f i n S s V v -)/' \
+               'n/{-S,--suffix}/x:<suffix>/' \
+               'n/{-V,--version-control}/"(t numbered nil existing \
+                                           never simple"/' \
+               'n/-/f/' \
+               'N/-/x:<link_name>/' \
+               'p/1/f/' \
+               'p/2/x:<link_name>/'
+
 complete kill  'p/*/`ps ax| awk \{print\ \$1\}`/'
 complete pkill 'p/*/`ps c | awk \{print\ \$5\} | sort |uniq | tr -d COMMAND`/'
 
+ 
+complete ./configure 'c/-[IL]/d/' \
+                     'c/--*=/f/' \
+                     'c/--{cache-file,prefix,exec-prefix,\
+                           bindir,sbindir,libexecdir,datadir,\
+                           sysconfdir,sharedstatedir,localstatedir,\
+                           libdir,includedir,oldincludedir,infodir,\
+                           mandir,srcdir}/(=)//' \
+                     'c/--/(cache-file verbose prefix exec-prefix bindir \
+                            sbindir libexecdir datadir sysconfdir \
+                            sharedstatedir localstatedir libdir \
+                            includedir oldincludedir infodir mandir \
+                            srcdir)//'
+ 
