@@ -82,8 +82,23 @@ if ( -e $home/perl5/perlbrew/etc/cshrc ) then
   source $home/perl5/perlbrew/etc/cshrc 
 endif
 
-if ( $SHLVL == 1 && $term != "xterm" ) then
-  set term=jfbterm && jfbterm
+# setting for jfbterm 
+if ( ${?TERM} ) then
+    switch ( "${TERM}" )
+    case screen:
+      set pcmd=`procstat -ch $$ | awk '{print $2}'`
+      set ppid=`procstat -h $$ | awk '{print $2}'`
+      while ( ! "0" == "${ppid}" )
+          if ( "jfbterm" == "${pcmd}" ) then
+              TERM=jfbterm-256color
+              break
+          endif
+          set pcmd='procstat -ch "${ppid}" | awk '{print $2}'`
+          set ppid='procstat -h "${ppid}" | awk '{print $2}'`
+      end
+      unset pcmd ppid
+      breaksw
+  endsw
 endif
 
 source $HOME/.complete.tcsh
