@@ -64,7 +64,6 @@ alias pfetch 'sudo make fetch-recursive'
 alias pinst "sudo make install distclean; rehash"
 alias pconf sudo make config-recursive
 alias pclean sudo make clean distclean
-alias awk gawk
 alias view "vim -R -"
 alias .. 'cd ..'
 alias scsh 'rlwrap scsh'

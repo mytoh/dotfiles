@@ -9,13 +9,13 @@ set interval = 1
 while (1)
   set date = `date +"$date_format"`
 
-  set cpu = `top -b -d 2 | grep ^CPU | gawk '{print $2,$6}'`
+  set cpu = `top -b -d 2 | grep ^CPU | awk '{print $2,$6}'`
 
-  set rx = `bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | gawk '{print $2,$3}'`
+  set rx = `bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | awk '{print $2,$3}'`
 
-  set tx = `bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | gawk '{print $4,$5}'`
+  set tx = `bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | awk '{print $4,$5}'`
 
-  set freemem = `vmstat -h |grep -n 2| gawk '{print $6}'`
+  set freemem = `vmstat -h |grep -n 2| awk '{print $6}'`
 
   set battery = `sysctl -n hw.acpi.battery.life`
 
