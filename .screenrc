@@ -10,13 +10,13 @@ startup_message off
 autodetach on
 bind q quit
 bind k kill
-bindkey  prev
-bindkey  next
+#bindkey  prev
+#bindkey  next
 defmonitor off
 defscrollback 10000
 altscreen on
 
-term xterm
+term screen
 attrcolor b ".I"
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 defbce on

@@ -13,7 +13,7 @@ set color
 set colorcat
 set autoexpand
 set complete=enhance
-set path = (~/local/bin ~/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin /usr/local/sbin )
+set path = (/usr/local/lib/cw ~/local/bin ~/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin /usr/local/sbin )
 set cdpath = (~/local/ ~/local/var/)
 set noclobber
 set notify
@@ -39,7 +39,7 @@ setenv SCSH_LIB_DIRS ' "." "/usr/home/mytoh/.scsh" "/usr/local/lib/scsh/" "/usr/
 set catalog=ja.ayanami.cat
 setenv NLSPATH ~/local/lib/tcsh/%N
 
-bindkey -v
+bindkey -e
 bindkey "" backward-delete-word
 bindkey "" history-search-backward
 bindkey "" history-search-forward
@@ -70,13 +70,6 @@ alias scsh 'rlwrap scsh'
 alias gosh 'rlwrap gosh'
 alias ew 'emacs -f w3m'
 
-complete cd 'p/1/d/'
-complete make 'p/1/(all clean distclean depend  install install.man Makefiles buildworld installworld config-recursive)/'
-complete sudo 'p/1/(make vim portsnap)/'
-complete tar      'n/{,-}[crtux]*z*f/f:*.{tar.gz,tar.Z,tgz,TGZ}/' \
-                  'n/{,-}[crtux]*f/f:*.tar/'  \
-                          'n/*/f/'
-complete {pkg_*,port*} 'n...@*@D:/var/db/pkg@ @'
 
 if ( -e $home/perl5/perlbrew/etc/cshrc ) then
   source $home/perl5/perlbrew/etc/cshrc 
@@ -90,7 +83,7 @@ if ( ${?TERM} ) then
       set ppid=`procstat -h $$ | awk '{print $2}'`
       while ( ! "0" == "${ppid}" )
           if ( "jfbterm" == "${pcmd}" ) then
-              TERM=jfbterm-256color
+              TERM=jfbterm-color
               break
           endif
           set pcmd='procstat -ch "${ppid}" | awk '{print $2}'`

@@ -1,4 +1,5 @@
 
+
 complete cd 'p/1/d/'  \
             'n/-*/d/'
 
@@ -53,8 +54,7 @@ complete tar	'c/-[Acru]*/(b B C f F g G h i l L M N o P \
         			'N/{-C,--directory}/`\ls $:-1`/' \
         			'n/-[0-7]/"(l m h)"/'
 
-complete pkg_info         'n@-[cdorLR]*@` \
-                          \ls -1 /var/db/pkg | sed "s%/var/db/pkg/%%"`@'
+complete pkg_info         'n@-[cdorLR]*@` \ls -1 /var/db/pkg | sed "s%/var/db/pkg/%%"`@'
 complete pkg_delete       'n@*@` \ls -1 /var/db/pkg | sed "s%/var/db/pkg/%%"`@'
 
 complete ps               'n/-*U/u/'
@@ -119,3 +119,12 @@ complete ./configure 'c/-[IL]/d/' \
                             includedir oldincludedir infodir mandir \
                             srcdir)//'
  
+#from 2ch FreeBSD thread
+complete sysctl 'c/-/(b d e h N n o x a)/' \
+                'C@?*.?*.?*.?*.@`\/sbin\/sysctl -Noa `@@' \
+                'C@?*.?*.?*.@`\/sbin\/sysctl -Noa | awk -F . '"'"'{if(NF>4) print $1"."$2"."$3"."$4"."; else print $1"."$2"."$3"."$4}'"'"' | sort | uniq`@@' \
+                'C@?*.?*.@`\/sbin\/sysctl -Noa | awk -F . '"'"'{if(NF>3) print $1"."$2"."$3"."; else print $1"."$2"."$3}'"'"' | sort | uniq`@@' \
+                'C@?*.@`\/sbin\/sysctl -Noa | awk -F . '"'"'{if(NF>2) print $1"."$2"."; else print $1"."$2}'"'"' | sort | uniq`@@' \
+                'C@*@`\/sbin\/sysctl -Noa | awk -F . '"'"'{if(NF>1) print $1"."; else print $1}'"'"' | sort | uniq`@@' 
+
+

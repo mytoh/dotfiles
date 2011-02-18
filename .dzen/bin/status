@@ -18,7 +18,6 @@ while (1)
   set freemem = `vmstat -h |grep -n 2| awk '{print $6}'`
 
   set battery = `sysctl -n hw.acpi.battery.life`
-
   if ( $battery <= 100 && $battery > 50 ) then 
    set baticon = "$icons/sm4tik/bat_full_01.xbm";
   else if ( $battery >= 10 && $battery <= 50 ) then 
