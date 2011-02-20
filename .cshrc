@@ -60,10 +60,10 @@ alias la ls-F -a
 alias ll ls-F -hlA 
 alias vi vim
 alias find gfind
-alias pfetch 'sudo make fetch-recursive'
-alias pinst "sudo make install distclean; rehash"
-alias pconf sudo make config-recursive
-alias pclean sudo make clean distclean
+alias pfetch 'sudo make  fetch-recursive'
+alias pinst "sudo make  install distclean; rehash"
+alias pconf sudo make  config-recursive
+alias pclean sudo make  clean distclean
 alias view "vim -R -"
 alias .. 'cd ..'
 alias scsh 'rlwrap scsh'

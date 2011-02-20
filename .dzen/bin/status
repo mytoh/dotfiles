@@ -1,9 +1,12 @@
-#!/bin/tcsh
+#!/bin/csh -f
 
 # this script depends on system FreeBSD, gawk, bwm-ng, and some xbm icon files
 
+# disable color wrapper for some utils
+setenv NOCOLOR true
+
 set date_format = '%a %d/%m %H:%M'
-set icons = $HOME/.dzen/icons
+set icons = "$HOME/.dzen/icons"
 set interval = 1
 
 while (1)
@@ -18,20 +21,20 @@ while (1)
   set freemem = `vmstat -h |grep -n 2| awk '{print $6}'`
 
   set battery = `sysctl -n hw.acpi.battery.life`
-  if ( $battery <= 100 && $battery > 50 ) then 
-   set baticon = "$icons/sm4tik/bat_full_01.xbm";
-  else if ( $battery >= 10 && $battery <= 50 ) then 
-   set baticon = "$icons/sm4tik/bat_low_01.xbm";
+  if ( "$battery" <= 100  && "$battery" > 50 ) then 
+   set baticon = "$icons/sm4tik/bat_full_01.xbm"
+  else if ( "$battery" >= 10 && "$battery" <= 50 ) then 
+   set baticon = "$icons/sm4tik/bat_low_01.xbm"
   else 
-   set baticon = "$icons/sm4tik/bat_empty_01.xbm";
+   set baticon = "$icons/sm4tik/bat_empty_01.xbm"
   endif
 
   set batstate = `sysctl -n hw.acpi.battery.state`
   set batcolour = "#ffffff"
-  if ( $batstate == 1 ) then
-      set batcolour = "#ff4500";
-  else if ( $batstate == 2 ) then
-      set batcolour = "#00ff00";
+  if ( "$batstate" == 1 ) then
+      set batcolour = "#ff4500"
+  else if ( "$batstate" == 2 ) then
+      set batcolour = "#00ff00"
   endif
 
   set diskused = `df -ch | grep total | awk '{print $3}' | cut -c 1-3`

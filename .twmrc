@@ -139,6 +139,7 @@ Menu "apps."
 "gimv"   f.exec "exec gimv &"
 "enfle"  f.exec "exec enfle &"
 "grsync" f.exec "exec grsync &"
+"jd" f.exec "exec jd &"
 }
 
 Cursors
