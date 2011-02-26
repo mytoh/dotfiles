@@ -27,7 +27,8 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 urxvt.font: \
     xft:Inconsolata:size=10:antialias=true,\
     xft:M+ 1p:size=9:style=regular:antialias=true
-urxvt.boldFont: xft:Inconsolata:style=Bold:size=10:antialias=true
+urxvt.boldFont: xft:Inconsolata:style=Bold:size=10:antialias=true, \
+                xft:M+ 1p:size=9:style=:bold:antialias=true
 
 urxvt.color12: #7fb4ff
 

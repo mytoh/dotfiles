@@ -9,6 +9,9 @@ set ignoreeof
 set histdup=erase
 set rmstar
 set inputmode=insert
+set listlinks
+set ellipsis
+set implicitcd=verbose
 set color
 set colorcat
 set autoexpand
@@ -58,6 +61,7 @@ alias cup 'cpan-outdated && cpan-outdated | xargs cpanm -Sv'
 alias sc screen -U -D -RR  -s /bin/tcsh -m 
 alias la ls-F -a
 alias ll ls-F -hlA 
+alias ls ls-F
 alias vi vim
 alias find gfind
 alias pfetch 'sudo make  fetch-recursive'

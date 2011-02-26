@@ -6,7 +6,7 @@ complete cd 'p/1/d/'  \
 complete echo 'p/1/s/'
 
 complete make     'p/1/(all clean distclean depend  install install.man Makefiles buildworld installworld config-recursive)/'
-complete sudo     'p/1/(make vim portsnap)/'
+complete sudo     'p/1/c/'
 
 
 complete unzip  'p/*/f:*.{ZIP,zip}/'
