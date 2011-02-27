@@ -1,0 +1,35 @@
+# The Bar && Font
+#
+#wbarcommand="wbar -bpress -above-desk"
+
+i: /usr/local/share/wbar/iconpack/wbar.osx/osxbarback.png
+c: 
+t: /usr/local/share/wbar/iconpack/wbar.osx/font/12
+
+i: /usr/local/share/wbar/iconpack/wbar.osx/firefox.png
+c: firefox3
+t: firefox3
+
+i: /usr/local/share/wbar/iconpack/wbar.osx/thunderbird.png
+c: thunderbird
+t: thunderbird
+
+i: /usr/local/share/wbar/iconpack/wbar.osx/gmplayer.png
+c: /usr/local/bin/mplayer
+t: mplayer
+
+i: /usr/local/share/wbar/iconpack/wbar.osx/mlgui.png
+c: 
+t: sancho
+
+i: /usr/local/share/wbar/iconpack/wbar.osx/gimp.png
+c: gimp
+t: gimp
+
+i: /usr/local/share/wbar/iconpack/wbar.osx/picasa.png
+c: picasa
+t: picasa
+
+i: /usr/local/share/wbar/iconpack/wbar.osx/gqview.png
+c: gqview
+t: gqview
