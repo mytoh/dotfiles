@@ -40,9 +40,10 @@ while (1)
   set diskused = `df -ch | grep total | awk '{print $3}' | cut -c 1-3`
   set disktotal = `df -ch | grep total | awk '{print $2}'`
 
-  set iconcolour = "#ffffff"
+  set iconcolour = "#808080"
+  set charcolour = "#ffffff"
 
-  echo "  ^fg($iconcolour)^i($icons/sm4tik/cpu.xbm)^fg(#73f0ff) $cpu ^fg($iconcolour)^i($icons/sm4tik/mem.xbm)^fg(#73f0ff) $freemem  ^fg($iconcolour)^i($icons/sm4tik/net_up_02.xbm)^fg(#73f0ff) $tx ^fg($iconcolour)^i($icons/sm4tik/net_down_02.xbm)^fg(#73f0ff) $rx  ^fg(#cdcdcd)^i($icons/sm4tik/fs_01.xbm)^fg(#73f0ff) ${diskused}/${disktotal}B ^fg($batcolour)^i($baticon)^fg(#73f0ff) ${battery}% ^fg($iconcolour)^i($icons/sm4tik/clock.xbm)^fg(#73f0ff) $date "
+  echo "  ^fg($iconcolour)^i($icons/sm4tik/cpu.xbm)^fg($charcolour) $cpu ^fg($iconcolour)^i($icons/sm4tik/mem.xbm)^fg($charcolour) $freemem  ^fg($iconcolour)^i($icons/sm4tik/net_up_02.xbm)^fg($charcolour) $tx ^fg($iconcolour)^i($icons/sm4tik/net_down_02.xbm)^fg($charcolour) $rx  ^fg($iconcolour)^i($icons/sm4tik/fs_01.xbm)^fg($charcolour) ${diskused}/${disktotal}B ^fg($batcolour)^i($baticon)^fg($charcolour) ${battery}% ^fg($iconcolour)^i($icons/sm4tik/clock.xbm)^fg($charcolour) $date "
 
 #  sleep $interval
 

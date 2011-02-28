@@ -1,4 +1,4 @@
-pXcursor.theme: whiteglass
+Xcursor.theme: whiteglass
 
 urxvt.termName: xterm
 urxvt.background: #000000
@@ -24,9 +24,7 @@ urxvt.urlLauncher: firefox3
 urxvt.matcher.button: 1
 urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
-urxvt.font: \
-    xft:Inconsolata:size=10:antialias=true,\
-    xft:M+ 1p:size=9:style=regular:antialias=true
+urxvt.font: -adobe-helvetica-medium-r-normal--10-*
 urxvt.boldFont: xft:Inconsolata:style=Bold:size=10:antialias=true, \
                 xft:M+ 1p:size=9:style=:bold:antialias=true
 
