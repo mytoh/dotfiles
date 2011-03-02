@@ -9,9 +9,9 @@ urxvt.buffered: true
 !urxvt.borderLess: true
 urxvt.internalBorder: 1
 urxvt.transparent: true
-urxvt.fade: 10%
+urxvt.fade: 50%
 urxvt.fadeColor: black
-urxvt.shading: 60
+urxvt.shading: 30
 urxvt.blurradius: 2
 !urxvt.tintColor: #ffffff
 urxvt.preedittype: root
@@ -24,7 +24,7 @@ urxvt.urlLauncher: firefox3
 urxvt.matcher.button: 1
 urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
-urxvt.font: -adobe-helvetica-medium-r-normal--10-*
+urxvt.font: -mplus-fxd-medium-r-normal--10-*
 urxvt.boldFont: xft:Inconsolata:style=Bold:size=10:antialias=true, \
                 xft:M+ 1p:size=9:style=:bold:antialias=true
 

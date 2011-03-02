@@ -16,7 +16,6 @@ NobackingStore
 UsePPosition "on"
 AutoRelativeResize
 WarpUnmapped
-AutoRaise
 OpaqueMove
 RandomPlacement 
 ShowIconManager
@@ -25,6 +24,8 @@ TitleButtonBorderWidth 1
 TitlePadding 4
 FramePadding 1
 BorderWidth 0
+TitleButtonBorderWidth 0
+
 
 IconManagerDontShow
 {
@@ -48,6 +49,11 @@ NoTitle
     "wbar"
 }
 
+AutoRaise
+{
+    "screen"
+    "firefox"
+}
 Color
 {
     BorderColor "gray65"
@@ -71,6 +77,7 @@ MoveDelta 3
 Function "move-or-lower" { f.move f.deltastop f.lower }
 Function "move-or-raise" { f.move f.deltastop f.raise }
 Function "move-or-iconify" { f.move f.deltastop f.iconify }
+Function "winup" { f.circleup}
 
 Button1 = : root : f.menu "defops"
 
@@ -89,7 +96,7 @@ Button2 = : icon : f.iconify
 Button1 = : iconmgr : f.iconify
 Button2 = : iconmgr : f.iconify
 
-"Tab" = m3 : all : f.raiselower
+"Tab" = m : all : f.function "winup"
 
 LeftTitleButton ":xlogo" = f.delete
 LeftTitleButton ":resize" = f.fullzoom
