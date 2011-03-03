@@ -78,6 +78,7 @@ Function "move-or-lower" { f.move f.deltastop f.lower }
 Function "move-or-raise" { f.move f.deltastop f.raise }
 Function "move-or-iconify" { f.move f.deltastop f.iconify }
 Function "winup" { f.circleup}
+Function "next-window" { f.forwiconmgr f.lower }
 
 Button1 = : root : f.menu "defops"
 
@@ -96,7 +97,7 @@ Button2 = : icon : f.iconify
 Button1 = : iconmgr : f.iconify
 Button2 = : iconmgr : f.iconify
 
-"Tab" = m : all : f.function "winup"
+"Tab" = m : all : f.function "next-window"
 
 LeftTitleButton ":xlogo" = f.delete
 LeftTitleButton ":resize" = f.fullzoom
