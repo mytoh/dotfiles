@@ -6,12 +6,12 @@ defencoding utf-8
 defkanji utf-8
 vbell on
 bell_msg "bell: %n (%t) [%w:%s]"
+shelltitle '> |tcsh'
 startup_message off
 autodetach on
 bind q quit
 bind k kill
-#bindkey  prev
-#bindkey  next
+bind s 
 defmonitor off
 defscrollback 10000
 altscreen on
@@ -21,6 +21,8 @@ attrcolor b ".I"
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 defbce on
 
-hardstatus alwayslastline "%`%-w%{=b bw}%n %t%{-}%+w [%02c]"
+caption always "%{= wk} %?%F%{b wg}%? %?%h%:%t (screen #%n) %{-}"
+#hardstatus alwayslastline "%`%-w%{= dd}%n %t%{-}%+w [%02c]"
+hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= dB} %n %t %{-}%+Lw%-040=%{= dM} %l %{= dB} %Y/%m/%d %C:%s %A "
 
 
