@@ -1,9 +1,9 @@
 
-TitleFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*-*-*-*"
-ResizeFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*-*-*-*"
-MenuFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*-*-*-*"
-IconFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*-*-*-*"
-IconManagerFont "-adobe-helvetica-medium-r-normal--*-90-*-*-*"
+TitleFont "-schumacher-clean-medium-r-normal--*-*"
+ResizeFont "-schumacher-clean-medium-r-normal--*-*"
+MenuFont "-schumacher-clean-medium-r-normal--*-*"
+IconFont "-schumacher-clean-medium-r-normal--*-*"
+IconManagerFont "-schumacher-clean-medium-r-normal--*-*"
 
 NoGrabServer
 RestartPreviousState
@@ -47,6 +47,7 @@ NoTitle
     "trayer"
     "panel"
     "wbar"
+    "fbpanel"
 }
 
 AutoRaise
