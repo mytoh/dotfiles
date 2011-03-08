@@ -16,12 +16,12 @@ urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
 #xscreensaver -no-splash &
 parcellite &
 xcompmgr -c &   
-#xfce4-panel &
+thunar --daemon &
 #xsnow &
 #oneko -sakura &
 # tint2 & 
-#exec xmonad
-if [ "$1" = "twm" -o "$*" = "" ]; then
+
+if [ "$1" = "twm" -o "$*" = "" -o "$1" = "openbox" ]; then
 /home/mytoh/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 16 -bg gray15 -fn '-adobe-helvetica-medium-r-normal--10-*' -e 'onexit=ungrabmouse' &
 trayer --expand false --alpha 20  --tint 0x606060 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 7 --widthtype pixel --width 120 &
 #sleep 20 && wbar -above-desk -bpress -isize 45 -balfa 20 -nanim 9 &
@@ -56,6 +56,9 @@ case $1 in
         ;;
   evilwm)
         exec evilwm
+        ;;
+  openbox)
+        exec openbox
         ;;
   *)
         exec $DEFAULT_SESSION

@@ -1,7 +1,7 @@
 #!/usr/local/bin/scsh -s
 !#
 
-(define (dropbox file) (string-append "http://dl.dropbox.com/u/6792198/etc/" file))
+(define dropbox "http://dl.dropbox.com/u/6792198/etc/" )
 
 (define dfiles (list "rc.conf" "loader.conf"))
 
@@ -11,10 +11,11 @@
         (display "script finished!")
 	(newline))
       (begin
-        (run (fetch (,dropbox (car ,f)))) 
+        (let ((file ((string-append  "http://dl.dropbox.com/u/6792198/etc/" (car f)))))
+        (run (fetch  (file)))) 
 	(display (string-append "fetching " (car f)))
-	(newline)
-        (loop (cdr f)))))
+	(newline))
+        (loop (cdr f))))
 
 
 
