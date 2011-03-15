@@ -10,7 +10,7 @@ xrdb -merge .Xresources
 xmodmap .Xmodmap
 setxkbmap dvorak
 xsetroot -cursor_name right_ptr -solid black &
-nitrogen --restore &
+#nitrogen --restore &
 urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
 #urxvtc -e screenie -s /bin/tcsh -m &
 #xscreensaver -no-splash &
@@ -59,6 +59,15 @@ case $1 in
         ;;
   openbox)
         exec openbox
+        ;;
+  golem)
+        exec golem
+        ;;
+  qvwm)
+        exec qvwm
+        ;;
+  wmfs)
+        exec wmfs
         ;;
   *)
         exec $DEFAULT_SESSION
