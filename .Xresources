@@ -28,23 +28,28 @@ urxvt.font: -mplus-fxd-medium-r-normal--10-*
 urxvt.boldFont: xft:Inconsolata:style=Bold:size=10:antialias=true, \
                 xft:M+ 1p:size=9:style=:bold:antialias=true
 
-urxvt.color12: #7fb4ff
-
-!urxvt.color0: #000000
-!urxvt.color1: #CD0000
-!urxvt.color2: #00CD00
-!urxvt.color3: #CDCD00
-!urxvt.color4: #1E90FF
-!urxvt.color5: #CD00CD
-!urxvt.color6: #00CDCD
-!urxvt.color7: #E5E5E5
-!urxvt.color8: #4C4C4C
-!urxvt.color9: #FF0000
-!urxvt.color10: #00FF00
-!urxvt.color11: #FFFF00
-!urxvt.color12: #2b4f98
-!urxvt.color13: #FF00FF
-!urxvt.color14: #00FFFF
-!urxvt.color15: #FFFFFF
-
+! BLACK
+*color0: #262729
+*color8: #554444
+! MAGENTA
+*color1: #F92672
+*color9: #FF669D
+! BLUE
+*color2: #7441ff
+*color10: #391f80
+! YELLOW
+*color3: #FFD800
+*color11: #CCAD00
+! GREEN
+*color4: #21802f
+*color12: #52fc6f
+! PERIWINKLE
+*color5: #9E6FFE
+*color13: #9E6FFE
+! LIGHT BLUE
+*color6: #66D9EF
+*color14: #66D9EF
+! WHITE
+*color7: #CCCCC6
+*color15: #F8F8F2
 

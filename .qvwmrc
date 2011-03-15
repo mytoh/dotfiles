@@ -6,7 +6,7 @@
 
 [Variables]
 LocaleName		= "ja_JP.UTF-8"		; locale name used in this file
-ImagePath		= "/usr/local/share/qvwm/images"
+ImagePath		= "/usr/local/share/qvwm/images:~/.qvwm/icon"
 SoundPath		= "/usr/local/share/qvwm/sounds"
 RestartOnFailure	= True		; restart on seg fault/bus error
 UseDebugger		= True
@@ -24,9 +24,9 @@ NoDesktopFocus		= True		; prevent focus from moving to desktop
 NoFocusChangeMask	= Shift		; prevent focus change by this key
 TitlebarMotion		= True		; animation on minimizing or maximizing
 TitlebarMotionSpeed	= 1		; the speed (small is fast)
-AutoRaise		= True		; auto raise
+AutoRaise		= False		; auto raise
 AutoRaiseDelay		= 300		; delay for auto raise (ms)
-UseInfoDisplay		= True		; display info when moving and resizing
+UseInfoDisplay		= False		; display info when moving and resizing
 GradWindowMapStyle	= Normal	; style for mapping/unmapping windows
 GradWindowMapSpeed	= 10		; map/unmap animation speed
 MinimizeButtonMessage	= "Minimize"
@@ -37,10 +37,10 @@ RestoreButtonMessage	= "Restore"
 ; virtual screen (paging)
 PagingResistance	= 250		; edge resistance for switching page
 PagingMovement		= 100		; movement (%) on switching page
-PagingBeltSize		= 2		; switchable area of edge (dot)
+PagingBeltSize		= 0		; switchable area of edge (dot)
 TopLeftPage		= -1-1		; top-left page of virtual screen
 PagingSize		= 3x3		; size of virtual screen
-PagingSpeed		= 5		; switch page gradually
+PagingSpeed		= 7		; switch page gradually
 
 ; pager
 UsePager		= True		; use pager
@@ -284,7 +284,7 @@ include			/usr/local/share/qvwm/default.qvwm-theme
 ;    number times icon area's width (height).
 ;**********************************************************************
 [Shortcuts]
-"Emacs"			"emacs32.ani"	"PAGE[1, 0, Emacs] emacs"
+"Emacs"			"emacs32.ani"	"emacs"
 "Xv"			"xv32.xpm"	"xv"
 "Xterm"			"xterm32.ani"	"xterm"
 "Xeyes"			"xeyes32.ani"	"xeyes"
@@ -395,3 +395,14 @@ IconImage	"quit32.ani"
 OKButton	"\&Yes"
 CancelButton	"\&No"
 HelpButton	"\&Help"
+
+;**********************************************************************
+; Accessories for desktop
+;    <image> <location> <style>
+;
+;    <image> : name of image
+;    <location> : Top, Bottom, Left, Right, TopLeft, TopRight, BottomLeft,
+;                 BottomRight, Center, or geometry position (like +0+0)
+;    <style> : Background, OnTop, Application
+;**********************************************************************
+
