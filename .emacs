@@ -151,6 +151,9 @@
 	      (:inherit shadow :background "gray45"
 	      )))))
 
+;; kepmap
+(keyboard-translate ?\C-h ?\C-?)
+
 ;; scheme program
 (setq scheme-program-name "scsh -l ~/.scsh/lib.scm")
 ; set encoding to utf-8 

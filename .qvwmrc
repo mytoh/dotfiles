@@ -113,7 +113,7 @@ EnableAlsa		= False		; enable ALSA (Linux only)
 EnableEsd		= False		; enable EsounD
 
 ; theme
-include			/usr/local/share/qvwm/default.qvwm-theme
+include			~/.qvwm-theme
 
 
 ;**********************************************************************
@@ -396,13 +396,4 @@ OKButton	"\&Yes"
 CancelButton	"\&No"
 HelpButton	"\&Help"
 
-;**********************************************************************
-; Accessories for desktop
-;    <image> <location> <style>
-;
-;    <image> : name of image
-;    <location> : Top, Bottom, Left, Right, TopLeft, TopRight, BottomLeft,
-;                 BottomRight, Center, or geometry position (like +0+0)
-;    <style> : Background, OnTop, Application
-;**********************************************************************
 
