@@ -327,6 +327,7 @@ s		Alt		QVWM_SHOW_TASKBAR
 h		Alt		QVWM_HIDE_TASKBAR
 F1		Alt		"xman"
 ;#22		None		QVWM_POPUP_START_MENU
+Super_R None  "dmenu_path|dmenu_run"
 
 
 ;**********************************************************************
@@ -375,7 +376,8 @@ F1		Alt		"xman"
 [Indicators]
 "xbiff"		"xbiff"
 "XEyes"		"xeyes"
-"xload"		"xload -nolabel -update 5 -bg gray"
+"xload"		"xload -hl blue -nolabel -update 2 -bg gray"
+"trayer"  "trayer -widthtype pixel -width 10"
 
 
 ;**********************************************************************

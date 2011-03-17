@@ -132,7 +132,6 @@ SystemRestartSound	= "chimes.wav"
 
 [Accessories]
 "qvwmdesk.ani"		TopRight	Background
-"nagi.ani"        +30+500 Background
 "nagato.ani"      +100+50  Background
 "asakura.ani"     +1200+300 Background
 "kimidori.ani"    +1000+600 Background

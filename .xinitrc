@@ -10,12 +10,13 @@ xrdb -merge .Xresources
 xmodmap .Xmodmap
 setxkbmap dvorak
 xsetroot -cursor_name right_ptr -solid black &
-#nitrogen --restore &
+nitrogen --restore &
 urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
 #urxvtc -e screenie -s /bin/tcsh -m &
 #xscreensaver -no-splash &
 parcellite &
 xcompmgr -c &   
+xbindkeys &
 thunar --daemon &
 #xsnow &
 #oneko -sakura &
