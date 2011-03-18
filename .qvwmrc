@@ -17,7 +17,7 @@ ImageAnimation		= True
 OpaqueMove		= True		; full drag move
 OpaqueResize		= True		; full drag resize
 FullOpaque		= True		; full drag resize with the contents
-ClickToFocus		= False	; activate on click of window
+ClickToFocus		= True  ; activate on click of window
 FocusOnMap		= False		; activate a mapped window
 ClickingRaises		= True		; clicking in the client area raises
 NoDesktopFocus		= True		; prevent focus from moving to desktop
@@ -291,6 +291,7 @@ include			~/.qvwm-theme
 "Netscape Navigator"	"netscape32.ani" "PAGECUR[Navigator] netscape"
 "Exit"			""		QVWM_EXIT
 "Xcalc"			"xcalc32.ani"	"xcalc"		!1, 0
+"Comix"     "comix.xpm" "comix"     !1, !1
 
 
 ;**********************************************************************
@@ -377,7 +378,6 @@ Super_R None  "dmenu_path|dmenu_run"
 "xbiff"		"xbiff"
 "XEyes"		"xeyes"
 "xload"		"xload -hl blue -nolabel -update 2 -bg gray"
-"trayer"  "trayer -widthtype pixel -width 10"
 
 
 ;**********************************************************************

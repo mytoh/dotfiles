@@ -180,7 +180,9 @@
     (add-change-log-entry
      nil
      (expand-file-name "~/.changelog")))
-(define-key global-map (kbd "C-x M") 'memo)
+(define-key global-map (kbd "C-c M") 'memo)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; elisp packages ;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;

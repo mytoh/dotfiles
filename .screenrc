@@ -11,10 +11,10 @@ startup_message off
 autodetach on
 bind q quit
 bind k kill
-bind s 
 defmonitor off
 defscrollback 10000
 altscreen on
+defflow off
 
 term screen
 attrcolor b ".I"

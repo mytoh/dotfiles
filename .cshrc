@@ -49,6 +49,7 @@ bindkey "" history-search-backward
 bindkey "" history-search-forward
 
 stty kill 
+stty stop undef # disable C-s key
 
 alias cwdcmd ls-F 
 #alias jobcmd 'echo -n "]2\;\!#"'
@@ -74,6 +75,7 @@ alias .. 'cd ..'
 alias scsh 'rlwrap scsh'
 alias gosh 'rlwrap gosh'
 alias ew 'emacs -f w3m'
+alias sigle 'sudo shutdown now'
 
 
 if ( -e $home/perl5/perlbrew/etc/cshrc ) then
