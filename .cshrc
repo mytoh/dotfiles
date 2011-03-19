@@ -75,7 +75,7 @@ alias .. 'cd ..'
 alias scsh 'rlwrap scsh'
 alias gosh 'rlwrap gosh'
 alias ew 'emacs -f w3m'
-alias sigle 'sudo shutdown now'
+alias single 'sudo shutdown now'
 
 
 if ( -e $home/perl5/perlbrew/etc/cshrc ) then
