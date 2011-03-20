@@ -9,14 +9,22 @@ bell_msg "bell: %n (%t) [%w:%s]"
 shelltitle '> |tcsh'
 startup_message off
 autodetach on
-bind q quit
-bind k kill
 defmonitor off
 defscrollback 10000
 altscreen on
 defflow off
 
-term screen
+bind q quit
+bind k kill
+bind -c REGION 0 remove
+bind -c REGION 1 only
+bind -c REGION 2 split
+bind -c REGION 3 split -v
+bind -c REGION o focus
+bind -c REGION \^ resize
+bind ^x command -c REGION
+bindkey ^t focus
+
 attrcolor b ".I"
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 defbce on
@@ -24,6 +32,8 @@ defbce on
 caption always "%{= wk} %?%F%{b kw}%? %?%h%:%t (screen #%n) %{-}"
 #hardstatus alwayslastline "%`%-w%{= dd}%n %t%{-}%+w [%02c]"
 backtick 0 0 0 whoami
-hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= bw} %n %t %{-}%+Lw%-040=%{=b gw}  %`@%H%{=b dM} %l %{=b bw} %Y/%m/%d %C:%s %A "
+hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= bw} %n %t %{-}%+Lw%-055=%{= gw} %`@%H %{= dM} %l %{= bw} %Y/%m/%d %C:%s %A %="
+sorendition "= dd"
+
 
 

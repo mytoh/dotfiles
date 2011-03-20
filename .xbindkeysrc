@@ -36,7 +36,7 @@
 
 
 #dmenu
-"dmenu_path | dmenu"
+"dmenu_run -nb pink -nf red4 -sb red4 -sf pink"
     Mod4 + Super_R 
 
 #
