@@ -203,7 +203,7 @@
 
 ;; w3m 
 (require 'w3m-load)
-(global-set-key (kbd "C-c w") 'w3m)
+(global-set-key (kbd "C-c C-w") 'w3m)
 (add-hook 'w3m-mode-hook
          '(lambda ()
             (local-set-key (kbd "f") 'w3m-go-to-linknum)
