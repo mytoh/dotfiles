@@ -43,7 +43,7 @@ PagingSize		= 3x3		; size of virtual screen
 PagingSpeed		= 7		; switch page gradually
 
 ; pager
-UsePager		= True		; use pager
+UsePager		= False		; use pager
 PagerGeometry		= 72x72-0-0	; size and position of pager
 OnTopPager		= False		; keep pager on top
 
@@ -217,7 +217,7 @@ include			~/.qvwm-theme
 "Re\&start"		""		QVWM_RESTART
 "twm"			""		"EXEC twm"
 ""			""		QVWM_SEPARATOR
-"\&xterm"		"xterm16.xpm"	"xterm"
+"\&urxvtc"		"xterm16.xpm"	"urxvtc"
 ""			""		QVWM_SEPARATOR
 "L\&ineup Icon"		""		QVWM_LINEUP_ICON
 "\&Paging"		""
@@ -291,7 +291,7 @@ include			~/.qvwm-theme
 "Netscape Navigator"	"netscape32.ani" "PAGECUR[Navigator] netscape"
 "Exit"			""		QVWM_EXIT
 "Xcalc"			"xcalc32.ani"	"xcalc"		!1, 0
-"Comix"     "comix.xpm" "comix"     !1, !1
+"Comix"     "comix.ani" "comix"     !1, !1
 
 
 ;**********************************************************************
@@ -378,7 +378,7 @@ Super_R None  "dmenu_path|dmenu_run"
 "xbiff"		"xbiff"
 "XEyes"		"xeyes"
 "xload"		"xload -hl blue -nolabel -update 2 -bg gray"
-
+"xloadimage" "xloadimage"
 
 ;**********************************************************************
 ; Exit dialog configuration

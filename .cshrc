@@ -54,8 +54,6 @@ stty stop undef # disable C-s key
 alias cwdcmd ls-F 
 #alias jobcmd 'echo -n "]2\;\!#"'
 alias precmd rehash
-alias quit 'sync;sync;sync;sudo shutdown -p now'
-alias res 'sync;sync;sync;sudo shutdown -r now'
 alias pup 'sudo portsnap fetch update '
 alias pcheck 'sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster --clean-packages --clean-distfiles'
 #alias pup 'sudo portsnap fetch update && sudo pkg_replace -Bcav && sudo portaudit -av && rehash'
@@ -76,11 +74,8 @@ alias scsh 'rlwrap scsh'
 alias gosh 'rlwrap gosh'
 alias ew 'emacs -f w3m'
 alias single 'sudo shutdown now'
-
-
-if ( -e $home/perl5/perlbrew/etc/cshrc ) then
-  source $home/perl5/perlbrew/etc/cshrc 
-endif
+alias halt 'sync;sync;sync;sudo shutdown -p now'
+alias reboot 'sync;sync;sync;sudo shutdown -r now'
 
 # setting for jfbterm 
 if ( ${?TERM} ) then
