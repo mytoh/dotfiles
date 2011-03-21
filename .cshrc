@@ -62,8 +62,6 @@ alias sc screen -U -D -RR  -s /bin/tcsh -m
 alias la ls-F -a
 alias ll ls-F -hlA 
 alias ls ls-F
-alias vi vim
-alias find gfind
 alias pfetch 'sudo make  fetch-recursive'
 alias pinst "sudo make  install distclean; rehash"
 alias pconf sudo make  config-recursive
