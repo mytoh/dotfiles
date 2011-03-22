@@ -378,6 +378,7 @@ Super_R None  "dmenu_path|dmenu_run"
 "xbiff"		"xbiff"
 "XEyes"		"xeyes"
 "xload"		"xload -hl blue -nolabel -update 2 -bg gray"
+"stalonetray"	"stalonetray"
 
 ;**********************************************************************
 ; Exit dialog configuration
