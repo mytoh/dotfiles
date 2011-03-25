@@ -15,7 +15,7 @@ urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
 #urxvtc -e screenie -s /bin/tcsh -m &
 #xscreensaver -no-splash &
 parcellite &
-#xcompmgr -s &   
+xcompmgr -a &   
 xbindkeys &
 thunar --daemon &
 #xsnow &
