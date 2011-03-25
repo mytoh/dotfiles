@@ -215,8 +215,15 @@ include			~/.qvwm-theme
 [DesktopMenu]
 "Re\&fresh"		""		"xrefresh"
 "Re\&start"		""		QVWM_RESTART
-"twm"			""		"EXEC twm"
 ""			""		QVWM_SEPARATOR
+"\&WM"          ""
++
+  "twm"		    	""		"EXEC twm"
+  "fluxbox"			""		"EXEC fluxbox"
+  "stumpwm"			""		"EXEC stumpwm"
+  "evilwm"			""		"EXEC evilwm"
+  "sawfish"			""		"EXEC sawfish"
+-
 "\&urxvtc"		"xterm16.xpm"	"urxvtc"
 ""			""		QVWM_SEPARATOR
 "L\&ineup Icon"		""		QVWM_LINEUP_ICON
@@ -285,12 +292,9 @@ include			~/.qvwm-theme
 ;**********************************************************************
 [Shortcuts]
 "Emacs"			"emacs32.ani"	"emacs"
-"Xv"			"xv32.xpm"	"xv"
 "Xterm"			"xterm32.ani"	"xterm"
-"Xeyes"			"xeyes32.ani"	"xeyes"
 "Netscape Navigator"	"netscape32.ani" "PAGECUR[Navigator] netscape"
 "Exit"			""		QVWM_EXIT
-"Xcalc"			"xcalc32.ani"	"xcalc"		!1, 0
 "Comix"     "comix.ani" "comix"     !1, !1
 
 
@@ -365,6 +369,7 @@ Super_R None  "dmenu_path|dmenu_run"
 "Netscape Download"	ONTOP
 "desktop_icon"	STICKY, NO_FOCUS, NO_TBUTTON
 "panel"		STICKY, NO_FOCUS, NO_TBUTTON
+"xwinwrap"		STICKY, NO_FOCUS, NO_TBUTTON, NO_TITLE, NO_BORDER, NO_BORDER_EDGE, NO_TBUTTON
 
 
 ;**********************************************************************
