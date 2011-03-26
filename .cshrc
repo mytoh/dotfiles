@@ -11,6 +11,7 @@ set histdup=erase
 set rmstar
 set inputmode=insert
 set listlinks
+set listjobs=long
 set ellipsis
 set implicitcd=verbose
 set color
@@ -21,6 +22,7 @@ set path = (~/.cw /usr/local/lib/cw ~/local/bin ~/local/sbin /usr/local/bin /sbi
 set cdpath = (~/local/ ~/local/var/)
 set noclobber
 set notify
+set padhour
 set time=(8 "\
     Time spent in user mode   (CPU seconds) : %Us\
     Time spent in kernel mode (CPU seconds) : %Ss\
