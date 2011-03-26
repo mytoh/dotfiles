@@ -223,6 +223,8 @@ include			~/.qvwm-theme
   "stumpwm"			""		"EXEC stumpwm"
   "evilwm"			""		"EXEC evilwm"
   "sawfish"			""		"EXEC sawfish"
+  "icewm"			""		"EXEC icewm"
+  "dwm"			""		"EXEC dwm"
 -
 "\&urxvtc"		"xterm16.xpm"	"urxvtc"
 ""			""		QVWM_SEPARATOR
