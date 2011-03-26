@@ -6,20 +6,25 @@ noremap ; :
 colorscheme sweets
 
 
-set go-=rb
-set hintchars=hjklasdf
-set wildoptions=auto
-set complete=bs
+set hintchars=dhtnaoeu
+
+set complete=lsb
 set defsearch="google"
-set newtab=help,addons,extoptions
-
-
-"delicious_search
-autocmd VimperatorEnter ".*" :set complete+=D
+set editor="vim"
+set toolbars=noaddons,nobookmars,menu,nonavigation,tabs,statuslinetoolbar
 
 "direct_bookmark.js
-let g:direct_sbm_use_services_by_tag = "hd"
-let g:direct_sbm_use_services_by_post = "hd"
+let g:direct_sbm_use_services_by_tag = "hdg"
+let g:direct_sbm_use_services_by_post = "hdg"
 
-"clock.js
-let clock_format = '(%t %d)'
+command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+" Google Reader
+lazy fmaps -u='www\.google\.(co\.jp|com)/reader' -events=vkeypress j k n p m s v A r S N P X O gh gd gs gt gu u / ? J K
+" Google Reader Full Feed
+lazy fmaps -u='www\.google\.(co\.jp|com)/reader' -events=vkeyup z
+
+" statusline-toolbar
+set statustoolbars=bookmarks-menu-button-container
+
+
+
