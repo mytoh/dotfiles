@@ -11,10 +11,10 @@
 DefaultIcon		= "def16.ani"	; default titlebar/taskbar-button icon
 DefaultLargeIcon	= "def32.ani"	; default task switcher icon
 DefaultShortcutIcon	= "icon32.ani"	; default shortcut icon
-DefaultFont		= "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*"
+DefaultFont		= "-mplus-fxd-medium-r-normal-*-12-*-*-*-*-*-*-*"
 
 ; desktop
-WallPaper		= Windows98	; image tiled in the desktop
+WallPaper		= ~/wallpaper.jpg	; image tiled in the desktop
 DesktopColor		= qvroyalblue	; desktop background color
 DesktopActiveColor	= qvblue	; desktop active color
 CursorColor		= white		; cursor color

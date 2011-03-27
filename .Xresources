@@ -28,28 +28,54 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 urxvt.font: -mplus-fxd-medium-r-normal--10-*
 urxvt.boldFont: -mplus-fxd-medium-r-normal--10-*
 
-! BLACK
-*color0: #262729
-*color8: #554444
-! MAGENTA
-*color1: #F92672
-*color9: #FF669D
-! BLUE
-*color2: #7441ff
-*color10: #391f80
-! YELLOW
-*color3: #FFD800
-*color11: #CCAD00
-! GREEN
-*color4: #21802f
-*color12: #52fc6f
-! PERIWINKLE
-*color5: #9E6FFE
-*color13: #9E6FFE
-! LIGHT BLUE
-*color6: #66D9EF
-*color14: #66D9EF
-! WHITE
-*color7: #CCCCC6
-*color15: #F8F8F2
+!-------------------------------------
+!*color0: black
+!*color1: red3
+!*color2: green3
+!*color3: yellow3
+!*color4: blue2
+!*color5: magenta3
+!*color6: cyan3
+!*color7: gray90
+!*color8: gray50
+!*color9: red
+!*color10: green
+!*color11: yellow
+!*color12: rgb:5c/5c/ff
+!*color13: magenta
+!*color14: cyan
+!*color15: white
+!--------------------------------------
+
+
+*color0: #333333
+*color1: #ffa0a0
+*color2: #98fb98
+*color3: #f0e68c
+*color4: #87ceeb
+*color5: #ffa0a0
+*color6: #87ceeb
+*color7: #ffffff
+*color8:#333333 
+*color9:#ffa0a0 
+*color10:#9acd32
+*color11:#f0e68c
+*color12:#87ceeb
+*color13:#ffa0a0
+*color14:#87ceeb
+*color15:#ffffff
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

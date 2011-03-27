@@ -49,7 +49,7 @@ OnTopPager		= False		; keep pager on top
 
 ; taskbar
 UseTaskbar		= True		; use taskbar
-TaskbarPosition		= Bottom	; initial position
+TaskbarPosition		= Top	; initial position
 TaskbarRows		= 1		; initial rows
 TaskbarAutoHide		= False		; hide taskbar automatically
 RestoreMinimize		= True		; minimize by pushing active tbutton

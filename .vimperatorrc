@@ -8,10 +8,10 @@ colorscheme sweets
 
 set hintchars=dhtnaoeu
 
-set complete=lsb
+set complete=lsbD
 set defsearch="google"
 set editor="vim"
-set toolbars=noaddons,nobookmars,menu,nonavigation,tabs,statuslinetoolbar
+set toolbars=noaddons,nobookmarks,menu,nonavigation,tabs,statuslinetoolbar
 
 "direct_bookmark.js
 let g:direct_sbm_use_services_by_tag = "hdg"
@@ -24,7 +24,7 @@ lazy fmaps -u='www\.google\.(co\.jp|com)/reader' -events=vkeypress j k n p m s v
 lazy fmaps -u='www\.google\.(co\.jp|com)/reader' -events=vkeyup z
 
 " statusline-toolbar
-set statustoolbars=bookmarks-menu-button-container
+"set statustoolbars=bookmarks-menu-button-container
 
 
 

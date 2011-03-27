@@ -18,7 +18,7 @@ parcellite &
 xcompmgr -a &   
 xbindkeys &
 thunar --daemon &
-pcmanfm -d &
+pcmanfm --daemon-mode &
 #xsnow &
 #oneko -sakura &
 # tint2 & 
