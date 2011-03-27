@@ -1,7 +1,7 @@
 
 # Write your default config options here!
 [default]
-vo=x11
+#vo=x11
 ao=oss
 cache=4096
 #cache-min = 6
