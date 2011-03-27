@@ -142,7 +142,7 @@ include			~/.qvwm-theme
 [StartMenu]
 "\&Program"	""
 +
-	"\&Emacs"	"emacs16.ani"	"emacs"
+	"\&Emacs"	"emacs-16.ani"	"emacs"
 	"Xe\&yes"	"xeyes16.ani"	"xeyes"
 	"X\&mag"	""		"xmag"
 	"Xre\&fresh"	""		"xrefresh"
@@ -225,6 +225,7 @@ include			~/.qvwm-theme
   "sawfish"			""		"EXEC sawfish"
   "icewm"			""		"EXEC icewm"
   "dwm"			""		"EXEC dwm"
+  "fvwm95"  ""    "EXEC fvwm95"
 -
 "\&urxvtc"		"xterm16.xpm"	"urxvtc"
 ""			""		QVWM_SEPARATOR
@@ -293,11 +294,14 @@ include			~/.qvwm-theme
 ;    number times icon area's width (height).
 ;**********************************************************************
 [Shortcuts]
-"Emacs"			"emacs32.ani"	"emacs"
+"Emacs"			"emacs-32.ani"	"emacs"
 "Xterm"			"xterm32.ani"	"xterm"
-"Netscape Navigator"	"netscape32.ani" "PAGECUR[Navigator] netscape"
-"Exit"			""		QVWM_EXIT
-"Comix"     "comix.ani" "comix"     !1, !1
+"firefox"		"firefox32.ani"	"firefox" !1,!1
+"comix"     "comix32.ani" "comix"    !1,!0
+"gimv"      "gimv32.ani" "gimv" !2,!0
+"jd"        "jd32.ani"    "jd" !3,!0
+"thunar"    "thunar32.ani" "thunar" !2,!1
+"Exit"			""		QVWM_EXIT   !0,!2
 
 
 ;**********************************************************************
@@ -359,7 +363,12 @@ Super_R None  "dmenu_path|dmenu_run"
 [Applications]
 "xbiff"		STICKY, NO_FOCUS
 "console"	STICKY, NO_TITLE
-"Emacs"		SMALL_PIX="emacs16.ani", LARGE_PIX="emacs32.ani"
+"Emacs"		SMALL_PIX="emacs-16.ani", LARGE_PIX="emacs-32.ani"
+"Jd"      SMALL_PIX="jd16.ani", LARGE_PIX="jd32.ani"
+"Firefox" SMALL_PIX="firefox16.ani", LARGE_PIX="firefox32.ani"
+"GImageView" SMALL_PIX="gimv16.ani", LARGE_PIX="gimv32.ani"
+"Comix"   SMALL_PIX="comix16.ani", LARGE_PIX="comix32.ani"
+"Thunar"  SMALL_PIX="thunar16.ani", LARGE_PIX="thunar32.ani"
 "XTerm"		SMALL_PIX="xterm16.xpm", LARGE_PIX="xterm32.ani"
 "Netscape"	SMALL_PIX="netscape16.ani", LARGE_PIX="netscape32.ani"
 "XCalc"		SMALL_PIX="xcalc16.xpm", LARGE_PIX="xcalc32.ani", NO_BORDER_EDGE
