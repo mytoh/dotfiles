@@ -18,6 +18,7 @@ parcellite &
 xcompmgr -a &   
 xbindkeys &
 thunar --daemon &
+pcmanfm -d &
 #xsnow &
 #oneko -sakura &
 # tint2 & 
@@ -70,6 +71,9 @@ case $1 in
   wmfs)
         exec wmfs
         ;;
+  fvwm95)
+	exec fvwm95
+	;;
   *)
         exec $DEFAULT_SESSION
         ;;
