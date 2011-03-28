@@ -1,8 +1,8 @@
 
 set term=xterm-256color
 set promptchars=">,#"
-#set prompt="%{\e[0000m\ek\e\\%}[%{\e[34m%n\e[37m@\e[32m%m\e[m%}] %c2 %# "
-set prompt='%{\033[0000m\033k\033\\%}[%{\033[34m%n\033[37m@\033[32m%m\033[m%}] %c2 > '
+#set prompt='%{[0000mk\\%}[%{[34m%n[37m@[32m%m[m%}] %c2 > '
+set prompt='%{[0000mk\\%}[%{[34m%n[37m@[32m%m[m%}] %c2 > '
 set history=100000
 set savehist=(100000 merge)
 set autolist = ambiguous

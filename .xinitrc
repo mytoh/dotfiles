@@ -18,6 +18,7 @@ parcellite &
 xcompmgr -a &   
 xbindkeys &
 thunar --daemon &
+mpd 
 #xsnow &
 #oneko -sakura &
 # tint2 & 

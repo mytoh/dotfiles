@@ -56,26 +56,13 @@ urxvt.boldFont: -mplus-fxd-medium-r-normal--10-*
 *color5: #ffa0a0
 *color6: #87ceeb
 *color7: #ffffff
-*color8:#333333 
-*color9:#ffa0a0 
-*color10:#9acd32
-*color11:#f0e68c
-*color12:#87ceeb
-*color13:#ffa0a0
-*color14:#87ceeb
-*color15:#ffffff
-
-
-
-
-
-
-
-
-
-
-
-
-
+*color8: #333333 
+*color9: #ffa0a0 
+*color10: #9acd32
+*color11: #f0e68c
+*color12: #87ceeb
+*color13: #ffa0a0
+*color14: #87ceeb
+*color15: #ffffff
 
 
