@@ -20,7 +20,7 @@ DesktopActiveColor	= qvblue	; desktop active color
 CursorColor		= white		; cursor color
 
 ; titlebar
-FrameTitleHeight	= 18
+FrameTitleHeight	= 16
 ;TitlebarImage		= ""		; titlebar background image
 ;TitlebarActiveImage	= ""		; titlebar active background image
 GradTitlebar		= True		; titlebar gradation
@@ -31,7 +31,7 @@ TitlebarActiveColor	= qvblue	; titlebar color (active)
 TitlebarActiveColor2	= qvlightblue	; titlebar right-side color (active)
 TitleStringColor	= qvgray	; title string color (inactive)
 TitleStringActiveColor	= white		; title string color (active)
-TitleFont		= "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*"
+TitleFont		= "-*-*-medium-r-normal-*-12-*-*-*-*-*-*-*"
 
 ; frame
 FrameBorderWidth	= 2
@@ -48,7 +48,7 @@ MiniatureColor		= yellow	; non-active mini window color in pager
 MiniatureActiveColor	= red		; active mini window color in pager
 
 ; taskbar
-TaskbarButtonHeight	= 22
+TaskbarButtonHeight	= 20
 ;TaskbarImage		= ""		; taskbar background image
 TaskbarColor		= qvgray	; taskbar color
 ClockStringColor	= black		; clock string color
@@ -61,7 +61,7 @@ IndicatorSize		= 16
 
 ; shortcut icon
 IconSize		= 32		; icon size
-IconHorizontalSpacing	= 43		; horizontal space between icons
+IconHorizontalSpacing	= 40		; horizontal space between icons
 IconVerticalSpacing	= 43		; vertical space between icons
 IconStringColor		= white
 IconStringActiveColor	= white

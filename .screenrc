@@ -32,7 +32,7 @@ defbce on
 caption always "%{= wk} %?%F%{b kw}%? %?%h%:%t (screen #%n) %{-}"
 #hardstatus alwayslastline "%`%-w%{= dd}%n %t%{-}%+w [%02c]"
 backtick 0 0 0 whoami
-hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= bw} %n %t %{-}%+Lw%-055=%{= gw} %`@%H %{= dM} %l %{= bw} %Y/%m/%d %C:%s %A %="
+hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= bk} %n %t %{-}%+Lw%-055=%{= gk} %`@%H %{= Mk} %l %{= bk} %Y/%m/%d %C:%s %A %="
 sorendition "= dd"
 
 

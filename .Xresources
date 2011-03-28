@@ -1,7 +1,7 @@
 Xcursor.theme: whiteglass
 
 urxvt.termName: xterm
-urxvt.background: #000000
+urxvt.background: #2a2a2a
 urxvt.foreground: [90]snow
 urxvt.geometry: 100x40+100+100
 urxvt.depth: 32

@@ -10,7 +10,7 @@ ImagePath		= "/usr/local/share/qvwm/images:~/.qvwm/icon"
 SoundPath		= "/usr/local/share/qvwm/sounds"
 RestartOnFailure	= True		; restart on seg fault/bus error
 UseDebugger		= True
-HourGlassTime		= 1000
+HourGlassTime		= 2000
 ImageAnimation		= True
 
 ; window
@@ -39,13 +39,13 @@ PagingResistance	= 250		; edge resistance for switching page
 PagingMovement		= 100		; movement (%) on switching page
 PagingBeltSize		= 0		; switchable area of edge (dot)
 TopLeftPage		= -1-1		; top-left page of virtual screen
-PagingSize		= 3x3		; size of virtual screen
-PagingSpeed		= 7		; switch page gradually
+PagingSize		= 4x1		; size of virtual screen
+PagingSpeed		= 5		; switch page gradually
 
 ; pager
-UsePager		= False		; use pager
-PagerGeometry		= 72x72-0-0	; size and position of pager
-OnTopPager		= False		; keep pager on top
+UsePager		= True		; use pager
+PagerGeometry		= 72x18-0-0	; size and position of pager
+OnTopPager		= True		; keep pager on top
 
 ; taskbar
 UseTaskbar		= True		; use taskbar
@@ -53,7 +53,7 @@ TaskbarPosition		= Top	; initial position
 TaskbarRows		= 1		; initial rows
 TaskbarAutoHide		= False		; hide taskbar automatically
 RestoreMinimize		= True		; minimize by pushing active tbutton
-NoResizeOverTaskbar	= False		; no resize over taskbar
+NoResizeOverTaskbar	= True		; no resize over taskbar
 GradTaskbarMotion	= True		; taskbar hides gradually
 GradTaskbarMotionSpeed	= 10		; the speed
 TaskbarShowDelay	= 0		; delay for automatic show (ms)
@@ -66,9 +66,9 @@ StartButtonMessage	= "Start with this button."
 ; taskbar clock
 UseClock		= True
 ClockLocaleName		= ""
-ClockFormat		= "%l:%M %p"		; 4:50 PM
+;ClockFormat		= "%l:%M %p"		; 4:50 PM
 ;ClockFormat		= "%R"			; 16:50
-;ClockFormat		= "%a, %d %b %Y %R"	; Mon, 22 Jun 1998 16:50
+ClockFormat		= "%a, %d %b %Y %R"	; Mon, 22 Jun 1998 16:50
 ;ClockFormat		= "%T"			; 16:50:59
 ClockMessageFormat	= "%A, %B %e, %Y"	; Monday, June 22, 1998
 
@@ -104,8 +104,8 @@ TooltipMotionSpeed      = 5
 TooltipDisplayTime	= 6000
 
 ; screen saver
-ScreenSaver		= "xlock"	; screen saver program
-ScreenSaverDelay	= 600		; start after 10 minutes
+;ScreenSaver		= "xlock"	; screen saver program
+;ScreenSaverDelay	= 600		; start after 10 minutes
 
 ; sound
 EnableSound		= True		; enable sound facility
@@ -296,12 +296,13 @@ include			~/.qvwm-theme
 [Shortcuts]
 "Emacs"			"emacs-32.ani"	"emacs"
 "Xterm"			"xterm32.ani"	"xterm"
+"Exit"			""		QVWM_EXIT   !0,!2
 "firefox"		"firefox32.ani"	"firefox" !1,!1
 "comix"     "comix32.ani" "comix"    !1,!0
+"gcolor"    "gcolor32.ani" "gcolor" !1,!2
 "gimv"      "gimv32.ani" "gimv" !2,!0
-"jd"        "jd32.ani"    "jd" !3,!0
 "thunar"    "thunar32.ani" "thunar" !2,!1
-"Exit"			""		QVWM_EXIT   !0,!2
+"jd"        "jd32.ani"    "jd" !3,!0
 
 
 ;**********************************************************************
@@ -338,7 +339,7 @@ s		Alt		QVWM_SHOW_TASKBAR
 h		Alt		QVWM_HIDE_TASKBAR
 F1		Alt		"xman"
 ;#22		None		QVWM_POPUP_START_MENU
-Super_R None  "dmenu_path|dmenu_run"
+Super_R None  "dmenu_run -b  -nb gray3 -nf white"
 
 
 ;**********************************************************************
@@ -368,6 +369,7 @@ Super_R None  "dmenu_path|dmenu_run"
 "Firefox" SMALL_PIX="firefox16.ani", LARGE_PIX="firefox32.ani"
 "GImageView" SMALL_PIX="gimv16.ani", LARGE_PIX="gimv32.ani"
 "Comix"   SMALL_PIX="comix16.ani", LARGE_PIX="comix32.ani"
+"gcolor2" SMALL_PIX="gcolor16.ani", LARGE_PIX="gcolor16.ani"
 "Thunar"  SMALL_PIX="thunar16.ani", LARGE_PIX="thunar32.ani"
 "XTerm"		SMALL_PIX="xterm16.xpm", LARGE_PIX="xterm32.ani"
 "Netscape"	SMALL_PIX="netscape16.ani", LARGE_PIX="netscape32.ani"

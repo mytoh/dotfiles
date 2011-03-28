@@ -13,9 +13,8 @@ follow_outside_symlinks	"yes"
 follow_inside_symlinks		"yes"
 
 audio_output {
-        type "osx"
+        type "oss"
         name "dixneuf"
-        mixer_type "software"
 }
 
 audio_output {
