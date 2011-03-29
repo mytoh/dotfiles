@@ -34,7 +34,7 @@ TitleStringActiveColor	= white		; title string color (active)
 TitleFont		= "-*-*-medium-r-normal-*-12-*-*-*-*-*-*-*"
 
 ; frame
-FrameBorderWidth	= 2
+FrameBorderWidth	= 1
 ;FrameImage		= ""		; frame background image
 ;FrameActiveImage	= ""		; frame active background image
 FrameColor		= qvgray	; window frame color

@@ -22,6 +22,5 @@ framedrop=yes
 vo=xv
 ao=oss
 msglevel=all=5
-
-
 vf=eq2
+skin=Shiki-Player

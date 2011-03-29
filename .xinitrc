@@ -32,51 +32,23 @@ fi
 
 DEFAULT_SESSION="qvwm"
 case $1 in
-  stumpwm)
-        exec stumpwm
-        ;;
-  sawfish)
-        exec sawfish
-        ;;
-  xmonad)
-        exec xmonad
-        ;;
-  twm)
-        exec twm -v
-        ;;
-  xfce)
-        exec startxfce4
-        ;;
-  swm)
-        exec swm
-        ;;
-  fluxbox)
-        exec fluxbox
-        ;;
-  pekwm)
-        exec pekwm
-        ;;
-  evilwm)
-        exec evilwm
-        ;;
-  openbox)
-        exec openbox
-        ;;
-  golem)
-        exec golem
-        ;;
-  qvwm)
-        exec qvwm
-        ;;
-  wmfs)
-        exec wmfs
-        ;;
-  fvwm95)
-	exec fvwm95
-	;;
-  *)
-        exec $DEFAULT_SESSION
-        ;;
+  stumpwm) exec stumpwm ;;
+  sawfish) exec sawfish ;;
+  xmonad) exec xmonad ;;
+  twm) exec twm -v ;;
+  xfce) exec startxfce4 ;;
+  swm) exec swm ;;
+  fluxbox) exec fluxbox ;;
+  pekwm) exec pekwm ;;
+  evilwm) exec evilwm ;;
+  openbox) exec openbox ;;
+  golem) exec golem ;;
+  qvwm) exec qvwm ;;
+  wmfs) exec wmfs ;;
+  fvwm95) exec fvwm95 ;;
+  dwm) exec ewm ;;
+  awesome) exec awesome ;;
+  *) exec $DEFAULT_SESSION ;;
 esac
 
 

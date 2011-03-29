@@ -45,7 +45,7 @@ PagingSpeed		= 5		; switch page gradually
 ; pager
 UsePager		= True		; use pager
 PagerGeometry		= 72x18-0-0	; size and position of pager
-OnTopPager		= True		; keep pager on top
+OnTopPager		= False		; keep pager on top
 
 ; taskbar
 UseTaskbar		= True		; use taskbar
@@ -226,8 +226,9 @@ include			~/.qvwm-theme
   "icewm"			""		"EXEC icewm"
   "dwm"			""		"EXEC dwm"
   "fvwm95"  ""    "EXEC fvwm95"
+  "awesome" ""    "EXEC awesome"
 -
-"\&urxvtc"		"xterm16.xpm"	"urxvtc"
+"urxvtc"		"xterm16.xpm"	"urxvtc"
 ""			""		QVWM_SEPARATOR
 "L\&ineup Icon"		""		QVWM_LINEUP_ICON
 "\&Paging"		""
@@ -295,7 +296,7 @@ include			~/.qvwm-theme
 ;**********************************************************************
 [Shortcuts]
 "Emacs"			"emacs-32.ani"	"emacs"
-"Xterm"			"xterm32.ani"	"xterm"
+"urxvtc"			"xterm32.ani"	"urxvtc"
 "Exit"			""		QVWM_EXIT   !0,!2
 "firefox"		"firefox32.ani"	"firefox" !1,!1
 "comix"     "comix32.ani" "comix"    !1,!0
@@ -339,7 +340,7 @@ s		Alt		QVWM_SHOW_TASKBAR
 h		Alt		QVWM_HIDE_TASKBAR
 F1		Alt		"xman"
 ;#22		None		QVWM_POPUP_START_MENU
-Super_R None  "dmenu_run -b  -nb gray3 -nf white"
+Super_R None "dmenu_run -b  -nb gray3 -nf white"
 
 
 ;**********************************************************************

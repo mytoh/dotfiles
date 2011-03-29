@@ -8,10 +8,10 @@ colorscheme sweets
 
 set hintchars=dhtnaoeu
 
-set complete=lsbD
+set complete=lsb
 set defsearch="google"
 set editor="vim"
-set toolbars=noaddons,nobookmarks,menu,nonavigation,tabs,statuslinetoolbar
+set toolbars=noaddons,nobookmarks,menu,nonavigation,tabs
 
 "direct_bookmark.js
 let g:direct_sbm_use_services_by_tag = "hdg"
