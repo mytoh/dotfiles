@@ -71,6 +71,7 @@ alias pinst "sudo make  install distclean; rehash"
 alias pconf sudo make  config-recursive
 alias pclean sudo make  clean distclean
 alias view "vim -R -"
+alias vim "vim -X"
 alias .. 'cd ..'
 alias scsh 'rlwrap scsh'
 alias gosh 'rlwrap gosh'

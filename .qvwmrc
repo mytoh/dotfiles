@@ -124,7 +124,9 @@ include			~/.qvwm-theme
 [Startup]
 ;"PAGE[1, 0, Navigator] netscape"
 ;"PAGE[0, 1, Emacs] emacs"
-
+;"xcompmgr -n&"
+;"hsetroot -fill ~/wallpaper.jpg"
+;"nitrogen --restore"
 
 ;**********************************************************************
 ; Menu configuration
@@ -300,6 +302,7 @@ include			~/.qvwm-theme
 "Exit"			""		QVWM_EXIT   !0,!2
 "firefox"		"firefox32.ani"	"firefox" !1,!1
 "comix"     "comix32.ani" "comix"    !1,!0
+"nitrogen"  "nitrogen32.ani" "nitrogen" !0,!3
 "gcolor"    "gcolor32.ani" "gcolor" !1,!2
 "gimv"      "gimv32.ani" "gimv" !2,!0
 "thunar"    "thunar32.ani" "thunar" !2,!1
@@ -370,6 +373,7 @@ Super_R None "dmenu_run -b  -nb gray3 -nf white"
 "Firefox" SMALL_PIX="firefox16.ani", LARGE_PIX="firefox32.ani"
 "GImageView" SMALL_PIX="gimv16.ani", LARGE_PIX="gimv32.ani"
 "Comix"   SMALL_PIX="comix16.ani", LARGE_PIX="comix32.ani"
+"Nitrogen" SMALL_PIX="nitrogen16.ani", LARGE_PIX="nitrogen32.ani"
 "gcolor2" SMALL_PIX="gcolor16.ani", LARGE_PIX="gcolor16.ani"
 "Thunar"  SMALL_PIX="thunar16.ani", LARGE_PIX="thunar32.ani"
 "XTerm"		SMALL_PIX="xterm16.xpm", LARGE_PIX="xterm32.ani"
