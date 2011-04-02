@@ -48,7 +48,7 @@ set catalog=ja.ayanami.cat
 setenv NLSPATH ~/local/lib/tcsh/%N
 
 bindkey -e
-bindkey "" backward-delete-word
+bindkey "" backward-delete-word
 bindkey "" history-search-backward
 bindkey "" history-search-forward
 
@@ -70,15 +70,16 @@ alias pfetch 'sudo make  fetch-recursive'
 alias pinst "sudo make  install distclean; rehash"
 alias pconf sudo make  config-recursive
 alias pclean sudo make  clean distclean
-alias view "vim -R -"
+alias view "vim -X -R -"
 alias vim "vim -X"
 alias .. 'cd ..'
 alias scsh 'rlwrap scsh'
-alias gosh 'rlwrap gosh'
+alias goshrl 'rlwrap gosh'
 alias ew 'emacs -f w3m'
 alias single 'sudo shutdown now'
 alias halt 'sync;sync;sync;sudo shutdown -p now'
 alias reboot 'sync;sync;sync;sudo shutdown -r now'
+alias sudo 'sudo -E '
 
 # setting for jfbterm 
 if ( ${?TERM} ) then
@@ -91,7 +92,7 @@ if ( ${?TERM} ) then
               TERM=jfbterm-color
               break
           endif
-          set pcmd='procstat -ch "${ppid}" | awk '{print $2}'`
+          set pcmd='procstat -ch "${ppid}" | awk '{print $2}''`
           set ppid='procstat -h "${ppid}" | awk '{print $2}'`
       end
       unset pcmd ppid

@@ -14,9 +14,9 @@ DefaultShortcutIcon	= "icon32.ani"	; default shortcut icon
 DefaultFont		= "-mplus-fxd-medium-r-normal-*-12-*-*-*-*-*-*-*"
 
 ; desktop
-;WallPaper		= ~/wallpaper.jpg	; image tiled in the desktop
-;DesktopColor		= qvroyalblue	; desktop background color
-;DesktopActiveColor	= qvblue	; desktop active color
+WallPaper		= ~/wallpaper.jpg	; image tiled in the desktop
+DesktopColor		= qvroyalblue	; desktop background color
+DesktopActiveColor	= qvblue	; desktop active color
 CursorColor		= white		; cursor color
 
 ; titlebar

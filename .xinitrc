@@ -44,6 +44,7 @@ case $1 in
   fvwm95) exec fvwm95 ;;
   dwm) exec ewm ;;
   awesome) exec awesome ;;
+  matchbox) exec matchbox-window-manager -use_titlebar yes;;
   *) exec $DEFAULT_SESSION ;;
 esac
 

@@ -127,6 +127,7 @@ include			~/.qvwm-theme
 ;"xcompmgr -n&"
 ;"hsetroot -fill ~/wallpaper.jpg"
 ;"nitrogen --restore"
+"stalonetray" "stalonetray"
 
 ;**********************************************************************
 ; Menu configuration
@@ -229,6 +230,7 @@ include			~/.qvwm-theme
   "dwm"			""		"EXEC dwm"
   "fvwm95"  ""    "EXEC fvwm95"
   "awesome" ""    "EXEC awesome"
+  "matchbox" ""   "EXEC matchbox-window-manager"
 -
 "urxvtc"		"xterm16.xpm"	"urxvtc"
 ""			""		QVWM_SEPARATOR
@@ -300,13 +302,17 @@ include			~/.qvwm-theme
 "Emacs"			"emacs-32.ani"	"emacs"
 "urxvtc"			"xterm32.ani"	"urxvtc"
 "Exit"			""		QVWM_EXIT   !0,!2
-"firefox"		"firefox32.ani"	"firefox" !1,!1
-"comix"     "comix32.ani" "comix"    !1,!0
 "nitrogen"  "nitrogen32.ani" "nitrogen" !0,!3
+"firefox"		"anifox32.ani"	"firefox" !1,!1
+"comix"     "comix32.ani" "comix"    !1,!0
 "gcolor"    "gcolor32.ani" "gcolor" !1,!2
 "gimv"      "gimv32.ani" "gimv" !2,!0
 "thunar"    "thunar32.ani" "thunar" !2,!1
 "jd"        "jd32.ani"    "jd" !3,!0
+"sonata"    "sonata32.ani"  "sonata" !3,!1
+"deadbeef"  "deadbeef32.ani"  "deadbeef" !2,!2
+"ario"      "ario32.ani"      "ario" !1,!3
+
 
 
 ;**********************************************************************
@@ -370,7 +376,7 @@ Super_R None "dmenu_run -b  -nb gray3 -nf white"
 "console"	STICKY, NO_TITLE
 "Emacs"		SMALL_PIX="emacs-16.ani", LARGE_PIX="emacs-32.ani"
 "Jd"      SMALL_PIX="jd16.ani", LARGE_PIX="jd32.ani"
-"Firefox" SMALL_PIX="firefox16.ani", LARGE_PIX="firefox32.ani"
+"Firefox" SMALL_PIX="anifox32.ani", LARGE_PIX="anifox32.ani"
 "GImageView" SMALL_PIX="gimv16.ani", LARGE_PIX="gimv32.ani"
 "Comix"   SMALL_PIX="comix16.ani", LARGE_PIX="comix32.ani"
 "Nitrogen" SMALL_PIX="nitrogen16.ani", LARGE_PIX="nitrogen32.ani"
@@ -388,6 +394,10 @@ Super_R None "dmenu_run -b  -nb gray3 -nf white"
 "desktop_icon"	STICKY, NO_FOCUS, NO_TBUTTON
 "panel"		STICKY, NO_FOCUS, NO_TBUTTON
 "xwinwrap"		STICKY, NO_FOCUS, NO_TBUTTON, NO_TITLE, NO_BORDER, NO_BORDER_EDGE, NO_TBUTTON
+"sonata"  SMALL_PIX="sonata16.ani", LARGE_PIX="sonata32.ani"
+"deadbeef"  SMALL_PIX="deadbeef16.ani", LARGE_PIX="deadbeef32.ani"
+"ario"    SMALL_PIX="ario16.ani", LARGE_PIX="ario32.ani"
+"stalonetray" NO_TBUTTON,STICKY,NO_FOCUS,NO_BORDER
 
 
 ;**********************************************************************
@@ -401,7 +411,6 @@ Super_R None "dmenu_run -b  -nb gray3 -nf white"
 "xbiff"		"xbiff"
 "XEyes"		"xeyes"
 "xload"		"xload -hl blue -nolabel -update 2 -bg gray"
-"stalonetray"	"stalonetray"
 
 ;**********************************************************************
 ; Exit dialog configuration
