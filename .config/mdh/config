@@ -1,0 +1,236 @@
+[toolbar]
+use_dock=FALSE
+configure_event=TRUE
+geom_x=40
+geom_y=760
+layer=normal
+sticky=TRUE
+tooltips=TRUE
+font=
+button_relief=normal
+panel_shadow=in
+
+[general]
+browser=firefox
+
+[run]
+save=FALSE
+close=TRUE
+xterm=xterm
+
+[scratch_pad]
+save=TRUE
+
+[buttons]
+menu=TRUE
+toggle=TRUE
+run=FALSE
+pad=FALSE
+
+[button_custom]
+count=10
+
+[button_custom_0]
+enabled=FALSE
+value=Web
+command=firefox
+icon=/usr/local/share/mdh/icons/default.png
+tooltip=Firefox
+
+[button_custom_1]
+enabled=FALSE
+value=Mail
+command=balsa
+icon=/usr/local/share/mdh/icons/default.png
+tooltip=Balsa
+
+[button_custom_2]
+enabled=FALSE
+value=News
+command=pan
+icon=/usr/local/share/mdh/icons/default.png
+tooltip=Pan
+
+[button_custom_3]
+enabled=FALSE
+value=OO
+command=ooffice
+icon=/usr/local/share/mdh/icons/default.png
+tooltip=Open Office
+
+[button_custom_4]
+enabled=FALSE
+value=File
+command=nautilus
+icon=/usr/local/share/mdh/icons/default.png
+tooltip=Nautilus File Browser
+
+[button_custom_5]
+enabled=FALSE
+value=FTP
+command=gftp
+icon=/usr/local/share/mdh/icons/default.png
+tooltip=gFTP
+
+[button_custom_6]
+enabled=FALSE
+value=Term
+command=xterm
+icon=/usr/local/share/mdh/icons/default.png
+tooltip=X Terminal
+
+[button_custom_7]
+enabled=FALSE
+value=XQF
+command=xqf
+icon=/usr/local/share/mdh/icons/default.png
+tooltip=Quake Server Browser
+
+[button_custom_8]
+enabled=FALSE
+value=Mix
+command=aumix
+icon=/usr/local/share/mdh/icons/default.png
+tooltip=Audio Mixer
+
+[button_custom_9]
+enabled=FALSE
+value=Lock
+command=xlock
+icon=/usr/local/share/mdh/icons/default.png
+tooltip=Lock Workstation
+
+[panel_time]
+enabled=TRUE
+display=%m/%d - %l:%M %p
+command=evolution
+
+[panel_mail]
+count=3
+bold=TRUE
+threshold=1
+
+[panel_mail_0]
+enabled=FALSE
+value=/var/mail/mytoh
+display=%n/%t
+command=balsa %s
+interval=30
+
+[panel_mail_1]
+enabled=FALSE
+value=
+display=%n/%t
+command=balsa %s
+interval=30
+
+[panel_mail_2]
+enabled=FALSE
+value=
+display=%n/%t
+command=balsa %s
+interval=30
+
+[panel_cpu]
+bold=TRUE
+threshold=90
+enabled=TRUE
+display=%p
+command=xterm -e top
+interval=3
+
+[panel_mem]
+bold=TRUE
+threshold=85
+buffers=TRUE
+enabled=TRUE
+display=%u (%U)
+command=
+interval=15
+
+[panel_disk]
+count=3
+bold=TRUE
+threshold=85
+
+[panel_disk_0]
+enabled=FALSE
+value=/
+display=%u (%U)
+command=gmc %s
+interval=60
+
+[panel_disk_1]
+enabled=FALSE
+value=/usr
+display=%u (%U)
+command=gmc %s
+interval=60
+
+[panel_disk_2]
+enabled=FALSE
+value=/var
+display=%u (%U)
+command=gmc %s
+interval=60
+
+[panel_net]
+count=3
+
+[panel_net_0]
+enabled=TRUE
+value=eth0
+display=%r/%t
+command=ethereal %s
+interval=3
+
+[panel_net_1]
+enabled=FALSE
+value=eth1
+display=%r/%t
+command=ethereal %s
+interval=3
+
+[panel_net_2]
+enabled=FALSE
+value=eth2
+display=%r/%t
+command=ethereal %s
+interval=3
+
+[panel_weather]
+icon=TRUE
+enabled=FALSE
+value=54311
+display=%t
+command=firefox %s
+interval=10800
+unit=standard
+
+[panel_uptime]
+enabled=TRUE
+display=%U
+command=
+interval=60
+
+[panel_custom]
+count=3
+
+[panel_custom_0]
+enabled=FALSE
+value=hostname
+command=
+interval=60
+
+[panel_custom_1]
+enabled=FALSE
+value=uname -sr
+command=
+interval=60
+
+[panel_custom_2]
+enabled=FALSE
+value=date +%D
+command=
+interval=60
+
