@@ -29,7 +29,7 @@ attrcolor b ".I"
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 defbce on
 
-caption always "%{= wk} %?%F%{b kw}%?%t%?[%h]%?%{-} (screen #%n) "
+caption always "%{= wk} %?%F%{b kw}%?%t%? [%h] %?%{-} (screen #%n) "
 backtick 0 0 0 whoami
 hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= bk} %n %t %{-}%+Lw%-055=%{= gk} %`@%H %{= Mk} %l %{= bk} %Y/%m/%d %C:%s %A %="
 sorendition "= dd"
