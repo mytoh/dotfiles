@@ -14,7 +14,7 @@ DefaultShortcutIcon	= "icon32.ani"	; default shortcut icon
 DefaultFont		= "-mplus-fxd-medium-r-normal-*-12-*-*-*-*-*-*-*"
 
 ; desktop
-WallPaper		= ~/wallpaper.jpg	; image tiled in the desktop
+WallPaper		= ~/wallpaper.png	; image tiled in the desktop
 DesktopColor		= qvroyalblue	; desktop background color
 DesktopActiveColor	= qvblue	; desktop active color
 CursorColor		= white		; cursor color
@@ -132,8 +132,8 @@ SystemRestartSound	= "chimes.wav"
 
 [Accessories]
 ;"qvwmdesk.ani"		TopRight	Background
-"nagato.ani"      +1000+600  Background
-"asakura.ani"     +1100+600 Background
-"kimidori.ani"    +900+600 Background
+;"nagato.ani"      +1000+600  Background
+;"asakura.ani"     +1100+600 Background
+;"kimidori.ani"    +900+600 Background
 
 

@@ -1,5 +1,5 @@
 [toolbar]
-use_dock=FALSE
+use_dock=TRUE
 configure_event=TRUE
 geom_x=40
 geom_y=760
@@ -31,7 +31,7 @@ pad=FALSE
 count=10
 
 [button_custom_0]
-enabled=FALSE
+enabled=TRUE
 value=Web
 command=firefox
 icon=/usr/local/share/mdh/icons/default.png
