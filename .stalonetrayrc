@@ -92,7 +92,7 @@ scrollbars none
 # scrollbars-step <step>     # scrollbars step in pixels; default is slot_size / 2
 # scrollbars-step 32
 
-# slot_size <int>            # specifies size of icon slot, defaults to
+slot_size 1            # specifies size of icon slot, defaults to
                              # icon_size NEW in 0.8.
 
 # skip_taskbar [<bool>]      # hide tray`s window from the taskbar
