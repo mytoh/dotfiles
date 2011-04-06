@@ -175,12 +175,12 @@
   "\C-cS" 'scheme-other-window)
 
 ;; changelog 
-(defun memo ()
+(defun cl-memo ()
   (interactive)
     (add-change-log-entry
      nil
      (expand-file-name "~/.changelog")))
-(define-key global-map (kbd "C-c M") 'memo)
+(define-key ctl-x-map  "M" 'cl-memo)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
