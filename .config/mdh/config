@@ -1,8 +1,8 @@
 [toolbar]
 use_dock=TRUE
 configure_event=TRUE
-geom_x=40
-geom_y=760
+geom_x=55
+geom_y=775
 layer=normal
 sticky=TRUE
 tooltips=TRUE
@@ -154,7 +154,7 @@ bold=TRUE
 threshold=85
 
 [panel_disk_0]
-enabled=FALSE
+enabled=TRUE
 value=/
 display=%u (%U)
 command=gmc %s
