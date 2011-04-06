@@ -4,7 +4,7 @@
 (use file.util)
 
 (define gitdir "~/local/git/dotfiles/")
-(define dotfiles (list ".dzen/bin/status" ".mc/ini" ".ncmpcpp/config" ".mpdconf" ".portmasterrc" ".mplayer/config" ".qvwmrc" ".qvwm-theme" ".config/awesome/rc.lua" ".cshrc" ".cw/make" ".stalonetrayrc" ".screenrc" ".vimrc" ".gtkrc-2.0" ".xinitrc" ".emacs" ".emacs-w3m" ".Xresources"))
+(define dotfiles (list ".lighty/etc/lighttpd.conf" ".lighty/etc/modules.conf" ".dzen/bin/status" ".mc/ini" ".ncmpcpp/config" ".mpdconf" ".portmasterrc" ".mplayer/config" ".qvwmrc" ".qvwm-theme" ".config/awesome/rc.lua" ".config/mdh/config" ".cshrc" ".cw/make" ".stalonetrayrc" ".screenrc" ".vimrc" ".gtkrc-2.0" ".xinitrc" ".emacs" ".emacs-w3m" ".Xresources"))
 
 (define (make-symlink files) 
   (let loop ((files files))
