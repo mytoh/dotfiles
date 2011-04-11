@@ -14,7 +14,7 @@ DefaultShortcutIcon	= "icon32.ani"	; default shortcut icon
 DefaultFont		= "-mplus-fxd-medium-r-normal-*-12-*-*-*-*-*-*-*"
 
 ; desktop
-WallPaper		= ~/wallpaper.png	; image tiled in the desktop
+WallPaper		= ~/wallpaper.jpg	; image tiled in the desktop
 DesktopColor		= qvroyalblue	; desktop background color
 DesktopActiveColor	= qvblue	; desktop active color
 CursorColor		= white		; cursor color
@@ -48,13 +48,13 @@ MiniatureColor		= yellow	; non-active mini window color in pager
 MiniatureActiveColor	= red		; active mini window color in pager
 
 ; taskbar
-TaskbarButtonHeight	= 20
+TaskbarButtonHeight	= 18 
 ;TaskbarImage		= ""		; taskbar background image
 TaskbarColor		= qvgray	; taskbar color
 ClockStringColor	= black		; clock string color
-UseBoldFont		= False		; use bold font for emphasis
-TaskbarFont		= "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*"
-TaskbarBoldFont		= "-*-*-bold-r-normal-*-14-*-*-*-*-*-*-*"
+UseBoldFont		= True		; use bold font for emphasis
+TaskbarFont		= "-*-*-medium-r-normal-*-12-*-*-*-*-*-*-*"
+TaskbarBoldFont		= "-*-*-bold-r-normal-*-12-*-*-*-*-*-*-*"
 
 ; indicator
 IndicatorSize		= 16

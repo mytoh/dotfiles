@@ -81,24 +81,6 @@ alias halt 'sync;sync;sync;sudo shutdown -p now'
 alias reboot 'sync;sync;sync;sudo shutdown -r now'
 alias sudo 'sudo -E '
 
-# setting for jfbterm 
-if ( ${?TERM} ) then
-    switch ( "${TERM}" )
-    case screen:
-      set pcmd=`procstat -ch $$ | awk '{print $2}'`
-      set ppid=`procstat -h $$ | awk '{print $2}'`
-      while ( ! "0" == "${ppid}" )
-          if ( "jfbterm" == "${pcmd}" ) then
-              TERM=jfbterm-color
-              break
-          endif
-          set pcmd='procstat -ch "${ppid}" | awk '{print $2}''`
-          set ppid='procstat -h "${ppid}" | awk '{print $2}'`
-      end
-      unset pcmd ppid
-      breaksw
-  endsw
-endif
 
 source $HOME/.complete.tcsh
 

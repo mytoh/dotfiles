@@ -11,7 +11,7 @@ SoundPath		= "/usr/local/share/qvwm/sounds"
 RestartOnFailure	= True		; restart on seg fault/bus error
 UseDebugger		= True
 HourGlassTime		= 2000
-ImageAnimation		= True
+ImageAnimation		= False
 
 ; window
 OpaqueMove		= True		; full drag move
@@ -22,7 +22,7 @@ FocusOnMap		= False		; activate a mapped window
 ClickingRaises		= True		; clicking in the client area raises
 NoDesktopFocus		= True		; prevent focus from moving to desktop
 NoFocusChangeMask	= Shift		; prevent focus change by this key
-TitlebarMotion		= True		; animation on minimizing or maximizing
+TitlebarMotion		= False		; animation on minimizing or maximizing
 TitlebarMotionSpeed	= 1		; the speed (small is fast)
 AutoRaise		= False		; auto raise
 AutoRaiseDelay		= 300		; delay for auto raise (ms)
@@ -49,7 +49,7 @@ OnTopPager		= False		; keep pager on top
 
 ; taskbar
 UseTaskbar		= True		; use taskbar
-TaskbarPosition		= Top	; initial position
+TaskbarPosition		= Bottom	; initial position
 TaskbarRows		= 1		; initial rows
 TaskbarAutoHide		= False		; hide taskbar automatically
 RestoreMinimize		= True		; minimize by pushing active tbutton
@@ -128,7 +128,7 @@ include			~/.qvwm-theme
 ;"hsetroot -fill ~/wallpaper.jpg"
 ;"nitrogen --restore"
 "stalonetray" "stalonetray"
-"mdh" "mdh"
+;"mdh" "mdh"
 
 ;**********************************************************************
 ; Menu configuration

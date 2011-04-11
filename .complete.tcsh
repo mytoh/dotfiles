@@ -98,9 +98,9 @@ complete ln    'c/-/(b d F f i n S s V v -)/' \
                'n/{-V,--version-control}/"(t numbered nil existing \
                                            never simple"/' \
                'n/-/f/' \
-               'N/-/x:<link_name>/' \
+               'N/-/f/' \
                'p/1/f/' \
-               'p/2/x:<link_name>/'
+               'p/2/f/'
 
 complete kill  'p/*/`ps ax| awk \{print\ \$1\}`/'
 complete pkill 'p/*/`ps c | awk \{print\ \$5\} | sort |uniq | tr -d COMMAND`/'

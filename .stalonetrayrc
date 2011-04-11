@@ -47,7 +47,7 @@ grow_gravity E
 icon_gravity NE
 
 # icon_size <int>            # specifies dimensions of typical icon slot
-icon_size 16
+icon_size 18
 
 # log_level <level>          # controls the amount of logging output, level can
                              # be err (default), info, or trace (enabled only
@@ -92,7 +92,7 @@ scrollbars none
 # scrollbars-step <step>     # scrollbars step in pixels; default is slot_size / 2
 # scrollbars-step 32
 
-slot_size 1            # specifies size of icon slot, defaults to
+slot_size  2           # specifies size of icon slot, defaults to
                              # icon_size NEW in 0.8.
 
 # skip_taskbar [<bool>]      # hide tray`s window from the taskbar
@@ -107,7 +107,7 @@ tint_color white
 
 # tint_level <level>         # set tinting level; level ranges from 0 (disabled)
                              # to 255
-tint_level 50
+tint_level 255
 
 # transparent [<bool>]       # whether to use root-transparency (background
                              # image must be set with Esetroot or compatible utility)
