@@ -310,9 +310,9 @@ include			~/.qvwm-theme
 "gimv"      "gimv32.ani" "gimv" !2,!0
 "thunar"    "thunar32.ani" "thunar" !2,!1
 "jd"        "jd32.ani"    "jd" !3,!0
-"sonata"    "sonata32.ani"  "sonata" !3,!1
 "deadbeef"  "deadbeef32.ani"  "deadbeef" !2,!2
-"ario"      "ario32.ani"      "ario" !1,!3
+;"ario"      "ario32.ani"      "ario" !1,!3
+;"sonata"    "sonata32.ani"  "sonata" !3,!1
 
 
 
