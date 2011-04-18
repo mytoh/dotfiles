@@ -6,6 +6,7 @@ set prompt='%{[0000mk\\%}[%{[34m%n[37m@[32m%m[m%}] %c2 > '
 set history=100000
 set savehist=(100000 merge)
 set autolist = ambiguous
+set autocorrect
 set ignoreeof
 set histdup=erase
 set rmstar
@@ -18,7 +19,7 @@ set color
 set colorcat
 set autoexpand
 set complete=enhance
-set path = (~/.cw /usr/local/lib/cw ~/local/bin ~/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin /usr/local/sbin )
+set path = (~/.cw /usr/local/lib/cw ~/local/{bin,sbin} /usr/local/{sbin,bin} /sbin /bin /usr/sbin /usr/bin )
 set cdpath = (~/local/ ~/local/var/)
 set noclobber
 set notify

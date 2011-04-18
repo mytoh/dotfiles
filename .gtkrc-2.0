@@ -1,6 +1,7 @@
 
-gtk-theme-name = "WinMe"
+#gtk-theme-name = "WinMe"
 gtk-icon-theme-name = "Faenza-Cupertino"
 gtk-cursor-theme-name = "ComixCursors-Ghost"
-gtk-font-name = "M+ 2m:style=regular 10"
+#gtk-key-theme-name = "Emacs"
+#gtk-font-name = "M+ 2m:style=regular 10"
 

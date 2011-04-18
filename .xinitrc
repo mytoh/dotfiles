@@ -16,7 +16,7 @@ nitrogen --restore &
 urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
 parcellite &
 xbindkeys &
-thunar --daemon &
+Thunar --daemon &
 mpd 
 
 if [ "$1" = "twm" -o "$1" = "openbox" ]; then
@@ -25,6 +25,8 @@ trayer --expand false --alpha 20  --tint 0x606060 --transparent true --padding 1
 #sleep 20 && wbar -above-desk -bpress -isize 45 -balfa 20 -nanim 9 &
 fbpanel &
 fi
+
+
 
 DEFAULT_SESSION="qvwm"
 case $1 in
@@ -41,7 +43,7 @@ case $1 in
   golem) exec golem ;;
   qvwm) exec qvwm ;;
   wmfs) exec wmfs ;;
-  fvwm95) exec fvwm95 ;;
+  fvwm*) exec fvwm;;
   dwm) exec ewm ;;
   awesome) exec awesome ;;
   matchbox) exec matchbox-window-manager -use_titlebar yes;;
