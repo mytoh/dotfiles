@@ -35,18 +35,14 @@ case $1 in
   xmonad) exec xmonad ;;
   twm) exec twm -v ;;
   xfce) exec startxfce4 ;;
-  swm) exec swm ;;
   fluxbox) exec fluxbox ;;
   pekwm) exec pekwm ;;
+  flwm) exec flwm ;;
   evilwm) exec evilwm ;;
-  openbox) exec openbox ;;
-  golem) exec golem ;;
   qvwm) exec qvwm ;;
-  wmfs) exec wmfs ;;
   fvwm*) exec fvwm;;
   dwm) exec ewm ;;
   awesome) exec awesome ;;
-  matchbox) exec matchbox-window-manager -use_titlebar yes;;
   *) exec $DEFAULT_SESSION ;;
 esac
 
