@@ -6,6 +6,8 @@
 (define gitdir "~/local/git/dotfiles/")
 (define dotfiles (list ".lighty/etc/lighttpd.conf" 
                        ".lighty/etc/modules.conf" 
+                       ".fvwm2rc"
+                       ".wbar"
                        ".dzen/bin/status" 
                        ".mc/ini" 
                        ".ncmpcpp/config" 

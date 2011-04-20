@@ -7,15 +7,11 @@ c:
 t: /usr/local/share/wbar/iconpack/wbar.osx/font/12
 
 i: /usr/local/share/wbar/iconpack/wbar.osx/firefox.png
-c: firefox3
-t: firefox3
-
-i: /usr/local/share/wbar/iconpack/wbar.osx/thunderbird.png
-c: thunderbird
-t: thunderbird
+c: firefox
+t: firefox
 
 i: /usr/local/share/wbar/iconpack/wbar.osx/gmplayer.png
-c: /usr/local/bin/mplayer
+c: /usr/local/bin/gmplayer
 t: mplayer
 
 i: /usr/local/share/wbar/iconpack/wbar.osx/mlgui.png
@@ -31,5 +27,5 @@ c: picasa
 t: picasa
 
 i: /usr/local/share/wbar/iconpack/wbar.osx/gqview.png
-c: gqview
-t: gqview
+c: gimv
+t: gimv
