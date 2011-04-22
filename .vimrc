@@ -91,7 +91,7 @@ augroup END
 "------------------------------------
 
 " Chalice for vim -------------------
-set runtimepath+=$HOME/.vim/chalice
+"set runtimepath+=$HOME/.vim/chalice
 let chalice_startupflags = 'bookmark'
 let chalice_writeoptions = 'amp,nbsp,zenkaku'
 let chalice_statusline = '%c,'

@@ -28,3 +28,6 @@
 [submodule ".vim/bundle/vim-quickrun"]
 	path = .vim/bundle/vim-quickrun
 	url = git://github.com/thinca/vim-quickrun.git
+[submodule ".vim/bundle/chalice"]
+	path = .vim/bundle/chalice
+	url = git://github.com/koron/chalice.git
