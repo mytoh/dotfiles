@@ -12,6 +12,7 @@
                        ".mc/ini" 
                        ".ncmpcpp/config" 
                        ".mpdconf" 
+                       ".jd/jd.conf" 
                        ".portmasterrc" 
                        ".mplayer/config" 
                        ".qvwmrc" 

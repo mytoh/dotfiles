@@ -124,7 +124,7 @@ include			~/.qvwm-theme
 [Startup]
 ;"PAGE[1, 0, Navigator] netscape"
 ;"PAGE[0, 1, Emacs] emacs"
-;"xcompmgr -n&"
+"xcompmgr -n&"
 ;"hsetroot -fill ~/wallpaper.jpg"
 ;"nitrogen --restore"
 "stalonetray" "stalonetray"

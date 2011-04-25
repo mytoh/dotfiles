@@ -67,7 +67,7 @@ IconStringColor		= white
 IconStringActiveColor	= white
 IconForeColor		= black		; icon foreground color
 IconBackColor		= white		; icon background color
-IconFont		= "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*"
+IconFont		= "-*-*-medium-r-normal-*-12-*-*-*-*-*-*-*"
 
 ; menu
 ;MenuImage		= ""		; menu background image
