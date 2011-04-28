@@ -13,7 +13,7 @@ urxvt.internalBorder: 0
 urxvt.transparent: true
 urxvt.fading: 2%
 urxvt.fadeColor: grey
-urxvt.shading: 20
+urxvt.shading: 10
 urxvt.tintcolor: black
 urxvt.preedittype: root
 urxvt.savelines: 2000

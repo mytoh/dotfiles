@@ -124,7 +124,7 @@ include			~/.qvwm-theme
 [Startup]
 ;"PAGE[1, 0, Navigator] netscape"
 ;"PAGE[0, 1, Emacs] emacs"
-"xcompmgr -n&"
+;"xcompmgr -c&"
 ;"hsetroot -fill ~/wallpaper.jpg"
 ;"nitrogen --restore"
 "stalonetray" "stalonetray"
@@ -311,8 +311,9 @@ include			~/.qvwm-theme
 "gimv"      "gimv32.ani" "gimv" !2,!0
 "thunar"    "thunar32.ani" "thunar" !2,!1
 "jd"        "jd32.ani"    "jd" !3,!0
-"deadbeef"  "deadbeef32.ani"  "deadbeef" !2,!2
 "audacious"      "audacious32.ani"      "audacious" !3,!1
+"gimp"      "gimp32.ani"      "gimp" !2,!2
+"inkscape"      "inkscape32.ani"      "inkscape" !4,!0
 ;"ario"      "ario32.ani"      "ario" !1,!3
 ;"sonata"    "sonata32.ani"  "sonata" !3,!1
 
@@ -379,12 +380,13 @@ Super_R None "dmenu_run -b  -nb gray3 -nf white"
 "console"	STICKY, NO_TITLE
 "Emacs"		SMALL_PIX="emacs-16.ani", LARGE_PIX="emacs-32.ani"
 "Jd"      SMALL_PIX="jd16.ani", LARGE_PIX="jd32.ani"
-"Firefox" SMALL_PIX="anifox32.ani", LARGE_PIX="anifox32.ani"
+"Firefox" SMALL_PIX="anifox16.ani", LARGE_PIX="anifox32.ani"
 "GImageView" SMALL_PIX="gimv16.ani", LARGE_PIX="gimv32.ani"
 "Comix"   SMALL_PIX="comix16.ani", LARGE_PIX="comix32.ani"
 "Nitrogen" SMALL_PIX="nitrogen16.ani", LARGE_PIX="nitrogen32.ani"
 "gcolor2" SMALL_PIX="gcolor16.ani", LARGE_PIX="gcolor16.ani"
 "Thunar"  SMALL_PIX="thunar16.ani", LARGE_PIX="thunar32.ani"
+"Gimp"  SMALL_PIX="gimp16.ani", LARGE_PIX="gimp32.ani"
 "Audacious"  SMALL_PIX="audacious16.ani", LARGE_PIX="audacious32.ani"
 "XTerm"		SMALL_PIX="xterm16.xpm", LARGE_PIX="xterm32.ani"
 "Netscape"	SMALL_PIX="netscape16.ani", LARGE_PIX="netscape32.ani"
