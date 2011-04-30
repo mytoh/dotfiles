@@ -1,10 +1,13 @@
 
-"turn filetype off to load ftdetect by pathogen.vim
+"turn filetype off to load ftdetect 
+set nocompatible
 filetype off
 
-"pathogen
-call pathogen#runtime_append_all_bundles()
-"call pathogen#helptags() "remove temporarily, it makes untracked contents in git status(doc/tags)
+set rtp+=~/.vim/vundle/
+call vundle#rc()
+
+" my bundles here
+Bundle 'tpope/vim-fugitive'
 
 filetype on
 filetype plugin indent on
