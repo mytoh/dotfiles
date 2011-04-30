@@ -7,7 +7,21 @@ set rtp+=~/.vim/vundle/
 call vundle#rc()
 
 " my bundles here
+" github repo
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/vimfiler'
+Bundle 'Shougo/vinarise'
+Bundle 'Shougo/unite.vim'
+Bundle 'thinca/vim-quickrun'
+Bundle 'thinca/vim-ref'
+Bundle 'koron/chalice'
+
+" vim-scripts repo
+Bundle 'minibufexplorerpp'
+
+" git repo
 
 filetype on
 filetype plugin indent on
@@ -78,7 +92,6 @@ nmap N Nzz
 " <CR>: close popup and save indent.
 inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 
-helptags $HOME/.vim/doc
 
 au BufWritePost .vimrc source $MYVIMRC
 
