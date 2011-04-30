@@ -20,6 +20,7 @@ set colorcat
 set autoexpand
 set complete=enhance
 set path = (~/.cw /usr/local/lib/cw ~/local/{bin,sbin} /usr/local/{sbin,bin} /sbin /bin /usr/sbin /usr/bin )
+#set path = (~/local/{bin,sbin} /usr/local/{sbin,bin} /sbin /bin /usr/sbin /usr/bin )
 set cdpath = (~/local/ ~/local/var/)
 set noclobber
 set notify

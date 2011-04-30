@@ -9,7 +9,7 @@ ibus-daemon -d -x &
 xrdb -merge .Xresources
 xmodmap .Xmodmap
 setxkbmap dvorak
-#xsetroot -cursor_name right_ptr &
+xsetroot -cursor_name right_ptr &
 nitrogen --restore &
 #hsetroot -fill ~/wallpaper.jpg
 #xcompmgr -c&

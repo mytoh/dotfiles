@@ -82,7 +82,7 @@ myFocusedBorderColor = "#ad9dc5"
 
 -- Fonts -------------------------------------------
 myTabFont = "xft: Inconsolata-8"
-myXPFont = "xft: Inconsolata-21"
+myXPFont = "-adobe-helvetica-medium-r-normal--15-*"
 myDzenFont = "-adobe-helvetica-medium-r-normal--12-*"
 
 -- Layouts ------------------------------------------
@@ -258,3 +258,4 @@ myConfig = do
         logHook            = myLogHook d,
         startupHook        = myStartupHook
     } `additionalKeysP` myKeys
+

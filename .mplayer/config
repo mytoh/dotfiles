@@ -3,7 +3,7 @@
 [default]
 #vo=x11
 ao=oss
-cache=8192
+#cache=8192
 #cache-min = 6
 autosync=100
 #speed=0.80

@@ -31,6 +31,8 @@
                        ".xinitrc" 
                        ".emacs" 
                        ".emacs-w3m" 
+                       ".xmonad/xmonad.hs" 
+                       ".xmonad/restart.sh" 
                        ".Xresources"))
 
 (define (make-symlink files) 
