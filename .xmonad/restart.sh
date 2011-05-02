@@ -3,6 +3,7 @@
 killall dzen2
 killall trayer
 killall gmail-notifier
+killall xcompmgr
 xmonad --recompile 
 xmonad --restart
 

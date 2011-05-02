@@ -14,8 +14,8 @@ set editor="vim"
 set toolbars=noaddons,nobookmarks,menu,nonavigation,tabs
 
 "direct_bookmark.js
-let g:direct_sbm_use_services_by_tag = "hdg"
-let g:direct_sbm_use_services_by_post = "hdg"
+let g:direct_sbm_use_services_by_tag = "dg"
+let g:direct_sbm_use_services_by_post = "dg"
 
 command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
 " Google Reader

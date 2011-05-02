@@ -228,10 +228,11 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
 myEventHook = ewmhDesktopsEventHook
 
 -- dzen bars ----------------------------------------------------------------------
-myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 400 -h 16 -fn " ++ myDzenFont  
-myRightBar  = "~/.dzen/bin/status | exec dzen2 -p -ta r -x 400 -y 0 -w 800 -h 16 -fn " ++ myDzenFont
-trayer      = "exec trayer --expand false --alpha 200  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype pixel --width 80 "
+myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 350 -h 16 -fn " ++ myDzenFont  
+myRightBar  = "~/.dzen/bin/status | exec dzen2 -p -ta r -x 350 -y 0 -w 750 -h 16 -fn " ++ myDzenFont
+trayer      = "exec trayer --expand true --alpha 100  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype request --width 100 "
 mail        = "gmail-notifier"
+compmgr     = "xcompmgr -n"
 -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 
 myStartupHook :: X () 
@@ -239,6 +240,7 @@ myStartupHook = do
                 spawn myRightBar
                 spawn trayer
                 spawn mail
+                spawn compmgr
 
 -- main config ---------------------------------------------------------------------
 main = myConfig

@@ -41,7 +41,8 @@ case $1 in
   evilwm) exec evilwm ;;
   qvwm) exec qvwm ;;
   fvwm*) exec fvwm;;
-  dwm) exec ewm ;;
+  dwm) exec dwm ;;
+  swm) exec swm ;;
   awesome) exec awesome ;;
   *) exec $DEFAULT_SESSION ;;
 esac

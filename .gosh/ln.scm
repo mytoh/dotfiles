@@ -33,6 +33,7 @@
                        ".emacs-w3m" 
                        ".xmonad/xmonad.hs" 
                        ".xmonad/restart.sh" 
+                       ".Xmodmap" 
                        ".Xresources"))
 
 (define (make-symlink files) 
