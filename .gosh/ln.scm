@@ -21,6 +21,7 @@
                        ".config/Thunar/thunarrc" 
                        ".config/mdh/config" 
                        ".cshrc" 
+                       ".gtkrc.mine" 
                        ".cw/make" 
                        ".stalonetrayrc" 
                        ".screenrc" 
