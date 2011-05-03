@@ -160,6 +160,7 @@ myManageHook = -- insertPosition End Newer <+> composeAll
       className  =? "Gimp"                                --> doFloat,
       className  =? "DTA"                                 --> doFloat,
       className  =? "Gcolor2"                             --> doFloat,
+      className  =? "Switch2"                             --> doFloat,
       (className =? "Firefox" <&&> resource =? "Dialog")  --> doFloat
       ] 
         <+> namedScratchpadManageHook myScratchPads
