@@ -82,8 +82,8 @@ myNormalBorderColor  = "#111111"
 myFocusedBorderColor = "#ff89c5"
 
 -- Fonts -------------------------------------------
-myTabFont = "xft: Inconsolata-8"
-myXPFont = "-adobe-helvetica-medium-r-normal--15-*"
+myTabFont = "xft: Ricty-8"
+myXPFont = "xft: Ricty"
 myDzenFont = "-adobe-helvetica-medium-r-normal--12-*"
 
 -- Layouts ------------------------------------------

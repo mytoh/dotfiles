@@ -25,6 +25,8 @@ urxvt.urlLauncher: firefox
 urxvt.matcher.button: 1
 urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
+!urxvt.font: xft: Ricty-Regular-9
+!urxvt.boldFont: xft: Ricty-Bold-9
 urxvt.font: -mplus-fxd-medium-r-normal--10-*
 urxvt.boldFont: -mplus-fxd-medium-r-normal--10-*
 

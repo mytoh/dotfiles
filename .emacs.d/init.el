@@ -104,7 +104,7 @@
 	           '(height . 52) ;; window height
 	           '(top . 15)     ;; window placement
 	           '(left . 10)    ;; window placement
-	           '(font . "Inconsolata 13")
+	           '(font . "Ricty 13")
 	           )
               initial-frame-alist)))
 (setq default-frame-alist initial-frame-alist)
