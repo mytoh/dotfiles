@@ -30,7 +30,7 @@
                        ".vimperatorrc"
                        ".gtkrc-2.0" 
                        ".xinitrc" 
-                       ".emacs" 
+                       ".emacs.d/init.el" 
                        ".emacs-w3m" 
                        ".xmonad/xmonad.hs" 
                        ".xmonad/restart.sh" 
