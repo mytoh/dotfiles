@@ -100,7 +100,7 @@ myLayoutHook =  avoidStruts                $
 
                    full    = named "*" (smartBorders (noBorders (dwmStyle shrinkText myTheme Full)))
                    tile    = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
-                   tabbed  = named "=" (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedAlways shrinkText myTheme)))
+                   tabbed  = named "=" (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedBottomAlways shrinkText myTheme)))
                    twopane = named "-" (smartBorders (withBorder 1 (TwoPane 0.02 0.4)))
                    mosaic  = named "%" (smartBorders (withBorder 1 (MosaicAlt M.empty)))
                    sprl    = named "@" (smartBorders (withBorder 1 (limitWindows 5 (spiral gratio))))
@@ -135,7 +135,12 @@ myKeys = [
 
              scratchFiler = namedScratchpadAction myScratchPads "thunar"
 
-             myRestart = "~/.xmonad/restart.sh"
+             myRestart = "for pid in `pgrep trayer`; do kill -9 $pid; done &&" ++ 
+                         "for pid in `pgrep dzen2`; do kill -9 $pid; done &&" ++
+                         "for pid in `pgrep gmail-notifier`; do kill -9 $pid; done &&" ++
+                         "for pid in `pgrep xcompmgr`; do kill -9 $pid; done &&" ++
+                         "xmonad --recompile && xmonad --restart"
+                         
 
 -- shell prompt config ---------------------------------------------
 myXPConfig = defaultXPConfig {
