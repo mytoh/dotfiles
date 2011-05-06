@@ -28,7 +28,7 @@ fi
 
 
 
-DEFAULT_SESSION="qvwm"
+DEFAULT_SESSION="xmonad"
 case $1 in
   stumpwm) exec stumpwm ;;
   sawfish) exec sawfish ;;

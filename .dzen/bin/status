@@ -43,7 +43,7 @@ while (1)
   set iconcolour = "#808080"
   set charcolour = "#ffffff"
 
-  echo "  ^fg($iconcolour)^i($icons/sm4tik/cpu.xbm)^fg($charcolour) $cpu ^fg($iconcolour)^i($icons/sm4tik/mem.xbm)^fg($charcolour) $freemem  ^fg($iconcolour)^i($icons/sm4tik/net_up_02.xbm)^fg($charcolour) $tx ^fg($iconcolour)^i($icons/sm4tik/net_down_02.xbm)^fg($charcolour) $rx  ^fg($iconcolour)^i($icons/sm4tik/fs_01.xbm)^fg($charcolour) ${diskused}/${disktotal}B ^fg($batcolour)^i($baticon)^fg($charcolour) ${battery}% ^fg($iconcolour)^i($icons/sm4tik/clock.xbm)^fg($charcolour) $date "
+  echo "  ^fg($iconcolour)^i($icons/sm4tik/cpu.xbm)^fg($charcolour) $cpu ^fg($iconcolour)^i($icons/mem.xpm)^fg($charcolour) $freemem  ^fg($iconcolour)^i($icons/sm4tik/net_up_02.xbm)^fg($charcolour) $tx ^fg($iconcolour)^i($icons/sm4tik/net_down_02.xbm)^fg($charcolour) $rx  ^fg($iconcolour)^i($icons/floppy.xpm)^fg($charcolour) ${diskused}/${disktotal}B ^fg($batcolour)^i($baticon)^fg($charcolour) ${battery}% ^fg($iconcolour)^i($icons/sm4tik/clock.xbm)^fg($charcolour) $date "
 
 #  sleep $interval
 

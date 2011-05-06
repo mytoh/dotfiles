@@ -84,7 +84,8 @@ myFocusedBorderColor = "#ff89c5"
 -- Fonts -------------------------------------------
 myTabFont = "xft: Ricty-8"
 myXPFont = "xft: Ricty"
-myDzenFont = "-adobe-helvetica-medium-r-normal--12-*"
+--myDzenFont = "-mplus-fxd-medium-r-semicondensed--12-*"
+myDzenFont = "-*-fixed-medium-r-semicondensed-*-12-*"
 
 -- Layouts ------------------------------------------
 myLayoutHook =  avoidStruts                $ 
@@ -118,7 +119,7 @@ myTheme = defaultTheme {
 }
 
 -- keybindings --------------------------------------------
-myKeys = [
+myKeys = [ -- M4 for Super key
          ("M-s", shellPrompt myXPConfig),
          ("M-f", sendMessage $ Toggle NBFULL),
          ("M-x", sendMessage $ Toggle REFLECTX),
@@ -235,8 +236,8 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
 myEventHook = ewmhDesktopsEventHook
 
 -- dzen bars ----------------------------------------------------------------------
-myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 350 -h 16 -fn " ++ myDzenFont  
-myRightBar  = "~/.dzen/bin/status | exec dzen2 -p -ta r -x 350 -y 0 -w 750 -h 16 -fn " ++ myDzenFont
+myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 450 -h 16 -fn " ++ myDzenFont  
+myRightBar  = "~/.dzen/bin/status | exec dzen2 -p -ta r -x 450 -y 0 -w 700 -h 16 -fn " ++ myDzenFont
 trayer      = "exec trayer --expand true --alpha 100  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype request --width 100 "
 mail        = "gmail-notifier"
 compmgr     = "xcompmgr -n"
