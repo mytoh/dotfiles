@@ -1,4 +1,5 @@
-;; -*- lisp -*-
+;; -*-lisp-*-
+;; vim:filetype=lisp
 
 ;; settings taken from "http://aperturefever.wordpress.com/2010/05/10/updating-stumpwm-conf/"
 
@@ -9,7 +10,7 @@
 ;; hide mouse
 ;; (run-with-timer 5 5 'banish-pointer)
 
-(set-font "-kochi-gothic-medium-r-normal-*-12-110-*-*-p-*-iso10646-1")
+(set-font "-*-fixed-medium-r-semicondensed-*-12-*")
   
 
 ;;;; message window
@@ -24,7 +25,7 @@
 ;; (run-shell-command " ~/.dzen/bin/status | exec dzen2 -p 1 -ta r -x 400 -y 0 -w 800 -h 16 ")
 ;; (run-shell-command "exec trayer --expand false --alpha 200  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype pixel --width 80 " )
 
-(defcommand terminal () () (run-shell-command "urxvtc"))
+(defcommand terminal () () (run-shell-command "urxvtcd"))
 (defcommand browser () () (run-or-raise "firefox3" '(:class "Firefox")))
 (defcommand filer () () (run-or-raise "thunar" '(:class "Thunar")))
 (defcommand dmenu () () (run-shell-command "dmenu_run -nb grey20 -nf orange"))
@@ -39,11 +40,7 @@
 (define-key *top-map* (kbd "M-n") "fnext")
 (define-key *top-map* (kbd "M-h") "gprev")
 (define-key *top-map* (kbd "M-l") "gnext")
-(define-key *top-map* (kbd "M-s") "vsplit")
-(define-key *top-map* (kbd "M-S") "hsplit")
-(define-key *top-map* (kbd "M-R") "remove")
 (define-key *top-map* (kbd "M-d") "dmenu")
-(define-key *top-map* (kbd "M-TAB") "next")
 
 (setf *mouse-focus-policy* :sloppy)
 
