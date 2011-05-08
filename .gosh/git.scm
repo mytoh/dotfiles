@@ -5,8 +5,8 @@
 
 (define gitdir  "~/local/git/")
 
-(define (update-gitdir gitdir)
-  (let ((dirs (directory-list (expand-path gitdir) :children? #t :add-path? #t)))
+(define (update-gitdir git)
+  (let ((dirs (directory-list (expand-path git) :children? #t :add-path? #t)))
        (let loop ((dirs dirs))
             (begin
               (current-directory (car dirs)) ;change directory to argument 

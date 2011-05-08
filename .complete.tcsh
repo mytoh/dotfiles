@@ -104,6 +104,7 @@ complete ln    'c/-/(b d F f i n S s V v -)/' \
 
 complete kill  'p/*/`ps ax| awk \{print\ \$1\}`/'
 complete pkill 'p/*/`ps c | awk \{print\ \$5\} | sort |uniq | tr -d COMMAND`/'
+complete killall 'p/*/`ps c | awk \{print\ \$5\} | sort |uniq | tr -d COMMAND`/'
 
  
 complete ./configure 'c/-[IL]/d/' \
