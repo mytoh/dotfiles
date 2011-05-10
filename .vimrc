@@ -55,6 +55,7 @@ set fileformat=unix
 set fileformats=unix,mac,dos
 set splitright
 set splitbelow
+set autochdir
 
 "statusline
 set laststatus=2

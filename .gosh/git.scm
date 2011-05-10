@@ -7,13 +7,12 @@
 
 (define (update-gitdir git)
   (let ((dirs (directory-list (expand-path git) :children? #t :add-path? #t)))
-       (let loop ((dirs dirs))
-            (begin
-              (current-directory (car dirs)) ;change directory to argument 
-              (run-process '(git pull) ))
-            (loop (cdr dirs)))
-   ))
-               
-
+       (let loop ((dir dirs))
+            (if (null? dir)
+                (display "update finied!")
+                (begin
+                  (current-directory (car dir)) ;change directory to argument 
+                  (run-process '(git pull) )
+                (loop (cdr dir)))))))
 
 (update-gitdir gitdir)

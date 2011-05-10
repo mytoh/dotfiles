@@ -29,7 +29,6 @@
                        ".vim" 
                        ".vimrc" 
                        ".vimperatorrc"
-                       ".gtkrc-2.0" 
                        ".screenrc" 
                        ".stumpwmrc"
                        ".xinitrc" 
