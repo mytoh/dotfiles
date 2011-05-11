@@ -5,14 +5,17 @@
 
 (define gitdir  "~/local/git/")
 
-(define (update-gitdir git)
-  (let ((dirs (directory-list (expand-path git) :children? #t :add-path? #t)))
-       (let loop ((dir dirs))
-            (if (null? dir)
-                (display "update finied!")
+(define (update-gitdir gitdir)
+  (let ((dirs (list (directory-list (expand-path gitdir) :children? #t :add-path? #t))))
+       (let loop ((dirs (car dirs)))
+            (if (null? dirs)
+                (display "update finied!\n")
                 (begin
-                  (current-directory (car dir)) ;change directory to argument 
-                  (run-process '(git pull) )
-                (loop (cdr dir)))))))
+                  (display (car dirs) )
+                  (display "\n" )
+                  (current-directory (car dirs)) ;change directory to argument 
+                  (run-process '(git pull) :wait #t)
+                  (display "\n")
+                  (loop (cdr dirs)))))))
 
 (update-gitdir gitdir)

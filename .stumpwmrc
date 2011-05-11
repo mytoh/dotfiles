@@ -24,7 +24,7 @@
 
 ;; (run-shell-command " ~/.dzen/bin/status | exec dzen2 -p 1 -ta r -x 400 -y 0 -w 800 -h 16 ")
 (run-shell-command "exec trayer --expand false --alpha 200  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype pixel --width 80 " )
-(run-shell-command "xcompmgr -n &" )
+(run-shell-command "xcompmgr -a &" )
 
 (defcommand terminal () () (run-shell-command "urxvtcd"))
 (defcommand browser () () (run-or-raise "firefox" '(:class "Firefox")))
@@ -36,6 +36,8 @@
 (define-key *root-map* (kbd "t") "filer")
 (define-key *root-map* (kbd "C-f") "fullscreen")
 (define-key *root-map* (kbd "d") "dmenu")
+(define-key *top-map* (kbd "M-TAB") "next")
+(define-key *top-map* (kbd "s-RET") "fullscreen")
 
 (setf *mouse-focus-policy* :sloppy)
 
