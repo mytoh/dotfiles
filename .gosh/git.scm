@@ -11,10 +11,10 @@
             (if (null? dirs)
                 (display "update finied!\n")
                 (begin
+                  (display "=> ")
                   (display (car dirs) )
                   (display "\n" )
-                  (current-directory (car dirs)) ;change directory to argument 
-                  (run-process '(git pull) :wait #t)
+                  (run-process '(git pull) :wait #t :directory (car dirs))
                   (display "\n")
                   (loop (cdr dirs)))))))
 

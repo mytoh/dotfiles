@@ -5,90 +5,114 @@
 
 (in-package :stumpwm)
 
-(setf *startup-message* nil)
 
-;; hide mouse
-;; (run-with-timer 5 5 'banish-pointer)
+(defparameter terminal "urxvtcd")
 
-(set-font "-*-fixed-medium-r-semicondensed-*-12-*")
-  
-
-;;;; message window
+;; message window
 (set-bg-color "grey20")
 (set-fg-color "orange")
 (set-border-color "grey10")
 (set-msg-border-width 1)
-(setf *message-window-gravity* :top-right
-      *input-window-gravity* :bottom-left)
+(set-font "-*-fixed-medium-r-semicondensed-*-12-*")
 
+;; windows
+(set-focus-color "dimgrey")
+(set-unfocus-color "grey10")
+(set-win-bg-color "black")
+(set-normal-gravity :center)
+(set-frame-outline-width 1)
 
-;; (run-shell-command " ~/.dzen/bin/status | exec dzen2 -p 1 -ta r -x 400 -y 0 -w 800 -h 16 ")
-(run-shell-command "exec trayer --expand false --alpha 200  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype pixel --width 80 " )
-(run-shell-command "xcompmgr -a &" )
+;; options
+(setf 
+  *normal-border-width*             1 
+  *maxsize-border-width*            2
+  *transient-border-width*          1
+  *window-border-style*             :thin ;; thick,thin,none,tight
+  *startup-message*                 nil
+  *frame-number-map*                "aoeuidhtnspyfgcrlqjkxbmwvz"
+  *window-number-map*               "aoeuidhtns"
+  *group-number-map*                "aoeuidhtns"
+  *mouse-focus-policy*              :sloppy
+  *message-window-gravity*          :top-right
+  *input-window-gravity*            :bottom-left
+  *run-or-raise-all-groups*         T
+  *input-history-ignore-duplicates* T
+  *new-window-preferred-frame*      '(:empty :focused)
+  *mode-line-background-color*      "grey20"
+  *mode-line-foreground-color*      "orange"
+  *mode-line-border-color*          "pink"
+  *mode-line-position*              :top
+  *mode-line-border-width*          1
+  *mode-line-pad-x*                 2
+  *mode-line-pad-y*                 2
+  *mode-line-timeout*               5
+  *window-format*                   "^9*(%n%s%m%15t)^n" ;;^5 magenta
+  *group-format*                    "^7*[%t%s]^n" ;;^7 white
+  )
 
+;; set color slots
+(setf *colors* (append *colors*
+                       (list "orange"  
+                             "pink")))
+(update-color-map (current-screen))
+
+;; modeline
+(if (not (head-mode-line (current-head)))
+    (toggle-mode-line (current-screen) (current-head)))
+
+(setf *screen-mode-line-format*  ;; ^n use the normal bg and fg color
+      (list "%g ^8*|^n %w ^8*|^n %d" 
+            ;'(:eval (run-shell-command "top -b -d 2 | grep '^CPU' | awk '{print $2,$6}'" t))
+            ))
+
+;; startup programmes
+;(run-shell-command "exec trayer --expand false --alpha 200  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype pixel --width 80 " )
+;(run-shell-command "xcompmgr -a &" )
+; (run-shell-command " ~/.dzen/bin/status | exec dzen2 -p 1 -ta r -x 400 -y 0 -w 800 -h 16 ")
+
+;; commands
 (defcommand terminal () () (run-shell-command "urxvtcd"))
 (defcommand browser () () (run-or-raise "firefox" '(:class "Firefox")))
 (defcommand filer () () (run-or-raise "thunar" '(:class "Thunar")))
 (defcommand dmenu () () (run-shell-command "dmenu_run -nb grey20 -nf orange"))
+(defcommand reinit () () (run-commands "reload" "loadrc"))
 
+;; keymap
 (define-key *root-map* (kbd "c") "terminal")
 (define-key *root-map* (kbd "f") "browser")
 (define-key *root-map* (kbd "t") "filer")
-(define-key *root-map* (kbd "C-f") "fullscreen")
 (define-key *root-map* (kbd "d") "dmenu")
+(define-key *root-map* (kbd "C-f") "fullscreen")
+(define-key *root-map* (kbd "C-o") "fnext") ; default key "C-t o"
+
 (define-key *top-map* (kbd "M-TAB") "next")
 (define-key *top-map* (kbd "s-RET") "fullscreen")
-
-(setf *mouse-focus-policy* :sloppy)
-
-;;;; windows
-(setf *normal-border-width* 1 
-      *maxsize-border-width* 2
-      *transient-border-width* 1
-      *window-border-style* :thin) ;; thick,thin,none,tight
-(set-focus-color "dimgrey")
-(set-unfocus-color "grey10")
-(set-normal-gravity :center)
-(set-frame-outline-width 1)
-(setf *new-window-preferred-frame* '(:empty :focused))
-
-;;;; set the two remaining color slots
-(setf *colors* (append *colors*
-                (list "orange"  
-                      "pink")))
-(update-color-map (current-screen))
-
-;; modeline
-(enable-mode-line (current-screen) (current-head) t)
-
-(setf *mode-line-background-color* "grey20"
-      *mode-line-foreground-color* "orange"
-      *mode-line-position* :top
-      *mode-line-border-width* 1
-      *mode-line-pad-x* 2
-      *mode-line-pad-y* 2
-      *mode-line-timeout* 1
-      *window-format* "^9*(%n%s%m%15t)^n" ;;^5 magenta
-      *group-format*  "^7*[%t%s]^n" ;;^7 white
-      *screen-mode-line-format*  ;; ^n use the normal bg and fg color
-      (list "%g ^8*|^n %w ^8*|^n " 
-       '(:eval (run-shell-command "date +'%a %d %m %T' | tr -d '[:cntrl:]'" t))))
+(define-key *top-map* (kbd "s-r") "reinit")
+ 
+;;input window keymap
+(define-key *input-map* (kbd "C-i") 'input-complete-forward)
+(define-key *input-map* (kbd "C-m") 'input-submit)
+(define-key *input-map* (kbd "C-h") 'input-delete-backward-char)
 
 
-;;;; groups
-;; rename the first group to main
-;;(setf (group-name (first (screen (current-screen)))) "main")
-;; create the other group
-(run-commands  "gnewbg β" "gnewbg γ" "gselect Default" "grename α" "gselect α")
 
+;; groups
+; rename the first group to main
+;(setf (group-name (first (screen (current-screen)))) "main")
+; create the other group
+(run-commands  "gselect Default" "grename main" "gselect main" "gnewbg web" "gnewbg-float media" )
 
 ;;;; window placement rules
-;; clear rules
-(clear-window-placement-rules)
+(clear-window-placement-rules) ; clear rules
 
-(define-frame-preference "www"
-;; frame raise lock (lock AND raise == jumpto)
-(0 t t :class "Firefox"))
+;(define-frame-preference "web"
+;      ;; fnumber raise lock (lock AND raise == jumpto)
+;      (0 t t :class "Firefox")
+;      (0 t t :class "Opera"))
+;
+;(define-frame-preference "media"
+;      (0 t t :class "MPlayer")
+;      (0 t t :class "Audacious"))
 
 (setf *debug-level* 10)
 

@@ -11,13 +11,11 @@ xmodmap .Xmodmap
 setxkbmap dvorak
 xsetroot -cursor_name right_ptr &
 nitrogen --restore &
-#hsetroot -fill ~/wallpaper.jpg
-#xcompmgr -c&
 urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
 parcellite &
 xbindkeys &
 Thunar --daemon &
-mpd 
+spinner -T -t /dev/ttyv0
 
 if [ "$1" = "twm" -o "$1" = "openbox" ]; then
 /home/mytoh/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 16 -bg gray15 -fn '-adobe-helvetica-medium-r-normal--10-*' -e 'onexit=ungrabmouse' &

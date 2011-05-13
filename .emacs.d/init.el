@@ -362,6 +362,8 @@
 (require 'popwin)
 (setq display-buffer-function 'popwin:display-buffer)
 
+;; info+
+(eval-after-load "info" '(require 'info+))
 
 (cd "~/")
 

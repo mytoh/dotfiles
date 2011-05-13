@@ -40,7 +40,8 @@
 (define (make-symlink files) 
   (let loop ((files files))
        (if (null? files)
-             (display "finished linking!\n")
+             (newline)
+             (print "finished linking!")
            (begin 
              (make-directory* (sys-dirname (string-append (expand-path "~") (car files))))
              (run-process 
