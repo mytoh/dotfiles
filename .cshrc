@@ -19,8 +19,7 @@ set color
 set colorcat
 set autoexpand
 set complete=enhance
-#set path = (~/.cw /usr/local/lib/cw ~/local/{bin,sbin} /usr/local/{sbin,bin} /sbin /bin /usr/sbin /usr/bin )
-set path = (~/local/{bin,sbin} /usr/local/{sbin,bin} /sbin /bin /usr/sbin /usr/bin )
+set path = (~/local/bin /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} )
 set cdpath = (~/local/ ~/local/var/)
 set noclobber
 set notify
@@ -83,7 +82,8 @@ alias halt 'sync;sync;sync;sudo shutdown -p now'
 alias reboot 'sync;sync;sync;sudo shutdown -r now'
 alias sudo 'sudo -E '
 
-
-source $HOME/.complete.tcsh
-
+foreach f ($HOME/.complete.tcsh $HOME/perl5/perlbrew/etc/cshrc)
+  if (-f $f) then
+    source $f
+end
 

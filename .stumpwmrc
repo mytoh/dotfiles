@@ -1,4 +1,4 @@
-;; -*-lisp-*-
+;; -*-lisp;stumpwm-*-
 ;; vim:filetype=lisp
 
 ;; settings taken from "http://aperturefever.wordpress.com/2010/05/10/updating-stumpwm-conf/"
@@ -33,7 +33,7 @@
   *window-number-map*               "aoeuidhtns"
   *group-number-map*                "aoeuidhtns"
   *mouse-focus-policy*              :sloppy
-  *message-window-gravity*          :top-right
+  *message-window-gravity*          :bottom-left
   *input-window-gravity*            :bottom-left
   *run-or-raise-all-groups*         T
   *input-history-ignore-duplicates* T
@@ -42,7 +42,7 @@
   *mode-line-foreground-color*      "orange"
   *mode-line-border-color*          "pink"
   *mode-line-position*              :top
-  *mode-line-border-width*          1
+  *mode-line-border-width*          0
   *mode-line-pad-x*                 2
   *mode-line-pad-y*                 2
   *mode-line-timeout*               5
@@ -61,21 +61,35 @@
     (toggle-mode-line (current-screen) (current-head)))
 
 (setf *screen-mode-line-format*  ;; ^n use the normal bg and fg color
-      (list "%g ^8*|^n %w ^8*|^n %d" 
-            ;'(:eval (run-shell-command "top -b -d 2 | grep '^CPU' | awk '{print $2,$6}'" t))
+      (list "%g ^8*|^n %w " 
+            "^8*|^n Cpu:"
+            '(:eval (run-shell-command "~/.gosh/stumpwm.scm" t))
+            "^8*|^n %d"
             ))
 
 ;; startup programmes
 ;(run-shell-command "exec trayer --expand false --alpha 200  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype pixel --width 80 " )
-;(run-shell-command "xcompmgr -a &" )
+(run-shell-command "xcompmgr -a &" )
 ; (run-shell-command " ~/.dzen/bin/status | exec dzen2 -p 1 -ta r -x 400 -y 0 -w 800 -h 16 ")
 
 ;; commands
-(defcommand terminal () () (run-shell-command "urxvtcd"))
-(defcommand browser () () (run-or-raise "firefox" '(:class "Firefox")))
-(defcommand filer () () (run-or-raise "thunar" '(:class "Thunar")))
-(defcommand dmenu () () (run-shell-command "dmenu_run -nb grey20 -nf orange"))
-(defcommand reinit () () (run-commands "reload" "loadrc"))
+(defcommand terminal () () (run-shell-command "exec urxvtcd"))
+(defcommand browser () () (run-or-raise "exec opera" '(:class "opera")))
+(defcommand filer () () (run-or-raise "exec thunar" '(:class "Thunar")))
+(defcommand dmenu () () (run-shell-command "exec dmenu_run -nb grey20 -nf orange"))
+
+;; display key sequence
+;;
+(defun key-press-hook (key key-seq cmd)
+ (declare (ignore key))
+ (unless (eq *top-map* *resize-map*)
+  (let ((*message-window-gravity* :bottom-right))
+   (message "Key sequence: ~A - "
+    (print-key-seq (reverse key-seq)) cmd))))
+(sleep 0.5)
+(defmacro replace-hook (hook fn)
+ `(remove-hook ,hook ,fn)
+ `(add-hook ,hook ,fn))
 
 ;; keymap
 (define-key *root-map* (kbd "c") "terminal")
@@ -87,12 +101,15 @@
 
 (define-key *top-map* (kbd "M-TAB") "next")
 (define-key *top-map* (kbd "s-RET") "fullscreen")
-(define-key *top-map* (kbd "s-r") "reinit")
+(define-key *top-map* (kbd "s-r") "restart-hard")
  
 ;;input window keymap
 (define-key *input-map* (kbd "C-i") 'input-complete-forward)
 (define-key *input-map* (kbd "C-m") 'input-submit)
 (define-key *input-map* (kbd "C-h") 'input-delete-backward-char)
+
+;; group key map
+(define-key *groups-map* (kbd "f") "gmove media")
 
 
 

@@ -8,6 +8,7 @@ complete echo 'p/1/s/'
 complete make     'p/1/(config fetch checksum depends extract patch configure build showconfig showconfig-recursive rmconfig rmconfig-recursive config-conditional fetch-list fetch-recursive fetch-recursive-list run-depends-list build-depends-list all-depends-list pretty-print-run-depends-list pretty-print-build-depends-list missing reinstall deinstall deinstall-all package package-recursive package-name readmes search quicksearch describe maintainer index fetchindex all clean distclean  install buildworld installworld config-recursive)/'
 complete sudo     'p/1/c/'
 
+complete xinit    'p/1/c/'
 
 complete unzip  'p/*/f:*.{ZIP,zip}/'
 complete tar	'c/-[Acru]*/(b B C f F g G h i l L M N o P \
@@ -56,6 +57,7 @@ complete tar	'c/-[Acru]*/(b B C f F g G h i l L M N o P \
 
 complete pkg_info         'n@-[cdorLR]*@` \ls -1 /var/db/pkg | sed "s%/var/db/pkg/%%"`@'
 complete pkg_delete       'n@*@` \ls -1 /var/db/pkg | sed "s%/var/db/pkg/%%"`@'
+
 
 complete ps               'n/-*U/u/'
 

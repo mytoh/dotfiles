@@ -17,6 +17,7 @@ Bundle 'Shougo/unite.vim'
 Bundle 'thinca/vim-quickrun'
 Bundle 'thinca/vim-ref'
 Bundle 'koron/chalice'
+Bundle 'scrooloose/nerdcommenter'
 
 " vim-scripts repo
 Bundle 'minibufexplorerpp'
@@ -39,7 +40,7 @@ set hlsearch
 set incsearch
 set showmode
 set modeline
-set history=10000
+set history=100
 set autoindent
 set smartindent
 set cindent
@@ -56,6 +57,7 @@ set fileformats=unix,mac,dos
 set splitright
 set splitbelow
 set autochdir
+set cursorline
 
 "statusline
 set laststatus=2
@@ -82,18 +84,21 @@ set enc=utf-8
 set fenc=utf-8
 "set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
 
-" keymaps ---------------
+" keymap
+let mapleader = ","
 noremap ; :
 noremap : ;
 noremap <CR> o<ESC>
 noremap <SPACE> i<SPACE><ESC>
 nmap n nzz
 nmap N Nzz
+nnoremap <ESC><ESC> ;nohlsearch<CR><ESC>
+nnoremap ,w :<C-u>up<CR>
 " neocomplcache keymap
 " <CR>: close popup and save indent.
 inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 
-
+" autocommands {{
 au BufWritePost .vimrc source $MYVIMRC
 
 augroup Scheme
@@ -101,6 +106,16 @@ augroup Scheme
   au FileType scheme setl cindent& lispwords=define,lambda,call-with-*
 augroup END
        
+augroup cch
+  autocmd! cch
+  autocmd WinLeave * set nocursorline
+  autocmd WinEnter,BufRead * set cursorline
+augroup END
+
+:hi clear Cursorline
+:hi Cursorline gui=underline
+highlight Cursorline ctermbg=black guibg=black
+" }}
 
 
 "------------------------------------
@@ -134,14 +149,19 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
 " quickrun ---------------------------
-let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'petite --script'}}
-
-"--------------------------------------
-" I stole settings from these urls
-"--------------------------------------
+let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
 
 " minibufexplorer and many useful plugins
 " http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 "
+
+"" unite.vim
+"let g:unite_enable_start_insert=1
+" buffer list
+nnoremap <silent> ,ub :<C-u>Unite bookmark<CR>
+nnoremap <silent> ,uf :<C-u>Unite file file_mru<CR>
+" leave unite buffer 
+au Filetype unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au Filetype unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
 

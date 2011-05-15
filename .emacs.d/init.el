@@ -155,10 +155,10 @@
 (keyboard-translate ?\C-h ?\C-?)
 
 ;; scheme program
-(setq scheme-program-name "scsh -l ~/.scsh/lib.scm")
+(setq scheme-program-name "gosh")
 ; set encoding to utf-8 
 (setq process-coding-system-alist
-      (cons '("scsh" utf-8 . utf-8) process-coding-system-alist))
+      (cons '("gauche" utf-8 . utf-8) process-coding-system-alist))
 ; load cmuscheme.el for scheme program
 (autoload 'scheme-mode "cmuscheme" "Major mode for Schem." t)
 (autoload 'run-schapeme "cmuscheme" "Run an inferior Scheme process." t)

@@ -26,7 +26,7 @@ fi
 
 
 
-DEFAULT_SESSION="xmonad"
+DEFAULT_SESSION="stumpwm"
 case $1 in
   stumpwm) exec stumpwm ;;
   sawfish) exec sawfish ;;
