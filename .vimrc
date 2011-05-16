@@ -18,6 +18,7 @@ Bundle 'thinca/vim-quickrun'
 Bundle 'thinca/vim-ref'
 Bundle 'koron/chalice'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'kana/vim-fakeclip'
 
 " vim-scripts repo
 Bundle 'minibufexplorerpp'
@@ -28,8 +29,9 @@ filetype on
 filetype plugin indent on
 syntax on
 
+
 set nobackup
-set clipboard+=unnamed
+set clipboard=unnamed,autoselect
 set showmatch
 set title
 set scrolloff=3

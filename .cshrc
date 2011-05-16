@@ -47,6 +47,7 @@ setenv YPSILON_SITELIB ~/.ypsilon
 setenv YPSILON_LOADPATH ~/.ypsilon
 set catalog=ja.ayanami.cat
 setenv NLSPATH ~/local/lib/tcsh/%N
+setenv RLWRAP_HOME ~/.rlwrap
 
 bindkey -e
 bindkey "" backward-delete-word
@@ -75,7 +76,7 @@ alias view "vim -X -R -"
 alias vim "vim -X"
 alias .. 'cd ..'
 alias scsh 'rlwrap scsh'
-alias goshrl 'rlwrap gosh'
+alias goshrl "rlwrap -pBlue -b '(){}[],#;| ' gosh"
 alias ew 'emacs -f w3m'
 alias single 'sudo shutdown now'
 alias halt 'sync;sync;sync;sudo shutdown -p now'
