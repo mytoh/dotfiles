@@ -31,6 +31,7 @@
                        ".vimperatorrc"
                        ".screenrc" 
                        ".stumpwmrc"
+                       ".twmrc"
                        ".xinitrc" 
                        ".xmonad/xmonad.hs" 
                        ".xmonad/restart.sh" 
@@ -40,8 +41,9 @@
 (define (make-symlink files) 
   (let loop ((files files))
        (if (null? files)
+           (begin
              (newline)
-             (print "finished linking!")
+             (print "finished linking!"))
            (begin 
              (make-directory* (sys-dirname (string-append (expand-path "~") (car files))))
              (run-process 

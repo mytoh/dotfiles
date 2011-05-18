@@ -15,7 +15,7 @@ urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
 parcellite &
 xbindkeys &
 Thunar --daemon &
-spinner -T -t /dev/ttyv0
+spinner -T 
 
 if [ "$1" = "twm" -o "$1" = "openbox" ]; then
 /home/mytoh/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 16 -bg gray15 -fn '-adobe-helvetica-medium-r-normal--10-*' -e 'onexit=ungrabmouse' &
@@ -34,13 +34,11 @@ case $1 in
   twm) exec twm -v ;;
   xfce) exec startxfce4 ;;
   fluxbox) exec fluxbox ;;
-  pekwm) exec pekwm ;;
   flwm) exec flwm ;;
-  evilwm) exec evilwm ;;
   qvwm) exec qvwm ;;
-  fvwm*) exec fvwm;;
   dwm) exec dwm ;;
   swm) exec swm ;;
+  afterstep) exec afterstep ;;
   awesome) exec awesome ;;
   *) exec $DEFAULT_SESSION ;;
 esac
