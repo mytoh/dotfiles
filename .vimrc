@@ -6,7 +6,7 @@ filetype off
 set rtp+=~/.vim/vundle/
 call vundle#rc()
 
-" my bundles here
+" my bundles here {{
 " github repo
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
@@ -19,11 +19,16 @@ Bundle 'thinca/vim-ref'
 Bundle 'koron/chalice'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'kana/vim-fakeclip'
+Bundle 'tyru/savemap.vim'
+Bundle 'tyru/vice.vim'
+Bundle 'tyru/eskk.vim'
 
 " vim-scripts repo
 Bundle 'minibufexplorerpp'
 
 " git repo
+"
+" }}
 
 filetype on
 filetype plugin indent on
@@ -157,13 +162,27 @@ let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
 " http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 "
 
-"" unite.vim
+" unite.vim {{
 "let g:unite_enable_start_insert=1
 " buffer list
 nnoremap <silent> ,ub :<C-u>Unite bookmark<CR>
-nnoremap <silent> ,uf :<C-u>Unite file file_mru<CR>
+nnoremap <silent> ,uf :<C-u>Unite file_rec file_mru<CR>
 " leave unite buffer 
 au Filetype unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au Filetype unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+" }}
 
+" eskk {{
+if has('vim_starting')
+    let g:eskk_dictionary = '~/.skk-jisyo'
+"   let g:eskk_large_dictionary = '~/.skk-jisyo.mine'
+endif
+
+let g:eskk_egg_like_newline = 0
+"let g:eskk_revert_henkan_style = "okuri"
+let g:eskk_enable_completion = 0
+" }}
+
+
+"
 

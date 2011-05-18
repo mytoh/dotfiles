@@ -1,1 +1,0 @@
-/home/mytoh/.vim/bundle/unite.vim/doc/unite.txt
