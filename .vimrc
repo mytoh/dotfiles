@@ -23,9 +23,9 @@ Bundle 'tyru/savemap.vim'
 Bundle 'tyru/vice.vim'
 Bundle 'tyru/eskk.vim'
 Bundle 'rgarver/Kwbd.vim'
+Bundle 'fholgado/minibufexpl.vim'
 
 " vim-scripts repo
-Bundle 'minibufexplorerpp'
 
 " git repo
 "
