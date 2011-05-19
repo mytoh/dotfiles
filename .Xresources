@@ -10,7 +10,7 @@ urxvt.scrollBar: false
 urxvt.buffered: true
 !urxvt.borderLess: true
 urxvt.internalBorder: 0
-!urxvt.transparent: true
+urxvt.transparent: true
 urxvt.fading: 2%
 urxvt.fadeColor: grey
 urxvt.shading: 20
