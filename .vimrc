@@ -22,6 +22,7 @@ Bundle 'kana/vim-fakeclip'
 Bundle 'tyru/savemap.vim'
 Bundle 'tyru/vice.vim'
 Bundle 'tyru/eskk.vim'
+Bundle 'rgarver/Kwbd.vim'
 
 " vim-scripts repo
 Bundle 'minibufexplorerpp'
