@@ -22,7 +22,6 @@ Bundle 'kana/vim-fakeclip'
 Bundle 'tyru/savemap.vim'
 Bundle 'tyru/vice.vim'
 Bundle 'tyru/eskk.vim'
-Bundle 'rgarver/Kwbd.vim'
 Bundle 'fholgado/minibufexpl.vim'
 
 " vim-scripts repo
@@ -167,7 +166,7 @@ let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
 "let g:unite_enable_start_insert=1
 " buffer list
 nnoremap <silent> ,ub :<C-u>Unite bookmark<CR>
-nnoremap <silent> ,uf :<C-u>Unite file_rec file_mru<CR>
+nnoremap <silent> ,uf :<C-u>Unite file_rec file<CR>
 " leave unite buffer 
 au Filetype unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au Filetype unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
