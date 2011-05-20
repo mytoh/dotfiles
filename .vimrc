@@ -101,23 +101,25 @@ nmap n nzz
 nmap N Nzz
 nnoremap <ESC><ESC> ;nohlsearch<CR><ESC>
 nnoremap ,w :<C-u>up<CR>
+nnoremap ,q :<C-u>qa<CR>
 " neocomplcache keymap
 " <CR>: close popup and save indent.
 inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 
 " autocommands {{
 au BufWritePost .vimrc source $MYVIMRC
+"au BufWritePost .zshrc !zcompile .zshrc; 
 
-augroup Scheme
+aug Scheme
   au!
   au FileType scheme setl cindent& lispwords=define,lambda,call-with-*
-augroup END
+aug END
        
-augroup cch
-  autocmd! cch
-  autocmd WinLeave * set nocursorline
-  autocmd WinEnter,BufRead * set cursorline
-augroup END
+aug cch
+  au! cch
+  au WinLeave * set nocursorline
+  au WinEnter,BufRead * set cursorline
+aug END
 
 :hi clear Cursorline
 :hi Cursorline gui=underline

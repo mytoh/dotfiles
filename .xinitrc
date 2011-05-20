@@ -11,7 +11,7 @@ xmodmap .Xmodmap
 setxkbmap dvorak
 xsetroot -cursor_name right_ptr &
 nitrogen --restore &
-urxvtcd -e screen -U -D -RR  -s /bin/tcsh -m &
+urxvtcd -e screen -U -D -RR -m &
 parcellite &
 xbindkeys &
 Thunar --daemon &

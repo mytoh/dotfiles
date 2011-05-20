@@ -6,7 +6,7 @@ defencoding utf-8
 defkanji utf-8
 vbell on
 bell_msg "bell: %n (%t) [%w:%s]"
-shelltitle '> |tcsh'
+shelltitle '> |zsh'
 startup_message off
 autodetach on
 defmonitor off

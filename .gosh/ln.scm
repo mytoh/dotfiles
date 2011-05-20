@@ -36,7 +36,8 @@
                        ".xmonad/xmonad.hs" 
                        ".xmonad/restart.sh" 
                        ".Xmodmap" 
-                       ".Xresources"))
+                       ".Xresources"
+                       ".zshrc"))
 
 (define (make-symlink files) 
   (let loop ((files files))
