@@ -13,7 +13,13 @@ export LSCOLORS=ExFxCxdxBxegedabagacad
 export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:;bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
 ## zsh directory
-path=(~/local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:${path})
+path=(~/local/bin(N)\
+      /usr/games(N)\
+      /usr/local/{sbin,bin}\
+      /usr/{sbin,bin}\
+      /{sbin,bin})
+typeset -U path  # remove duplicates
+
 fpath=(~/.zsh/functions/completion ${fpath})
 
 # Autoloads
@@ -34,7 +40,6 @@ bindkey -e
 bindkey '^i' expand-or-complete-prefix
 setopt hist_ignore_dups hist_ignore_all_dups hist_save_no_dups share_history
 setopt auto_cd  auto_pushd extendedglob notify
-#setopt auto_menu
 setopt clobber
 setopt list_packed list_types nolist_beep 
 setopt auto_param_slash noauto_remove_slash

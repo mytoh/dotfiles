@@ -10,12 +10,12 @@ xrdb -merge .Xresources
 xmodmap .Xmodmap
 setxkbmap dvorak
 xsetroot -cursor_name right_ptr &
-nitrogen --restore &
 urxvtcd -e screen -U -D -RR -m &
-parcellite &
 xbindkeys &
 Thunar --daemon &
 spinner -T 
+#parcellite &
+#nitrogen --restore &
 
 if [ "$1" = "twm" -o "$1" = "openbox" ]; then
 /home/mytoh/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 16 -bg gray15 -fn '-adobe-helvetica-medium-r-normal--10-*' -e 'onexit=ungrabmouse' &
