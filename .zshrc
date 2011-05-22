@@ -1,7 +1,6 @@
 # Environment
 export TERM=xterm-256color
 export LANG=en_GB.UTF-8
-export PATH=~/local/bin:~/local/sbin:$PATH
 export EDITOR=vim
 export PAGER=less
 export FTP_PASSIVE_MODE=true
@@ -14,6 +13,7 @@ export LSCOLORS=ExFxCxdxBxegedabagacad
 export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:;bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
 ## zsh directory
+path=(~/local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:${path})
 fpath=(~/.zsh/functions/completion ${fpath})
 
 # Autoloads
@@ -81,7 +81,7 @@ chpwd() {
 
 # setting for screen
 # from zshwiki
-# {{
+# 
 title() {
   print -nR $'\033k'$1$'\033'\\
   print -nR $'\033]0;'$2$'\a'
@@ -89,6 +89,7 @@ title() {
 
 precmd() {
   title zsh "$PWD"
+  rehash
 }
 
 preexec() {
@@ -97,7 +98,7 @@ preexec() {
   title $cmd[1]:t "$cmd[2,-1]"
 #  printf "\ek$1\e\\"
 }
-# }}
+
 
 ## Aliases
 #alias precmd=rehash
@@ -138,4 +139,7 @@ alias -s mkv=mplayer
 
 
 source /usr/home/mytoh/perl5/perlbrew/etc/bashrc
+
+fortune
+
 
