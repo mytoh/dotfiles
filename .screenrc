@@ -34,7 +34,7 @@ defhstatus "^Et"
 
 caption always "%{= wk}%?%F%{b kw}%? %t %?[%h] %?%{-} (screen #%n) "
 backtick 0 0 0 whoami
-hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= bk} %n %t %{-}%+Lw%-055=%{= gk} %`@%H %{= Mk} %l %{= bk} %Y/%m/%d %C:%s %A %="
+hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= ck} %n %t %{-}%+Lw%-055=%{= gk} %`@%H %{= Mk} %l %{= ck} %Y/%m/%d %C:%s %A %="
 sorendition "= dd"
 
 

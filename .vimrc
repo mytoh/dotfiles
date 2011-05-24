@@ -107,10 +107,15 @@ nnoremap ,q :<C-u>qa<CR>
 inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 
 " autocommands {{
-au BufWritePost .vimrc source $MYVIMRC
+aug mycommands
+  au!
+  au BufWritePost .vimrc source $MYVIMRC
+  au bufwritepost .Xresources silent !xrdb -remove 
+  au bufwritepost .Xresources silent !xrdb -merge ~/.Xresources 
+aug END
 "au BufWritePost .zshrc !zcompile .zshrc; 
 
-aug Scheme
+aug scheme
   au!
   au FileType scheme setl cindent& lispwords=define,lambda,call-with-*
 aug END
@@ -121,8 +126,8 @@ aug cch
   au WinEnter,BufRead * set cursorline
 aug END
 
-:hi clear Cursorline
-:hi Cursorline gui=underline
+hi clear Cursorline
+hi Cursorline gui=underline
 highlight Cursorline ctermbg=black guibg=black
 " }}
 

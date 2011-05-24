@@ -68,9 +68,8 @@
             ))
 
 ;; startup programmes
-;(run-shell-command "exec trayer --expand false --alpha 200  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype pixel --width 80 " )
 (run-shell-command "xcompmgr -a &" )
-; (run-shell-command " ~/.dzen/bin/status | exec dzen2 -p 1 -ta r -x 400 -y 0 -w 800 -h 16 ")
+(run-shell-command "nitrogen --restore" )
 
 ;; commands
 (defcommand terminal () () (run-shell-command "exec urxvtcd"))

@@ -1,5 +1,8 @@
 Xcursor.theme: whiteglass
 
+!---------------
+! urxvt
+!---------------
 urxvt.termName: xterm
 urxvt.depth: 32
 urxvt.background: rgba:0000/0000/0000/cccc
@@ -27,10 +30,22 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
 !urxvt.font: xft: Ricty-10
 !urxvt.boldFont: xft: Ricty-10 
-urxvt.font: -*-fixed-medium-r-semicondensed-*-12-*
+!urxvt.font: -*-fixed-medium-r-semicondensed-*-12-*
 !urxvt.boldFont: -*-fixed-medium-r-semicondensed-*-12-*
+urxvt.font: -mplus-fxd-medium-r-semicondensed-*-12-*
+urxvt.boldFont: -mplus-fxd-bold-r-semicondensed-*-12-*
+
+!-------------
+! xterm       
+! ------------
+xterm*foreground: white
+xterm*background: black
+xterm*scrollBar: false
+
 
 !-------------------------------------
+! colors
+!----------------------------------
 !*color0: black
 !*color1: red3
 !*color2: green3
@@ -54,7 +69,7 @@ urxvt.font: -*-fixed-medium-r-semicondensed-*-12-*
 *color1: #ffa0a0
 *color2: #98fb98
 *color3: #f0e68c
-*color4: #87ceeb
+*color4: #7c81ff
 *color5: #ffa0a0
 *color6: #87ceeb
 *color7: #ffffff

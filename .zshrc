@@ -1,28 +1,55 @@
+# Options
+bindkey -e
+setopt hist_ignore_dups hist_ignore_all_dups hist_save_no_dups share_history
+setopt inc_append_history
+setopt auto_cd  auto_pushd extendedglob notify
+setopt clobber
+setopt list_packed list_types nolist_beep 
+setopt noflow_control
+setopt ignore_eof
+setopt complete_aliases
+setopt magic_equal_subst
+setopt auto_remove_slash
+setopt no_auto_param_slash
+setopt always_last_prompt
+setopt cdable_vars
+setopt print_eightbit
+setopt transient_rprompt
+setopt all_export # may cause problem
+unsetopt appendhistory beep nomatch
+
 # Environment
-export LANG=en_GB.UTF-8
-export EDITOR=vim
-export PAGER=less
-export FTP_PASSIVE_MODE=true
-export MYVIMRC=~/.vimrc
-export G_FILENAME_ENCODING=@locale
-export HOMEBREW_VERBOSE
-export RLWRAP_HOME=~/.rlwrap
-export LISTMAX=1000
-export LSCOLORS=ExFxCxdxBxegedabagacad
+# 
+LANG=en_GB.UTF-8
+EDITOR=vim
+PAGER=less
+FTP_PASSIVE_MODE=true
+MYVIMRC=~/.vimrc
+G_FILENAME_ENCODING=@locale
+HOMEBREW_VERBOSE=true
+RLWRAP_HOME=~/.rlwrap
+LISTMAX=1000
+LSCOLORS=ExFxCxdxBxegedabagacad
 if [[ -x `which gdircolors` ]]; then
   eval $(gdircolors -b)
 fi
+ZLS_COLORS=$LS_COLORS
+GAUCHE_LOAD_PATH="$HOME/.gosh"
+
 HISTFILE=~/.zsh_history
 HISTSIZE=50000
 SAVEHIST=50000
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 ## zsh directory
-path=(~/local/bin(N)\
+path=(~/.cw
+      ~/local/bin(N)\
       /usr/games(N)\
       /usr/local/{sbin,bin}\
       /usr/{sbin,bin}\
       /{sbin,bin})
 typeset -U path  # remove duplicates
+cdpath=(~/local ~/local/var)
 
 fpath=(~/.zsh/functions/completion ${fpath})
 
@@ -36,27 +63,13 @@ autoload colors &&  colors
 zmodload zsh/complist
 
 
-# Options
-bindkey -e
-setopt hist_ignore_dups hist_ignore_all_dups hist_save_no_dups share_history
-setopt auto_cd  auto_pushd extendedglob notify
-setopt clobber
-setopt list_packed list_types nolist_beep 
-setopt auto_param_slash noauto_remove_slash
-setopt noflow_control
-setopt ignore_eof
-setopt complete_aliases
-setopt magic_equal_subst
-setopt print_eightbit
-setopt transient_rprompt
-unsetopt appendhistory beep nomatch
-
 # Zstyles
 zstyle :compinstall filename '/Users/kazuki/.zshrc'
+zstyle ':completion:*' completer _oldlist _complete
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:(processes|jobs)' menu yes select=2
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]=** r:|=*' '+l:|=*' '+m:{A-Z}={a-z}'
-zstyle ':completion:*' format '%BCompleting %d%b'
+zstyle ':completion:*' format '%BCompleting %b%F{blue}%d'
 zstyle ':completion:*' group-name ''
 
 
@@ -64,18 +77,18 @@ zstyle ':completion:*' group-name ''
 setprompt() {
   case $TERM in
     screen*|jfbterm*)
-  PROMPT="%{${fg[cyan]}%}┌───%{${reset_color}%}(%{${fg[green]}%}%~%{${reset_color}%})%{${fg[cyan]}%}──(%{$fg[cyan]%}%n%{${fg[white]}%}@%{${fg[green]}%}%m%{${fg[white]}%}%{${fg[cyan]}%})
-%{${fg[cyan]}%}└──%{${reset_color}%}> "
+      PROMPT="%{${fg[blue]}%}┌───(%{${fg[green]}%}%~%{${fg[blue]}%})──(%{${fg[cyan]}%}%n%{${fg[white]}%}@%{${fg[green]}%}%m%{${fg[white]}%}%{${fg[blue]}%})
+%{${fg[blue]}%}└──%{${reset_color}%}> "
   PROMPT2="%{${fg[cyan]}%}%_%%%{${reset_color}%} "
   SPROMPT="%{${fg[cyan]}%}%r is correct? [n,y,a,e]:%{^[[m%} "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
     PROMPT="%{${fg[white]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
     ;;
   xterm*)
-    PROMPT="%{${fg[cyan]}%},----%{${reset_color}%}(%{${fg[green]}%}%~%{${reset_color}%})%{${fg[cyan]}%}(%{$fg[cyan]%}%n%{${fg[white]}%}@%{${fg[green]}%}%m%{${fg[white]}%}%{${fg[cyan]}%})
+    PROMPT="%{${fg[cyan]}%},----%{${reset_color}%}(%{${fg[green]}%}%~%{${reset_color}%})%{${fg[cyan]}%}(%{${fg[cyan]%}%n%{${fg[white]}%}@%{${fg[green]}%}%m%{${fg[white]}%}%{${fg[cyan]}%})
 |--%{${fg[cyan]}%}%{${reset_color}%} > "
 ;;
-esac
+  esac
 
 
 }
@@ -157,8 +170,20 @@ alias -s {gif,jpg,jpeg,png}=xli
 alias -s {m3u,mp3,flac}=audacious
 alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
 
+###
+# auto-fu.zsh
+{. ~/.zsh/plugins/auto-fu.zsh/auto-fu; auto-fu-install;} 
+zstyle ':auto-fu:highlight' input bold
+zstyle ':auto-fu:highlight' completion fg=cyan,bold
+zstyle ':auto-fu:highlight' completion/one fg=white,bold,underline
+zstyle ':auto-fu:var' postdisplay ''
+zstyle ':auto-fu:var' track-keymap-skip opp
+zle-line-init() {auto-fu-init;}; zle -N zle-line-init
+zle -N zle-keymap-select auto-fu-zle-keymap-select
 
-source /usr/home/mytoh/perl5/perlbrew/etc/bashrc
+
+source ~/perl5/perlbrew/etc/bashrc
+source ~/.zsh/plugins/zaw/zaw.zsh
 
 fortune
 
