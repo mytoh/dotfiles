@@ -23,8 +23,8 @@
 (set-frame-outline-width 1)
 
 ;; options
-(setf 
-  *normal-border-width*             1 
+(setf
+  *normal-border-width*             1
   *maxsize-border-width*            2
   *transient-border-width*          1
   *window-border-style*             :thin ;; thick,thin,none,tight
@@ -52,7 +52,7 @@
 
 ;; set color slots
 (setf *colors* (append *colors*
-                       (list "orange"  
+                       (list "orange"
                              "pink")))
 (update-color-map (current-screen))
 
@@ -61,7 +61,7 @@
     (toggle-mode-line (current-screen) (current-head)))
 
 (setf *screen-mode-line-format*  ;; ^n use the normal bg and fg color
-      (list "%g ^8*|^n %w " 
+      (list "%g ^8*|^n %w "
             "^8*|^n "
             '(:eval (run-shell-command "~/.gosh/stumpwm.scm" t))
             "^8*|^n %d"
@@ -75,7 +75,7 @@
 (defcommand terminal () () (run-shell-command "exec urxvtcd"))
 (defcommand browser () () (run-or-raise "exec opera" '(:class "opera")))
 (defcommand filer () () (run-or-raise "exec thunar" '(:class "Thunar")))
-(defcommand dmenu () () (run-shell-command "exec dmenu_run -nb grey20 -nf orange"))
+(defcommand dmenu () () (run-shell-command "exec dmenu_run -i -b -nb grey20 -nf orange"))
 
 ;; keymap
 (define-key *root-map* (kbd "c") "terminal")

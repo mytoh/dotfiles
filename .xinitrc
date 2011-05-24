@@ -10,6 +10,8 @@ xrdb -merge .Xresources
 xmodmap .Xmodmap
 setxkbmap dvorak
 xsetroot -cursor_name right_ptr &
+xset fp+ /usr/local/lib/X11/fonts/local
+xset fp rehash
 urxvtcd -e screen -U -D -RR -m &
 xbindkeys &
 Thunar --daemon &

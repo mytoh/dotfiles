@@ -16,7 +16,7 @@ urxvt.internalBorder: 0
 urxvt.transparent: true
 urxvt.fading: 2%
 urxvt.fadeColor: grey
-urxvt.shading: 20
+urxvt.shading: 10
 urxvt.tintcolor: black
 urxvt.preedittype: root
 urxvt.savelines: 2000
@@ -28,12 +28,10 @@ urxvt.urlLauncher: firefox
 urxvt.matcher.button: 1
 urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
-!urxvt.font: xft: Ricty-10
-!urxvt.boldFont: xft: Ricty-10 
+urxvt.font: xft: Ricty-9
+urxvt.boldFont: xft: Ricty-9
 !urxvt.font: -*-fixed-medium-r-semicondensed-*-12-*
 !urxvt.boldFont: -*-fixed-medium-r-semicondensed-*-12-*
-urxvt.font: -mplus-fxd-medium-r-semicondensed-*-12-*
-urxvt.boldFont: -mplus-fxd-bold-r-semicondensed-*-12-*
 
 !-------------
 ! xterm       
@@ -65,16 +63,16 @@ xterm*scrollBar: false
 !--------------------------------------
 
 
-*color0: #333333
+*color0: #222222
 *color1: #ffa0a0
 *color2: #98fb98
 *color3: #f0e68c
-*color4: #7c81ff
+*color4: #3a93ff
 *color5: #ffa0a0
 *color6: #87ceeb
 *color7: #ffffff
-*color8: #333333 
-*color9: #ffa0a0 
+*color8: #333333
+*color9: #ffa0a0
 *color10: #9acd32
 *color11: #f0e68c
 *color12: #87ceeb

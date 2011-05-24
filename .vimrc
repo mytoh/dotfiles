@@ -1,5 +1,5 @@
 
-"turn filetype off to load ftdetect 
+"turn filetype off to load ftdetect
 set nocompatible
 filetype off
 
@@ -23,8 +23,10 @@ Bundle 'tyru/savemap.vim'
 Bundle 'tyru/vice.vim'
 Bundle 'tyru/eskk.vim'
 Bundle 'fholgado/minibufexpl.vim'
+Bundle 'lilydjwg/colorizer'
 
 " vim-scripts repo
+Bundle 'gauref.vim'
 
 " git repo
 "
@@ -65,6 +67,8 @@ set splitright
 set splitbelow
 set autochdir
 set cursorline
+set list
+set listchars=tab:>-,trail:-
 
 "statusline
 set laststatus=2
@@ -93,10 +97,10 @@ set fenc=utf-8
 
 " keymap
 let mapleader = ","
-noremap ; :
-noremap : ;
-noremap <CR> o<ESC>
-noremap <SPACE> i<SPACE><ESC>
+nnoremap ; :
+nnoremap : ;
+nnoremap <CR> o<ESC>
+nnoremap <SPACE> i<SPACE><ESC>
 nmap n nzz
 nmap N Nzz
 nnoremap <ESC><ESC> ;nohlsearch<CR><ESC>
@@ -109,21 +113,21 @@ inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 " autocommands {{
 aug mycommands
   au!
-  au BufWritePost .vimrc source $MYVIMRC
-  au bufwritepost .Xresources silent !xrdb -remove 
-  au bufwritepost .Xresources silent !xrdb -merge ~/.Xresources 
+  au bufwritepost .vimrc source $MYVIMRC
+  au bufwritepost .Xresources silent !xrdb -remove
+  au bufwritepost .Xresources silent !xrdb -merge ~/.Xresources
 aug END
-"au BufWritePost .zshrc !zcompile .zshrc; 
+"au BufWritePost .zshrc !zcompile .zshrc;
 
 aug scheme
   au!
-  au FileType scheme setl cindent& lispwords=define,lambda,call-with-*
+  au filetype scheme setl cindent& lispwords=define,lambda,call-with-*
 aug END
        
 aug cch
   au! cch
-  au WinLeave * set nocursorline
-  au WinEnter,BufRead * set cursorline
+  au winleave * set nocursorline
+  au winenter,bufread * set cursorline
 aug END
 
 hi clear Cursorline
@@ -175,8 +179,8 @@ let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
 nnoremap <silent> ,ub :<C-u>Unite bookmark<CR>
 nnoremap <silent> ,uf :<C-u>Unite file_rec file<CR>
 " leave unite buffer 
-au Filetype unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au Filetype unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+au filetype unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au filetype unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 " }}
 
 " eskk {{
@@ -190,6 +194,6 @@ let g:eskk_egg_like_newline = 0
 let g:eskk_enable_completion = 0
 " }}
 
-
-"
+" gauref
+let g:gauref_file = '/usr/home/mytoh/.vim/bundle/gauref.vim/doc/gauche-refe.txt'
 

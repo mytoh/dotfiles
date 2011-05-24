@@ -4,7 +4,7 @@ setopt hist_ignore_dups hist_ignore_all_dups hist_save_no_dups share_history
 setopt inc_append_history
 setopt auto_cd  auto_pushd extendedglob notify
 setopt clobber
-setopt list_packed list_types nolist_beep 
+setopt list_packed list_types nolist_beep
 setopt noflow_control
 setopt ignore_eof
 setopt complete_aliases
@@ -98,8 +98,8 @@ setprompt
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end 
-bindkey "\\ep" history-beginning-search-backward-end 
+bindkey "^P" history-beginning-search-backward-end
+bindkey "\\ep" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 bindkey "\\en" history-beginning-search-forward-end
 
@@ -130,9 +130,9 @@ case $TERM in
       #  printf "\ek$1\e\\"
     }
     ;;
-  xterm*)
+  xterm*|jfbterm*)
     precmd() {
-      print -Pn "\e]0;$TERM - [%n@%M]%# [%~]\a" 
+      print -Pn "\e]0;$TERM - [%n@%M]%# [%~]\a"
     }
     preexec() {
       print -Pn "\e]0;$TERM - [%n@%M]%# ($l)\a"
@@ -147,7 +147,8 @@ alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster
 alias cup="cpan-outdated && cpan-outdated | xargs cpanm -Sv"
 alias sc="screen -U -D -RR -m "
 alias la="ls -G -a"
-alias ll="ls -G -hlA " alias ls="ls -G"
+alias ll="ls -G -hlA " 
+alias ls="ls -G -F"
 alias pfetch="sudo make  fetch-recursive"
 alias pinst="sudo make  install distclean; rehash"
 alias pconf="sudo make  config-recursive"

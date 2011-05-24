@@ -59,9 +59,9 @@
 ;; flash parens
 (show-paren-mode t)
 ;; line by line scrolling
-(setq scroll-step 1 
-      scroll-conservatively 10000) 
-;; 
+(setq scroll-step 1
+      scroll-conservatively 10000)
+;;
 (setq-default scroll-down-aggressively 0.4
               scroll-up-aggressively   0.4)
 
@@ -122,24 +122,24 @@
 ;;;;; faces  ;;;;;
 (custom-set-faces
  '(default   ((t
-	      (:background "gray7" 
-	       :foreground "#d0d0d0" 
-	       :height 80
-	       ))))
+       (:background "gray7"
+        :foreground "#d0d0d0"
+        :height 80
+        ))))
  '(cursor    ((t
                (:background "white"
                ))))
  '(highlight ((t
                (:background "HotPink2"
                 :foreground "gray11"
-	       ))))
+       ))))
  '(region    ((t
-	       (:background "dark slate blue"
-	       ))))
+         (:background "dark slate blue"
+         ))))
  '(modeline ((t
-	      (:background "gray30"
-	       :foreground "white"
-	      ))))
+        (:background "gray30"
+         :foreground "white"
+        ))))
  '(mode-line-buffer-id ((t
                          (:background "gray15"
                           :foreground "linen"
@@ -148,8 +148,8 @@
                             (:foreground "gray35"
                             ))))
  '(linum    ((t
-	      (:inherit shadow :background "gray45"
-	      )))))
+        (:inherit shadow :background "gray45"
+        )))))
 
 ;; kepmap
 (keyboard-translate ?\C-h ?\C-?)
