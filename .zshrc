@@ -1,5 +1,4 @@
 # Environment
-export TERM=xterm-256color
 export LANG=en_GB.UTF-8
 export EDITOR=vim
 export PAGER=less
@@ -10,7 +9,12 @@ export HOMEBREW_VERBOSE
 export RLWRAP_HOME=~/.rlwrap
 export LISTMAX=1000
 export LSCOLORS=ExFxCxdxBxegedabagacad
-export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:;bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+if [[ -x `which gdircolors` ]]; then
+  eval $(gdircolors -b)
+fi
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
 
 ## zsh directory
 path=(~/local/bin(N)\
@@ -23,8 +27,8 @@ typeset -U path  # remove duplicates
 fpath=(~/.zsh/functions/completion ${fpath})
 
 # Autoloads
-autoload -Uz compinit; compinit
-autoload colors; colors
+autoload -Uz compinit && compinit
+autoload colors &&  colors
 #autoload predict-on
 #predict-on
 
@@ -33,11 +37,7 @@ zmodload zsh/complist
 
 
 # Options
-HISTFILE=~/.histfile
-HISTSIZE=50000
-SAVEHIST=50000
 bindkey -e
-bindkey '^i' expand-or-complete-prefix
 setopt hist_ignore_dups hist_ignore_all_dups hist_save_no_dups share_history
 setopt auto_cd  auto_pushd extendedglob notify
 setopt clobber
@@ -53,22 +53,33 @@ unsetopt appendhistory beep nomatch
 
 # Zstyles
 zstyle :compinstall filename '/Users/kazuki/.zshrc'
-zstyle ':completion:*' completer _match _complete _approximate
-zstyle ':completion:*:match:*' original only
-zstyle ':completion:*:approximate:*' max-errors 1 numeric
-zstyle ':completion:*:functions' ignore-patterns '_*'
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} m:[-._]=[-._] r:|[-._]=** r:|=*' '+l:|=*'
+zstyle ':completion:*:(processes|jobs)' menu yes select=2
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]=** r:|=*' '+l:|=*' '+m:{A-Z}={a-z}'
+zstyle ':completion:*' format '%BCompleting %d%b'
+zstyle ':completion:*' group-name ''
 
 
 # Prompts
-PROMPT="%{${fg[cyan]}%}%~%{${reset_color}%} > "
-PROMPT2="%{${fg[cyan]}%}%_%%%{${reset_color}%} "
-SPROMPT="%{${fg[cyan]}%}%r is correct? [n,y,a,e]:%{^[[m%} "
-[ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-  PROMPT="%{${fg[white]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-# right prompt
-RPROMPT="[%{$fg[cyan]%}%n%{${fg[white]}%}@%{${fg[green]}%}%m%{${fg[white]}%}]"
+setprompt() {
+  case $TERM in
+    screen*|jfbterm*)
+  PROMPT="%{${fg[cyan]}%}┌───%{${reset_color}%}(%{${fg[green]}%}%~%{${reset_color}%})%{${fg[cyan]}%}──(%{$fg[cyan]%}%n%{${fg[white]}%}@%{${fg[green]}%}%m%{${fg[white]}%}%{${fg[cyan]}%})
+%{${fg[cyan]}%}└──%{${reset_color}%}> "
+  PROMPT2="%{${fg[cyan]}%}%_%%%{${reset_color}%} "
+  SPROMPT="%{${fg[cyan]}%}%r is correct? [n,y,a,e]:%{^[[m%} "
+  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
+    PROMPT="%{${fg[white]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
+    ;;
+  xterm*)
+    PROMPT="%{${fg[cyan]}%},----%{${reset_color}%}(%{${fg[green]}%}%~%{${reset_color}%})%{${fg[cyan]}%}(%{$fg[cyan]%}%n%{${fg[white]}%}@%{${fg[green]}%}%m%{${fg[white]}%}%{${fg[cyan]}%})
+|--%{${fg[cyan]}%}%{${reset_color}%} > "
+;;
+esac
+
+
+}
+setprompt
 
 # History search keymap
 autoload history-search-end
@@ -92,20 +103,31 @@ title() {
   print -nR $'\033]0;'$2$'\a'
 }
 
-precmd() {
-  title zsh "$PWD"
-  rehash
-}
+case $TERM in
+  screen*)
+    precmd() {
+      title zsh "$PWD"
+      rehash
+    }
 
-preexec() {
-  emulate -L zsh
-  local -a cmd; cmd=(${(z)1})
-  title $cmd[1]:t "$cmd[2,-1]"
-#  printf "\ek$1\e\\"
-}
+    preexec() {
+      emulate -L zsh
+      local -a cmd; cmd=(${(z)1})
+      title $cmd[1]:t "$cmd[2,-1]"
+      #  printf "\ek$1\e\\"
+    }
+    ;;
+  xterm*)
+    precmd() {
+      print -Pn "\e]0;$TERM - [%n@%M]%# [%~]\a" 
+    }
+    preexec() {
+      print -Pn "\e]0;$TERM - [%n@%M]%# ($l)\a"
+    }
+    ;;
+esac
 
-
-## Aliases
+# Aliases
 #alias precmd=rehash
 alias pup="sudo portsnap fetch update "
 alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster --clean-packages --clean-distfiles"
@@ -129,18 +151,11 @@ alias sudo="sudo -E "
 # aliases for files
 alias -s txt=cat
 alias -s zip=zipinfo
-alias -s tgz=gzcat
-alias -s tbz=bzcat
-alias -s gz=tar -xzvf
-alias -s bz2=tar -xjvf
-alias -s gif=xli
-alias -s jpg=xli
-alias -s jpeg=xli
-alias -s png=xli
-alias -s m3u=audacious
-alias -s mp4=mplayer
-alias -s flv=mplayer
-alias -s mkv=mplayer
+alias -s {tgz,tbz}=gzcat
+alias -s {gz,bz2}=tar -xzvf
+alias -s {gif,jpg,jpeg,png}=xli
+alias -s {m3u,mp3,flac}=audacious
+alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
 
 
 source /usr/home/mytoh/perl5/perlbrew/etc/bashrc

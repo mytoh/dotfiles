@@ -1,4 +1,5 @@
 
+term screen-256color
 escape z
 defutf8 on
 encoding utf-8 utf-8
@@ -27,7 +28,9 @@ bindkey ^t focus
 
 attrcolor b ".I"
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo jfbterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 defbce on
+defhstatus "^Et"
 
 caption always "%{= wk}%?%F%{b kw}%? %t %?[%h] %?%{-} (screen #%n) "
 backtick 0 0 0 whoami
