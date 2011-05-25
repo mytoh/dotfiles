@@ -27,6 +27,7 @@ Bundle 'lilydjwg/colorizer'
 
 " vim-scripts repo
 Bundle 'gauref.vim'
+Bundle 'info.vim'
 
 " git repo
 "

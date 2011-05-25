@@ -11,6 +11,10 @@ xmodmap .Xmodmap
 setxkbmap dvorak
 xsetroot -cursor_name right_ptr &
 xset fp+ /usr/local/lib/X11/fonts/local
+xset fp+ /usr/local/lib/X11/fonts/TrueType
+xset fp+ /usr/local/lib/X11/fonts/cyrillic
+xset fp+ /usr/local/lib/X11/fonts/profont
+xset fp+ $HOME/.fonts
 xset fp rehash
 urxvtcd -e screen -U -D -RR -m &
 xbindkeys &

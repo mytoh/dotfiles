@@ -2,9 +2,18 @@
 bindkey -e
 setopt hist_ignore_dups hist_ignore_all_dups hist_save_no_dups share_history
 setopt inc_append_history
-setopt auto_cd  auto_pushd extendedglob notify
+setopt auto_cd
+setopt auto_pushd
+setopt extended_glob
+setopt glob_dots
+setopt multibyte
+setopt notify
+setopt auto_name_dirs
 setopt clobber
 setopt list_packed list_types nolist_beep
+setopt hash_list_all
+setopt list_rows_first
+setopt long_list_jobs
 setopt noflow_control
 setopt ignore_eof
 setopt complete_aliases
@@ -16,10 +25,10 @@ setopt cdable_vars
 setopt print_eightbit
 setopt transient_rprompt
 setopt all_export # may cause problem
-unsetopt appendhistory beep nomatch
+unsetopt bg_nice appendhistory beep nomatch
 
+##
 # Environment
-# 
 LANG=en_GB.UTF-8
 EDITOR=vim
 PAGER=less
@@ -28,7 +37,7 @@ MYVIMRC=~/.vimrc
 G_FILENAME_ENCODING=@locale
 HOMEBREW_VERBOSE=true
 RLWRAP_HOME=~/.rlwrap
-LISTMAX=1000
+LISTMAX=0
 LSCOLORS=ExFxCxdxBxegedabagacad
 if [[ -x `which gdircolors` ]]; then
   eval $(gdircolors -b)
@@ -50,8 +59,13 @@ path=(~/.cw
       /{sbin,bin})
 typeset -U path  # remove duplicates
 cdpath=(~/local ~/local/var)
-
 fpath=(~/.zsh/functions/completion ${fpath})
+
+##  named directories
+# $ cd ~dir
+quatre=~/local/mnt/quatre
+deskstar=~/local/mnt/deskstar
+mypassport=~/local/mnt/mypassport
 
 # Autoloads
 autoload -Uz compinit && compinit
