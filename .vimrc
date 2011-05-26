@@ -134,6 +134,15 @@ aug END
 hi clear Cursorline
 hi Cursorline gui=underline
 highlight Cursorline ctermbg=black guibg=black
+
+au bufwritepost * call SetUTF8Xattr(expand("<afile>"))
+function! SetUTF8Xattr(file)
+  let isutf8 = &fileencoding == "utf-8" || (&fileencoding == "" && &encoding == "utf-8")
+  if has("unix") && match(system("uname"),'Darwin') != -1 && isutf8
+    call system("xattr -w com.apple.TextEncoding 'utf-8;134217984' '" . a:file . "'")
+  endif
+endfunction
+
 " }}
 
 
