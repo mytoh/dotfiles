@@ -69,7 +69,7 @@ set splitbelow
 set autochdir
 set cursorline
 set list
-set listchars=tab:>-,trail:-
+set listchars=tab:^\ ,trail:_
 
 "statusline
 set laststatus=2
@@ -88,6 +88,8 @@ set ttymouse=xterm2
 
 "colors
 set t_Co=256
+"set t_AB=^[[48;5;%dm
+"set t_AF=^[[38;5;%dm
 colorscheme xoria256
 
 "encodings
@@ -115,6 +117,7 @@ inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 aug mycommands
   au!
   au bufwritepost .vimrc source $MYVIMRC
+  au bufread,bufnewfile .tmux.conf  set filetype=tmux
   au bufwritepost .Xresources silent !xrdb -remove
   au bufwritepost .Xresources silent !xrdb -merge ~/.Xresources
 aug END

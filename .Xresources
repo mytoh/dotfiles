@@ -36,7 +36,7 @@ urxvt.font: k12
 urxvt.boldfont: k12b
 
 !-------------
-! xterm       
+! xterm
 ! ------------
 xterm*foreground: white
 xterm*background: black

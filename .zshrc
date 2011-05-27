@@ -24,11 +24,12 @@ setopt always_last_prompt
 setopt cdable_vars
 setopt print_eightbit
 setopt transient_rprompt
-setopt all_export # may cause problem
 unsetopt bg_nice appendhistory beep nomatch
+limit coredumpsize 0
 
 ##
 # Environment
+setopt all_export # may cause problem
 LANG=en_GB.UTF-8
 EDITOR=vim
 PAGER=less
@@ -38,7 +39,7 @@ G_FILENAME_ENCODING=@locale
 HOMEBREW_VERBOSE=true
 RLWRAP_HOME=~/.rlwrap
 LISTMAX=0
-LSCOLORS=ExFxCxdxBxegedabagacad
+LSCOLORS=exFxCxdxBxegedabagacad
 if [[ -x `which gdircolors` ]]; then
   eval $(gdircolors -b)
 fi
@@ -61,7 +62,8 @@ typeset -U path  # remove duplicates
 cdpath=(~/local ~/local/var)
 fpath=(~/.zsh/functions/completion ${fpath})
 
-##  named directories
+##
+# named directories
 # $ cd ~dir
 quatre=~/local/mnt/quatre
 deskstar=~/local/mnt/deskstar
@@ -96,7 +98,7 @@ setprompt() {
   PROMPT2="%{${fg[cyan]}%}%_%%%{${reset_color}%} "
   SPROMPT="%{${fg[cyan]}%}%r is correct? [n,y,a,e]:%{^[[m%} "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-    PROMPT="%{${fg[white]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
+    PROMPT="%{${fg[red]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
     ;;
   xterm*)
     PROMPT="%{${fg[cyan]}%},----%{${reset_color}%}(%{${fg[green]}%}%~%{${reset_color}%})%{${fg[cyan]}%}(%{${fg[cyan]%}%n%{${fg[white]}%}@%{${fg[green]}%}%m%{${fg[white]}%}%{${fg[cyan]}%})
@@ -195,9 +197,13 @@ zstyle ':auto-fu:var' track-keymap-skip opp
 zle-line-init() {auto-fu-init;}; zle -N zle-line-init
 zle -N zle-keymap-select auto-fu-zle-keymap-select
 
-
+if [ -e $HOME/perl5 ]; then
 source ~/perl5/perlbrew/etc/bashrc
+fi
+
 source ~/.zsh/plugins/zaw/zaw.zsh
+
+#[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 fortune
 

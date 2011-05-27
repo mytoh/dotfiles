@@ -16,7 +16,7 @@ xset fp+ /usr/local/lib/X11/fonts/cyrillic
 xset fp+ /usr/local/lib/X11/fonts/profont
 xset fp+ $HOME/.fonts
 xset fp rehash
-urxvtcd -e screen -U -D -RR -m &
+urxvtcd  &
 xbindkeys &
 Thunar --daemon &
 spinner -T 
