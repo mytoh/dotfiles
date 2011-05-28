@@ -90,25 +90,11 @@ zstyle ':completion:*' group-name ''
 
 
 # Prompts
-setprompt() {
-  case $TERM in
-    screen*|jfbterm*)
-      PROMPT="%{${fg[blue]}%}┌───(%{${fg[green]}%}%~%{${fg[blue]}%})──(%{${fg[cyan]}%}%n%{${fg[white]}%}@%{${fg[green]}%}%m%{${fg[white]}%}%{${fg[blue]}%})
-%{${fg[blue]}%}└──%{${reset_color}%}> "
-  PROMPT2="%{${fg[cyan]}%}%_%%%{${reset_color}%} "
-  SPROMPT="%{${fg[cyan]}%}%r is correct? [n,y,a,e]:%{^[[m%} "
-  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-    PROMPT="%{${fg[red]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-    ;;
-  xterm*)
-    PROMPT="%{${fg[cyan]}%},----%{${reset_color}%}(%{${fg[green]}%}%~%{${reset_color}%})%{${fg[cyan]}%}(%{${fg[cyan]%}%n%{${fg[white]}%}@%{${fg[green]}%}%m%{${fg[white]}%}%{${fg[cyan]}%})
-|--%{${fg[cyan]}%}%{${reset_color}%} > "
-;;
-  esac
-
-
-}
-setprompt
+PROMPT="%{${fg[green]}%}%~%{${fg[white]}%} > "
+PROMPT2="%{${fg[cyan]}%}%_%%%{${reset_color}%} "
+SPROMPT="%{${fg[cyan]}%}%r is correct? [n,y,a,e]:%{^[[m%} "
+[ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
+  PROMPT="%{${fg[red]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
 
 # History search keymap
 autoload history-search-end
@@ -119,49 +105,28 @@ bindkey "\\ep" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 bindkey "\\en" history-beginning-search-forward-end
 
-# Functions
+## Functions
 chpwd() {
   ls -G -F
 }
 
-# setting for screen
-# from zshwiki
-# 
-title() {
-  print -nR $'\033k'$1$'\033'\\
-  print -nR $'\033]0;'$2$'\a'
+precmd() {
+  rehash
 }
 
-case $TERM in
-  screen*)
-    precmd() {
-      title zsh "$PWD"
-      rehash
-    }
-
-    preexec() {
-      emulate -L zsh
-      local -a cmd; cmd=(${(z)1})
-      title $cmd[1]:t "$cmd[2,-1]"
-      #  printf "\ek$1\e\\"
-    }
-    ;;
-  xterm*|jfbterm*)
-    precmd() {
-      print -Pn "\e]0;$TERM - [%n@%M]%# [%~]\a"
-    }
-    preexec() {
-      print -Pn "\e]0;$TERM - [%n@%M]%# ($l)\a"
-    }
-    ;;
-esac
+sc() {
+  if tmux ls >/dev/null 2>&1; then
+    tmux attach
+  else
+    tmux
+  fi
+}
 
 # Aliases
 #alias precmd=rehash
 alias pup="sudo portsnap fetch update "
 alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster --clean-packages --clean-distfiles"
 alias cup="cpan-outdated && cpan-outdated | xargs cpanm -Sv"
-alias sc="screen -U -D -RR -m "
 alias la="ls -G -a"
 alias ll="ls -G -hlA " 
 alias ls="ls -G -F"
