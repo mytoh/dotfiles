@@ -91,6 +91,8 @@ zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]
 zstyle ':completion:*' format '%BCompleting %b%F{blue}%d'
 zstyle ':completion:*' group-name ''
 
+# compdef
+compdef _portmaster portbuilder 
 
 # Prompts
 PROMPT="%{$fg[green]%}%~%{$fg[white]%} > "

@@ -40,14 +40,14 @@ let colors_name = "xoria256"
 
 "" General colors
 "hi Normal       ctermfg=252 guifg=#d0d0d0 ctermbg=234 guibg=#111111 cterm=none gui=none
-hi Normal       ctermfg=252 guifg=#d0d0d0 guibg=#111111 cterm=none gui=none
+hi Normal       ctermfg=252 guifg=#d0d0d0             guibg=#111111  cterm=none gui=none
 hi CursorColumn                           ctermbg=238 guibg=#444444
 hi Cursor                                 ctermbg=214 guibg=#ffaf00
 hi CursorLine                             ctermbg=238 guibg=#444444
 hi FoldColumn   ctermfg=248 guifg=#a8a8a8 ctermbg=234 guibg=#111111
 hi Folded       ctermfg=255 guifg=#eeeeee ctermbg=60  guibg=#5f5f87
 hi IncSearch    ctermfg=0   guifg=#000000 ctermbg=223 guibg=#ffdfaf cterm=none gui=none
-hi NonText      ctermfg=248 guifg=#a8a8a8 ctermbg=233 guibg=#101010 cterm=bold gui=bold
+hi NonText      ctermfg=248 guifg=#a8a8a8 ctermbg=233 guibg=#101010 cterm=none gui=bold
 hi Pmenu        ctermfg=0   guifg=#000000 ctermbg=246 guibg=#949494
 hi PmenuSbar                              ctermbg=243 guibg=#767676
 hi PmenuSel     ctermfg=0   guifg=#000000 ctermbg=243 guibg=#767676
@@ -72,7 +72,7 @@ hi ErrorMsg     ctermfg=15  guifg=#ffffff ctermbg=1   guibg=#800000
 hi Identifier   ctermfg=182 guifg=#dfafdf                           cterm=none
 hi Ignore       ctermfg=238 guifg=#444444
 hi LineNr       ctermfg=248 guifg=#a8a8a8 ctermbg=233 guibg=#101010
-hi MatchParen   ctermfg=188 guifg=#dfdfdf ctermbg=68  guibg=#5f87df cterm=bold gui=bold
+hi MatchParen   ctermfg=188 guifg=#dfdfdf ctermbg=68  guibg=#5f87df cterm=none gui=bold
 hi Number       ctermfg=180 guifg=#dfaf87
 hi PreProc      ctermfg=150 guifg=#afdf87
 hi Special      ctermfg=174 guifg=#df8787

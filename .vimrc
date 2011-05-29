@@ -89,8 +89,6 @@ set ttymouse=xterm2
 
 "colors
 set t_Co=256
-"set t_AB=^[[48;5;%dm
-"set t_AF=^[[38;5;%dm
 colorscheme xoria256
 
 "encodings
@@ -137,7 +135,7 @@ aug END
 
 hi clear Cursorline
 hi Cursorline gui=underline
-highlight Cursorline ctermbg=black guibg=black
+hi Cursorline ctermbg=black guibg=black
 
 au bufwritepost * call SetUTF8Xattr(expand("<afile>"))
 function! SetUTF8Xattr(file)
