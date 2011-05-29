@@ -134,7 +134,7 @@ preexec() {
   title $cmd[1]:t "$cmd[2,-1]"
 }
 
-sc() {
+tm() {
   if tmux ls >/dev/null 2>&1; then
     tmux attach
   else
