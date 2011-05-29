@@ -128,7 +128,7 @@ aug scheme
   au!
   au filetype scheme setl cindent& lispwords=define,lambda,call-with-*
 aug END
-       
+
 aug cch
   au! cch
   au winleave * set nocursorline
