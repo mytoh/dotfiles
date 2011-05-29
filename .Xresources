@@ -33,7 +33,7 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 !urxvt.font: -shinonome-gothic-medium-r-normal--12-*
 !urxvt.boldFont: -shinonome-gothic-bold-r-normal-*-12-*
 urxvt.font: k12
-urxvt.boldfont: k12b
+urxvt.boldfont: k12
 
 !-------------
 ! xterm

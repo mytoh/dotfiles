@@ -56,12 +56,13 @@ SAVEHIST=50000
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 ## zsh directory
-path=(~/.cw
-      ~/local/bin(N)\
-      /usr/games(N)\
-      /usr/local/{sbin,bin}\
-      /usr/{sbin,bin}\
-      /{sbin,bin})
+path=(~/.cw(N)
+      ~/local/homebrew/{sbin,bin}(N)\
+       ~/local/bin(N)\
+       /usr/games(N)\
+       /usr/local/{sbin,bin}\
+       /usr/{sbin,bin}\
+       /{sbin,bin})
 typeset -U path  # remove duplicates
 cdpath=(~/local ~/local/var)
 fpath=(~/.zsh/functions/completion ${fpath})
