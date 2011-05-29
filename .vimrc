@@ -70,6 +70,7 @@ set autochdir
 set cursorline
 set list
 set listchars=tab:^\ ,trail:_
+set virtualedit=all
 
 "statusline
 set laststatus=2
@@ -120,8 +121,8 @@ aug mycommands
   au bufread,bufnewfile .tmux.conf  set filetype=tmux
   au bufwritepost .Xresources silent !xrdb -remove
   au bufwritepost .Xresources silent !xrdb -merge ~/.Xresources
+  au bufwritepost .zshrc silent !zcompile .zshrc
 aug END
-"au BufWritePost .zshrc !zcompile .zshrc;
 
 aug scheme
   au!

@@ -1,7 +1,10 @@
 # Options
 bindkey -e
-setopt hist_ignore_dups hist_ignore_all_dups hist_save_no_dups share_history
-setopt inc_append_history
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_reduce_blanks
+setopt share_history
 setopt auto_cd
 setopt auto_pushd
 setopt extended_glob
@@ -26,6 +29,7 @@ setopt print_eightbit
 setopt transient_rprompt
 unsetopt bg_nice appendhistory beep nomatch
 limit coredumpsize 0
+umask 002
 
 ##
 # Environment
@@ -72,8 +76,7 @@ mypassport=~/local/mnt/mypassport
 # Autoloads
 autoload -Uz compinit && compinit
 autoload colors &&  colors
-#autoload predict-on
-#predict-on
+autoload -Uz zmv
 
 # Modules
 zmodload zsh/complist
@@ -90,11 +93,11 @@ zstyle ':completion:*' group-name ''
 
 
 # Prompts
-PROMPT="%{${fg[green]}%}%~%{${fg[white]}%} > "
-PROMPT2="%{${fg[cyan]}%}%_%%%{${reset_color}%} "
-SPROMPT="%{${fg[cyan]}%}%r is correct? [n,y,a,e]:%{^[[m%} "
+PROMPT="%{$fg[green]%}%~%{$fg[white]%} > "
+PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
+SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-  PROMPT="%{${fg[red]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
+  PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
 
 # History search keymap
 autoload history-search-end
@@ -110,8 +113,25 @@ chpwd() {
   ls -G -F
 }
 
+# zshwiki hardstatus
+title() {
+  if [[ $TERM == screen* ]]; then
+    print -nR $'\033k'$1$'\033'\\
+    print -nR $'\033]0;'$2$'\a'
+  elif [[ $TERM == xterm* || $TERM == jfbterm* ]]; then
+    print -nR $'\033]0;'$*$'\a'
+  fi
+}
+
 precmd() {
+  title zsh "$PWD"
   rehash
+}
+
+preexec() {
+  emulate -L zsh
+  local -a cmd; cmd=(${(z)1})
+  title $cmd[1]:t "$cmd[2,-1]"
 }
 
 sc() {
@@ -142,6 +162,7 @@ alias single="sudo shutdown now"
 alias halt="sync;sync;sync;sudo shutdown -p now"
 alias reboot="sync;sync;sync;sudo shutdown -r now"
 alias sudo="sudo -E "
+alias zln="zmv -L"
 # aliases for files
 alias -s txt=cat
 alias -s zip=zipinfo

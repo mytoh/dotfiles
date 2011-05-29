@@ -30,8 +30,8 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
 !urxvt.font: xft: aqua_pfont-9
 !urxvt.boldFont: xft: aqua_pfont-9
-!urxvt.font: -*-fixed-medium-r-semicondensed-*-12-*
-!urxvt.boldFont: -*-fixed-medium-r-semicondensed-*-12-*
+!urxvt.font: -shinonome-gothic-medium-r-normal--12-*
+!urxvt.boldFont: -shinonome-gothic-bold-r-normal-*-12-*
 urxvt.font: k12
 urxvt.boldfont: k12b
 
