@@ -34,7 +34,7 @@ umask 002
 ##
 # Environment
 setopt all_export # may cause problem
-LANG=en_GB.UTF-8
+LANG=ja_JP.UTF-8
 EDITOR=vim
 PAGER=less
 FTP_PASSIVE_MODE=true
@@ -44,8 +44,8 @@ HOMEBREW_VERBOSE=true
 RLWRAP_HOME=~/.rlwrap
 LISTMAX=0
 LSCOLORS=exFxCxdxBxegedabagacad
-if [[ -x `which gdircolors` ]]; then
-  eval $(gdircolors -b)
+if [[ -x `which gdircolors` ]] && [[ -e $HOME/.dir_colors ]]; then
+  eval $(gdircolors $HOME/.dir_colors -b)
 fi
 ZLS_COLORS=$LS_COLORS
 GAUCHE_LOAD_PATH="$HOME/.gosh"
@@ -70,9 +70,9 @@ fpath=(~/.zsh/functions/completion ${fpath})
 ##
 # named directories
 # $ cd ~dir
-quatre=~/local/mnt/quatre
-deskstar=~/local/mnt/deskstar
-mypassport=~/local/mnt/mypassport
+hash -d quatre=~/local/mnt/quatre
+hash -d deskstar=~/local/mnt/deskstar
+hash -d mypassport=~/local/mnt/mypassport
 
 # Autoloads
 autoload -Uz compinit && compinit
@@ -91,6 +91,9 @@ zstyle ':completion:*:(processes|jobs)' menu yes select=2
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]=** r:|=*' '+l:|=*' '+m:{A-Z}={a-z}'
 zstyle ':completion:*' format '%BCompleting %b%F{blue}%d'
 zstyle ':completion:*' group-name ''
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*:functions' ignore-patterns '_*'
 
 # compdef
 compdef _portmaster portbuilder 
@@ -166,7 +169,7 @@ alias halt="sync;sync;sync;sudo shutdown -p now"
 alias reboot="sync;sync;sync;sudo shutdown -r now"
 alias sudo="sudo -E "
 alias zln="zmv -L"
-# aliases for files
+# suffix aliases
 alias -s txt=cat
 alias -s zip=zipinfo
 alias -s {tgz,tbz}=gzcat
@@ -193,6 +196,10 @@ fi
 source ~/.zsh/plugins/zaw/zaw.zsh
 
 #[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+
+if [ $TERM = cons25 ]; then
+  jfbterm
+fi
 
 fortune
 

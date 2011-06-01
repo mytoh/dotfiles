@@ -19,7 +19,7 @@ xset fp rehash
 urxvtcd  &
 xbindkeys &
 Thunar --daemon &
-spinner -T 
+#spinner -T 
 #parcellite &
 #nitrogen --restore &
 

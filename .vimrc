@@ -71,6 +71,7 @@ set cursorline
 set list
 set listchars=tab:^\ ,trail:_
 set virtualedit=all
+set grepprg=ack\ -a
 
 "statusline
 set laststatus=2
@@ -185,17 +186,17 @@ let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
 " http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 "
 
-" unite.vim {{
+" unite.vim ------------------
 "let g:unite_enable_start_insert=1
+let g:untie_split_rule = "belowright"
 " buffer list
 nnoremap <silent> ,ub :<C-u>Unite bookmark<CR>
 nnoremap <silent> ,uf :<C-u>Unite file_rec file<CR>
 " leave unite buffer 
 au filetype unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au filetype unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-" }}
 
-" eskk {{
+" eskk ----------------------------
 if has('vim_starting')
     let g:eskk_dictionary = '~/.skk-jisyo'
 "   let g:eskk_large_dictionary = '~/.skk-jisyo.mine'
