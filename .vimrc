@@ -107,8 +107,8 @@ nnoremap <SPACE> i<SPACE><ESC>
 nmap n nzz
 nmap N Nzz
 nnoremap <ESC><ESC> ;nohlsearch<CR><ESC>
-nnoremap ,w :<C-u>up<CR>
-nnoremap ,q :<C-u>qa<CR>
+nnoremap <Leader>w :<C-u>up<CR>
+nnoremap <Leader>q :<C-u>qa<CR>
 " neocomplcache keymap
 " <CR>: close popup and save indent.
 inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
@@ -190,9 +190,9 @@ let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
 "let g:unite_enable_start_insert=1
 let g:untie_split_rule = "belowright"
 " buffer list
-nnoremap <silent> ,ub :<C-u>Unite bookmark<CR>
-nnoremap <silent> ,uf :<C-u>Unite file_rec file<CR>
-" leave unite buffer 
+nnoremap <silent> <Leader>ub :<C-u>Unite bookmark<CR>
+nnoremap <silent> <Leader>uf :<C-u>Unite file_rec file<CR>
+" leave unite buffer
 au filetype unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au filetype unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 

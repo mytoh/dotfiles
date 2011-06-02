@@ -84,7 +84,6 @@ RUN_EXECUTABLE=1
 # BOOKMARKS=mark=/full/directory/path=filename
 
 BOOKMARKS=H=/home/mytoh=../
-BOOKMARKS=m=/usr/home/mytoh/local/mnt/mypassport/var=musica/
 BOOKMARKS=z=/home/mytoh/.vifm=../
 
 # COMMAND=command_name=action
@@ -110,6 +109,7 @@ COMMAND=mv=mv %f %D &
 FILETYPE=movie=wmv,mkv,flv,mp4,mov,ts=mplayer
 FILETYPE=image=jpg,png,gif,jpeg=comix,gimv,zgv
 FILETYPE=archive=rar,zip,tar.xz,tar.gz=comix
+FILETYPE=music=mp3,flac=audacious,mplayer
 
 # For automated FUSE mounts, you must register an extension with FILETYPE=..
 # in the following format:

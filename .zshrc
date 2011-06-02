@@ -34,7 +34,7 @@ umask 002
 ##
 # Environment
 setopt all_export # may cause problem
-LANG=ja_JP.UTF-8
+LANG=fi_FI.UTF-8
 EDITOR=vim
 PAGER=less
 FTP_PASSIVE_MODE=true
@@ -89,7 +89,7 @@ zstyle ':completion:*' completer _oldlist _complete
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:(processes|jobs)' menu yes select=2
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]=** r:|=*' '+l:|=*' '+m:{A-Z}={a-z}'
-zstyle ':completion:*' format '%BCompleting %b%F{blue}%d'
+zstyle ':completion:*' format 'Completing %F{blue}%d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
@@ -181,7 +181,7 @@ alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
 ###
 # auto-fu.zsh
 {. ~/.zsh/plugins/auto-fu.zsh/auto-fu; auto-fu-install;} 
-zstyle ':auto-fu:highlight' input bold
+#zstyle ':auto-fu:highlight' input bold
 zstyle ':auto-fu:highlight' completion fg=cyan,bold
 zstyle ':auto-fu:highlight' completion/one fg=white,bold,underline
 zstyle ':auto-fu:var' postdisplay ''

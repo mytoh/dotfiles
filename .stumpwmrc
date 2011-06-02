@@ -52,7 +52,7 @@
 
 ;; set color slots
 (setf *colors* (append *colors*
-                       (list "orange"
+                       (list "grey10"
                              "pink")))
 (update-color-map (current-screen))
 
@@ -121,14 +121,18 @@
 ;;;; window placement rules
 (clear-window-placement-rules) ; clear rules
 
-;(define-frame-preference "web"
-;      ;; fnumber raise lock (lock AND raise == jumpto)
-;      (0 t t :class "Firefox")
-;      (0 t t :class "Opera"))
-;
-;(define-frame-preference "media"
-;      (0 t t :class "MPlayer")
-;      (0 t t :class "Audacious"))
+(define-frame-preference "web"
+     ;; fnumber raise lock (lock AND raise == jumpto)
+      (0 t t :class "Opera"))
+
+(define-frame-preference "web"
+      (0 t t :class "Firefox"))
+
+(define-frame-preference "media"
+      (0 t t :class "Audacious"))
+
+(define-frame-preference "media"
+      (0 t t :class "MPlayer"))
 
 (setf *debug-level* 10)
 
