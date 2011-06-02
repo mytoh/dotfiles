@@ -1,0 +1,7 @@
+
+noremap l gt
+noremap h gT
+noremap ; :
+noremap : ;
+
+set hintkeys=aoeuhtns
