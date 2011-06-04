@@ -3,7 +3,7 @@
 [default]
 #vo=x11
 ao=oss
-fstype=none,fullscreen,netwm
+fstype=fullscreen
 #cache=8192
 #cache-min = 6
 autosync=100

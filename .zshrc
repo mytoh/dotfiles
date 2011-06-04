@@ -34,11 +34,13 @@ umask 002
 ##
 # Environment
 setopt all_export # may cause problem
-LANG=fi_FI.UTF-8
+LANG=ja_JP.UTF-8
 EDITOR=vim
 PAGER=less
+INFOPATH=(~/.emacs.d/info:~/local/share/info)
 FTP_PASSIVE_MODE=true
 MYVIMRC=~/.vimrc
+VIMRUNTIME=(~/.vim/vundle:$VIMRUNTIME)
 G_FILENAME_ENCODING=@locale
 HOMEBREW_VERBOSE=true
 RLWRAP_HOME=~/.rlwrap
@@ -55,7 +57,6 @@ HISTSIZE=50000
 SAVEHIST=50000
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
-## zsh directory
 path=(~/.cw(N)
       ~/local/homebrew/{sbin,bin}(N)\
        ~/local/bin(N)\
@@ -65,6 +66,7 @@ path=(~/.cw(N)
        /{sbin,bin})
 typeset -U path  # remove duplicates
 cdpath=(~/local ~/local/var)
+## zsh functions directory
 fpath=(~/.zsh/functions/completion ${fpath})
 
 ##
@@ -92,7 +94,6 @@ zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]
 zstyle ':completion:*' format 'Completing %F{blue}%d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle ':completion:*:functions' ignore-patterns '_*'
 
 # compdef
@@ -140,19 +141,21 @@ preexec() {
   title $cmd[1]:t "$cmd[2,-1]"
 }
 
+# alias functions
 tm() {
   if tmux ls >/dev/null 2>&1; then
-    tmux attach
+    tmux -2 attach
   else
-    tmux
+    tmux -2
   fi
 }
+
 
 # Aliases
 #alias precmd=rehash
 alias pup="sudo portsnap fetch update "
 alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster --clean-packages --clean-distfiles"
-alias cup="cpan-outdated && cpan-outdated | xargs cpanm -Sv"
+alias cup="cpan-outdated && cpan-outdated | xargs cpanm -v"
 alias la="ls -G -a"
 alias ll="ls -G -hlA " 
 alias ls="ls -G -F"
@@ -161,6 +164,7 @@ alias pinst="sudo make  install distclean; rehash"
 alias pconf="sudo make  config-recursive"
 alias pclean="sudo make  clean "
 alias view="vim -X -R -"
+alias svim="vim --servername VIM --remote-silent"
 alias scsh="rlwrap scsh"
 alias goshrl="rlwrap -pBlue -b '(){}[],#;| ' gosh"
 alias ew="emacs -f w3m"
@@ -202,5 +206,6 @@ if [ $TERM = cons25 ]; then
 fi
 
 fortune
+echo "\n"
 
 

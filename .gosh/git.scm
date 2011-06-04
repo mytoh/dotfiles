@@ -19,3 +19,4 @@
                   (loop (cdr dirs)))))))
 
 (update-gitdir gitdir)
+

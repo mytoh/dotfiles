@@ -52,7 +52,7 @@
 
 ;; set color slots
 (setf *colors* (append *colors*
-                       (list "grey10"
+                       (list "grey"
                              "pink")))
 (update-color-map (current-screen))
 

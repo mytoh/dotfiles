@@ -13,7 +13,7 @@ urxvt.scrollBar: false
 urxvt.buffered: true
 !urxvt.borderLess: true
 urxvt.internalBorder: 0
-urxvt.transparent: true
+!urxvt.transparent: true
 urxvt.fading: 2%
 urxvt.fadeColor: grey
 urxvt.shading: 10
@@ -65,21 +65,21 @@ xterm*scrollBar: false
 !--------------------------------------
 
 
-*color0: #222222
-*color1: #ffa0a0
-*color2: #98fb98
-*color3: #f0e68c
-*color4: #3a93ff
-*color5: #ffa0a0
-*color6: #87ceeb
-*color7: #ffffff
-*color8: #333333
-*color9: #ffa0a0
-*color10: #9acd32
-*color11: #f0e68c
-*color12: #87ceeb
-*color13: #ffa0a0
-*color14: #87ceeb
-*color15: #ffffff
+urxvt.color0: #222222
+urxvt.color1: #ffa0a0
+urxvt.color2: #98fb98
+urxvt.color3: #f0e68c
+urxvt.color4: #3a93ff
+urxvt.color5: #ffa0a0
+urxvt.color6: #87ceeb
+urxvt.color7: #ffffff
+urxvt.color8: #333333
+urxvt.color9: #ffa0a0
+urxvt.color10: #9acd32
+urxvt.color11: #f0e68c
+urxvt.color12: #87ceeb
+urxvt.color13: #ffa0a0
+urxvt.color14: #87ceeb
+urxvt.color15: #ffffff
 
 
