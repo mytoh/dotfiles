@@ -1,4 +1,4 @@
-p
+
 "turn filetype off to load ftdetect
 set nocompatible
 filetype off

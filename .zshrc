@@ -150,21 +150,28 @@ tm() {
   fi
 }
 
+svim() {
+  if [[ -n `pgrep xorg` ]]; then
+    vim --servername VIM --remote-silent $1
+  else
+    vim $1
+  fi
+}
+
 
 # Aliases
 #alias precmd=rehash
 alias pup="sudo portsnap fetch update "
-alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster --clean-packages --clean-distfiles"
-alias cup="cpan-outdated && cpan-outdated | xargs cpanm -v"
-alias la="ls -G -a"
-alias ll="ls -G -hlA " 
-alias ls="ls -G -F"
+alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles"
 alias pfetch="sudo make  fetch-recursive"
 alias pinst="sudo make  install distclean; rehash"
 alias pconf="sudo make  config-recursive"
 alias pclean="sudo make  clean "
+alias cup="cpan-outdated && cpan-outdated | xargs cpanm -v"
+alias la="ls -G -a"
+alias ll="ls -G -hlA " 
+alias ls="ls -G -F"
 alias view="vim -X -R -"
-alias svim="vim --servername VIM --remote-silent"
 alias scsh="rlwrap scsh"
 alias goshrl="rlwrap -pBlue -b '(){}[],#;| ' gosh"
 alias ew="emacs -f w3m"
@@ -193,11 +200,14 @@ zstyle ':auto-fu:var' track-keymap-skip opp
 zle-line-init() {auto-fu-init;}; zle -N zle-line-init
 zle -N zle-keymap-select auto-fu-zle-keymap-select
 
+
 if [ -e $HOME/perl5 ]; then
 source ~/perl5/perlbrew/etc/bashrc
 fi
 
+if [ -e $HOME/.zsh/plugins/zaw/zaw.zsh ]; then
 source ~/.zsh/plugins/zaw/zaw.zsh
+fi
 
 #[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
