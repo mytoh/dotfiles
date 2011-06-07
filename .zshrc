@@ -192,16 +192,22 @@ alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
 
 ###
 # auto-fu.zsh
+# hchbaw/auto-fu.zsh
 if [ -e $HOME/.zsh/plugins/auto-fu.zsh ]; then
-{. ~/.zsh/plugins/auto-fu.zsh/auto-fu; auto-fu-install;} 
-#zstyle ':auto-fu:highlight' input bold
-zstyle ':auto-fu:highlight' completion fg=cyan,bold
-zstyle ':auto-fu:highlight' completion/one fg=white,bold,underline
-zstyle ':auto-fu:var' postdisplay ''
-zstyle ':auto-fu:var' track-keymap-skip opp
-zle-line-init() {auto-fu-init;}; zle -N zle-line-init
-zle -N zle-keymap-select auto-fu-zle-keymap-select
-fi 
+  if [ ! -e $HOME/.zsh/plugins/auto-fu.zsh/auto-fu.zwc ]; then
+    source $HOME/.zsh/plugins/auto-fu.zsh/auto-fu.zsh
+    auto-fu-zcompile $HOME/.zsh/plugins/auto-fu.zsh/auto-fu.zsh $HOME/.zsh/plugins/auto-fu.zsh
+  else
+    {. ~/.zsh/plugins/auto-fu.zsh/auto-fu; auto-fu-install;}
+    #zstyle ':auto-fu:highlight' input bold
+    zstyle ':auto-fu:highlight' completion fg=cyan,bold
+    zstyle ':auto-fu:highlight' completion/one fg=white,bold,underline
+    zstyle ':auto-fu:var' postdisplay ''
+    zstyle ':auto-fu:var' track-keymap-skip opp
+    zle-line-init() {auto-fu-init;}; zle -N zle-line-init
+      zle -N zle-keymap-select auto-fu-zle-keymap-select
+    fi
+fi
 
 
 if [ -e $HOME/perl5 ]; then

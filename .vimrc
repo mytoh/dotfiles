@@ -3,11 +3,15 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/vundle/
+set rtp+=~/.vim/bundle/vundle
+
 call vundle#rc()
 
-" my bundles here {{
+" let Vundle manage Vundle 
+Bundle 'gmarik/vundle'
 
+" my bundles here {{
+"
 " github repo
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
@@ -32,16 +36,13 @@ Bundle 'mattn/unite-remotefile'
 Bundle 'mattn/googlereader-vim'
 Bundle 'ujihisa/unite-colorscheme'
 Bundle 'ujihisa/neco-look'
-
 " vim-scripts repo
 "Bundle 'gauref.vim'
 Bundle 'info.vim'
 Bundle 'eregex.vim'
 Bundle 'sudo.vim'
-
-" git repo
+" other git repo
 "
-
 " }}
 
 filetype on
@@ -116,12 +117,9 @@ nnoremap <CR> o<ESC>
 nnoremap <SPACE> i<SPACE><ESC>
 nmap n nzz
 nmap N Nzz
-nnoremap <ESC><ESC> ;nohlsearch<CR><ESC>
+nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
 nnoremap <Leader>w :<C-u>up<CR>
 nnoremap <Leader>q :<C-u>qa<CR>
-" neocomplcache keymap
-" <CR>: close popup and save indent.
-inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 " }}
 
 " autocommands {{
@@ -181,7 +179,8 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_auto_select = 0
 let g:neocomplcache_dictionary_filetype_lists = {
                     \ 'default' : '',
-                    \ 'scheme'  : $HOME.'/.gosh_completions'
+                    \ 'scheme'  : $HOME.'/.rlwrap/gosh_completions',
+                    \ 'vimshell': $HOME.'/.vimshell_hist'
                     \ }
 " }}
 
@@ -226,13 +225,19 @@ let g:eskk_enable_completion = 0
 " }}
 
 " vimshell {{
-nnoremap <silent> <Leader>is :VimShell<cr>
+nmap <Leader>ss <Plug>(vimshell_split_switch)
+let g:vimshell_execute_file_list = {}
+call vimshell#set_execute_file('txt,vim,c,cpp,xml,java', 'vim')
+let g:vimshell_execute_file_list['pl'] = 'perl'
+let g:vimshell_execute_file_list['scm'] = 'gosh'
+
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_smart_case = 1
 let g:vimshell_enable_auto_slash = 1
 
-aug Vimshell
-  autocmd FileType vimshell
+aug vimshell
+  au! vimshell
+  au FileType vimshell
         \ call vimshell#hook#set('chpwd', ['g:my_chpwd'])
 
   function! g:my_chpwd(args, context)
