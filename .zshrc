@@ -179,7 +179,8 @@ alias single="sudo shutdown now"
 alias halt="sync;sync;sync;sudo shutdown -p now"
 alias reboot="sync;sync;sync;sudo shutdown -r now"
 alias sudo="sudo -E "
-alias zln="zmv -L"
+alias zln="noglob zmv -L -s -W"
+alias zmv='noglob zmv -W'
 # suffix aliases
 alias -s txt=cat
 alias -s zip=zipinfo
