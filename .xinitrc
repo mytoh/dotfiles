@@ -46,6 +46,7 @@ case $1 in
   swm) exec swm ;;
   afterstep) exec afterstep ;;
   awesome) exec awesome ;;
+  kde) exec startkde4 ;;
   *) exec $DEFAULT_SESSION ;;
 esac
 

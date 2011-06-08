@@ -7,7 +7,7 @@ set rtp+=~/.vim/bundle/vundle
 
 call vundle#rc()
 
-" let Vundle manage Vundle 
+" let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
 " my bundles here {{
@@ -36,6 +36,7 @@ Bundle 'mattn/unite-remotefile'
 Bundle 'mattn/googlereader-vim'
 Bundle 'ujihisa/unite-colorscheme'
 Bundle 'ujihisa/neco-look'
+Bundle 'ujihisa/vimshell-ssh'
 " vim-scripts repo
 "Bundle 'gauref.vim'
 Bundle 'info.vim'
@@ -45,7 +46,6 @@ Bundle 'sudo.vim'
 "
 " }}
 
-filetype on
 filetype plugin indent on
 syntax on
 
@@ -142,7 +142,7 @@ aug end
 
 hi clear cursorline
 hi cursorline gui=underline
-hi cursorline ctermbg=black guibg=black
+hi cursorline ctermbg=237 guibg=black
 
 au bufwritepost * call SetUTF8Xattr(expand("<afile>"))
 function! SetUTF8Xattr(file)
@@ -225,11 +225,12 @@ let g:eskk_enable_completion = 0
 " }}
 
 " vimshell {{
-nmap <leader>ss <plug>(vimshell_split_switch)
+nmap <leader>ss <plug>(vimshell_switch)
+
 let g:vimshell_execute_file_list = {}
-call vimshell#set_execute_file('txt,vim,c,cpp,xml,java', 'vim')
 let g:vimshell_execute_file_list['pl'] = 'perl'
 let g:vimshell_execute_file_list['scm'] = 'gosh'
+call vimshell#set_execute_file('txt,vim,c,cpp,xml,java', 'vim')
 
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_smart_case = 1
@@ -240,7 +241,6 @@ aug vimshell
   au! vimshell
   au filetype vimshell
         \ call vimshell#hook#set('chpwd', ['g:my_chpwd'])
-
   function! g:my_chpwd(args, context)
     call vimshell#execute('ls')
   endfunction

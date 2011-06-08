@@ -57,13 +57,26 @@ HISTSIZE=50000
 SAVEHIST=50000
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
-path=(~/.cw(N)
-      ~/local/homebrew/{sbin,bin}(N)\
-       ~/local/bin(N)\
-       /usr/games(N)\
-       /usr/local/{sbin,bin}\
-       /usr/{sbin,bin}\
-       /{sbin,bin})
+if [ -d /usr/local/lib/cw ]; then
+  path=(~/.cw(N)
+        ~/local/homebrew/{sbin,bin}(N)\
+        ~/local/bin(N)\
+         /usr/games(N)\
+         /usr/local/{sbin,bin}\
+         /usr/local/kde4/{sbin,bin}(N)\
+         /usr/{sbin,bin}\
+         /{sbin,bin})
+else
+  path=( ~/local/homebrew/{sbin,bin}(N)
+         ~/local/bin(N)\
+          /usr/games(N)\
+          /usr/local/{sbin,bin}\
+          /usr/local/kde4/{sbin,bin}(N)\
+          /usr/{sbin,bin}\
+          /{sbin,bin})
+fi
+
+
 typeset -U path  # remove duplicates
 cdpath=(~/local ~/local/var)
 ## zsh functions directory
@@ -166,7 +179,7 @@ alias pup="sudo portsnap fetch update "
 alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles"
 alias pfetch="sudo make  fetch-recursive"
 alias pinst="sudo make  install distclean; rehash"
-alias pconf="sudo make  config-recursive"
+alias pconf="sudo make config-recursive"
 alias pclean="sudo make  clean "
 alias cup="cpan-outdated && cpan-outdated | xargs cpanm -v"
 alias la="ls -G -a"
@@ -192,8 +205,7 @@ alias -s {gif,jpg,jpeg,png}=xli
 alias -s {m3u,mp3,flac}=audacious
 alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
 
-###
-# auto-fu.zsh
+## auto-fu.zsh
 # hchbaw/auto-fu.zsh
 if [ -e $HOME/.zsh/plugins/auto-fu.zsh ]; then
    set_auto_fu() {
@@ -231,7 +243,9 @@ if [ $TERM = cons25 ]; then
   jfbterm
 fi
 
+if [ -x /usr/games/fortune ]; then
 fortune
 echo "\n"
+fi
 
 
