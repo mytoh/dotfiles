@@ -100,7 +100,8 @@ zstyle ':completion:*:functions' ignore-patterns '_*'
 compdef _portmaster portbuilder 
 
 # Prompts
-PROMPT="%{$fg[green]%}%~%{$fg[white]%} > "
+PROMPT="%{$fg[green]%}[%~]%{$fg[white]%}
+%{$fg[cyan]%} >>> "
 PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
 SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
@@ -144,9 +145,9 @@ preexec() {
 # alias functions
 tm() {
   if tmux ls >/dev/null 2>&1; then
-    tmux -2 attach
+    tmux attach
   else
-    tmux -2
+    tmux -u2
   fi
 }
 
@@ -179,6 +180,7 @@ alias single="sudo shutdown now"
 alias halt="sync;sync;sync;sudo shutdown -p now"
 alias reboot="sync;sync;sync;sudo shutdown -r now"
 alias sudo="sudo -E "
+alias pkg_add="pkg_add -v"
 alias zln="noglob zmv -L -s -W"
 alias zmv='noglob zmv -W'
 # suffix aliases
@@ -194,10 +196,7 @@ alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
 # auto-fu.zsh
 # hchbaw/auto-fu.zsh
 if [ -e $HOME/.zsh/plugins/auto-fu.zsh ]; then
-  if [ ! -e $HOME/.zsh/plugins/auto-fu.zsh/auto-fu.zwc ]; then
-    source $HOME/.zsh/plugins/auto-fu.zsh/auto-fu.zsh
-    auto-fu-zcompile $HOME/.zsh/plugins/auto-fu.zsh/auto-fu.zsh $HOME/.zsh/plugins/auto-fu.zsh
-  else
+   set_auto_fu() {
     {. ~/.zsh/plugins/auto-fu.zsh/auto-fu; auto-fu-install;}
     #zstyle ':auto-fu:highlight' input bold
     zstyle ':auto-fu:highlight' completion fg=cyan,bold
@@ -205,7 +204,15 @@ if [ -e $HOME/.zsh/plugins/auto-fu.zsh ]; then
     zstyle ':auto-fu:var' postdisplay ''
     zstyle ':auto-fu:var' track-keymap-skip opp
     zle-line-init() {auto-fu-init;}; zle -N zle-line-init
-      zle -N zle-keymap-select auto-fu-zle-keymap-select
+    zle -N zle-keymap-select auto-fu-zle-keymap-select
+  }
+
+  if [ ! -e $HOME/.zsh/plugins/auto-fu.zsh/auto-fu.zwc ]; then
+    source $HOME/.zsh/plugins/auto-fu.zsh/auto-fu.zsh
+    auto-fu-zcompile $HOME/.zsh/plugins/auto-fu.zsh/auto-fu.zsh $HOME/.zsh/plugins/auto-fu.zsh
+    set_auto_fu
+  else
+    set_auto_fu
     fi
 fi
 

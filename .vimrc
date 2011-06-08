@@ -117,7 +117,7 @@ nnoremap <CR> o<ESC>
 nnoremap <SPACE> i<SPACE><ESC>
 nmap n nzz
 nmap N Nzz
-nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
+nnoremap <silent> <ESC><ESC> :nohlsearch<CR><ESC>
 nnoremap <Leader>w :<C-u>up<CR>
 nnoremap <Leader>q :<C-u>qa<CR>
 " }}
@@ -130,22 +130,19 @@ aug mycommands
   au bufwritepost .Xresources silent !xrdb -remove
   au bufwritepost .Xresources silent !xrdb -merge ~/.Xresources
   au bufwritepost .zshrc silent !zcompile .zshrc
-aug END
-
-aug scheme
-  au!
   au filetype scheme setl cindent& lispwords=define,lambda,call-with-*
-aug END
+aug end
+
 
 aug cch
   au! cch
   au winleave * set nocursorline
   au winenter,bufread * set cursorline
-aug END
+aug end
 
-hi clear Cursorline
-hi Cursorline gui=underline
-hi Cursorline ctermbg=black guibg=black
+hi clear cursorline
+hi cursorline gui=underline
+hi cursorline ctermbg=black guibg=black
 
 au bufwritepost * call SetUTF8Xattr(expand("<afile>"))
 function! SetUTF8Xattr(file)
@@ -207,11 +204,14 @@ let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
 "let g:unite_enable_start_insert=1
 let g:unite_split_rule = "belowright"
 " buffer list
-nnoremap <silent> <Leader>ub :<C-u>Unite bookmark<CR>
-nnoremap <silent> <Leader>uf :<C-u>Unite -buffer-name=files file<CR>
+nnoremap <silent> <leader>ub :<c-u>Unite bookmark<cr>
+nnoremap <silent> <leader>uf :<c-u>Unite -buffer-name=files file<cr>
 " leave unite buffer
-au filetype unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au filetype unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+aug unite
+  au! unite
+  au filetype unite nnoremap <silent> <buffer> <esc><esc> :q<cr>
+  au filetype unite inoremap <silent> <buffer> <esc><esc> <esc>:q<cr>
+aug end
 " }}
 
 " eskk {{
@@ -225,7 +225,7 @@ let g:eskk_enable_completion = 0
 " }}
 
 " vimshell {{
-nmap <Leader>ss <Plug>(vimshell_split_switch)
+nmap <leader>ss <plug>(vimshell_split_switch)
 let g:vimshell_execute_file_list = {}
 call vimshell#set_execute_file('txt,vim,c,cpp,xml,java', 'vim')
 let g:vimshell_execute_file_list['pl'] = 'perl'
@@ -235,15 +235,16 @@ let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_smart_case = 1
 let g:vimshell_enable_auto_slash = 1
 
+let g:vimshell_split_height = 20
 aug vimshell
   au! vimshell
-  au FileType vimshell
+  au filetype vimshell
         \ call vimshell#hook#set('chpwd', ['g:my_chpwd'])
 
   function! g:my_chpwd(args, context)
     call vimshell#execute('ls')
   endfunction
-aug END
+aug end
 " }}
 
 " vimproc {{
