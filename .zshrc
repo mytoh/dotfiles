@@ -179,7 +179,7 @@ tm() {
 }
 
 svim() {
-  if [[ -n `pgrep xorg` ]]; then
+  if [[ -n `pgrep X` ]]; then
     vim --servername VIM --remote-silent $1
   else
     vim $1

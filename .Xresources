@@ -16,7 +16,7 @@ urxvt.internalBorder: 0
 !urxvt.transparent: true
 urxvt.fading: 2%
 urxvt.fadeColor: grey
-urxvt.shading: 10
+urxvt.shading: 20
 urxvt.tintcolor: black
 urxvt.preedittype: root
 urxvt.savelines: 2000
@@ -30,19 +30,13 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
 !urxvt.font: xft: aqua_pfont-9
 !urxvt.boldFont: xft: aqua_pfont-9
-urxvt.font: xft: Bitstream Vera Sans Mono-9
-urxvt.boldFont: xft: Bitstream Vera Sans Mono-9
+!urxvt.font: xft: Bitstream Vera Sans Mono-8 
+!urxvt.boldFont: xft: Bitstream Vera Sans Mono-8
 !urxvt.font: -shinonome-gothic-medium-r-normal--12-*
-!urxvt.boldFont: -shinonome-gothic-bold-r-normal-*-12-*
-!urxvt.font: k12
-!urxvt.boldfont: k12
+!urxvt.boldFont: -shinonome-gothic-bold-r-normal--12-*
+urxvt.font: k12
+urxvt.boldfont: k12
 
-!-------------
-! xterm
-! ------------
-xterm*foreground: white
-xterm*background: black
-xterm*scrollBar: false
 
 
 !-------------------------------------
@@ -104,11 +98,13 @@ urxvt.color13: #ec93d3
 urxvt.color14: #93e0e3
 urxvt.color15: #ffffff
 
-
-
-!!-------------------------------
-! xterm settings
-! ---------------------------------
+!-------------
+!
+! xterm
+! ------------
+xterm*foreground: white
+xterm*background: black
+xterm*scrollBar: false
 
 xterm.color0: #3f3f3f
 xterm.color1: #705050

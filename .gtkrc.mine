@@ -4,5 +4,5 @@ gtk-icon-theme-name = "Faenza-Cupertino"
 gtk-cursor-theme-name = "whiteglass"
 #gtk-cursor-theme-name = "ComixCursors-Ghost"
 #gtk-key-theme-name = "Emacs"
-gtk-font-name = "Ricty 10"
+gtk-font-name = "Inconsolata 10"
 

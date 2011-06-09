@@ -61,12 +61,12 @@ set smartcase
 set hlsearch
 set incsearch
 set showmode
+set showcmd
 set modeline
 set history=100
-"set autoindent
-"set smartindent
+set autoindent
+set smartindent
 "set cindent
-set showcmd
 set wrapscan
 set autoread
 set hidden
@@ -112,13 +112,13 @@ set fenc=utf-8
 let mapleader = ","
 nnoremap ; :
 nnoremap : ;
-nnoremap <CR> o<ESC>
-nnoremap <SPACE> i<SPACE><ESC>
+nnoremap <cr> o<esc>
+nnoremap <space> i<space><esc>
 nmap n nzz
 nmap N Nzz
-nnoremap <silent> <ESC><ESC> :nohlsearch<CR><ESC>
-nnoremap <Leader>w :<C-u>up<CR>
-nnoremap <Leader>q :<C-u>qa<CR>
+nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
+nnoremap <leader>w :<c-u>up<cr>
+nnoremap <leader>q :<c-u>qa<cr>
 "
 " }}
 

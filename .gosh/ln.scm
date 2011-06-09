@@ -25,6 +25,7 @@
                        ".mc/ini"
                        ".mpdconf"
                        ".mplayer/config"
+                       ".pentadactylrc"
                        ".portmasterrc"
                        ".qvwmrc"
                        ".qvwm-theme"
