@@ -1,4 +1,4 @@
-# Options
+# {{ Options
 bindkey -e
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
@@ -30,9 +30,12 @@ setopt transient_rprompt
 unsetopt bg_nice appendhistory beep nomatch
 limit coredumpsize 0
 umask 002
+# }}
 
-##
-# Environment
+
+# {{ Environment
+# set local variables
+local home=$HOME
 setopt all_export # may cause problem
 LANG=ja_JP.UTF-8
 EDITOR=vim
@@ -47,11 +50,11 @@ HOMEBREW_VERBOSE=true
 RLWRAP_HOME=~/.rlwrap
 LISTMAX=0
 LSCOLORS=exFxCxdxBxegedabagacad
-if [[ -x `which gdircolors` ]] && [[ -e $HOME/.dir_colors ]]; then
-  eval $(gdircolors $HOME/.dir_colors -b)
+if [[ -x `which gdircolors` ]] && [[ -e $home/.dir_colors ]]; then
+  eval $(gdircolors $home/.dir_colors -b)
 fi
 ZLS_COLORS=$LS_COLORS
-GAUCHE_LOAD_PATH="$HOME/.gosh"
+GAUCHE_LOAD_PATH="$home/.gosh"
 
 HISTFILE=~/.zsh_history
 HISTSIZE=50000
@@ -82,24 +85,27 @@ typeset -U path  # remove duplicates
 cdpath=(~/local ~/local/var)
 ## zsh functions directory
 fpath=(~/.zsh/functions/completion ${fpath})
+# }}
 
-##
-# named directories
+# {{ named directories
 # $ cd ~dir
 hash -d quatre=~/local/mnt/quatre
 hash -d deskstar=~/local/mnt/deskstar
 hash -d mypassport=~/local/mnt/mypassport
+# }}
 
-# Autoloads
+# {{ Autoloads
 autoload -Uz compinit && compinit
 autoload colors &&  colors
 autoload -Uz zmv
+# }}
 
-# Modules
+# {{ Modules
 zmodload zsh/complist
+# }}
 
 
-# Zstyles
+# {{ Zstyles
 zstyle :compinstall filename '/Users/kazuki/.zshrc'
 zstyle ':completion:*' completer _oldlist _complete
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
@@ -109,19 +115,22 @@ zstyle ':completion:*' format 'Completing %F{blue}%d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*:functions' ignore-patterns '_*'
+# }}
 
-# compdef
+# {{ compdef
 compdef _portmaster portbuilder 
+# }}
 
-# Prompts
+# {{ Prompts
 PROMPT="%{$fg[green]%}[%~]%{$fg[white]%}
 %{$fg[cyan]%} >>> "
 PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
 SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
   PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
+# }}
 
-# History search keymap
+# {{ History search keymap
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -129,8 +138,9 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "\\ep" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 bindkey "\\en" history-beginning-search-forward-end
+# }}
 
-## Functions
+# {{ Functions
 chpwd() {
   ls -G -F
 }
@@ -155,7 +165,10 @@ preexec() {
   local -a cmd; cmd=(${(z)1})
   title $cmd[1]:t "$cmd[2,-1]"
 }
+# }}
 
+
+# {{ Aliases
 # alias functions
 tm() {
   if tmux ls >/dev/null 2>&1; then
@@ -173,8 +186,6 @@ svim() {
   fi
 }
 
-
-# Aliases
 #alias precmd=rehash
 alias pup="sudo portsnap fetch update "
 alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles"
@@ -205,11 +216,12 @@ alias -s {gz,bz2}=tar -xzvf
 alias -s {gif,jpg,jpeg,png}=xli
 alias -s {m3u,mp3,flac}=audacious
 alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
+# }}
 
-## auto-fu.zsh
-# hchbaw/auto-fu.zsh
-if [ -e $HOME/.zsh/plugins/auto-fu.zsh ]; then
-   set_auto_fu() {
+# {{ auto-fu.zsh
+# github.com/hchbaw/auto-fu.zsh
+if [ -e $home/.zsh/plugins/auto-fu.zsh ]; then
+  set_auto_fu() {
     {. ~/.zsh/plugins/auto-fu.zsh/auto-fu; auto-fu-install;}
     #zstyle ':auto-fu:highlight' input bold
     zstyle ':auto-fu:highlight' completion fg=cyan,bold
@@ -217,28 +229,36 @@ if [ -e $HOME/.zsh/plugins/auto-fu.zsh ]; then
     zstyle ':auto-fu:var' postdisplay ''
     zstyle ':auto-fu:var' track-keymap-skip opp
     zle-line-init() {auto-fu-init;}; zle -N zle-line-init
-    zle -N zle-keymap-select auto-fu-zle-keymap-select
-  }
+      zle -N zle-keymap-select auto-fu-zle-keymap-select
+    }
 
-  if [ ! -e $HOME/.zsh/plugins/auto-fu.zsh/auto-fu.zwc ]; then
-    source $HOME/.zsh/plugins/auto-fu.zsh/auto-fu.zsh
-    auto-fu-zcompile $HOME/.zsh/plugins/auto-fu.zsh/auto-fu.zsh $HOME/.zsh/plugins/auto-fu.zsh
-    set_auto_fu
+      if [ ! -e $home/.zsh/plugins/auto-fu.zsh/auto-fu.zwc ]; then
+        source $home/.zsh/plugins/auto-fu.zsh/auto-fu.zsh
+        auto-fu-zcompile $home/.zsh/plugins/auto-fu.zsh/auto-fu.zsh $home/.zsh/plugins/auto-fu.zsh
+        set_auto_fu
+      else
+        set_auto_fu
+      fi
   else
+    mkdir $home/.zsh/plugins
+    cd $home/.zsh/plugins
+    git clone git://github.com/hchbaw/auto-fu.zsh
+    source $home/.zsh/plugins/auto-fu.zsh/auto-fu.zsh
+    auto-fu-zcompile $home/.zsh/plugins/auto-fu.zsh/auto-fu.zsh $home/.zsh/plugins/auto-fu.zsh
     set_auto_fu
-    fi
 fi
+# }}
 
 
-if [ -e $HOME/perl5 ]; then
+if [ -e $home/perl5 ]; then
 source ~/perl5/perlbrew/etc/bashrc
 fi
 
-if [ -e $HOME/.zsh/plugins/zaw/zaw.zsh ]; then
+if [ -e $home/.zsh/plugins/zaw/zaw.zsh ]; then
 source ~/.zsh/plugins/zaw/zaw.zsh
 fi
 
-#[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+#[[ -s $home/.rvm/scripts/rvm ]] && source $home/.rvm/scripts/rvm
 
 if [ $TERM = cons25 ]; then
   jfbterm

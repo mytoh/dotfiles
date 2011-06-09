@@ -1,4 +1,3 @@
-
 "turn filetype off to load ftdetect
 set nocompatible
 filetype off
@@ -10,7 +9,7 @@ call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
-" my bundles here {{
+" {{ my bundles here
 "
 " github repo
 Bundle 'tpope/vim-fugitive'
@@ -46,6 +45,8 @@ Bundle 'sudo.vim'
 "
 " }}
 
+" {{ options
+"
 filetype plugin indent on
 syntax on
 
@@ -83,33 +84,31 @@ set list
 set listchars=tab:^\ ,trail:_
 set virtualedit=all
 set grepprg=ack\ -a
-
-"statusline
+" statusline
 set laststatus=2
 set statusline=%<%f\ %m%r%h%w%=%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P
-
-"tabs
+" tabs
 set smarttab
 set tabstop=2
 set expandtab
 set softtabstop=2
 set shiftwidth=2
-
-"set mouse
+" set mouse
 set mouse=a
 set ttymouse=xterm2
-
-"colors
+" colors
 set t_Co=256
 colorscheme xoria256
-
-"encodings
+" encodings
 set termencoding=utf-8
 set enc=utf-8
 set fenc=utf-8
 "set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
+"
+" }}
 
-" keymap {{
+" {{ keymap
+"
 let mapleader = ","
 nnoremap ; :
 nnoremap : ;
@@ -120,9 +119,10 @@ nmap N Nzz
 nnoremap <silent> <ESC><ESC> :nohlsearch<CR><ESC>
 nnoremap <Leader>w :<C-u>up<CR>
 nnoremap <Leader>q :<C-u>qa<CR>
+"
 " }}
 
-" autocommands {{
+" {{ autocommands
 aug mycommands
   au!
   au bufwritepost .vimrc source $MYVIMRC
@@ -131,8 +131,8 @@ aug mycommands
   au bufwritepost .Xresources silent !xrdb -merge ~/.Xresources
   au bufwritepost .zshrc silent !zcompile .zshrc
   au filetype scheme setl cindent& lispwords=define,lambda,call-with-*
+  au filetype help nnoremap q :<c-u>q<cr>
 aug end
-
 
 aug cch
   au! cch
@@ -155,9 +155,9 @@ endfunction
 " }}
 
 
-" plugins {{{
-
-" Chalice for vim {{
+" {{{ plugins
+"
+" {{ Chalice for vim
 "set runtimepath+=$HOME/.vim/chalice
 let chalice_startupflags = 'bookmark'
 let chalice_writeoptions = 'amp,nbsp,zenkaku'
@@ -168,7 +168,7 @@ let chalice_previewflags = 'autoclose'
 let chalice_reloadinterval_threadlist = 0
 " }}
 
-" neocomplcache {{
+" {{ neocomplcache
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1 
 let g:neocomplcache_enable_camle_case_completion = 1
@@ -181,26 +181,25 @@ let g:neocomplcache_dictionary_filetype_lists = {
                     \ }
 " }}
 
-" vimfiler {{
+" {{ vimfiler
 let g:vimfiler_as_default_explorer = 1
 " }}
 
-" minibufexplorerpp {{
+" {{ minibufexplorerpp
 let g:miniBufExplMapWindowNavVim = 1 "move with keys hjkl
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
-" }}
-
-" quickrun {{
-let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
-" }}
-
 " minibufexplorer and many useful plugins
 " http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 "
+" }}
 
-" unite.vim {{
+" {{ quickrun
+let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
+" }}
+
+" {{ unite.vim
 "let g:unite_enable_start_insert=1
 let g:unite_split_rule = "belowright"
 " buffer list
@@ -214,17 +213,26 @@ aug unite
 aug end
 " }}
 
-" eskk {{
+" {{ eskk
 if has('vim_starting')
-    let g:eskk_dictionary = '~/.skk-jisyo'
-"   let g:eskk_large_dictionary = '~/.skk-jisyo.mine'
+  let g:eskk#dictionary = {
+        \       'path': "~/.skk-jisyo",
+        \       'sorted': 0,
+        \       'encoding': 'utf-8',
+        \       }
+  let g:eskk#large_dictionary = {
+        \ 'path': "~/.skk-jisyo.mine",
+        \ 'sorted': 0,
+        \ 'encoding': 'utf-8',
+        \ }
 endif
+
 let g:eskk_egg_like_newline = 0
-"let g:eskk_revert_henkan_style = "okuri"
 let g:eskk_enable_completion = 0
+"let g:eskk_revert_henkan_style = "okuri"
 " }}
 
-" vimshell {{
+" {{ vimshell
 nmap <leader>ss <plug>(vimshell_switch)
 
 let g:vimshell_execute_file_list = {}
@@ -248,7 +256,7 @@ aug vimshell
 aug end
 " }}
 
-" vimproc {{
+" {{ vimproc
 let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/proc.so'
 " }}
 
