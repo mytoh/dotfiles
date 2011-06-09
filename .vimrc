@@ -62,9 +62,9 @@ set incsearch
 set showmode
 set modeline
 set history=100
-set autoindent
-set smartindent
-set cindent
+"set autoindent
+"set smartindent
+"set cindent
 set showcmd
 set wrapscan
 set autoread
@@ -177,7 +177,7 @@ let g:neocomplcache_enable_auto_select = 0
 let g:neocomplcache_dictionary_filetype_lists = {
                     \ 'default' : '',
                     \ 'scheme'  : $HOME.'/.rlwrap/gosh_completions',
-                    \ 'vimshell': $HOME.'/.vimshell_hist'
+                    \ 'vimshell': $HOME.'/.vimshell/command_history'
                     \ }
 " }}
 
@@ -240,7 +240,8 @@ let g:vimshell_split_height = 20
 aug vimshell
   au! vimshell
   au filetype vimshell
-        \ call vimshell#hook#set('chpwd', ['g:my_chpwd'])
+        \  call vimshell#hook#set('chpwd', ['g:my_chpwd'])
+        \| call vimshell#altercmd#define('la', 'ls -a')
   function! g:my_chpwd(args, context)
     call vimshell#execute('ls')
   endfunction

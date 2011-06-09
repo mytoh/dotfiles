@@ -37,6 +37,7 @@ setopt all_export # may cause problem
 LANG=ja_JP.UTF-8
 EDITOR=vim
 PAGER=less
+LESS="-iGJ"
 INFOPATH=(~/.emacs.d/info:~/local/share/info)
 FTP_PASSIVE_MODE=true
 MYVIMRC=~/.vimrc

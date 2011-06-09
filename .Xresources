@@ -30,10 +30,12 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
 !urxvt.font: xft: aqua_pfont-9
 !urxvt.boldFont: xft: aqua_pfont-9
+urxvt.font: xft: Bitstream Vera Sans Mono-9
+urxvt.boldFont: xft: Bitstream Vera Sans Mono-9
 !urxvt.font: -shinonome-gothic-medium-r-normal--12-*
 !urxvt.boldFont: -shinonome-gothic-bold-r-normal-*-12-*
-urxvt.font: k12
-urxvt.boldfont: k12
+!urxvt.font: k12
+!urxvt.boldfont: k12
 
 !-------------
 ! xterm
@@ -65,21 +67,63 @@ xterm*scrollBar: false
 !--------------------------------------
 
 
-urxvt.color0: #222222
-urxvt.color1: #ffa0a0
-urxvt.color2: #98fb98
-urxvt.color3: #f0e68c
-urxvt.color4: #3a93ff
-urxvt.color5: #ffa0a0
-urxvt.color6: #87ceeb
-urxvt.color7: #ffffff
-urxvt.color8: #333333
-urxvt.color9: #ffa0a0
-urxvt.color10: #9acd32
-urxvt.color11: #f0e68c
-urxvt.color12: #87ceeb
-urxvt.color13: #ffa0a0
-urxvt.color14: #87ceeb
+!urxvt.color0: #222222
+!urxvt.color1: #ffa0a0
+!urxvt.color2: #98fb98
+!urxvt.color3: #f0e68c
+!urxvt.color4: #3a93ff
+!urxvt.color5: #ffa0a0
+!urxvt.color6: #87ceeb
+!urxvt.color7: #ffffff
+!urxvt.color8: #333333
+!urxvt.color9: #ffa0a0
+!urxvt.color10: #9acd32
+!urxvt.color11: #f0e68c
+!urxvt.color12: #87ceeb
+!urxvt.color13: #ffa0a0
+!urxvt.color14: #87ceeb
+!urxvt.color15: #ffffff
+
+!--------------
+! kde konsole DarkPastel colorscheme
+! Background 2c2c2c, 2c4444
+urxvt.color0: #3f3f3f
+urxvt.color1: #705050
+urxvt.color2: #60b48a
+urxvt.color3: #dfaf8f
+urxvt.color4: #9ab8d7
+urxvt.color5: #dc8cc3
+urxvt.color6: #8cd0d3
+urxvt.color7: #dcdccc
+urxvt.color8: #709080
+urxvt.color9: #dca3a3 
+urxvt.color10: #72d5a3
+urxvt.color11: #f0dfaf
+urxvt.color12: #94bff3
+urxvt.color13: #ec93d3
+urxvt.color14: #93e0e3
 urxvt.color15: #ffffff
 
+
+
+!!-------------------------------
+! xterm settings
+! ---------------------------------
+
+xterm.color0: #3f3f3f
+xterm.color1: #705050
+xterm.color2: #60b48a
+xterm.color3: #dfaf8f
+xterm.color4: #9ab8d7
+xterm.color5: #dc8cc3
+xterm.color6: #8cd0d3
+xterm.color7: #dcdccc
+xterm.color8: #709080
+xterm.color9: #dca3a3 
+xterm.color10: #72d5a3
+xterm.color11: #f0dfaf
+xterm.color12: #94bff3
+xterm.color13: #ec93d3
+xterm.color14: #93e0e3
+xterm.color15: #ffffff
 
