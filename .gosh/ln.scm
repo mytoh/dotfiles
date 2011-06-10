@@ -19,6 +19,7 @@
                        ".gosh/ln.scm"
                        ".gosh/stumpwm.scm"
                        ".gosh/git.scm"
+                       ".gsoh/sshfs.scm"
                        ".gtkrc.mine"
                        ".jd/jd.conf"
                        ".ncmpcpp/config"

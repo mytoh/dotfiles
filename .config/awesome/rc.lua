@@ -405,7 +405,7 @@ end
 do
   local cmds =
   {
-    "xcompmgr -c",
+    "xcompmgr",
     "gmail-notifier",
     "parcellite"
   }
