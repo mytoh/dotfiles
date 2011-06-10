@@ -13,6 +13,8 @@ require("naughty")
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/usr/local/share/awesome/themes/default/theme.lua")
+theme.font          = "Inconsolata 9"
+theme.bg_widget = "#222222cc"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvtcd "
@@ -82,6 +84,58 @@ mytextclock = awful.widget.textclock({ align = "right" })
 -- Create a systray
 mysystray = widget({ type = "systray" })
 
+-- {{ Create Quick Launch Bar
+-- http://awesome.naquadah.org/wiki/Quick_launch_bar_widget
+--
+-- Make dot.desktop file in $filedir
+--
+--   [Desktop Entry]
+--   Name=Calculator
+--   Exec=gcalctool
+--   Icon=/usr/share/icons/gnome/24x24/apps/calc.png
+--   Position=1   # optional
+--   #and so on
+--
+-- Quick launch bar widget BEGINS
+ function getValue(t, key)
+    _, _, res = string.find(t, key .. " *= *([^%c]+)%c")
+    return res
+ end
+
+ function split (s,t)
+    local l = {n=0}
+    local f = function (s)
+                l.n = l.n + 1
+                l[l.n] = s
+             end
+    local p = "%s*(.-)%s*"..t.."%s*"
+    s = string.gsub(s,p,f)
+    l.n = l.n + 1
+    return l
+ end
+
+ launchbar = { layout = awful.widget.layout.horizontal.leftright }
+ filedir = "/home/mytoh/.config/awesome/launchbar/" -- Specify your folder with shortcuts here
+ files = split(io.popen("ls " .. filedir .. "*.desktop"):read("*all"),"\n")
+ for i = 1, table.getn(files) do
+    local t = io.open(files[i]):read("*all")
+    launchbar[i] = { image = image(getValue(t,"Icon")),
+                     command = getValue(t,"Exec"),
+                     tooltip = getValue(t,"Name"),
+                     position = tonumber(getValue(t,"Position")) or 255 }
+ end
+ table.sort(launchbar, function(a,b) return a.position < b.position end)
+ for i = 1, table.getn(launchbar) do
+    local txt = launchbar[i].tooltip
+    launchbar[i] = awful.widget.launcher(launchbar[i])
+    local tt = awful.tooltip ({ objects = { launchbar[i] } })
+    tt:set_text (txt)
+    tt:set_timeout (0)
+ end
+
+-- Quick launch bar widget ENDS
+-- }}
+
 -- Create a wibox for each screen and add it
 mywibox = {}
 mypromptbox = {}
@@ -148,6 +202,7 @@ for s = 1, screen.count() do
             mylauncher,
             mytaglist[s],
             mypromptbox[s],
+            launchbar, -- Quick_launch_bar_widget
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
@@ -350,7 +405,7 @@ end
 do
   local cmds =
   {
-    "xcompmgr",
+    "xcompmgr -c",
     "gmail-notifier",
     "parcellite"
   }

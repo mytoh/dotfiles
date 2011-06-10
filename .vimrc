@@ -62,7 +62,7 @@ set hlsearch
 set incsearch
 set showmode
 set showcmd
-set modeline
+"set modeline
 set history=100
 set autoindent
 set smartindent
