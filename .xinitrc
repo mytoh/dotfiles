@@ -47,6 +47,7 @@ case $1 in
   afterstep) exec afterstep ;;
   awesome) exec awesome ;;
   kde) exec startkde4 ;;
+  gnome) exec gnome-session ;;
   *) exec $DEFAULT_SESSION ;;
 esac
 

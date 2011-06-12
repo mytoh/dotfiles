@@ -75,6 +75,17 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 
 mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
                                      menu = mymainmenu })
+-- applications launchers
+--
+-- another way, Create Quick Launch Bar
+-- http://awesome.naquadah.org/wiki/Quick_launch_bar_widget
+--
+mybrowserlauncher = awful.widget.launcher({ image = image(awful.util.getdir("config") .. "/icons/firefox.png"),
+                                            command = "firefox" })
+myfilerlauncher   = awful.widget.launcher({ image = image(awful.util.getdir("config") .. "/icons/thunar.png"),
+                                            command = "thunar" })
+myimgbrowser   = awful.widget.launcher({ image = image(awful.util.getdir("config") .. "/icons/gthumb.png"),
+                                            command = "gqview" })
 -- }}}
 
 -- {{{ Wibox
@@ -84,57 +95,6 @@ mytextclock = awful.widget.textclock({ align = "right" })
 -- Create a systray
 mysystray = widget({ type = "systray" })
 
--- {{ Create Quick Launch Bar
--- http://awesome.naquadah.org/wiki/Quick_launch_bar_widget
---
--- Make dot.desktop file in $filedir
---
---   [Desktop Entry]
---   Name=Calculator
---   Exec=gcalctool
---   Icon=/usr/share/icons/gnome/24x24/apps/calc.png
---   Position=1   # optional
---   #and so on
---
--- Quick launch bar widget BEGINS
- function getValue(t, key)
-    _, _, res = string.find(t, key .. " *= *([^%c]+)%c")
-    return res
- end
-
- function split (s,t)
-    local l = {n=0}
-    local f = function (s)
-                l.n = l.n + 1
-                l[l.n] = s
-             end
-    local p = "%s*(.-)%s*"..t.."%s*"
-    s = string.gsub(s,p,f)
-    l.n = l.n + 1
-    return l
- end
-
- launchbar = { layout = awful.widget.layout.horizontal.leftright }
- filedir = "/home/mytoh/.config/awesome/launchbar/" -- Specify your folder with shortcuts here
- files = split(io.popen("ls " .. filedir .. "*.desktop"):read("*all"),"\n")
- for i = 1, table.getn(files) do
-    local t = io.open(files[i]):read("*all")
-    launchbar[i] = { image = image(getValue(t,"Icon")),
-                     command = getValue(t,"Exec"),
-                     tooltip = getValue(t,"Name"),
-                     position = tonumber(getValue(t,"Position")) or 255 }
- end
- table.sort(launchbar, function(a,b) return a.position < b.position end)
- for i = 1, table.getn(launchbar) do
-    local txt = launchbar[i].tooltip
-    launchbar[i] = awful.widget.launcher(launchbar[i])
-    local tt = awful.tooltip ({ objects = { launchbar[i] } })
-    tt:set_text (txt)
-    tt:set_timeout (0)
- end
-
--- Quick launch bar widget ENDS
--- }}
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -202,7 +162,10 @@ for s = 1, screen.count() do
             mylauncher,
             mytaglist[s],
             mypromptbox[s],
-            launchbar, -- Quick_launch_bar_widget
+            --launchbar, -- Quick_launch_bar_widget
+            mybrowserlauncher,
+            myfilerlauncher,
+            myimgbrowser,
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
@@ -241,18 +204,24 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
+    awful.key({ modkey, "Shift"   }, "j",  function () awful.client.swap.byidx(  1)    end),
+    awful.key({ modkey, "Shift"   }, "k",  function () awful.client.swap.byidx( -1)    end),
+    awful.key({ modkey, "Control" }, "j",  function () awful.screen.focus_relative( 1) end),
+    awful.key({ modkey, "Control" }, "k",  function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey,           }, "u",  awful.client.urgent.jumpto),
+    -- act same as mod + j
     awful.key({ modkey,           }, "Tab",
         function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
+            awful.client.focus.byidx( 1)
+            if client.focus then client.focus:raise() end
         end),
+    --awful.key({ modkey,           }, "Tab",
+        --function ()
+            --awful.client.focus.history.previous()
+            --if client.focus then
+                --client.focus:raise()
+            --end
+        --end),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
@@ -269,7 +238,16 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    --awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+
+    -- Launch dmenu prompt
+      awful.key({ modkey },            "r",
+                  function ()
+                    awful.util.spawn("dmenu_run -i -p 'Run command:' -nb '" ..
+                                    beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal ..
+                                    "' -sb '" .. beautiful.bg_focus ..
+                                    "' -sf '" .. beautiful.fg_focus .. "'")
+                  end),
 
     awful.key({ modkey }, "x",
               function ()
@@ -358,6 +336,8 @@ awful.rules.rules = {
     { rule = { class = "pinentry" },
       properties = { floating = true } },
     { rule = { class = "gimp" },
+      properties = { floating = true } },
+    { rule = { class = "Thunar" },
       properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },

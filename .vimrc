@@ -4,6 +4,7 @@ filetype off
 
 set rtp+=~/.vim/bundle/vundle
 
+
 call vundle#rc()
 
 " let Vundle manage Vundle
@@ -86,7 +87,7 @@ set virtualedit=all
 set grepprg=ack\ -a
 " statusline
 set laststatus=2
-set statusline=%<%f\ %m%r%h%w%=%y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P
+set statusline=%<%f\ %m%r%h%w%=%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P
 " tabs
 set smarttab
 set tabstop=2
@@ -241,6 +242,9 @@ let g:vimshell_execute_file_list['scm'] = 'gosh'
 call vimshell#set_execute_file('txt,vim,c,cpp,xml,java', 'vim')
 
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
+let g:vimshell_prompt = ' > '
+
 let g:vimshell_smart_case = 1
 let g:vimshell_enable_auto_slash = 1
 
@@ -249,6 +253,9 @@ aug vimshell
   au! vimshell
   au filetype vimshell
         \  call vimshell#hook#set('chpwd', ['g:my_chpwd'])
+        \| call vimshell#altercmd#define('la', 'ls -a')
+        \| call vimshell#altercmd#define('pup','sudo portsnap fetch update')
+        \| call vimshell#altercmd#define('pcheck','sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles')
         \| call vimshell#altercmd#define('la', 'ls -a')
   function! g:my_chpwd(args, context)
     call vimshell#execute('ls')

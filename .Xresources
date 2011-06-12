@@ -81,7 +81,7 @@ urxvt.boldfont: k12
 !--------------
 ! kde konsole DarkPastel colorscheme
 ! Background 2c2c2c, 2c4444
-urxvt.color0:  #3f3f3f
+urxvt.color0:  #2c2c2c
 urxvt.color1:  #705050
 urxvt.color2:  #60b48a
 urxvt.color3:  #dfaf8f

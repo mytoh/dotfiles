@@ -37,7 +37,7 @@ umask 002
 # set local variables
 local home=$HOME
 setopt all_export # may cause problem
-LANG=ja_JP.UTF-8
+LANG=en_GB.UTF-8
 EDITOR=vim
 PAGER=less
 LESS="-iGJ"
