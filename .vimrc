@@ -234,16 +234,16 @@ let g:eskk_enable_completion = 0
 " }}
 
 " {{ vimshell
-nmap <leader>ss <plug>(vimshell_switch)
+
+let g:vimshell_prompt = ' > '
+"let g:vimshell_user_prompt = 'getcwd()'
+"let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 
 let g:vimshell_execute_file_list = {}
 let g:vimshell_execute_file_list['pl'] = 'perl'
 let g:vimshell_execute_file_list['scm'] = 'gosh'
 call vimshell#set_execute_file('txt,vim,c,cpp,xml,java', 'vim')
 
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
-let g:vimshell_prompt = ' > '
 
 let g:vimshell_smart_case = 1
 let g:vimshell_enable_auto_slash = 1
@@ -261,6 +261,8 @@ aug vimshell
     call vimshell#execute('ls')
   endfunction
 aug end
+
+nmap <leader>ss <plug>(vimshell_switch)
 " }}
 
 " {{ vimproc

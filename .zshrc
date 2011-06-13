@@ -40,7 +40,7 @@ setopt all_export # may cause problem
 LANG=en_GB.UTF-8
 EDITOR=vim
 PAGER=less
-LESS="-iGJ"
+#LESS="-iGJ"
 INFOPATH=(~/.emacs.d/info:~/local/share/info)
 FTP_PASSIVE_MODE=true
 MYVIMRC=~/.vimrc
@@ -113,7 +113,7 @@ zstyle ':completion:*:(processes|jobs)' menu yes select=2
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]=** r:|=*' '+l:|=*' '+m:{A-Z}={a-z}'
 zstyle ':completion:*' format 'Completing %F{blue}%d'
 zstyle ':completion:*' group-name ''
-zstyle ':completion:*' use-cache on
+zstyle ':completion:*' use-cache true
 zstyle ':completion:*:functions' ignore-patterns '_*'
 # }}
 
@@ -188,7 +188,7 @@ svim() {
 
 #alias precmd=rehash
 alias pup="sudo portsnap fetch update "
-alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles"
+alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends"
 alias pfetch="sudo make  fetch-recursive"
 alias pinst="sudo make  install distclean; rehash"
 alias pconf="sudo make config-recursive"
