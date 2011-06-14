@@ -113,13 +113,18 @@ set fenc=utf-8
 let mapleader = ","
 nnoremap ; :
 nnoremap : ;
-nnoremap <cr> o<esc>
 nnoremap <space> i<space><esc>
 nmap n nzz
 nmap N Nzz
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <leader>w :<c-u>up<cr>
 nnoremap <leader>q :<c-u>qa<cr>
+
+" gui settings
+if has('gui_running')
+  set guifont=Monaco:h10
+  set transparency=20
+endif
 "
 " }}
 
