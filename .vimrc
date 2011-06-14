@@ -122,7 +122,7 @@ nnoremap <leader>q :<c-u>qa<cr>
 
 " gui settings
 if has('gui_running')
-  set guifont=Monaco:h10
+  set guifont=KohatuTohab\ 10
   set transparency=20
 endif
 "
