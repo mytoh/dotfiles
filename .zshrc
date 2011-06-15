@@ -99,7 +99,7 @@ hash -d mypassport=~/local/mnt/mypassport
 # }}
 
 # {{ Autoloads
-autoload -Uz compinit && compinit
+autoload -Uz compinit -C  && compinit
 autoload colors &&  colors
 autoload -Uz zmv
 # }}
