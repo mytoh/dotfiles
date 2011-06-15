@@ -76,7 +76,7 @@ else
   path=( ~/local/*/{sbin,bin}(N)
          ~/local/bin(N)\
           /usr/X11/bin(N) \
-          /usr/X11R6/bin \
+          /usr/X11R6/bin(N) \
           /usr/games(N)\
           /usr/local/{sbin,bin}\
           /usr/local/*/{sbin,bin}(N)\
