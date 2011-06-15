@@ -251,10 +251,6 @@ aug vimshell
   au! vimshell
   au filetype vimshell
         \  call vimshell#hook#set('chpwd', ['g:my_chpwd'])
-        \| call vimshell#altercmd#define('la', 'ls -a')
-        \| call vimshell#altercmd#define('pup','sudo portsnap fetch update')
-        \| call vimshell#altercmd#define('pcheck','sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles')
-        \| call vimshell#altercmd#define('la', 'ls -a')
   function! g:my_chpwd(args, context)
     call vimshell#execute('ls')
   endfunction
