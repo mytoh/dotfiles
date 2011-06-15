@@ -1,5 +1,5 @@
 
 
-set guifont=KohatuTohab\ 10
-set transparency=20
-colorscheme desert
+set guifont=KohatuTohaba\ 10
+set transparency=10
+colorscheme xoria256
