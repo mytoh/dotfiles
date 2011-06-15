@@ -1,7 +1,7 @@
 
 
 if has('gui_macvim')
-  set guifont=KonatuTohaba:h10
+  set guifont=KonatuTohaba:h12
   set guioptions-=T
   set transparency=10
   colorscheme xoria256
