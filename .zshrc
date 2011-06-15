@@ -99,7 +99,7 @@ hash -d mypassport=~/local/mnt/mypassport
 # }}
 
 # {{ Autoloads
-autoload -Uz compinit -C  && compinit
+autoload -Uz compinit  && compinit -C # ignore insecure directories in $fpath
 autoload colors &&  colors
 autoload -Uz zmv
 # }}
