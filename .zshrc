@@ -62,19 +62,21 @@ SAVEHIST=50000
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 if [ -d /usr/local/lib/cw ]; then
-  path=(~/.cw(N)
-        ~/local/*/{sbin,bin}(N)\
-        ~/local/bin(N)\
-         /usr/X11/bin(N) \
-         /usr/X11R6/bin(N) \
-         /usr/games(N)\
-         /usr/local/{sbin,bin}\
-         /usr/local/*/{sbin,bin}(N)\
-         /usr/{sbin,bin}\
-         /{sbin,bin})
+  path=( ~/.cw(N)
+         ~/local/*/{sbin,bin}(N)\
+         ~/local/bin(N)\
+          /opt/X11/bin(N) \
+          /usr/X11/bin(N) \
+          /usr/X11R6/bin(N) \
+          /usr/games(N)\
+          /usr/local/{sbin,bin}\
+          /usr/local/*/{sbin,bin}(N)\
+          /usr/{sbin,bin}\
+          /{sbin,bin})
 else
   path=( ~/local/*/{sbin,bin}(N)
          ~/local/bin(N)\
+          /opt/X11/bin(N) \
           /usr/X11/bin(N) \
           /usr/X11R6/bin(N) \
           /usr/games(N)\
