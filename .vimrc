@@ -109,7 +109,6 @@ set fenc=utf-8
 " }}
 
 " {{ keymap
-"
 let mapleader = ","
 nnoremap ; :
 nnoremap : ;
@@ -120,12 +119,6 @@ nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <leader>w :<c-u>up<cr>
 nnoremap <leader>q :<c-u>qa<cr>
 
-" gui settings
-if has('gui_running')
-  set guifont=KohatuTohab\ 10
-  set transparency=20
-endif
-"
 " }}
 
 " {{ autocommands
@@ -241,7 +234,7 @@ let g:eskk_enable_completion = 0
 " {{ vimshell
 
 let g:vimshell_prompt = ' > '
-"let g:vimshell_user_prompt = 'getcwd()'
+let g:vimshell_user_prompt = 'getcwd()'
 "let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 
 let g:vimshell_execute_file_list = {}
