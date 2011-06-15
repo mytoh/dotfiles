@@ -1,4 +1,5 @@
 
 .vim/bundle
-.zshrc.zwc
+*.zwc
 .vim/.vim
+*.swp

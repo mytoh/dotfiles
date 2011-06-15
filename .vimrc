@@ -26,7 +26,6 @@ Bundle 'thinca/vim-ref'
 Bundle 'koron/chalice'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'kana/vim-fakeclip'
-Bundle 'tyru/savemap.vim'
 Bundle 'tyru/vice.vim'
 Bundle 'tyru/eskk.vim'
 Bundle 'fholgado/minibufexpl.vim'
@@ -126,6 +125,7 @@ aug mycommands
   au!
   au bufwritepost .vimrc source $MYVIMRC
   au bufread,bufnewfile .tmux.conf  set filetype=tmux
+  au bufread,bufnewfile .vimshrc set filetype=vim
   au bufwritepost .Xresources silent !xrdb -remove
   au bufwritepost .Xresources silent !xrdb -merge ~/.Xresources
   au bufwritepost .zshrc silent !zcompile .zshrc
@@ -201,9 +201,16 @@ let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
 " {{ unite.vim
 "let g:unite_enable_start_insert=1
 let g:unite_split_rule = "belowright"
+" 
+" fnamemodify() format
+" :help filename-modifiers
+let g:unite_source_file_mru_filename_format = ':p:~:.'
+let g:unite_source_file_mru_time_format = ''
 " buffer list
 nnoremap <silent> <leader>ub :<c-u>Unite bookmark<cr>
 nnoremap <silent> <leader>uf :<c-u>Unite -buffer-name=files file<cr>
+nnoremap <silent> <leader>um :<c-u>Unite -buffer-name=files file_mru<cr>
+
 " leave unite buffer
 aug unite
   au! unite
@@ -233,9 +240,9 @@ let g:eskk_enable_completion = 0
 
 " {{ vimshell
 
-let g:vimshell_prompt = ' > '
-let g:vimshell_user_prompt = 'getcwd()'
-"let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
+let g:vimshell_prompt = '>>> '
+let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 
 let g:vimshell_execute_file_list = {}
 let g:vimshell_execute_file_list['pl'] = 'perl'
