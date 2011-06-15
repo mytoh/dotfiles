@@ -63,19 +63,23 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 if [ -d /usr/local/lib/cw ]; then
   path=(~/.cw(N)
-        ~/local/homebrew/{sbin,bin}(N)\
+        ~/local/*/{sbin,bin}(N)\
         ~/local/bin(N)\
+         /usr/X11/bin(N) \
+         /usr/X11R6/bin(N) \
          /usr/games(N)\
          /usr/local/{sbin,bin}\
-         /usr/local/kde4/{sbin,bin}(N)\
+         /usr/local/*/{sbin,bin}(N)\
          /usr/{sbin,bin}\
          /{sbin,bin})
 else
-  path=( ~/local/homebrew/{sbin,bin}(N)
+  path=( ~/local/*/{sbin,bin}(N)
          ~/local/bin(N)\
+          /usr/X11/bin(N) \
+          /usr/X11R6/bin \
           /usr/games(N)\
           /usr/local/{sbin,bin}\
-          /usr/local/kde4/{sbin,bin}(N)\
+          /usr/local/*/{sbin,bin}(N)\
           /usr/{sbin,bin}\
           /{sbin,bin})
 fi
