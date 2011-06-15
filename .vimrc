@@ -121,7 +121,7 @@ nnoremap <leader>q :<c-u>qa<cr>
 " }}
 
 " {{ autocommands
-aug mycommands
+aug myautocommands
   au!
   au bufwritepost .vimrc source $MYVIMRC
   au bufread,bufnewfile .tmux.conf  set filetype=tmux
