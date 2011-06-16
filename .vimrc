@@ -182,11 +182,22 @@ let g:neocomplcache_dictionary_filetype_lists = {
 let g:vimfiler_as_default_explorer = 1
 " }}
 
-" {{ minibufexplorerpp
-let g:miniBufExplMapWindowNavVim = 1 "move with keys hjkl
-let g:miniBufExplMapWindowNavArrows = 1
+" {{ fholgado's minibufexpl
+let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
+" highlights
+"hi MBENormal               " - for buffers that have NOT CHANGED and
+                            "   are NOT VISIBLE.
+hi MBEChanged guibg=darkblue ctermbg=darkblue ctermfg=white             | " - for buffers that HAVE CHANGED and are
+                                                                          "   NOT VISIBLE
+"hi MBEVisibleNormal        " - buffers that have NOT CHANGED and are
+                            "   VISIBLE
+"hi MBEVisibleNormalActive  " - buffers that have NOT CHANGED and are
+                            "   VISIBLE and is the active buffer
+"hi MBEVisibleChanged       " - for buffers that have CHANGED and are 
+                            "   VISIBLE
+"hi MBEVisibleChangedActive " - buffers that have CHANGED and are VISIBLE
+                             "and is the active buffer
 " minibufexplorer and many useful plugins
 " http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 "
