@@ -104,7 +104,6 @@ set termencoding=utf-8
 set enc=utf-8
 set fenc=utf-8
 "set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
-"
 " }}
 
 " {{ keymap
@@ -117,7 +116,6 @@ nmap N Nzz
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <leader>w :<c-u>up<cr>
 nnoremap <leader>q :<c-u>qa<cr>
-
 " }}
 
 " {{ autocommands
@@ -201,7 +199,6 @@ let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
 " {{ unite.vim
 "let g:unite_enable_start_insert=1
 let g:unite_split_rule = "belowright"
-" 
 " fnamemodify() format
 " :help filename-modifiers
 let g:unite_source_file_mru_filename_format = ':p:~:.'
@@ -210,7 +207,6 @@ let g:unite_source_file_mru_time_format = ''
 nnoremap <silent> <leader>ub :<c-u>Unite bookmark<cr>
 nnoremap <silent> <leader>uf :<c-u>Unite -buffer-name=files file<cr>
 nnoremap <silent> <leader>um :<c-u>Unite -buffer-name=files file_mru<cr>
-
 " leave unite buffer
 aug unite
   au! unite
@@ -239,21 +235,17 @@ let g:eskk_enable_completion = 0
 " }}
 
 " {{ vimshell
-
 let g:vimshell_prompt = '>>> '
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
-
 let g:vimshell_execute_file_list = {}
 let g:vimshell_execute_file_list['pl'] = 'perl'
 let g:vimshell_execute_file_list['scm'] = 'gosh'
 call vimshell#set_execute_file('txt,vim,c,cpp,xml,java', 'vim')
-
-
 let g:vimshell_smart_case = 1
 let g:vimshell_enable_auto_slash = 1
-
 let g:vimshell_split_height = 20
+let g:vimshell_split_command = 'split'
 aug vimshell
   au! vimshell
   au filetype vimshell

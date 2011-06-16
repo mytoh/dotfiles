@@ -39,7 +39,7 @@ local home=$HOME
 setopt all_export # may cause problem
 LANG=en_GB.UTF-8
 EDITOR=vim
-PAGER=less
+PAGER="less"
 #LESS="-iGJ"
 INFOPATH=(~/.emacs.d/info:~/local/share/info)
 FTP_PASSIVE_MODE=true
