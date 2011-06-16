@@ -275,4 +275,6 @@ fortune
 echo "\n"
 fi
 
-
+case "$OSTYPE" in
+  solaris*) 
+esac
