@@ -276,5 +276,6 @@ echo "\n"
 fi
 
 case "$OSTYPE" in
-  solaris*) 
+  solaris*) ;;
+  darwin*)   ;;
 esac
