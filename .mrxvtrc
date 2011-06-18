@@ -5,15 +5,49 @@ Mrxvt.xft: True
 Mrxvt.xftHinting: True
 Mrxvt.xftAutoHint: True
 Mrxvt.xftFont: Bitstream Vera Sans Mono
-Mrxvt.xftSize: 10
-Mrxvt.xftmFont: Bitstream Vera Sans 
-Mrxvt.xftmSize: 10
+Mrxvt.xftSize: 8
+Mrxvt.xftmSize: 8
+Mrxvt.xfttSize: 8
+Mrxvt.xftmFont: Bitstream Vera Sans
+Mrxvt.xftPFont: Bitstream Vera Sans
+Mrxvt.xftPSize: 8
+Mrxvt.multichar_encoding: utf-8
 Mrxvt.bottomTabbar: True
-Mrxvt.Menubar: False
+Mrxvt.autohideTabbar: True
+Mrxvt.hideButtons: True
+Mrxvt.syncTabIcon: True
+Mrxvt.tabBar: False
+Mrxvt.itabBackground: #101010
+Mrxvt.tabBackground:  #000000
+Mrxvt.itabForeground: #909090
+Mrxvt.tabForeground:  #9a9a9a
+Mrxvt.scrollBar: false
+Mrxvt.scrollbarRight: false
 Mrxvt.backgroundFade: 40
+
+FullScreen.bottomTabbar: False
+FullScreen.fullscreen: True
+
 Mrxvt.background: black
 Mrxvt.foreground: white
 Mrxvt.tinColor: #aaffff
+Mrxvt.highlightColor: #303060
+Mrxvt.color0:  #2c2c2c
+Mrxvt.color1:  #705050
+Mrxvt.color2:  #60b48a
+Mrxvt.color3:  #dfaf8f
+Mrxvt.color4:  #9ab8d7
+Mrxvt.color5:  #dc8cc3
+Mrxvt.color6:  #8cd0d3
+Mrxvt.color7:  #dcdccc
+Mrxvt.color8:  #709080
+Mrxvt.color9:  #dca3a3
+Mrxvt.color10: #72d5a3
+Mrxvt.color11: #f0dfaf
+Mrxvt.color12: #94bff3
+Mrxvt.color13: #ec93d3
+Mrxvt.color14: #93e0e3
+Mrxvt.color15: #ffffff
 
 #Mrxvt.tranparent: True
 #Mrxvt.tranparentTabber: True
