@@ -218,36 +218,6 @@ alias -s {m3u,mp3,flac}=audacious
 alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
 # }}
 
-# {{ auto-fu.zsh
-# github.com/hchbaw/auto-fu.zsh
-if [ -e $home/.zsh/plugins/auto-fu.zsh ]; then
-  set_auto_fu() {
-    {. ~/.zsh/plugins/auto-fu.zsh/auto-fu; auto-fu-install;}
-    #zstyle ':auto-fu:highlight' input bold
-    zstyle ':auto-fu:highlight' completion fg=cyan,bold
-    zstyle ':auto-fu:highlight' completion/one fg=white,bold,underline
-    zstyle ':auto-fu:var' postdisplay ''
-    zstyle ':auto-fu:var' track-keymap-skip opp
-    zle-line-init() {auto-fu-init;}; zle -N zle-line-init
-      zle -N zle-keymap-select auto-fu-zle-keymap-select
-    }
-
-      if [ ! -e $home/.zsh/plugins/auto-fu.zsh/auto-fu.zwc ]; then
-        source $home/.zsh/plugins/auto-fu.zsh/auto-fu.zsh
-        auto-fu-zcompile $home/.zsh/plugins/auto-fu.zsh/auto-fu.zsh $home/.zsh/plugins/auto-fu.zsh
-        set_auto_fu
-      else
-        set_auto_fu
-      fi
-  else
-    mkdir -p $home/.zsh/plugins
-    cd $home/.zsh/plugins 
-    git clone git://github.com/hchbaw/auto-fu.zsh
-    source $home/.zsh/plugins/auto-fu.zsh/auto-fu.zsh
-    auto-fu-zcompile $home/.zsh/plugins/auto-fu.zsh/auto-fu.zsh $home/.zsh/plugins/auto-fu.zsh
-    set_auto_fu
-fi
-# }}
 
 
 if [ -e $home/perl5 ]; then
