@@ -1,0 +1,21 @@
+Mrxvt.termName: xterm
+Mrxvt.opacity: 10
+Mrxvt.opacityDegree: 5
+Mrxvt.xft: True
+Mrxvt.xftHinting: True
+Mrxvt.xftAutoHint: True
+Mrxvt.xftFont: Bitstream Vera Sans Mono
+Mrxvt.xftSize: 10
+Mrxvt.xftmFont: Bitstream Vera Sans 
+Mrxvt.xftmSize: 10
+Mrxvt.Tabbar: False
+Mrxvt.backgroundFade: 40
+Mrxvt.background: black
+Mrxvt.foreground: white
+Mrxvt.tinColor: #aaffff
+
+#Mrxvt.tranparent: True
+#Mrxvt.tranparentTabber: True
+#Mrxvt.tranparentMenubar: True
+#Mrxvt.tranparentScrollbar: True
+#Mrxvt.shading:80 
