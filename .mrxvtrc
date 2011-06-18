@@ -32,6 +32,7 @@ Mrxvt.background: black
 Mrxvt.foreground: white
 Mrxvt.tinColor: #aaffff
 Mrxvt.highlightColor: #303060
+
 Mrxvt.color0:  #2c2c2c
 Mrxvt.color1:  #705050
 Mrxvt.color2:  #60b48a
