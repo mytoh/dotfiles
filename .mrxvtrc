@@ -8,7 +8,8 @@ Mrxvt.xftFont: Bitstream Vera Sans Mono
 Mrxvt.xftSize: 10
 Mrxvt.xftmFont: Bitstream Vera Sans 
 Mrxvt.xftmSize: 10
-Mrxvt.Tabbar: False
+Mrxvt.bottomTabbar: True
+Mrxvt.Menubar: False
 Mrxvt.backgroundFade: 40
 Mrxvt.background: black
 Mrxvt.foreground: white

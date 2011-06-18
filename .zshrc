@@ -246,7 +246,7 @@ if [ -e $home/.zsh/plugins/auto-fu.zsh ]; then
         set_auto_fu
       fi
   else
-    mkdir $home/.zsh/plugins
+    mkdir -p $home/.zsh/plugins
     cd $home/.zsh/plugins
     git clone git://github.com/hchbaw/auto-fu.zsh
     source $home/.zsh/plugins/auto-fu.zsh/auto-fu.zsh
