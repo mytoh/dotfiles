@@ -147,9 +147,6 @@ bindkey "\\en" history-beginning-search-forward-end
 # }}
 
 # {{ Functions
-chpwd() {
-  ls -G -F
-}
 
 # zshwiki hardstatus
 title() {
@@ -200,9 +197,6 @@ alias pinst="sudo make  install distclean; rehash"
 alias pconf="sudo make config-recursive"
 alias pclean="sudo make  clean "
 alias cup="cpan-outdated && cpan-outdated | xargs cpanm -v"
-alias la="ls -G -a"
-alias ll="ls -G -hlA " 
-alias ls="ls -G -F"
 alias view="vim -X -R -"
 alias scsh="rlwrap scsh"
 alias goshrl="rlwrap -pBlue -b '(){}[],#;| ' gosh"
@@ -247,7 +241,7 @@ if [ -e $home/.zsh/plugins/auto-fu.zsh ]; then
       fi
   else
     mkdir -p $home/.zsh/plugins
-    cd $home/.zsh/plugins
+    cd $home/.zsh/plugins 
     git clone git://github.com/hchbaw/auto-fu.zsh
     source $home/.zsh/plugins/auto-fu.zsh/auto-fu.zsh
     auto-fu-zcompile $home/.zsh/plugins/auto-fu.zsh/auto-fu.zsh $home/.zsh/plugins/auto-fu.zsh
@@ -275,7 +269,21 @@ fortune
 echo "\n"
 fi
 
-case "$OSTYPE" in
-  solaris*) ;;
-  darwin*)   ;;
+case ${OSTYPE} in
+  solaris*) 
+	alias la="ls  -a" 
+	alias ll="ls  -hlA " 
+	alias ls="ls  -F" 
+	chpwd() {
+	  ls -F
+	}
+	;;
+  darwin*)   
+	alias la="ls -G -a" 
+	alias ll="ls -G -hlA " 
+	alias ls="ls -G -F" 
+	chpwd() {
+	  ls -G -F
+	}
+	;;
 esac
