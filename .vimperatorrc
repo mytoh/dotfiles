@@ -5,13 +5,10 @@ noremap ; :
 
 colorscheme sweets
 
-
-set hintchars=dhtnaoeu
-
 set complete=lsb
 set defsearch="google"
 set editor="vim"
-set toolbars=noaddons,nobookmarks,menu,nonavigation,tabs
+set statuslinetoolbars=noaddons,nobookmarks,menu,nonavigation,tabs
 
 "direct_bookmark.js
 let g:direct_sbm_use_services_by_tag = "dg"
@@ -26,5 +23,6 @@ lazy fmaps -u='www\.google\.(co\.jp|com)/reader' -events=vkeyup z
 " statusline-toolbar
 "set statustoolbars=bookmarks-menu-button-container
 
+set mainecoon=a
 
 
