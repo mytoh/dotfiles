@@ -210,6 +210,20 @@ pack() {
   esac
 }
 
+unpack() {
+  local lower
+  lower=${(L)1}
+  case $lower in
+    *.tar.xz|*.tar.bz2|*.tar.gz)
+      tar xvf $@;;
+    *.txz|*.tbz2|*.tgz)
+      tar xvf $@;;
+    *.zip)
+      unzip $@;;
+  esac
+}
+
+
 # {{ Aliases
 #alias precmd=rehash
 alias pup="sudo portsnap fetch update "
