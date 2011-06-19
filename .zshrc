@@ -171,7 +171,6 @@ preexec() {
 # }}
 
 
-# {{ Aliases
 # alias functions
 tm() {
   if tmux ls >/dev/null 2>&1; then
@@ -189,6 +188,29 @@ svim() {
   fi
 }
 
+# archive function from
+# http://www.christoph-polcin.com/blog/zsh-archive-funcition
+pack() {
+  if [[ $# -lt 2 ]];
+  then
+    echo "compress files and directories via:"
+    echo " pack archive_file file [dir|file]*"
+    return 1
+  fi
+
+  [[ -f $1 ]] && echo "error: destination archive_file exists" && return 1
+
+  local lower
+  lower=${(L)1}
+  case $lower in
+    *.tar.xz|*.xz)
+      tar cvf $@;;
+    *)
+      echo "'$1' cannot be created via 'pack'";;
+  esac
+}
+
+# {{ Aliases
 #alias precmd=rehash
 alias pup="sudo portsnap fetch update "
 alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends"
