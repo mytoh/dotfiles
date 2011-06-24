@@ -80,11 +80,11 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- another way, Create Quick Launch Bar
 -- http://awesome.naquadah.org/wiki/Quick_launch_bar_widget
 --
-mybrowserlauncher = awful.widget.launcher({ image = image(awful.util.getdir("config") .. "/icons/firefox.png"),
+mybrowserlauncher = awful.widget.launcher({ image = image(awful.util.getdir("config") .. "/icons/firefox.xpm"),
                                             command = "firefox" })
-myfilerlauncher   = awful.widget.launcher({ image = image(awful.util.getdir("config") .. "/icons/thunar.png"),
+myfilerlauncher   = awful.widget.launcher({ image = image(awful.util.getdir("config") .. "/icons/thunar.xpm"),
                                             command = "thunar" })
-myimgbrowser   = awful.widget.launcher({ image = image(awful.util.getdir("config") .. "/icons/gthumb.png"),
+myimgbrowser   = awful.widget.launcher({ image = image(awful.util.getdir("config") .. "/icons/gthumb.xpm"),
                                             command = "gqview" })
 -- }}}
 
@@ -385,7 +385,7 @@ end
 do
   local cmds =
   {
-    "xcompmgr -n",
+    "xcompmgr -c",
     "gmail-notifier",
     "parcellite"
   }

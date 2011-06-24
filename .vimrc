@@ -122,12 +122,12 @@ nnoremap <leader>q :<c-u>qa<cr>
 " {{ autocommands
 aug myautocommands
   au!
-  au bufwritepost .vimrc source $MYVIMRC
   au bufread,bufnewfile .tmux.conf  set filetype=tmux
-  au bufread,bufnewfile .vimshrc set filetype=vim
-  au bufwritepost .Xresources silent !xrdb -remove
-  au bufwritepost .Xresources silent !xrdb -merge ~/.Xresources
-  au bufwritepost .zshrc silent !zcompile .zshrc
+  au bufread,bufnewfile .vimshrc    set filetype=vim
+  au bufwritepost       .vimrc      source $MYVIMRC
+  au bufwritepost       .Xresources silent !xrdb -remove
+  au bufwritepost       .Xresources silent !xrdb -merge ~/.Xresources
+  au bufwritepost       .zshrc      silent !zcompile .zshrc
   au filetype scheme setl cindent& lispwords=define,lambda,call-with-*
   au filetype help nnoremap q :<c-u>q<cr>
 aug end
