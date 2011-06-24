@@ -38,8 +38,8 @@ layouts =
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
+    --awful.layout.suit.spiral,
+    --awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier
@@ -241,7 +241,7 @@ globalkeys = awful.util.table.join(
     --awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
     -- Launch dmenu prompt
-      awful.key({ modkey },            "r",
+      awful.key({ modkey },            "p",
                   function ()
                     awful.util.spawn("dmenu_run -i -p 'Run command:' -nb '" ..
                                     beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal ..

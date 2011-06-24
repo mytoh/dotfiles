@@ -188,7 +188,7 @@ svim() {
   fi
 }
 
-# archive function from
+# archive function
 # http://www.christoph-polcin.com/blog/zsh-archive-funcition
 pack() {
   if [[ $# -lt 2 ]];
@@ -284,7 +284,7 @@ case ${OSTYPE} in
 	  ls -F
 	}
 	;;
-  darwin*|bsd*)   
+  darwin*|freebsd*)   
 	alias la="ls -G -a" 
 	alias ll="ls -G -hlA " 
 	alias ls="ls -G -F" 
