@@ -284,7 +284,7 @@ case ${OSTYPE} in
 	  ls -F
 	}
 	;;
-  darwin*)   
+  darwin*|bsd*)   
 	alias la="ls -G -a" 
 	alias ll="ls -G -hlA " 
 	alias ls="ls -G -F" 

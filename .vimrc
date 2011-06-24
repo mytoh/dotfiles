@@ -19,8 +19,8 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/vimfiler'
 Bundle 'Shougo/vinarise'
 Bundle 'Shougo/unite.vim'
-"Bundle 'Shougo/vimproc'
-"Bundle 'Shougo/vimshell'
+Bundle 'Shougo/vimproc'
+Bundle 'Shougo/vimshell'
 Bundle 'thinca/vim-quickrun'
 Bundle 'thinca/vim-ref'
 Bundle 'koron/chalice'
@@ -100,6 +100,7 @@ set ttymouse=xterm2
 set t_Co=256
 colorscheme xoria256
 " encodings
+scriptencoding=utf-8
 set termencoding=utf-8
 set enc=utf-8
 set fenc=utf-8
