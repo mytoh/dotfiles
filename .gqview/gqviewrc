@@ -216,7 +216,7 @@ main_window_x: 0
 
 main_window_y: 16
 
-main_window_width: 1278
+main_window_width: 638
 
 main_window_height: 782
 
@@ -234,7 +234,7 @@ float_window_divider: 200
 
 divider_position_h: 270
 
-divider_position_v: 487
+divider_position_v: 200
 
 ######################################################################
 #                      end of GQview config file                     #

@@ -12,7 +12,7 @@ require("naughty")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/local/share/awesome/themes/default/theme.lua")
+beautiful.init(awful.util.getdir("config") .. "/themes/default/theme.lua")
 theme.font          = "Inconsolata 9"
 theme.bg_widget = "#222222cc"
 
@@ -86,6 +86,8 @@ myfilerlauncher   = awful.widget.launcher({ image = image(awful.util.getdir("con
                                             command = "thunar" })
 myimgbrowser   = awful.widget.launcher({ image = image(awful.util.getdir("config") .. "/icons/gthumb.xpm"),
                                             command = "gqview" })
+myaudioplayer   = awful.widget.launcher({ image = image(awful.util.getdir("config") .. "/icons/audacious.xpm"),
+                                            command = "audacious" })
 -- }}}
 
 -- {{{ Wibox
@@ -166,6 +168,7 @@ for s = 1, screen.count() do
             mybrowserlauncher,
             myfilerlauncher,
             myimgbrowser,
+            myaudioplayer,
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
@@ -385,8 +388,8 @@ end
 do
   local cmds =
   {
-    "xcompmgr -c",
-    "gmail-notifier",
+    "xcompmgr ",
+    --"gmail-notifier",
     "parcellite"
   }
 
