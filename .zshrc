@@ -276,6 +276,20 @@ echo "\n"
 fi
 
 case ${OSTYPE} in
+  beos*|haiku*)
+	path=( ~/config/bin \
+		/boot/common/bin \
+		/boot/apps \
+		/boot/preferences \
+		/boot/system/apps \
+		/boot/system/preferences \
+		/boot/develop/tools/gnupro/bin \
+		${path})
+	alias la="ls -a"
+	chpwd() {
+	  ls -F 
+	}
+	;;
   solaris*) 
 	alias la="ls  -a" 
 	alias ll="ls  -hlA " 
