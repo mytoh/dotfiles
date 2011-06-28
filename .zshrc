@@ -286,9 +286,13 @@ case ${OSTYPE} in
 		/boot/develop/tools/gnupro/bin \
 		${path})
 	alias la="ls -a"
+	alias reboot="shutdown -r"
+	alias halt="shutdown"
 	chpwd() {
 	  ls -F 
 	}
+  export VIM=~/.vim
+  export TERMINFO=/boot/common/share/terminfo
 	;;
   solaris*) 
 	alias la="ls  -a" 
