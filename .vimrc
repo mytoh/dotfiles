@@ -1,4 +1,20 @@
-"turn filetype off to load ftdetect
+if has('mac')
+    let ostype = "Mac"
+ else
+    let ostype = system("uname")
+endif
+
+if ostype == "Haiku"
+  colorscheme evening
+  syntax off
+  :NeoComplCacheDisable
+  let loaded_vimshell = 1
+  let loaded_neocomplcache = 1
+  let loaded_vimproc = 1
+endif
+
+
+"turn filetype off not to load ftdetect
 set nocompatible
 filetype off
 
@@ -49,6 +65,8 @@ Bundle 'sudo.vim'
 "
 filetype plugin indent on
 syntax on
+
+
 
 set nobackup
 set clipboard=unnamed,autoselect

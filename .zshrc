@@ -277,23 +277,25 @@ fi
 
 case ${OSTYPE} in
   beos*|haiku*)
-	path=( ~/config/bin \
-		/boot/common/bin \
-		/boot/apps \
-		/boot/preferences \
-		/boot/system/apps \
-		/boot/system/preferences \
-		/boot/develop/tools/gnupro/bin \
-		${path})
-	alias la="ls -a"
-	alias reboot="shutdown -r"
-	alias halt="shutdown"
-	chpwd() {
-	  ls -F 
-	}
+  path=( ~/config/bin \
+    /boot/common/bin \
+    /boot/apps \
+    /boot/preferences \
+    /boot/system/apps \
+    /boot/system/preferences \
+    /boot/develop/tools/gnupro/bin \
+    ${path})
+  alias la="ls -a"
+  alias reboot="shutdown -r"
+  alias halt="shutdown"
+  alias vim='vim --noplugin -u ~/.vimrc'
+  chpwd() {
+    ls -F
+  }
   export VIM=~/.vim
   export TERMINFO=/boot/common/share/terminfo
-	;;
+  export VIMRUNTIME=(/boot/common/data/vim/vim73)
+  ;;
   solaris*) 
 	alias la="ls  -a" 
 	alias ll="ls  -hlA " 
