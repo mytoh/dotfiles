@@ -288,28 +288,25 @@ case ${OSTYPE} in
   alias la="ls -a"
   alias reboot="shutdown -r"
   alias halt="shutdown"
-  alias vim='vim --noplugin -u ~/.vimrc'
   chpwd() {
     ls -F
   }
-  export VIM=~/.vim
-  export TERMINFO=/boot/common/share/terminfo
-  export VIMRUNTIME=(/boot/common/data/vim/vim73)
+  TERMINFO=/boot/common/share/terminfo
   ;;
-  solaris*) 
-	alias la="ls  -a" 
-	alias ll="ls  -hlA " 
-	alias ls="ls  -F" 
-	chpwd() {
-	  ls -F
-	}
-	;;
-  darwin*|freebsd*)   
-	alias la="ls -G -a" 
-	alias ll="ls -G -hlA " 
-	alias ls="ls -G -F" 
-	chpwd() {
-	  ls -G -F
-	}
-	;;
-esac
+  solaris*)
+  alias la="ls  -a"
+  alias ll="ls  -hlA "
+  alias ls="ls  -F"
+  chpwd() {
+    ls -F
+  }
+  ;;
+  darwin*|freebsd*)
+  alias la="ls -G -a"
+  alias ll="ls -G -hlA "
+  alias ls="ls -G -F"
+  chpwd() {
+    ls -G -F
+  }
+  ;;
+ esac
