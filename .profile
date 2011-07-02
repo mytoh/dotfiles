@@ -39,6 +39,14 @@ unpack()
    fi
 }
 
+if [ $OSTYPE = "Haiku" ]; then
+  cd()
+  {
+    cd "$*"
+    ls --group-directories-first --color
+  }
+fi
+
 share_history()
 {
     history -a
@@ -63,6 +71,7 @@ alias ...='cd ../../'
 
 bind "\C-p":history-search-backward
 bind "\C-n":history-search-forward
+bind "\C-u":kill-whole-line
 
 complete -A hostname sftp ssh
 complete -A directory mkdir rmdir
