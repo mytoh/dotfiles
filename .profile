@@ -2,8 +2,11 @@ set -o notify
 set -o noclobber
 set -o ignoreeof
 
-shopt -s histappend histverify
+shopt -s histverify
 shopt -s extglob
+shopt -s cdavle_vars
+shopt -s 
+
 shopt -u mailwarn
 unset MAILCHECK
 
@@ -23,7 +26,7 @@ NC='\e[0m'
 PS1="${green}[\w] ${cyan}(\s) \n${blue}>>> ${NC}"
 
 # functions
-function unpack() 
+unpack()
 {
    if [ -f $1 ]; then
 	case $1 in
@@ -37,14 +40,14 @@ function unpack()
    fi
 }
 
-function share_history
+share_history()
 {
     history -a
     history -c
     history -r
 }
-
 PROMPT_COMMAND='share_history'
+shopt -u histappend
 
 
 alias halt='shutdown'
@@ -52,6 +55,10 @@ alias reboot='shutdown -r'
 alias la='ls --group-directories-first -A'
 alias ll='ls --group-directories-first -lgA'
 alias ls='ls --group-directories-first --color'
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+alias 
 alias ..='cd ..'
 alias ...='cd ../../'
 
