@@ -4,8 +4,7 @@ set -o ignoreeof
 
 shopt -s histverify
 shopt -s extglob
-shopt -s cdavle_vars
-shopt -s 
+shopt -s cdable_vars
 
 shopt -u mailwarn
 unset MAILCHECK
@@ -58,7 +57,6 @@ alias ls='ls --group-directories-first --color'
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
-alias 
 alias ..='cd ..'
 alias ...='cd ../../'
 
