@@ -36,6 +36,7 @@ function unpack()
 
 
 alias reboot="shutdown -r"
+alias halt="shutdown"
 
 complete -A hostname sftp ssh
 complete -A directory mkdir rmdir
