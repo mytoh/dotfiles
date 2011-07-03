@@ -39,11 +39,11 @@ unpack()
    fi
 }
 
-if [ $OSTYPE = "Haiku" ]; then
-  cd()
+if [ "$OSTYPE" = "beos" ]; then
+  cd ()
   {
-    cd "$*"
-    ls --group-directories-first --color
+    builtin cd $1
+    ls 
   }
 fi
 
