@@ -7,6 +7,9 @@ shopt -s extglob
 shopt -u mailwarn
 unset MAILCHECK
 
+export HISTCONTROL=ignoreboth
+export HISTSIZE=10000
+
 red='\e[0;31m'
 RED='\e[1;31m'
 blue='\e[0;34m'
@@ -34,9 +37,27 @@ function unpack()
    fi
 }
 
+function share_history
+{
+    history -a
+    history -c
+    history -r
+}
 
-alias reboot="shutdown -r"
-alias halt="shutdown"
+PROMPT_COMMAND='share_history'
+
+
+alias halt='shutdown'
+alias reboot='shutdown -r'
+alias la='ls --group-directories-first -A'
+alias ll='ls --group-directories-first -lgA'
+alias ls='ls --group-directories-first --color'
+alias ..='cd ..'
+alias ...='cd ../../'
+
+
+bind "\C-p":history-search-backward
+bind "\C-n":history-search-forward
 
 complete -A hostname sftp ssh
 complete -A directory mkdir rmdir
