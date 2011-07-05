@@ -1,5 +1,3 @@
-set -o notify
-set -o noclobber
 set -o ignoreeof
 set -o vi
 
@@ -19,11 +17,12 @@ blue='\e[0;34m'
 BLUE='\e[1;34m'
 cyan='\e[0;36m'
 CYAN='\e[1;36m'
-darkgray='\e[1;30m'
+darkgray='\e[1;37m'
 green='\e[32m'
 NC='\e[0m'
 
-PS1="${green}[\w] ${cyan}(\s) \n${blue}>>> ${NC}"
+
+PS1="${green}[\w] ${cyan}(\s) \n${darkgray}>>${CYAN}> ${NC}"
 
 # functions
 unpack()
@@ -56,7 +55,10 @@ fi
 prompt_command()
 {
     hash -r
+    let promptl_x=2
+    let promptr_x=$COLUMNS-5
 }
+
 
 share_history()
 {
