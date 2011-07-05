@@ -42,10 +42,20 @@ unpack()
 if [ "$OSTYPE" = "beos" ]; then
   cd ()
   {
-    builtin cd $1
-    ls 
+    if [ $# == '0' ]; then
+        builtin cd 
+	ls
+    else
+        builtin cd "$*"
+        ls 
+    fi
   }
 fi
+
+prompt_command()
+{
+    hash -r
+}
 
 share_history()
 {
@@ -53,7 +63,7 @@ share_history()
     history -c
     history -r
 }
-PROMPT_COMMAND='share_history'
+PROMPT_COMMAND='share_history; prompt_command'
 shopt -u histappend
 
 
