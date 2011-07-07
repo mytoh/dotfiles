@@ -8,8 +8,8 @@ shopt -s cdable_vars
 shopt -u mailwarn
 unset MAILCHECK
 
-export HISTCONTROL=ignoreboth
-export HISTSIZE=10000
+HISTCONTROL=ignoreboth
+HISTSIZE=10000
 
 red='\e[0;31m'
 RED='\e[1;31m'
