@@ -12,17 +12,18 @@ export HISTCONTROL=ignoreboth
 export HISTSIZE=10000
 
 red='\e[0;31m'
-RED='\e[1;31m'
+lightred='\e[1;31m'
 blue='\e[0;34m'
-BLUE='\e[1;34m'
+lightblue='\e[1;34m'
 cyan='\e[0;36m'
-CYAN='\e[1;36m'
+lightcyan='\e[1;36m'
+green='\e[0;32m'
+lightgreen='\e[1;32m'
 darkgray='\e[1;37m'
-green='\e[32m'
 NC='\e[0m'
 
 
-PS1="${green}[\w] ${cyan}(\s) \n${darkgray}>>${CYAN}> ${NC}"
+PS1="${green}[\w] ${cyan}(\s) \n${blue}>>> ${NC}"
 
 # functions
 unpack()
