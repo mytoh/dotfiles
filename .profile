@@ -8,8 +8,8 @@ shopt -s cdable_vars
 shopt -u mailwarn
 unset MAILCHECK
 
-HISTCONTROL=ignoreboth
-HISTSIZE=10000
+export HISTCONTROL=ignoreboth
+export HISTSIZE=10000
 
 red='\e[0;31m'
 RED='\e[1;31m'
@@ -55,8 +55,6 @@ fi
 prompt_command()
 {
     hash -r
-    let promptl_x=2
-    let promptr_x=$COLUMNS-5
 }
 
 
@@ -82,9 +80,9 @@ alias ..='cd ..'
 alias ...='cd ../../'
 
 
-bind "\C-p":history-search-backward
-bind "\C-n":history-search-forward
-bind "\C-u":kill-whole-line
+bind '"\C-p":history-search-backward'
+bind '"\C-n":history-search-forward'
+bind '"\C-u":kill-whole-line'
 
 complete -A hostname sftp ssh
 complete -A directory mkdir rmdir
