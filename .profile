@@ -8,9 +8,6 @@ shopt -s cdable_vars
 shopt -u mailwarn
 unset MAILCHECK
 
-export HISTCONTROL=ignoreboth
-export HISTSIZE=10000
-
 red='\e[0;31m'
 lightred='\e[1;31m'
 blue='\e[0;34m'
@@ -45,10 +42,10 @@ if [ "$OSTYPE" = "beos" ]; then
   {
     if [ $# == '0' ]; then
         builtin cd 
-	ls
+	ls -F
     else
         builtin cd "$*"
-        ls 
+        ls -F
     fi
   }
 fi
@@ -58,15 +55,8 @@ prompt_command()
     hash -r
 }
 
+PROMPT_COMMAND='prompt_command'
 
-share_history()
-{
-    history -a
-    history -c
-    history -r
-}
-PROMPT_COMMAND='share_history; prompt_command'
-shopt -u histappend
 
 
 alias halt='shutdown'
