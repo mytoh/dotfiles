@@ -19,9 +19,10 @@ lightgreen='\e[1;32m'
 darkgray='\e[1;37m'
 NC='\e[0m'
 
-
 PS1="${green}[\w] ${cyan}(\s) \n${blue}>>> ${NC}"
 
+export TERM=xterm
+export TERMINFO=/boot/common/share/terminfo
 # functions
 unpack()
 {
