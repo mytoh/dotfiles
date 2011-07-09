@@ -1,6 +1,7 @@
 
 let os = substitute(system('uname'),"\n","","")
 if os == "Haiku"
+  let g:loaded_vimproc = 1
 endif
 
 "turn filetype off not to load ftdetect
@@ -55,14 +56,6 @@ Bundle 'sudo.vim'
 filetype plugin indent on
 syntax on
 
-if ostype == "Haiku"
-  colorscheme evening
-  syntax off
-  :NeoComplCacheDisable
-  let loaded_vimshell = 1
-  let loaded_neocomplcache = 1
-  let loaded_vimproc = 1
-endif
 
 
 set nobackup

@@ -4,6 +4,7 @@ set -o vi
 shopt -s histverify
 shopt -s extglob
 shopt -s cdable_vars
+shopt -s dotglob
 
 shopt -u mailwarn
 unset MAILCHECK
