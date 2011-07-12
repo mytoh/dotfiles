@@ -287,5 +287,8 @@ let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/proc.so'
 " gauref
 let g:gauref_file = '/usr/home/mytoh/.vim/bundle/gauref.vim/doc/gauche-refe.txt'
 
+" changelog
+let g:changelog_username = " "
+
 " }}}
 
