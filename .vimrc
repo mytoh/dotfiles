@@ -56,13 +56,15 @@ Bundle 'sudo.vim'
 filetype plugin indent on
 syntax on
 
+language messages C
+language time C
 
 
 set nobackup
 set clipboard=unnamed,autoselect
 set showmatch
 set title
-set scrolloff=3
+set scrolloff=1
 set ruler
 set ignorecase
 set smartcase
