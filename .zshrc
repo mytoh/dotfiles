@@ -112,7 +112,7 @@ zmodload zsh/complist
 
 
 # {{ Zstyles
-zstyle :compinstall filename '/Users/kazuki/.zshrc'
+zstyle :compinstall filename $HOME/.zshrc
 zstyle ':completion:*' completer _oldlist _complete
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:(processes|jobs)' menu yes select=2
