@@ -76,7 +76,7 @@ alias ...='cd ../../'
 bind '"\C-p":history-search-backward'
 bind '"\C-n":history-search-forward'
 bind '"\C-u":kill-whole-line'
-stty werase undef
+#stty werase undef
 bind '"\C-w":backward-kill-word'
 
 complete -A hostname sftp ssh
