@@ -22,20 +22,22 @@ NC='\e[0m'
 
 PS1="${green}[\w] ${cyan}(\s) \n${blue}>>> ${NC}"
 
+if [ "$OSTYPE" = "beos" ]; then
 export TERM=xterm
 export TERMINFO=/boot/common/share/terminfo
+fi
 # functions
 unpack()
 {
    if [ -f $1 ]; then
-	case $1 in
-	     *.tar.bz2|*.tar.gz) 
-	       tar xvf $1 ;;
+  case $1 in
+       *.tar.bz2|*.tar.gz|*.tar.xz)
+         tar xvf $1 ;;
              *.zip)
-	       unzip $1;;
-	esac
+         unzip $1;;
+  esac
    else
-	echo "'$1' is not a valid file"
+  echo "'$1' is not a valid file"
    fi
 }
 
@@ -43,7 +45,7 @@ if [ "$OSTYPE" = "beos" ]; then
   cd ()
   {
     if [ $# == '0' ]; then
-        builtin cd 
+        builtin cd
 	ls -F
     else
         builtin cd "$*"
