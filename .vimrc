@@ -2,6 +2,7 @@
 let os = substitute(system('uname'),"\n","","")
 if os == "Haiku"
   let g:loaded_vimproc = 1
+  set rtp^=~/.vim/
 endif
 
 " Vundle and bundles configuration
@@ -52,7 +53,7 @@ set virtualedit=all
 set grepprg=ack\ -a
 " statusline
 set laststatus=2
-set statusline=%<%f%{fugitive#statusline()}\ %m%r%h%w%=%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P
+set statusline=%<%f %m%r%h%w%=%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P
 " tabs
 set smarttab
 set tabstop=2
@@ -219,7 +220,11 @@ let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 let g:vimshell_execute_file_list = {}
 let g:vimshell_execute_file_list['pl'] = 'perl'
 let g:vimshell_execute_file_list['scm'] = 'gosh'
+
+if isdirectory(expand("$HOME/.vim/bundle/vimproc/"))
 call vimshell#set_execute_file('txt,vim,c,cpp,xml,java', 'vim')
+endif
+
 let g:vimshell_smart_case = 1
 let g:vimshell_enable_auto_slash = 1
 let g:vimshell_split_height = 20
