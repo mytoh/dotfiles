@@ -4,57 +4,12 @@ if os == "Haiku"
   let g:loaded_vimproc = 1
 endif
 
-"turn filetype off not to load ftdetect
-set nocompatible
-filetype off
-
-set rtp+=~/.vim/bundle/vundle
-set rtp+=~/.vim/vundle
-
-
-call vundle#rc()
-
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-
-" {{ my bundles here
-"
-" github repo
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/vimfiler'
-Bundle 'Shougo/vinarise'
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/vimproc'
-Bundle 'Shougo/vimshell'
-Bundle 'thinca/vim-quickrun'
-Bundle 'thinca/vim-ref'
-Bundle 'koron/chalice'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'kana/vim-fakeclip'
-Bundle 'tyru/vice.vim'
-Bundle 'tyru/eskk.vim'
-Bundle 'fholgado/minibufexpl.vim'
-Bundle 'lilydjwg/colorizer'
-Bundle 'hakobe/unite-script'
-Bundle 'mattn/unite-remotefile'
-Bundle 'mattn/googlereader-vim'
-Bundle 'ujihisa/unite-colorscheme'
-Bundle 'ujihisa/neco-look'
-Bundle 'ujihisa/vimshell-ssh'
-" vim-scripts repo
-"Bundle 'gauref.vim'
-Bundle 'info.vim'
-Bundle 'eregex.vim'
-Bundle 'sudo.vim'
-" other git repo
-"
-" }}
+" Vundle and bundles configuration
+source $HOME/.vim-bundles
 
 " {{ options
 "
-filetype plugin indent on
+filetype plugin indent on " required
 syntax on
 
 language messages C
@@ -97,7 +52,7 @@ set virtualedit=all
 set grepprg=ack\ -a
 " statusline
 set laststatus=2
-set statusline=%<%f\ %m%r%h%w%=%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P
+set statusline=%<%f%{fugitive#statusline()}\ %m%r%h%w%=%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P
 " tabs
 set smarttab
 set tabstop=2
