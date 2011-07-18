@@ -53,7 +53,7 @@ set virtualedit=all
 set grepprg=ack\ -a
 " statusline
 set laststatus=2
-set statusline=%<%f %m%r%h%w%=%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P
+set statusline=%<\ %f\ %m%r%h%w\ %{fugitive#statusline()}%=%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P
 " tabs
 set smarttab
 set tabstop=2
