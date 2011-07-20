@@ -1,3 +1,5 @@
+umask 022
+
 set -o ignoreeof
 set -o vi
 
@@ -10,17 +12,17 @@ shopt -u mailwarn
 unset MAILCHECK
 
 red='\e[0;31m'
-lightred='\e[1;31m'
 blue='\e[0;34m'
-lightblue='\e[1;34m'
 cyan='\e[0;36m'
-lightcyan='\e[1;36m'
 green='\e[0;32m'
-lightgreen='\e[1;32m'
 darkgray='\e[1;37m'
+lightred='\e[1;31m'
+lightblue='\e[1;34m'
+lightcyan='\e[1;36m'
+lightgreen='\e[1;32m'
 NC='\e[0m'
 
-PS1="${green}[\w] ${cyan}(\s) \n${blue}>>> ${NC}"
+PS1="${lightgreen}[\w] ${lightcyan}(\s) \n${blue}>>> ${NC}"
 
 export CDPATH=".:~:~/local"
 
