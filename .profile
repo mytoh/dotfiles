@@ -22,6 +22,8 @@ NC='\e[0m'
 
 PS1="${green}[\w] ${cyan}(\s) \n${blue}>>> ${NC}"
 
+export CDPATH=".:~:~/local"
+
 if [ "$OSTYPE" = "beos" ]; then
 export TERM=xterm
 export TERMINFO=/boot/common/share/terminfo
