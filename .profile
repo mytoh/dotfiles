@@ -18,25 +18,6 @@ shopt -s nocaseglob
 shopt -u mailwarn
 unset MAILCHECK
 
-black='\e[0;30m' # Black - Regular
-red='\e[0;31m' # Red
-green='\e[0;32m' # Green
-yellow='\e[0;33m' # Yellow
-blue='\e[0;34m' # Blue
-purple='\e[0;35m' # Purple
-cyan='\e[0;36m' # Cyan
-White='\e[0;37m' # White
-lightblack='\e[1;30m' # Black - Bold
-lightred='\e[1;31m' # Red
-lightgreen='\e[1;32m' # Green
-lightyellow='\e[1;33m' # Yellow
-lightblue='\e[1;34m' # Blue
-lightpurpl='\e[1;35m' # Purple
-lightcyan='\e[1;36m' # Cyan
-lightwhite='\e[1;37m' # White
-NC='\e[0m'
-
-PS1="${lightgreen}[\w] ${lightcyan}(\s) \n${blue}>>> ${NC}"
 
 HISTCONTROL=erasedups:ignoredups:ignorespace
 HISTIGNORE='&:bg:fg:ll:h'
@@ -50,7 +31,8 @@ if [ "$OSTYPE" = "beos" ]; then
 export TERM=xterm
 export TERMINFO=/boot/common/share/terminfo
 fi
-# functions
+
+# {{{ functions
 unpack()
 {
    if [ -f $1 ]; then
@@ -77,15 +59,52 @@ if [ "$OSTYPE" = "beos" ]; then
     fi
   }
 fi
+# }}}
+
+# {{{ prompt commands
+# { git
+# http://d.hatena.ne.jp/snaka72/20090129/1233238778
+# http://henrik.nyh.se/2008/12/git-dirty-prompt
+# http://www.simplisticcomplexity.com/2008/03/13/show-your-git-branch-name-in-your-prompt/
+parse_git_dirty()
+{
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+
+function parse_git_branch
+{
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[$(parse_git_dirty)]/"
+  #git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
+}
+# }
 
 prompt_command()
 {
+  PS1="${lightgreen}[\w] ${lightcyan}(\s) ${yellow}X/_/X ${lightred}$(parse_git_branch)\n${blue} >>> ${nc}"
     hash -r
 }
 
 PROMPT_COMMAND='prompt_command'
 
+black='\e[0;30m' # Black - Regular
+red='\e[0;31m' # Red
+green='\e[0;32m' # Green
+yellow='\e[0;33m' # Yellow
+blue='\e[0;34m' # Blue
+purple='\e[0;35m' # Purple
+cyan='\e[0;36m' # Cyan
+White='\e[0;37m' # White
+lightblack='\e[1;30m' # Black - Bold
+lightred='\e[1;31m' # Red
+lightgreen='\e[1;32m' # Green
+lightyellow='\e[1;33m' # Yellow
+lightblue='\e[1;34m' # Blue
+lightpurpl='\e[1;35m' # Purple
+lightcyan='\e[1;36m' # Cyan
+lightwhite='\e[1;37m' # White
+nc='\e[0m'
 
+# }}}
 
 alias halt='shutdown'
 alias reboot='shutdown -r'
