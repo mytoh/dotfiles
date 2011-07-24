@@ -138,7 +138,7 @@ compdef _portmaster portbuilder
 
 # {{ Prompts
 PROMPT="%{$fg[green]%}[%~]%{$fg[white]%}
-%{$fg[cyan]%}>>> "
+%{$fg[cyan]%}>>>%{$fg[white]%} "
 PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
 SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
