@@ -88,7 +88,7 @@ function parse_git_branch
 
 prompt_command()
 {
-  PS1="${lightgreen}[\w] ${lightcyan}(\s) ${yellow}X/_/X ${lightred}$(parse_git_branch)\n${blue} >>> ${nc}"
+  PS1="${lightgreen}(\w)${nc} ${lightcyan}(\s)${nc} ${yellow}(X/_/X)${nc} ${lightred}$(parse_git_branch)\n${blue} >>> ${nc}"
     hash -r
 }
 
