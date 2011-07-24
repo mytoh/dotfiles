@@ -54,6 +54,15 @@ if [[ -x `which gdircolors` ]] && [[ -e $home/.dir_colors ]]; then
   eval $(gdircolors $home/.dir_colors -b)
 fi
 ZLS_COLORS=$LS_COLORS
+LESS='-i -N -w -z-4 -g -e -M -X -F -R -P%t?f%f \
+:stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
+LESS_TERMCAP_mb=$'\E[01;31m'
+LESS_TERMCAP_md=$'\E[01;31m'
+LESS_TERMCAP_me=$'\E[0m'
+LESS_TERMCAP_se=$'\E[0m'
+LESS_TERMCAP_so=$'\E[01;44;33m'
+LESS_TERMCAP_ue=$'\E[0m'
+LESS_TERMCAP_us=$'\E[01;32m'
 GAUCHE_LOAD_PATH="$home/.gosh"
 
 HISTFILE=~/.zsh_history
