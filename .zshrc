@@ -180,7 +180,7 @@ SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
   PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
 # git prompt
-RPROMPT="%{$fg[green]%}%1v%2v [%~]%{$reset_color%}"
+RPROMPT="%{$fg[green]%}%1v%{$fg[cyan]%}%2v %{$reset_color%}"
 # }}
 
 # {{ History search keymap
