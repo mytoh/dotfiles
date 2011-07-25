@@ -39,6 +39,7 @@
                        ".tmux.conf"
                        ".vim"
                        ".vimrc"
+                       ".vim-bundles"
                        ".vimshrc"
                        ".vimperatorrc"
                        ".wbar"
