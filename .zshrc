@@ -24,6 +24,7 @@ setopt magic_equal_subst
 setopt auto_remove_slash
 setopt no_auto_param_slash
 setopt always_last_prompt
+setopt prompt_subst
 setopt cdable_vars
 setopt print_eightbit
 setopt transient_rprompt
@@ -113,6 +114,7 @@ hash -d mypassport=~/local/mnt/mypassport
 autoload -Uz compinit  && compinit -C # ignore insecure directories in $fpath
 autoload colors &&  colors
 autoload -Uz zmv
+autoload -Uz is-at-least
 # }}
 
 # {{ Modules
@@ -130,6 +132,40 @@ zstyle ':completion:*' format 'Completing %F{blue}%d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*:functions' ignore-patterns '_*'
+
+# git prompt
+if is-at-least 4.3.10; then
+  autoload -Uz vcs_info
+  autoload -Uz add-zsh-hook
+
+  zstyle ':vcs_info:*' enable git
+  zstyle ':vcs_info:git:*' check-for-changes true
+  zstyle ':vcs_info:git:*' stagedstr "+"
+  zstyle ':vcs_info:git:*' unstagedstr "-"
+  zstyle ':vcs_info:git:*' formats '@%b%u%c'
+  zstyle ':vcs_info:git:*' actionformats '@%b|%a%u%c'
+
+  function _update_vcs_info_msg() {
+    psvar=()
+    LANG=en_US.UTF-8 vcs_info
+    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+    psvar[2]=$(_git_not_pushed)
+  }
+  function _git_not_pushed() {
+  if [ "$(git rev-parse --is-inside-word-tree 2>/dev/null)" = "true" ]; then
+    head="$(git rev-parse HEAD)"
+    for x in $(git rev-parse --remotes)
+    do
+      if [ "$head" = "$x" ]; then
+        return 0
+      fi
+    done
+    echo "?"
+  fi
+  return 0
+  }
+  add-zsh-hook precmd _update_vcs_info_msg
+fi
 # }}
 
 # {{ compdef
@@ -143,6 +179,8 @@ PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
 SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
   PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
+# git prompt
+RPROMPT="%{$fg[green]%}%1v%2v [%~]%{$reset_color%}"
 # }}
 
 # {{ History search keymap
