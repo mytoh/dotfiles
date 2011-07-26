@@ -1,6 +1,6 @@
 #/bin/csh -f
 
-csup /etc/supfile
+#csup /etc/supfile
 cd /usr/src
 make cleandir
 make cleandir
@@ -10,5 +10,5 @@ endif
 
 cd /usr/src
 
-make buildworld && make buildkernel
+make -j4 buildworld && make -j4 buildkernel
 
