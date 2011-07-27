@@ -55,7 +55,7 @@ if [[ -x `which gdircolors` ]] && [[ -e $home/.dir_colors ]]; then
   eval $(gdircolors $home/.dir_colors -b)
 fi
 ZLS_COLORS=$LS_COLORS
-LESS='-i -N -w -z-4 -g -e -M -X -F -R -P%t?f%f \
+LESS='-i  -w -z-4 -g -e -M -X -F -R -P%t?f%f \
 :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
 LESS_TERMCAP_mb=$'\E[01;31m'
 LESS_TERMCAP_md=$'\E[01;31m'
@@ -121,6 +121,9 @@ autoload -Uz is-at-least
 zmodload zsh/complist
 # }}
 
+# {{ compdef
+compdef _portmaster portbuilder 
+# }}
 
 # {{ Zstyles
 zstyle :compinstall filename $HOME/.zshrc
@@ -134,53 +137,79 @@ zstyle ':completion:*' use-cache true
 zstyle ':completion:*:functions' ignore-patterns '_*'
 
 # git prompt
-if is-at-least 4.3.10; then
-  autoload -Uz vcs_info
-  autoload -Uz add-zsh-hook
+##if is-at-least 4.3.10; then
+##  autoload -Uz vcs_info
+##  autoload -Uz add-zsh-hook
+##
+##  zstyle ':vcs_info:*' enable git
+##  zstyle ':vcs_info:git:*' check-for-changes true
+##  zstyle ':vcs_info:git:*' stagedstr '+'
+##  zstyle ':vcs_info:git:*' unstagedstr "${fg[yellow]}-"
+##  zstyle ':vcs_info:git:*' formats '(@%b%u%c)'
+##  zstyle ':vcs_info:git:*' actionformats '@%b|%a%u%c'
+##
+##  function _update_vcs_info_msg() {
+##    psvar=()
+##    LANG=en_US.UTF-8 vcs_info
+##    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+##    psvar[2]=$(_git_not_pushed)
+##  }
+##  function _git_not_pushed() {
+##  if [ "$(git rev-parse --is-inside-word-tree 2>/dev/null)" = "true" ]; then
+##    head="$(git rev-parse HEAD)"
+##    for x in $(git rev-parse --remotes)
+##    do
+##      if [ "$head" = "$x" ]; then
+##        return 0
+##      fi
+##    done
+##    echo "?"
+##  fi
+##  return 0
+##  }
+##  add-zsh-hook precmd _update_vcs_info_msg
+##fi
+### }}
+#
 
-  zstyle ':vcs_info:*' enable git
-  zstyle ':vcs_info:git:*' check-for-changes true
-  zstyle ':vcs_info:git:*' stagedstr "+"
-  zstyle ':vcs_info:git:*' unstagedstr "-"
-  zstyle ':vcs_info:git:*' formats '@%b%u%c'
-  zstyle ':vcs_info:git:*' actionformats '@%b|%a%u%c'
+##
+# git prompt from
+# briancarper.net/tag/249/zsh 
+autoload -Uz vcs_info
+autoload -Uz add-zsh-hook
 
-  function _update_vcs_info_msg() {
-    psvar=()
-    LANG=en_US.UTF-8 vcs_info
-    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-    psvar[2]=$(_git_not_pushed)
+zstyle ':vcs_info:*' stagedstr '%F{28}+'
+zstyle ':vcs_info:*' unstagedstr '%F{11}-'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' enable git svn
+
+_update_vcs_info_msg() {
+  if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
+    zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{blue}]'
+  } else {
+    zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{red}+%F{blue}]'
   }
-  function _git_not_pushed() {
-  if [ "$(git rev-parse --is-inside-word-tree 2>/dev/null)" = "true" ]; then
-    head="$(git rev-parse HEAD)"
-    for x in $(git rev-parse --remotes)
-    do
-      if [ "$head" = "$x" ]; then
-        return 0
-      fi
-    done
-    echo "?"
-  fi
-  return 0
-  }
-  add-zsh-hook precmd _update_vcs_info_msg
-fi
-# }}
+  vcs_info
+}
 
-# {{ compdef
-compdef _portmaster portbuilder 
-# }}
+add-zsh-hook precmd _update_vcs_info_msg
+
+
 
 # {{ Prompts
-PROMPT="%{$fg[green]%}[%~]%{$fg[white]%}
-%{$fg[cyan]%}>>>%{$fg[white]%} "
+PROMPT="%{$fg[green]%}[%~]%{$fg[white]%} "
+# git prompt
+PROMPT+='%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}'
+####
+PROMPT+="%{$reset_color%}
+"
+PROMPT+="%{$fg[cyan]%}>>>%{$fg[white]%} "
 PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
 SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
   PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
 # git prompt
-RPROMPT="%{$fg[green]%}%1v%{$fg[cyan]%}%2v %{$reset_color%}"
+RPROMPT=""
 # }}
 
 # {{ History search keymap
@@ -273,12 +302,6 @@ unpack() {
 
 # {{ Aliases
 #alias precmd=rehash
-alias pup="sudo portsnap fetch update "
-alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends"
-alias pfetch="sudo make  fetch-recursive"
-alias pinst="sudo make  install distclean; rehash"
-alias pconf="sudo make config-recursive"
-alias pclean="sudo make  clean "
 alias cup="cpan-outdated && cpan-outdated | xargs cpanm -v"
 alias view="vim -X -R -"
 alias scsh="rlwrap scsh"
@@ -288,7 +311,6 @@ alias single="sudo shutdown now"
 alias halt="sync;sync;sync;sudo shutdown -p now"
 alias reboot="sync;sync;sync;sudo shutdown -r now"
 alias sudo="sudo -E "
-alias pkg_add="pkg_add -v"
 alias zln="noglob zmv -L -s -W"
 alias zmv='noglob zmv -W'
 # suffix aliases
@@ -348,10 +370,25 @@ case ${OSTYPE} in
     ls -F
   }
   ;;
-  darwin*|freebsd*)
+  darwin*)
   alias la="ls -G -a"
   alias ll="ls -G -hlA "
   alias ls="ls -G -F"
+  chpwd() {
+    ls -G -F
+  }
+  ;;
+  freebsd*)
+  alias la="ls -G -a"
+  alias ll="ls -G -hlA "
+  alias ls="ls -G -F"
+  alias pup="sudo portsnap fetch update "
+  alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends"
+  alias pfetch="sudo make  fetch-recursive"
+  alias pinst="sudo make  install distclean; rehash"
+  alias pconf="sudo make config-recursive"
+  alias pclean="sudo make  clean "
+  alias pkg_add="pkg_add -v"
   chpwd() {
     ls -G -F
   }
