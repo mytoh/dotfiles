@@ -5,14 +5,15 @@ noremap ; :
 
 colorscheme sweets
 
+set hintchars=aoeuidhtns
 set complete=lsb
 set defsearch="google"
 set editor="vim"
-set statuslinetoolbars=noaddons,nobookmarks,menu,nonavigation,tabs
+set toolbars=noaddons,nobookmarks,menu,nonavigation,tabs
 
 "direct_bookmark.js
-let g:direct_sbm_use_services_by_tag = "dg"
-let g:direct_sbm_use_services_by_post = "dg"
+let g:direct_sbm_use_services_by_tag = "hd"
+let g:direct_sbm_use_services_by_post = "d"
 
 command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
 " Google Reader
@@ -23,6 +24,7 @@ lazy fmaps -u='www\.google\.(co\.jp|com)/reader' -events=vkeyup z
 " statusline-toolbar
 "set statustoolbars=bookmarks-menu-button-container
 
-set mainecoon=a
+" delicious_search.js
+autocmd VimperatorEnter ".*" :set complete+=D
 
 
