@@ -30,9 +30,9 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
 !urxvt.font: xft: aqua_pfont-9
 !urxvt.boldFont: xft: aqua_pfont-9
-urxvt.font: xft: Bitstream Vera Sans Mono-8, \
-            xft: KonatuTohaba-8
-urxvt.boldFont: xft: Bitstream Vera Sans Mono-8
+!urxvt.font: xft: Bitstream Vera Sans Mono-8, \
+!            xft: KonatuTohaba-8
+!urxvt.boldFont: xft: Bitstream Vera Sans Mono-8
 !urxvt.font: -shinonome-gothic-medium-r-normal--12-*
 !urxvt.boldFont: -shinonome-gothic-bold-r-normal--12-*
 !urxvt.font: k12
@@ -41,6 +41,9 @@ urxvt.boldFont: xft: Bitstream Vera Sans Mono-8
 !urxvt.boldFont: xft: KonatuTohaba-8
 !urxvt.font: xft:  Ricty-Regular-8
 !urxvt.boldFont: xft: Ricty-Regular-8
+urxvt.font: xft: Inconsolata-9, \
+            xft: KonatuTohaba-9
+urxvt.boldFont: xft: Inconsolata-9
 
 
 
