@@ -178,8 +178,8 @@ zstyle ':completion:*:functions' ignore-patterns '_*'
 autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
 
-zstyle ':vcs_info:*' stagedstr '%F{28}+'  まる
-zstyle ':vcs_info:*' unstagedstr '%F{11}-'  まる
+zstyle ':vcs_info:*' stagedstr '%F{28}+'
+zstyle ':vcs_info:*' unstagedstr '%F{11}-'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' enable git svn
 
