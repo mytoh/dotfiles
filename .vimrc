@@ -8,32 +8,32 @@ endif
 " Vundle and bundles configuration
 source $HOME/.vim-bundles
 
-" {{ options
-"
 filetype plugin indent on " required
 syntax on
 
 language messages C
 language time C
 
-
+" {{ options
+"
 set nobackup
+set history=100
 set clipboard=unnamed,autoselect
-set showmatch
-set title
 set scrolloff=1
+set title
 set ruler
+set cursorline
+set modeline
+set showmode
+set showcmd
+set showmatch
+set autoindent
+set smartindent
+" search
 set ignorecase
 set smartcase
 set hlsearch
 set incsearch
-set showmode
-set showcmd
-set modeline
-set history=100
-set autoindent
-set smartindent
-"set cindent
 set wrapscan
 set autoread
 set hidden
@@ -41,12 +41,11 @@ set wildmenu
 set wildmode=list:full
 set shortmess=atI
 set backspace=indent,eol,start
-set fileformat=unix
-set fileformats=unix,mac,dos
 set splitright
 set splitbelow
+set fileformat=unix
+set fileformats=unix,mac,dos
 set autochdir
-set cursorline
 set list
 set listchars=tab:^\ ,trail:_
 set virtualedit=all
@@ -90,7 +89,7 @@ nnoremap <leader>q :<c-u>qa<cr>
 aug myautocommands
   au!
   au bufread,bufnewfile .tmux.conf  set filetype=tmux
-  au bufread,bufnewfile .vimshrc    set filetype=vim
+  au bufread,bufnewfile .vimshrc,.vim-bundles    set filetype=vim
   au bufwritepost       .vimrc      source $MYVIMRC
   au bufwritepost       .Xresources silent !xrdb -remove
   au bufwritepost       .Xresources silent !xrdb -merge ~/.Xresources
@@ -142,9 +141,9 @@ let g:neocomplcache_enable_camle_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_auto_select = 0
 let g:neocomplcache_dictionary_filetype_lists = {
-                    \ 'default' : '',
-                    \ 'scheme'  : $HOME.'/.rlwrap/gosh_completions',
-                    \ 'vimshell': $HOME.'/.vimshell/command_history'
+                    \ 'default'  : '',
+                    \ 'scheme'   : $HOME . '/.rlwrap/gosh_completions',
+                    \ 'vimshell' : $HOME . '/.vimshell/command_history'
                     \ }
 " }}
 
@@ -190,7 +189,7 @@ nnoremap <silent> <leader>uf :<c-u>Unite -buffer-name=files file<cr>
 nnoremap <silent> <leader>um :<c-u>Unite -buffer-name=files file_mru<cr>
 " leave unite buffer
 aug unite
-  au! unite
+  au!
   au filetype unite nnoremap <silent> <buffer> <esc><esc> :q<cr>
   au filetype unite inoremap <silent> <buffer> <esc><esc> <esc>:q<cr>
 aug end
@@ -209,7 +208,6 @@ if has('vim_starting')
         \ 'encoding': 'utf-8',
         \ }
 endif
-
 let g:eskk_egg_like_newline = 0
 let g:eskk_enable_completion = 0
 "let g:eskk_revert_henkan_style = "okuri"
@@ -220,12 +218,12 @@ let g:vimshell_prompt = '>>> '
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 let g:vimshell_execute_file_list = {}
+call vimshell#set_execute_file('txt,vim,c,h,cpp,d,xml,java', 'vim')
 let g:vimshell_execute_file_list['pl'] = 'perl'
 let g:vimshell_execute_file_list['scm'] = 'gosh'
 
-if isdirectory(expand("$HOME/.vim/bundle/vimproc/"))
-call vimshell#set_execute_file('txt,vim,c,cpp,xml,java', 'vim')
-endif
+"if isdirectory(expand("~/.vim/bundle/vimproc/"))
+"endif
 
 let g:vimshell_smart_case = 1
 let g:vimshell_enable_auto_slash = 1
