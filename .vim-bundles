@@ -39,6 +39,7 @@ Bundle 'mattn/googlereader-vim'
 Bundle 'ujihisa/unite-colorscheme'
 Bundle 'ujihisa/neco-look'
 Bundle 'ujihisa/vimshell-ssh'
+Bundle 'koron/chalice'
 " vim-scripts repo
 "Bundle 'gauref.vim'
 Bundle 'info.vim'

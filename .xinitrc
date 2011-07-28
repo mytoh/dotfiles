@@ -32,7 +32,7 @@ fi
 
 
 
-DEFAULT_SESSION="stumpwm"
+DEFAULT_SESSION="xfce"
 case $1 in
   stumpwm) exec stumpwm ;;
   sawfish) exec sawfish ;;
