@@ -100,7 +100,7 @@ aug myautocommands
 aug end
 
 aug cch
-  au! cch
+  au!
   au winleave * set nocursorline
   au winenter,bufread * set cursorline
 aug end
@@ -156,7 +156,7 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 " highlights
 "hi MBENormal               " - for buffers that have NOT CHANGED and
                             "   are NOT VISIBLE.
-hi MBEChanged guibg=darkblue ctermbg=darkblue ctermfg=white             | " - for buffers that HAVE CHANGED and are
+"hi MBEChanged guibg=darkblue ctermbg=blue ctermfg=white               " - for buffers that HAVE CHANGED and are
                                                                           "   NOT VISIBLE
 "hi MBEVisibleNormal        " - buffers that have NOT CHANGED and are
                             "   VISIBLE
@@ -230,7 +230,7 @@ let g:vimshell_enable_auto_slash = 1
 let g:vimshell_split_height = 20
 let g:vimshell_split_command = 'split'
 aug vimshell
-  au! vimshell
+  au!
   au filetype vimshell
         \  call vimshell#hook#set('chpwd', ['g:my_chpwd'])
   function! g:my_chpwd(args, context)
