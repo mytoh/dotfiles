@@ -201,8 +201,8 @@ PROMPT="%{$fg[green]%}[%~]%{$fg[white]%} "
 # git prompt
 PROMPT+='%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}'
 ####
-PROMPT+="%{$reset_color%}
-"
+PROMPT+="%{$reset_color%}"
+PROMPT+=$'\n'
 PROMPT+="%{$fg[cyan]%}>>>%{$fg[white]%} "
 PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
 SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
@@ -302,6 +302,7 @@ unpack() {
 
 # {{ Aliases
 #alias precmd=rehash
+alias pd=popd
 alias cup="cpan-outdated && cpan-outdated | xargs cpanm -v"
 alias view="vim -X -R -"
 alias scsh="rlwrap scsh"
