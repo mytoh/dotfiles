@@ -6,7 +6,8 @@ Xcursor.theme: whiteglass
 urxvt.termName: xterm
 urxvt.depth: 32
 urxvt.background: rgba:0000/0000/0000/cccc
-!urxvt.background: rgb:0000/0000/0000
+!urxvt.background: rgba:0000/0000/0000/cccc
+!urxvt.background: [90]#262630
 urxvt.foreground: white
 urxvt.geometry: 100x40+100+100
 urxvt.scrollBar: false
@@ -42,8 +43,9 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 !urxvt.font: xft:  Ricty-Regular-8
 !urxvt.boldFont: xft: Ricty-Regular-8
 urxvt.font: xft: Inconsolata-9, \
-            xft: KonatuTohaba-8
+            xft: M+ 1c-10:antialias=true
 urxvt.boldFont: xft: Inconsolata-9
+
 
 
 
