@@ -86,6 +86,7 @@ nnoremap <leader>q :<c-u>qa<cr>
 cnorempa <c-a>      <home>
 cnoremap <c-f>      <right>
 cnoremap <c-b>      <left>
+" http://vim.g.hatena.ne.jp/tyru/20100116
 cnoremap <c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>
 " }}
 
