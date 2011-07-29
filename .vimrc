@@ -83,7 +83,7 @@ nmap N Nzz
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <leader>w :<c-u>up<cr>
 nnoremap <leader>q :<c-u>qa<cr>
-cnorempa <c-a>      <home>
+cnoremap <c-a>      <home>
 cnoremap <c-f>      <right>
 cnoremap <c-b>      <left>
 " http://vim.g.hatena.ne.jp/tyru/20100116
