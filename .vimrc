@@ -1,6 +1,12 @@
 
-let os = substitute(system('uname'),"\n","","")
-if os == "Haiku"
+function! s:isos(name)
+  let os = tolower(substitute(system('uname'),"\n","",""))
+  if os == a:name
+    return 1
+  endif
+endfunction
+
+if s:isos('haiku')
   let g:loaded_vimproc = 1
   set rtp^=~/.vim/
 endif
@@ -113,7 +119,7 @@ hi clear cursorline
 hi cursorline gui=underline
 hi cursorline ctermbg=237 guibg=black
 
-if os == "Darwin"
+if s:isos('darwin')
   au bufwritepost * call SetUTF8Xattr(expand("<afile>"))
   function! SetUTF8Xattr(file)
     let isutf8 = &fileencoding == "utf-8" || (&fileencoding == "" && &encoding == "utf-8")
@@ -201,18 +207,14 @@ aug end
 " }}
 
 " {{ eskk
-"if has('vim_starting')
-  "let g:eskk#dictionary = {
-        "\       'path': "~/.skk-jisyo",
-        "\       'sorted': 0,
-        "\       'encoding': 'utf-8',
-        "\       }
-  "let g:eskk#large_dictionary = {
-        "\ 'path': "~/.skk-jisyo.mine",
-        "\ 'sorted': 0,
-        "\ 'encoding': 'utf-8',
-        "\ }
-"endif
+if has('vim_starting')
+  let g:eskk_dictionary = '~/.skk-jisyo'
+  if s:isos("darwin")
+    let g:eskk_large_dictionary = '~/Library/AquaSkk/SKK-JISYO.L'
+  elseif s:isos('freebsd')
+    let g:eskk_large_dictionary = '/usr/local/share/skk/SKK-JISYO.L'
+  endif
+endif
 let g:eskk_egg_like_newline = 0
 let g:eskk_enable_completion = 0
 "let g:eskk_revert_henkan_style = "okuri"
