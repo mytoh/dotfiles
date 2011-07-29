@@ -196,18 +196,18 @@ aug end
 " }}
 
 " {{ eskk
-if has('vim_starting')
-  let g:eskk#dictionary = {
-        \       'path': "~/.skk-jisyo",
-        \       'sorted': 0,
-        \       'encoding': 'utf-8',
-        \       }
-  let g:eskk#large_dictionary = {
-        \ 'path': "~/.skk-jisyo.mine",
-        \ 'sorted': 0,
-        \ 'encoding': 'utf-8',
-        \ }
-endif
+"if has('vim_starting')
+  "let g:eskk#dictionary = {
+        "\       'path': "~/.skk-jisyo",
+        "\       'sorted': 0,
+        "\       'encoding': 'utf-8',
+        "\       }
+  "let g:eskk#large_dictionary = {
+        "\ 'path': "~/.skk-jisyo.mine",
+        "\ 'sorted': 0,
+        "\ 'encoding': 'utf-8',
+        "\ }
+"endif
 let g:eskk_egg_like_newline = 0
 let g:eskk_enable_completion = 0
 "let g:eskk_revert_henkan_style = "okuri"
