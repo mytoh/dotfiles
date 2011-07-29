@@ -41,13 +41,12 @@ setopt all_export # may cause problem
 LANG=en_GB.UTF-8
 EDITOR=vim
 PAGER="less"
-#LESS="-iGJ"
-INFOPATH=(~/.emacs.d/info:~/local/share/info)
+INFOPATH=(~/.emacs.d/info:~/local/share/info:$INFOPATH)
 FTP_PASSIVE_MODE=true
 MYVIMRC=~/.vimrc
 VIMRUNTIME=(~/.vim/vundle:$VIMRUNTIME)
+MYGITDIR=~/local/git
 G_FILENAME_ENCODING=@locale
-HOMEBREW_VERBOSE=true
 RLWRAP_HOME=~/.rlwrap
 LISTMAX=0
 LSCOLORS=exFxCxdxBxegedabagacad
@@ -225,7 +224,7 @@ bindkey "\\en" history-beginning-search-forward-end
 # {{ Functions
 
 # zshwiki hardstatus
-title() {
+_title() {
   if [[ $TERM == screen* ]]; then
     print -nR $'\033k'$1$'\033'\\
     print -nR $'\033]0;'$2$'\a'
@@ -235,7 +234,7 @@ title() {
 }
 
 precmd() {
-  title zsh "$PWD"
+  _title zsh "$PWD"
   rehash
 }
 
@@ -372,6 +371,7 @@ case ${OSTYPE} in
   }
   ;;
   darwin*)
+  HOMEBREW_VERBOSE=true
   alias la="ls -G -a"
   alias ll="ls -G -hlA "
   alias ls="ls -G -F"
