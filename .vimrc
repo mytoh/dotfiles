@@ -83,6 +83,9 @@ nmap N Nzz
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <leader>w :<c-u>up<cr>
 nnoremap <leader>q :<c-u>qa<cr>
+cnorempa <c-a>      <home>
+cnoremap <c-f>      <right>
+cnoremap <c-b>      <left>
 " }}
 
 " {{ autocommands
