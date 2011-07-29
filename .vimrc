@@ -6,7 +6,7 @@ if os == "Haiku"
 endif
 
 " Vundle and bundles configuration
-source $HOME/.vim-bundles
+source $HOME/.bundles.vim
 
 filetype plugin indent on " required
 syntax on

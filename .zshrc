@@ -241,7 +241,7 @@ precmd() {
 preexec() {
   emulate -L zsh
   local -a cmd; cmd=(${(z)1})
-  title $cmd[1]:t "$cmd[2,-1]"
+  _title $cmd[1]:t "$cmd[2,-1]"
 }
 # }}
 
