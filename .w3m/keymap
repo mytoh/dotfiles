@@ -2,17 +2,19 @@
 keymap H BACK
 keymap L NEXT
 keymap r RELOAD
-keymap d CLOSE_TAB
-keymap o GOTO
-keymap t TAB_GOTO
-keymap h PREV_TAB
-keymap l NEXT_TAB
-keymap ? HELP
 keymap C-d NEXT_PAGE
 keymap C-u PREV_PAGE
 
-keymap O OPTION
 keymap o GOTO
+keymap t TAB_GOTO
+
+keymap h PREV_TAB
+keymap l NEXT_TAB
+keymap d CLOSE_TAB
+
+keymap ? HELP
+
+keymap O OPTION
 
 keymap / ISEARCH
 
