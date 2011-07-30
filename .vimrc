@@ -6,6 +6,7 @@ function! s:isos(name)
   endif
 endfunction
 
+
 if s:isos('haiku')
   let g:loaded_vimproc = 1
   set rtp^=~/.vim/
@@ -99,12 +100,13 @@ cnoremap <c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<
 " {{ autocommands
 aug myautocommands
   au!
-  au bufread,bufnewfile .tmux.conf  set filetype=tmux
+  au bufread,bufnewfile .tmux.conf               set filetype=tmux
   au bufread,bufnewfile .vimshrc,.vim-bundles    set filetype=vim
-  au bufwritepost       .vimrc      source $MYVIMRC
-  au bufwritepost       .Xresources silent !xrdb -remove
-  au bufwritepost       .Xresources silent !xrdb -merge ~/.Xresources
-  au bufwritepost       .zshrc      silent !zcompile .zshrc
+  au bufread,bufnewfile *.changelog              set filetype=changelog
+  au bufwritepost       .vimrc                   source $MYVIMRC
+  au bufwritepost       .Xresources       silent !xrdb -remove
+  au bufwritepost       .Xresources       silent !xrdb -merge ~/.Xresources
+  au bufwritepost       .zshrc            silent !zcompile .zshrc
   au filetype scheme setl cindent& lispwords=define,lambda,call-with-*
   au filetype help nnoremap q :<c-u>q<cr>
 aug end
