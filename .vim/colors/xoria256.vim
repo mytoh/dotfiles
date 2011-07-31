@@ -36,7 +36,7 @@ let colors_name = "xoria256"
 "}}}
 " Colours {{{1
 "" General {{{2
-hi Normal       ctermfg=253 guifg=#d0d0d0 ctermbg=234 guibg=#1c1c1c cterm=none gui=none
+hi Normal       ctermfg=253 guifg=#d0d0d0 ctermbg=233 guibg=#1c1c1c cterm=none gui=none
 hi Cursor                                 ctermbg=214 guibg=#ffaf00
 hi CursorColumn                           ctermbg=238 guibg=#444444
 hi CursorLine                             ctermbg=237 guibg=#3a3a3a cterm=none gui=none
