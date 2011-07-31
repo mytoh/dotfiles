@@ -107,6 +107,7 @@ aug myautocommands
   au bufwritepost       .Xresources       silent !xrdb -remove
   au bufwritepost       .Xresources       silent !xrdb -merge ~/.Xresources
   au bufwritepost       .zshrc            silent !zcompile .zshrc
+  au bufwritepost       .conkyrc            silent !killall -SIGUSR1  conky
   au filetype scheme setl cindent& lispwords=define,lambda,call-with-*
   au filetype help nnoremap q :<c-u>q<cr>
 aug end
