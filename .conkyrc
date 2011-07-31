@@ -20,7 +20,7 @@ background yes
 use_xft yes
 
 # Xft font when Xft is enabled
-xftfont  Konatu:size=8
+xftfont  M+ 1p:size=8
 
 # Text alpha when using Xft
 xftalpha 0.8
@@ -55,7 +55,7 @@ own_window_type desktop
 # Use pseudo transparency with own_window?
 own_window_transparent no
 own_window_argb_visual yes
-own_window_argb_value 90
+own_window_argb_value 120
 
 # If own_window_transparent is set to no, you can set the background colour here
 own_window_colour black
@@ -85,7 +85,8 @@ draw_graph_borders yes
 stippled_borders 8
 
 # border margins
-border_margin 4
+border_inner_margin 4
+border_outer_margin 2
 
 # border width
 border_width 1
@@ -96,15 +97,15 @@ default_shade_color black
 default_outline_color black
 
 # Text alignment, other possible values are commented
-#alignment top_left
-alignment top_right
+alignment top_left
+#alignment top_right
 #alignment bottom_left
 #alignment bottom_right
 #alignment none
 
 # Gap between borders of screen and text
 # same thing as passing -x at command line
-gap_x 12
+gap_x 30
 gap_y 40
 
 # Subtract file system buffers from used memory?
@@ -138,6 +139,7 @@ use_spacer right
 
 # Timing interval for music player thread, e.g. mpd, audacious
 #music_player_interval (update_interval is default)
+music_player_interval update_interval
 
 # variable is given either in format $variable or in ${variable}. Latter
 # allows characters right after the variable and must be used in network
@@ -156,8 +158,8 @@ ${color lightgrey}Swap Usage:$color $swap/$swapmax - $swapperc% ${swapbar}
 ${color lightgrey}Processes:$color $processes  ${color grey}Running:$color $running_processes
 
 ${color lightgrey}Networking:
- Down:${color #8844ee} ${downspeed em0} k/s${color lightgrey} ${offset 80}Up:${color #22ccff} ${upspeed em0} k/s
-${color #0000ff}${downspeedgraph fxp0 32,150 ff0000 0000ff} ${color #22ccff}${upspeedgraph fxp0 32,150 0000ff ff0000}
+ Down:${color #2244ee} ${downspeed em0} k/s${color lightgrey} ${offset 80}Up:${color #22ccff} ${upspeed em0} k/s
+${color #0000ff}${downspeedgraph em0 32,150 ff0000 0000ff} ${color #22ccff}${upspeedgraph em0 32,150 0000ff ff0000}
 ${color lightgrey}File systems:
  /home $color${fs_used /home}/${fs_size /home} ${fs_bar /home}
 ${color}Name                PID     CPU%   MEM%
@@ -169,5 +171,11 @@ ${color}Mem usage
 ${color #ddaa00} ${top_mem name 1} ${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}
 ${color lightgrey} ${top_mem name 2} ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
 ${color lightgrey} ${top_mem name 3} ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
+
 ${color blue}Rss
 ${color lightgrey}${rss http://headline.2ch.net/bbynews/news.rss 1 item_titles 13 }
+
+music
+${audacious_status}
+ ${audacious_title 20} (${audacious_length}), ${audacious_bitrate}bps
+${audacious_bar}
