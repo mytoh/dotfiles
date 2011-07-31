@@ -20,7 +20,7 @@ background yes
 use_xft yes
 
 # Xft font when Xft is enabled
-xftfont Bitstream Vera Sans Mono:size=8
+xftfont  Konatu:size=8
 
 # Text alpha when using Xft
 xftalpha 0.8
@@ -55,10 +55,10 @@ own_window_type desktop
 # Use pseudo transparency with own_window?
 own_window_transparent no
 own_window_argb_visual yes
-own_window_argb_value 20
+own_window_argb_value 90
 
 # If own_window_transparent is set to no, you can set the background colour here
-own_window_colour blue
+own_window_colour black
 
 # If own_window is yes, these window manager hints may be used
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
@@ -170,4 +170,4 @@ ${color #ddaa00} ${top_mem name 1} ${top_mem pid 1} ${top_mem cpu 1} ${top_mem m
 ${color lightgrey} ${top_mem name 2} ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
 ${color lightgrey} ${top_mem name 3} ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
 ${color blue}Rss
-${color lightgrey}${rss http://planet.archlinux.org/rss20.xml 1 item_titles 10 }
+${color lightgrey}${rss http://headline.2ch.net/bbynews/news.rss 1 item_titles 13 }
