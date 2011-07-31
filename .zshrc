@@ -196,7 +196,9 @@ add-zsh-hook precmd _update_vcs_info_msg
 
 
 # {{ Prompts
-PROMPT="%{$fg[green]%}[%~]%{$fg[white]%} "
+# muridana
+PROMPT="%{$fg[cyan]%}(・×・)つ "
+PROMPT+="%{$fg[green]%}[%~]%{$fg[white]%} "
 # git prompt
 PROMPT+='%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}'
 ####
