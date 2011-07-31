@@ -197,8 +197,7 @@ add-zsh-hook precmd _update_vcs_info_msg
 
 # {{ Prompts
 # muridana
-PROMPT="%{$fg[cyan]%}(・×・)つ "
-PROMPT+="%{$fg[green]%}[%~]%{$fg[white]%} "
+PROMPT="%{$fg[green]%}[%~]%{$fg[white]%} "
 # git prompt
 PROMPT+='%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}'
 ####
@@ -209,8 +208,9 @@ PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
 SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
   PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
-# git prompt
-RPROMPT=""
+if [[ $TERM != cons25 ]]; then
+RPROMPT="%{$fg[cyan]%}(・×・) "
+fi
 # }}
 
 # {{ History search keymap
@@ -337,7 +337,7 @@ fi
 
 #[[ -s $home/.rvm/scripts/rvm ]] && source $home/.rvm/scripts/rvm
 
-if [ $TERM = cons25 ]; then
+if [[ $TERM = cons25 && -e /usr/local/bin/jfbterm ]]; then
   jfbterm
 fi
 
@@ -386,7 +386,7 @@ case ${OSTYPE} in
   alias ll="ls -G -hlA "
   alias ls="ls -G -F"
   alias pup="sudo portsnap fetch update "
-  alias pcheck="sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends"
+  alias pcheck="sudo portmaster -PBida && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends"
   alias pfetch="sudo make  fetch-recursive"
   alias pinst="sudo make  install distclean; rehash"
   alias pconf="sudo make config-recursive"
