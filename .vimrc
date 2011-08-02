@@ -115,6 +115,8 @@ aug myautocommands
   au bufwritepost       .conkyrc            silent !killall -SIGUSR1  conky
   au filetype scheme setl cindent& lispwords=define,lambda,call-with-*
   au filetype help nnoremap q :<c-u>q<cr>
+  " for chalice buffers
+  au filetype 2ch* set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
 aug end
 
 aug cch
@@ -151,6 +153,7 @@ let chalice_anonyname = ''
 let chalice_autonumcheck = 1
 let chalice_previewflags = 'autoclose'
 let chalice_reloadinterval_threadlist = 0
+let chalice_basedir = $HOME . '/.chalice'
 " }}
 
 " {{ neocomplcache
