@@ -80,7 +80,7 @@ set fenc=utf-8
 "set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
 "}}}
 
-" keymap{{{
+" keymaps{{{
 let mapleader = ","
 nnoremap ; :
 nnoremap : ;
@@ -141,7 +141,7 @@ endif
 
 " plugins{{{
 "
-" {{ Chalice for vim
+" Chalice {{{
 "set runtimepath+=$HOME/.vim/chalice
 let chalice_startupflags = 'bookmark'
 let chalice_writeoptions = 'amp,nbsp,zenkaku'
@@ -151,9 +151,9 @@ let chalice_autonumcheck = 1
 let chalice_previewflags = 'autoclose'
 let chalice_reloadinterval_threadlist = 0
 let chalice_basedir = $HOME . '/.chalice'
-" }}
+"}}}
 
-" {{ neocomplcache
+" neocomplcache"{{{
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1 
 let g:neocomplcache_enable_camle_case_completion = 1
@@ -164,9 +164,9 @@ let g:neocomplcache_dictionary_filetype_lists = {
                     \ 'scheme'   : $HOME . '/.rlwrap/gosh_completions',
                     \ 'vimshell' : $HOME . '/.vimshell/command_history'
                     \ }
-" }}
+"}}}
 
-" {{ vimfiler
+" vimfiler"{{{
 let g:vimfiler_as_default_explorer = 1
 " }}
 
@@ -177,13 +177,13 @@ let g:miniBufExplShowBufNumbers = 1
 " minibufexplorer and many useful plugins
 " http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 "
-" }}
+"}}}
 
-" {{ quickrun
+" quickrun{{{
 let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
-" }}
+"}}}
 
-" {{ unite.vim
+" unite{{{
 "let g:unite_enable_start_insert=1
 let g:unite_split_rule = "belowright"
 " fnamemodify() format
@@ -200,9 +200,9 @@ aug unite
   au filetype unite nnoremap <silent> <buffer> <esc><esc> :q<cr>
   au filetype unite inoremap <silent> <buffer> <esc><esc> <esc>:q<cr>
 aug end
-" }}
+"}}}
 
-" {{ eskk
+" eskk{{{
 if has('vim_starting')
   let g:eskk_dictionary = '~/.skk-jisyo'
   if s:isos("darwin")
@@ -214,19 +214,19 @@ endif
 let g:eskk_egg_like_newline = 0
 let g:eskk_enable_completion = 0
 "let g:eskk_revert_henkan_style = "okuri"
-" }}
+"}}}
 
-" {{ vimshell
+" vimshell"{{{
 let g:vimshell_prompt = '>>> '
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
-let g:vimshell_execute_file_list = {}
+if isdirectory(expand('~/.vim/bundle/vimproc/'))
 call vimshell#set_execute_file('txt,vim,c,h,cpp,d,xml,java', 'vim')
+endif
+let g:vimshell_execute_file_list = {}
 let g:vimshell_execute_file_list['pl'] = 'perl'
 let g:vimshell_execute_file_list['scm'] = 'gosh'
 
-"if isdirectory(expand("~/.vim/bundle/vimproc/"))
-"endif
 
 let g:vimshell_smart_case = 1
 let g:vimshell_enable_auto_slash = 1
@@ -242,19 +242,21 @@ aug vimshell
 aug end
 
 nmap <leader>ss <plug>(vimshell_switch)
-" }}
+"}}}
 
-" {{ vimproc
+" vimproc{{{
 let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/proc.so'
-" }}
+"}}}
 
-" gauref
+" gauref{{{
 let g:gauref_file = '/usr/home/mytoh/.vim/bundle/gauref.vim/doc/gauche-refe.txt'
+"}}}
 
-" changelog
+" changelog{{{
 let g:changelog_username = " "
 let g:changelog_username = ''
 let g:changelog_spacing_errors = 0
+"}}}
 
 " }}}
 
