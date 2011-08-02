@@ -31,6 +31,7 @@ set clipboard=unnamed,autoselect
 set scrolloff=1
 set title
 set ruler
+set tildeop
 set cursorline
 set modeline
 set showmode
@@ -87,6 +88,8 @@ let mapleader = ","
 nnoremap ; :
 nnoremap : ;
 nnoremap <space> i<space><esc>
+nnoremap gt :<c-u>MBEbn<cr>
+nnoremap gT :<c-u>MBEbp<cr>
 nmap n nzz
 nmap N Nzz
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
