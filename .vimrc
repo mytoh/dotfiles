@@ -259,3 +259,5 @@ let g:changelog_spacing_errors = 0
 " }}}
 
 set secure
+
+" vim:set foldmethod=marker:
