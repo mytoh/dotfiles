@@ -20,7 +20,7 @@ syntax on
 language messages C
 language time C
 
-" {{ options
+"  options{{{
 "
 set nobackup
 set history=100
@@ -78,9 +78,9 @@ set termencoding=utf-8
 set enc=utf-8
 set fenc=utf-8
 "set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
-" }}
+"}}}
 
-" {{ keymap
+" keymap{{{
 let mapleader = ","
 nnoremap ; :
 nnoremap : ;
@@ -97,9 +97,9 @@ cnoremap <c-f>      <right>
 cnoremap <c-b>      <left>
 " http://vim.g.hatena.ne.jp/tyru/20100116
 cnoremap <c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>
-" }}
+"}}}
 
-" {{ autocommands
+" autocommands{{{
 aug myautocommands
   au!
   au bufread,bufnewfile .tmux.conf               set filetype=tmux
@@ -136,10 +136,10 @@ if s:isos('darwin')
   endfunction
 endif
 
-" }}
+" }}}
 
 
-" {{{ plugins
+" plugins{{{
 "
 " {{ Chalice for vim
 "set runtimepath+=$HOME/.vim/chalice
