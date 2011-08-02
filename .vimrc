@@ -1,8 +1,10 @@
 
 function! s:isos(name)
   let os = tolower(substitute(system('uname'),"\n","",""))
-  if os == a:name
+  if os == a:name 
     return 1
+  else
+    return 0
   endif
 endfunction
 
@@ -168,19 +170,7 @@ let g:vimfiler_as_default_explorer = 1
 " {{ fholgado's minibufexpl
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
-" highlights
-"hi MBENormal               " - for buffers that have NOT CHANGED and
-                            "   are NOT VISIBLE.
-"hi MBEChanged guibg=darkblue ctermbg=blue ctermfg=white               " - for buffers that HAVE CHANGED and are
-                                                                          "   NOT VISIBLE
-"hi MBEVisibleNormal        " - buffers that have NOT CHANGED and are
-                            "   VISIBLE
-"hi MBEVisibleNormalActive  " - buffers that have NOT CHANGED and are
-                            "   VISIBLE and is the active buffer
-"hi MBEVisibleChanged       " - for buffers that have CHANGED and are 
-                            "   VISIBLE
-"hi MBEVisibleChangedActive " - buffers that have CHANGED and are VISIBLE
-                             "and is the active buffer
+let g:miniBufExplShowBufNumbers = 1
 " minibufexplorer and many useful plugins
 " http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 "
