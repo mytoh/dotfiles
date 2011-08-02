@@ -1,11 +1,8 @@
 
 function! s:isos(name)
   let os = tolower(substitute(system('uname'),"\n","",""))
-  if os == a:name 
-    return 1
-  else
-    return 0
-  endif
+  return os == a:name ? 1 : 0
+  unlet os
 endfunction
 
 
@@ -261,3 +258,4 @@ let g:changelog_spacing_errors = 0
 
 " }}}
 
+set secure
