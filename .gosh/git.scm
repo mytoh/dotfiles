@@ -9,7 +9,7 @@
   (let ((dirs (list (directory-list (expand-path gitdir) :children? #t :add-path? #t))))
        (let loop ((dirs (car dirs)))
             (if (null? dirs)
-                (display "update finied!\n")
+                (display "update finished!\n")
                 (begin
                   (display "=> ")
                   (display (car dirs) )
