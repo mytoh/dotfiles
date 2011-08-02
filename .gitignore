@@ -1,5 +1,6 @@
 
 .vim/bundle
-*.zwc
 .vim/.vim
+.vim/doc
+*.zwc
 *.swp
