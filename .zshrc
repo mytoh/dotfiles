@@ -1,4 +1,5 @@
-# {{ Options
+
+# Options {{{
 bindkey -e
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
@@ -31,10 +32,9 @@ setopt transient_rprompt
 unsetopt bg_nice appendhistory beep nomatch
 limit coredumpsize 0
 umask 002
-# }}
+# }}}
 
-
-# {{ Environment
+# Environment {{{
 # set local variables
 local home=$HOME
 setopt all_export # may cause problem
@@ -100,31 +100,31 @@ typeset -U path  # remove duplicates
 cdpath=(~/local ~/local/var)
 ## zsh functions directory
 fpath=(~/.zsh/functions/completion ${fpath})
-# }}
+# }}}
 
-# {{ named directories
+# named directories {{{
 # $ cd ~dir
 hash -d quatre=~/local/mnt/quatre
 hash -d deskstar=~/local/mnt/deskstar
 hash -d mypassport=~/local/mnt/mypassport
-# }}
+# }}}
 
-# {{ Autoloads
+# Autoloads {{{
 autoload -Uz compinit  && compinit -C # ignore insecure directories in $fpath
 autoload colors &&  colors
 autoload -Uz zmv
 autoload -Uz is-at-least
-# }}
+# }}}
 
-# {{ Modules
+# Modules {{{
 zmodload zsh/complist
-# }}
+# }}}
 
-# {{ compdef
+# compdef {{{
 compdef _portmaster portbuilder 
-# }}
+# }}}
 
-# {{ Zstyles
+# Zstyles {{{
 zstyle :compinstall filename $HOME/.zshrc
 zstyle ':completion:*' completer _oldlist _complete
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
@@ -134,8 +134,9 @@ zstyle ':completion:*' format 'Completing %F{blue}%d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*:functions' ignore-patterns '_*'
+# }}}
 
-# git prompt
+# git prompt {{{
 ##if is-at-least 4.3.10; then
 ##  autoload -Uz vcs_info
 ##  autoload -Uz add-zsh-hook
@@ -170,9 +171,9 @@ zstyle ':completion:*:functions' ignore-patterns '_*'
 ##fi
 ### }}
 #
+# }}}
 
-##
-# git prompt from
+# git prompt from {{{
 # briancarper.net/tag/249/zsh 
 autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
@@ -192,10 +193,10 @@ _update_vcs_info_msg() {
 }
 
 add-zsh-hook precmd _update_vcs_info_msg
+# }}}
 
 
-
-# {{ Prompts
+# Prompts {{{
 # muridana
 PROMPT="%{$fg[green]%}[%~]%{$fg[white]%} "
 # git prompt
@@ -211,9 +212,9 @@ SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 if [[ $TERM != cons25 ]]; then
 RPROMPT="%{$fg[cyan]%}(・×・) "
 fi
-# }}
+# }}}
 
-# {{ History search keymap
+# History search keymap {{{
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -221,9 +222,9 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "\\ep" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 bindkey "\\en" history-beginning-search-forward-end
-# }}
+# }}}
 
-# {{ Functions
+# Functions {{{
 
 # zshwiki hardstatus
 _title() {
@@ -245,10 +246,10 @@ preexec() {
   local -a cmd; cmd=(${(z)1})
   _title $cmd[1]:t "$cmd[2,-1]"
 }
-# }}
+# }}}
 
 
-# alias functions
+# alias functions {{{
 tm() {
   if tmux ls >/dev/null 2>&1; then
     tmux attach
@@ -299,9 +300,9 @@ unpack() {
       unzip $@;;
   esac
 }
+# }}}
 
-
-# {{ Aliases
+# Aliases {{{
 #alias precmd=rehash
 alias pd=popd
 alias cup="cpan-outdated && cpan-outdated | xargs cpanm -v"
@@ -315,6 +316,9 @@ alias reboot="sync;sync;sync;sudo shutdown -r now"
 alias sudo="sudo -E "
 alias zln="noglob zmv -L -s -W"
 alias zmv='noglob zmv -W'
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias df='df -h'
 # suffix aliases
 alias -s txt=cat
 alias -s zip=zipinfo
@@ -323,7 +327,7 @@ alias -s {gz,bz2}=tar -xzvf
 alias -s {gif,jpg,jpeg,png}=xli
 alias -s {m3u,mp3,flac}=audacious
 alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
-# }}
+# }}}
 
 
 
@@ -444,3 +448,4 @@ orb() {
 ;;
 esac
 
+# vim: set foldmethod=marker:
