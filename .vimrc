@@ -1,12 +1,12 @@
-
-function! s:isos(name)
+let myfunc = {}
+function! myfunc.isos(name)
   let os = tolower(substitute(system('uname'),"\n","",""))
   return os == a:name ? 1 : 0
   unlet os
 endfunction
 
 
-if s:isos('haiku')
+if myfunc.isos('haiku')
   let g:loaded_vimproc = 1
   set rtp^=~/.vim/
 endif
@@ -113,7 +113,7 @@ aug myautocommands
   au filetype scheme setl cindent& lispwords=define,lambda,call-with-*
   au filetype help nnoremap q :<c-u>q<cr>
   " for chalice buffers
-  au filetype 2ch* set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
+  au filetype 2ch* setlocal fencs=cp932,iso-2022-jp-3,euc-jp
 aug end
 
 aug cch
@@ -126,7 +126,7 @@ hi clear cursorline
 hi cursorline gui=underline
 hi cursorline ctermbg=237 guibg=black
 
-if s:isos('darwin')
+if myfunc.isos('darwin')
   au bufwritepost * call SetUTF8Xattr(expand("<afile>"))
   function! SetUTF8Xattr(file)
     let isutf8 = &fileencoding == "utf-8" || (&fileencoding == "" && &encoding == "utf-8")
@@ -137,7 +137,6 @@ if s:isos('darwin')
 endif
 
 " }}}
-
 
 " plugins{{{
 "
@@ -205,9 +204,9 @@ aug end
 " eskk{{{
 if has('vim_starting')
   let g:eskk_dictionary = '~/.skk-jisyo'
-  if s:isos("darwin")
+  if myfunc.isos("darwin")
     let g:eskk_large_dictionary = '~/Library/AquaSkk/SKK-JISYO.L'
-  elseif s:isos('freebsd')
+  elseif myfunc.isos('freebsd')
     let g:eskk_large_dictionary = '/usr/local/share/skk/SKK-JISYO.L'
   endif
 endif
