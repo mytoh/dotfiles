@@ -13,34 +13,34 @@ call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
-" {{ my bundles here
+" my bundles here {{{
 "
 " github repo
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
 Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/vimfiler'
-Bundle 'Shougo/vinarise'
 Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/vimfiler'
 Bundle 'Shougo/vimproc'
 Bundle 'Shougo/vimshell'
+Bundle 'Shougo/vinarise'
+Bundle 'fholgado/minibufexpl.vim'
+Bundle 'godlygeek/tabular'
+Bundle 'hakobe/unite-script'
+Bundle 'kana/vim-fakeclip'
+Bundle 'koron/chalice'
+Bundle 'lilydjwg/colorizer'
+Bundle 'mattn/googlereader-vim'
+Bundle 'mattn/unite-remotefile'
+Bundle 'scrooloose/nerdcommenter'
 Bundle 'thinca/vim-quickrun'
 Bundle 'thinca/vim-ref'
-"Bundle 'koron/chalice'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'kana/vim-fakeclip'
-Bundle 'tyru/vice.vim'
-Bundle 'tyru/savemap.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
 Bundle 'tyru/eskk.vim'
-Bundle 'fholgado/minibufexpl.vim'
-Bundle 'lilydjwg/colorizer'
-Bundle 'hakobe/unite-script'
-Bundle 'mattn/unite-remotefile'
-Bundle 'mattn/googlereader-vim'
-Bundle 'ujihisa/unite-colorscheme'
+Bundle 'tyru/savemap.vim'
+Bundle 'tyru/vice.vim'
 Bundle 'ujihisa/neco-look'
+Bundle 'ujihisa/unite-colorscheme'
 Bundle 'ujihisa/vimshell-ssh'
-Bundle 'koron/chalice'
 " vim-scripts repo
 "Bundle 'gauref.vim'
 Bundle 'info.vim'
@@ -48,4 +48,4 @@ Bundle 'eregex.vim'
 Bundle 'sudo.vim'
 " other git repo
 "
-" }}
+" }}}
