@@ -1,15 +1,3 @@
-let myfunc = {}
-function! myfunc.isos(name)
-  let os = tolower(substitute(system('uname'),"\n","",""))
-  return os == a:name ? 1 : 0
-  unlet os
-endfunction
-
-
-if myfunc.isos('haiku')
-  let g:loaded_vimproc = 1
-  set rtp^=~/.vim/
-endif
 
 " Vundle and bundles configuration
 source $HOME/.bundles.vim
@@ -46,7 +34,7 @@ set autoread
 set hidden
 set wildmenu
 set wildmode=list:full
-set shortmess=atI
+set shortmess=atIT
 set backspace=indent,eol,start
 set splitright
 set splitbelow
@@ -78,6 +66,21 @@ set termencoding=utf-8
 set enc=utf-8
 set fenc=utf-8
 "set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
+"}}}
+
+" funcs {{{
+let s:myfunc = {}
+function! s:myfunc.isos(name)
+  let os = tolower(substitute(system('uname'),"\n","",""))
+  return os == a:name ? 1 : 0
+  unlet os
+endfunction
+
+
+if s:myfunc.isos('haiku')
+  let g:loaded_vimproc = 1
+  set rtp^=~/.vim/
+endif
 "}}}
 
 " keymaps{{{
@@ -126,7 +129,7 @@ hi clear cursorline
 hi cursorline gui=underline
 hi cursorline ctermbg=237 guibg=black
 
-if myfunc.isos('darwin')
+if s:myfunc.isos('darwin')
   au bufwritepost * call SetUTF8Xattr(expand("<afile>"))
   function! SetUTF8Xattr(file)
     let isutf8 = &fileencoding == "utf-8" || (&fileencoding == "" && &encoding == "utf-8")
@@ -142,14 +145,14 @@ endif
 "
 " Chalice {{{
 "set runtimepath+=$HOME/.vim/chalice
-let chalice_startupflags = 'bookmark'
-let chalice_writeoptions = 'amp,nbsp,zenkaku'
-let chalice_statusline = '%c,'
-let chalice_anonyname = ''
-let chalice_autonumcheck = 1
-let chalice_previewflags = 'autoclose'
+let chalice_startupflags              = 'bookmark'
+let chalice_writeoptions              = 'amp,nbsp,zenkaku'
+let chalice_statusline                = '%c,'
+let chalice_anonyname                 = ''
+let chalice_autonumcheck              = 1
+let chalice_previewflags              = 'autoclose'
 let chalice_reloadinterval_threadlist = 0
-let chalice_basedir = $HOME . '/.chalice'
+let chalice_basedir                   = $HOME . '/.chalice'
 "}}}
 
 " neocomplcache"{{{
@@ -167,9 +170,9 @@ let g:neocomplcache_dictionary_filetype_lists = {
 
 " vimfiler"{{{
 let g:vimfiler_as_default_explorer = 1
-" }}
+" }}}
 
-" {{ fholgado's minibufexpl
+" {{{ fholgado's minibufexpl
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplShowBufNumbers = 1
@@ -179,7 +182,9 @@ let g:miniBufExplShowBufNumbers = 1
 "}}}
 
 " quickrun{{{
+if executable('gosh')
 let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
+endif
 "}}}
 
 " unite{{{
@@ -204,9 +209,9 @@ aug end
 " eskk{{{
 if has('vim_starting')
   let g:eskk_dictionary = '~/.skk-jisyo'
-  if myfunc.isos("darwin")
+  if s:myfunc.isos("darwin")
     let g:eskk_large_dictionary = '~/Library/AquaSkk/SKK-JISYO.L'
-  elseif myfunc.isos('freebsd')
+  elseif s:myfunc.isos('freebsd')
     let g:eskk_large_dictionary = '/usr/local/share/skk/SKK-JISYO.L'
   endif
 endif
@@ -219,13 +224,13 @@ let g:eskk_enable_completion = 0
 let g:vimshell_prompt = '>>> '
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
+
 if isdirectory(expand('~/.vim/bundle/vimproc/'))
 call vimshell#set_execute_file('txt,vim,c,h,cpp,d,xml,java', 'vim')
 endif
 let g:vimshell_execute_file_list = {}
 let g:vimshell_execute_file_list['pl'] = 'perl'
 let g:vimshell_execute_file_list['scm'] = 'gosh'
-
 
 let g:vimshell_smart_case = 1
 let g:vimshell_enable_auto_slash = 1
