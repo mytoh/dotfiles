@@ -3,7 +3,7 @@
 source $HOME/.bundles.vim
 
 filetype plugin indent on " required
-syntax on
+syntax enable
 
 language messages C
 language time C
@@ -11,7 +11,7 @@ language time C
 "  options{{{
 "
 set nobackup
-set history=100
+set history=10000
 set clipboard=unnamed,autoselect
 set scrolloff=1
 set title
@@ -22,13 +22,48 @@ set modeline
 set showmode
 set showcmd
 set showmatch
+" indent
 set autoindent
 set smartindent
+set smarttab
+set expandtab
+set tabstop=2
+set softtabstop=2
+set shiftround
+set shiftwidth=2
+
 " search
 set ignorecase
 set smartcase
 set hlsearch
 set incsearch
+
+set list
+set listchars=tab:^\ ,trail:_
+
+" tags
+set showfulltag
+
+" statusline
+set laststatus=2
+set statusline=%<\ %f\ %m%r%h%w\ %{fugitive#statusline()}%=%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P
+
+" set mouse
+set mouse=a
+set ttymouse=xterm2
+
+" colors
+set t_Co=256
+colorscheme xoria256
+
+" encodings
+scriptencoding=utf-8
+set termencoding=utf-8
+set enc=utf-8
+set fenc=utf-8
+"set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
+
+set helplang=ja,en
 set wrapscan
 set autoread
 set hidden
@@ -41,31 +76,9 @@ set splitbelow
 set fileformat=unix
 set fileformats=unix,mac,dos
 set autochdir
-set list
-set listchars=tab:^\ ,trail:_
 set virtualedit=all
 set grepprg=ack\ -a
-" statusline
-set laststatus=2
-set statusline=%<\ %f\ %m%r%h%w\ %{fugitive#statusline()}%=%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P
-" tabs
-set smarttab
-set tabstop=2
-set expandtab
-set softtabstop=2
-set shiftwidth=2
-" set mouse
-set mouse=a
-set ttymouse=xterm2
-" colors
-set t_Co=256
-colorscheme xoria256
-" encodings
-scriptencoding=utf-8
-set termencoding=utf-8
-set enc=utf-8
-set fenc=utf-8
-"set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
+
 "}}}
 
 " funcs {{{
@@ -90,8 +103,8 @@ nnoremap : ;
 nnoremap <space> i<space><esc>
 nnoremap gt :<c-u>MBEbn<cr>
 nnoremap gT :<c-u>MBEbp<cr>
-nmap n nzz
-nmap N Nzz
+nmap     n nzz
+nmap     N Nzz
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <leader>w :<c-u>up<cr>
 nnoremap <leader>q :<c-u>qa<cr>
