@@ -195,7 +195,6 @@ _update_vcs_info_msg() {
 add-zsh-hook precmd _update_vcs_info_msg
 # }}}
 
-
 # Prompts {{{
 # muridana
 PROMPT="%{$fg[green]%}[%~]%{$fg[white]%} "
@@ -329,7 +328,7 @@ alias -s {m3u,mp3,flac}=audacious
 alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
 # }}}
 
-
+# misc {{{
 
 if [ -e $home/perl5 ]; then
 source ~/perl5/perlbrew/etc/bashrc
@@ -349,7 +348,9 @@ if [ -x /usr/games/fortune ]; then
 fortune
 echo "\n"
 fi
+# }}}
 
+# Os detection {{{
 case ${OSTYPE} in
   beos*|haiku*)
   path=( ~/config/bin \
@@ -386,6 +387,7 @@ case ${OSTYPE} in
   }
   ;;
   freebsd*)
+  HTTP_PROXY="http://192.168.1.3:3128"
   alias la="ls -G -a"
   alias ll="ls -G -hlA "
   alias ls="ls -G -F"
@@ -447,5 +449,6 @@ orb() {
 
 ;;
 esac
+#}}}
 
 # vim: set foldmethod=marker:
