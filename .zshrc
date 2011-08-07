@@ -385,6 +385,16 @@ case ${OSTYPE} in
   chpwd() {
     ls -G -F
   }
+  squid_restart() {
+    killall squid
+    killall squid
+    kill `cat ~/.squid/logs/squid.pid`
+    kill `cat ~/.squid/logs/squid.pid`
+    /bin/rm -rfv ~/.squid/cache/*
+    squid -f ~/.squid/etc/squid.conf -z
+    squid -f ~/.squid/etc/squid.conf
+    export JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
+  }
   ;;
   freebsd*)
   HTTP_PROXY="http://192.168.1.3:3128"
