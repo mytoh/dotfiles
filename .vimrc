@@ -22,6 +22,7 @@ set modeline
 set showmode
 set showcmd
 set showmatch
+
 " indent
 set autoindent
 set smartindent
@@ -44,17 +45,22 @@ set listchars=tab:^\ ,trail:_
 " tags
 set showfulltag
 
+" colors
+set t_Co=256
+colorscheme jellybeans
+
 " statusline
 set laststatus=2
-set statusline=%<\ %f\ %m%r%h%w\ %{fugitive#statusline()}%=%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P
+set statusline=%<\ %f\ %m%r%h%w\ %1*%{fugitive#statusline()}%*%=\ %Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %1*(・×・)%*\ 
+" highlight for statusline
+" set colorscheme above this line
+" User1-9 => %{1-9}*
+hi User1 ctermfg=darkblue ctermbg=none
+"hi link User2 Statement
 
 " set mouse
 set mouse=a
 set ttymouse=xterm2
-
-" colors
-set t_Co=256
-colorscheme xoria256
 
 " encodings
 scriptencoding=utf-8
@@ -77,7 +83,9 @@ set fileformat=unix
 set fileformats=unix,mac,dos
 set autochdir
 set virtualedit=all
+if executable('ack')
 set grepprg=ack\ -a
+endif
 
 "}}}
 
@@ -88,7 +96,6 @@ function! s:myfunc.isos(name)
   return os == a:name ? 1 : 0
   unlet os
 endfunction
-
 
 if s:myfunc.isos('haiku')
   let g:loaded_vimproc = 1
