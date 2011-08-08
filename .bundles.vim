@@ -10,8 +10,9 @@ filetype off     " required
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let Vundle manage Vundle
+" let Vundle manage Vundle {{{
 Bundle 'gmarik/vundle'
+"}}}
 
 " my bundles here {{{
 "
@@ -44,12 +45,16 @@ Bundle 'tyru/vice.vim'
 Bundle 'ujihisa/neco-look'
 Bundle 'ujihisa/unite-colorscheme'
 Bundle 'ujihisa/vimshell-ssh'
+
 " vim-scripts repo
 "Bundle 'gauref.vim'
 Bundle 'info.vim'
 Bundle 'eregex.vim'
 Bundle 'sudo.vim'
 Bundle 'jellybeans.vim'
+Bundle 'YankRing.vim'
 " other git repo
-"
+
 " }}}
+
+" vim:set foldmethod=marker:

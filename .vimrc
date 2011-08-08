@@ -1,6 +1,7 @@
 
-" Vundle and bundles configuration
+" Vundle and bundles configuration {{{
 source $HOME/.bundles.vim
+"}}}
 
 filetype plugin indent on " required
 syntax enable
@@ -22,6 +23,7 @@ set modeline
 set showmode
 set showcmd
 set showmatch
+set diffopt+=vertical
 
 " indent
 set autoindent
@@ -51,11 +53,12 @@ colorscheme jellybeans
 
 " statusline
 set laststatus=2
-set statusline=%<\ %f\ %m%r%h%w\ %1*%{fugitive#statusline()}%*%=\ %Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %1*(・×・)%*\ 
+set statusline=%<%1*\ %f\ %m%r%h%w\ %1*%{fugitive#statusline()}%1*%=\ %1*%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %9*(・×・)%*\ 
 " highlight for statusline
 " set colorscheme above this line
 " User1-9 => %{1-9}*
-hi User1 ctermfg=darkblue ctermbg=none
+hi User1 ctermfg=white ctermbg=235 cterm=none
+hi User9 ctermfg=4 ctermbg=235 cterm=none
 "hi link User2 Statement
 
 " set mouse
