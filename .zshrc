@@ -345,8 +345,12 @@ if [[ $TERM = cons25 && -e /usr/local/bin/jfbterm ]]; then
 fi
 
 if [ -x /usr/games/fortune ]; then
-fortune
-echo "\n"
+  if [ -f /usr/local/share/games/fortune/bible ]; then
+    fortune /usr/local/share/games/fortune/bible
+  else
+    fortune
+  fi
+  echo "\n"
 fi
 # }}}
 
@@ -397,7 +401,8 @@ case ${OSTYPE} in
   }
   ;;
   freebsd*)
-  HTTP_PROXY="http://192.168.1.3:3128"
+  http_proxy="http://192.168.1.3:3128"
+  ftp_proxy=""
   alias la="ls -G -a"
   alias ll="ls -G -hlA "
   alias ls="ls -G -F"
