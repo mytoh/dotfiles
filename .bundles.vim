@@ -49,6 +49,7 @@ Bundle 'ujihisa/vimshell-ssh'
 Bundle 'info.vim'
 Bundle 'eregex.vim'
 Bundle 'sudo.vim'
+Bundle 'jellybeans.vim'
 " other git repo
 "
 " }}}
