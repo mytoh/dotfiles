@@ -3,14 +3,15 @@
 source $HOME/.bundles.vim
 "}}}
 
+
+"  options{{{
+
 filetype plugin indent on " required
 syntax enable
 
 language messages C
 language time C
 
-"  options{{{
-"
 set nobackup
 set history=10000
 set clipboard=unnamed,autoselect
@@ -187,7 +188,7 @@ let g:neocomplcache_enable_auto_select = 0
 let g:neocomplcache_dictionary_filetype_lists = {
                     \ 'default'  : '',
                     \ 'scheme'   : $HOME . '/.rlwrap/gosh_completions',
-                    \ 'vimshell' : $HOME . '/.vimshell/command_history'
+                    \ 'vimshell' : $HOME . '/.vimshell/command-history'
                     \ }
 "}}}
 
@@ -243,7 +244,7 @@ let g:eskk_enable_completion = 0
 "let g:eskk_revert_henkan_style = "okuri"
 "}}}
 
-" vimshell"{{{
+" vimshell {{{
 let g:vimshell_prompt = '>>> '
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
@@ -255,7 +256,7 @@ let g:vimshell_execute_file_list = {}
 let g:vimshell_execute_file_list['pl'] = 'perl'
 let g:vimshell_execute_file_list['scm'] = 'gosh'
 
-let g:vimshell_smart_case = 1
+let g:vimshell_enable_smart_case = 1
 let g:vimshell_enable_auto_slash = 1
 let g:vimshell_split_height = 20
 let g:vimshell_split_command = 'split'
@@ -266,6 +267,7 @@ aug vimshell
   function! g:my_chpwd(args, context)
     call vimshell#execute('ls')
   endfunction
+  "call vimshell#execute('source ~/.zshrc')
 aug end
 
 nmap <leader>ss <plug>(vimshell_switch)
@@ -290,3 +292,4 @@ let g:changelog_spacing_errors = 0
 set secure
 
 " vim:set foldmethod=marker:
+

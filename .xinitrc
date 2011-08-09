@@ -23,10 +23,11 @@ Thunar --daemon &
 #parcellite &
 #nitrogen --restore &
 
-if [ "$1" = "twm" -o "$1" = "openbox" ]; then
+if [ "$1" = "twm" -o "$1" = "openbox" -o "$1" = "flwm" ]; then
 /home/mytoh/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 16 -bg gray15 -fn '-adobe-helvetica-medium-r-normal--10-*' -e 'onexit=ungrabmouse' &
 trayer --expand false --alpha 20  --tint 0x606060 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 7 --widthtype pixel --width 120 &
 #sleep 20 && wbar -above-desk -bpress -isize 45 -balfa 20 -nanim 9 &
+feh --bg-max ~/.wallpaper.jpg &
 fbpanel &
 fi
 
@@ -48,6 +49,7 @@ case $1 in
   awesome) exec awesome ;;
   kde) exec startkde4 ;;
   gnome) exec gnome-session ;;
+  openbox) exec openbox ;;
   *) exec $DEFAULT_SESSION ;;
 esac
 

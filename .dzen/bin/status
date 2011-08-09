@@ -41,9 +41,9 @@ while (1)
   set disktotal = `df -ch | grep total | awk '{print $2}'`
 
   set iconcolour = "#808080"
-  set charcolour = "#ffffff"
+  set strcolour = "#ffffff"
 
-  echo "  ^fg($iconcolour)^i($icons/sm4tik/cpu.xbm)^fg($charcolour) $cpu ^fg($iconcolour)^i($icons/mem.xpm)^fg($charcolour) $freemem  ^fg($iconcolour)^i($icons/sm4tik/net_up_02.xbm)^fg($charcolour) $tx ^fg($iconcolour)^i($icons/sm4tik/net_down_02.xbm)^fg($charcolour) $rx  ^fg($iconcolour)^i($icons/floppy.xpm)^fg($charcolour) ${diskused}/${disktotal}B ^fg($batcolour)^i($baticon)^fg($charcolour) ${battery}% ^fg($iconcolour)^i($icons/sm4tik/clock.xbm)^fg($charcolour) $date "
+  echo "  ^fg($iconcolour)^i($icons/sm4tik/cpu.xbm)^fg($strcolour) $cpu ^fg($iconcolour)^i($icons/mem.xpm)^fg($strcolour) $freemem  ^fg($iconcolour)^i($icons/sm4tik/net_up_02.xbm)^fg($strcolour) $tx ^fg($iconcolour)^i($icons/sm4tik/net_down_02.xbm)^fg($strcolour) $rx  ^fg($iconcolour)^i($icons/floppy.xpm)^fg($strcolour) ${diskused}/${disktotal}B ^fg($batcolour)^i($baticon)^fg($strcolour) ${battery}% ^fg($iconcolour)^i($icons/sm4tik/clock.xbm)^fg($strcolour) $date "
 
 #  sleep $interval
 
