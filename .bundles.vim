@@ -1,7 +1,7 @@
 " First run
-" $ cd .vim/ && mkdir bundle
-" $ cd bundle && git submodule git://github.com/gmarik/vundle
-" $ vim -u $HOME/.vim-bundles +BundleInstall +q
+" $ mkdir -p ~/.vim/bundle
+" $ cd ~/.vim/bundle && git submodule git://github.com/gmarik/vundle
+" $ vim -u $HOME/.bundles.vim +BundleInstall +q
 
 "turn filetype off not to load ftdetect
 set nocompatible

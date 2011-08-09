@@ -3,7 +3,6 @@
 source $HOME/.bundles.vim
 "}}}
 
-
 "  options{{{
 
 filetype plugin indent on " required
@@ -149,7 +148,7 @@ aug cch
   au winenter,bufread * set cursorline
 aug end
 
-hi clear cursorline
+ hi clear cursorline
 hi cursorline gui=underline
 hi cursorline ctermbg=237 guibg=black
 
