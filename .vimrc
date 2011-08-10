@@ -78,7 +78,7 @@ set autoread
 set hidden
 set wildmenu
 set wildmode=list:full
-set shortmess=atIT
+set shortmess=atIToO
 set backspace=indent,eol,start
 set splitright
 set splitbelow
@@ -172,10 +172,18 @@ let chalice_startupflags              = 'bookmark'
 let chalice_writeoptions              = 'amp,nbsp,zenkaku'
 let chalice_statusline                = '%c,'
 let chalice_anonyname                 = ''
+let chalice_boardlist_columns         = 9
+let chalice_threadlist_lines          = 13
 let chalice_autonumcheck              = 1
 let chalice_previewflags              = 'autoclose'
 let chalice_reloadinterval_threadlist = 0
 let chalice_basedir                   = $HOME . '/.chalice'
+let chalice_exbrowser                 = 'tmux new-window w3m %URL% '
+aug chalice
+  au!
+  au filetype 2ch_thread       CMiniBufExplorer
+aug END
+"call mkdir($HOME.'/.chalice', 'p')
 "}}}
 
 " neocomplcache"{{{
@@ -198,7 +206,7 @@ let g:vimfiler_as_default_explorer = 1
 " {{{ fholgado's minibufexpl
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplShowBufNumbers = 1
+let g:miniBufExplShowBufNumbers = 0
 " minibufexplorer and many useful plugins
 " http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 "

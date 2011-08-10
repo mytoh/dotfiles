@@ -318,6 +318,7 @@ alias zmv='noglob zmv -W'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias df='df -h'
+alias starwars='telnet towel.blinkenlights.nl'
 # suffix aliases
 alias -s txt=cat
 alias -s zip=zipinfo
