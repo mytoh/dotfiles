@@ -108,13 +108,13 @@ endif
 
 " keymaps{{{
 let mapleader = ","
+nmap     n nzz
+nmap     N Nzz
 nnoremap ; :
 nnoremap : ;
 nnoremap <space> i<space><esc>
 nnoremap gt :<c-u>MBEbn<cr>
 nnoremap gT :<c-u>MBEbp<cr>
-nmap     n nzz
-nmap     N Nzz
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <leader>w :<c-u>up<cr>
 nnoremap <leader>q :<c-u>qa<cr>
@@ -135,11 +135,11 @@ aug myautocommands
   au bufwritepost       .Xresources       silent !xrdb -remove
   au bufwritepost       .Xresources       silent !xrdb -merge ~/.Xresources
   au bufwritepost       .zshrc            silent !zcompile .zshrc
-  au bufwritepost       .conkyrc            silent !killall -SIGUSR1  conky
-  au filetype scheme setl cindent& lispwords=define,lambda,call-with-*
-  au filetype help nnoremap q :<c-u>q<cr>
+  au bufwritepost       .conkyrc          silent !killall -SIGUSR1  conky
+  au filetype           scheme                   setl cindent& lispwords=define,lambda,call-with-*
+  au filetype           help                     nnoremap q :<c-u>q<cr>
   " for chalice buffers
-  au filetype 2ch* setlocal fencs=cp932,iso-2022-jp-3,euc-jp
+  au filetype           2ch*                     setl fencs=cp932,iso-2022-jp-3,euc-jp
 aug end
 
 aug cch
@@ -148,7 +148,7 @@ aug cch
   au winenter,bufread * set cursorline
 aug end
 
- hi clear cursorline
+hi clear cursorline
 hi cursorline gui=underline
 hi cursorline ctermbg=237 guibg=black
 
