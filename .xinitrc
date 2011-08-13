@@ -33,7 +33,7 @@ fi
 
 
 
-DEFAULT_SESSION="xfce"
+DEFAULT_SESSION="twm"
 case $1 in
   stumpwm) exec stumpwm ;;
   sawfish) exec sawfish ;;
@@ -43,6 +43,7 @@ case $1 in
   fluxbox) exec fluxbox ;;
   flwm) exec flwm ;;
   qvwm) exec qvwm ;;
+  fvwm*) exec fvwm2 ;;
   dwm) exec dwm ;;
   swm) exec swm ;;
   afterstep) exec afterstep ;;

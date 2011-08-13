@@ -54,7 +54,7 @@ if [[ -x `which gdircolors` ]] && [[ -e $home/.dir_colors ]]; then
   eval $(gdircolors $home/.dir_colors -b)
 fi
 ZLS_COLORS=$LS_COLORS
-LESS='-i  -w -z-4 -g -e -M -X -F -R -P%t?f%f \
+LESS='-i  -w -z-4 -g -M -X -F -R -P%t?f%f \
 :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
 LESS_TERMCAP_mb=$'\E[01;31m'
 LESS_TERMCAP_md=$'\E[01;31m'
