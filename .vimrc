@@ -241,7 +241,7 @@ aug end
 if has('vim_starting')
   let g:eskk_dictionary = '~/.skk-jisyo'
   if s:myfunc.isos("darwin")
-    let g:eskk_large_dictionary = '~/Library/AquaSkk/SKK-JISYO.L'
+    let g:eskk_large_dictionary = '~/Library/Application\ Support/AquaSKK/SKK-JISYO.L'
   elseif s:myfunc.isos('freebsd')
     let g:eskk_large_dictionary = '/usr/local/share/skk/SKK-JISYO.L'
   endif
