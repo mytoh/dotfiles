@@ -37,14 +37,18 @@ umask 002
 # Environment {{{
 # set local variables
 local home=$HOME
+
 setopt all_export # may cause problem
+
 LANG=en_GB.UTF-8
+
 EDITOR=vim
-PAGER="less"
-INFOPATH=(~/.emacs.d/info:~/local/share/info:$INFOPATH)
-FTP_PASSIVE_MODE=true
 MYVIMRC=~/.vimrc
 VIMRUNTIME=(~/.vim/vundle:$VIMRUNTIME)
+
+INFOPATH=(~/.emacs.d/info:~/local/share/info:$INFOPATH)
+GAUCHE_LOAD_PATH="$home/.gosh"
+FTP_PASSIVE_MODE=true
 MYGITDIR=~/local/git
 G_FILENAME_ENCODING=@locale
 RLWRAP_HOME=~/.rlwrap
@@ -54,6 +58,8 @@ if [[ -x `which gdircolors` ]] && [[ -e $home/.dir_colors ]]; then
   eval $(gdircolors $home/.dir_colors -b)
 fi
 ZLS_COLORS=$LS_COLORS
+
+PAGER="less"
 LESS='-i  -w -z-4 -g -M -X -F -R -P%t?f%f \
 :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
 LESS_TERMCAP_mb=$'\E[01;31m'
@@ -63,7 +69,6 @@ LESS_TERMCAP_se=$'\E[0m'
 LESS_TERMCAP_so=$'\E[01;44;33m'
 LESS_TERMCAP_ue=$'\E[0m'
 LESS_TERMCAP_us=$'\E[01;32m'
-GAUCHE_LOAD_PATH="$home/.gosh"
 
 HISTFILE=~/.zsh_history
 HISTSIZE=50000
@@ -125,7 +130,7 @@ compdef _portmaster portbuilder
 # }}}
 
 # Zstyles {{{
-zstyle :compinstall filename $HOME/.zshrc
+zstyle :compinstall filename $home/.zshrc
 zstyle ':completion:*' completer _oldlist _complete
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:(processes|jobs)' menu yes select=2
