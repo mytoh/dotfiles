@@ -31,7 +31,7 @@ setopt print_eightbit
 setopt transient_rprompt
 unsetopt bg_nice appendhistory beep nomatch
 limit coredumpsize 0
-umask 002
+#umask 022
 # }}}
 
 # Environment {{{
