@@ -49,7 +49,7 @@ set showfulltag
 
 " colors
 set t_Co=256
-colorscheme jellybeans
+colorscheme xoria256
 
 " statusline
 set laststatus=2
@@ -206,7 +206,7 @@ let g:vimfiler_as_default_explorer = 1
 " {{{ fholgado's minibufexpl
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplShowBufNumbers = 0
+"let g:miniBufExplShowBufNumbers = 0
 " minibufexplorer and many useful plugins
 " http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 "

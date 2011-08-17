@@ -52,8 +52,10 @@ Bundle 'ujihisa/vimshell-ssh'
 Bundle 'info.vim'
 Bundle 'eregex.vim'
 Bundle 'sudo.vim'
-Bundle 'jellybeans.vim'
 Bundle 'YankRing.vim'
+" colorschemes
+Bundle 'jellybeans.vim'
+Bundle 'xoria256.vim'
 " other git repo
 
 " }}}
