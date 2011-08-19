@@ -409,6 +409,9 @@ case ${OSTYPE} in
   freebsd*)
   http_proxy="http://192.168.1.3:3128"
   ftp_proxy=""
+  FTP_TIMEOUT=30
+  HTTP_TIMEOUT=30
+  PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages-9-current/Latest/"
   alias la="ls -G -a"
   alias ll="ls -G -hlA "
   alias ls="ls -G -F"

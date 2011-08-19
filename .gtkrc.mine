@@ -1,6 +1,6 @@
 
-gtk-theme-name = "Haiku"
-gtk-icon-theme-name = "hicolor"
+gtk-theme-name = "Murrina Haikuish"
+gtk-icon-theme-name = "Haiku"
 gtk-cursor-theme-name = "whiteglass"
 #gtk-cursor-theme-name = "ComixCursors-Ghost"
 #gtk-key-theme-name = "Emacs"

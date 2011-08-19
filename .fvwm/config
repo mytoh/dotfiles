@@ -3,52 +3,142 @@
 # for hints, as well as pointers from the various links on the official
 # fvwm web page (see the FAQ).
 
-# SetEnv {{{
-SetEnv fvwm_home $[HOME]/.fvwm
-SetEnv fvwm_icons $[fvwm_home]/.icons
-SetEnv myfont "xft:M+ 1c:size=10"
-# }}}
+# 
+# http://dev.gentoo.org/~taviso/fvwm2rc.html 
 #
-EdgeResistance 250 10
+
+# Envs {{{
+SetEnv fvwm_home $[HOME]/.fvwm
+SetEnv fvwm_icons $[fvwm_home]/icons
+SetEnv myfont "xft:Inconsolata:size=9"
+SetEnv fvwm_wallpaper_dir $[HOME]/local/var/pic
+SetEnv fvwm_wallpaper $[fvwm_wallpaper_dir]/circles_dark_blue_purple.png
+
+ImagePath $[fvwm_icons]:${HOME}/.icons:/usr/local/share/icons:/usr/local/share/pixmaps:+
+# }}}
+
+# settings {{{
+EdgeResistance 250
 EdgeScroll 100 100
+EdgeThickness 0
 ClickTime 750
-
 DeskTopSize 2x2
-#Menustyle * fvwm, Font -adobe-times-bold-r-*-*-14-*-*-*-*-*-*-*
-Menustyle * fvwm, Font $[myfont]
-MenuStyle * Foreground maroon, Background grey60, Greyed grey40
-
 ColormapFocus FollowsMouse
+HideGeometryWindow Never
+OpaqueMoveSize unlimited
+#}}}
 
-#Colorset 23 Transparent, fg rgb:ff/ff/c4, bg darkgrey
-#MenuStyle * MenuColorset 23
+# Colorset {{{
+#
+# Basic FVWM Colorset
+Colorset 0 fg black, bg #98B0C8, Plain, NoShape
+# taviso title bar, inactive and active
+Colorset 1  fg white, bg black, sh white, RootTransparent Buffer, Tint black 60
+Colorset 2  fg black, bg white, sh white, RootTransparent Buffer, Tint #b9b6a3 50
+# window borders, inactive and active
+Colorset 3 fg black, bg rgb:98/B0/C8, Plain, NoShape
+Colorset 4 fg black, bg rgb:98/B0/C8, Plain, NoShape
 
-# default Styles:
+#
+# Menu Colorsets
+#
+# inactive menu item fg+bg and menu face
+Colorset 5 fg white, bg rgb:20/20/20, \
+	sh rgb:30/30/30, hi rgb:50/50/50,  NoShape, \
+  RootTransparent, Tint black 90
+# active menu item fg+bg
+Colorset 6 fg black, bg rgb:6f/a9/e5, Plain, NoShape
+# greyed menu item fg
+Colorset 7 fg grey, bg grey, Plain, NoShape
+
+# Module colorsets
+# FvwmButtons
+Colorset 8 fg black, bg white, sh white, RootTransparent Buffer, Tint #b9b6a3 60
+
+# FvwmTaskBar
+# Normal TaskBar Button
+Colorset 10 fg white, bg black, \
+	sh white, hi white, NoShape, \
+  RootTransparent Buffer, Tint #333333 60
+# Focused TaskBar Button
+Colorset 11 fg black, bg white, \
+	sh white, hi black, NoShape, \
+  RootTransparent Buffer, Tint #b9b6a3 70
+# Iconified TaskBar Button
+Colorset 12 fg rgb:20/20/20, bg white, \
+	sh white, hi white, NoShape
+# }}}
+
+# Cursorstyle {{{
+CursorStyle ROOT         right_ptr		black	white
+CursorStyle POSITION     right_ptr	black	white
+CursorStyle TITLE        right_ptr		black	white
+CursorStyle DEFAULT      right_ptr		black	white
+CursorStyle SYS          hand2			black	white
+CursorStyle MOVE         fleur			black	white
+CursorStyle RESIZE       sizing			black	white
+CursorStyle WAIT         watch			black	white
+CursorStyle MENU         right_ptr		black	white
+CursorStyle SELECT       crosshair		black	white
+CursorStyle DESTROY      pirate			black	white
+CursorStyle TOP          top_side		black	white
+CursorStyle RIGHT        right_side		black	white
+CursorStyle BOTTOM       bottom_side		black	white
+CursorStyle LEFT         left_side		black	white
+CursorStyle TOP_LEFT     top_left_corner	black	white
+CursorStyle TOP_RIGHT    top_right_corner	black	white
+CursorStyle BOTTOM_LEFT  bottom_left_corner	black	white
+CursorStyle BOTTOM_RIGHT bottom_right_corner	black	white
+CursorStyle TOP_EDGE     top_side		black	white
+CursorStyle RIGHT_EDGE   right_side		black	white
+CursorStyle BOTTOM_EDGE  bottom_side		black	white
+CursorStyle LEFT_EDGE    left_side		black	white
+CursorStyle STROKE       plus			black	white
+# }}}
+
+# default Styles {{{
 # make sure these fonts exist on your system:
-#Style *           Font -adobe-times-bold-r-*-*-18-*-*-*-*-*-*-*
-Style *           Font $[myfont]
-#Style *           IconFont -adobe-times-bold-r-*-*-18-*-*-*-*-*-*-*
-Style *           IconFont $[myfont]
-Style *           HilightFore black, HilightBack palevioletred
-Style *           BorderWidth 3, HandleWidth 3
-Style *           Icon unknown1.xpm, Color lightgrey/dimgrey
-Style *           MWMFunctions, MWMDecor, HintOverride
-Style *           DecorateTransient, NoPPosition
-Style *           IconBox 0 -10 -280 -1
-Style *           FocusFollowsMouse
-Style *           TileCascadePlacement
+#
+# colorset
+DefaultColorset   0
+Style * Colorset 1
+Style * HilightColorset 2
+Style * BorderColorset 3
+Style * HilightBorderColorset 4
+# font
+Style * Font $[myfont]
+Style * IconFont $[myfont]
 
-# Styles for various Fvwm modules:
+# title bar buttons
+Style * NoIcon
+Style * SnapAttraction 3 SameType Screen
+Style * SnapGrid 1 1
+Style * EdgeMoveDelay 250
+Style * EdgeMoveResistance 10
+Style * BorderWidth 3, HandleWidth 3
+Style * Icon unknown1.xpm, Color lightgrey/dimgrey
+Style * MWMFunctions, MWMDecor, HintOverride
+Style * ResizeOpaque
+Style * DecorateTransient, NoPPosition
+Style * IconBox 0 -10 -280 -1
+Style * ClickToFocus
+Style * TileCascadePlacement
+Style * ParentalRelativity
+# }}}
+
+# Styles for various Fvwm modules {{{
 Style "Fvwm*"       NoTitle,  Sticky, WindowListSkip
 Style "Fvwm*"       BorderWidth 2, CirculateSkipIcon, CirculateSkip
 Style "FvwmPager"   StaysOnTop
 Style "FvwmBanner"  StaysOnTop
-Style "FvwmButtons" Icon toolbox.xpm, ClickToFocus
+Style "FvwmButtons" Icon toolbox.xpm, ClickToFocus, BorderWidth 0, HandleWidth 0
+Style "FvwmTaskBar" NoTitle, NoHandles, Sticky,WindowListSkip,\
+	CirculateSkip,NoHandles,TitleAtBottom
+# }}}
 
+#Styles for Apps {{{
 # Styles for your common terminal emulator programs:
-Style "XTerm"       Icon xterm.xpm, SloppyFocus, IconBox -70 1 -1 -140
-Style "rxvt"        Icon term.xpm, SloppyFocus, IconBox -70 1 -1 -140
-Style "rxvt"        MWMBorder, MWMButtons
+Style "XTerm"       Icon xterm-color_32x32.xpm, SloppyFocus, IconBox -70 1 -1 -140
 Style "urxvt"        Icon term.xpm, SloppyFocus, IconBox -70 1 -1 -140
 Style "urxvt"        MWMBorder, MWMButtons
 
@@ -57,82 +147,102 @@ Style "*lock"       NoTitle, NoHandles, Sticky, WindowListSkip, ClickToFocus
 Style "xbiff"       NoTitle, Sticky, WindowListSkip, ClickToFocus
 Style "xcalc"       Icon xcalc.xpm, NoButton 2,ClickToFocus
 Style "xmh"         Icon mail1.xpm, NoIconTitle,StickyIcon
-Style "xmh"	    NoButton 2
-Style "xman"	    Icon xman.xpm, ClickToFocus
-Style "xmag"	    Icon mag_glass.xpm, ClickToFocus
+Style "xmh"     NoButton 2
+Style "xman"      Icon xman.xpm, ClickToFocus
+Style "xmag"      Icon mag_glass.xpm, ClickToFocus
 Style "xgraph"      Icon graphs.xpm, ClickToFocus
 Style "xmosaic"     Color Green/Yellow, ClickToFocus
+#}}}
 
+# Title style {{{
 
-# some simple default key bindings:
-Key Next         A       SCM     Next (AcceptsFocus) Focus
-Key Prior        A       SCM     Prev (AcceptsFocus) Focus
+DestroyDecor DefaultDecor
+AddToDecor DefaultDecor
++ TitleStyle LeftJustified Height 15
++ TitleStyle InActive ( Colorset 1 -- Flat ) Active ( Colorset 2 -- Flat )
++ AddTitleStyle Active ( TiledPixmap title_back.png -- Flat ) \
+    Inactive ( TiledPixmap title_back_inactive.png -- Flat )
++ ButtonStyle All InActive ( Colorset 1 -- Flat )
++ ButtonStyle All Active ( Colorset 2 -- Flat )
++ AddButtonStyle  All Inactive TiledPixmap title_back_inactive.png -- Flat
++ AddButtonStyle  All Active TiledPixmap title_back.png -- Flat
++ AddButtonStyle  1 Active Vector 4 49x49@2 49x51@2 51x51@2 51x49@2 -- Flat
++ AddButtonStyle  1 Inactive Vector 4 49x49@3 49x51@3 51x51@3 51x49@3 -- Flat
++ AddButtonStyle  1 AllUp Vector 2 50x55@1 50x55@1 -- Flat
++ AddButtonStyle  1 Active MiniIcon -- Flat
++ AddButtonStyle  1 InActive MiniIcon -- Flat
++ AddButtonStyle  3 Active Vector 4 40x40@2 60x60@2 60x40@4 40x60@2 -- Flat
++ AddButtonStyle  3 Inactive Vector 4 40x40@3 60x60@3 60x40@4 40x60@3 -- Flat
++ AddButtonStyle  3 AllUp Vector 4 40x45@1 60x65@1 60x45@4 40x65@1 -- Flat
++ AddButtonStyle  5 Active Vector 7 40x40@2 40x60@2 60x60@2 60x40@2 40x40@2 40x45@2 60x45@2 -- Flat
++ AddButtonStyle  5 Inactive Vector 7 40x40@3 40x60@3 60x60@3 60x40@3 40x40@3 40x45@3 60x45@3 -- Flat
++ AddButtonStyle  5 AllUp Vector 4 40x65@1 60x65@1 45x50@4 55x50@1 -- Flat
++ AddButtonStyle  7 Active Vector 5 40x60@2 60x60@2 60x55@2 40x55@2 40x60@2 -- Flat
++ AddButtonStyle  7 Inactive Vector 5 40x60@3 60x60@3 60x55@3 40x55@3 40x60@3 -- Flat
++ AddButtonStyle  7 AllUp Vector 2 40x65@1 60x65@1 -- Flat
++ AddButtonStyle  9 Active Vector 9 40x40@2 45x35@2 55x35@2 60x40@2 60x45@2 50x50@2 50x55@2 50x65@4 50x65@2 -- Flat
++ AddButtonStyle  9 InActive Vector 9 40x40@3 45x35@3 55x35@3 60x40@3 60x45@3 50x50@3 50x55@3 50x65@4 50x65@3 -- Flat
++ AddButtonStyle  9 AllUp Vector 7 40x45@1 45x40@1 55x40@1 60x50@4 50x60@1 50x75@4 50x75@1 -- Flat
++ ButtonStyle 1 - Clear MwmDecorMenu
++ ButtonStyle 3 - Clear MwmDecorMin
++ ButtonStyle 5 - Clear
++ ButtonStyle 7 - Clear MwmDecorMax
++ BorderStyle Active Solid black -- NoInset HiddenHandles
++ BorderStyle Inactive Solid black -- NoInset HiddenHandles
 
-# some simple default mouse bindings:
-#   for the root window:
-Mouse 1	R   	A       Menu RootMenu Nop
-Mouse 2	R    	A      	Menu Window-Ops Nop
-Mouse 3	R    	A      	WindowList
+# These two vectors draw a circle around the vectors above, uncomment 
+# them and see what you think.
+#+ AddButtonStyle  All Active Vector 9 80x60@4 80x40@2 60x20@2 40x20@2 20x40@2 20x60@2 40x80@2 60x80@2 80x60@2 -- Flat
+#+ AddButtonStyle  All Inactive Vector 9 80x60@4 80x40@2 60x20@2 40x20@2 20x40@2 20x60@2 40x80@2 60x80@2 80x60@2 -- Flat
 
-#   for the title bar buttons:
-Mouse 0	1    	A      	Menu Window-Ops2 Close
-Mouse 0	2    	A     	Maximize-Func
-Mouse 0	4    	A     	Iconify
+Style * UseDecor DefaultDecor
 
-#   for other parts of the window/borders/icons:
-Mouse 1	F	A	Resize-or-Raise
-Mouse 1	TS	A	Move-or-Raise
-Mouse 1	I	A	Move-or-Iconify
-Mouse 2	I	A	Iconify
-Mouse 2	FST	A	Menu Window-Ops2 Nop
-Mouse 3	TSIF	A	RaiseLower
+# }}}
 
-######################## Initialization Functions ############################
-AddToFunc StartFunction
- + I Module FvwmButtons
+# Menustyles {{{
+MenuStyle * Hilight3DThin, PopupOffset 0 100, PopupDelay 300
+MenuStyle * Font $[myfont]
+MenuStyle * MenuColorset 5, HilightBack, ActiveColorset 6
+MenuStyle * BorderWidth 1, TitleUnderlines1, SeparatorsLong, TrianglesSolid, Animation
+MenuStyle * ItemFormat "%.2|%.5i%.5l%.5i%2.3>%2|"
+# }}}
 
-AddToFunc InitFunction
- #+ I exec xsetroot -mod 2 2 -fg rgb:55/40/55 -bg rgb:70/50/70
- + I exec fvwm-root -r $HOME/.wallpaper
- + I exec xcompmgr -n
- + I exec launchy
-
-# For some SM-s (like gnome-session) there is an internal background setter.
-AddToFunc SessionInitFunction
- + I Nop
-
-######################## Menus ###################
-AddToMenu RootMenu	"Root Menu"	Title
-+			"XTerm"		Exec exec xterm
-+			"Rxvt"		Exec exec rxvt
-+			"urxvt"		Exec exec urxvtcd
-+			""		Nop
-+			"Remote Logins"	Popup Remote-Logins
-+			""		Nop
-+                       "Utilities"     Popup Utilities
-+			""		Nop
-+			"Fvwm Modules"	          Popup Module-Popup
-+                       "Fvwm Window Ops"         Popup Window-Ops
-+                       "Fvwm Simple Config Ops"  Popup Misc-Ops
-+			""		Nop
+# Menus {{{
+AddToMenu RootMenu  "Root Menu" Title
++     "Apps"    Popup Apps
++     ""    Nop
++     "Utilities"     Popup Utilities
++     ""    Nop
++     "Fvwm Modules"            Popup Module-Popup
++     "Fvwm Window Ops"         Popup Window-Ops
++     "Fvwm Simple Config Ops"  Popup Misc-Ops
++     "Fvwm Help"               Popup FvwmManPagesMenu
++     ""    Nop
 +                       "Refresh Screen"   Refresh
 +                       "Recapture Screen" Recapture
-+			""		Nop
-+			"Exit Fvwm"	Popup Quit-Verify
++     ""    Nop
++     "Exit Fvwm" Popup Quit-Verify
+
+AddToMenu Apps          
++     "XTerm"   Exec exec xterm
++     "urxvt"   Exec exec urxvtcd
++     "Thunar%file-manager.svg:12x12%" Exec  exec Thunar
++     ""        Nop
++     "gvim"    Exec exec gvim
++     ""        Nop
++     "firefox%web-browser.svg:12x12%" Exec  exec firefox
+      ""        Nop
++     "comix%comix.svg:12x12%"         Exec  exec comix
++     "gcolor2"            Exec  exec gcolor2
 
 AddToMenu Utilities     "Utilities" Title
-+			"Top"		Exec exec xterm -T Top -n Top -e top
-+			"Calculator"	Exec exec xcalc
-+			"Xman"		Exec exec xman
-+			"Xmag"		Exec exec xmag
-+                       "Editres"       Exec exec editres
-+			""		Nop
-+			"XEmacs"	Exec exec xemacs
-+                       "Mail"          MailFunction xmh "-font fixed"
-+			""		Nop
-+                       "XLock"         Exec exec xlock -mode random
-+			""		Nop
++     "Top"   Exec exec xterm -T Top -n Top -e top
++     "Calculator"  Exec exec xcalc
++     ""    Nop
 +                       "Reset X defaults" Exec xrdb -load $HOME/.Xdefaults
+      ""    Nop
++ MissingSubmenuFunction WallpaperBrowser
++ %graphics_convert_polaroid.png%"Browse Wallpaper" Popup $[fvwm_wallpaper_dir]
 
 AddToMenu Misc-Ops "Misc Config Opts" Title
 +                  "Sloppy Focus"        ChangeDefaultFocus SloppyFocus
@@ -149,118 +259,174 @@ AddToMenu Misc-Ops "Misc Config Opts" Title
 +                  "Partial Paging"         EdgeScroll 50 50
 +                  "Full Paging && Edge Wrap" EdgeScroll 100000 100000
 
-AddToMenu Window-Ops	"Window Ops"	Title
-+			"Move"		Move
-+			"Resize"	Resize
-+			"Raise"		Raise
-+			"Lower"		Lower
-+		 	"(De)Iconify"	Iconify
-+			"(Un)Stick"	Stick
-+			"(Un)Maximize"	Maximize
-+			""		Nop
-+			"Delete"	Delete
-+			"Close"		Close
-+			"Destroy"	Destroy
-+			""		Nop
-+			"Refresh Window" RefreshWindow
+AddToMenu Window-Ops  "Window Ops"  Title
++     "Move"    Move
++     "Resize"  Resize
++     "Raise"   Raise
++     "Lower"   Lower
++     "(De)Iconify" Iconify
++     "(Un)Stick" Stick
++     "(Un)Maximize"  Maximize
++     ""    Nop
++     "Delete"  Delete
++     "Close"   Close
++     "Destroy" Destroy
++     ""    Nop
++     "Refresh Window" RefreshWindow
 
-AddToMenu Window-Ops2	"&Move"		Move
-+			"&Resize"	Resize
-+			"R&aise"	Raise
-+			"&Lower"	Lower
-+			"(De)&Iconify"	Iconify
-+			"(Un)&Stick"	Stick
+AddToMenu Window-Ops2 "&Move"   Move
++     "&Resize" Resize
++     "R&aise"  Raise
++     "&Lower"  Lower
++     "(De)&Iconify"  Iconify
++     "(Un)&Stick"  Stick
 +                       "(Un)Ma&ximize" Maximize
-+			""		Nop
-+			"&Delete"	Delete
-+			"&Close"	Close
-+			"Destroy"	Destroy
-+			""		Nop
-+			"ScrollBar" 	Module FvwmScroll 2 2
-+			"Print"         PrintFunction
++     ""    Nop
++     "&Delete" Delete
++     "&Close"  Close
++     "Destroy" Destroy
++     ""    Nop
++     "ScrollBar"   Module FvwmScroll 2 2
++     "Print"         PrintFunction
 +                       "Print Reverse" PrintReverseFunction
 
-# be sure to fill these in with your correct machine names:
-AddToMenu Remote-Logins	"dopey"	 Exec rsh dopey rxvt -display $HOSTDISPLAY &
-+			"snoopy" Exec rsh snoopy rxvt -display $HOSTDISPLAY &
-+			"grumpy" Exec rsh grumpy rxvt -display $HOSTDISPLAY &
-+			"happy"	 Exec rsh happy rxvt -display $HOSTDISPLAY &
-+			"bailey" Exec rsh bailey rxvt -display $HOSTDISPLAY &
-+			"barnum" Exec rsh barnum rxvt -display $HOSTDISPLAY &
-+			"joker"	 Exec rsh joker rxvt -display $HOSTDISPLAY &
-+			"signal" Exec rxterm signal
 
-AddToMenu Module-Popup	"FvwmModules"	Title
-+			"Identify"	Module	FvwmIdent
-+			"Talk"  	Module	FvwmTalk
-+			""		Nop
-+			"Button-Bar"	Module	FvwmButtons
-+			"Pager"		Module  FvwmPager 0 0
-+			"Pager (2 desks)" Module  FvwmPager 0 1
-+			"WinList"	Module  FvwmWinList
-+			""		Nop
-+			"Banner"	Module	FvwmBanner
-+                       "ScrollBar"     Module  FvwmScroll 50 50
-+			"Background"	Module  FvwmBacker
-+                       "AutoRaise"     Module  FvwmAuto 200 Raise Nop
-+                       "Stop AutoRaise" KillModule FvwmAuto
-+			""		Nop
-+			"IconBox"	Module	FvwmIconBox
-+                       "IconMan"       Module  FvwmIconMan
-+			""		Nop
-+                       "Form - Rlogin"      Module FvwmForm Rlogin
-+                       "Form - MyFvwmTalk"  Module FvwmForm MyFvwmTalk
-+                       "Form - QuitVerify"  Module FvwmForm QuitVerify
+AddToMenu Module-Popup  "FvwmModules" Title
++     "Identify"  Module  FvwmIdent
++     "Talk"    Module  FvwmTalk
++     ""    Nop
++     "Button-Bar"  Module  FvwmButtons
++     "Pager"   Module  FvwmPager 0 0
++     "Pager (2 desks)" Module  FvwmPager 0 1
++     "WinList" Module  FvwmWinList
++     ""    Nop
++     "Banner"  Module  FvwmBanner
++     "ScrollBar"     Module  FvwmScroll 50 50
++     "Background"  Module  FvwmBacker
++     "AutoRaise"     Module  FvwmAuto 200 Raise Nop
++     "Stop AutoRaise" KillModule FvwmAuto
++     ""    Nop
++     "IconBox" Module  FvwmIconBox
++     "IconMan"       Module  FvwmIconMan
++     ""    Nop
++     "Form - Rlogin"      Module FvwmForm Rlogin
++     "Form - MyFvwmTalk"  Module FvwmForm MyFvwmTalk
++     "Form - QuitVerify"  Module FvwmForm QuitVerify
 
-AddToMenu Quit-Verify 	"Really Quit Fvwm?" Title
-+		      	"Yes, Really Quit"  Quit
-+		      	""		    Nop
+DestroyMenu FvwmManPagesMenu
+AddTomenu   FvwmManPagesMenu "FVWM Man Pages" Title
++   "%help.png%fvwm"                  FvwmViewManPage fvwm
++   "%help.png%FvwmAnimate"           FvwmViewManPage FvwmAnimate
++   "%help.png%FvwmAuto"              FvwmViewManPage FvwmAuto
++   "%help.png%FvwmBacker"                  FvwmViewManPage FvwmBacker
++   "%help.png%FvwmBanner"                  FvwmViewManPage FvwmBanner
++   "%help.png%FvwmButtons"                  FvwmViewManPage FvwmButtons
++   "%help.png%FvwmCommand"                  FvwmViewManPage FvwmCommand
++   "%help.png%FvwmConsole"                  FvwmViewManPage FvwmConsole
++   "%help.png%FvwmConsoleC.pl"                  FvwmViewManPage FvwmConsoleC.pl
++   "%help.png%FvwmCpp"                  FvwmViewManPage FvwmCpp
++   "%help.png%FvwmDebug"                  FvwmViewManPage FvwmDebug
++   "%help.png%FvwmDragWell"                  FvwmViewManPage FvwmDragWell
++   "%help.png%FvwmEvent"                  FvwmViewManPage FvwmEvent
++   "%help.png%FvwmForm"                  FvwmViewManPage FvwmForm
++   "%help.png%FvwmGtk"                  FvwmViewManPage FvwmGtk
++   "%help.png%FvwmGtkDebug"                  FvwmViewManPage FvwmGtkDebug
++   "%help.png%FvwmIconBox"                  FvwmViewManPage FvwmIconBox
+
+AddToMenu Quit-Verify   "Really Quit Fvwm?" Title
++           "Yes, Really Quit"  Quit
++           ""        Nop
 +                       "Restart Fvwm"      Restart
-+		      	"Restart Fvwm 1.x"  Restart fvwm -s
-+		      	""		    Nop
-+		      	"Start twm"         Restart twm
-+		      	"Start ctwm"        Restart ctwm
-+		        "Start tvtwm"       Restart tvtwm
-+		        "Start vtwm"        Restart vtwm
-+		      	"Start mwm"    	    Restart mwm
-+	      	      	"Start olwm"        Restart /usr/openwin/bin/olwm
-+		      	""		    Nop
-+		      	"Start dummy"       Restart xterm
-+		      	""		    Nop
-+		      	"No, Don't Quit"    Nop
++           "Restart Fvwm 1.x"  Restart fvwm -s
++           ""        Nop
++           "Start twm"         Restart twm
++           "Start ctwm"        Restart ctwm
++           "Start tvtwm"       Restart tvtwm
++           "Start vtwm"        Restart vtwm
++           "Start mwm"         Restart mwm
++                 "Start olwm"        Restart /usr/openwin/bin/olwm
++           ""        Nop
++           "Start dummy"       Restart xterm
++           ""        Nop
++           "No, Don't Quit"    Nop
+#}}}
 
-######################## Sample Functions ##########################
+# key bindings {{{
+# some simple default key bindings:
+Key Next         A       SCM     Next (AcceptsFocus) Focus
+Key Prior        A       SCM     Prev (AcceptsFocus) Focus
+#}}}
 
-AddToFunc MailFunction	   I Next (AcceptsFocus $0) Iconify -1
-+		           I Next (AcceptsFocus $0) Focus
-+			   I None (AcceptsFocus $0) Exec $0 $1
+# mouse bindings {{{
+# some simple default mouse bindings:
+#   for the root window:
+Mouse 1 R     A        WindowList
+Mouse 2 R     A       Menu Window-Ops Nop
+Mouse 3 R     A       Menu RootMenu Nop
 
-AddToFunc Move-or-Raise		I Raise
-+				M Move
-+  				D Lower
+#   for the title bar buttons:
+Mouse 0 1     A       Menu Window-Ops2 Close
+Mouse 0 3     A       Delete
+Mouse 0 5     A       Iconify
 
-AddToFunc Move-or-Raise2	M Raise
-+				M Move
-+  				D Lower
+#   for other parts of the window/borders/icons:
+Mouse 1 F A Resize-or-Raise
+Mouse 1 TS  A Move-or-Raise
+Mouse 1 I A Move-or-Iconify
+Mouse 2 I A Iconify
+Mouse 2 FST A Menu Window-Ops2 Nop
+Mouse 3 TSIF  A RaiseLower
+# }}}
 
-AddToFunc Maximize-Func		M Maximize	 0 100
-+				C Maximize	 0 80
-+				D Maximize	 100 100
+# Initialization Functions {{{
+AddToFunc StartFunction
+ + I Module FvwmButtons
+ + I Module FvwmTaskBar
 
-AddToFunc Move-or-Iconify	I Raise
-+				M Move
-+				D Iconify
+AddToFunc InitFunction
+ #+ I exec xsetroot -mod 2 2 -fg rgb:55/40/55 -bg rgb:70/50/70
+ + I exec fvwm-root -r $HOME/.wallpaper
+ + I exec xcompmgr -n
+ + I exec launchy
 
-AddToFunc Resize-or-Raise	I Raise
-+				M Resize
-+				D Lower
+# For some SM-s (like gnome-session) there is an internal background setter.
+AddToFunc SessionInitFunction
+ + I Nop
 
-AddToFunc Resize-or-Raise2	M Raise
-+				M Resize
-+				D Lower
+# }}}
 
-AddToFunc PrintFunction		I Raise
-+				I Exec xdpr -id $w
+# Sample Functions {{{
+
+AddToFunc MailFunction     I Next (AcceptsFocus $0) Iconify -1
++              I Next (AcceptsFocus $0) Focus
++        I None (AcceptsFocus $0) Exec $0 $1
+
+AddToFunc Move-or-Raise   I Raise
++       M Move
++         D Lower
+
+AddToFunc Move-or-Raise2  M Raise
++       M Move
++         D Lower
+
+AddToFunc Maximize-Func   M Maximize   0 100
++       C Maximize   0 80
++       D Maximize   100 100
+
+AddToFunc Move-or-Iconify I Raise
++       M Move
++       D Iconify
+
+AddToFunc Resize-or-Raise I Raise
++       M Resize
++       D Lower
+
+AddToFunc Resize-or-Raise2  M Raise
++       M Resize
++       D Lower
+
+AddToFunc PrintFunction   I Raise
++       I Exec xdpr -id $w
 
 AddToFunc PrintReverseFunction  I Raise
 +                               I Exec xdpr 1/2 -h -rv -id $w
@@ -282,20 +448,95 @@ AddToFunc DeiconifyFocusAndWarp I Iconify -1
 
 AddToFunc ChangeDefaultFocus I Style * $0
 +                            I Recapture
+# }}}
+#
+ DestroyFunc WallpaperBrowser
+AddToFunc WallpaperBrowser I PipeRead 'test ! -d "$0/.thumbs" && mkdir "$0/.thumbs"; \
+    for i in "$0/"*; do \
+        test -f "$0/.thumbs/${i##*/}" \
+            -a "${i}" -ot "$0/.thumbs/${i##*/}" || { \
+                convert -quality 0 -scale 42 "${i}" "png:$0/.thumbs/${i##*/}" 2>/dev/null \
+                    || continue; \
+            }; \
+    done; \
+    fvwm-menu-directory --icon-title folder_view.png --icon-file __PIXMAP__ \
+    --icon-dir folder_paper_closed.png --dir "$0" --exec-file "^fvwm-root --dither -r" \
+    --exec-t="^xv -wait 2 *" | sed -e "s#FuncFvwmMenuDirectory#WallpaperBrowser#g" \
+    -e "s#__PIXMAP__\\(.*\\)\\\"\\(.*/\\)\\(.*\\)\\\"#\\2.thumbs/\\3\\1\\2\\3#g"'
 
-################## FvwmButtons button-bar ################################
-*FvwmButtonsGeometry 520x100-1-1
-*FvwmButtonsBack bisque3
-*FvwmButtons(Frame 2 Padding 2 2 Container(Rows 2 Columns 5 Frame 1 \
-                                           Padding 10 0))
-*FvwmButtons(3x2 Frame 2 Swallow "FvwmIconMan" "Module FvwmIconMan")
-*FvwmButtons(1x2 Frame 2 Swallow(UseOld) "FvwmPager" "Module FvwmPager 0 0")
-*FvwmButtons(1x2 Frame 0 Container(Rows 2 Columns 2 Frame 0))
-*FvwmButtons(Frame 2 Swallow(UseOld,NoHints,Respawn) "xbiff" `Exec exec xbiff -bg bisque3`)
-*FvwmButtons(Frame 3 Swallow(UseOld,NoHints,Respawn) "xclock" `Exec exec xclock -bg bisque3 -fg black -hd black -hl black -padding 0 -update 1`)
-*FvwmButtons(2x1 Frame 2 Swallow(UseOld,NoHints,Respawn) "xload" `Exec exec xload -bg bisque3 -fg black -update 5 -nolabel`)
-*FvwmButtons(End)
-*FvwmButtons(End)
+
+# Module Functions {{{
+DestroyFunc FuncFvwmDeiconifyFocusAndRaise
+AddToFunc   FuncFvwmDeiconifyFocusAndRaise
++ I Iconify off
++ I Focus
++ I Raise
+# }}}
+
+################## FvwmButtons  ################################
+KillModule FvwmButtons
+DestroyModuleConfig FvwmButtons: *
+*FvwmButtons: Colorset 8
+*FvwmButtons: PressColorset 0
+*FvwmButtons: ActiveColorset 9
+*FvwmButtons: Fore black
+*FvwmButtons: Back #aaaaaa
+*FvwmButtons: Font $[myfont]
+*FvwmButtons: Frame 1
+*FvwmButtons: Padding 1 1
+*FvwmButtons: Geometry +1-1
+*FvwmButtons: Pixmap none
+*FvwmButtons: Rows 1
+#*FvwmButtonsColumns 1
+
+#  apps, no title
+*FvwmButtons: -  comix.svg:25x25        Exec  exec comix &
+*FvwmButtons: -  web-browser.svg:25x25  Exec  exec firefox &
+*FvwmButtons: -  file-manager.svg:25x25 Exec  exec Thunar &
+*FvwmButtons: -  gcolor.png             Exec  exec gcolor2 &
+
+
+# FvwmTaskBar Configration {{{
+KillModule FvwmTaskBar
+DestroyModuleConfig FvwmTaskBar: *
+# defined in the option
+*FvwmTaskBar: Geometry +0+0
+*FvwmTaskBar: Rows 1
+*FvwmTaskBar: Colorset 10
+*FvwmTaskBar: FocusColorset 11
+*FvwmTaskBar: IconColorset 12
+*FvwmTaskBar: TipsColorset 10
+*FvwmTaskBar: Font $[myfont]
+*FvwmTaskBar: SelFont $[myfont]
+*FvwmTaskBar: StatusFont $[myfont]
+*FvwmTaskBar: ButtonWidth 140
+
+*FvwmTaskBar: Action Click1 FuncFvwmDeiconifyFocusAndRaise
+*FvwmTaskBar: Action Click2 Popup MenuFvwmWindowOps Mouse c c
+*FvwmTaskBar: Action Click3 Iconify
+
+# Flatなボタンを表示するので、フォーカスのあるウインドウボタンを
+# 特に強調する必要はありません。
+*FvwmTaskBar: NoBrightFocus
+
+# WindowListSkipスタイルが適用されたウインドウはタスクバーに表示しません。
+*FvwmTaskBar: UseSkipList
+*FvwmTaskBar: AutoStick
+
+# StartNameは「スタートボタン」に表示される文字列です。
+# 今回は絵だけですので、文字列は何も指定しません。
+*FvwmTaskBar: StartName
+*FvwmTaskBar: StartMenu RootMenu Root +0 +20p
+*FvwmTaskBar: StartIcon start.svg:16x16
+
+# Transientsウインドウ（ダイアログボックス）もタスクバーボタンに表示します。
+*FvwmTaskBar: ShowTransients
+*FvwmTaskBar: DeskOnly
+*FvwmTaskBar: MailCheck 0
+*FvwmTaskBar: NoIconAction SendToModule FvwmAnimate animate
+*FvwmTaskBar: ClockFormat %m/%d %R
+*FvwmTaskBar: ShowTips
+# }}}
 
 ########################## Icon Manager ####################################
 # this FvwmIconMan setup is for swallowing in above button bar example
@@ -303,7 +544,7 @@ AddToFunc ChangeDefaultFocus I Style * $0
 *FvwmIconMan*Resolution  page
 *FvwmIconMan*background  bisque3
 *FvwmIconMan*foreground  black
-*FvwmIconMan*font        7x13bold
+*FvwmIconMan*font        $[myfont]
 *FvwmIconMan*format      "%t"
 *FvwmIconMan*action      Mouse   1 N sendcommand Focus, sendcommand "Iconify"
 *FvwmIconMan*action      Mouse   2 N sendcommand "Iconify 1"
@@ -323,7 +564,7 @@ AddToFunc ChangeDefaultFocus I Style * $0
 # Just choose colors and a fonts
 *FvwmIdentBack MidnightBlue
 *FvwmIdentFore Yellow
-*FvwmIdentFont -adobe-helvetica-medium-r-*-*-12-*-*-*-*-*-*-*
+*FvwmIdentFont $[myfont]
 
 ########################### Pager #########################################
 *FvwmPagerBack #908090
@@ -377,7 +618,7 @@ AddToFunc ChangeDefaultFocus I Style * $0
 #*FvwmIconBoxFore       blue
 *FvwmIconBoxGeometry    5x1+0+0
 *FvwmIconBoxMaxIconSize 64x38
-*FvwmIconBoxFont        -adobe-helvetica-medium-r-*-*-12-*-*-*-*-*-*-*
+*FvwmIconBoxFont        $[myfont]
 *FvwmIconBoxSortIcons   IconName
 *FvwmIconBoxPadding     4
 *FvwmIconBoxLines       10
@@ -450,7 +691,7 @@ AddToFunc ChangeDefaultFocus I Style * $0
 # FvwmForm alias - query exit ala mwm
 *QuitVerifyGrabServer
 *QuitVerifyWarpPointer
-*QuitVerifyFont          *helvetica*m*r*n*14*
+*QuitVerifyFont          $[myfont]
 #*QuitVerifyButtonFont    *helvetica*m*o*n*14*
 *QuitVerifyButtonFont    7x13bold
 *QuitVerifyFore          Black
@@ -508,5 +749,11 @@ AddToFunc ChangeDefaultFocus I Style * $0
 *MyFvwmTalkCommand Nop
 
 # to change banner pixmap
-#*FvwmBannerPixmap fvwm3.xpm
-#*FvwmBannerTimeout 2
+DestroyModuleConfig FvwmBanner: *
+*FvwmBanner: NoDecor
+*FvwmBanner: Pixmap banner.xpm
+*FvwmBanner: Timeout 3
+#
+
+# vim: set foldmethod=marker:
+

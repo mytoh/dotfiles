@@ -49,7 +49,7 @@ set showfulltag
 
 " colors
 set t_Co=256
-colorscheme xoria256
+colorscheme jellybeans
 
 " statusline
 set laststatus=2
@@ -234,6 +234,8 @@ aug unite
   au!
   au filetype unite nnoremap <silent> <buffer> <esc><esc> :q<cr>
   au filetype unite inoremap <silent> <buffer> <esc><esc> <esc>:q<cr>
+  "call unite#custom_default_action('file', 'tabopen')
+  "call unite#custom_default_action('bookmark', 'tabopen')
 aug end
 "}}}
 

@@ -43,7 +43,8 @@ case $1 in
   fluxbox) exec fluxbox ;;
   flwm) exec flwm ;;
   qvwm) exec qvwm ;;
-  fvwm*) exec fvwm2 ;;
+  fvwm|fvwm2) exec fvwm2 ;;
+  fvwm-themes*) exec fvwm-themes-start -s sa ;;
   dwm) exec dwm ;;
   swm) exec swm ;;
   afterstep) exec afterstep ;;
