@@ -1,0 +1,833 @@
+# Initialize file for FD
+#
+
+# whether if limit configuration items or not in the customizer
+#	0: not limit (Default)
+#	>= 1: limit
+#BASICCUSTOM=0
+
+# default sort type
+#	0: not sort (Default)
+#	1: alphabetical	9: alphabetical (reversal)
+#	2: extension	10: extension (reversal)
+#	3: size		11: size (reversal)
+#	4: date		12: date (reversal)
+#	5: length	13: length (reversal)
+#	100-113: preserve previous sort type
+#	200-213: preserve previous sort type also in the archive browser
+#		(the least 2 digits are effective just after initialize)
+#SORTTYPE=0
+FD_SORTTYPE=101
+
+# default display mode
+#	0: normal (Default)
+#	1: sym-link status
+#	2: 			file type symbol
+#	3: sym-link status &	file type symbol
+#	4: 						invisible dot file
+#	5: sym-link status &				invisible dot file
+#	6: 			file type symbol &	invisible dot file
+#	7: sym-link status &	file type symbol &	invisible dot file
+#DISPLAYMODE=0
+
+# whether if sort or not in tree mode
+#	0: not sort (Default)
+#	>= 1: sort according to SORTTYPE
+#SORTTREE=0
+FD_SORTTREE=1
+
+# behavior about writing over directory on file system
+#	0: confirm to write or not, after directory arranged (Default)
+#	1: write directory only if commanded
+#	2: never write over directory even if commanded
+#WRITEFS=0
+FD_WRITEFS=1
+
+# whether if ignore uppercase or lowercase in filename comparison
+#	0: not ignore (Default)
+#	>= 1: ignore
+#IGNORECASE=0
+
+# whether if inherit timestamp or not when copying
+#	0: not inherit (Default)
+#	>= 1: inherit
+#INHERITCOPY=0
+FD_INHERITCOPY=1
+
+# whether if display progress bar on copying/moving files
+#	0: not dislpay (Default)
+#	>= 1: dislpay
+#PROGRESSBAR=0
+
+# whether if query overwriting policy in advance before copying/moving files
+#	0: not query (Default)
+#	>= 1: query
+#PRECOPYMENU=0
+
+# whether if adjust tty or not when exiting
+#	0: not adjust (Default)
+#	>= 1: adjust
+#ADJTTY=0
+
+# whether if prioritize VT100 escape sequence or not for getting terminal size
+#	0: not prioritize (Default)
+#	>= 1: prioritize
+#USEGETCURSOR=0
+
+# default columns of file in 1 line
+#	1: 1 column
+#	2: 2 columns (Default)
+#	3: 3 columns
+#	5: 5 columns
+#DEFCOLUMNS=2
+FD_DEFCOLUMNS=1
+
+# minimum columns of filename field
+#	Default: 12
+#MINFILENAME=12
+
+# history file of sh mode
+#	Default: ~/.fd_history
+#HISTFILE=~/.fd_history
+
+# history file of path input
+#	Default: none
+#DIRHISTFILE=""
+
+# history size of sh mode
+#	Default: 50
+#HISTSIZE=50
+
+# history size of path input
+#	Default: 50
+#DIRHIST=50
+
+# size of saved command history
+#	Default: 50
+#SAVEHIST=50
+
+# size of saved directory history
+#	Default: 50
+#SAVEDIRHIST=50
+
+# limit of counting files in directory, on tree mode
+#	Default: 50
+#DIRCOUNTLIMIT=50
+
+# whether if make MS-DOS drive effective
+#	0: not use (Default)
+#	>= 1: effective
+#DOSDRIVE=0
+
+# whether if display the second hand of clock
+#	0: not display (Default)
+#	>= 1: display
+#SECOND=0
+
+# interval seconds to update browser automatically
+#	0: invalid (Default)
+#	>= 1: valid
+#AUTOUPDATE=0
+
+# whether if use the screen layout based on the traditional "FD"
+#	0: original layout (Default)
+#	>= 1: traditional layout
+#TRADLAYOUT=0
+
+# whether if show the info. of filesize
+#	0: not show (Default)
+#	>= 1: show
+#SIZEINFO=0
+
+# layout form of the function line
+#	value: n * 100 + size
+#	n: the number of function keys
+#	size: the block size of function keys
+#	Default: 10 * 100 + 5
+#FUNCLAYOUT=1005
+
+# key to invoke tiny Kanji Input Method Editor
+#	Default: none
+#IMEKEY=""
+
+# whether if hold the Kana-Kanji translation table on memory
+#	0: not hold (Default)
+#	>= 1: hold
+#IMEBUFFER=0
+
+# whether if support ANSI color escape sequence
+#	0: monochrome (Default)
+#	1: color
+#	2: color & force background to blacken
+#	3: color & force foreground to blacken
+#ANSICOLOR=0
+FD_ANSICOLOR=1
+
+# color palette in the ANSI color mode
+#	Default: none
+#	0: black
+#	1: red
+#	2: green
+#	3: yellow
+#	4: blue
+#	5: magenta
+#	6: cyan
+#	7: white
+#	8: default color for foreground
+#	9: default color for background
+#	default palette: 89624351888
+#	                 |||||||||||
+#	normal file -----+||||||||||
+#	background -------+|||||||||
+#	directory ---------+||||||||
+#	unwritable ---------+|||||||
+#	unreadable ----------+||||||
+#	symbolic link --------+|||||
+#	socket ----------------+||||
+#	fifo (named pipe) ------+|||
+#	block device ------------+||
+#	character device ---------+|
+#	exectable -----------------+
+#ANSIPALETTE=""
+
+# edit mode with your favorite editor type
+#	emacs: ^P, ^N, ^F, ^B, ... (Default)
+#	wordstar ^E, ^X, ^D, ^S, ...
+#	vi: k, j, l, h, ...
+#EDITMODE=emacs
+
+# whether if loop cursor moving within the same page
+#	0: not loop (Default)
+#	>= 1: loop
+#LOOPCURSOR=0
+
+# temporary directory where archive file is unpacked
+#	Default: /tmp
+#TMPDIR=/tmp
+
+# file creation mask for the temporary directory
+#	Default: 022
+#TMPUMASK=022
+
+# mount point of CD-ROM with iso-9660 rock ridge format
+#	Default: none
+#RRPATH=""
+
+# directories on which browsing precedes getting file status
+#	Default: none
+#PRECEDEPATH=""
+
+# shell prompt strings
+#	Default: "$ "
+#PS1="$ "
+
+# continuous shell prompt strings
+#	Default: "> "
+#PS2="> "
+
+# whether if not use control sequences in the internal shell
+#	0: use (Default)
+#	>= 1: not use
+#DUMBSHELL=0
+
+# whether if use pseudo terminal
+#	0: not use (Default)
+#	>= 1: use
+#PTYMODE=0
+
+# value of the environ variable "TERM" for pseudo terminal
+#	Default: "vt100"
+#PTYTERM="vt100"
+
+# key to open pseudo terminal menu
+#	Default: none
+#PTYMENUKEY=""
+
+# filename for logging
+#	Default: none
+#LOGFILE=""
+
+# file size for logging
+#	Default: 1024 (KB)
+#LOGSIZE=1024
+
+# whether if use syslog for logging
+#	0: not use (Default)
+#	>= 1: use
+#USESYSLOG=0
+
+# logging level for normal users
+#	0: not logging (Default)
+#	1: for warning
+#	2: for notice
+#	3: for information
+#	>= 4: for debug
+#LOGLEVEL=0
+
+# logging level for the super user
+#	0: not logging
+#	1: for warning (Default)
+#	2: for notice
+#	3: for information
+#	>= 4: for debug
+#ROOTLOGLEVEL=1
+
+# whether if pass through the startup arguments as is
+#	0: evaluate arguments (Default)
+#	>= 1: pass through
+#THRUARGS=0
+FD_THRUARGS=1
+
+# whether if make URL drive effective
+#	0: not use (Default)
+#	>= 1: effective
+#URLDRIVE=0
+
+# timeout seconds for communications on URL drive
+#	0: invalid (Default)
+#	>= 1: valid
+#URLTIMEOUT=0
+
+# communication options for URL drive
+#	 0: normal (Default)
+#	 1: deny PASV
+#	 2: deny        PORT
+#	 3: deny PASV & PORT
+#	 4: deny               MDTM
+#	 5: deny PASV &        MDTM
+#	 6: deny        PORT & MDTM
+#	 7: deny PASV & PORT & MDTM
+#	 8: deny                      FEAT
+#	 9: deny PASV               & FEAT
+#	10: deny        PORT        & FEAT
+#	11: deny PASV & PORT        & FEAT
+#	12: deny               MDTM & FEAT
+#	13: deny PASV &        MDTM & FEAT
+#	14: deny        PORT & MDTM & FEAT
+#	15: deny PASV & PORT & MDTM & FEAT
+#	16:					  get HTTP detail status
+#	17: deny PASV				& get HTTP detail status
+#	18: deny        PORT			& get HTTP detail status
+#	19: deny PASV & PORT			& get HTTP detail status
+#	20: deny               MDTM		& get HTTP detail status
+#	21: deny PASV &        MDTM		& get HTTP detail status
+#	22: deny        PORT & MDTM		& get HTTP detail status
+#	23: deny PASV & PORT & MDTM		& get HTTP detail status
+#	24: deny                      FEAT	& get HTTP detail status
+#	25: deny PASV               & FEAT	& get HTTP detail status
+#	26: deny        PORT        & FEAT	& get HTTP detail status
+#	27: deny PASV & PORT        & FEAT	& get HTTP detail status
+#	28: deny               MDTM & FEAT	& get HTTP detail status
+#	29: deny PASV &        MDTM & FEAT	& get HTTP detail status
+#	30: deny        PORT & MDTM & FEAT	& get HTTP detail status
+#	31: deny PASV & PORT & MDTM & FEAT	& get HTTP detail status
+#URLOPTIONS=0
+
+# whether if suppress displaying '*' with password input
+#	0: display '*' (Default)
+#	>= 1: display none
+#HIDEPASSWD=0
+
+# mail address for anonymous FTP
+#	Default: "FDclone@"
+#FTPADDRESS="FDclone@"
+
+# FTP proxy address
+#	Default: none
+#FTPPROXY=""
+
+# filename for logging FTP communications
+#	Default: none
+#FTPLOGFILE=""
+
+# HTTP proxy address
+#	Default: none
+#HTTPPROXY=""
+
+# filename for logging HTTP communications
+#	Default: none
+#HTTPLOGFILE=""
+
+# filename for logging received HTML
+#	Default: none
+#HTMLLOGFILE=""
+
+# whether if hold the UNICODE translation table on memory
+#	0: not hold (Default)
+#	>= 1: hold
+#UNICODEBUFFER=0
+
+# language code to be displayed
+#	Default: No convert
+#	euc, EUC: EUC-JP
+#	sjis, SJIS: Shift JIS
+#	jis, JIS: 7bits JIS
+#	jis8, JIS8: 8bits JIS
+#	junet, JUNET: ISO-2022-JP
+#	ojis, OJIS: old 7bits JIS
+#	ojis8, OJIS8: old 8bits JIS
+#	ojunet, OJUNET: old ISO-2022-JP
+#	utf8, UTF8: UTF-8
+#	utf8-mac, UTF8-MAC: UTF-8 for Mac OS X
+#	utf8-iconv, UTF8-ICONV: UTF-8 for iconv
+#	en, EN, C: English
+#LANGUAGE=""
+FD_LANGUAGE=$LANG
+
+# system default Kanji code
+#	Default: No convert
+#	euc, EUC: EUC-JP
+#	sjis, SJIS: Shift JIS
+#	jis, JIS: 7bits JIS
+#	jis8, JIS8: 8bits JIS
+#	junet, JUNET: ISO-2022-JP
+#	ojis, OJIS: old 7bits JIS
+#	ojis8, OJIS8: old 8bits JIS
+#	ojunet, OJUNET: old ISO-2022-JP
+#	hex, HEX: HEX
+#	cap, CAP: CAP
+#	utf8, UTF8: UTF-8
+#	utf8-mac, UTF8-MAC: UTF-8 for Mac OS X
+#	utf8-iconv, UTF8-ICONV: UTF-8 for iconv
+#DEFKCODE=""
+
+# Kanji code to be inputted
+#	Default: No convert
+#	euc, EUC: EUC-JP
+#	sjis, SJIS: Shift JIS
+#	utf8, UTF8: UTF-8
+#	utf8-mac, UTF8-MAC: UTF-8 for Mac OS X
+#	utf8-iconv, UTF8-ICONV: UTF-8 for iconv
+#INPUTKCODE=""
+
+# Kanji code to be inputted to the pseudo terminal
+#	Default: No convert
+#	euc, EUC: EUC-JP
+#	sjis, SJIS: Shift JIS
+#	utf8, UTF8: UTF-8
+#	utf8-mac, UTF8-MAC: UTF-8 for Mac OS X
+#	utf8-iconv, UTF8-ICONV: UTF-8 for iconv
+#PTYINKCODE=""
+
+# Kanji code to be outputted from the pseudo terminal
+#	Default: No convert
+#	euc, EUC: EUC-JP
+#	sjis, SJIS: Shift JIS
+#	utf8, UTF8: UTF-8
+#	utf8-mac, UTF8-MAC: UTF-8 for Mac OS X
+#	utf8-iconv, UTF8-ICONV: UTF-8 for iconv
+#PTYOUTKCODE=""
+
+# Kanji code in filename
+#	Default: No convert
+#	euc, EUC: EUC-JP
+#	sjis, SJIS: Shift JIS
+#	jis, JIS: 7bits JIS
+#	jis8, JIS8: 8bits JIS
+#	junet, JUNET: ISO-2022-JP
+#	ojis, OJIS: old 7bits JIS
+#	ojis8, OJIS8: old 8bits JIS
+#	ojunet, OJUNET: old ISO-2022-JP
+#	hex, HEX: HEX
+#	cap, CAP: CAP
+#	utf8, UTF8: UTF-8
+#	utf8-mac, UTF8-MAC: UTF-8 for Mac OS X
+#	utf8-iconv, UTF8-ICONV: UTF-8 for iconv
+#FNAMEKCODE=""
+
+# Kanji code in filename on URL drive
+#	Default: No convert
+#	euc, EUC: EUC-JP
+#	sjis, SJIS: Shift JIS
+#	jis, JIS: 7bits JIS
+#	jis8, JIS8: 8bits JIS
+#	junet, JUNET: ISO-2022-JP
+#	ojis, OJIS: old 7bits JIS
+#	ojis8, OJIS8: old 8bits JIS
+#	ojunet, OJUNET: old ISO-2022-JP
+#	hex, HEX: HEX
+#	cap, CAP: CAP
+#	utf8, UTF8: UTF-8
+#	utf8-mac, UTF8-MAC: UTF-8 for Mac OS X
+#	utf8-iconv, UTF8-ICONV: UTF-8 for iconv
+#URLKCODE=""
+
+# language code to be displayed
+#	Default: according to LANGUAGE
+#	en, EN, C: English
+#	ja: Japanese
+#MESSAGELANG=""
+
+# directories on which Kanji code in filename is SJIS
+#	Default: none
+#SJISPATH=""
+
+# directories on which Kanji code in filename is EUC-JP
+#	Default: none
+#EUCPATH=""
+
+# directories on which Kanji code in filename is 7bits JIS
+#	Default: none
+#JISPATH=""
+
+# directories on which Kanji code in filename is 8bits JIS
+#	Default: none
+#JIS8PATH=""
+
+# directories on which Kanji code in filename is ISO-2022-JP
+#	Default: none
+#JUNETPATH=""
+
+# directories on which Kanji code in filename is old 7bits JIS
+#	Default: none
+#OJISPATH=""
+
+# directories on which Kanji code in filename is old 8bits JIS
+#	Default: none
+#OJIS8PATH=""
+
+# directories on which Kanji code in filename is old ISO-2022-JP
+#	Default: none
+#OJUNETPATH=""
+
+# directories on which Kanji code in filename is HEX
+#	Default: none
+#HEXPATH=""
+
+# directories on which Kanji code in filename is CAP
+#	Default: none
+#CAPPATH=""
+
+# directories on which Kanji code in filename is UTF-8
+#	Default: none
+#UTF8PATH=""
+
+# directories on which Kanji code in filename is UTF-8 for Mac OS X
+#	Default: none
+#UTF8MACPATH=""
+
+# directories on which Kanji code in filename is UTF-8 for iconv
+#	Default: none
+#UTF8ICONVPATH=""
+
+# directories on which Kanji code in filename is not converted
+#	Default: none
+#NOCONVPATH=""
+
+#PAGER=more%K
+FD_PAGER=${PAGER:-/usr/bin/more}%K
+#EDITOR=vi
+#SHELL=/bin/sh
+
+# for Mischievous Japanese OS (see `man fd')
+#export	LANG=C
+
+# launcher definitions
+tar="tar"
+tar_format="%a %u/%g %s %m %d %t %y %f"
+
+for ext in /.tar .gem; do
+  launch "$ext"		"$tar tvf"		"$tar_format"
+done
+
+for ext in .tar.Z .taZ .TAZ; do
+  launch "$ext"		"$tar Ztvf %C"		"$tar_format"
+done
+
+for ext in .tar.gz .tar.z /.tgz .taz; do
+  launch "$ext"		"$tar ztvf %C"		"$tar_format"
+done
+
+for ext in .tar.bz2 .tbz2 /.tbz; do
+  launch "$ext"		"$tar jtvf %C"		"$tar_format"
+done
+
+for ext in .tar.xz /.txz; do
+#  launch "$ext"		"$tar Jtvf %C"		"$tar_format"
+  launch "$ext"		"xz -cd %C | $tar tvf -"	"$tar_format"
+done
+
+launch "/.lzh"		"lha -lq"		"%a %u/%g %s %x %m %d %{yt} %f"
+
+for ext in /.zip /.jar; do
+  launch "$ext"	"unzip -lqq"		" %s %m-%d-%y %t %f"
+done
+
+for ext in .Z /.gz; do
+  launch "$ext"	"zcat %C | $PAGER"
+done
+
+launch "/.bz2"		"bzip2 -cd %C | $PAGER"
+launch "/.xz"		"xz -cd %C | $PAGER"
+
+# RCS/CVS files
+launch ",v"		"rlog %C | $PAGER"
+
+# distribution files
+launch	"/.aa"	"cat %X.?? | $tar tvfz -"	"$tar_format"
+arch	"/.aa"	"echo ERROR"			"cat %X.?? | $tar zxf - %TA"
+
+#(Default)
+#launch ".lzh"		"lha l" \
+#		-f "%a %u/%g %s %x %m %d %{yt} %*f" \
+#		-f "%9a %u/%g %s %x %m %d %{yt} %*f" \
+#		-i " PERMSSN * UID*GID *" \
+#		-i "----------*" \
+#		-i " Total * file* ???.*%*" \
+#launch ".tar"		"tar tvf" \
+#		-f "%a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %s %y-%m-%d %t %*f" \
+#		-f "%a %l %u %g %s %m %d %{yt} %*f" \
+#		-f "%10a %u/%g %s %m %d %t %y %*f" \
+#		-f "%9a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u %g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %m %d %t %y %*f"
+#launch ".tar.Z"	"zcat %C|tar tvf -" \
+#		-f "%a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %s %y-%m-%d %t %*f" \
+#		-f "%a %l %u %g %s %m %d %{yt} %*f" \
+#		-f "%10a %u/%g %s %m %d %t %y %*f" \
+#		-f "%9a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u %g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %m %d %t %y %*f"
+#launch ".tar.gz"	"gzip -cd %C|tar tvf -" \
+#		-f "%a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %s %y-%m-%d %t %*f" \
+#		-f "%a %l %u %g %s %m %d %{yt} %*f" \
+#		-f "%10a %u/%g %s %m %d %t %y %*f" \
+#		-f "%9a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u %g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %m %d %t %y %*f"
+#launch ".tar.bz2"	"bzip2 -cd %C|tar tvf -" \
+#		-f "%a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %s %y-%m-%d %t %*f" \
+#		-f "%a %l %u %g %s %m %d %{yt} %*f" \
+#		-f "%10a %u/%g %s %m %d %t %y %*f" \
+#		-f "%9a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u %g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %m %d %t %y %*f"
+#launch ".taZ"		"zcat %C|tar tvf -" \
+#		-f "%a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %s %y-%m-%d %t %*f" \
+#		-f "%a %l %u %g %s %m %d %{yt} %*f" \
+#		-f "%10a %u/%g %s %m %d %t %y %*f" \
+#		-f "%9a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u %g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %m %d %t %y %*f"
+#launch ".taz"		"gzip -cd %C|tar tvf -" \
+#		-f "%a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %s %y-%m-%d %t %*f" \
+#		-f "%a %l %u %g %s %m %d %{yt} %*f" \
+#		-f "%10a %u/%g %s %m %d %t %y %*f" \
+#		-f "%9a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u %g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %m %d %t %y %*f"
+#launch ".tgz"		"gzip -cd %C|tar tvf -" \
+#		-f "%a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %s %y-%m-%d %t %*f" \
+#		-f "%a %l %u %g %s %m %d %{yt} %*f" \
+#		-f "%10a %u/%g %s %m %d %t %y %*f" \
+#		-f "%9a %u/%g %s %m %d %t %y %*f" \
+#		-f "%a %u %g %s %m %d %t %y %*f" \
+#		-f "%a %u/%g %m %d %t %y %*f"
+#(Examples)
+#launch ".zip"	"unzip -lqq"		" %s %m-%d-%y %t %*f"
+#launch ".zoo"	"zoo lq"		" %s %x %x %d %m %y %t %*f"
+#launch ".rar"	"unrar v" \
+#		-f " %*f\n%s %x %x %d-%m-%y %t %a" \
+#		-i "UNRAR *" \
+#		-i "RAR *" \
+#		-i "Shareware version *" \
+#		-i "Verifying authenticity *" \
+#		-i "Solid archive *" \
+#		-i "Archive *" \
+#		-i "Pathname/Comment" \
+#		-i "Size * Packed *" \
+#		-i "----------*" \
+#		-i "* * * ??%" \
+#		-i "Old style *" \
+#		-i "Archive *.rar" \
+#		-i "created at ??:??:?? *" \
+#		-i "by * *" \
+#		-i ""
+#launch ".Z"	"zcat %C|$PAGER"
+#launch ".gz"	"gzip -cd %C|$PAGER"
+#launch ".bz2"	"bzip2 -cd %C|$PAGER"
+
+# examples for MS-DOS
+#launch ".lzh"		"lha v %S" %
+#		-f "%*f\n%s %x %x %y-%m-%d %t %a" %
+#		-f "%1x %12f %s %x %x %y-%m-%d %t %a" %
+#		-i "Listing of archive : *" %
+#		-i "  Name          Original *" %
+#		-i "--------------*" %
+#		-i "* files * ???.?%%%% ??-??-?? ??:??:??" %
+#		-i ""
+#launch ".tar.Z"	"gzip -cd %S|tar tvf -" %
+#		-f "%a %u/%g %s %m %d %t %y %*f" %
+#		-f "%a %u/%g %s %y-%m-%d %t %*f" %
+#		-f "%a %u/%g %s %m %d %y %t %*f" %
+#launch ".tar.gz"	"gzip -cd %S|tar tvf -" %
+#		-f "%a %u/%g %s %m %d %t %y %*f" %
+#		-f "%a %u/%g %s %y-%m-%d %t %*f" %
+#		-f "%a %u/%g %s %m %d %y %t %*f" %
+#launch ".tar.bz2"	"bzip2 -cd %S|tar tvf -" %
+#		-f "%a %u/%g %s %m %d %t %y %*f" %
+#		-f "%a %u/%g %s %y-%m-%d %t %*f" %
+#		-f "%a %u/%g %s %m %d %y %t %*f" %
+#launch ".taz"		"gzip -cd %S|tar tvf -" %
+#		-f "%a %u/%g %s %m %d %t %y %*f" %
+#		-f "%a %u/%g %s %y-%m-%d %t %*f" %
+#		-f "%a %u/%g %s %m %d %y %t %*f" %
+#launch ".tgz"		"gzip -cd %S|tar tvf -" %
+#		-f "%a %u/%g %s %m %d %t %y %*f" %
+#		-f "%a %u/%g %s %y-%m-%d %t %*f" %
+#		-f "%a %u/%g %s %m %d %y %t %*f" %
+#launch ".zip"	"unzip -lqq %S"		" %s %y-%m-%d %t %*f"
+#launch ".zip"	"pkunzip -vb %S"	" %s %x %x %x %y-%m-%d %t %*f" 14 2
+
+# archiver definition
+
+for ext in /.tar; do
+  arch	"$ext"	"$tar cf %C %T"			"$tar xf %C %TA"
+done
+
+for ext in .tar.Z .taZ .TAZ; do
+  arch	"$ext"	"$tar Zcf %C %T"		"$tar Zxf %C %TA"
+done
+
+for ext in .tar.gz .tar.z /.tgz .taz; do
+  arch	"$ext"	"$tar cf - %T | gzip -9c > %C"	"$tar zxf %C %TA"
+done
+
+for ext in .tar.bz2 .tbz2 /.tbz; do
+  arch	"$ext"	"$tar cf - %T | bzip2 -9c > %C"	"$tar jxf %C %TA"
+done
+
+for ext in .tar.xz /.txz; do
+#  arch	"$ext"	"$tar cf - %T | xz -9c > %C"	"$tar Jxf %C %TA"
+  arch	"$ext"	"$tar cf - %T | xz -9c > %C"	"xz -cd %C | $tar xf - %TA"
+done
+
+arch	".Z"	"compress %M"			"uncompress %C"
+arch	"/.gz"	"gzip -9 %M"			"gzip -d %C"
+arch	"/.bz2"	"bzip2 -9 %M"			"bzip2 -d %C"
+arch	"/.xz"	"xz -9 %M"			"xz -d %C"
+
+arch	"/.lzh"	"lha aq %C %TA"			"lha xq %C %TA"
+
+for ext in /.zip /.jar; do
+  arch	"$ext"	"zip -qr %C %TA"		"unzip -q %C %TA"
+done
+
+_uuencode() {
+  uu=$1
+  shift
+  for file; do
+    uuencode $file $file >> $uu
+  done
+}
+
+arch	".uu"  "_uuencode %C %TA"		"uudecode -ic < %C"
+
+#(Default)
+#arch ".lzh"	"lha aq %C %TA"			"lha xq %C %TA"
+#arch ".tar"	"tar cf %C %T"			"tar xf %C %TA"
+#arch ".tar.Z"	"tar cf - %T|compress -c > %C"	"zcat %C|tar xf - %TA"
+#arch ".tar.gz"	"tar cf - %T|gzip -c > %C"	"gzip -cd %C|tar xf - %TA"
+#arch ".tar.bz2" \
+#		"tar cf - %T|bzip2 -c > %C"	"bzip2 -cd %C|tar xf - %TA"
+#arch ".taZ"	"tar cf - %T|compress -c > %C"	"zcat %C|tar xf - %TA"
+#arch ".taz"	"tar cf - %T|gzip -c > %C"	"gzip -cd %C|tar xf - %TA"
+#arch ".tgz"	"tar cf - %T|gzip -c > %C"	"gzip -cd %C|tar xf - %TA"
+#(Examples)
+#arch ".zip"	"zip -q %C %TA"			"unzip -q %C %TA"
+#arch ".zoo"	"zoo aq %C %TA"			"zoo xq %C %TA"
+#arch ".rar"	"rar a -inul %C %TA"		"unrar x -inul %C %TA"
+
+# examples for MS-DOS
+#arch ".lzh"	"lha a %S %TA"			"lha x %S %TA"
+#arch ".tar.Z"	"tar cf - %T|compress -c > %C"	"gzip -cd %S|tar xf - %TA"
+#arch ".tar.gz"	"tar cf - %T|gzip -c > %C"	"gzip -cd %S|tar xf - %TA"
+#arch ".tar.bz2" %
+#		"tar cf - %T|bzip2 -c > %C"	"bzip2 -cd %S|tar xf - %TA"
+#arch ".taz"	"tar cf - %T|compress -c > %C"	"gzip -cd %S|tar xf - %TA"
+#arch ".tgz"	"tar cf - %T|gzip -c > %C"	"gzip -cd %S|tar xf - %TA"
+#arch ".zip"	"pkzip %S %TA"			"pkunzip %S %TA"
+
+# key bind definition
+#(Examples)
+#bind 'I'	"dir -d %C"
+#bind 'g'	"gzip %C%K"	WARNING_BELL
+#bind 'G'	"gzip -d %C%K"	WARNING_BELL
+#bind 'R'	"grep %R %C"
+#bind '{'	ROLL_UP
+#bind '}'	ROLL_DOWN
+#bind '~'	"cd ~%N%K"
+#bind 'F1'	"man fd%N%K"	:Manual
+bind 'k' CUR_UP
+bind 'j' CUR_DOWN
+bind 'h' CUR_LEFT OUT_DIR
+bind 'l' CUR_RIGHT IN_DIR
+
+# function definition
+#(Example1)
+#rename() {
+#	MARK_ALL 0
+#	MARK_FIND $1
+##	RENAME_FILE $2
+#	evalmacro mv %M $2
+#}
+#
+#(Example2: used in archiver definition)
+#maketaz() {
+#	evalmacro tar cf %X.tar %T
+#	evalmacro $1 %X.tar
+#	evalmacro mv %X.tar.$2 %X.$3
+#}
+#
+#(Example3: ftp browsing)
+#getftp() {
+#	FHOST=$1
+#	FPATH=
+#	browse -@ - <<'EOF0'
+#	'ftp -n $FHOST <<-EOF
+#	user ftp `whoami`@`hostname`
+#	dir $FPATH
+#	quit
+#	EOF'
+#	-f "%a %l %u %g %s %m %d %{yt} %*f"
+#	-i "total *"
+#	-e "Not connected."
+#	-e "Login incorrect."
+#	-e "Login failed."
+#	-p 'FPATH=$1; while [ "$#" -gt 1 ]; do shift; FPATH=$1/$FPATH; done'
+#	-d loop
+#
+#	'dir=`readline "Dir: "` && [ -d "$dir" ] \
+#	&& yesno "copy \"$FPATH\" to \"$dir\" ?" \
+#	&& ftp -n $FHOST <<-EOF \
+#	&& echo "copy \"$FPATH\" to \"$dir\"." %K \
+#	|| echo canceled.
+#	user ftp `whoami`@`hostname`
+#	get $FPATH $dir/${FPATH##*/}
+#	quit
+#	EOF'
+#EOF0
+#}
+
+# MS-DOS drive definition
+#(Example)
+#setdrv B	"/dev/rfd00a"	2, 18, 80
+
+# alias definition
+#(Example)
+#alias dir="ls -laF"
+
+# keymap definition
+#(Example)
+#keymap DEL	"\033[3~"
+
+if [ -f /etc/fd2rc.local ]; then
+	source /etc/fd2rc.local
+fi
