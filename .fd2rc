@@ -16,7 +16,7 @@
 #	100-113: preserve previous sort type
 #	200-213: preserve previous sort type also in the archive browser
 #		(the least 2 digits are effective just after initialize)
-#SORTTYPE=0
+SORTTYPE=2
 FD_SORTTYPE=101
 
 # default display mode
@@ -28,12 +28,12 @@ FD_SORTTYPE=101
 #	5: sym-link status &				invisible dot file
 #	6: 			file type symbol &	invisible dot file
 #	7: sym-link status &	file type symbol &	invisible dot file
-#DISPLAYMODE=0
+DISPLAYMODE=1
 
 # whether if sort or not in tree mode
 #	0: not sort (Default)
 #	>= 1: sort according to SORTTYPE
-#SORTTREE=0
+SORTTREE=1
 FD_SORTTREE=1
 
 # behavior about writing over directory on file system
@@ -57,7 +57,7 @@ FD_INHERITCOPY=1
 # whether if display progress bar on copying/moving files
 #	0: not dislpay (Default)
 #	>= 1: dislpay
-#PROGRESSBAR=0
+PROGRESSBAR=1
 
 # whether if query overwriting policy in advance before copying/moving files
 #	0: not query (Default)
@@ -79,8 +79,8 @@ FD_INHERITCOPY=1
 #	2: 2 columns (Default)
 #	3: 3 columns
 #	5: 5 columns
-#DEFCOLUMNS=2
-FD_DEFCOLUMNS=1
+DEFCOLUMNS=2
+FD_DEFCOLUMNS=2
 
 # minimum columns of filename field
 #	Default: 12
@@ -160,7 +160,7 @@ FD_DEFCOLUMNS=1
 #	1: color
 #	2: color & force background to blacken
 #	3: color & force foreground to blacken
-#ANSICOLOR=0
+ANSICOLOR=1
 FD_ANSICOLOR=1
 
 # color palette in the ANSI color mode
@@ -194,7 +194,7 @@ FD_ANSICOLOR=1
 #	emacs: ^P, ^N, ^F, ^B, ... (Default)
 #	wordstar ^E, ^X, ^D, ^S, ...
 #	vi: k, j, l, h, ...
-#EDITMODE=emacs
+EDITMODE=vi
 
 # whether if loop cursor moving within the same page
 #	0: not loop (Default)
@@ -371,7 +371,7 @@ FD_THRUARGS=1
 #	utf8-mac, UTF8-MAC: UTF-8 for Mac OS X
 #	utf8-iconv, UTF8-ICONV: UTF-8 for iconv
 #	en, EN, C: English
-#LANGUAGE=""
+LANGUAGE=$LANG
 FD_LANGUAGE=$LANG
 
 # system default Kanji code
@@ -389,7 +389,7 @@ FD_LANGUAGE=$LANG
 #	utf8, UTF8: UTF-8
 #	utf8-mac, UTF8-MAC: UTF-8 for Mac OS X
 #	utf8-iconv, UTF8-ICONV: UTF-8 for iconv
-#DEFKCODE=""
+DEFKCODE=$LANG
 
 # Kanji code to be inputted
 #	Default: No convert
@@ -433,7 +433,7 @@ FD_LANGUAGE=$LANG
 #	utf8, UTF8: UTF-8
 #	utf8-mac, UTF8-MAC: UTF-8 for Mac OS X
 #	utf8-iconv, UTF8-ICONV: UTF-8 for iconv
-#FNAMEKCODE=""
+FNAMEKCODE=$LANG
 
 # Kanji code in filename on URL drive
 #	Default: No convert
@@ -516,7 +516,7 @@ FD_LANGUAGE=$LANG
 
 #PAGER=more%K
 FD_PAGER=${PAGER:-/usr/bin/more}%K
-#EDITOR=vi
+EDITOR=vim
 #SHELL=/bin/sh
 
 # for Mischievous Japanese OS (see `man fd')
@@ -685,6 +685,29 @@ arch	"/.aa"	"echo ERROR"			"cat %X.?? | $tar zxf - %TA"
 #		-f "%a %u/%g %s %m %d %y %t %*f" %
 #launch ".zip"	"unzip -lqq %S"		" %s %y-%m-%d %t %*f"
 #launch ".zip"	"pkunzip -vb %S"	" %s %x %x %x %y-%m-%d %t %*f" 14 2
+#
+
+# my launchers
+launch .txt  "vim %C"
+
+launch .html "w3m %C"
+
+launch .jpg  "feh %C"
+launch .png  "feh %C"
+launch .gif  "feh %C"
+launch .bmp  "feh %C"
+
+launch .cbz  "comix %C"
+launch .cbr  "comix %C"
+
+launch .flac "mplayer -really-quiet %C"
+launch .mp3  "mplayer -really-quiet %C"
+launch .m3u  "mplayer -really-quiet -playlist %C"
+
+launch .mkv  "mplayer -really-quiet  %C"
+launch .mp4  "mplayer -really-quiet  %C"
+launch .avi  "mplayer -really-quiet  %C"
+
 
 # archiver definition
 
@@ -765,10 +788,14 @@ arch	".uu"  "_uuencode %C %TA"		"uudecode -ic < %C"
 #bind '}'	ROLL_DOWN
 #bind '~'	"cd ~%N%K"
 #bind 'F1'	"man fd%N%K"	:Manual
-bind 'k' CUR_UP
-bind 'j' CUR_DOWN
-bind 'h' CUR_LEFT OUT_DIR
-bind 'l' CUR_RIGHT IN_DIR
+#
+#bind 'k' CUR_UP
+#bind 'j' CUR_DOWN
+#bind 'h' CUR_LEFT OUT_DIR
+#bind 'l' CUR_RIGHT IN_DIR
+#bind '^u' ROLL_DOWN
+#bind '^d' ROLL_UP
+#bind '^i' NEXT_WINDOW
 
 # function definition
 #(Example1)

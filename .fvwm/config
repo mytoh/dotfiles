@@ -11,8 +11,8 @@
 SetEnv fvwm_home $[HOME]/.fvwm
 SetEnv fvwm_icons $[fvwm_home]/icons
 SetEnv myfont "xft:Inconsolata:size=9"
-SetEnv fvwm_wallpaper_dir $[HOME]/local/var/pic
-SetEnv fvwm_wallpaper $[fvwm_wallpaper_dir]/circles_dark_blue_purple.png
+SetEnv fvwm_wallpaper_dir $[fvwm_home]/images
+SetEnv fvwm_wallpaper $[fvwm_wallpaper_dir]/wallpaper.png
 
 ImagePath $[fvwm_icons]:${HOME}/.icons:/usr/local/share/icons:/usr/local/share/pixmaps:+
 # }}}
@@ -33,37 +33,37 @@ OpaqueMoveSize unlimited
 # Basic FVWM Colorset
 Colorset 0 fg black, bg #98B0C8, Plain, NoShape
 # taviso title bar, inactive and active
-Colorset 1  fg white, bg black, sh white, RootTransparent Buffer, Tint black 60
-Colorset 2  fg black, bg white, sh white, RootTransparent Buffer, Tint #b9b6a3 50
+Colorset 1  fg white, bg black, sh white, RootTransparent buffer, Tint #a9a28f 60
+Colorset 2  fg black, bg white, sh white, RootTransparent buffer, Tint #b9b6a3 50
 # window borders, inactive and active
-Colorset 3 fg black, bg rgb:98/B0/C8, Plain, NoShape
-Colorset 4 fg black, bg rgb:98/B0/C8, Plain, NoShape
+Colorset 3 fg black, bg #a9a28f, Plain, NoShape
+Colorset 4 fg black, bg white, Plain, NoShape
 
 #
 # Menu Colorsets
 #
 # inactive menu item fg+bg and menu face
-Colorset 5 fg white, bg rgb:20/20/20, \
-	sh rgb:30/30/30, hi rgb:50/50/50,  NoShape, \
-  RootTransparent, Tint black 90
+Colorset 5 fg white, bg #202020, sh #303030, hi #505050, \
+    NoShape,  RootTransparent buffer, Tint #a9a28f 90
 # active menu item fg+bg
-Colorset 6 fg black, bg rgb:6f/a9/e5, Plain, NoShape
+Colorset 6 fg white, bg #202020, \
+           RootTransparent buffer, Tint #b9b6a3 90, \
 # greyed menu item fg
-Colorset 7 fg grey, bg grey, Plain, NoShape
+Colorset 7 fg grey, bg grey, \
+           Plain, NoShape
 
-# Module colorsets
 # FvwmButtons
-Colorset 8 fg black, bg white, sh white, RootTransparent Buffer, Tint #b9b6a3 60
+Colorset 8 fg black, bg white, sh white, \
+           RootTransparent Buffer, Tint #b9b6a3 60
 
 # FvwmTaskBar
 # Normal TaskBar Button
-Colorset 10 fg white, bg black, \
-	sh white, hi white, NoShape, \
-  RootTransparent Buffer, Tint #333333 60
+Colorset 10 fg white, bg black, sh white, hi white, \
+            RootTransparent buffer, Tint #333333 60, \
 # Focused TaskBar Button
-Colorset 11 fg black, bg white, \
-	sh white, hi black, NoShape, \
-  RootTransparent Buffer, Tint #b9b6a3 70
+Colorset 11 fg black, bg white, sh white, hi black, \
+            RootTransparent buffer, Tint #b9b6a3 70, \
+            NoShape
 # Iconified TaskBar Button
 Colorset 12 fg rgb:20/20/20, bg white, \
 	sh white, hi white, NoShape
@@ -115,7 +115,7 @@ Style * SnapAttraction 3 SameType Screen
 Style * SnapGrid 1 1
 Style * EdgeMoveDelay 250
 Style * EdgeMoveResistance 10
-Style * BorderWidth 3, HandleWidth 3
+Style * BorderWidth 2, HandleWidth 2
 Style * Icon unknown1.xpm, Color lightgrey/dimgrey
 Style * MWMFunctions, MWMDecor, HintOverride
 Style * ResizeOpaque
@@ -132,8 +132,8 @@ Style "Fvwm*"       BorderWidth 2, CirculateSkipIcon, CirculateSkip
 Style "FvwmPager"   StaysOnTop
 Style "FvwmBanner"  StaysOnTop
 Style "FvwmButtons" Icon toolbox.xpm, ClickToFocus, BorderWidth 0, HandleWidth 0
-Style "FvwmTaskBar" NoTitle, NoHandles, Sticky,WindowListSkip,\
-	CirculateSkip,NoHandles,TitleAtBottom
+Style "FvwmTaskBar" BorderWidth 0, HandleWidth 0, NoTitle, NoHandles, Sticky,WindowListSkip,\
+	CirculateSkip
 # }}}
 
 #Styles for Apps {{{
@@ -187,8 +187,8 @@ AddToDecor DefaultDecor
 + ButtonStyle 3 - Clear MwmDecorMin
 + ButtonStyle 5 - Clear
 + ButtonStyle 7 - Clear MwmDecorMax
-+ BorderStyle Active Solid black -- NoInset HiddenHandles
-+ BorderStyle Inactive Solid black -- NoInset HiddenHandles
++ BorderStyle Active Solid black -- NoInset HiddenHandles flat
++ BorderStyle Inactive Solid black -- NoInset HiddenHandles  flat
 
 # These two vectors draw a circle around the vectors above, uncomment 
 # them and see what you think.
@@ -202,8 +202,9 @@ Style * UseDecor DefaultDecor
 # Menustyles {{{
 MenuStyle * Hilight3DThin, PopupOffset 0 100, PopupDelay 300
 MenuStyle * Font $[myfont]
-MenuStyle * MenuColorset 5, HilightBack, ActiveColorset 6
-MenuStyle * BorderWidth 1, TitleUnderlines1, SeparatorsLong, TrianglesSolid, Animation
+MenuStyle * MenuColorset 5, HilightBack, 
+MenuStyle * ActiveColorset 6
+MenuStyle * BorderWidth 1, TitleUnderlines1 , SeparatorsLong, TrianglesSolid, Animation
 MenuStyle * ItemFormat "%.2|%.5i%.5l%.5i%2.3>%2|"
 # }}}
 
@@ -385,7 +386,7 @@ AddToFunc StartFunction
 
 AddToFunc InitFunction
  #+ I exec xsetroot -mod 2 2 -fg rgb:55/40/55 -bg rgb:70/50/70
- + I exec fvwm-root -r $HOME/.wallpaper
+ + I exec fvwm-root -r $[fvwm_wallpaper]
  + I exec xcompmgr -n
  + I exec launchy
 
@@ -479,8 +480,6 @@ DestroyModuleConfig FvwmButtons: *
 *FvwmButtons: Colorset 8
 *FvwmButtons: PressColorset 0
 *FvwmButtons: ActiveColorset 9
-*FvwmButtons: Fore black
-*FvwmButtons: Back #aaaaaa
 *FvwmButtons: Font $[myfont]
 *FvwmButtons: Frame 1
 *FvwmButtons: Padding 1 1
@@ -515,21 +514,15 @@ DestroyModuleConfig FvwmTaskBar: *
 *FvwmTaskBar: Action Click2 Popup MenuFvwmWindowOps Mouse c c
 *FvwmTaskBar: Action Click3 Iconify
 
-# Flatなボタンを表示するので、フォーカスのあるウインドウボタンを
-# 特に強調する必要はありません。
 *FvwmTaskBar: NoBrightFocus
 
-# WindowListSkipスタイルが適用されたウインドウはタスクバーに表示しません。
 *FvwmTaskBar: UseSkipList
 *FvwmTaskBar: AutoStick
 
-# StartNameは「スタートボタン」に表示される文字列です。
-# 今回は絵だけですので、文字列は何も指定しません。
 *FvwmTaskBar: StartName
 *FvwmTaskBar: StartMenu RootMenu Root +0 +20p
 *FvwmTaskBar: StartIcon start.svg:16x16
 
-# Transientsウインドウ（ダイアログボックス）もタスクバーボタンに表示します。
 *FvwmTaskBar: ShowTransients
 *FvwmTaskBar: DeskOnly
 *FvwmTaskBar: MailCheck 0

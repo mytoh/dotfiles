@@ -42,9 +42,13 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 !urxvt.boldFont: xft: KonatuTohaba-8
 !urxvt.font: xft:  Ricty-Regular-8
 !urxvt.boldFont: xft: Ricty-Regular-8
-urxvt.font: xft: Inconsolata-9, \
-            xft: M+ 1c-10:antialias=true
-urxvt.boldFont: xft: Inconsolata-9
+!urxvt.font: xft: Inconsolata-9, \
+!           xft: M+ 1c-10:antialias=true
+!urxvt.boldFont: xft: Inconsolata-9
+urxvt.font: -xos4-terminus-medium-r-normal--12-120-72-72-c-60-iso10646-1, \
+            mplus_f12r,mplus-h12r,mplus_f12r-jisx,mplus-h12r-jisx
+urxvt.boldFont: -xos4-terminus-bold-r-normal--12-120-72-72-c-60-iso10646-1, \
+            mplus_f12b,mplus-h12b,mplus_f12b-jisx,mplus-h12b-jisx
 
 
 
