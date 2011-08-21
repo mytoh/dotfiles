@@ -37,7 +37,7 @@
 
 #dmenu
 "dmenu_run -nb pink -nf red4 -sb red4 -sf pink"
-    Mod4 + Super_R 
+    Mod1 + Super_R
 
 #
 # End of xbindkeys configuration
