@@ -113,8 +113,6 @@ nmap     N Nzz
 nnoremap ; :
 nnoremap : ;
 nnoremap <space> i<space><esc>
-nnoremap gt :<c-u>MBEbn<cr>
-nnoremap gT :<c-u>MBEbp<cr>
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <leader>w :<c-u>up<cr>
 nnoremap <leader>q :<c-u>qa<cr>
@@ -204,8 +202,10 @@ let g:vimfiler_as_default_explorer = 1
 " }}}
 
 " {{{ fholgado's minibufexpl
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
+"nnoremap gt :<c-u>MBEbn<cr>
+"nnoremap gT :<c-u>MBEbp<cr>
+"let g:miniBufExplMapWindowNavVim = 1
+"let g:miniBufExplMapCTabSwitchBufs = 1
 "let g:miniBufExplShowBufNumbers = 0
 " minibufexplorer and many useful plugins
 " http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
@@ -234,8 +234,8 @@ aug unite
   au!
   au filetype unite nnoremap <silent> <buffer> <esc><esc> :q<cr>
   au filetype unite inoremap <silent> <buffer> <esc><esc> <esc>:q<cr>
-  "call unite#custom_default_action('file', 'tabopen')
-  "call unite#custom_default_action('bookmark', 'tabopen')
+  call unite#custom_default_action('file', 'tabopen')
+  call unite#custom_default_action('bookmark', 'tabopen')
 aug end
 "}}}
 

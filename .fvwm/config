@@ -10,7 +10,8 @@
 # Envs {{{
 SetEnv fvwm_home $[HOME]/.fvwm
 SetEnv fvwm_icons $[fvwm_home]/icons
-SetEnv myfont "-xos4-terminus-medium-r-normal-*-12-120-72-72-c-60-*-*,-mplus-goth_p-medium-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*"
+SetEnv normalfont "-xos4-terminus-medium-r-normal-*-12-120-72-72-c-60-*-*,-mplus-goth_p-medium-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*"
+SetEnv boldfont "-*-proggytinysz-bold-r-normal-*-10-*,-mplus-goth_p-bold-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*"
 SetEnv fvwm_wallpaper_dir $[fvwm_home]/images
 SetEnv fvwm_wallpaper $[fvwm_wallpaper_dir]/wallpaper.png
 
@@ -34,7 +35,7 @@ OpaqueMoveSize unlimited
 Colorset 0 fg black, bg #98B0C8, Plain, NoShape
 # taviso title bar, inactive and active
 Colorset 1  fg white, bg black, sh white, RootTransparent buffer, Tint #a9a28f 60
-Colorset 2  fg black, bg white, sh white, RootTransparent buffer, Tint #b9b6a3 50
+Colorset 2  fg #730a07, bg white, sh white, RootTransparent buffer, Tint #b9b6a3 50
 # window borders, inactive and active
 Colorset 3 fg black, bg #a9a28f, Plain, NoShape
 Colorset 4 fg black, bg white, Plain, NoShape
@@ -61,11 +62,11 @@ Colorset 8 fg black, bg white, sh white, \
 Colorset 10 fg white, bg black, sh white, hi white, \
             RootTransparent buffer, Tint #333333 60, \
 # Focused TaskBar Button
-Colorset 11 fg black, bg white, sh white, hi black, \
+Colorset 11 fg #730a07, bg white, sh white, hi black, \
             RootTransparent buffer, Tint #b9b6a3 70, \
             NoShape
 # Iconified TaskBar Button
-Colorset 12 fg rgb:20/20/20, bg white, \
+Colorset 12 fg #730a07, bg white, \
 	sh white, hi white, NoShape
 # }}}
 
@@ -107,8 +108,8 @@ Style * BorderColorset 3
 Style * HilightBorderColorset 4
 
 # font
-Style * Font $[myfont]
-Style * IconFont $[myfont]
+Style * Font $[normalfont]
+Style * IconFont $[normalfont]
 
 # title bar buttons
 Style * NoIcon
@@ -201,7 +202,7 @@ Style * UseDecor DefaultDecor
 
 # Menustyles {{{
 MenuStyle * Hilight3DThin, PopupOffset 0 100, PopupDelay 300
-MenuStyle * Font $[myfont]
+MenuStyle * Font $[normalfont]
 MenuStyle * MenuColorset 5, HilightBack, 
 MenuStyle * ActiveColorset 6
 MenuStyle * BorderWidth 1, TitleUnderlines1 , SeparatorsLong, TrianglesSolid, Animation
@@ -400,7 +401,7 @@ AddToFunc SessionInitFunction
 # Apps functions {{{
 DestroyFunc FvwmDmenu
 AddToFunc   FvwmDmenu
-+ I Exec exec dmenu_run -fn $[myfont] -nb $[bg.cs1] -nf $[fg.cs1] -sb $[bg.cs2] -sf $[fg.cs2]
++ I Exec exec dmenu_run -fn $[normalfont] -nb $[bg.cs1] -nf $[fg.cs1] -sb $[bg.cs2] -sf $[fg.cs2]
 # }}}
 
 # Sample Functions {{{
@@ -494,7 +495,7 @@ DestroyModuleConfig FvwmButtons: *
 *FvwmButtons: Colorset 8
 *FvwmButtons: PressColorset 0
 *FvwmButtons: ActiveColorset 9
-*FvwmButtons: Font $[myfont]
+*FvwmButtons: Font $[normalfont]
 *FvwmButtons: Frame 1
 *FvwmButtons: Padding 1 1
 *FvwmButtons: Geometry +1-1
@@ -519,9 +520,9 @@ DestroyModuleConfig FvwmTaskBar: *
 *FvwmTaskBar: FocusColorset 11
 *FvwmTaskBar: IconColorset 12
 *FvwmTaskBar: TipsColorset 10
-*FvwmTaskBar: Font $[myfont]
-*FvwmTaskBar: SelFont $[myfont]
-*FvwmTaskBar: StatusFont $[myfont]
+*FvwmTaskBar: Font $[normalfont]
+*FvwmTaskBar: SelFont $[boldfont]
+*FvwmTaskBar: StatusFont $[normalfont]
 *FvwmTaskBar: ButtonWidth 140
 
 *FvwmTaskBar: Action Click1 FuncFvwmDeiconifyFocusAndRaise
@@ -552,7 +553,7 @@ DestroyModuleConfig FvwmPager: *
 *FvwmPager: HilightColorset * 11
 #*FvwmPagerFont -adobe-helvetica-bold-r-*-*-10-*-*-*-*-*-*-*
 # turn off desktop names for swallowing in above button bar example:
-*FvwmPager: Font $[myfont]
+*FvwmPager: Font $[normalfont]
 *FvwmPager: MiniIcons
 *FvwmPager: Geometry -1-1
 *FvwmPager: Label 0 Misc
@@ -561,7 +562,7 @@ DestroyModuleConfig FvwmPager: *
 *FvwmPager: Label 3 Matlab
 *FvwmPager: SmallFont 5x8
 *FvwmPager: Balloons            All
-*FvwmPager: BalloonFont         $[myfont]
+*FvwmPager: BalloonFont         $[normalfont]
 *FvwmPager: BalloonYOffset      +2
 *FvwmPager: BalloonBorderWidth  1
 *FvwmPager: BalloonBorderColor  Black
