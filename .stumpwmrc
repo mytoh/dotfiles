@@ -5,7 +5,6 @@
 
 (in-package :stumpwm)
 
-
 (defparameter terminal "urxvtcd")
 
 ;; message window
@@ -13,19 +12,20 @@
 (set-fg-color "orange")
 (set-border-color "grey10")
 (set-msg-border-width 1)
-(set-font "-*-fixed-medium-r-semicondensed-*-12-*")
-
+;(set-font "-mplus-goth_p-medium-r-normal-*-10-*-*-*-*-*-iso10646-*"
+(set-font "-xos4-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*")
 ;; windows
-(set-focus-color "dimgrey")
+(set-focus-color "khaki")
 (set-unfocus-color "grey10")
 (set-win-bg-color "black")
 (set-normal-gravity :center)
+(set-transient-gravity :top-right)
 (set-frame-outline-width 1)
 
 ;; options
 (setf
   *normal-border-width*             1
-  *maxsize-border-width*            2
+  *maxsize-border-width*            1
   *transient-border-width*          1
   *window-border-style*             :thin ;; thick,thin,none,tight
   *startup-message*                 nil
@@ -39,12 +39,12 @@
   *input-history-ignore-duplicates* T
   *new-window-preferred-frame*      '(:empty :focused)
   *mode-line-background-color*      "grey20"
-  *mode-line-foreground-color*      "orange"
+  *mode-line-foreground-color*      "DarkKhaki"
   *mode-line-border-color*          "pink"
   *mode-line-position*              :top
   *mode-line-border-width*          0
-  *mode-line-pad-x*                 2
-  *mode-line-pad-y*                 2
+  *mode-line-pad-x*                 1
+  *mode-line-pad-y*                 1
   *mode-line-timeout*               5
   *window-format*                   "^9*(%n%s%m%15t)^n" ;;^5 magenta
   *group-format*                    "^7*[%t%s]^n" ;;^7 white
@@ -61,33 +61,42 @@
     (toggle-mode-line (current-screen) (current-head)))
 
 (setf *screen-mode-line-format*  ;; ^n use the normal bg and fg color
-      (list "%g ^8*|^n %w "
+      (list "%g ^8*|^n %W "
             "^8*|^n "
             '(:eval (run-shell-command "~/.gosh/stumpwm.scm" t))
-            "^8*|^n %d"
+            "^8*|^n %d "
             ))
 
 ;; startup programmes
-(run-shell-command "xcompmgr -a &" )
-(run-shell-command "nitrogen --restore" )
+;(run-shell-command "exec trayer --expand true --alpha 100  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype request --width 100 " )
+;(run-shell-command "stalonetray" )
+;(run-shell-command "exec feh --bg-scale ~/.wallpaper" )
+(run-shell-command "exec display -window root ~/.wallpaper" )
+(run-shell-command "exec killall xcompmgr ; xcompmgr -n " )
 
 ;; commands
 (defcommand terminal () () (run-shell-command "exec urxvtcd"))
 (defcommand browser () () (run-or-raise "exec opera" '(:class "opera")))
 (defcommand filer () () (run-or-raise "exec thunar" '(:class "Thunar")))
-(defcommand dmenu () () (run-shell-command "exec dmenu_run -i -b -nb grey20 -nf orange"))
+(defcommand dmenu () () (run-shell-command "exec dmenu_run -i -b -nb grey20 -nf orange -sb orange -sf grey20"))
 
-;; keymap
-(define-key *root-map* (kbd "c") "terminal")
-(define-key *root-map* (kbd "f") "browser")
-(define-key *root-map* (kbd "t") "filer")
-(define-key *root-map* (kbd "d") "dmenu")
-(define-key *root-map* (kbd "C-f") "fullscreen")
-(define-key *root-map* (kbd "C-o") "fnext") ; default key "C-t o"
+;;; keymap
+;;;
+;;;  modifier keys are defined in 
+;;;  keytrans.lisp 
+;;;
+;; apps
+(define-key *root-map* (kbd "c")     "terminal")
+(define-key *root-map* (kbd "f")     "browser")
+(define-key *root-map* (kbd "t")     "filer")
+(define-key *top-map*  (kbd "M-SPC") "dmenu")
 
-(define-key *top-map* (kbd "M-TAB") "next")
-(define-key *top-map* (kbd "s-RET") "fullscreen")
-(define-key *top-map* (kbd "s-r") "restart-hard")
+;; window operation
+(define-key *root-map* (kbd "C-f")   "fullscreen")
+(define-key *top-map*  (kbd "s-RET") "fullscreen")
+(define-key *root-map* (kbd "C-o")   "fnext") ; default key "C-t o"
+(define-key *top-map*  (kbd "M-TAB") "next")
+(define-key *top-map*  (kbd "s-r")   "restart-hard")
  
 ;;input window keymap
 (define-key *input-map* (kbd "C-i") 'input-complete-forward)
@@ -98,25 +107,26 @@
 (define-key *groups-map* (kbd "f") "gmove media")
 
 ;; display the key sequence in progress
-(defun key-press-hook (key key-seq cmd)
- (declare (ignore key))
- (unless (eq *top-map* *resize-map*)
-  (let ((*message-window-gravity* :center))
-   (message "Key sequence: ~a" (print-key-seq (reverse key-seq))))
-  (when (stringp cmd)
-   (sleep 0.5))))
+;(defun key-press-hook (key key-seq cmd)
+ ;(declare (ignore key))
+ ;(unless (eq *top-map* *resize-map*)
+  ;(let ((*message-window-gravity* :center))
+   ;(message "Key sequence: ~a" (print-key-seq (reverse key-seq))))
+  ;(when (stringp cmd)
+   ;(sleep 0.5))))
 
-(defmacro replace-hook (hook fn)
- `(remove-hook ,hook ,fn)
- `(add-hook ,hook ,fn))
+;(defmacro replace-hook (hook fn)
+ ;`(remove-hook ,hook ,fn)
+ ;`(add-hook ,hook ,fn))
 
-(replace-hook *key-press-hook* 'key-press-hook)
+;(replace-hook *key-press-hook* 'key-press-hook)
 
 ;; groups
 ; rename the first group to main
 ;(setf (group-name (first (screen (current-screen)))) "main")
 ; create the other group
-(run-commands  "gselect Default" "grename main" "gselect main" "gnewbg web" "gnewbg-float media" )
+; gnewbg, gnewbg-float
+(run-commands  "gselect Default" "grename main" "gselect main" "gnewbg web" "gnewbg media" )
 
 ;;;; window placement rules
 (clear-window-placement-rules) ; clear rules

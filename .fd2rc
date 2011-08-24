@@ -199,7 +199,7 @@ EDITMODE=vi
 # whether if loop cursor moving within the same page
 #	0: not loop (Default)
 #	>= 1: loop
-#LOOPCURSOR=0
+LOOPCURSOR=0
 
 # temporary directory where archive file is unpacked
 #	Default: /tmp

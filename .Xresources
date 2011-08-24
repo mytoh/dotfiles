@@ -19,7 +19,7 @@ urxvt.fading: 2%
 urxvt.fadeColor: grey
 urxvt.shading: 20
 urxvt.tintcolor: black
-urxvt.preedittype: root
+urxvt.preedittype: Root
 urxvt.savelines: 2000
 urxvt.mousewheelscrollpage: true
 urxvt.urgentOnBell: true
@@ -29,14 +29,24 @@ urxvt.urlLauncher: firefox
 urxvt.matcher.button: 1
 urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
+!urxvt.font:Terminus\-ja-12
+!urxvt.boldFont:Terminus\-ja-12
 !urxvt.font: k12
 !urxvt.boldfont: k12
-urxvt.font: -xos4-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*, \
-            -mplus-goth_p-medium-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*
-urxvt.boldfont: -xos4-terminus-bold-r-normal-*-12-*-*-*-*-*-*-*, \
-            -mplus-goth_p-bold-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*
+urxvt.font: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso8859-*, \
+            -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*, \
+             -*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*, \
+            -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*,\
+            -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1,\
+            -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1,\
+            xft:Code200:antialias=false
 
-
+urxvt.boldfont: -mplus-goth_p-bold-r-normal-*-10-*-*-*-*-*-*-*
+!urxvt.font: 9x15bold,\
+!            -misc-fixed-bold-r-normal--15-140-75-75-75-c-90-iso10646-1,\
+!            -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1,\
+!            [codeset=JISX0208]xft:Kochi Gothic:antialias=false, \
+!            xft:Code200:antialias=false
 
 !-------------------------------------
 ! colors
@@ -100,9 +110,9 @@ urxvt.color15: #ffffff
 !-------------
 ! xterm
 ! ------------
-xterm*foreground: white
-xterm*background: black
-xterm*scrollBar: false
+xterm.foreground: white
+xterm.background: black
+xterm.scrollBar: false
 
 xterm.color0: black
 xterm.color1: #705050

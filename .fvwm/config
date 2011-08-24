@@ -10,7 +10,7 @@
 # Envs {{{
 SetEnv fvwm_home $[HOME]/.fvwm
 SetEnv fvwm_icons $[fvwm_home]/icons
-SetEnv normalfont "-xos4-terminus-medium-r-normal-*-12-120-72-72-c-60-*-*,-mplus-goth_p-medium-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*"
+SetEnv normalfont "-xos4-terminus-medium-r-normal-*-12-120-72-72-c-60-*-*,-mplus-goth_p-medium-r-normal-*-10-*-*-*-*-*-*-*"
 SetEnv boldfont "-*-proggytinysz-bold-r-normal-*-10-*,-mplus-goth_p-bold-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*"
 SetEnv fvwm_wallpaper_dir $[fvwm_home]/images
 SetEnv fvwm_wallpaper $[fvwm_wallpaper_dir]/wallpaper.png
@@ -34,9 +34,15 @@ OpaqueMoveSize unlimited
 # Basic FVWM Colorset
 Colorset 0 fg black, bg #98B0C8, Plain, NoShape
 # taviso title bar, inactive and active
-Colorset 1  fg white, bg black, sh white, RootTransparent buffer, Tint #a9a28f 60
-Colorset 2  fg #730a07, bg white, sh white, RootTransparent buffer, Tint #b9b6a3 50
+SetEnv title_color 1
+SetEnv title_hicolor 2
+Colorset 1  fg black, bg #a9a28f, sh white
+#            RootTransparent buffer, Tint #a9a28f 60
+Colorset 2  fg white, bg #7a755f, sh white 
+#            RootTransparent buffer, Tint #b9b6a3 50
 # window borders, inactive and active
+SetEnv border_color 3
+SetEnv border_hicolor 4
 Colorset 3 fg black, bg #a9a28f, Plain, NoShape
 Colorset 4 fg black, bg white, Plain, NoShape
 
@@ -44,30 +50,38 @@ Colorset 4 fg black, bg white, Plain, NoShape
 # Menu Colorsets
 #
 # inactive menu item fg+bg and menu face
-Colorset 5 fg white, bg #202020, sh #303030, hi #505050, \
-    NoShape,  RootTransparent buffer, Tint #a9a28f 90
+SetEnv menu_color 5
+SetEnv menu_hicolor 6
+SetEnv menu_greycolor 7
+Colorset 5 fg white, bg #202020, sh #303030, hi #505050 NoShape
+    #RootTransparent buffer, Tint #a9a28f 90
 # active menu item fg+bg
-Colorset 6 fg white, bg #202020, \
-           RootTransparent buffer, Tint #b9b6a3 90, \
+Colorset 6 fg white, bg #202020
+           #RootTransparent buffer, Tint #b9b6a3 90
 # greyed menu item fg
 Colorset 7 fg grey, bg grey, \
            Plain, NoShape
 
 # FvwmButtons
-Colorset 8 fg black, bg white, sh white, \
-           RootTransparent Buffer, Tint #b9b6a3 60
+SetEnv button_color 8
+SetEnv button_hicolor 9
+SetEnv button_pcolor 10
+Colorset 8 fg black, bg #a9a28f, sh white
+           #RootTransparent Buffer, Tint #b9b6a3 60
+Colorset 9 fg white, bg #7a755f, sh white
+           #RootTransparent Buffer, Tint #b9b6a3 60
+Colorset 9 fg black, bg white, sh white
+           #RootTransparent Buffer, Tint #b9b6a3 60
 
 # FvwmTaskBar
 # Normal TaskBar Button
-Colorset 10 fg white, bg black, sh white, hi white, \
-            RootTransparent buffer, Tint #333333 60, \
-# Focused TaskBar Button
-Colorset 11 fg #730a07, bg white, sh white, hi black, \
-            RootTransparent buffer, Tint #b9b6a3 70, \
-            NoShape
-# Iconified TaskBar Button
-Colorset 12 fg #730a07, bg white, \
-	sh white, hi white, NoShape
+#Colorset 10 fg black, bg #a9a28f, sh white, hi white
+#            #RootTransparent buffer, Tint #333333 60
+## Focused TaskBar Button
+#Colorset 11 fg white, bg #7a755f, sh white, hi black, NoShape
+#            #RootTransparent buffer, Tint #b9b6a3 70, \
+## Iconified TaskBar Button
+#Colorset 12 fg #730a07, bg white, sh white, hi white, NoShape
 # }}}
 
 # Cursorstyle {{{
@@ -103,22 +117,23 @@ CursorStyle STROKE       plus			black	white
 # colorset
 DefaultColorset   0
 Style * Colorset 1
-Style * HilightColorset 2
-Style * BorderColorset 3
-Style * HilightBorderColorset 4
+Style * HilightColorset $[title_hicolor]
+Style * BorderColorset $[border_color]
+Style * HilightBorderColorset $[border_hicolor]
+Style * UseDecor DefaultDecor
 
 # font
 Style * Font $[normalfont]
 Style * IconFont $[normalfont]
 
 # title bar buttons
+Style * BorderWidth 2, HandleWidth 2
 Style * NoIcon
+Style * Icon unknown1.xpm, Color lightgrey/dimgrey
 Style * SnapAttraction 3 SameType Screen
 Style * SnapGrid 1 1
 Style * EdgeMoveDelay 250
 Style * EdgeMoveResistance 10
-Style * BorderWidth 2, HandleWidth 2
-Style * Icon unknown1.xpm, Color lightgrey/dimgrey
 Style * MWMFunctions, MWMDecor, HintOverride
 Style * ResizeOpaque
 Style * DecorateTransient, NoPPosition
@@ -131,11 +146,8 @@ Style * ParentalRelativity
 # Styles for various Fvwm modules {{{
 Style "Fvwm*"       NoTitle,  Sticky, WindowListSkip
 Style "Fvwm*"       BorderWidth 2, CirculateSkipIcon, CirculateSkip
-Style "FvwmPager"   StaysOnTop
+Style "FvwmPager"   
 Style "FvwmBanner"  StaysOnTop
-Style "FvwmButtons" Icon toolbox.xpm, ClickToFocus, BorderWidth 0, HandleWidth 0
-Style "FvwmTaskBar" !Borders, !Handles, BorderWidth 0, HandleWidth 0, NoTitle, NoHandles, Sticky,WindowListSkip,\
-	CirculateSkip
 # }}}
 
 #Styles for Apps {{{
@@ -155,7 +167,7 @@ Style "xgraph"      Icon graphs.xpm, ClickToFocus
 Style "xmosaic"     Color Green/Yellow, ClickToFocus
 #}}}
 
-# Title style {{{
+# Title decor {{{
 
 DestroyDecor DefaultDecor
 AddToDecor DefaultDecor
@@ -196,15 +208,25 @@ AddToDecor DefaultDecor
 #+ AddButtonStyle  All Active Vector 9 80x60@4 80x40@2 60x20@2 40x20@2 20x40@2 20x60@2 40x80@2 60x80@2 80x60@2 -- Flat
 #+ AddButtonStyle  All Inactive Vector 9 80x60@4 80x40@2 60x20@2 40x20@2 20x40@2 20x60@2 40x80@2 60x80@2 80x60@2 -- Flat
 
-Style * UseDecor DefaultDecor
 
+# }}}
+
+# FlatDecor {{{
+# FvwmTaskBar , FvwmButtons
+AddToDecor FlatDecor
++ ButtonStyle All Active (Colorset 1 -- flat) Inactive (Colorset 2 -- flat)
++ TitleStyle -- flat
++ BorderStyle  -- HiddenHandles NoInset flat
+Style FlatStyle \
+    UseDecor FlatDecor, BorderWidth 0, HandleWidth 0, NoTitle, NoHandles, Sticky,WindowListSkip, CirculateSkip, ClickToFocus
 # }}}
 
 # Menustyles {{{
 MenuStyle * Hilight3DThin, PopupOffset 0 100, PopupDelay 300
 MenuStyle * Font $[normalfont]
-MenuStyle * MenuColorset 5, HilightBack, 
-MenuStyle * ActiveColorset 6
+MenuStyle * MenuColorset $[menu_color]
+MenuStyle * ActiveColorset $[menu_hicolor]
+MenuStyle * HilightBack
 MenuStyle * BorderWidth 1, TitleUnderlines1 , SeparatorsLong, TrianglesSolid, Animation
 MenuStyle * ItemFormat "%.2|%.5i%.5l%.5i%2.3>%2|"
 # }}}
@@ -383,14 +405,12 @@ Mouse 3 TSIF  A RaiseLower
 # Initialization Functions {{{
 AddToFunc StartFunction
  + I Module FvwmButtons
- + I Module FvwmTaskBar
  + I Module FvwmPager 0 1
 
 AddToFunc InitFunction
  #+ I exec xsetroot -mod 2 2 -fg rgb:55/40/55 -bg rgb:70/50/70
  + I exec fvwm-root -r $[fvwm_wallpaper]
  + I exec xcompmgr -n
- + I exec launchy
 
 # For some SM-s (like gnome-session) there is an internal background setter.
 AddToFunc SessionInitFunction
@@ -401,7 +421,7 @@ AddToFunc SessionInitFunction
 # Apps functions {{{
 DestroyFunc FvwmDmenu
 AddToFunc   FvwmDmenu
-+ I Exec exec dmenu_run -fn $[normalfont] -nb $[bg.cs1] -nf $[fg.cs1] -sb $[bg.cs2] -sf $[fg.cs2]
++ I Exec exec dmenu_run -i -b  -p ">>>"  -fn $[normalfont] -nb $[bg.cs1] -nf $[fg.cs1] -sb $[bg.cs2] -sf $[fg.cs2]
 # }}}
 
 # Sample Functions {{{
@@ -490,11 +510,12 @@ AddToFunc   FvwmViewManPage
 # }}}
 
 # FvwmButtons {{{
+Style "FvwmButtons" UseStyle FlatStyle
 KillModule FvwmButtons
 DestroyModuleConfig FvwmButtons: *
-*FvwmButtons: Colorset 8
-*FvwmButtons: PressColorset 0
-*FvwmButtons: ActiveColorset 9
+*FvwmButtons: Colorset $[button_color]
+*FvwmButtons: ActiveColorset $[button_hicolor]
+*FvwmButtons: PressColorset $[button_color]
 *FvwmButtons: Font $[normalfont]
 *FvwmButtons: Frame 1
 *FvwmButtons: Padding 1 1
@@ -511,6 +532,7 @@ DestroyModuleConfig FvwmButtons: *
 # }}}
 
 # FvwmTaskBar Configration {{{
+Style "FvwmTaskBar" UseStyle FlatStyle
 KillModule FvwmTaskBar
 DestroyModuleConfig FvwmTaskBar: *
 # defined in the option
@@ -549,8 +571,8 @@ DestroyModuleConfig FvwmTaskBar: *
 #Pager {{{
 KillModule FvwmPager
 DestroyModuleConfig FvwmPager: *
-*FvwmPager: Colorset * 10
-*FvwmPager: HilightColorset * 11
+*FvwmPager: Colorset * 1
+*FvwmPager: HilightColorset * 2
 #*FvwmPagerFont -adobe-helvetica-bold-r-*-*-10-*-*-*-*-*-*-*
 # turn off desktop names for swallowing in above button bar example:
 *FvwmPager: Font $[normalfont]
@@ -616,5 +638,4 @@ DestroyModuleConfig FvwmBanner: *
 *FvwmBanner: Timeout 3
 #
 
-# vim: set foldmethod=marker:
 

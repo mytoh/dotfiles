@@ -142,39 +142,39 @@ zstyle ':completion:*:functions' ignore-patterns '_*'
 # }}}
 
 # git prompt {{{
-##if is-at-least 4.3.10; then
-##  autoload -Uz vcs_info
-##  autoload -Uz add-zsh-hook
-##
-##  zstyle ':vcs_info:*' enable git
-##  zstyle ':vcs_info:git:*' check-for-changes true
-##  zstyle ':vcs_info:git:*' stagedstr '+'
-##  zstyle ':vcs_info:git:*' unstagedstr "${fg[yellow]}-"
-##  zstyle ':vcs_info:git:*' formats '(@%b%u%c)'
-##  zstyle ':vcs_info:git:*' actionformats '@%b|%a%u%c'
-##
-##  function _update_vcs_info_msg() {
-##    psvar=()
-##    LANG=en_US.UTF-8 vcs_info
-##    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-##    psvar[2]=$(_git_not_pushed)
-##  }
-##  function _git_not_pushed() {
-##  if [ "$(git rev-parse --is-inside-word-tree 2>/dev/null)" = "true" ]; then
-##    head="$(git rev-parse HEAD)"
-##    for x in $(git rev-parse --remotes)
-##    do
-##      if [ "$head" = "$x" ]; then
-##        return 0
-##      fi
-##    done
-##    echo "?"
-##  fi
-##  return 0
-##  }
-##  add-zsh-hook precmd _update_vcs_info_msg
-##fi
-### }}
+#if is-at-least 4.3.10; then
+#  autoload -Uz vcs_info
+#  autoload -Uz add-zsh-hook
+#
+#  zstyle ':vcs_info:*' enable git
+#  zstyle ':vcs_info:git:*' check-for-changes true
+#  zstyle ':vcs_info:git:*' stagedstr '+'
+#  zstyle ':vcs_info:git:*' unstagedstr "${fg[yellow]}-"
+#  zstyle ':vcs_info:git:*' formats '(@%b%u%c)'
+#  zstyle ':vcs_info:git:*' actionformats '@%b|%a%u%c'
+#
+#  function _update_vcs_info_msg() {
+#    psvar=()
+#    LANG=en_US.UTF-8 vcs_info
+#    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+#    psvar[2]=$(_git_not_pushed)
+#  }
+#  function _git_not_pushed() {
+#  if [ "$(git rev-parse --is-inside-word-tree 2>/dev/null)" = "true" ]; then
+#    head="$(git rev-parse HEAD)"
+#    for x in $(git rev-parse --remotes)
+#    do
+#      if [ "$head" = "$x" ]; then
+#        return 0
+#      fi
+#    done
+#    echo "?"
+#  fi
+#  return 0
+#  }
+#  add-zsh-hook precmd _update_vcs_info_msg
+#fi
+## }}
 #
 # }}}
 
@@ -307,7 +307,7 @@ unpack() {
 # }}}
 
 # Aliases {{{
-#alias precmd=rehash
+alias chalice='vim -c Chalice'
 alias pd=popd
 alias cup="cpan-outdated && cpan-outdated | xargs cpanm -v"
 alias view="vim -X -R -"
@@ -475,4 +475,3 @@ orb() {
 esac
 #}}}
 
-# vim: set foldmethod=marker:

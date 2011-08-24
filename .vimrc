@@ -138,6 +138,8 @@ aug myautocommands
   au filetype           help                     nnoremap q :<c-u>q<cr>
   " for chalice buffers
   au filetype           2ch*                     setl fencs=cp932,iso-2022-jp-3,euc-jp
+  au filetype           2ch*                     let g:loaded_golden_ratio = 1
+
 aug end
 
 aug cch
