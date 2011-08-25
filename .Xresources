@@ -38,7 +38,6 @@ urxvt.font: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso8859-*, \
              -*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*, \
             -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*,\
             -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1,\
-            -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1,\
             xft:Code200:antialias=false
 
 urxvt.boldfont: -mplus-goth_p-bold-r-normal-*-10-*-*-*-*-*-*-*
