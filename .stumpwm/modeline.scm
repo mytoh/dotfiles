@@ -83,7 +83,7 @@
                  (tx (string->number (car (drop tokens 9))))
                  )
                 (set! *NET-RECEIVE*  (/. (/. rx 1024) 1024))
-                (print *NET-RECEIVE*)
+                ;(print *NET-RECEIVE*)
                 )))))
 
 

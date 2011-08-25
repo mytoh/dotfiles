@@ -35,8 +35,8 @@
   *mouse-focus-policy*              :sloppy
   *message-window-gravity*          :bottom-left
   *input-window-gravity*            :bottom-left
-  *run-or-raise-all-groups*         T
-  *input-history-ignore-duplicates* T
+  *run-or-raise-all-groups*         t
+  *input-history-ignore-duplicates* t
   *new-window-preferred-frame*      '(:empty :focused)
   *mode-line-background-color*      "grey20"
   *mode-line-foreground-color*      "DarkKhaki"
@@ -76,8 +76,8 @@
 
 ;; commands
 (defcommand terminal () () (run-shell-command "exec urxvtcd"))
-(defcommand browser () () (run-or-raise "exec opera" '(:class "opera")))
-(defcommand filer () () (run-or-raise "exec thunar" '(:class "Thunar")))
+(defcommand firefox () () (run-or-raise "exec firefox" '(:class "firefox")))
+(defcommand thunar () () (run-or-raise "exec thunar" '(:class "Thunar")))
 (defcommand dmenu () () (run-shell-command "exec dmenu_run -i -b -nb grey20 -nf orange -sb orange -sf grey20"))
 
 ;;; keymap

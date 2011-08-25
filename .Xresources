@@ -70,6 +70,33 @@ urxvt.boldfont: -mplus-goth_p-bold-r-normal-*-10-*-*-*-*-*-*-*
 !--------------------------------------
 
 
+! colors from dzen wiki
+urxvt*color0:       #000000
+urxvt*color8:       #666666
+!! DarkRed + Red
+urxvt*color1:       #b45151
+urxvt*color9:       #fe8686
+!! DarkGreen + Green
+urxvt*color2:       #8ba574
+urxvt*color10:      #a5dca5
+!! DarkYellow + Yellow
+urxvt*color3:       Khaki3
+urxvt*color11:      #efe58b
+!! DarkBlue + Blue
+urxvt*color4:       #2797d8
+urxvt*color12:      #86cdea
+!! DarkMangenta + Mangenta
+urxvt*color5:       #aa6eaf
+urxvt*color13:      #b698b8
+!!DarkCyan + Cyan
+urxvt*color6:       #418179
+urxvt*color14:      #71bebe
+!! LightGrey + White
+urxvt*color7:       #bebebe
+urxvt*color15:      #ffffff
+
+
+!{{{
 !urxvt.color0: #222222
 !urxvt.color1: #ffa0a0
 !urxvt.color2: #98fb98
@@ -86,26 +113,30 @@ urxvt.boldfont: -mplus-goth_p-bold-r-normal-*-10-*-*-*-*-*-*-*
 !urxvt.color13: #ffa0a0
 !urxvt.color14: #87ceeb
 !urxvt.color15: #ffffff
+!}}}
 
-!--------------
+!{{{ --------------
 ! kde konsole DarkPastel colorscheme
 ! Background 2c2c2c, 2c4444
-urxvt.color0:  #2c2c2c
-urxvt.color1:  #705050
-urxvt.color2:  #60b48a
-urxvt.color3:  #dfaf8f
-urxvt.color4:  #9ab8d7
-urxvt.color5:  #dc8cc3
-urxvt.color6:  #8cd0d3
-urxvt.color7:  #dcdccc
-urxvt.color8:  #709080
-urxvt.color9:  #dca3a3
-urxvt.color10: #72d5a3
-urxvt.color11: #f0dfaf
-urxvt.color12: #94bff3
-urxvt.color13: #ec93d3
-urxvt.color14: #93e0e3
-urxvt.color15: #ffffff
+!urxvt.color0:  #2c2c2c
+!urxvt.color1:  #705050
+!urxvt.color2:  #60b48a
+!urxvt.color3:  #dfaf8f
+!urxvt.color4:  #9ab8d7
+!urxvt.color5:  #dc8cc3
+!urxvt.color6:  #8cd0d3
+!urxvt.color7:  #dcdccc
+!urxvt.color8:  #709080
+!urxvt.color9:  #dca3a3
+!urxvt.color10: #72d5a3
+!urxvt.color11: #f0dfaf
+!urxvt.color12: #94bff3
+!urxvt.color13: #ec93d3
+!urxvt.color14: #93e0e3
+!urxvt.color15: #ffffff
+!}}}
+
+
 
 !-------------
 ! xterm

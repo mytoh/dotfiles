@@ -54,10 +54,10 @@ import XMonad.Util.WorkspaceCompare
 import XMonad.Util.NamedScratchpad
 
 ---------------------------------------------------
-myTerminal    = "urxvtc "
+myTerminal    = "urxvtcd "
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
-myBorderWidth   = 3
+myBorderWidth   = 2
 myModMask       = mod1Mask
 myIcons         = "/home/mytoh/.dzen/icons/"
 
@@ -82,10 +82,10 @@ myNormalBorderColor  = "#111111"
 myFocusedBorderColor = "#ff89c5"
 
 -- Fonts -------------------------------------------
-myTabFont = "xft: Ricty-8"
-myXPFont = "xft: Ricty"
+myTabFont = "-*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*"
+myXPFont = "-*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*"
 --myDzenFont = "-mplus-fxd-medium-r-semicondensed--12-*"
-myDzenFont = "-*-fixed-medium-r-semicondensed-*-12-*"
+myDzenFont = "-*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*"
 
 -- Layouts ------------------------------------------
 myLayoutHook =  avoidStruts                $ 
@@ -97,7 +97,8 @@ myLayoutHook =  avoidStruts                $
 
                  where
 
-                   collectiveLayouts = tabbed ||| twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex 
+--                 collectiveLayouts = tabbed ||| twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex
+                   collectiveLayouts = twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex
 
                    full    = named "*" (smartBorders (noBorders (dwmStyle shrinkText myTheme Full)))
                    tile    = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
