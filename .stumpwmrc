@@ -63,7 +63,7 @@
 (setf *screen-mode-line-format*  ;; ^n use the normal bg and fg color
       (list "%g ^8*|^n %W "
             "^8*|^n "
-            '(:eval (run-shell-command "~/.gosh/stumpwm.scm" t))
+            '(:eval (run-shell-command "~/.stumpwm/modeline.scm" t))
             "^8*|^n %d "
             ))
 
