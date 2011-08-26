@@ -8,11 +8,11 @@ setopt hist_reduce_blanks
 setopt share_history
 setopt auto_cd
 setopt auto_pushd
+setopt auto_name_dirs
 setopt extended_glob
 setopt glob_dots
 setopt multibyte
 setopt notify
-setopt auto_name_dirs
 setopt clobber
 setopt list_packed list_types nolist_beep
 setopt hash_list_all
@@ -29,6 +29,7 @@ setopt prompt_subst
 setopt cdable_vars
 setopt print_eightbit
 setopt transient_rprompt
+setopt auto_menu
 unsetopt bg_nice appendhistory beep nomatch
 limit coredumpsize 0
 #umask 022
@@ -54,10 +55,12 @@ G_FILENAME_ENCODING=@locale
 RLWRAP_HOME=~/.rlwrap
 LISTMAX=0
 LSCOLORS=exFxCxdxBxegedabagacad
-if [[ -x `which gdircolors` ]] && [[ -e $home/.dir_colors ]]; then
+if [[ -x `which gdircolors` ]] && [[ ! -e $home/.dir_colors ]]; then
   eval $(gdircolors $home/.dir_colors -b)
+  ZLS_COLORS=$LS_COLORS
+else
+  LS_COLORS='di=34:ln=35:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 fi
-ZLS_COLORS=$LS_COLORS
 
 PAGER="less"
 LESS='-i  -w -z-4 -g -M -X -F -R -P%t?f%f \
@@ -133,12 +136,14 @@ compdef _portmaster portbuilder
 zstyle :compinstall filename $home/.zshrc
 zstyle ':completion:*' completer _oldlist _complete
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*:(processes|jobs)' menu yes select=2
+zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]=** r:|=*' '+l:|=*' '+m:{A-Z}={a-z}'
 zstyle ':completion:*' format 'Completing %F{blue}%d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*:functions' ignore-patterns '_*'
+# complete $cdpath directories when no candidates in local directory
+zstyle ':completion:*:cd:*' tag-order local-directories path-directories
 # }}}
 
 # git prompt {{{

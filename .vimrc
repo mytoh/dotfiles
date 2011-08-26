@@ -298,6 +298,12 @@ let g:changelog_username = ''
 let g:changelog_spacing_errors = 0
 "}}}
 
+" open-browser {{{
+let g:netrw_nogx = 1
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+" }}}
+
 " }}}
 
 set secure
