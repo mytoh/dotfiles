@@ -47,7 +47,7 @@ EDITOR=vim
 MYVIMRC=~/.vimrc
 VIMRUNTIME=(~/.vim/vundle:$VIMRUNTIME)
 
-INFOPATH=(~/.emacs.d/info:~/local/share/info:$INFOPATH)
+INFOPATH=(~/.info:~/local/share/info:$INFOPATH)
 GAUCHE_LOAD_PATH="$home/.gosh"
 FTP_PASSIVE_MODE=true
 MYGITDIR=~/local/git
