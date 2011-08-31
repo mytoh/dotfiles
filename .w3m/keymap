@@ -8,12 +8,7 @@ keymap C-u PREV_PAGE
 keymap o GOTO
 keymap t TAB_GOTO
 
-keymap h PREV_TAB
-keymap l NEXT_TAB
-keymap d CLOSE_TAB
-
 keymap ? HELP
-
 
 keymap / ISEARCH
 

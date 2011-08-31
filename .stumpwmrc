@@ -17,7 +17,7 @@
 ;; windows
 (set-focus-color "khaki")
 (set-unfocus-color "grey10")
-(set-win-bg-color "black")
+;(set-win-bg-color "black")
 (set-normal-gravity :center)
 (set-transient-gravity :top-right)
 (set-frame-outline-width 1)
@@ -46,8 +46,8 @@
   *mode-line-pad-x*                 1
   *mode-line-pad-y*                 1
   *mode-line-timeout*               5
-  *window-format*                   "^9*(%n%s%m%15t)^n" ;;^5 magenta
-  *group-format*                    "^7*[%t%s]^n" ;;^7 white
+  *window-format*                   "^9*(%n%m%15t)^n" ;;^5 magenta
+  *group-format*                    "^7*%t%s^n" ;;^7 white
   )
 
 ;; set color slots
@@ -71,14 +71,14 @@
 ;(run-shell-command "exec trayer --expand true --alpha 100  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype request --width 100 " )
 ;(run-shell-command "stalonetray" )
 ;(run-shell-command "exec feh --bg-scale ~/.wallpaper" )
-(run-shell-command "exec display -window root ~/.wallpaper" )
+(run-shell-command "exec gm display -window root ~/.wallpaper" )
 (run-shell-command "exec killall xcompmgr ; xcompmgr -n " )
 
 ;; commands
 (defcommand terminal () () (run-shell-command "exec urxvtcd"))
 (defcommand firefox () () (run-or-raise "exec firefox" '(:class "firefox")))
 (defcommand thunar () () (run-or-raise "exec thunar" '(:class "Thunar")))
-(defcommand dmenu () () (run-shell-command "exec dmenu_run -i -b -nb grey20 -nf orange -sb orange -sf grey20"))
+(defcommand dmenu () () (run-shell-command "exec dmenu_run -i -b -nb '#4d3e41' -nf '#947988' -sb '#947988' -sf '#4d3e41' "))
 
 ;;; keymap
 ;;;

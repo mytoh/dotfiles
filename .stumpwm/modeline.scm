@@ -2,7 +2,7 @@
 
 ;; original scheme script for dzen
 ;; see http://dzen.geekmode.org/dwiki/doku.php?id=dzen:scheme-monitor
-;; this is for stumpwm's mode-line
+;; this modified versin for stumpwm's mode-line
 
 (use gauche.process)
 (use file.util)
