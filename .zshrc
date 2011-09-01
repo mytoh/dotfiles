@@ -408,6 +408,13 @@ case ${OSTYPE} in
     /bin/rm -rfv ~/.squid/cache/*
     squid -f ~/.squid/etc/squid.conf -z
     squid -f ~/.squid/etc/squid.conf
+    mplayer() {
+      if [ -e /Applications/mplayer2.app ]; then
+        /Applications/mplayer2.app/Contents/MacOS/mplayer-bin $*
+      else
+        mplayer
+      fi
+      }
     export JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
   }
   ;;
