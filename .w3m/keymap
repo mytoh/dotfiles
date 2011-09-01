@@ -5,10 +5,5 @@ keymap r RELOAD
 keymap C-d NEXT_PAGE
 keymap C-u PREV_PAGE
 
-keymap o GOTO
-keymap t TAB_GOTO
-
-keymap ? HELP
-
 keymap / ISEARCH
 

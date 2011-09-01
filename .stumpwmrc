@@ -17,7 +17,7 @@
 ;; windows
 (set-focus-color "khaki")
 (set-unfocus-color "grey10")
-;(set-win-bg-color "black")
+(set-win-bg-color "grey20")
 (set-normal-gravity :center)
 (set-transient-gravity :top-right)
 (set-frame-outline-width 1)
@@ -51,9 +51,16 @@
   )
 
 ;; set color slots
-(setf *colors* (append *colors*
-                       (list "grey"
-                             "pink")))
+ (setf *colors* (list "grey"          ; 0 black
+                     "palevioletred" ; 1 red
+                     "lightblue"     ; 2 green
+                     "bisque"        ; 3 yellow
+                     "steelblue"     ; 4 blue
+                     "slateblue"     ; 5 magenta
+                     "aquamarine"    ; 6 cyan
+                     "honeydew"      ; 7 white
+                     "thistle"       ; 8 user
+                     "lightskyblue")); 9 user
 (update-color-map (current-screen))
 
 ;; modeline
@@ -73,6 +80,7 @@
 ;(run-shell-command "exec feh --bg-scale ~/.wallpaper" )
 (run-shell-command "exec gm display -window root ~/.wallpaper" )
 (run-shell-command "exec killall xcompmgr ; xcompmgr -n " )
+(run-shell-command "exec ~/.stumpwm/dzen.sh" )
 
 ;; commands
 (defcommand terminal () () (run-shell-command "exec urxvtcd"))
