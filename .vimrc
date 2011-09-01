@@ -94,6 +94,7 @@ endif
 
 " funcs {{{
 let s:myfunc = {}
+
 function! s:myfunc.isos(name)
   let os = tolower(substitute(system('uname'),"\n","",""))
   return os == a:name ? 1 : 0
@@ -104,6 +105,7 @@ if s:myfunc.isos('haiku')
   let g:loaded_vimproc = 1
   set rtp^=~/.vim/
 endif
+
 "}}}
 
 " keymaps{{{
@@ -243,11 +245,24 @@ aug end
 
 " eskk{{{
 if has('vim_starting')
-  let g:eskk_dictionary = '~/.skk-jisyo'
+        let g:eskk#dictionary = {
+        \ 'path': "~/.skk-jisyo",
+        \ 'sorted': 0,
+        \ 'encoding': 'utf-8',
+        \}
   if s:myfunc.isos("darwin")
-    let g:eskk_large_dictionary = '~/Library/Application\ Support/AquaSKK/SKK-JISYO.L'
+    let g:eskk_large_dictionary = 
+        let g:eskk#large_dictionary = {
+        \ 'path': "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L",
+        \ 'sorted': 1,
+        \ 'encoding': 'euc-jp',
+        \}
   elseif s:myfunc.isos('freebsd')
-    let g:eskk_large_dictionary = '/usr/local/share/skk/SKK-JISYO.L'
+        let g:eskk#large_dictionary = {
+        \ 'path': "/usr/local/share/skk/SKK-JISYO.L",
+        \ 'sorted': 1,
+        \ 'encoding': 'euc-jp',
+        \}
   endif
 endif
 let g:eskk_egg_like_newline = 0
