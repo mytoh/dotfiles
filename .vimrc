@@ -251,7 +251,6 @@ if has('vim_starting')
         \ 'encoding': 'utf-8',
         \}
   if s:myfunc.isos("darwin")
-    let g:eskk_large_dictionary = 
         let g:eskk#large_dictionary = {
         \ 'path': "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L",
         \ 'sorted': 1,
