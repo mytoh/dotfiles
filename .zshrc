@@ -418,6 +418,7 @@ case ${OSTYPE} in
     export JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
   }
   ;;
+
   freebsd*)
   http_proxy="http://192.168.1.3:3128"
   ftp_proxy=""
@@ -428,7 +429,7 @@ case ${OSTYPE} in
   alias ll="ls -G -hlA "
   alias ls="ls -G -F"
   alias pup="sudo portsnap fetch update "
-  alias pcheck="sudo portmaster -PBida && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends"
+  alias pcheck="sudo portmaster -PBidag && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends"
   alias pfetch="sudo make  fetch-recursive"
   alias pinst="sudo make  install distclean; rehash"
   alias pconf="sudo make config-recursive"
