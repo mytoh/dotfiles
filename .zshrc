@@ -429,7 +429,7 @@ case ${OSTYPE} in
   alias ll="ls -G -hlA "
   alias ls="ls -G -F"
   alias pup="sudo portsnap fetch update "
-  alias pcheck="sudo portmaster -PBidabg && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends "
+  alias pcheck="sudo portmaster -PBidag && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends "
   alias pfetch="sudo make  fetch-recursive"
   alias pinst="sudo make  install distclean; rehash"
   alias pconf="sudo make config-recursive"

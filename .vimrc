@@ -55,7 +55,7 @@ colorscheme jellybeans
 set laststatus=2
 set statusline=%<%1*\ %f\ %m%r%h%w\ %1*%{fugitive#statusline()}%1*%=\ %1*%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %9*(・×・)%*\ 
 " highlight for statusline
-" set colorscheme above this line
+" set colorscheme above
 " User1-9 => %{1-9}*
 hi User1 ctermfg=white ctermbg=235 cterm=none
 hi User9 ctermfg=4 ctermbg=235 cterm=none
