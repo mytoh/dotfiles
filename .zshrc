@@ -329,6 +329,11 @@ alias cp='cp -iv'
 alias mv='mv -iv'
 alias df='df -h'
 alias starwars='telnet towel.blinkenlights.nl'
+alias radio1='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r1.asx'
+alias radio2='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r2.asx'
+alias radio3='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r3.asx'
+alias radio4='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r4.asx'
+alias radio6='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r6.asx'
 # suffix aliases
 alias -s txt=cat
 alias -s zip=zipinfo
