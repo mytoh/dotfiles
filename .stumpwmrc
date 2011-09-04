@@ -55,7 +55,7 @@
                      "palevioletred" ; 1 red
                      "lightblue"     ; 2 green
                      "bisque"        ; 3 yellow
-                     "steelblue"     ; 4 blue
+                     "lightskyblue"     ; 4 blue
                      "slateblue"     ; 5 magenta
                      "aquamarine"    ; 6 cyan
                      "honeydew"      ; 7 white
@@ -79,7 +79,7 @@
 ;(run-shell-command "stalonetray" )
 ;(run-shell-command "exec feh --bg-scale ~/.wallpaper" )
 (run-shell-command "exec gm display -window root ~/.wallpaper" )
-(run-shell-command "exec killall xcompmgr ; xcompmgr -n " )
+(run-shell-command "exec xcompmgr -n " )
 (run-shell-command "exec ~/.stumpwm/dzen.sh" )
 
 ;; commands

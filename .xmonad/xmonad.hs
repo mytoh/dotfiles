@@ -242,6 +242,7 @@ myRightBar  = "~/.dzen/bin/status | exec dzen2 -p -ta r -x 450 -y 0 -w 700 -h 16
 trayer      = "exec trayer --expand true --alpha 100  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype request --width 100 "
 mail        = "gmail-notifier"
 compmgr     = "xcompmgr -n"
+bgmgr       = "feh --bg-center ~/.wallpaper"
 -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 
 myStartupHook :: X () 
@@ -250,6 +251,7 @@ myStartupHook = do
                 spawn trayer
                 spawn mail
                 spawn compmgr
+                spawn bgmgr
 
 -- main config ---------------------------------------------------------------------
 main = myConfig

@@ -424,7 +424,7 @@ case ${OSTYPE} in
   ftp_proxy=""
   FTP_TIMEOUT=30
   HTTP_TIMEOUT=30
-  PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages-9-current/Latest/"
+  PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages/Latest/"
   alias la="ls -G -a"
   alias ll="ls -G -hlA "
   alias ls="ls -G -F"
