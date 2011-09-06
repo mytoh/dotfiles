@@ -315,7 +315,7 @@ unpack() {
 # -np : no folow parent
 # -k  : make links as relative path
 get-html() {
-  wget -r -np -k $1
+  wget -r -np -k -m $*
 }
 # }}}
 
