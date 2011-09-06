@@ -291,7 +291,7 @@ pack() {
   lower=${(L)1}
   case $lower in
     *.tar.xz|*.xz)
-      tar cvf $@;;
+      tar cJvf $@;;
     *)
       echo "'$1' cannot be created via 'pack'";;
   esac
@@ -308,6 +308,14 @@ unpack() {
     *.zip)
       unzip $@;;
   esac
+}
+
+# save webpags as html file
+# -r recursive
+# -np : no folow parent
+# -k  : make links as relative path
+get-html() {
+  wget -r -np -k $1
 }
 # }}}
 
@@ -425,10 +433,9 @@ case ${OSTYPE} in
   ;;
 
   freebsd*)
-  http_proxy="http://192.168.1.3:3128"
-  ftp_proxy=""
-  FTP_TIMEOUT=30
-  HTTP_TIMEOUT=30
+  #http_proxy="http://192.168.1.3:3128"
+  #ftp_proxy=""
+  #FTP_TIMEOUT=30
   PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages/Latest/"
   alias la="ls -G -a"
   alias ll="ls -G -hlA "
@@ -436,7 +443,7 @@ case ${OSTYPE} in
   alias pup="sudo portsnap fetch update "
   alias pcheck="sudo portmaster -PBidag && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends "
   alias pfetch="sudo make  fetch-recursive"
-  alias pinst="sudo make  install distclean; rehash"
+  alias pinst=" HTTP_TIMEOUT=30 && sudo make  install distclean; rehash"
   alias pconf="sudo make config-recursive"
   alias pclean="sudo make  clean "
   alias pkg_add="pkg_add -v"
