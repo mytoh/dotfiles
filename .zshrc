@@ -315,7 +315,13 @@ unpack() {
 # -np : no folow parent
 # -k  : make links as relative path
 get-html() {
-  wget -r -np -k -m $*
+  wget --page-requisites \
+  --no-parent \
+  --convert-links \
+  --backup-converted \
+  --mirror \
+  --adjust-extension \
+  --random-wait $*
 }
 # }}}
 
