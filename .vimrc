@@ -24,6 +24,7 @@ set showmode
 set showcmd
 set showmatch
 set diffopt+=vertical
+set ambiwidth=double
 
 " indent
 set autoindent
@@ -70,7 +71,7 @@ scriptencoding=utf-8
 set termencoding=utf-8
 set enc=utf-8
 set fenc=utf-8
-"set fencs=cp932,usc-bom,usc-21e,ucs-2,iso-2022-jp-3,euc-jp
+set fencs=utf-8,iso-2022-jp-3,euc-jp,cp932
 
 set helplang=ja,en
 set wrapscan
@@ -191,7 +192,7 @@ aug END
 " neocomplcache"{{{
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1 
-let g:neocomplcache_enable_camle_case_completion = 1
+let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_auto_select = 0
 let g:neocomplcache_dictionary_filetype_lists = {
@@ -264,8 +265,10 @@ if has('vim_starting')
         \}
   endif
 endif
-let g:eskk_egg_like_newline = 0
-let g:eskk_enable_completion = 0
+let g:eskk#egg_like_newline = 1
+let g:eskk#enable_completion = 1
+let g:eskk#select_cand_keys = "aoeuidhts"
+let g:eskk#show_annotation = 1
 "let g:eskk_revert_henkan_style = "okuri"
 "}}}
 

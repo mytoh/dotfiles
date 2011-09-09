@@ -3,9 +3,11 @@
 bindkey -e
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
+setopt hist_ignore_space
 setopt hist_save_no_dups
 setopt hist_reduce_blanks
 setopt share_history
+
 setopt auto_cd
 setopt auto_pushd
 setopt auto_name_dirs
@@ -22,13 +24,17 @@ setopt noflow_control
 setopt ignore_eof
 setopt complete_aliases
 setopt magic_equal_subst
+setopt mark_dirs
 setopt auto_remove_slash
 setopt no_auto_param_slash
+
 setopt always_last_prompt
 setopt prompt_subst
+setopt prompt_percent
+setopt transient_rprompt
+
 setopt cdable_vars
 setopt print_eightbit
-setopt transient_rprompt
 setopt auto_menu
 unsetopt bg_nice appendhistory beep nomatch
 limit coredumpsize 0
@@ -41,19 +47,32 @@ local home=$HOME
 
 setopt all_export # may cause problem
 
-LANG=en_GB.UTF-8
+LANG=fi_FI.UTF-8
+REPORTTIME=3
 
-EDITOR=vim
-MYVIMRC=~/.vimrc
-VIMRUNTIME=(~/.vim/vundle:$VIMRUNTIME)
 
-INFOPATH=(~/.info:~/local/share/info:$INFOPATH)
 GAUCHE_LOAD_PATH="$home/.gosh"
 FTP_PASSIVE_MODE=true
 MYGITDIR=~/local/git
 G_FILENAME_ENCODING=@locale
 RLWRAP_HOME=~/.rlwrap
 LISTMAX=0
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
+# history
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=$HISTSIZE
+
+# vim
+EDITOR=vim
+if ! type vim >/dev/null 2>&1; then
+  alias vim=vi
+fi
+MYVIMRC=~/.vimrc
+VIMRUNTIME=(~/.vim/vundle:$VIMRUNTIME)
+
+# ls
 LSCOLORS=exFxCxdxBxegedabagacad
 if [[ -x `which gdircolors` ]] && [[ ! -e $home/.dir_colors ]]; then
   eval $(gdircolors $home/.dir_colors -b)
@@ -62,6 +81,7 @@ else
   LS_COLORS='di=34:ln=35:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 fi
 
+# less
 PAGER="less"
 LESS='-i  -w -z-4 -g -M -X -F -R -P%t?f%f \
 :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
@@ -73,41 +93,45 @@ LESS_TERMCAP_so=$'\E[01;44;33m'
 LESS_TERMCAP_ue=$'\E[0m'
 LESS_TERMCAP_us=$'\E[01;32m'
 
-HISTFILE=~/.zsh_history
-HISTSIZE=50000
-SAVEHIST=50000
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-
-if [ -d /usr/local/lib/cw ]; then
-  path=( ~/.cw(N)
-         ~/local/*/{sbin,bin}(N)\
-         ~/local/bin(N)\
-          /opt/X11/bin(N) \
-          /usr/X11/bin(N) \
-          /usr/X11R6/bin(N) \
-          /usr/games(N)\
-          /usr/local/{sbin,bin}\
-          /usr/local/*/{sbin,bin}(N)\
-          /usr/{sbin,bin}\
-          /{sbin,bin})
-else
-  path=( ~/local/*/{sbin,bin}(N)
-         ~/local/bin(N)\
-          /opt/X11/bin(N) \
-          /usr/X11/bin(N) \
-          /usr/X11R6/bin(N) \
-          /usr/games(N)\
-          /usr/local/{sbin,bin}\
-          /usr/local/*/{sbin,bin}(N)\
-          /usr/{sbin,bin}\
-          /{sbin,bin})
-fi
-
-
+# paths
 typeset -U path  # remove duplicates
-cdpath=(~/local ~/local/var)
+path=(
+  ~/local/*/{sbin,bin}(N-/)
+  ~/local/bin(N-/)
+   /opt/X11/bin(N-/)
+   /usr/X11/bin(N-/)
+   /usr/X11R6/bin(N-/)
+   /usr/games(N-/)
+   /usr/local/{sbin,bin}(N-/)
+   /usr/local/*/{sbin,bin}(N-/)
+   /usr/{sbin,bin}(N-/)
+   /{sbin,bin}(N-/))
+         
+if [ -d /usr/local/lib/cw ]; then
+  path=( ~/.cw(N-/) $path )
+fi
 ## zsh functions directory
+typeset -U fpath
 fpath=(~/.zsh/functions/completion ${fpath})
+
+typeset -U manpath
+manpath=(
+          ~/local/share/man(N-/)
+          /usr/local/man(N-/)
+          /usr/local/*/man(N-/)
+          /usr/share/man(N-/)
+          $manpath)
+
+unset INFOPATH
+typeset -xT INFOPATH infopath
+typeset -U infopath
+infopath=(~/.info(N-/)
+          ~/local/share/info(N-/)
+          /usr/local/*/info(N-/)
+          $infopath)
+
+typeset -U cdpath
+cdpath=(~/local ~/local/var)
 # }}}
 
 # named directories {{{
@@ -134,11 +158,11 @@ compdef _portmaster portbuilder
 
 # Zstyles {{{
 zstyle :compinstall filename $home/.zshrc
-zstyle ':completion:*' completer _oldlist _complete
+zstyle ':completion:*' completer _oldlist _complete _match _history _ignored _approximate _prefix
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]=** r:|=*' '+l:|=*' '+m:{A-Z}={a-z}'
-zstyle ':completion:*' format 'Completing %F{blue}%d'
+zstyle ':completion:*' format 'Completing %F{blue}%d%F{white}'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*:functions' ignore-patterns '_*'
@@ -202,7 +226,7 @@ _update_vcs_info_msg() {
   vcs_info
 }
 
-add-zsh-hook precmd _update_vcs_info_msg
+precmd_functions=(_update_vcs_info_msg $precmd_functions)
 # }}}
 
 # Prompts {{{
@@ -245,16 +269,19 @@ _title() {
   fi
 }
 
-precmd() {
+precmd_update_title() {
   _title zsh "$PWD"
   rehash
 }
 
-preexec() {
+precmd_functions=(precmd_update_title $precmd_functions)
+
+preexec_update_title() {
   emulate -L zsh
   local -a cmd; cmd=(${(z)1})
   _title $cmd[1]:t "$cmd[2,-1]"
 }
+preexec_functions=(preexec_update_title $precmd_functions)
 # }}}
 
 
@@ -310,7 +337,7 @@ unpack() {
   esac
 }
 
-# save webpags as html file
+# save webpages as html file
 # -r recursive
 # -np : no folow parent
 # -k  : make links as relative path
@@ -322,6 +349,30 @@ get-html() {
   --mirror \
   --adjust-extension \
   --random-wait $*
+}
+
+## 256色生成用便利関数
+# 
+### red: 0-5
+### green: 0-5
+### blue: 0-5
+color256()
+{
+    local red=$1; shift
+    local green=$2; shift
+    local blue=$3; shift
+
+    echo -n $[$red * 36 + $green * 6 + $blue + 16]
+}
+
+fg256()
+{
+    echo -n $'\e[38;5;'$(color256 "$@")"m"
+}
+
+bg256()
+{
+    echo -n $'\e[48;5;'$(color256 "$@")"m"
 }
 # }}}
 
@@ -341,6 +392,7 @@ alias zln="noglob zmv -L -s -W"
 alias zmv='noglob zmv -W'
 alias cp='cp -iv'
 alias mv='mv -iv'
+alias rr='command rm -rfv'
 alias df='df -h'
 alias starwars='telnet towel.blinkenlights.nl'
 alias radio1='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r1.asx'
@@ -374,7 +426,7 @@ if [[ $TERM = cons25 && -e /usr/local/bin/jfbterm ]]; then
   jfbterm
 fi
 
-if [ -x /usr/games/fortune ]; then
+if [[ -x `which fortune` ]]; then
   if [ -f /usr/local/share/games/fortune/bible ]; then
     fortune /usr/local/share/games/fortune/bible
   else
@@ -398,7 +450,8 @@ case ${OSTYPE} in
   alias la="ls -a"
   alias reboot="shutdown -r"
   alias halt="shutdown"
-  chpwd() {
+  chpwd_functions=(chpwd_ls dirs)
+  chpwd_ls(){
     ls -F
   }
   TERMINFO=/boot/common/share/terminfo
@@ -407,7 +460,8 @@ case ${OSTYPE} in
   alias la="ls  -a"
   alias ll="ls  -hlA "
   alias ls="ls  -F"
-  chpwd() {
+  chpwd_functions=(chpwd_ls dirs)
+  chpwd_ls() {
     ls -F
   }
   ;;
@@ -416,7 +470,8 @@ case ${OSTYPE} in
   alias la="ls -G -a"
   alias ll="ls -G -hlA "
   alias ls="ls -G -F"
-  chpwd() {
+  chpwd_functions=(chpwd_ls dirs)
+  chpwd_ls() {
     ls -G -F
   }
   squid_restart() {
@@ -447,12 +502,14 @@ case ${OSTYPE} in
   alias ll="ls -G -hlA "
   alias ls="ls -G -F"
   alias pup="sudo portsnap fetch update "
-  alias pcheck="sudo portmaster -PBidag && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends "
+  alias pcheck="sudo portmaster -PBida && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends "
   alias pfetch="sudo make  fetch-recursive"
   alias pinst=" HTTP_TIMEOUT=30 && sudo make  install distclean; rehash"
   alias pconf="sudo make config-recursive"
   alias pclean="sudo make  clean "
   alias pkg_add="pkg_add -v"
+  alias pcreate="pkg_create -RJvnb"
+  alias pcreateall="pkg_info -Ea |xargs -n 1 sudo pkg_create -Jnvb"
   chpwd() {
     ls -G -F
   }
