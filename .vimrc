@@ -132,6 +132,7 @@ aug myautocommands
   au bufread,bufnewfile .tmux.conf               set filetype=tmux
   au bufread,bufnewfile .vimshrc,.vim-bundles    set filetype=vim
   au bufread,bufnewfile *.changelog              set filetype=changelog
+  au bufread,bufnewfile *.twmrc                  set filetype=conf
   au bufwritepost       .vimrc                   source $MYVIMRC
   au bufwritepost       .Xresources       silent !xrdb -remove
   au bufwritepost       .Xresources       silent !xrdb -merge ~/.Xresources
@@ -277,9 +278,10 @@ let g:vimshell_prompt = '>>> '
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 
-if isdirectory(expand('~/.vim/bundle/vimproc/'))
-call vimshell#set_execute_file('txt,vim,c,h,cpp,d,xml,java', 'vim')
-endif
+"if isdirectory(expand('~/.vim/bundle/vimproc/'))
+"call vimshell#set_execute_file('txt,vim,c,h,cpp,d,xml,java', 'vim')
+"endif
+
 let g:vimshell_execute_file_list = {}
 let g:vimshell_execute_file_list['pl'] = 'perl'
 let g:vimshell_execute_file_list['scm'] = 'gosh'

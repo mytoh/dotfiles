@@ -1,8 +1,7 @@
 
-set term=xterm-256color
 set promptchars=">,#"
 #set prompt='%{[0000mk\\%}[%{[34m%n[37m@[32m%m[m%}] %c2 > '
-set prompt='%{[0000mk\\%}[%{[34m%n[37m@[32m%m[m%}] %c2 > '
+set prompt='%{[0000mk\\%}[%{[34m%n[37m@[32m%m[m%}]-%c2 \n>>> '
 set history=100000
 set savehist=(100000 merge)
 set autolist = ambiguous
@@ -65,9 +64,18 @@ alias pcheck 'sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster
 #alias pup 'sudo portsnap fetch update && sudo pkg_replace -Bcav && sudo portaudit -av && rehash'
 alias cup 'cpan-outdated && cpan-outdated | xargs cpanm -Sv'
 alias sc screen -U -D -RR  -s /bin/tcsh -m 
+alias tm 'if (tumx ls >/dev/null 2>&1) then \\
+              tumx attach                   \\
+            else                            \\
+              tmux -u2                      \\
+          endif'
 alias la ls-F -a
 alias ll ls-F -hlA 
 alias ls ls-F
+alias cp 'cp -iv'
+alias mv 'mv -iv'
+alias rr 'command rm -rfv'
+alias df 'df -h'
 alias pfetch 'sudo make  fetch-recursive'
 alias pinst "sudo make  install distclean; rehash"
 alias pconf sudo make  config-recursive
@@ -86,5 +94,6 @@ alias sudo 'sudo -E '
 foreach f ($HOME/.complete.tcsh $HOME/perl5/perlbrew/etc/cshrc)
   if (-f $f) then
     source $f
+    endif
 end
 

@@ -1,0 +1,4 @@
+
+image/*; feh %s
+video/*; mplayer -vo aa -aadriver curses -ao oss -playlist %s;needsterminal
+

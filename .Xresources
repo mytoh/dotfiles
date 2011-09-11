@@ -13,7 +13,7 @@ urxvt.depth: 32
 
 urxvt.background: rgba:0000/0000/0000/cccc
 !urxvt.background: [90]#262630
-urxvt.foreground: white
+urxvt.foreground: [90]gray
 urxvt.geometry: 100x40+100+100
 urxvt.scrollBar: false
 urxvt.buffered: true
