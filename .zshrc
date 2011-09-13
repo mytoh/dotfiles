@@ -242,7 +242,7 @@ PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
 SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
   PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
-if [[ $TERM != cons25 ]]; then
+if [[ $TERM != cons25 && $TERM != xterm ]]; then
 RPROMPT="%{$fg[cyan]%}(・x・) "
 fi
 # }}}
