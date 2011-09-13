@@ -54,7 +54,9 @@ colorscheme jellybeans
 
 " statusline
 set laststatus=2
-set statusline=%<%1*\ %f\ %m%r%h%w\ %1*%{fugitive#statusline()}%1*%=\ %1*%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %9*(・x・)%*\ 
+"set statusline=%<%1*\ %f\ %m%r%h%w\ %1*%{fugitive#statusline()}%1*%=\ %1*%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %9*(・x・)%*\ 
+" statusline for buftabs plugin
+set statusline=%<\ %=\ %{fugitive#statusline()}%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %9*(・x・)%*\ 
 " highlight for statusline
 " set colorscheme above
 " User1-9 => %{1-9}*
@@ -213,9 +215,24 @@ let g:vimfiler_as_default_explorer = 1
 "let g:miniBufExplMapWindowNavVim = 1
 "let g:miniBufExplMapCTabSwitchBufs = 1
 "let g:miniBufExplShowBufNumbers = 0
+"let g:miniBufExplSplitBelow = 0
+"let g:statusLineText = ''
 " minibufexplorer and many useful plugins
 " http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
 "
+"}}}
+
+"{{{ rson's bufstat
+nnoremap gt :<c-u>bnext<cr>
+nnoremap gT :<c-u>bNext<cr>
+let g:bufstat_debug = 1
+let g:bufstat_surround_buffers = ':'
+
+highlight ActiveBuffer ctermfg=green ctermbg=235 cterm=none
+highlight InactiveBuffer ctermfg=white ctermbg=235 cterm=none
+let g:bufstat_active_hl_group = "ActiveBuffer"
+let g:bufstat_inactive_hl_group = "InactiveBuffer"
+
 "}}}
 
 " quickrun{{{
@@ -240,8 +257,8 @@ aug unite
   au!
   au filetype unite nnoremap <silent> <buffer> <esc><esc> :q<cr>
   au filetype unite inoremap <silent> <buffer> <esc><esc> <esc>:q<cr>
-  call unite#custom_default_action('file', 'tabopen')
-  call unite#custom_default_action('bookmark', 'tabopen')
+  "call unite#custom_default_action('file', 'tabopen')
+  "call unite#custom_default_action('bookmark', 'tabopen')
 aug end
 "}}}
 

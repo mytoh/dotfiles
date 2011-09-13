@@ -154,6 +154,7 @@ Menu "apps"
 "enfle"    ! "exec enfle &"
 "grsync"   ! "exec grsync &"
 "jd"       ! "exec jd &"
+"liferea"  ! "exec liferea &"
 }
 
 Cursors
