@@ -27,4 +27,24 @@ lazy fmaps -u='www\.google\.(co\.jp|com)/reader' -events=vkeyup z
 " delicious_search.js
 autocmd VimperatorEnter ".*" :set complete+=D
 
-
+" user prefs
+javascript <<EOM
+liberator.options.setPref('browser.cache.memory.capacity', 32768)
+liberator.options.setPref('content.interrupt.parsing', true);
+liberator.options.setPref('content.max.tokenizing.time', 2250000);
+liberator.options.setPref('content.notify.backoffcount', 5);
+liberator.options.setPref('content.notify.interval', 750000);
+liberator.options.setPref('content.notify.ontimer', true);
+liberator.options.setPref('content.switch.threshold', 750000);
+liberator.options.setPref('mousewheel.withcontrolkey.action', 0);
+liberator.options.setPref('network.dns.disableIPv6', true);
+liberator.options.setPref('network.http.max-connections', 32);
+liberator.options.setPref('network.http.max-connections-per-server', 8);
+liberator.options.setPref('network.http.max-persistent-connections-per-server', 4); 
+liberator.options.setPref('network.http.pipelining', true);
+liberator.options.setPref('network.http.pipelining.firstrequest', true);
+liberator.options.setPref('network.http.pipelining.maxrequests', 8);
+liberator.options.setPref('nglayout.initialpaint.delay', 0);
+liberator.options.setPref('plugin.expose_full_path', true);
+liberator.options.setPref('ui.submenuDelay', 0);
+EOM
