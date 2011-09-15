@@ -49,6 +49,7 @@ NoTitle
     "panel"
     "wbar"
     "fbpanel"
+    "TWM Icon Manager"
 }
 
 AutoRaise
@@ -145,7 +146,7 @@ Menu "apps"
 "xterm"    ! "exec xterm &"
 "urxvt"    ! "exec urxvtcd &"
 "emacs"    ! "exec emacs &"
-"firefox"  ! "exec firefox3 &"
+"firefox"  ! "exec firefox &"
 "nitrogen" ! "exec nitrogen &"
 "comix"    ! "exec comix &"
 "gcolor"   ! "exec gcolor2 &"
@@ -155,6 +156,7 @@ Menu "apps"
 "grsync"   ! "exec grsync &"
 "jd"       ! "exec jd &"
 "liferea"  ! "exec liferea &"
+"agave"    ! "exec agave &"
 }
 
 Cursors

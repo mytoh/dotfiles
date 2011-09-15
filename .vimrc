@@ -56,7 +56,7 @@ colorscheme jellybeans
 set laststatus=2
 "set statusline=%<%1*\ %f\ %m%r%h%w\ %1*%{fugitive#statusline()}%1*%=\ %1*%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %9*(・x・)%*\ 
 " statusline for buftabs plugin
-set statusline=%<\ %=\ %{fugitive#statusline()}%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %9*(・x・)%*\ 
+set statusline=\ %=\ %{fugitive#statusline()}%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %9*(・x・)%*\ 
 " highlight for statusline
 " set colorscheme above
 " User1-9 => %{1-9}*
@@ -227,9 +227,11 @@ nnoremap gt :<c-u>bnext<cr>
 nnoremap gT :<c-u>bNext<cr>
 let g:bufstat_debug = 1
 let g:bufstat_surround_buffers = ':'
+let g:bufstat_number_before_bufname = 0
 
-highlight ActiveBuffer ctermfg=green ctermbg=235 cterm=none
-highlight InactiveBuffer ctermfg=white ctermbg=235 cterm=none
+highlight StatusLine ctermfg=gray ctermbg=235 cterm=none
+highlight ActiveBuffer ctermfg=blue ctermbg=235 cterm=none
+highlight InactiveBuffer ctermfg=gray ctermbg=235 cterm=none
 let g:bufstat_active_hl_group = "ActiveBuffer"
 let g:bufstat_inactive_hl_group = "InactiveBuffer"
 

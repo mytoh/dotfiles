@@ -269,19 +269,18 @@ _title() {
   fi
 }
 
+precmd_functions=(precmd_update_title $precmd_functions)
 precmd_update_title() {
   _title zsh "$PWD"
   rehash
 }
 
-precmd_functions=(precmd_update_title $precmd_functions)
-
+preexec_functions=(preexec_update_title $precmd_functions)
 preexec_update_title() {
   emulate -L zsh
   local -a cmd; cmd=(${(z)1})
   _title $cmd[1]:t "$cmd[2,-1]"
 }
-preexec_functions=(preexec_update_title $precmd_functions)
 # }}}
 
 
@@ -422,7 +421,7 @@ fi
 
 #[[ -s $home/.rvm/scripts/rvm ]] && source $home/.rvm/scripts/rvm
 
-if [[ $TERM = cons25 && -e /usr/local/bin/jfbterm ]]; then
+if [[ $TERM = cons25 && -e `which jfbterm` ]]; then
   jfbterm
 fi
 
