@@ -12,7 +12,7 @@ ConstrainedMoveTime 300
 #ClientBorderWidth
 DecorateTransients
 FramePadding 1
-IconManagerGeometry "+0+20"
+IconManagerGeometry "+1200+20"
 IconBorderWidth 1
 NoTitleHighlight
 NoGrabServer
@@ -104,7 +104,9 @@ Button2 = : icon : f.iconify
 Button1 = : iconmgr : f.iconify
 Button2 = : iconmgr : f.iconify
 
-"Tab" = m : all : f.function "next-window"
+#"Tab" = m : all : f.function "next-window"
+#"Tab" = m : all : f.circledown
+"Tab" = m : all : f.lower
  
 LeftTitleButton ":xlogo" = f.delete
 LeftTitleButton ":resize" = f.fullzoom
@@ -121,42 +123,59 @@ WindowRing
 
 Menu "defops"
 {
-"Twm" f.title
-"Iconify" f.iconify
-"Resize"  f.resize
-"Move"    f.move
-"Raise"   f.raise
-"Lower"   f.lower
-"------------"    f.nop
-"Focus"   f.focus
-"Unfocus" f.unfocus
-"Show Iconmgr"  f.showiconmgr
-"Hide Iconmgr"  f.hideiconmgr
-"------------"    f.nop
-"Kill"    f.destroy
-"Delete"  f.delete
-"------------"    f.nop
-"Restart" f.restart
-"Exit"    f.quit
+  "Twm" f.title
+    "Iconify" f.iconify
+    "Resize"  f.resize
+    "Move"    f.move
+    "Raise"   f.raise
+    "Lower"   f.lower
+    "------------"    f.nop
+    "Focus"   f.focus
+    "Unfocus" f.unfocus
+    "Show Iconmgr"  f.showiconmgr
+    "Hide Iconmgr"  f.hideiconmgr
+    "------------"    f.nop
+    "Kill"    f.destroy
+    "Delete"  f.delete
+    "------------"    f.nop
+    "Restart" f.restart
+    "Exit"    f.quit
 }
 
 Menu "apps"
 {
-"apps" f.title
-"xterm"    ! "exec xterm &"
-"urxvt"    ! "exec urxvtcd &"
-"emacs"    ! "exec emacs &"
-"firefox"  ! "exec firefox &"
-"nitrogen" ! "exec nitrogen &"
-"comix"    ! "exec comix &"
-"gcolor"   ! "exec gcolor2 &"
-"thunar"   ! "exec thunar &"
-"gimv"     ! "exec gimv &"
-"enfle"    ! "exec enfle &"
-"grsync"   ! "exec grsync &"
-"jd"       ! "exec jd &"
-"liferea"  ! "exec liferea &"
-"agave"    ! "exec agave &"
+  "apps" f.title
+    "net"        f.menu "apps-net"
+    "util"   f.menu "apps-util"
+    "images"   f.menu "apps-graphic"
+    "gcolor"   ! "exec gcolor2 &"
+    "thunar"   ! "exec thunar &"
+    "enfle"    ! "exec enfle &"
+    "grsync"   ! "exec grsync &"
+    "agave"    ! "exec agave &"
+}
+
+Menu "apps-net"
+{
+  "net"   f.title  
+    "firefox"  ! "exec firefox &"
+    "liferea"  ! "exec liferea &"
+    "jd"       ! "exec jd &"
+}
+
+Menu "apps-util"
+{
+  "util"   f.title  
+    "xterm"    ! "exec xterm &"
+    "urxvt"    ! "exec urxvtcd &"
+}
+
+Menu "apps-graphic"
+{
+  "image"   f.title
+    "nitrogen" ! "exec nitrogen &"
+    "comix"    ! "exec comix &"
+    "gimv"     ! "exec gimv &"
 }
 
 Cursors
