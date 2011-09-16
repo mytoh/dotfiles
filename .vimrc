@@ -189,7 +189,7 @@ let chalice_exbrowser                 = 'tmux new-window w3m %URL% '
 aug chalice
   au!
   au filetype 2ch_thread       CMiniBufExplorer
-aug END
+aug end
 "call mkdir($HOME.'/.chalice', 'p')
 "}}}
 
@@ -286,6 +286,48 @@ if has('vim_starting')
         \}
   endif
 endif
+
+"---
+" http://kstn.fc2web.com/seikana_zisyo.html
+aug eskk
+  au!
+  au User eskk-initialize-pre call s:eskk_initial_pre()
+function! s:eskk_initial_pre()
+  " User can be allowed to modify
+  " eskk global variables (`g:eskk#...`)
+  " until `User eskk-initialize-pre` event.
+  " So user can do something heavy process here.
+  " (I'm a paranoia, eskk#table#new() is not so heavy.
+  " But it loads autoload/vice.vim recursively)
+  let seikana = eskk#table#new('rom_to_hira*', 'rom_to_hira')
+  call seikana.add_map('gwa', 'ぐゎ')
+  call seikana.add_map('gwe', 'ぐぇ')
+  call seikana.add_map('gwi', 'ぐぃ')
+  call seikana.add_map('gwo', 'ぐぉ')
+  call seikana.add_map('gwu', 'ぐ')
+  call seikana.add_map('kwa', 'くゎ')
+  call seikana.add_map('kwe', 'くぇ')
+  call seikana.add_map('kwi', 'くぃ')
+  call seikana.add_map('kwo', 'くぉ')
+  call seikana.add_map('kwu', 'く')
+  call seikana.add_map('we', 'ゑ')
+  call seikana.add_map('wha', 'うぁ')
+  call seikana.add_map('whe', 'うぇ')
+  call seikana.add_map('whi', 'うぃ')
+  call seikana.add_map('who', 'うぉ')
+  call seikana.add_map('whu', 'う')
+  call seikana.add_map('wi', 'ゐ')
+  call seikana.add_map(':',':')
+  call seikana.add_map(';',';')
+  call seikana.add_map('!','!')
+  call seikana.add_map('?','?')
+  call seikana.add_map('{','『')
+  call seikana.add_map('}','』')
+  call eskk#register_mode_table('hira', seikana)
+endfunction
+aug end
+"---
+
 let g:eskk#egg_like_newline = 1
 let g:eskk#enable_completion = 1
 let g:eskk#select_cand_keys = "aoeuidhts"
