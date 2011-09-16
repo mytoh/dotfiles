@@ -90,7 +90,7 @@ set fileformats=unix,mac,dos
 set autochdir
 set virtualedit=all
 if executable('ack')
-set grepprg=ack\ -a
+  set grepprg=ack\ -a
 endif
 
 "}}}
@@ -124,7 +124,7 @@ nnoremap <leader>q :<c-u>qa<cr>
 cnoremap <c-a>      <home>
 cnoremap <c-f>      <right>
 cnoremap <c-b>      <left>
-" http://vim.g.hatena.ne.jp/tyru/20100116
+" vim.g.hatena.ne.jp/tyru/20100116
 cnoremap <c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>
 "}}}
 
@@ -200,10 +200,10 @@ let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_auto_select = 0
 let g:neocomplcache_dictionary_filetype_lists = {
-                    \ 'default'  : '',
-                    \ 'scheme'   : $HOME . '/.rlwrap/gosh_completions',
-                    \ 'vimshell' : $HOME . '/.vimshell/command-history'
-                    \ }
+      \ 'default'  : '',
+      \ 'scheme'   : $HOME . '/.rlwrap/gosh_completions',
+      \ 'vimshell' : $HOME . '/.vimshell/command-history'
+      \ }
 "}}}
 
 " vimfiler"{{{
@@ -219,7 +219,7 @@ let g:vimfiler_as_default_explorer = 1
 "let g:miniBufExplSplitBelow = 0
 "let g:statusLineText = ''
 " minibufexplorer and many useful plugins
-" http://d.hatena.ne.jp/yuroyoro/20101104/1288879591
+" d.hatena.ne.jp/yuroyoro/20101104/1288879591
 "
 "}}}
 
@@ -240,7 +240,7 @@ let g:bufstat_inactive_hl_group = "InactiveBuffer"
 
 " quickrun{{{
 if executable('gosh')
-let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
+  let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
 endif
 "}}}
 
@@ -267,23 +267,23 @@ aug end
 
 " eskk{{{
 if has('vim_starting')
-        let g:eskk#dictionary = {
+  let g:eskk#dictionary = {
         \ 'path': "~/.skk-jisyo",
         \ 'sorted': 0,
         \ 'encoding': 'utf-8',
         \}
   if s:myfunc.isos("darwin")
-        let g:eskk#large_dictionary = {
-        \ 'path': "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L",
-        \ 'sorted': 1,
-        \ 'encoding': 'euc-jp',
-        \}
+    let g:eskk#large_dictionary = {
+          \ 'path': "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L",
+          \ 'sorted': 1,
+          \ 'encoding': 'euc-jp',
+          \}
   elseif s:myfunc.isos('freebsd')
-        let g:eskk#large_dictionary = {
-        \ 'path': "/usr/local/share/skk/SKK-JISYO.L",
-        \ 'sorted': 1,
-        \ 'encoding': 'euc-jp',
-        \}
+    let g:eskk#large_dictionary = {
+          \ 'path': "/usr/local/share/skk/SKK-JISYO.L",
+          \ 'sorted': 1,
+          \ 'encoding': 'euc-jp',
+          \}
   endif
 endif
 
@@ -292,39 +292,39 @@ endif
 aug eskk
   au!
   au User eskk-initialize-pre call s:eskk_initial_pre()
-function! s:eskk_initial_pre()
-  " User can be allowed to modify
-  " eskk global variables (`g:eskk#...`)
-  " until `User eskk-initialize-pre` event.
-  " So user can do something heavy process here.
-  " (I'm a paranoia, eskk#table#new() is not so heavy.
-  " But it loads autoload/vice.vim recursively)
-  let seikana = eskk#table#new('rom_to_hira*', 'rom_to_hira')
-  call seikana.add_map('gwa', 'ぐゎ')
-  call seikana.add_map('gwe', 'ぐぇ')
-  call seikana.add_map('gwi', 'ぐぃ')
-  call seikana.add_map('gwo', 'ぐぉ')
-  call seikana.add_map('gwu', 'ぐ')
-  call seikana.add_map('kwa', 'くゎ')
-  call seikana.add_map('kwe', 'くぇ')
-  call seikana.add_map('kwi', 'くぃ')
-  call seikana.add_map('kwo', 'くぉ')
-  call seikana.add_map('kwu', 'く')
-  call seikana.add_map('we', 'ゑ')
-  call seikana.add_map('wha', 'うぁ')
-  call seikana.add_map('whe', 'うぇ')
-  call seikana.add_map('whi', 'うぃ')
-  call seikana.add_map('who', 'うぉ')
-  call seikana.add_map('whu', 'う')
-  call seikana.add_map('wi', 'ゐ')
-  call seikana.add_map(':',':')
-  call seikana.add_map(';',';')
-  call seikana.add_map('!','!')
-  call seikana.add_map('?','?')
-  call seikana.add_map('{','『')
-  call seikana.add_map('}','』')
-  call eskk#register_mode_table('hira', seikana)
-endfunction
+  function! s:eskk_initial_pre()
+    " User can be allowed to modify
+    " eskk global variables (`g:eskk#...`)
+    " until `User eskk-initialize-pre` event.
+    " So user can do something heavy process here.
+    " (I'm a paranoia, eskk#table#new() is not so heavy.
+    " But it loads autoload/vice.vim recursively)
+    let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
+    call t.add_map('gwa', 'ぐゎ')
+    call t.add_map('gwe', 'ぐぇ')
+    call t.add_map('gwi', 'ぐぃ')
+    call t.add_map('gwo', 'ぐぉ')
+    call t.add_map('gwu', 'ぐ')
+    call t.add_map('kwa', 'くゎ')
+    call t.add_map('kwe', 'くぇ')
+    call t.add_map('kwi', 'くぃ')
+    call t.add_map('kwo', 'くぉ')
+    call t.add_map('kwu', 'く')
+    call t.add_map('we', 'ゑ')
+    call t.add_map('wha', 'うぁ')
+    call t.add_map('whe', 'うぇ')
+    call t.add_map('whi', 'うぃ')
+    call t.add_map('who', 'うぉ')
+    call t.add_map('whu', 'う')
+    call t.add_map('wi', 'ゐ')
+    call t.add_map(':',':')
+    call t.add_map(';',';')
+    call t.add_map('!','!')
+    call t.add_map('?','?')
+    call t.add_map('{','『')
+    call t.add_map('}','』')
+    call eskk#register_mode_table('hira', t)
+  endfunction
 aug end
 "---
 
@@ -383,6 +383,9 @@ let g:changelog_spacing_errors = 0
 let g:netrw_nogx = 1
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
+let g:openbrowser_open_rules = {
+        \   'w3m':           '{browser} {shellescape(uri)} ',
+        \}
 " }}}
 
 " }}}

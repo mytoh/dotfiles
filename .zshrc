@@ -84,7 +84,7 @@ fi
 # less
 PAGER="less"
 LESS='-i  -w -z-4 -g -M -X -F -R -P%t?f%f \
-:stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
+  :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
 LESS_TERMCAP_mb=$'\E[01;31m'
 LESS_TERMCAP_md=$'\E[01;31m'
 LESS_TERMCAP_me=$'\E[0m'
@@ -96,17 +96,17 @@ LESS_TERMCAP_us=$'\E[01;32m'
 # paths
 typeset -U path  # remove duplicates
 path=(
-  ~/local/*/{sbin,bin}(N-/)
-  ~/local/bin(N-/)
-   /opt/X11/bin(N-/)
-   /usr/X11/bin(N-/)
-   /usr/X11R6/bin(N-/)
-   /usr/games(N-/)
-   /usr/local/{sbin,bin}(N-/)
-   /usr/local/*/{sbin,bin}(N-/)
-   /usr/{sbin,bin}(N-/)
-   /{sbin,bin}(N-/))
-         
+~/local/*/{sbin,bin}(N-/)
+~/local/bin(N-/)
+/opt/X11/bin(N-/)
+/usr/X11/bin(N-/)
+/usr/X11R6/bin(N-/)
+/usr/games(N-/)
+/usr/local/{sbin,bin}(N-/)
+/usr/local/*/{sbin,bin}(N-/)
+/usr/{sbin,bin}(N-/)
+/{sbin,bin}(N-/))
+
 if [ -d /usr/local/lib/cw ]; then
   path=( ~/.cw(N-/) $path )
 fi
@@ -116,19 +116,19 @@ fpath=(~/.zsh/functions/completion ${fpath})
 
 typeset -U manpath
 manpath=(
-          ~/local/share/man(N-/)
-          /usr/local/man(N-/)
-          /usr/local/*/man(N-/)
-          /usr/share/man(N-/)
-          $manpath)
+~/local/share/man(N-/)
+/usr/local/man(N-/)
+/usr/local/*/man(N-/)
+/usr/share/man(N-/)
+$manpath)
 
 unset INFOPATH
 typeset -xT INFOPATH infopath
 typeset -U infopath
 infopath=(~/.info(N-/)
-          ~/local/share/info(N-/)
-          /usr/local/*/info(N-/)
-          $infopath)
+~/local/share/info(N-/)
+/usr/local/*/info(N-/)
+$infopath)
 
 typeset -U cdpath
 cdpath=(~/local ~/local/var)
@@ -221,9 +221,9 @@ _update_vcs_info_msg() {
   if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
     zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{blue}]'
   } else {
-    zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{red}+%F{blue}]'
-  }
-  vcs_info
+  zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{red}+%F{blue}]'
+}
+vcs_info
 }
 
 precmd_functions=(_update_vcs_info_msg $precmd_functions)
@@ -243,7 +243,7 @@ SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
   PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
 if [[ $TERM != cons25 && $TERM != xterm ]]; then
-RPROMPT="%{$fg[cyan]%}(・x・) "
+  RPROMPT="%{$fg[cyan]%}(・x・) "
 fi
 # }}}
 
@@ -342,12 +342,12 @@ unpack() {
 # -k  : make links as relative path
 get-html() {
   wget --page-requisites \
-  --no-parent \
-  --convert-links \
-  --backup-converted \
-  --mirror \
-  --adjust-extension \
-  --random-wait $*
+    --no-parent \
+    --convert-links \
+    --backup-converted \
+    --mirror \
+    --adjust-extension \
+    --random-wait $*
 }
 
 ## 256色生成用便利関数
@@ -357,21 +357,21 @@ get-html() {
 ### blue: 0-5
 color256()
 {
-    local red=$1; shift
-    local green=$2; shift
-    local blue=$3; shift
+  local red=$1; shift
+  local green=$2; shift
+  local blue=$3; shift
 
-    echo -n $[$red * 36 + $green * 6 + $blue + 16]
+  echo -n $[$red * 36 + $green * 6 + $blue + 16]
 }
 
 fg256()
 {
-    echo -n $'\e[38;5;'$(color256 "$@")"m"
+  echo -n $'\e[38;5;'$(color256 "$@")"m"
 }
 
 bg256()
 {
-    echo -n $'\e[48;5;'$(color256 "$@")"m"
+  echo -n $'\e[48;5;'$(color256 "$@")"m"
 }
 # }}}
 
@@ -412,11 +412,11 @@ alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
 # misc {{{
 
 if [ -e $home/perl5 ]; then
-source ~/perl5/perlbrew/etc/bashrc
+  source ~/perl5/perlbrew/etc/bashrc
 fi
 
 if [ -e $home/.zsh/plugins/zaw/zaw.zsh ]; then
-source ~/.zsh/plugins/zaw/zaw.zsh
+  source ~/.zsh/plugins/zaw/zaw.zsh
 fi
 
 #[[ -s $home/.rvm/scripts/rvm ]] && source $home/.rvm/scripts/rvm
@@ -438,80 +438,80 @@ fi
 # Os detection {{{
 case ${OSTYPE} in
   beos*|haiku*)
-  path=( ~/config/bin \
-    /boot/common/bin \
-    /boot/apps \
-    /boot/preferences \
-    /boot/system/apps \
-    /boot/system/preferences \
-    /boot/develop/tools/gnupro/bin \
-    ${path})
-  alias la="ls -a"
-  alias reboot="shutdown -r"
-  alias halt="shutdown"
-  chpwd_functions=(chpwd_ls dirs)
-  chpwd_ls(){
-    ls -F
-  }
-  TERMINFO=/boot/common/share/terminfo
-  ;;
+    path=( ~/config/bin \
+      /boot/common/bin \
+      /boot/apps \
+      /boot/preferences \
+      /boot/system/apps \
+      /boot/system/preferences \
+      /boot/develop/tools/gnupro/bin \
+      ${path})
+    alias la="ls -a"
+    alias reboot="shutdown -r"
+    alias halt="shutdown"
+    chpwd_functions=(chpwd_ls dirs)
+    chpwd_ls(){
+      ls -F
+    }
+    TERMINFO=/boot/common/share/terminfo
+    ;;
   solaris*)
-  alias la="ls  -a"
-  alias ll="ls  -hlA "
-  alias ls="ls  -F"
-  chpwd_functions=(chpwd_ls dirs)
-  chpwd_ls() {
-    ls -F
-  }
-  ;;
+    alias la="ls  -a"
+    alias ll="ls  -hlA "
+    alias ls="ls  -F"
+    chpwd_functions=(chpwd_ls dirs)
+    chpwd_ls() {
+      ls -F
+    }
+    ;;
   darwin*)
-  HOMEBREW_VERBOSE=true
-  alias la="ls -G -a"
-  alias ll="ls -G -hlA "
-  alias ls="ls -G -F"
-  chpwd_functions=(chpwd_ls dirs)
-  chpwd_ls() {
-    ls -G -F
-  }
-  squid_restart() {
-    killall squid
-    killall squid
-    kill `cat ~/.squid/logs/squid.pid`
-    kill `cat ~/.squid/logs/squid.pid`
-    /bin/rm -rfv ~/.squid/cache/*
-    squid -f ~/.squid/etc/squid.conf -z
-    squid -f ~/.squid/etc/squid.conf
-    mplayer() {
-      if [ -e /Applications/mplayer2.app ]; then
-        /Applications/mplayer2.app/Contents/MacOS/mplayer-bin $*
-      else
-        mplayer
-      fi
+    HOMEBREW_VERBOSE=true
+    alias la="ls -G -a"
+    alias ll="ls -G -hlA "
+    alias ls="ls -G -F"
+    chpwd_functions=(chpwd_ls dirs)
+    chpwd_ls() {
+      ls -G -F
+    }
+    squid_restart() {
+      killall squid
+      killall squid
+      kill `cat ~/.squid/logs/squid.pid`
+      kill `cat ~/.squid/logs/squid.pid`
+      /bin/rm -rfv ~/.squid/cache/*
+      squid -f ~/.squid/etc/squid.conf -z
+      squid -f ~/.squid/etc/squid.conf
+      mplayer() {
+        if [ -e /Applications/mplayer2.app ]; then
+          /Applications/mplayer2.app/Contents/MacOS/mplayer-bin $*
+        else
+          mplayer
+        fi
       }
-    export JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
-  }
-  ;;
+      export JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
+    }
+    ;;
 
   freebsd*)
-  #http_proxy="http://192.168.1.3:3128"
-  #ftp_proxy=""
-  #FTP_TIMEOUT=30
-  PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages/Latest/"
-  alias la="ls -G -a"
-  alias ll="ls -G -hlA "
-  alias ls="ls -G -F"
-  alias pup="sudo portsnap fetch update "
-  alias pcheck="sudo portmaster -PBida && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends "
-  alias pfetch="sudo make  fetch-recursive"
-  alias pinst=" HTTP_TIMEOUT=30 && sudo make  install distclean; rehash"
-  alias pconf="sudo make config-recursive"
-  alias pclean="sudo make  clean "
-  alias pkg_add="pkg_add -v"
-  alias pcreate="pkg_create -RJvnb"
-  alias pcreateall="pkg_info -Ea |xargs -n 1 sudo pkg_create -Jnvb"
-  chpwd() {
-    ls -G -F
-  }
+    #http_proxy="http://192.168.1.3:3128"
+    #ftp_proxy=""
+    #FTP_TIMEOUT=30
+    PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages/Latest/"
+    alias la="ls -G -a"
+    alias ll="ls -G -hlA "
+    alias ls="ls -G -F"
+    alias pup="sudo portsnap fetch update "
+    alias pcheck="sudo portmaster -PBida && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends "
+    alias pfetch="sudo make  fetch-recursive"
+    alias pinst=" HTTP_TIMEOUT=30 && sudo make  install distclean; rehash"
+    alias pconf="sudo make config-recursive"
+    alias pclean="sudo make  clean "
+    alias pkg_add="pkg_add -v"
+    alias pcreate="pkg_create -RJvnb"
+    alias pcreateall="pkg_info -Ea |xargs -n 1 sudo pkg_create -Jnvb"
+    chpwd() {
+      ls -G -F
+    }
   beastie() {
     echo '
                 \e[31m,        ,                              
