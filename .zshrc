@@ -10,6 +10,8 @@ setopt share_history
 
 setopt auto_cd
 setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushd_to_home
 setopt auto_name_dirs
 setopt extended_glob
 setopt glob_dots
@@ -27,6 +29,7 @@ setopt magic_equal_subst
 setopt mark_dirs
 setopt auto_remove_slash
 setopt no_auto_param_slash
+setopt dvorak
 
 setopt always_last_prompt
 setopt prompt_subst
@@ -146,6 +149,12 @@ autoload -Uz compinit  && compinit -C # ignore insecure directories in $fpath
 autoload colors &&  colors
 autoload -Uz zmv
 autoload -Uz is-at-least
+autoload -Uz run-help
+autoload -Uz zrecompile
+# remove all ~ files recursively
+# zargs **/*~ -- rm
+autoload -Uz zargs
+
 # }}}
 
 # Modules {{{
