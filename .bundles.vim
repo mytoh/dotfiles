@@ -57,6 +57,7 @@ Bundle 'info.vim'
 Bundle 'eregex.vim'
 Bundle 'sudo.vim'
 Bundle 'YankRing.vim'
+Bundle 'fluxbox.vim'
 "Bundle 'buftabs'
 " colorschemes
 Bundle 'jellybeans.vim'

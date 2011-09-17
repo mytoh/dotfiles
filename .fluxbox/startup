@@ -1,0 +1,14 @@
+#!/bin/sh
+
+~/.fehbg &
+xcompmgr -n &
+
+exec fluxbox &
+# start apps after fluxbox started
+fbpid=$!
+sleep 1
+{
+  # ipager &
+  true &
+} &
+wait $fbpid

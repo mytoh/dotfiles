@@ -28,10 +28,13 @@ if [ "$1" = "twm" -o "$1" = "openbox" -o "$1" = "flwm" ]; then
 $HOME/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 16 -bg gray15 -fn '-*-terminus-medium-r-normal--12-*' -e 'onexit=ungrabmouse' &
 trayer --expand false --alpha 20  --tint 0x606060 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 7 --widthtype pixel --width 120 &
 #sleep 20 && wbar -above-desk -bpress -isize 45 -balfa 20 -nanim 9 &
-feh --bg-max ~/.wallpaper &
+if [ -f $HOME/.fehbg ]; then
+$HOME/.fehbg &
+else
+  feh --bg-max ~/.wallpaper &
+fi
 fbpanel &
 fi
-
 
 
 DEFAULT_SESSION="twm"
@@ -41,7 +44,7 @@ case $1 in
   xmonad) exec xmonad ;;
   twm) exec twm -v ;;
   xfce) exec startxfce4 ;;
-  fluxbox) exec fluxbox ;;
+  fluxbox) exec startfluxbox ;;
   flwm) exec flwm ;;
   qvwm) exec qvwm ;;
   fvwm|fvwm2) exec fvwm2 ;;
