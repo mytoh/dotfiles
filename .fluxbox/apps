@@ -5,3 +5,8 @@
 [app] (name=urxvt) (class=URxvt)
   [Alpha]	{230}
 [end]
+[app] (name=firefox) (class=Firefox)
+  [Alpha]	{230}
+[end]
+[app] (name=Navigator) (class=Firefox) (role=browser)
+[end]

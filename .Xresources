@@ -20,7 +20,7 @@ urxvt.buffered: true
 urxvt.borderLess: false
 urxvt.internalBorder: 0
 !urxvt.transparent: fa lse
-urxvt.inheritPixmap: true
+!urxvt.inheritPixmap: true
 urxvt.fading: 2%
 urxvt.fadeColor: grey
 urxvt.shading: 20

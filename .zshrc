@@ -50,7 +50,7 @@ local home=$HOME
 
 setopt all_export # may cause problem
 
-LANG=fi_FI.UTF-8
+LANG=en_GB.UTF-8
 REPORTTIME=3
 
 
