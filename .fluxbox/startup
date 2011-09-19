@@ -2,6 +2,7 @@
 
 ~/.fehbg &
 xcompmgr -n &
+mmaker -f FluxBox &
 
 exec fluxbox &
 # start apps after fluxbox started

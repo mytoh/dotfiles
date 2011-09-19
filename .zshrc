@@ -401,7 +401,9 @@ alias zmv='noglob zmv -W'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias rr='command rm -rfv'
-alias df='df -h'
+if type cdf >/dev/null 2>&1; then
+alias df='cdf -h'
+fi
 alias starwars='telnet towel.blinkenlights.nl'
 alias radio1='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r1.asx'
 alias radio2='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r2.asx'

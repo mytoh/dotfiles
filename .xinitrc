@@ -56,6 +56,7 @@ case $1 in
   kde) exec startkde4 ;;
   gnome) exec gnome-session ;;
   openbox) exec openbox ;;
+wmaker)   exec wmaker ;;
   *) exec $DEFAULT_SESSION ;;
 esac
 
