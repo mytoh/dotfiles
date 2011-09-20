@@ -1,5 +1,5 @@
 [submenu] (backgrounds)
-  [wallpaper] (~/fluxbox/backgrounds)
-  [wallpaper] (/usr/share/fluxbox/backgrounds)
+  [wallpapers] (~/fluxbox/backgrounds)
+  [wallpapers] (/usr/share/fluxbox/backgrounds)
 [end]
 

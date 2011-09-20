@@ -2,7 +2,7 @@
 
 ~/.fehbg &
 xcompmgr -n &
-mmaker -f FluxBox &
+#mmaker -f FluxBox &
 conky -c /usr/home/mytoh/.fluxbox/conkyrc &
 
 exec fluxbox &
