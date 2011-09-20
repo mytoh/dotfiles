@@ -10,3 +10,8 @@
 [end]
 [app] (name=Navigator) (class=Firefox) (role=browser)
 [end]
+[app] (name=torsmo) (class=Torsmo)
+  [Layer] {12}
+  [Sticky] {yes}
+  [Hidden] {yes}
+[end]

@@ -1,22 +1,23 @@
 # torsmo configuration
 
 # set to yes if you want tormo to be forked in the background
-background no
+background yes
 
 # X font when Xft is disabled, you can pick one with program xfontsel
 #font 5x7
 #font 6x10
 #font 7x13
 #font 8x13
-font 9x15
+#font 9x15
 #font *mintsmild.se*
 #font -*-*-*-*-*-*-34-*-*-*-*-*-*-*
+font -*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*
 
 # Use Xft?
-use_xft no
+use_xft yes
 
 # Xft font when Xft is enabled
-xftfont courier-12
+xftfont Terminus-9
 
 # Text alpha when using Xft
 xftalpha 0.8
@@ -25,7 +26,7 @@ xftalpha 0.8
 mail_spool $MAIL
 
 # Update interval in seconds
-update_interval 5.0
+update_interval 1.0
 
 # Create own window instead of using desktop (required in nautilus)
 own_window no
@@ -43,7 +44,7 @@ draw_shades yes
 draw_outline no
 
 # Draw borders around text
-draw_borders yes
+draw_borders no
 
 # Stippled borders?
 stippled_borders 8
@@ -60,14 +61,14 @@ default_shade_color black
 default_outline_color black
 
 # Text alignment, other possible values are commented
-#alignment top_left
+alignment top_left
 #alignment top_right
-alignment bottom_left
+#alignment bottom_left
 #alignment bottom_right
 
 # Gap between borders of screen and text
-gap_x 12
-gap_y 12
+gap_x 8
+gap_y 8
 
 # Subtract file system buffers from used memory?
 no_buffers yes
@@ -182,18 +183,4 @@ uppercase no
 # stuff after 'TEXT' will be formatted on screen
 
 TEXT
-$nodename - $sysname $kernel on $machine
-$stippled_hr
-${color grey}Uptime$color $uptime
-${color grey}RAM Usage:$color $mem/$memmax - $memperc% ${membar 6}
-${color grey}Swap Usage:$color $swap/$swapmax - $swapperc% ${swapbar 6}
-${color grey}CPU Usage:$color $cpu% ${cpubar 6}
-${color grey}Processes:$color $processes  ${color grey}Running:$color $running_processes
-${color grey}Mails: ${color}$mails${color grey} New: ${color}$new_mails${color grey}
-$color$stippled_hr
-${color grey}Networking:
- Up:$color ${upspeed eth0} k/s${color grey} - Down:$color ${downspeed eth0} k/s
-${color grey}File systems:
- / $color${fs_free /}/${fs_size /} ${fs_bar 6 /}
-${color grey}Temperatures:
- CPU:$color ${i2c temp 1}°C${color grey} - MB:$color ${i2c temp 2}°C
+$nodename - $sysname $kernel on $machine ${color grey}Uptime$color $uptime ${color grey}RAM:$color $mem/$memmax - $memperc% ${color grey}Swap:$color $swap/$swapmax - $swapperc% ${color grey}CPU:$color $cpu% ${color grey}Networking: Up:$color ${upspeed eth0} k/s${color grey} - Down:$color ${downspeed eth0} k/s ${color grey}File systems: / $color${fs_free /}/${fs_size /} ${color grey}battery: ${color}${battery}

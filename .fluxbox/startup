@@ -3,6 +3,7 @@
 ~/.fehbg &
 xcompmgr -n &
 mmaker -f FluxBox &
+killall torsmo;torsmo &
 
 exec fluxbox &
 # start apps after fluxbox started
