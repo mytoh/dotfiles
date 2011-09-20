@@ -3,7 +3,7 @@
 ~/.fehbg &
 xcompmgr -n &
 mmaker -f FluxBox &
-killall torsmo;torsmo &
+conky -c /usr/home/mytoh/.fluxbox/conkyrc &
 
 exec fluxbox &
 # start apps after fluxbox started
