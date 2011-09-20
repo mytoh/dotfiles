@@ -3,6 +3,7 @@
 ~/.fehbg &
 xcompmgr -n &
 #mmaker -f FluxBox &
+#fluxbox-generate_menu -g -k -ds -is
 conky -c /usr/home/mytoh/.fluxbox/conkyrc &
 
 exec fluxbox &
