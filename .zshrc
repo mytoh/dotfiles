@@ -514,12 +514,13 @@ case ${OSTYPE} in
     alias pup="sudo portsnap fetch update "
     alias pcheck="sudo portmaster -PBida && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends "
     alias pfetch="sudo make  fetch-recursive"
-    alias pinst=" HTTP_TIMEOUT=30 && sudo make fetch-recursive && sudo make  install distclean; rehash"
+    alias pinst=" HTTP_TIMEOUT=30 && sudo make  install distclean; rehash"
     alias pconf="sudo make config-recursive"
     alias pclean="sudo make  clean "
     alias pkg_add="pkg_add -v"
     alias pcreate="pkg_create -RJvnb"
     alias pcreateall="pkg_info -Ea |xargs -n 1 sudo pkg_create -Jnvb"
+    alias fbgenmenu="fluxbox-generate_menu -g -k -ds -is"
     chpwd() {
       ls -G -F
     }

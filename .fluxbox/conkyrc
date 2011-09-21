@@ -35,14 +35,15 @@ draw_borders no
 draw_graph_borders yes
 draw_outline no
 draw_shades no
-use_xft yes
+font -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*
+use_xft no
 xftfont DejaVu Sans Mono:size=8
 gap_x 4
-gap_y 5
+gap_y 2
 minimum_size 5 5
 net_avg_samples 2
-no_buffers yes
-double_buffers yes
+no_buffers no
+double_buffer yes
 out_to_console no
 out_to_stderr no
 extra_newline no

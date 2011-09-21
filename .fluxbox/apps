@@ -15,3 +15,6 @@
   [Sticky] {yes}
   [Hidden] {yes}
 [end]
+[group]
+  [app] (class=Thunar)
+[end]

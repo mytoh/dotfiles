@@ -4,7 +4,7 @@
 xcompmgr -n &
 #mmaker -f FluxBox &
 #fluxbox-generate_menu -g -k -ds -is
-conky -c /usr/home/mytoh/.fluxbox/conkyrc &
+conky -c ~/.fluxbox/conkyrc &
 
 exec fluxbox &
 # start apps after fluxbox started
