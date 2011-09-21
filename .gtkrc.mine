@@ -7,3 +7,11 @@ gtk-cursor-theme-name = "whiteglass"
 #gtk-key-theme-name = "Emacs"
 gtk-font-name = "Inconsolata 9"
 
+style "thunar-icon-view-reduced-style"
+{
+    ThunarIconView::column-spacing = 1
+    ThunarIconView::row-spacing = 1
+}
+
+class "ThunarIconView" style "thunar-icon-view-reduced-style"
+

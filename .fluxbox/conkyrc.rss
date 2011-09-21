@@ -1,0 +1,42 @@
+alignment top_left
+background no
+border_width 1
+cpu_avg_samples 2
+default_color white
+default_outline_color white
+default_shade_color white
+default_bar_size 50 5
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+use_xft yes
+#override_utf8_locale yes
+xftfont M+ 2m:size=8
+gap_x 4
+gap_y 30
+minimum_size 5 5
+net_avg_samples 2
+no_buffers yes
+double_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+own_window yes
+own_window_class Conky
+own_window_type desktop
+own_window_colour 333333
+stippled_borders 0
+update_interval 1.0
+uppercase no
+use_spacer none
+show_graph_scale no
+show_graph_range no
+
+TEXT
+${color lightblue}${rss http://planet.archlinux.org/rss20.xml 1 feed_title}
+${color}${rss http://planet.archlinux.org/rss20.xml 1 item_titles 10 }
+
+${color orange}${rss http://www.pheedo.jp/f/slashdot_japan 1 feed_title}
+${color}${rss http://www.pheedo.jp/f/slashdot_japan 1 item_titles 10 }
+

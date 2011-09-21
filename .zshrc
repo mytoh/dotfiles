@@ -524,6 +524,7 @@ case ${OSTYPE} in
     alias pkg_add="pkg_add -v"
     alias pcreate="pkg_create -RJvnb"
     alias pcreateall="pkg_info -Ea |xargs -n 1 sudo pkg_create -Jnvb"
+    alias fbgenmenu="fluxbox-generate_menu -g -k -ds -is"
     chpwd() {
       ls -G -F
     }

@@ -1,0 +1,8 @@
+[submenu] (apps)
+[exec] (thunar) {thunar}
+[exec] (jd) {jd}
+[end]
+[submenu] (backgrounds)
+[wallpapers] (~/.fluxbox/backgrounds) {feh --bg-scale}
+[end]
+

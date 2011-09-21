@@ -8,7 +8,7 @@
 # MY_TERM='aterm -tint $(random_color)'
 
 # Your favourite browser. You can also specify options.
-# MY_BROWSER=mozilla
+MY_BROWSER=firefox
 
 # Name of the outputfile
 # MENUFILENAME=/home/mytoh/.fluxbox/menu
@@ -52,7 +52,7 @@ BACKGROUND_DIRS="/home/mytoh/.fluxbox/backgrounds/:/usr/local/share/fluxbox/back
 BACKGROUNDMENUITEM=yes
 
 # Include KDE-menus
-# KDEMENU=yes
+KDEMENU=yes
 
 # Include Gnome-menus
 GNOMEMENU=yes

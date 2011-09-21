@@ -2,8 +2,9 @@
 
 ~/.fehbg &
 xcompmgr -n &
-mmaker -f FluxBox &
-killall torsmo;torsmo &
+#mmaker -f FluxBox &
+#fluxbox-generate_menu -g -k -ds -is
+conky -c ~/.fluxbox/conkyrc &
 
 exec fluxbox &
 # start apps after fluxbox started
