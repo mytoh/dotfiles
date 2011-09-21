@@ -404,12 +404,15 @@ alias rr='command rm -rfv'
 if type cdf >/dev/null 2>&1; then
 alias df='cdf -h'
 fi
+
 alias starwars='telnet towel.blinkenlights.nl'
 alias radio1='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r1.asx'
 alias radio2='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r2.asx'
 alias radio3='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r3.asx'
 alias radio4='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r4.asx'
 alias radio6='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r6.asx'
+alias sumo='mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_haishin/asx/sumolive.asx'
+
 # suffix aliases
 alias -s txt=cat
 alias -s zip=zipinfo
@@ -480,6 +483,7 @@ case ${OSTYPE} in
     alias la="ls -G -a"
     alias ll="ls -G -hlA "
     alias ls="ls -G -F"
+    alias mp2="/Applications/mplayer2.app/Contents/MacOS/mplayer-bin"
     chpwd_functions=(chpwd_ls dirs)
     chpwd_ls() {
       ls -G -F
