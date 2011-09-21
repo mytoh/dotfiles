@@ -1,6 +1,7 @@
 #!/bin/sh
 
 ~/.fehbg &
+fluxter -w &
 xcompmgr -n &
 #mmaker -f FluxBox &
 #fluxbox-generate_menu -g -k -ds -is
