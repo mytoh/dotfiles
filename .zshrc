@@ -50,7 +50,7 @@ local home=$HOME
 
 setopt all_export # may cause problem
 
-LANG=en_GB.UTF-8
+LANG=fi_FI.UTF-8
 REPORTTIME=3
 
 
@@ -239,12 +239,16 @@ precmd_functions=(_update_vcs_info_msg $precmd_functions)
 # }}}
 
 # Prompts {{{
-# muridana
-PROMPT="%{$fg[green]%}[%~]%{$fg[white]%} "
+setup_prompt(){
+unset PROMPT
+PROMPT+="%{$fg[green]%}[%~]%{$fg[white]%} "
 # git prompt
-PROMPT+='%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}'
+gitprompt='%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}'
+PROMPT+=$gitprompt
+# ip
+#ip="(%F{yellow}$(curl ifconfig.me 2>/dev/null)%{$reset_color%})"
+#PROMPT+=$ip
 ####
-PROMPT+="%{$reset_color%}"
 PROMPT+=$'\n'
 PROMPT+="%{$fg[cyan]%}>>>%{$fg[white]%} "
 PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
@@ -252,8 +256,11 @@ SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
   PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
 if [[ $TERM != cons25 && $TERM != xterm ]]; then
-  RPROMPT="%{$fg[cyan]%}(・x・) "
+  local muridana="%{$fg[cyan]%}(・x・) "
+  RPROMPT=$muridana
 fi
+}
+setup_prompt
 # }}}
 
 # History search keymap {{{

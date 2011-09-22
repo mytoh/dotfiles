@@ -1,4 +1,7 @@
 [begin]
+  [submenu] (root)
+  [include] (~/.fluxbox/menu)
+  [end]
   [shade]
   [stick]
   [maximize]

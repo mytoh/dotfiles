@@ -42,16 +42,14 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 urxvt.font: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso8859-*, \
             -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*, \
              -*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*, \
-            -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*,\
-            -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1,\
-            xft:Code200:antialias=false
+            -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*
+
+!urxvt.font: -mplus-gothic-medium-r-normal-*-12-*-*-*-*-*-*-*
 
 urxvt.boldFont: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso8859-*, \
             -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*, \
              -*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*, \
             -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*,\
-            -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1,\
-            xft:Code200:antialias=false
 
 !urxvt.boldfont: -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-*-*
 !urxvt.boldFont: 9x15bold,\

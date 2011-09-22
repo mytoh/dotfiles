@@ -38,8 +38,8 @@ draw_shades no
 font -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*
 use_xft no
 xftfont DejaVu Sans Mono:size=8
-gap_x 4
-gap_y 2
+gap_x 3
+gap_y 1
 minimum_size 5 5
 net_avg_samples 2
 no_buffers no
@@ -59,4 +59,4 @@ show_graph_scale no
 show_graph_range no
 
 TEXT
-${scroll 16 $nodename - $sysname $kernel on $machine} ${color grey}RAM:$color $memperc% ${membar} ${color grey}CPU:$color $cpu% ${cpubar} ${color grey}Processes:$color $processes  ${color grey}Running:$color $running_processes ${color grey}Disk: / $color${fs_used /}/${fs_size /} ${fs_bar /} ${color grey}Up:$color ${upspeed em0} ${color grey}- Down:$color ${downspeed em0} 
+${scroll 16 $nodename - $sysname $kernel on $machine} ${color grey}cpu:$color $cpu% ${cpubar} ${color grey}ram:$color $memperc% ${membar} ${color grey}processes:$color $processes  ${color grey}running:$color $running_processes ${color grey}disk: / $color${fs_used /}/${fs_size /} ${fs_bar /} ${color grey}up:$color ${upspeed em0} ${color grey}- down:$color ${downspeed em0} 
