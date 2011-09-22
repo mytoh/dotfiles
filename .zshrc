@@ -352,19 +352,6 @@ unpack() {
   esac
 }
 
-# save webpages as html file
-# -r recursive
-# -np : no folow parent
-# -k  : make links as relative path
-get-html() {
-  wget --page-requisites \
-    --no-parent \
-    --convert-links \
-    --backup-converted \
-    --mirror \
-    --adjust-extension \
-    --random-wait $*
-}
 
 ## 256色生成用便利関数
 # 
@@ -390,11 +377,11 @@ bg256()
   echo -n $'\e[48;5;'$(color256 "$@")"m"
 }
 
+colortest()
+{
 # colortesh.sh
 # from arch linux forum 
 # september 2011 screenshots thread
-colortest()
-{
 local T='▆ ▆'   # The test text
 
 echo -e "\n                 40m     41m     42m     43m\
@@ -413,6 +400,35 @@ done
 echo
 
 }
+
+get-html() {
+# save webpages as html file
+# -r recursive
+# -np : no folow parent
+# -k  : make links as relative path
+  wget --page-requisites \
+    --no-parent \
+    --convert-links \
+    --backup-converted \
+    --mirror \
+    --adjust-extension \
+    --random-wait $*
+}
+
+SS2mkd(){
+## get SSes from wiki page and
+# convert to mkd
+local num=1
+
+for num in `seq 1 1200`;
+do
+  if [ ! -e SS$num.txt ]; then
+w3m -dump_source nagatoyuki.info/?SS%BD%B8%2F$num |nkf|pandoc -t markdown -f html | sed -e 's/\\$//g' > SS$num.mkd
+fi
+echo $num.mkd
+done
+}
+
 # }}}
 
 # Aliases {{{

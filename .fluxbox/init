@@ -55,7 +55,7 @@ session.screen0.colPlacementDirection:	TopToBottom
 session.screen0.menuDelay:	200
 session.screen0.allowRemoteActions:	false
 session.screen0.defaultDeco:	NORMAL
-session.screen0.workspaceNames:	yksi ,kaksi , kolme , nelj,
+session.screen0.workspaceNames:	yksi ,kaksi ,kolme ,neljä
 session.tabPadding:	0
 session.cacheLife:	5
 session.appsFile:	/home/mytoh/.fluxbox/apps
