@@ -13,6 +13,7 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 setopt pushd_to_home
 setopt auto_name_dirs
+
 setopt extended_glob
 setopt glob_dots
 setopt multibyte
@@ -25,6 +26,7 @@ setopt long_list_jobs
 setopt noflow_control
 setopt ignore_eof
 setopt complete_aliases
+setopt complete_in_word
 setopt magic_equal_subst
 setopt mark_dirs
 setopt auto_remove_slash
@@ -42,6 +44,78 @@ setopt auto_menu
 unsetopt bg_nice appendhistory beep nomatch
 limit coredumpsize 0
 #umask 022
+# }}}
+
+# internal function {{{
+check_com() {
+# {{{
+# grml zshrc
+# utility functions
+# this function checks if a command exists and returns either true
+# or false. This avoids using 'which' and 'whence', which will
+# avoid problems with aliases for which on certain weird systems. :-)
+# Usage: check_com [-c|-g] word
+#   -c  only checks for external commands
+#   -g  does the usual tests and also checks for global aliases
+#   ex) if check_com -c vim; then
+#           ..... 
+#       fi
+#
+    emulate -L zsh
+    local -i comonly gatoo
+
+    if [[ $1 == '-c' ]] ; then
+        (( comonly = 1 ))
+        shift
+    elif [[ $1 == '-g' ]] ; then
+        (( gatoo = 1 ))
+    else
+        (( comonly = 0 ))
+        (( gatoo = 0 ))
+    fi
+
+    if (( ${#argv} != 1 )) ; then
+        printf 'usage: check_com [-c] <command>\n' >&2
+        return 1
+    fi
+
+    if (( comonly > 0 )) ; then
+        [[ -n ${commands[$1]}  ]] && return 0
+        return 1
+    fi
+
+    if   [[ -n ${commands[$1]}    ]] \
+      || [[ -n ${functions[$1]}   ]] \
+      || [[ -n ${aliases[$1]}     ]] \
+      || [[ -n ${reswords[(r)$1]} ]] ; then
+
+        return 0
+    fi
+
+    if (( gatoo > 0 )) && [[ -n ${galiases[$1]} ]] ; then
+        return 0
+    fi
+
+    return 1
+# }}}
+}
+
+xsource() { # {{{
+# grml zshrc
+# Check if we can read given files and source those we can.
+    emulate -L zsh
+    if (( ${#argv} < 1 )) ; then
+        printf 'usage: xsource FILE(s)...\n' >&2
+        return 1
+    fi
+
+    while (( ${#argv} > 0 )) ; do
+        [[ -r "$1" ]] && source "$1"
+        shift
+    done
+    return 0
+}
+#}}}
 # }}}
 
 # Environment {{{
@@ -69,11 +143,12 @@ SAVEHIST=$HISTSIZE
 
 # vim
 EDITOR=vim
-if ! type vim >/dev/null 2>&1; then
+if ! check_com -c vim; then
   alias vim=vi
 fi
 MYVIMRC=~/.vimrc
 VIMRUNTIME=(~/.vim/vundle:$VIMRUNTIME)
+
 
 # ls
 LSCOLORS=exFxCxdxBxegedabagacad
@@ -179,42 +254,6 @@ zstyle ':completion:*:functions' ignore-patterns '_*'
 zstyle ':completion:*:cd:*' tag-order local-directories path-directories
 # }}}
 
-# git prompt {{{
-#if is-at-least 4.3.10; then
-#  autoload -Uz vcs_info
-#  autoload -Uz add-zsh-hook
-#
-#  zstyle ':vcs_info:*' enable git
-#  zstyle ':vcs_info:git:*' check-for-changes true
-#  zstyle ':vcs_info:git:*' stagedstr '+'
-#  zstyle ':vcs_info:git:*' unstagedstr "${fg[yellow]}-"
-#  zstyle ':vcs_info:git:*' formats '(@%b%u%c)'
-#  zstyle ':vcs_info:git:*' actionformats '@%b|%a%u%c'
-#
-#  function _update_vcs_info_msg() {
-#    psvar=()
-#    LANG=en_US.UTF-8 vcs_info
-#    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-#    psvar[2]=$(_git_not_pushed)
-#  }
-#  function _git_not_pushed() {
-#  if [ "$(git rev-parse --is-inside-word-tree 2>/dev/null)" = "true" ]; then
-#    head="$(git rev-parse HEAD)"
-#    for x in $(git rev-parse --remotes)
-#    do
-#      if [ "$head" = "$x" ]; then
-#        return 0
-#      fi
-#    done
-#    echo "?"
-#  fi
-#  return 0
-#  }
-#  add-zsh-hook precmd _update_vcs_info_msg
-#fi
-## }}
-#
-# }}}
 
 # git prompt from {{{
 # briancarper.net/tag/249/zsh 
@@ -297,10 +336,7 @@ preexec_update_title() {
   local -a cmd; cmd=(${(z)1})
   _title $cmd[1]:t "$cmd[2,-1]"
 }
-# }}}
 
-
-# alias functions {{{
 tm() {
   if tmux ls >/dev/null 2>&1; then
     tmux attach
@@ -315,41 +351,6 @@ svim() {
   else
     vim $1
   fi
-}
-
-# archive function
-# http://www.christoph-polcin.com/blog/zsh-archive-funcition
-pack() {
-  if [[ $# -lt 2 ]];
-  then
-    echo "compress files and directories via:"
-    echo " pack archive_file file [dir|file]*"
-    return 1
-  fi
-
-  [[ -f $1 ]] && echo "error: destination archive_file exists" && return 1
-
-  local lower
-  lower=${(L)1}
-  case $lower in
-    *.tar.xz|*.xz)
-      tar cJvf $@;;
-    *)
-      echo "'$1' cannot be created via 'pack'";;
-  esac
-}
-
-unpack() {
-  local lower
-  lower=${(L)1}
-  case $lower in
-    *.tar.xz|*.tar.bz2|*.tar.gz)
-      tar xvf $@;;
-    *.txz|*.tbz2|*.tgz)
-      tar xvf $@;;
-    *.zip)
-      unzip $@;;
-  esac
 }
 
 
@@ -382,6 +383,7 @@ colortest()
 # colortesh.sh
 # from arch linux forum 
 # september 2011 screenshots thread
+emulate -L zsh
 local T='▆ ▆'   # The test text
 
 echo -e "\n                 40m     41m     42m     43m\
@@ -418,6 +420,7 @@ get-html() {
 SS2mkd(){
 ## get SSes from wiki page and
 # convert to mkd
+ emulate -L zsh
 local num=1
 
 for num in `seq 1 1200`;
@@ -429,16 +432,218 @@ echo $num.mkd
 done
 }
 
+
+hex() {
+# print hex value of a number
+    emulate -L zsh
+    [[ -n "$1" ]] && printf "%x\n" $1 || { print 'Usage: hex <number-to-convert>' ; return 1 }
+}
+
+cd() {
+# smart cd function, allows switching to /etc when running 'cd /etc/fstab'
+    if (( ${#argv} == 1 )) && [[ -f ${1} ]]; then
+        [[ ! -e ${1:h} ]] && return 1
+        print "Correcting ${1} to ${1:h}"
+        builtin cd ${1:h}
+    else
+        builtin cd "$@"
+    fi
+}
+
+unpack() {
+# Usage: simple-extract <file>
+# Using option -d deletes the original archive file.
+#f5# Smart archive extractor
+    emulate -L zsh
+    setopt extended_glob noclobber
+    local DELETE_ORIGINAL DECOMP_CMD USES_STDIN USES_STDOUT GZTARGET WGET_CMD
+    local RC=0
+    zparseopts -D -E "d=DELETE_ORIGINAL"
+    for ARCHIVE in "${@}"; do
+        case $ARCHIVE in
+            *.(tar.bz2|tbz2|tbz))
+                DECOMP_CMD="tar -xvjf -"
+                USES_STDIN=true
+                USES_STDOUT=false
+                ;;
+            *.(tar.gz|tgz))
+                DECOMP_CMD="tar -xvzf -"
+                USES_STDIN=true
+                USES_STDOUT=false
+                ;;
+            *.(tar.xz|txz|tar.lzma))
+                DECOMP_CMD="tar -xvJf -"
+                USES_STDIN=true
+                USES_STDOUT=false
+                ;;
+            *.tar)
+                DECOMP_CMD="tar -xvf -"
+                USES_STDIN=true
+                USES_STDOUT=false
+                ;;
+            *.rar)
+                DECOMP_CMD="unrar x"
+                USES_STDIN=false
+                USES_STDOUT=false
+                ;;
+            *.lzh)
+                DECOMP_CMD="lha x"
+                USES_STDIN=false
+                USES_STDOUT=false
+                ;;
+            *.7z)
+                DECOMP_CMD="7z x"
+                USES_STDIN=false
+                USES_STDOUT=false
+                ;;
+            *.(zip|jar))
+                DECOMP_CMD="unzip"
+                USES_STDIN=false
+                USES_STDOUT=false
+                ;;
+            *.deb)
+                DECOMP_CMD="ar -x"
+                USES_STDIN=false
+                USES_STDOUT=false
+                ;;
+            *.bz2)
+                DECOMP_CMD="bzip2 -d -c -"
+                USES_STDIN=true
+                USES_STDOUT=true
+                ;;
+            *.(gz|Z))
+                DECOMP_CMD="gzip -d -c -"
+                USES_STDIN=true
+                USES_STDOUT=true
+                ;;
+            *.(xz|lzma))
+                DECOMP_CMD="xz -d -c -"
+                USES_STDIN=true
+                USES_STDOUT=true
+                ;;
+            *)
+                print "ERROR: '$ARCHIVE' has unrecognized archive type." >&2
+                RC=$((RC+1))
+                continue
+                ;;
+        esac
+
+        if ! check_com ${DECOMP_CMD[(w)1]}; then
+            echo "ERROR: ${DECOMP_CMD[(w)1]} not installed." >&2
+            RC=$((RC+2))
+            continue
+        fi
+
+        GZTARGET="${ARCHIVE:t:r}"
+        if [[ -f $ARCHIVE ]] ; then
+
+            print "Extracting '$ARCHIVE' ..."
+            if $USES_STDIN; then
+                if $USES_STDOUT; then
+                    ${=DECOMP_CMD} < "$ARCHIVE" > $GZTARGET
+                else
+                    ${=DECOMP_CMD} < "$ARCHIVE"
+                fi
+            else
+                if $USES_STDOUT; then
+                    ${=DECOMP_CMD} "$ARCHIVE" > $GZTARGET
+                else
+                    ${=DECOMP_CMD} "$ARCHIVE"
+                fi
+            fi
+            [[ $? -eq 0 && -n "$DELETE_ORIGINAL" ]] && rm -f "$ARCHIVE"
+
+        elif [[ "$ARCHIVE" == (#s)(https|http|ftp)://* ]] ; then
+            if check_com curl; then
+                WGET_CMD="curl -k -s -o -"
+            elif check_com wget; then
+                WGET_CMD="wget -q -O - --no-check-certificate"
+            else
+                print "ERROR: neither wget nor curl is installed" >&2
+                RC=$((RC+4))
+                continue
+            fi
+            print "Downloading and Extracting '$ARCHIVE' ..."
+            if $USES_STDIN; then
+                if $USES_STDOUT; then
+                    ${=WGET_CMD} "$ARCHIVE" | ${=DECOMP_CMD} > $GZTARGET
+                    RC=$((RC+$?))
+                else
+                    ${=WGET_CMD} "$ARCHIVE" | ${=DECOMP_CMD}
+                    RC=$((RC+$?))
+                fi
+            else
+                if $USES_STDOUT; then
+                    ${=DECOMP_CMD} =(${=WGET_CMD} "$ARCHIVE") > $GZTARGET
+                else
+                    ${=DECOMP_CMD} =(${=WGET_CMD} "$ARCHIVE")
+                fi
+            fi
+
+        else
+            print "ERROR: '$ARCHIVE' is neither a valid file nor a supported URI." >&2
+            RC=$((RC+8))
+        fi
+    done
+    return $RC
+}
+
+__archive_or_uri()
+{
+    _alternative \
+        'files:Archives:_files -g "*.(#l)(tar.bz2|tbz2|tbz|tar.gz|tgz|tar.xz|txz|tar.lzma|tar|rar|lzh|7z|zip|jar|deb|bz2|gz|Z|xz|lzma)"' \
+        '_urls:Remote Archives:_urls'
+}
+
+_simple_extract()
+{
+    _arguments \
+        '-d[delete original archivefile after extraction]' \
+        '*:Archive Or Uri:__archive_or_uri'
+}
+compdef _simple_extract unpack
+alias unar=unpack
+
+# Usage: smartcompress <file> (<type>)
+#f5# Smart archive creator
+pack() {
+    emulate -L zsh
+    if [[ -n $2 ]] ; then
+        case $2 in
+            tgz | tar.gz)   tar -zcvf$1.$2 $1 ;;
+            tbz2 | tar.bz2) tar -jcvf$1.$2 $1 ;;
+            tar.Z)          tar -Zcvf$1.$2 $1 ;;
+            tar)            tar -cvf$1.$2  $1 ;;
+            gz | gzip)      gzip           $1 ;;
+            bz2 | bzip2)    bzip2          $1 ;;
+            *)
+                echo "Error: $2 is not a valid compression type"
+                ;;
+        esac
+    else
+        smartcompress $1 tar.gz
+    fi
+}
+
+vman() {
+# It's shameless stolen from <http://www.vim.org/tips/tip.php?tip_id=167>
+#f5# Use \kbd{vim} as your manpage reader
+    emulate -L zsh
+    if (( ${#argv} == 0 )); then
+        printf 'usage: vman <topic>\n'
+        return 1
+    fi
+    man "$@" | col -b | vim -X -R -c 'set ft=man nomod nolist' -
+}
 # }}}
 
 # Aliases {{{
 alias chalice='vim -c Chalice'
 alias pd=popd
 alias cup="cpan-outdated && cpan-outdated | xargs cpanm -v"
-alias view="vim -X -R -"
+#alias view="vim -X -R -"
 alias scsh="rlwrap scsh"
 alias goshrl="rlwrap -pBlue -b '(){}[],#;| ' gosh"
-alias ew="emacs -f w3m"
 alias single="sudo shutdown now"
 alias halt="sync;sync;sync;sudo shutdown -p now"
 alias reboot="sync;sync;sync;sudo shutdown -r now"
@@ -448,7 +653,7 @@ alias zmv='noglob zmv -W'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias rr='command rm -rfv'
-if type cdf >/dev/null 2>&1; then
+if check_com -c cdf ; then
 alias df='cdf -h'
 fi
 
@@ -472,13 +677,20 @@ alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
 
 # misc {{{
 
-if [ -e $home/perl5 ]; then
-  source ~/perl5/perlbrew/etc/bashrc
+# set default browser
+if [[ -z "$BROWSER" ]] ; then
+    if [[ -n "$DISPLAY" ]] ; then
+        #v# If X11 is running
+        check_com -c firefox && export BROWSER=firefox
+    else
+        #v# If no X11 is running
+        check_com -c w3m && export BROWSER=w3m
+    fi
 fi
 
-if [ -e $home/.zsh/plugins/zaw/zaw.zsh ]; then
-  source ~/.zsh/plugins/zaw/zaw.zsh
-fi
+xsource ~/perl5/perlbrew/etc/bashrc
+
+xsource ~/.zsh/plugins/zaw/zaw.zsh
 
 #[[ -s $home/.rvm/scripts/rvm ]] && source $home/.rvm/scripts/rvm
 
@@ -486,7 +698,7 @@ if [[ $TERM = cons25 && -e `which jfbterm` ]]; then
   jfbterm
 fi
 
-if [[ -x `which fortune` ]]; then
+if check_com -c fortune; then
   if [ -f /usr/local/share/games/fortune/bible ]; then
     fortune /usr/local/share/games/fortune/bible
   else
