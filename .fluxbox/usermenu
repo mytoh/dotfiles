@@ -1,6 +1,13 @@
 [submenu] (apps)
 [exec] (thunar) {thunar}
 [exec] (jd) {jd}
+[exec] (danpei) {danpei}
+[exec] (rox) {rox}
+[exec] (macopix) {macopix}
+[exec] (buoh) {buoh}
+[exec] (agave) {agave}
+[exec] (liferea) {liferea}
+[exec] (comix) {comix}
 [end]
 [submenu] (backgrounds)
 [wallpapers] (~/.fluxbox/backgrounds) {feh --bg-scale}
