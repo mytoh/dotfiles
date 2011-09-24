@@ -152,7 +152,7 @@ VIMRUNTIME=(~/.vim/vundle:$VIMRUNTIME)
 
 # ls
 LSCOLORS=exFxCxdxBxegedabagacad
-if [[ -x `which gdircolors` ]] && [[ ! -e $home/.dir_colors ]]; then
+if check_com -c gdircolors && [[ ! -e $home/.dir_colors ]]; then
   eval $(gdircolors $home/.dir_colors -b)
   ZLS_COLORS=$LS_COLORS
 else
@@ -172,7 +172,6 @@ LESS_TERMCAP_ue=$'\E[0m'
 LESS_TERMCAP_us=$'\E[01;32m'
 
 # paths
-typeset -U path  # remove duplicates
 path=(
 ~/local/*/{sbin,bin}(N-/)
 ~/local/bin(N-/)
@@ -189,10 +188,8 @@ if [ -d /usr/local/lib/cw ]; then
   path=( ~/.cw(N-/) $path )
 fi
 ## zsh functions directory
-typeset -U fpath
 fpath=(~/.zsh/functions/completion ${fpath})
 
-typeset -U manpath
 manpath=(
 ~/local/share/man(N-/)
 /usr/local/man(N-/)
@@ -210,13 +207,16 @@ $infopath)
 
 typeset -U cdpath
 cdpath=(~/local ~/local/var)
+
+# remove duplicates
+typeset -U path cdpath fpath manpath infopath
 # }}}
 
 # named directories {{{
 # $ cd ~dir
 hash -d quatre=~/local/mnt/quatre
-hash -d deskstar=~/local/mnt/deskstar
-hash -d mypassport=~/local/mnt/mypassport
+hash -d desk=~/local/mnt/deskstar
+hash -d mypass=~/local/mnt/mypassport
 # }}}
 
 # Autoloads {{{
@@ -289,13 +289,13 @@ PROMPT+=$gitprompt
 #PROMPT+=$ip
 ####
 PROMPT+=$'\n'
-PROMPT+="%{$fg[cyan]%}>>>%{$fg[white]%} "
+PROMPT+="%{$fg[cyan]%}>>>%{$reset_color%} "
 PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
 SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
   PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
 if [[ $TERM != cons25 && $TERM != xterm ]]; then
-  local muridana="%{$fg[cyan]%}(・x・) "
+  local muridana="%{$fg[cyan]%}(・x・) %{$reset_color%}"
   RPROMPT=$muridana
 fi
 }
@@ -635,6 +635,43 @@ vman() {
     fi
     man "$@" | col -b | vim -X -R -c 'set ft=man nomod nolist' -
 }
+compdef _man vman
+
+limg() {
+# list images only
+    local -a images
+    images=( *.{jpg,gif,png}(.N) )
+
+    if [[ $#images -eq 0 ]] ; then
+        print "No image files found"
+    else
+        ls "$images[@]"
+    fi
+}
+
+lvid() {
+# list video only
+    local -a videos
+    videos=( *.{mkv,mp4,avi}(.N) )
+
+    if [[ $#videos -eq 0 ]] ; then
+        print "No video files found"
+    else
+        ls "$videos[@]"
+    fi
+}
+
+status() {
+#f5# Show some status info
+    print
+    print "Date..: "$(date "+%Y-%m-%d %H:%M:%S")
+    print "Shell.: Zsh $ZSH_VERSION (PID = $$, $SHLVL nests)"
+    print "Term..: $TTY ($TERM), ${BAUD:+$BAUD bauds, }$COLUMNS x $LINES chars"
+    print "Login.: $LOGNAME (UID = $EUID) on $HOST"
+    print "System: $(uname)"
+    print "Uptime:$(uptime)"
+    print
+}
 # }}}
 
 # Aliases {{{
@@ -649,14 +686,35 @@ alias halt="sync;sync;sync;sudo shutdown -p now"
 alias reboot="sync;sync;sync;sudo shutdown -r now"
 alias sudo="sudo -E "
 alias zln="noglob zmv -L -s -W"
-alias zmv='noglob zmv -W'
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias rr='command rm -rfv'
+alias zmv='noglob zmv -v -W'
+alias mv='nocorrect mv -iv'
+alias cp='nocorrect cp -iv'
+alias rr='nocorrect command rm -rfv'
 if check_com -c cdf ; then
 alias df='cdf -h'
 fi
-
+# listing stuff
+alias dir="ls -lSrah"
+alias lad='ls -d .*(/)'                # only show dot-directories
+alias lsa='ls -a .*(.,@)'                # only show dot-files and symlinks
+alias lss='ls -l *(s,S,t)'             # only files with setgid/setuid/sticky flag
+alias lsl='ls -l *(@)'                 # only symlinks
+alias lsx='ls -l *(*)'                 # only executables
+alias lsw='ls -ld *(R,W,X.^ND/)'       # world-{readable,writable,executable} files
+alias lsbig="ls -flh *(.OL[1,10])"     # display the biggest files
+alias lsd='ls -d *(/)'                 # only show directories
+alias lse='ls -d *(/^F)'               # only show empty directories
+alias lsnew="ls -rtlh *(D.om[1,10])"   # display the newest files
+alias lsold="ls -rtlh *(D.Om[1,10])"   # display the oldest files
+alias lssmall="ls -Srl *(.oL[1,10])"   # display the smallest files
+# chmod
+alias rw-='chmod 600'
+alias rwx='chmod 700'
+alias r--='chmod 644'
+alias r-x='chmod 755'
+# some useful aliases
+alias md='mkdir -p'
+# network staff
 alias starwars='telnet towel.blinkenlights.nl'
 alias radio1='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r1.asx'
 alias radio2='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r2.asx'
@@ -664,7 +722,6 @@ alias radio3='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r3.asx'
 alias radio4='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r4.asx'
 alias radio6='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r6.asx'
 alias sumo='mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_haishin/asx/sumolive.asx'
-
 # suffix aliases
 alias -s txt=cat
 alias -s zip=zipinfo
