@@ -8,6 +8,10 @@
 [exec] (agave) {agave}
 [exec] (liferea) {liferea}
 [exec] (comix) {comix}
+[exec] (pho)  {pho}
+[exec] (zphoto) {zphoto}
+[exec] (danpei) {danpei}
+[exec] (gimagevier) {gimv}
 [end]
 [submenu] (backgrounds)
 [wallpapers] (~/.fluxbox/backgrounds) {feh --bg-scale}

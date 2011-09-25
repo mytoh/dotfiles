@@ -47,8 +47,7 @@ limit coredumpsize 0
 # }}}
 
 # internal function {{{
-check_com() {
-# {{{
+check_com() { # {{{
 # grml zshrc
 # utility functions
 # this function checks if a command exists and returns either true
@@ -97,8 +96,8 @@ check_com() {
     fi
 
     return 1
-# }}}
 }
+# }}}
 
 xsource() { # {{{
 # grml zshrc
@@ -254,8 +253,7 @@ zstyle ':completion:*:functions' ignore-patterns '_*'
 zstyle ':completion:*:cd:*' tag-order local-directories path-directories
 # }}}
 
-
-# git prompt from {{{
+# git prompt {{{
 # briancarper.net/tag/249/zsh 
 autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
