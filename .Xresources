@@ -5,11 +5,7 @@ Xcursor.theme: whiteglass
 !---------------
 urxvt.termName: xterm-256color
 
-!----------
-!on  ->get transparency in some wm
-!off ->image display in w3m
-urxvt.depth: 32
-!----------
+urxvt.depth: 24
 
 urxvt.background: rgba:0000/0000/0000/cccc
 !urxvt.background: [90]#262630

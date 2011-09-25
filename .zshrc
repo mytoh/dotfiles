@@ -685,9 +685,9 @@ alias reboot="sync;sync;sync;sudo shutdown -r now"
 alias sudo="sudo -E "
 alias zln="noglob zmv -L -s -W"
 alias zmv='noglob zmv -v -W'
-alias mv='nocorrect mv -iv'
-alias cp='nocorrect cp -iv'
-alias rr='nocorrect command rm -rfv'
+alias mv='mv -iv'
+alias cp='cp -iv'
+alias rr='command rm -rfv'
 if check_com -c cdf ; then
 alias df='cdf -h'
 fi
