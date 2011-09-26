@@ -311,28 +311,55 @@ bindkey "\\en" history-beginning-search-forward-end
 # }}}
 
 # Functions {{{
+chpwd_functions=()
+precmd_functions=()
+preexec_functions=()
 
-# zshwiki hardstatus
-_title() {
-  if [[ $TERM == screen* ]]; then
-    print -nR $'\033k'$1$'\033'\\
-    print -nR $'\033]0;'$2$'\a'
-  elif [[ $TERM == xterm* || $TERM == jfbterm* ]]; then
-    print -nR $'\033]0;'$*$'\a'
-  fi
-}
+if [[ "$TERM" == screen* ]]; then
+  chpwd_title () { printf "_`pwd`\\" }
+  chpwd_functions=(chpwd_title $chpwd_functions)
+  preexec_functions=(preexec_update_title $precmd_functions)
+  preexec_update_title() {
+    # see [zsh-workers:13180]
+    # http://www.zsh.org/mla/workers/2000/msg03993.html
+    emulate -L zsh
+    local -a cmd; cmd=(${(z)2})
+    case $cmd[1] in
+      fg)
+        if (( $#cmd == 1 )); then
+          cmd=(builtin jobs -l %+)
+        else
+          cmd=(builtin jobs -l $cmd[2])
+        fi
+        ;;
+      %*)
+        cmd=(builtin jobs -l $cmd[1])
+        ;;
+      cd)
+        if (( $#cmd == 2)); then
+          cmd[1]=$cmd[2]
+        fi
+        ;;
+      sudo)
+          cmd[1]=$cmd[2]
+        ;;
+      *)
+        echo -n "k$cmd[1]:t\\"
+        return
+        ;;
+    esac
 
-precmd_functions=(precmd_update_title $precmd_functions)
-precmd_update_title() {
-  _title zsh "$PWD"
-  rehash
-}
+    local -A jt; jt=(${(kv)jobtexts})
 
-preexec_functions=(preexec_update_title $precmd_functions)
-preexec_update_title() {
-  emulate -L zsh
-  local -a cmd; cmd=(${(z)1})
-  _title $cmd[1]:t "$cmd[2,-1]"
+    $cmd >>(read num rest
+    cmd=(${(z)${(e):-\$jt$num}})
+    echo -n "k$cmd[1]:t\\") 2>/dev/null
+  }
+fi
+
+chpwd_functions=( $chpwd_functions chpwd_ls dirs)
+chpwd_ls(){
+  ls -F
 }
 
 tm() {
@@ -670,6 +697,12 @@ status() {
     print "Uptime:$(uptime)"
     print
 }
+
+google()  {
+# Search Google
+    emulate -L zsh
+    ${=BROWSER} "http://www.google.com/search?&num=100&q=$*"
+}
 # }}}
 
 # Aliases {{{
@@ -777,20 +810,12 @@ case ${OSTYPE} in
     alias la="ls -a"
     alias reboot="shutdown -r"
     alias halt="shutdown"
-    chpwd_functions=(chpwd_ls dirs)
-    chpwd_ls(){
-      ls -F
-    }
     TERMINFO=/boot/common/share/terminfo
     ;;
   solaris*)
     alias la="ls  -a"
     alias ll="ls  -hlA "
     alias ls="ls  -F"
-    chpwd_functions=(chpwd_ls dirs)
-    chpwd_ls() {
-      ls -F
-    }
     ;;
   darwin*)
     HOMEBREW_VERBOSE=true
@@ -798,10 +823,6 @@ case ${OSTYPE} in
     alias ll="ls -G -hlA "
     alias ls="ls -G -F"
     alias mp2="/Applications/mplayer2.app/Contents/MacOS/mplayer-bin"
-    chpwd_functions=(chpwd_ls dirs)
-    chpwd_ls() {
-      ls -G -F
-    }
     squid_restart() {
       killall squid
       killall squid
@@ -839,17 +860,10 @@ case ${OSTYPE} in
     alias pcreate="pkg_create -RJvnb"
     alias pcreateall="pkg_info -Ea |xargs -n 1 sudo pkg_create -Jnvb"
     alias fbgenmenu="fluxbox-generate_menu -g -k -ds -is"
-    chpwd() {
-      ls -G -F
+    chpwd_ls(){
+      ls -F -G
     }
   beastie() {
-print    "Shell.: Zsh $ZSH_VERSION (PID = $$, $SHLVL nests)"
-print    "Term..: $TTY ($TERM), ${BAUD:+$BAUD bauds, }$COLUMNS x $LINES chars"
-print    "Login.: $LOGNAME (UID = $EUID) on $HOST"
-print    "System: $(uname)"
-print    "Uptime:$(uptime)"                                           
-print    "Date..: "$(date "+%Y-%m-%d %H:%M:%S")
-
     echo '
     
     
