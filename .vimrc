@@ -354,8 +354,7 @@ let g:vimshell_split_height = 20
 let g:vimshell_split_command = 'split'
 aug vimshell
   au!
-  au filetype vimshell
-        \  call vimshell#hook#set('chpwd', ['g:my_chpwd'])
+  au filetype vimshell  call vimshell#hook#set('chpwd', ['g:my_chpwd'])
   function! g:my_chpwd(args, context)
     call vimshell#execute('ls')
   endfunction
@@ -384,8 +383,7 @@ let g:netrw_nogx = 1
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
 let g:openbrowser_open_rules = {
-        \   'w3m':           '{browser} {shellescape(uri)} ',
-        \}
+        \   'w3m':           '{browser} {shellescape(uri)} ', }
 " }}}
 
 " }}}
