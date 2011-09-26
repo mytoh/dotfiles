@@ -698,7 +698,7 @@ status() {
     print
 }
 
-google()  {
+ggr()  {
 # Search Google
     emulate -L zsh
     ${=BROWSER} "http://www.google.com/search?&num=100&q=$*"
@@ -767,13 +767,7 @@ alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
 
 # set default browser
 if [[ -z "$BROWSER" ]] ; then
-    if [[ -n "$DISPLAY" ]] ; then
-        #v# If X11 is running
-        check_com -c firefox && export BROWSER=firefox
-    else
-        #v# If no X11 is running
         check_com -c w3m && export BROWSER=w3m
-    fi
 fi
 
 xsource ~/perl5/perlbrew/etc/bashrc
