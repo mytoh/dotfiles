@@ -12,6 +12,7 @@
 [exec] (zphoto) {zphoto}
 [exec] (danpei) {danpei}
 [exec] (gimagevier) {gimv}
+[exec] (xnview) {xnview}
 [end]
 [submenu] (backgrounds)
 [wallpapers] (~/.fluxbox/backgrounds) {feh --bg-scale}

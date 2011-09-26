@@ -843,11 +843,20 @@ case ${OSTYPE} in
       ls -G -F
     }
   beastie() {
+print    "Shell.: Zsh $ZSH_VERSION (PID = $$, $SHLVL nests)"
+print    "Term..: $TTY ($TERM), ${BAUD:+$BAUD bauds, }$COLUMNS x $LINES chars"
+print    "Login.: $LOGNAME (UID = $EUID) on $HOST"
+print    "System: $(uname)"
+print    "Uptime:$(uptime)"                                           
+print    "Date..: "$(date "+%Y-%m-%d %H:%M:%S")
+
     echo '
+    
+    
                 \e[31m,        ,                              
                /(        )`                                   
                \ \___   / |                                   
-               /- \e[37m_\e[31m  `-/  '\''                       
+               /- \e[37m_\e[31m  `-/  '\''                      
               (\e[37m/\/ \\\e[31m \   /\                       
               \e[37m/ /   |\e[31m `    \                      
               \e[34mO O   \e[37m) \e[31m/    |                
