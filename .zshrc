@@ -256,7 +256,6 @@ zstyle ':completion:*:cd:*' tag-order local-directories path-directories
 # git prompt {{{
 # briancarper.net/tag/249/zsh 
 autoload -Uz vcs_info
-autoload -Uz add-zsh-hook
 
 zstyle ':vcs_info:*' stagedstr '%F{28}● '
 zstyle ':vcs_info:*' unstagedstr '%F{11}●'
@@ -264,11 +263,13 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' enable git svn
 
 _update_vcs_info_msg() {
-  if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-    zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{blue}]'
-  } else {
-  zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{red}+%F{blue}]'
-}
+  if [[ -e $PWD/.git ]]; then
+    if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
+      zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{blue}]'
+    } else {
+    zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{red}+%F{blue}]'
+  }
+fi
 vcs_info
 }
 
@@ -312,13 +313,12 @@ bindkey "\\en" history-beginning-search-forward-end
 
 # Functions {{{
 chpwd_functions=()
-precmd_functions=()
 preexec_functions=()
 
 if [[ "$TERM" == screen* ]]; then
   chpwd_title () { printf "_`pwd`\\" }
   chpwd_functions=(chpwd_title $chpwd_functions)
-  preexec_functions=(preexec_update_title $precmd_functions)
+  preexec_functions=(preexec_update_title $preexec_functions)
   preexec_update_title() {
     # see [zsh-workers:13180]
     # http://www.zsh.org/mla/workers/2000/msg03993.html
