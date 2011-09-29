@@ -123,6 +123,7 @@ local home=$HOME
 
 setopt all_export # may cause problem
 
+LC_ALL=fi_FI.UTF-8
 LANG=fi_FI.UTF-8
 REPORTTIME=3
 
@@ -262,7 +263,7 @@ zstyle ':vcs_info:*' unstagedstr '%F{11}●'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' enable git svn
 
-_update_vcs_info_msg() {
+_precmd_update_vcs_info_msg() {
   if [[ -e $PWD/.git ]]; then
     if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
       zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{blue}]'
@@ -273,7 +274,7 @@ fi
 vcs_info
 }
 
-precmd_functions=(_update_vcs_info_msg $precmd_functions)
+precmd_functions=(_precmd_update_vcs_info_msg $precmd_functions)
 # }}}
 
 # Prompts {{{
@@ -316,7 +317,7 @@ chpwd_functions=()
 preexec_functions=()
 
 if [[ "$TERM" == screen* ]]; then
-  chpwd_title () { printf "_`pwd`\\" }
+  chpwd_title () { printf "_`dirs -p|awk '{print $1;exit}'`\\" }
   chpwd_functions=(chpwd_title $chpwd_functions)
   preexec_functions=(preexec_update_title $preexec_functions)
   preexec_update_title() {
@@ -357,10 +358,15 @@ if [[ "$TERM" == screen* ]]; then
   }
 fi
 
-chpwd_functions=( $chpwd_functions chpwd_ls dirs)
 chpwd_ls(){
   ls -F
 }
+chpwd_functions=( $chpwd_functions chpwd_ls dirs)
+
+_precmd_rehash(){
+  rehash
+}
+precmd_functions=( $precmd_rehash $precmd_functions )
 
 tm() {
   if tmux ls >/dev/null 2>&1; then
@@ -627,7 +633,6 @@ _simple_extract()
         '*:Archive Or Uri:__archive_or_uri'
 }
 compdef _simple_extract unpack
-alias unar=unpack
 
 # Usage: smartcompress <file> (<type>)
 #f5# Smart archive creator
@@ -703,11 +708,152 @@ ggr()  {
     emulate -L zsh
     ${=BROWSER} "http://www.google.com/search?&num=100&q=$*"
 }
+
+# color function {{{
+# functions from
+# http://crunchbanglinux.org/forums/post/126921/#p126921
+colorspacman(){
+# ANSI Color -- use these variables to easily have different color
+#    and format output. Make sure to output the reset sequence after
+#    colors (f = foreground, b = background), and use the 'off'
+#    feature for anything you turn on.
+
+initializeANSI()
+{
+ esc=""
+
+  blackf="${esc}[30m";   redf="${esc}[31m";    greenf="${esc}[32m"
+  yellowf="${esc}[33m"   bluef="${esc}[34m";   purplef="${esc}[35m"
+  cyanf="${esc}[36m";    whitef="${esc}[37m"
+
+  blackb="${esc}[40m";   redb="${esc}[41m";    greenb="${esc}[42m"
+  yellowb="${esc}[43m"   blueb="${esc}[44m";   purpleb="${esc}[45m"
+  cyanb="${esc}[46m";    whiteb="${esc}[47m"
+
+  boldon="${esc}[1m";    boldoff="${esc}[22m"
+  italicson="${esc}[3m"; italicsoff="${esc}[23m"
+  ulon="${esc}[4m";      uloff="${esc}[24m"
+  invon="${esc}[7m";     invoff="${esc}[27m"
+
+  reset="${esc}[0m"
+}
+
+# note in this first use that switching colors doesn't require a reset
+# first - the new color overrides the old one.
+
+clear
+
+initializeANSI
+
+cat << EOF
+
+ ${yellowf}  ▄███████▄${reset}   ${redf}  ▄██████▄${reset}    ${greenf}  ▄██████▄${reset}    ${bluef}  ▄██████▄${reset}    ${purplef}  ▄██████▄${reset}    ${cyanf}  ▄██████▄${reset}
+ ${yellowf}▄█████████▀▀${reset}  ${redf}▄${whitef}█▀█${redf}██${whitef}█▀█${redf}██▄${reset}  ${greenf}▄${whitef}█▀█${greenf}██${whitef}█▀█${greenf}██▄${reset}  ${bluef}▄${whitef}█▀█${bluef}██${whitef}█▀█${bluef}██▄${reset}  ${purplef}▄${whitef}█▀█${purplef}██${whitef}█▀█${purplef}██▄${reset}  ${cyanf}▄${whitef}█▀█${cyanf}██${whitef}█▀█${cyanf}██▄${reset}
+ ${yellowf}███████▀${reset}      ${redf}█${whitef}▄▄█${redf}██${whitef}▄▄█${redf}███${reset}  ${greenf}█${whitef}▄▄█${greenf}██${whitef}▄▄█${greenf}███${reset}  ${bluef}█${whitef}▄▄█${bluef}██${whitef}▄▄█${bluef}███${reset}  ${purplef}█${whitef}▄▄█${purplef}██${whitef}▄▄█${purplef}███${reset}  ${cyanf}█${whitef}▄▄█${cyanf}██${whitef}▄▄█${cyanf}███${reset}
+ ${yellowf}███████▄${reset}      ${redf}████████████${reset}  ${greenf}████████████${reset}  ${bluef}████████████${reset}  ${purplef}████████████${reset}  ${cyanf}████████████${reset}
+ ${yellowf}▀█████████▄▄${reset}  ${redf}██▀██▀▀██▀██${reset}  ${greenf}██▀██▀▀██▀██${reset}  ${bluef}██▀██▀▀██▀██${reset}  ${purplef}██▀██▀▀██▀██${reset}  ${cyanf}██▀██▀▀██▀██${reset}
+ ${yellowf}  ▀███████▀${reset}   ${redf}▀   ▀  ▀   ▀${reset}  ${greenf}▀   ▀  ▀   ▀${reset}  ${bluef}▀   ▀  ▀   ▀${reset}  ${purplef}▀   ▀  ▀   ▀${reset}  ${cyanf}▀   ▀  ▀   ▀${reset}
+
+ ${boldon}${yellowf}  ▄███████▄   ${redf}  ▄██████▄    ${greenf}  ▄██████▄    ${bluef}  ▄██████▄    ${purplef}  ▄██████▄    ${cyanf}  ▄██████▄${reset}
+ ${boldon}${yellowf}▄█████████▀▀  ${redf}▄${whitef}█▀█${redf}██${whitef}█▀█${redf}██▄  ${greenf}▄${whitef}█▀█${greenf}██${whitef}█▀█${greenf}██▄  ${bluef}▄${whitef}█▀█${bluef}██${whitef}█▀█${bluef}██▄  ${purplef}▄${whitef}█▀█${purplef}██${whitef}█▀█${purplef}██▄  ${cyanf}▄${whitef}█▀█${cyanf}██${whitef}█▀█${cyanf}██▄${reset}
+ ${boldon}${yellowf}███████▀      ${redf}█${whitef}▄▄█${redf}██${whitef}▄▄█${redf}███  ${greenf}█${whitef}▄▄█${greenf}██${whitef}▄▄█${greenf}███  ${bluef}█${whitef}▄▄█${bluef}██${whitef}▄▄█${bluef}███  ${purplef}█${whitef}▄▄█${purplef}██${whitef}▄▄█${purplef}███  ${cyanf}█${whitef}▄▄█${cyanf}██${whitef}▄▄█${cyanf}███${reset}
+ ${boldon}${yellowf}███████▄      ${redf}████████████  ${greenf}████████████  ${bluef}████████████  ${purplef}████████████  ${cyanf}████████████${reset}
+ ${boldon}${yellowf}▀█████████▄▄  ${redf}██▀██▀▀██▀██  ${greenf}██▀██▀▀██▀██  ${bluef}██▀██▀▀██▀██  ${purplef}██▀██▀▀██▀██  ${cyanf}██▀██▀▀██▀██${reset}
+ ${boldon}${yellowf}  ▀███████▀   ${redf}▀   ▀  ▀   ▀  ${greenf}▀   ▀  ▀   ▀  ${bluef}▀   ▀  ▀   ▀  ${purplef}▀   ▀  ▀   ▀  ${cyanf}▀   ▀  ▀   ▀${reset}
+
+EOF
+}
+
+colorinvaders(){
+# ANSI Color -- use these variables to easily have different color
+#    and format output. Make sure to output the reset sequence after
+#    colors (f = foreground, b = background), and use the 'off'
+#    feature for anything you turn on.
+
+initializeANSI()
+{
+  esc=""
+
+  blackf="${esc}[30m";   redf="${esc}[31m";    greenf="${esc}[32m"
+  yellowf="${esc}[33m"   bluef="${esc}[34m";   purplef="${esc}[35m"
+  cyanf="${esc}[36m";    whitef="${esc}[37m"
+
+  blackb="${esc}[40m";   redb="${esc}[41m";    greenb="${esc}[42m"
+  yellowb="${esc}[43m"   blueb="${esc}[44m";   purpleb="${esc}[45m"
+  cyanb="${esc}[46m";    whiteb="${esc}[47m"
+
+  boldon="${esc}[1m";    boldoff="${esc}[22m"
+  italicson="${esc}[3m"; italicsoff="${esc}[23m"
+  ulon="${esc}[4m";      uloff="${esc}[24m"
+  invon="${esc}[7m";     invoff="${esc}[27m"
+
+  reset="${esc}[0m"
+}
+
+# note in this first use that switching colors doesn't require a reset
+# first - the new color overrides the old one.
+
+initializeANSI
+
+cat << EOF
+
+   ${boldon}${redf}▀▄   ▄▀  ${reset}    ${boldon}${greenf}▄▄▄████▄▄▄ ${reset}   ${boldon}${yellowf}  ▄██▄  ${reset}     ${boldon}${bluef}▀▄   ▄▀  ${reset}    ${boldon}${purplef}▄▄▄████▄▄▄ ${reset}   ${boldon}${cyanf}  ▄██▄  ${reset}
+  ${boldon}${redf}▄█▀███▀█▄ ${reset}   ${boldon}${greenf}███▀▀██▀▀███${reset}   ${boldon}${yellowf}▄█▀██▀█▄${reset}    ${boldon}${bluef}▄█▀███▀█▄ ${reset}   ${boldon}${purplef}███▀▀██▀▀███${reset}   ${boldon}${cyanf}▄█▀██▀█▄${reset}
+ ${boldon}${redf}█▀███████▀█${reset}   ${boldon}${greenf}▀▀▀██▀▀██▀▀▀${reset}   ${boldon}${yellowf}▀▀█▀▀█▀▀${reset}   ${boldon}${bluef}█▀███████▀█${reset}   ${boldon}${purplef}▀▀▀██▀▀██▀▀▀${reset}   ${boldon}${cyanf}▀▀█▀▀█▀▀${reset}
+ ${boldon}${redf}▀ ▀▄▄ ▄▄▀ ▀${reset}   ${boldon}${greenf}▄▄▀▀ ▀▀ ▀▀▄▄${reset}   ${boldon}${yellowf}▄▀▄▀▀▄▀▄${reset}   ${boldon}${bluef}▀ ▀▄▄ ▄▄▀ ▀${reset}   ${boldon}${purplef}▄▄▀▀ ▀▀ ▀▀▄▄${reset}   ${boldon}${cyanf}▄▀▄▀▀▄▀▄${reset}
+
+   ${redf}▀▄   ▄▀  ${reset}    ${greenf}▄▄▄████▄▄▄ ${reset}   ${yellowf}  ▄██▄  ${reset}     ${bluef}▀▄   ▄▀  ${reset}    ${purplef}▄▄▄████▄▄▄ ${reset}   ${cyanf}  ▄██▄  ${reset}
+  ${redf}▄█▀███▀█▄ ${reset}   ${greenf}███▀▀██▀▀███${reset}   ${yellowf}▄█▀██▀█▄${reset}    ${bluef}▄█▀███▀█▄ ${reset}   ${purplef}███▀▀██▀▀███${reset}   ${cyanf}▄█▀██▀█▄${reset}
+ ${redf}█▀███████▀█${reset}   ${greenf}▀▀▀██▀▀██▀▀▀${reset}   ${yellowf}▀▀█▀▀█▀▀${reset}   ${bluef}█▀███████▀█${reset}   ${purplef}▀▀▀██▀▀██▀▀▀${reset}   ${cyanf}▀▀█▀▀█▀▀${reset}
+ ${redf}▀ ▀▄▄ ▄▄▀ ▀${reset}   ${greenf}▄▄▀▀ ▀▀ ▀▀▄▄${reset}   ${yellowf}▄▀▄▀▀▄▀▄${reset}   ${bluef}▀ ▀▄▄ ▄▄▀ ▀${reset}   ${purplef}▄▄▀▀ ▀▀ ▀▀▄▄${reset}   ${cyanf}▄▀▄▀▀▄▀▄${reset}
+
+
+                                     ${whitef}▌${reset}
+
+                                   ${whitef}▌${reset}
+                                   ${whitef}${reset}
+                                  ${whitef}▄█▄${reset}
+                              ${whitef}▄█████████▄${reset}
+                              ${whitef}▀▀▀▀▀▀▀▀▀▀▀${reset}
+
+EOF
+}
+
+dump-colors(){
+  xdef="$HOME/.Xresources"
+  colors=( $( sed -re '/^!/d; /^$/d; /^#/d; s/(\*color)([0-9]):/\10\2:/g;' $xdef | grep 'color[01][0-9]:' | sort |sed 's/^.*: *//g' ) )
+  echo -e "\e[37m
+  Black   Red      Green   Yellow    Blue    Magenta   Cyan    White
+  -------------------------------------------------------------------\e[0m"
+  for i in {0..7}; echo -en "\e[$((30+$i))m $colors[i+1] \e[0m"
+    echo
+    for i in {8..15}; echo -en "\e[1;$((22+$i))m $colors[i+1] \e[0m"
+      echo -e "\n"
+}
+
+color-blocks () {
+    echo
+    local width=$(( ($COLUMNS / 16) -1 ))
+    local chars
+    local pre=$(( ( $COLUMNS - ($width+1)*16)/2 ))
+    for ((i=0; i<$width; i++)); chars+="░"
+    for ((i=0; i<$pre; i++)); echo -n " "
+    for ((i=0; i<=7; i++)); echo -en "\e[3${i}m${chars} \e[1;3${i}m${chars}\e[m "; echo; echo
+    unset i
+}
+color-numbers(){
+ for i in {000..255..16}; do for j in {$i..$((i+15))}; do echo -en "\e[38;5;${j}m $j \e[0m"; done; echo; done
+ }
+
+#}}}
+
 # }}}
 
 # Aliases {{{
 alias chalice='vim -c Chalice'
 alias pd=popd
+alias ...='cd ../..'
+alias ....='cd ../../..'
 alias cup="cpan-outdated && cpan-outdated | xargs cpanm -v"
 #alias view="vim -X -R -"
 alias scsh="rlwrap scsh"
@@ -724,6 +870,7 @@ alias rr='command rm -rfv'
 if check_com -c cdf ; then
 alias df='cdf -h'
 fi
+alias unar=unpack
 # listing stuff
 alias dir="ls -lSrah"
 alias lad='ls -d .*(/)'                # only show dot-directories
@@ -755,9 +902,7 @@ alias radio6='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r6.asx'
 alias sumo='mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_haishin/asx/sumolive.asx'
 # suffix aliases
 alias -s txt=cat
-alias -s zip=zipinfo
-alias -s {tgz,tbz}=gzcat
-alias -s {gz,bz2}=tar -xzvf
+alias -s {zip,rar,tgb,tgz,tar,xz,gz,bz2}=unpack
 alias -s {gif,jpg,jpeg,png}=xli
 alias -s {m3u,mp3,flac}=audacious
 alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
@@ -909,3 +1054,4 @@ orb() {
 esac
 #}}}
 
+# vim:foldmethod=marker

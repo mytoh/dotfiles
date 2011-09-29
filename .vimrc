@@ -25,6 +25,8 @@ set showcmd
 set showmatch
 set diffopt+=vertical
 set ambiwidth=double
+" key sequence timeout length (default: 1000(ms))
+set timeoutlen=10000
 
 " indent
 set autoindent
