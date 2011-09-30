@@ -41,9 +41,11 @@ setopt transient_rprompt
 setopt cdable_vars
 setopt print_eightbit
 setopt auto_menu
+#setopt all_export
 unsetopt bg_nice appendhistory beep nomatch
 limit coredumpsize 0
-#umask 022
+
+umask 002
 # }}}
 
 # internal function {{{
@@ -119,22 +121,19 @@ xsource() { # {{{
 
 # Environment {{{
 # set local variables
-local home=$HOME
+home=$HOME
 
-setopt all_export # may cause problem
-
-LC_ALL=fi_FI.UTF-8
-LANG=fi_FI.UTF-8
+export LC_ALL=fi_FI.UTF-8
+export LANG=fi_FI.UTF-8
 REPORTTIME=3
 
-
-GAUCHE_LOAD_PATH="$home/.gosh"
-FTP_PASSIVE_MODE=true
-MYGITDIR=~/local/git
-G_FILENAME_ENCODING=@locale
-RLWRAP_HOME=~/.rlwrap
-LISTMAX=0
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+export GAUCHE_LOAD_PATH="$home/.gosh"
+export FTP_PASSIVE_MODE=true
+export MYGITDIR=~/local/git
+export G_FILENAME_ENCODING=@locale
+export RLWRAP_HOME=~/.rlwrap
+export LISTMAX=0
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # history
 HISTFILE=~/.zsh_history
@@ -142,34 +141,34 @@ HISTSIZE=50000
 SAVEHIST=$HISTSIZE
 
 # vim
-EDITOR=vim
+export EDITOR=vim
 if ! check_com -c vim; then
   alias vim=vi
 fi
-MYVIMRC=~/.vimrc
-VIMRUNTIME=(~/.vim/vundle:$VIMRUNTIME)
+export MYVIMRC=~/.vimrc
+#export VIMRUNTIME="~/.vim/vundle:"
 
 
 # ls
-LSCOLORS=exFxCxdxBxegedabagacad
+export LSCOLORS=exFxCxdxBxegedabagacad
 if check_com -c gdircolors && [[ ! -e $home/.dir_colors ]]; then
   eval $(gdircolors $home/.dir_colors -b)
-  ZLS_COLORS=$LS_COLORS
+  export ZLS_COLORS=$LS_COLORS
 else
-  LS_COLORS='di=34:ln=35:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+export  LS_COLORS='di=34:ln=35:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 fi
 
 # less
-PAGER="less"
-LESS='-i  -w -z-4 -g -M -X -F -R -P%t?f%f \
+export PAGER="less"
+export LESS='-i  -w -z-4 -g -M -X -F -R -P%t?f%f \
   :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
-LESS_TERMCAP_mb=$'\E[01;31m'
-LESS_TERMCAP_md=$'\E[01;31m'
-LESS_TERMCAP_me=$'\E[0m'
-LESS_TERMCAP_se=$'\E[0m'
-LESS_TERMCAP_so=$'\E[01;44;33m'
-LESS_TERMCAP_ue=$'\E[0m'
-LESS_TERMCAP_us=$'\E[01;32m'
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
 
 # paths
 path=(
@@ -296,7 +295,7 @@ SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
   PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
 if [[ $TERM != cons25 && $TERM != xterm ]]; then
   local muridana="%{$fg[cyan]%}(・x・) %{$reset_color%}"
-  RPROMPT=$muridana
+  #RPROMPT=$muridana
 fi
 }
 setup_prompt

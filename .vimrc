@@ -58,7 +58,8 @@ colorscheme jellybeans
 set laststatus=2
 "set statusline=%<%1*\ %f\ %m%r%h%w\ %1*%{fugitive#statusline()}%1*%=\ %1*%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %9*(・x・)%*\ 
 " statusline for buftabs plugin
-set statusline=\ %=\ %{fugitive#statusline()}%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %9*(・x・)%*\ 
+let s:muridana='%9*(・x・)%*'
+set statusline=\ %=\ %{fugitive#statusline()}%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %*\ 
 " highlight for statusline
 " set colorscheme above
 " User1-9 => %{1-9}*
@@ -138,7 +139,7 @@ aug myautocommands
   au bufread,bufnewfile *.twmrc                  set filetype=conf
   au bufread,bufnewfile .vimshrc,.vim-bundles    set filetype=vim
   au bufread,bufnewfile .vimperatorrc            set filetype=vim
-  au bufwritepost       .vimrc                   source $MYVIMRC
+  au bufwritepost       .vimrc                   source ~/.vimrc
   au bufwritepost       .Xresources       silent !xrdb -remove
   au bufwritepost       .Xresources       silent !xrdb -merge ~/.Xresources
   au bufwritepost       .zshrc            silent !zcompile .zshrc
