@@ -123,6 +123,8 @@ xsource() { # {{{
 # set local variables
 home=$HOME
 
+export UNAME_r=9.9-CURRENT
+
 export LC_ALL=fi_FI.UTF-8
 export LANG=fi_FI.UTF-8
 REPORTTIME=3
@@ -989,7 +991,7 @@ case ${OSTYPE} in
     alias ll="ls -G -hlA "
     alias ls="ls -G -F"
     alias pup="sudo portsnap fetch update "
-    alias pcheck="sudo portmaster -PBida && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends "
+    alias pcheck='env UNAME_r=9.9-CURRENT sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends'
     alias pfetch="sudo make  fetch-recursive"
     alias pinst=" HTTP_TIMEOUT=30 && sudo make  install distclean; rehash"
     alias pconf="sudo make config-recursive"
@@ -998,6 +1000,10 @@ case ${OSTYPE} in
     alias pcreate="pkg_create -RJvnb"
     alias pcreateall="pkg_info -Ea |xargs -n 1 sudo pkg_create -Jnvb"
     alias fbgenmenu="fluxbox-generate_menu -g -k -ds -is"
+    fbgenmmaker() {
+      mmaker -f fluxbox
+      echo "[include] (~/.fluxbox/usermenu)" >> ~/.fluxbox/menu 
+    }
     chpwd_ls(){
       ls -F -G
     }

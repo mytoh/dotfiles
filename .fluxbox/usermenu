@@ -1,5 +1,6 @@
 [submenu] (apps)
 [exec] (thunar) {thunar}
+[exec] (firefox) {firefox}
 [exec] (jd) {jd}
 [exec] (danpei) {danpei}
 [exec] (rox) {rox}
@@ -12,7 +13,7 @@
 [exec] (zphoto) {zphoto}
 [exec] (danpei) {danpei}
 [exec] (gimagevier) {gimv}
-[exec] (xnview) {xnview}
+[exec] (xnview-mp) {xnview-mp}
 [end]
 [submenu] (backgrounds)
 [wallpapers] (~/.fluxbox/backgrounds) {feh --bg-scale}
