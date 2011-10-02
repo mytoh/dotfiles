@@ -1,70 +1,70 @@
-" First run
-" $ mkdir -p ~/.vim/bundle
-" $ cd ~/.vim/bundle && git submodule git://github.com/gmarik/vundle
-" $ vim -u $HOME/.bundles.vim +BundleInstall +q
 
-"turn filetype off not to load ftdetect
-set nocompatible
-filetype off     " required
+if !isdirectory(expand("~/.bundle"))
+  call mkdir(expand("~/.bundle"), "p")
+  call system("git clone " . "git://github.com/Shougo/neobundle.vim " . expand("~/.bundle/neobundle.vim"))
+endif
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
 
-" let Vundle manage Vundle {{{
-Bundle 'gmarik/vundle'
-"}}}
+if has('vim_starting')
+  set runtimepath+=$HOME/.bundle/neobundle.vim
+  filetype off
+  call neobundle#rc(expand('~/.bundle'))
+  filetype plugin on
+  filetype indent on
+endif
 
 " my bundles here {{{
 "
 " github repo
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/vimfiler'
-"Bundle 'Shougo/vimproc'
-Bundle 'Shougo/vimshell'
-Bundle 'Shougo/vinarise'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimfiler'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/vinarise'
 "Bundle 'fholgado/minibufexpl.vim'
-Bundle 'godlygeek/tabular'
-Bundle 'hakobe/unite-script'
-Bundle 'kana/vim-fakeclip'
-Bundle 'koron/chalice'
-Bundle 'lilydjwg/colorizer'
-Bundle 'mattn/googlereader-vim'
-Bundle 'mattn/unite-remotefile'
-Bundle 'mattn/webapi-vim'
-Bundle 'mattn/wwwrenderer-vim'
-"Bundle 'roman/golden-ratio'
-Bundle 'rson/vim-bufstat'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'thinca/vim-quickrun'
-Bundle 'thinca/vim-ref'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-afterimage'
-Bundle 'tyru/eskk.vim'
-Bundle 'tyru/skkdict.vim'
-Bundle 'tyru/open-browser.vim'
-Bundle 'tyru/savemap.vim'
-Bundle 'tyru/unite-cmdwin'
-Bundle 'tyru/vice.vim'
-Bundle 'ujihisa/neco-look'
-Bundle 'ujihisa/unite-colorscheme'
-Bundle 'ujihisa/vimshell-ssh'
+NeoBundle 'godlygeek/tabular'
+NeoBundle 'hakobe/unite-script'
+NeoBundle 'kana/vim-fakeclip'
+NeoBundle 'koron/chalice'
+NeoBundle 'lilydjwg/colorizer'
+NeoBundle 'mattn/googlereader-vim'
+NeoBundle 'mattn/unite-remotefile'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'mattn/wwwrenderer-vim'
+NeoBundle 'roman/golden-ratio'
+NeoBundle 'rson/vim-bufstat'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'thinca/vim-ref'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-afterimage'
+NeoBundle 'tyru/eskk.vim'
+NeoBundle 'tyru/skkdict.vim'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'tyru/savemap.vim'
+NeoBundle 'tyru/unite-cmdwin'
+NeoBundle 'tyru/vice.vim'
+NeoBundle 'ujihisa/neco-look'
+NeoBundle 'ujihisa/unite-colorscheme'
+NeoBundle 'ujihisa/vimshell-ssh'
 
 " vim-scripts repo
 "Bundle 'gauref.vim'
-Bundle 'info.vim'
-Bundle 'eregex.vim'
-Bundle 'sudo.vim'
-Bundle 'YankRing.vim'
-Bundle 'fluxbox.vim'
+NeoBundle 'info.vim'
+NeoBundle 'eregex.vim'
+NeoBundle 'sudo.vim'
+NeoBundle 'YankRing.vim'
+NeoBundle 'fluxbox.vim'
 "Bundle 'buftabs'
 " colorschemes
-Bundle 'jellybeans.vim'
-Bundle 'xoria256.vim'
+NeoBundle 'jellybeans.vim'
+NeoBundle 'xoria256.vim'
 " other git repo
 
 " }}}
+
 
 " vim:set foldmethod=marker:

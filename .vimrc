@@ -1,5 +1,5 @@
 
-" Vundle and bundles configuration {{{
+" NeoBundle and bundles configuration {{{
 source $HOME/.bundles.vim
 "}}}
 
@@ -369,7 +369,7 @@ nmap <leader>ss <plug>(vimshell_switch)
 "}}}
 
 " vimproc{{{
-let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/proc.so'
+let g:vimproc_dll_path = $HOME . '/.bundle/vimproc/autoload/proc.so'
 "}}}
 
 " gauref{{{
@@ -394,5 +394,9 @@ let g:openbrowser_open_rules = {
 
 set secure
 
-" vim:set foldmethod=marker:
+" hg clone https://vim.googlecode.com/hg/ vim
+" cd vim/src
+" ./configure --prefix=$HOME/local --enable-multibyte --enable-perlinterp=yes --with-x --enable-xim
+" make install
 
+" vim:set foldmethod=marker:
