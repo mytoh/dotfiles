@@ -134,16 +134,17 @@ cnoremap <c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<
 " autocommands{{{
 aug myautocommands
   au!
+  au bufread,bufnewfile $HOME/.*                 retab
   au bufread,bufnewfile .tmux.conf               set filetype=tmux
   au bufread,bufnewfile *.changelog              set filetype=changelog
   au bufread,bufnewfile *.twmrc                  set filetype=conf
   au bufread,bufnewfile .vimshrc,.vim-bundles    set filetype=vim
   au bufread,bufnewfile .vimperatorrc            set filetype=vim
   au bufwritepost       .vimrc                   source ~/.vimrc
-  au bufwritepost       .Xresources       silent !xrdb -remove
-  au bufwritepost       .Xresources       silent !xrdb -merge ~/.Xresources
-  au bufwritepost       .zshrc            silent !zcompile .zshrc
-  au bufwritepost       .conkyrc          silent !killall -SIGUSR1  conky
+  au bufwritepost       .Xresources              silent !xrdb -remove
+  au bufwritepost       .Xresources              silent !xrdb -merge ~/.Xresources
+  au bufwritepost       .zshrc                   silent !zcompile .zshrc
+  au bufwritepost       .conkyrc                 silent !killall -SIGUSR1  conky
   au filetype           scheme                   setl cindent& lispwords=define,lambda,call-with-*
   au filetype           help                     nnoremap q :<c-u>q<cr>
   " for chalice buffers

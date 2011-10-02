@@ -123,7 +123,7 @@ xsource() { # {{{
 # set local variables
 home=$HOME
 
-export UNAME_r=9.9-CURRENT
+#export UNAME_r=9.9-CURRENT
 
 export LC_ALL=fi_FI.UTF-8
 export LANG=fi_FI.UTF-8
@@ -290,7 +290,7 @@ PROMPT+=$gitprompt
 #PROMPT+=$ip
 ####
 PROMPT+=$'\n'
-PROMPT+="%{$fg[cyan]%}>>>%{$reset_color%} "
+PROMPT+="%{[38;5;67m%}>>>%{$reset_color%} "
 PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
 SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
@@ -868,6 +868,7 @@ alias zmv='noglob zmv -v -W'
 alias mv='mv -iv'
 alias cp='cp -iv'
 alias rr='command rm -rfv'
+alias dwm-recompile='(\cd /usr/ports/x11-wm/dwm && sudo make deinstall && sudo make install)'
 if check_com -c cdf ; then
 alias df='cdf -h'
 fi
@@ -991,7 +992,7 @@ case ${OSTYPE} in
     alias ll="ls -G -hlA "
     alias ls="ls -G -F"
     alias pup="sudo portsnap fetch update "
-    alias pcheck='env UNAME_r=9.9-CURRENT sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends'
+    alias pcheck='sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends'
     alias pfetch="sudo make  fetch-recursive"
     alias pinst=" HTTP_TIMEOUT=30 && sudo make  install distclean; rehash"
     alias pconf="sudo make config-recursive"
