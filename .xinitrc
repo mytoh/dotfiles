@@ -44,11 +44,15 @@ startdwm()
     $HOME/.fehbg &
   fi
   xcompmgr -n &
+
   while true; do
     xsetroot -name "$(date +"%F %R")"
     sleep 1m
   done &
- exec dwm
+
+  while true; do
+    dwm || exit
+  done
 }
 
 

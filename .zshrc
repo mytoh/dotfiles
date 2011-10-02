@@ -153,7 +153,7 @@ export MYVIMRC=~/.vimrc
 
 # ls
 export LSCOLORS=exFxCxdxBxegedabagacad
-if check_com -c gdircolors && [[ ! -e $home/.dir_colors ]]; then
+if check_com -c gdircolors && [[ -e $home/.dir_colors ]]; then
   eval $(gdircolors $home/.dir_colors -b)
   export ZLS_COLORS=$LS_COLORS
 else
@@ -709,6 +709,35 @@ ggr()  {
     emulate -L zsh
     ${=BROWSER} "http://www.google.com/search?&num=100&q=$*"
 }
+
+# prompt vi mode {{{
+# http://chocokanpan.net/archives/224
+accept_line() {
+  VIMODE="I"
+  setup_vi_prompt
+  builtin zle .accept-line
+}
+zle -N accept_line
+bindkey -M vicmd "^M" accept_line
+
+zle-keymap-select() {
+  VIMODE="${${KEYMAP/vicmd/N}/(main|viins)/I}"
+  setup_vi_prompt
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+# set vi prompt
+setup_vi_prompt(){
+  if [ ! $VIMODE ]; then
+    VIMODE="I"
+  fi
+  RPROMPT="[${VIMODE}]"
+}
+
+precmd_functions=(setup_vi_prompt $precmd_functions)
+# }}}
+
 
 # color function {{{
 # functions from
