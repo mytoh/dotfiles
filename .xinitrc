@@ -5,6 +5,8 @@ export QT_IM_MODULE="ibus"
 export XMODIFIERS=@im=ibus
 export XIM_PROGRAM="ibus-daemon"
 export XIM_ARGS="-r --daemonize --xim"
+
+export PATH="$HOME/local/bin:$PATH"
 ibus-daemon -d -x &
 xrdb -merge .Xresources
 xmodmap .Xmodmap
@@ -36,6 +38,19 @@ fi
 fbpanel &
 fi
 
+startdwm()
+{
+  if [ -x $HOME/.fehbg ]; then
+    $HOME/.fehbg &
+  fi
+  xcompmgr -n &
+  while true; do
+    xsetroot -name "$(date +"%F %R")"
+    sleep 1m
+  done &
+ exec dwm
+}
+
 
 DEFAULT_SESSION="twm"
 case $1 in
@@ -49,7 +64,7 @@ case $1 in
   qvwm) exec qvwm ;;
   fvwm|fvwm2) exec fvwm2 ;;
   fvwm-themes*) exec fvwm-themes-start -s sa ;;
-  dwm) exec dwm ;;
+  dwm) startdwm ;;
   swm) exec swm ;;
   afterstep) exec afterstep ;;
   awesome) exec awesome ;;

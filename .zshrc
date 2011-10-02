@@ -1,6 +1,6 @@
 
 # Options {{{
-bindkey -e
+bindkey -v
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
@@ -868,7 +868,7 @@ alias zmv='noglob zmv -v -W'
 alias mv='mv -iv'
 alias cp='cp -iv'
 alias rr='command rm -rfv'
-alias dwm-recompile='(\cd /usr/ports/x11-wm/dwm && sudo make deinstall && sudo make install)'
+alias dwm-recompile='(\cd /usr/ports/x11-wm/dwm && sudo make deinstall && sudo make install clean)'
 if check_com -c cdf ; then
 alias df='cdf -h'
 fi
