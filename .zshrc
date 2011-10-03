@@ -280,8 +280,8 @@ precmd_functions=(_precmd_update_vcs_info_msg $precmd_functions)
 
 # Prompts {{{
 setup_prompt(){
-unset PROMPT
-PROMPT+="%{$fg[green]%}[%~]%{$fg[white]%} "
+PROMPT=''
+PROMPT+='[%F{blue}%~$reset_color%}]'
 # git prompt
 gitprompt='%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}'
 PROMPT+=$gitprompt
@@ -721,7 +721,7 @@ zle -N accept_line
 bindkey -M vicmd "^M" accept_line
 
 zle-keymap-select() {
-  VIMODE="${${KEYMAP/vicmd/N}/(main|viins)/I}"
+  VIMODE="${${KEYMAP/vicmd/nor}/(main|viins)/ins}"
   setup_vi_prompt
   zle reset-prompt
 }
@@ -730,9 +730,15 @@ zle -N zle-keymap-select
 # set vi prompt
 setup_vi_prompt(){
   if [ ! $VIMODE ]; then
-    VIMODE="I"
+    VIMODE="ins"
   fi
-  RPROMPT="[${VIMODE}]"
+  if [ $VIMODE == "ins" ]; then
+  viprompt="[%{[38;5;67m%}${VIMODE}%{$reset_color%}]"
+  RPROMPT=$viprompt
+else
+  viprompt="[%{[38;5;182m%}${VIMODE}%{$reset_color%}]"
+  RPROMPT=$viprompt
+  fi
 }
 
 precmd_functions=(setup_vi_prompt $precmd_functions)
@@ -794,7 +800,7 @@ cat << EOF
 EOF
 }
 
-colorinvaders(){
+colorsinvader(){
 # ANSI Color -- use these variables to easily have different color
 #    and format output. Make sure to output the reset sequence after
 #    colors (f = foreground, b = background), and use the 'off'

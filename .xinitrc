@@ -48,10 +48,9 @@ startdwm()
   while true; do
     cpu=$(top -b -d 2 | grep ^CPU | awk '{print $2,$6}')
     diskused=$(df -ch | grep total | awk '{print $3}' | cut -c 1-3)
-  disktotal=$(df -ch | grep total | awk '{print $2}')
-  freemem=$(vmstat -h |grep -n 2| awk '{print $6}')
-  xsetroot -name "$cpu $freemem $diskused/$disktotal $(date +"%F %R")"
-  sleep 60
+    disktotal=$(df -ch | grep total | awk '{print $2}')
+    freemem=$(vmstat -h |grep -n 2| awk '{print $6}')
+    xsetroot -name "$cpu $freemem $diskused/$disktotal $(date +"%F %R")"
   done &
 
   while true; do

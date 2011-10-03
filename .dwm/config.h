@@ -17,10 +17,11 @@ static const Bool topbar            = True;     /* False means bottom bar */
 static const char *tags[] = { ".", ":", ".:", "::"};
 
 static const Rule rules[] = {
-  /* class      instance    title       tags mask     isfloating   monitor */
-  { "Gimp",     NULL,       NULL,       0,            True,        -1 },
-  { "Firefox",  NULL,       NULL,       1 << 4,       False,       -1 },
-  { "Rox",      NULL,       NULL,       0,            True,        -1 },
+  /* class       instance    title       tags mask     isfloating   monitor */
+  { "Gimp",      NULL,       NULL,       0,            True,        -1 },
+  { "Firefox",   NULL,       NULL,       1 << 3,       False,       -1 },
+  { "ROX-Filer", NULL,       NULL,       0,            True,        -1 },
+  { "feh",       NULL,       NULL,       0,            True,        -1 },
 };
 
 /* layout(s) */
@@ -46,8 +47,9 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-b", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "urxvtcd", NULL };
+static const char *dwmquitcmd[] = { "killall", "dwm", NULL };
 
 static Key keys[] = {
   /* modifier                     key        function        argument */
@@ -60,6 +62,7 @@ static Key keys[] = {
   { MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
   { MODKEY,                       XK_Return, zoom,           {0} },
   { MODKEY,                       XK_Tab,      focusstack,     {.i = +1 } },
+  //{ MODKEY,                       XK_Tab,    view,           {0} },
   { MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
   { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
   { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
@@ -81,7 +84,8 @@ static Key keys[] = {
   TAGKEYS(                        XK_7,                      6)
   TAGKEYS(                        XK_8,                      7)
   TAGKEYS(                        XK_9,                      8)
-  { MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+  { MODKEY|ShiftMask,             XK_q,      spawn,          {.v = dwmquitcmd } },
+  { MODKEY|ShiftMask,             XK_r,      quit,           {0} },
 };
 
 /* button definitions */
