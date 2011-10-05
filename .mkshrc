@@ -29,11 +29,13 @@ function precmd {
 
   (( e )) && print -n "$e|"
 }
+
 newline=$'\n'
 blue="[38;5;004m"
 normal_color="[38;5;67m"
 green="[38;5;6m"
 reset_color="[0m"
+
 PS1='$(precmd)${reset_color}${USER:=$(ulimit -c 0;id -un 2>&-||print \?)}@${HOSTNAME%%.*} [${green}$(
   local d=${PWD:-?} n p=~; [[ $p = ?(*/) ]] || d=${d/#$p/~}
   (( (${%d}>0 ? ${%d}: ${#d}) > (n = (COLUMNS/3<7 ? 7: COLUMNS/3)) )) && {
