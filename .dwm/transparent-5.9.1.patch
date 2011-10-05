@@ -1,4 +1,4 @@
---- dwm.c	2011-10-06 05:43:12.000000000 +0900
+--- dwm.c	2011-10-06 08:24:55.000000000 +0900
 +++ dwm.c.orig	2011-10-06 05:08:36.000000000 +0900
 @@ -58,7 +58,7 @@
  enum { CurNormal, CurResize, CurMove, CurLast };        /* cursor */
@@ -41,17 +41,18 @@
  			c->tags |= r->tags;
  			for(m = mons; m && m->num != r->monitor; m = m->next);
  			if(m)
-@@ -857,25 +853,12 @@
+@@ -857,26 +853,12 @@
  }
  
  void
 -window_opacity_set(Client *c, double opacity) {
--  if(opacity >= 0 && opacity <= 1) {
+-  if(opacity > 0 && opacity <= 1) {
 -    unsigned long real_opacity[] = { opacity * 0xffffffff };
 -    XChangeProperty(dpy, c->win, netatom[NetWMWindowOpacity], XA_CARDINAL, 32, PropModeReplace, (unsigned char *)real_opacity, 1);
 -  }
--  else
+-  else {
 -    XDeleteProperty(dpy, c->win, netatom[NetWMWindowOpacity]);
+-  }
 -}
 -
 -void
@@ -67,7 +68,7 @@
  	if(c) {
  		if(c->mon != selmon)
  			selmon = c->mon;
-@@ -891,7 +874,6 @@
+@@ -892,7 +874,6 @@
  		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
  	selmon->sel = c;
  	drawbars();
@@ -75,7 +76,7 @@
  }
  
  void
-@@ -1126,7 +1108,7 @@
+@@ -1127,7 +1108,7 @@
  		die("fatal: could not malloc() %u bytes\n", sizeof(Client));
  	c->win = w;
  	updatetitle(c);
@@ -84,7 +85,7 @@
  		c->mon = t->mon;
  		c->tags = t->tags;
  	}
-@@ -1569,7 +1551,6 @@
+@@ -1570,7 +1551,6 @@
  	netatom[NetActiveWindow] = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", False);
  	netatom[NetSupported] = XInternAtom(dpy, "_NET_SUPPORTED", False);
  	netatom[NetWMName] = XInternAtom(dpy, "_NET_WM_NAME", False);

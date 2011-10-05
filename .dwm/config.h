@@ -12,7 +12,7 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
-static const double shade           = 0.6;
+static const double shade           = 0.8;
 
 /* tagging */
 static const char *tags[] = { ".", ":", ".:", "::"};
@@ -51,7 +51,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-b", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "urxvt", NULL };
+static const char *termcmd[]  = { "urxvtcd", NULL };
 static const char *dwmquitcmd[] = { "killall", "dwm", NULL };
 
 static Key keys[] = {
