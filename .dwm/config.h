@@ -12,16 +12,19 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
+static const double shade           = 0.6;
 
 /* tagging */
 static const char *tags[] = { ".", ":", ".:", "::"};
 
 static const Rule rules[] = {
-  /* class       instance    title       tags mask     isfloating   monitor */
-  { "Gimp",      NULL,       NULL,       0,            True,        -1 },
-  { "Firefox",   NULL,       NULL,       1 << 3,       False,       -1 },
-  { "ROX-Filer", NULL,       NULL,       0,            True,        -1 },
-  { "feh",       NULL,       NULL,       0,            True,        -1 },
+  /* class       instance    title       tags mask     isfloating   monitor     opacity */
+  { "Gimp",      NULL,       NULL,       0,            True,        -1 ,        -1},
+  { "Firefox",   NULL,       NULL,       1 << 3,       False,       -1 ,        -1},
+  { "ROX-Filer", NULL,       NULL,       0,            True,        -1 ,        -1},
+  { "feh",       NULL,       NULL,       0,            True,        -1 ,        -1},
+  { "Thunar",       NULL,       NULL,       0,            True,        -1,      -1 },
+  { "URxvt",       NULL,       NULL,       0,            False,        -1,      0.92 },
 };
 
 /* layout(s) */
