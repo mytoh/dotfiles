@@ -19,7 +19,8 @@ xset fp+ /usr/local/lib/X11/fonts/profont
 xset fp+ /usr/local/lib/X11/fonts/terminus-font
 xset fp+ $HOME/.fonts
 xset fp rehash
-urxvtcd  &
+urxvt &
+#urxvtcd &
 xbindkeys &
 Thunar --daemon &
 #spinner -T 

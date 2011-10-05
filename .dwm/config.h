@@ -6,8 +6,8 @@ static const char normbordercolor[] = "#222222";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#6d6d6d";
 static const char selbordercolor[]  = "#506070";
-static const char selbgcolor[]      = "#506070";
-static const char selfgcolor[]      = "#222222";
+static const char selbgcolor[]      = "#202027";
+static const char selfgcolor[]      = "#506070";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
@@ -48,7 +48,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-b", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "urxvtcd", NULL };
+static const char *termcmd[]  = { "urxvt", NULL };
 static const char *dwmquitcmd[] = { "killall", "dwm", NULL };
 
 static Key keys[] = {

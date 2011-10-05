@@ -7,7 +7,7 @@ urxvt.termName: xterm-256color
 
 urxvt.depth: 24
 
-urxvt.background: rgba:0000/0000/0000/cccc
+urxvt.background: rgba:0900/0900/0950/cccc
 !urxvt.background: [90]#262630
 urxvt.foreground: [90]gray
 urxvt.geometry: 100x40+100+100
@@ -36,7 +36,7 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 !urxvt.font: k12
 !urxvt.boldfont: k12
 urxvt.font: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*, \
-            -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*
+            -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-*-*
 
 !urxvt.font: -mplus-gothic-medium-r-normal-*-12-*-*-*-*-*-*-*
 

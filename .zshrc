@@ -280,8 +280,9 @@ precmd_functions=(_precmd_update_vcs_info_msg $precmd_functions)
 
 # Prompts {{{
 setup_prompt(){
+cgray="%{[38;5;245m%}"
 PROMPT=''
-PROMPT+='[%F{blue}%~$reset_color%}]'
+PROMPT+='${cgray}[%F{blue}%~${cgray}]'
 # git prompt
 gitprompt='%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}'
 PROMPT+=$gitprompt

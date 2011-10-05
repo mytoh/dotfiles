@@ -28,7 +28,7 @@ startup_no_warning=FALSE
 
 [Image View]
 imgwin_save_win_state=TRUE
-imgwin_width=1278
+imgwin_width=874
 imgwin_height=784
 imgwin_fit_to_image=TRUE
 imgwin_open_new_win=FALSE
