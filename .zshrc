@@ -45,7 +45,7 @@ setopt auto_menu
 unsetopt bg_nice appendhistory beep nomatch
 limit coredumpsize 0
 
-umask 002
+umask 022
 # }}}
 
 # internal function {{{
@@ -1030,7 +1030,7 @@ case ${OSTYPE} in
     alias pup="sudo portsnap fetch update "
     alias pcheck='sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends'
     alias pfetch="sudo make  fetch-recursive"
-    alias pinst=" HTTP_TIMEOUT=30 && sudo make  install distclean; rehash"
+    alias pinst="sudo make  install distclean; rehash"
     alias pconf="sudo make config-recursive"
     alias pclean="sudo make  clean "
     alias pkg_add="pkg_add -v"
