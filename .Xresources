@@ -43,7 +43,7 @@ urxvt.font: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*, \
 urxvt.boldFont: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso8859-*, \
             -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*, \
              -*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*, \
-            -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-jisx0208.1990-*
+            -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-*-*
 
 !urxvt.boldfont: -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-*-*
 !urxvt.boldFont: 9x15bold,\

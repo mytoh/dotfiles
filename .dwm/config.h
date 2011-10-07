@@ -21,10 +21,13 @@ static const Rule rules[] = {
   /* class       instance    title       tags mask     isfloating   monitor     opacity */
   { "Gimp",      NULL,       NULL,       0,            True,        -1 ,        -1},
   { "Firefox",   NULL,       NULL,       1 << 3,       False,       -1 ,        -1},
-  { "ROX-Filer", NULL,       NULL,       0,            True,        -1 ,        -1},
+  { "ROX-Filer", NULL,       NULL,       0,            True,        -1 ,        0.90},
   { "feh",       NULL,       NULL,       0,            True,        -1 ,        -1},
+  { "Switch2",       NULL,       NULL,       0,            True,        -1 ,        -1},
   { "Thunar",       NULL,       NULL,       0,            True,        -1,      -1 },
   { "URxvt",       NULL,       NULL,       0,            False,        -1,      0.92 },
+  { "Comix",       NULL,       NULL,       0,            False,        -1,      0.92 },
+  { "GImageView",       NULL,       NULL,       0,            False,        -1,      0.92 },
 };
 
 /* layout(s) */
