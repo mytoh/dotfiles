@@ -20,7 +20,6 @@ xset fp+ /usr/local/lib/X11/fonts/terminus-font
 xset fp+ $HOME/.fonts
 xset fp rehash
 urxvtcd &
-#urxvtcd &
 xbindkeys &
 Thunar --daemon &
 #spinner -T 
@@ -44,7 +43,7 @@ startdwm()
   if [ -x $HOME/.fehbg ]; then
     $HOME/.fehbg &
   fi
-  xcompmgr -n &
+  #xcompmgr -n &
 
   while true; do
     cpu=$(top -b -d 2 | grep ^CPU | awk '{print $2,$6}')

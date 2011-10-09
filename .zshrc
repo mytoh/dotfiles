@@ -280,26 +280,26 @@ precmd_functions=(_precmd_update_vcs_info_msg $precmd_functions)
 
 # Prompts {{{
 setup_prompt(){
-cgray="%{[38;5;245m%}"
-PROMPT=''
-PROMPT+='${cgray}[%F{blue}%~${cgray}]'
-# git prompt
-gitprompt='%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}'
-PROMPT+=$gitprompt
-# ip
-#ip="(%F{yellow}$(curl ifconfig.me 2>/dev/null)%{$reset_color%})"
-#PROMPT+=$ip
-####
-PROMPT+=$'\n'
-PROMPT+="%{[38;5;67m%}>>>%{$reset_color%} "
-PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
-SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
-[ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-  PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
-if [[ $TERM != cons25 && $TERM != xterm ]]; then
-  local muridana="%{$fg[cyan]%}(・x・) %{$reset_color%}"
-  #RPROMPT=$muridana
-fi
+  cgray="%F{245}"
+  PROMPT=''
+  PROMPT+='${cgray}[%F{blue}%(5~,%-2~/../%2~,%~)${cgray}]'
+  # git prompt
+  gitprompt='%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}'
+  PROMPT+=$gitprompt
+  # ip
+  #ip="(%F{yellow}$(curl ifconfig.me 2>/dev/null)%{$reset_color%})"
+  #PROMPT+=$ip
+  ####
+  PROMPT+=$'\n'
+  PROMPT+="%F{67}>>>%{$reset_color%} "
+  PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
+  SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
+  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
+    PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
+  if [[ $TERM != cons25 && $TERM != xterm ]]; then
+    local muridana="%{$fg[cyan]%}(・x・) %{$reset_color%}"
+    #RPROMPT=$muridana
+  fi
 }
 setup_prompt
 # }}}
@@ -734,10 +734,10 @@ setup_vi_prompt(){
     VIMODE="ins"
   fi
   if [ $VIMODE == "ins" ]; then
-  viprompt="[%{[38;5;67m%}${VIMODE}%{$reset_color%}]"
+  viprompt="[%F{67}${VIMODE}%{$reset_color%}]"
   RPROMPT=$viprompt
 else
-  viprompt="[%{[38;5;182m%}${VIMODE}%{$reset_color%}]"
+  viprompt="[%F{182}${VIMODE}%{$reset_color%}]"
   RPROMPT=$viprompt
   fi
 }
@@ -746,10 +746,12 @@ precmd_functions=(setup_vi_prompt $precmd_functions)
 # }}}
 
 
-# color function {{{
+# color functions {{{
 # functions from
 # http://crunchbanglinux.org/forums/post/126921/#p126921
-colorspacman(){
+
+colorspacman() #{{{
+{
 # ANSI Color -- use these variables to easily have different color
 #    and format output. Make sure to output the reset sequence after
 #    colors (f = foreground, b = background), and use the 'off'
@@ -800,6 +802,7 @@ cat << EOF
 
 EOF
 }
+#}}}
 
 colorsinvader(){
 # ANSI Color -- use these variables to easily have different color

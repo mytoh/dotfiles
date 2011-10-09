@@ -1,4 +1,4 @@
---- dwm.c	2011-10-06 08:24:55.000000000 +0900
+--- dwm.c	2011-10-08 17:06:09.000000000 +0900
 +++ dwm.c.orig	2011-10-06 05:08:36.000000000 +0900
 @@ -58,7 +58,7 @@
  enum { CurNormal, CurResize, CurMove, CurLast };        /* cursor */
@@ -85,7 +85,7 @@
  		c->mon = t->mon;
  		c->tags = t->tags;
  	}
-@@ -1570,7 +1551,6 @@
+@@ -1570,11 +1551,10 @@
  	netatom[NetActiveWindow] = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", False);
  	netatom[NetSupported] = XInternAtom(dpy, "_NET_SUPPORTED", False);
  	netatom[NetWMName] = XInternAtom(dpy, "_NET_WM_NAME", False);
@@ -93,3 +93,8 @@
  	netatom[NetWMState] = XInternAtom(dpy, "_NET_WM_STATE", False);
  	netatom[NetWMFullscreen] = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
  	/* init cursors */
+-	cursor[CurNormal] = XCreateFontCursor(dpy, XC_right_ptr);
++	cursor[CurNormal] = XCreateFontCursor(dpy, XC_left_ptr);
+ 	cursor[CurResize] = XCreateFontCursor(dpy, XC_sizing);
+ 	cursor[CurMove] = XCreateFontCursor(dpy, XC_fleur);
+ 	/* init appearance */
