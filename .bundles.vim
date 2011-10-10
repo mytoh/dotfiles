@@ -13,6 +13,8 @@ if has('vim_starting')
   filetype indent on
 endif
 
+NeoBundle 'Shougo/neobundle.vim'
+
 " my bundles here {{{
 "
 " github repo
@@ -32,15 +34,17 @@ NeoBundle 'mattn/googlereader-vim'
 NeoBundle 'mattn/unite-remotefile'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/wwwrenderer-vim'
-NeoBundle 'roman/golden-ratio'
+"NeoBundle 'roman/golden-ratio'
 NeoBundle 'rson/vim-bufstat'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
+NeoBundle 'thinca/vim-ambicmd'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-afterimage'
+NeoBundle 'Twinside/vim-cuteErrorMarker'
 NeoBundle 'tyru/eskk.vim'
 NeoBundle 'tyru/skkdict.vim'
 NeoBundle 'tyru/open-browser.vim'
@@ -52,12 +56,13 @@ NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'ujihisa/vimshell-ssh'
 
 " vim-scripts repo
-"Bundle 'gauref.vim'
+"NeoBundle 'gauref.vim'
 NeoBundle 'info.vim'
 NeoBundle 'eregex.vim'
 NeoBundle 'sudo.vim'
 NeoBundle 'YankRing.vim'
 NeoBundle 'fluxbox.vim'
+NeoBundle 'matchit.zip'
 "Bundle 'buftabs'
 " colorschemes
 NeoBundle 'jellybeans.vim'

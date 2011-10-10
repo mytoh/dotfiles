@@ -7,9 +7,13 @@
   (let* ((d (process-output->string '(date) ))
         (date (format
              #f
-             "^fg(#607080)~a\n"
+             "^fg(#607080)~10@a\n"
              d)))
        (display date)))
+
+;(define (cpu)
+  ;(let* (())
+        ;))
 
 (define (main args)
   (date)

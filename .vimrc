@@ -150,6 +150,7 @@ aug myautocommands
   " for chalice buffers
   au filetype           2ch*                     setl fencs=cp932,iso-2022-jp-3,euc-jp
   au filetype           2ch*                     let g:loaded_golden_ratio = 1
+  au filetype           nerdtree                     let g:loaded_golden_ratio = 1
 aug end
 
 aug cch
@@ -372,7 +373,7 @@ let g:vimproc_dll_path = $HOME . '/.bundle/vimproc/autoload/proc.so'
 "}}}
 
 " gauref{{{
-let g:gauref_file = '/usr/home/mytoh/.vim/bundle/gauref.vim/doc/gauche-refe.txt'
+let g:gauref_file = $HOME . '/.bundle/gauref.vim/doc/gauche-refj.txt'
 "}}}
 
 " changelog{{{
@@ -387,6 +388,12 @@ nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
 let g:openbrowser_open_rules = {
         \   'w3m':           '{browser} {shellescape(uri)} ', }
+" }}}
+
+" ambicmd {{{
+  cnoremap <expr> <Space> ambicmd#expand("\<Space>")
+  cnoremap <expr> <CR>    ambicmd#expand("\<CR>")
+
 " }}}
 
 " }}}
