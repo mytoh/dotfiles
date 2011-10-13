@@ -396,6 +396,10 @@ let g:openbrowser_open_rules = {
 
 " }}}
 
+" mpc.vim {{{
+let g:mpd_host = "192.168.1.3"
+let g:mpd_port = "6600"
+" }}}
 " }}}
 
 set secure

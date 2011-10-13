@@ -183,7 +183,6 @@ path=(
 ~/local/bin(N-/)
 /opt/X11/bin(N-/)
 /usr/X11/bin(N-/)
-/usr/X11R6/bin(N-/)
 /usr/games(N-/)
 /usr/local/{sbin,bin}(N-/)
 /usr/local/*/{sbin,bin}(N-/)
@@ -285,18 +284,23 @@ precmd_functions=(_precmd_update_vcs_info_msg $precmd_functions)
 
 # Prompts {{{
 setup_prompt(){
-  cgray="%F{245}"
   PROMPT=''
-  PROMPT+='${cgray}[%F{blue}%(5~,%-2~/../%2~,%~)${cgray}]'
+  if [[ X$DISPLAY != "X" ]];then
+  PROMPT+="%F{8}┌%{$reset_color%}"
+fi
+  PROMPT+="%F{8}[%F{blue}%(5~,%-2~/../%2~,%~)%F{8}]%{$reset_color%}"
   # git prompt
-  gitprompt='%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}'
+  gitprompt="%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}"
   PROMPT+=$gitprompt
   # ip
   #ip="(%F{yellow}$(curl ifconfig.me 2>/dev/null)%{$reset_color%})"
   #PROMPT+=$ip
   ####
   PROMPT+=$'\n'
-  PROMPT+="%F{67}>>>%{$reset_color%} "
+  if [[ X$DISPLAY != "X" ]];then
+  PROMPT+="%F{8}└%{$reset_color%}"
+fi
+  PROMPT+="%F{blue}>%F{246} "
   PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
   SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&

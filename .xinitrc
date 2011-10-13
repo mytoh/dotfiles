@@ -50,7 +50,8 @@ startdwm()
     diskused=$(df -ch | grep total | awk '{print $3}' | cut -c 1-3)
     disktotal=$(df -ch | grep total | awk '{print $2}')
     freemem=$(vmstat -h |grep -n 2| awk '{print $6}')
-    xsetroot -name "$cpu $freemem $diskused/$disktotal $(date +"%F %R")"
+    ip=$(curl ifconfig.me 2>/dev/null)
+    xsetroot -name "$cpu :: $freemem :: $diskused/$disktotal :: $ip :: $(date +"%F %R")"
   done &
 
   while true; do

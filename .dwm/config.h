@@ -1,26 +1,36 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
+#define NUMCOLORS     4       // need at least 3
+static const char colors[NUMCOLORS][ColLast][8] = {
+    // border   foreground  background
+    { "#222222", "#6d6d6d", "#222222" },  // 0 = normal
+    { "#607080", "#607080", "#222222" },  // 1 = selected
+    { "#607080", "#607080", "#6d6d6d" },  // 2 = urgent/warnig
+    { "#ff0000", "#ffffff", "#ff0000" },  // 3 = error
+    // add more here
+};
+//static const char normbordercolor[] = "#222222";
+//static const char normbgcolor[]     = "#222222";
+//static const char normfgcolor[]     = "#6d6d6d";
+//static const char selbordercolor[]  = "#607080";
+//static const char selbgcolor[]      = "#222222";
+//static const char selfgcolor[]      = "#607080";
 static const char font[]            = "-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*";
-static const char normbordercolor[] = "#222222";
-static const char normbgcolor[]     = "#222222";
-static const char normfgcolor[]     = "#6d6d6d";
-static const char selbordercolor[]  = "#607080";
-static const char selbgcolor[]      = "#222222";
-static const char selfgcolor[]      = "#607080";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
-static const double shade           = 0.8;
+static const double shade           = 0.8;      /* Opacity of inactive windows */
 
 /* tagging */
-static const char *tags[] = { ".", ":", ".:", "::"};
+static const char *tags[] = {"А", "В", "Г", "Д"};
 
 static const Rule rules[] = {
   /* class       instance    title       tags mask     isfloating   monitor     opacity */
   { "Gimp",      NULL,       NULL,       0,            True,        -1 ,        -1},
   { "Firefox",   NULL,       NULL,       1 << 3,       False,       -1 ,        -1},
+  { "Dialog", NULL,       NULL,       0,            True,        -1 ,        0.90},
   { "ROX-Filer", NULL,       NULL,       0,            True,        -1 ,        0.90},
   { "feh",       NULL,       NULL,       0,            True,        -1 ,        -1},
   { "Switch2",       NULL,       NULL,       0,            True,        -1 ,        -1},
@@ -53,7 +63,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-b", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-b", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
 static const char *termcmd[]  = { "urxvtcd", NULL };
 static const char *dwmquitcmd[] = { "killall", "dwm", NULL };
 

@@ -54,6 +54,8 @@ NeoBundle 'tyru/vice.vim'
 NeoBundle 'ujihisa/neco-look'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'ujihisa/vimshell-ssh'
+NeoBundle 'mfumi/unite-mpc'
+NeoBundle 'mfumi/mpc.vim'
 
 " vim-scripts repo
 "NeoBundle 'gauref.vim'
