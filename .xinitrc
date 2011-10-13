@@ -8,8 +8,8 @@ export XIM_ARGS="-r --daemonize --xim"
 
 export PATH="$HOME/local/bin:$PATH"
 ibus-daemon -d -x &
-xrdb -merge .Xresources
-xmodmap .Xmodmap
+xrdb -merge $HOME/.Xresources
+xmodmap $HOME/.Xmodmap
 setxkbmap dvorak
 xsetroot -cursor_name right_ptr &
 xset fp+ /usr/local/lib/X11/fonts/local
@@ -38,27 +38,6 @@ fi
 fbpanel &
 fi
 
-startdwm()
-{
-  if [ -x $HOME/.fehbg ]; then
-    $HOME/.fehbg &
-  fi
-  #xcompmgr -n &
-
-  while true; do
-    cpu=$(top -b -d 2 | grep ^CPU | awk '{print $2,$6}')
-    diskused=$(df -ch | grep total | awk '{print $3}' | cut -c 1-3)
-    disktotal=$(df -ch | grep total | awk '{print $2}')
-    freemem=$(vmstat -h |grep -n 2| awk '{print $6}')
-    ip=$(curl ifconfig.me 2>/dev/null)
-    xsetroot -name "$cpu :: $freemem :: $diskused/$disktotal :: $ip :: $(date +"%F %R")"
-  done &
-
-  while true; do
-    dwm || exit
-  done
-}
-
 
 DEFAULT_SESSION="twm"
 case $1 in
@@ -72,7 +51,7 @@ case $1 in
   qvwm) exec qvwm ;;
   fvwm|fvwm2) exec fvwm2 ;;
   fvwm-themes*) exec fvwm-themes-start -s sa ;;
-  dwm) startdwm ;;
+  dwm) $HOME/.dwm/startdwm ;;
   swm) exec swm ;;
   afterstep) exec afterstep ;;
   awesome) exec awesome ;;
