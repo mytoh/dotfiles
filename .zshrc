@@ -754,7 +754,6 @@ else
 precmd_functions=(setup_vi_prompt $precmd_functions)
 # }}}
 
-
 # color functions {{{
 # functions from
 # http://crunchbanglinux.org/forums/post/126921/#p126921
@@ -813,7 +812,7 @@ EOF
 }
 #}}}
 
-colorsinvader(){
+colorsinvader(){ #{{{
 # ANSI Color -- use these variables to easily have different color
 #    and format output. Make sure to output the reset sequence after
 #    colors (f = foreground, b = background), and use the 'off'
@@ -866,7 +865,7 @@ cat << EOF
                               ${whitef}▀▀▀▀▀▀▀▀▀▀▀${reset}
 
 EOF
-}
+} #}}}
 
 dump-colors(){
   xdef="$HOME/.Xresources"
@@ -890,11 +889,47 @@ color-blocks () {
     for ((i=0; i<=7; i++)); echo -en "\e[3${i}m${chars} \e[1;3${i}m${chars}\e[m "; echo; echo
     unset i
 }
+
 color-numbers(){
- for i in {000..255..16}; do for j in {$i..$((i+15))}; do echo -en "\e[38;5;${j}m $j \e[0m"; done; echo; done
+ for i in {000..255..16}; do 
+   for j in {$i..$((i+15))}; do 
+     echo -en "\e[38;5;${j}m $j \e[0m"; 
+   done; 
+   echo; 
+ done
  }
 
+colorguns() { #{{{
+#
+# ANSI color scheme script by pfh
+#
+# Initializing mod by lolilolicon from Archlinux
+#
+# this is modified version
+for i in {1..6}; do
+  eval f$i=`echo -en "\e[3${i}m"`
+done
+bld=$'\e[1m'
+rst=$'\e[0m'
+inv=$'\e[7m'
+cat << EOF
+
+$f1   ▀▄▄███████████  $f2 ▀▄▄███████████  $f3 ▀▄▄███████████  $f4 ▀▄▄███████████  $f5 ▀▄▄███████████  $f6 ▀▄▄███████████
+$f1  ▄███▀█▀▀▀        $f2 ▄███▀█▀▀▀       $f3 ▄███▀█▀▀▀       $f4 ▄███▀█▀▀▀       $f5 ▄███▀█▀▀▀       $f6 ▄███▀█▀▀▀
+$f1 ▐███▄▀            $f2▐███▄▀           $f3▐███▄▀           $f4▐███▄▀           $f5▐███▄▀           $f6▐███▄▀
+$f1 ▐███              $f2▐███             $f3▐███             $f4▐███             $f5▐███             $f6▐███
+$f1  ▀▀▀              $f2 ▀▀▀             $f3 ▀▀▀             $f4 ▀▀▀             $f5 ▀▀▀             $f6 ▀▀▀
+$bld
+$f1   ▀▄▄███████████  $f2 ▀▄▄███████████  $f3 ▀▄▄███████████  $f4 ▀▄▄███████████  $f5 ▀▄▄███████████  $f6 ▀▄▄███████████
+$f1  ▄███▀█▀▀▀        $f2 ▄███▀█▀▀▀       $f3 ▄███▀█▀▀▀       $f4 ▄███▀█▀▀▀       $f5 ▄███▀█▀▀▀       $f6 ▄███▀█▀▀▀
+$f1 ▐███▄▀            $f2▐███▄▀           $f3▐███▄▀           $f4▐███▄▀           $f5▐███▄▀           $f6▐███▄▀
+$f1 ▐███              $f2▐███             $f3▐███             $f4▐███             $f5▐███             $f6▐███
+$f1  ▀▀▀              $f2 ▀▀▀             $f3 ▀▀▀             $f4 ▀▀▀             $f5 ▀▀▀             $f6 ▀▀▀
+$rst
+EOF
+} #}}}
 #}}}
+
 
 # }}}
 
