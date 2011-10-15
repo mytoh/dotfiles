@@ -116,6 +116,8 @@ xsource() { # {{{
     done
     return 0
 }
+
+
 #}}}
 # }}}
 
@@ -215,6 +217,11 @@ cdpath=(~/local ~/local/var)
 
 # remove duplicates
 typeset -U path cdpath fpath manpath infopath
+
+typeset -Uga preexec_functions
+typeset -Uga precmd_functions
+typeset -Uga chpwd_functions
+
 # }}}
 
 # named directories {{{
@@ -268,7 +275,7 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' stagedstr '%F{28}● '
 zstyle ':vcs_info:*' unstagedstr '%F{11}●'
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' enable git svn hg
 
 _precmd_update_vcs_info_msg() {
   if [[ -e $PWD/.git ]]; then
@@ -281,7 +288,7 @@ fi
 vcs_info
 }
 
-precmd_functions+=_precmd_update_vcs_info_msg
+precmd_functions+='_precmd_update_vcs_info_msg'
 # }}}
 
 # prompt vi mode {{{
@@ -315,7 +322,7 @@ else
   fi
 }
 
-precmd_functions+=setup_vi_prompt
+precmd_functions+='setup_vi_prompt'
 # }}}
 
 setup_prompt(){ #{{{
@@ -339,7 +346,7 @@ fi
 else
   PROMPT+="%F{8}-%{$reset_color%}"
 fi
-PROMPT+="%F{8}>%{[38;5;068m%} "
+PROMPT+="%F{8}>%{$reset_color%} "
   PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
   SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
@@ -376,13 +383,11 @@ bindkey -v "^H" backward-delete-char # changing default
 # }}}
 
 # Functions {{{
-chpwd_functions=()
-preexec_functions=()
 
 if [[ "$TERM" == screen* ]]; then
   chpwd_title () { printf "_`dirs -p|awk '{print $1;exit}'`\\" }
-  chpwd_functions=(chpwd_title $chpwd_functions)
-  preexec_functions=(preexec_update_title $preexec_functions)
+  chpwd_functions='chpwd_title'
+  preexec_functions+='preexec_update_title'
   preexec_update_title() {
     # see [zsh-workers:13180]
     # http://www.zsh.org/mla/workers/2000/msg03993.html
@@ -429,7 +434,7 @@ chpwd_functions=( $chpwd_functions chpwd_ls dirs)
 _precmd_rehash(){
   rehash
 }
-precmd_functions=( $precmd_rehash $precmd_functions )
+precmd_functions+='_precmd_rehash'
 
 tm() {
   if tmux ls >/dev/null 2>&1; then

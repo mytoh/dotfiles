@@ -10,14 +10,9 @@ static const char colors[NUMCOLORS][ColLast][8] = {
     { "#ff0000", "#ffffff", "#ff0000" },  // 3 = error
     // add more here
 };
-//static const char normbordercolor[] = "#222222";
-//static const char normbgcolor[]     = "#222222";
-//static const char normfgcolor[]     = "#6d6d6d";
-//static const char selbordercolor[]  = "#607080";
-//static const char selbgcolor[]      = "#222222";
-//static const char selfgcolor[]      = "#607080";
 static const char font[]            = "-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int gappx     = 2;        /* gap pixel between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
