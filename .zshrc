@@ -259,6 +259,8 @@ zstyle ':completion:*:functions' ignore-patterns '_*'
 zstyle ':completion:*:cd:*' tag-order local-directories path-directories
 # }}}
 
+# Prompts {{{
+
 # git prompt {{{
 # briancarper.net/tag/249/zsh 
 autoload -Uz vcs_info
@@ -279,14 +281,49 @@ fi
 vcs_info
 }
 
-precmd_functions=(_precmd_update_vcs_info_msg $precmd_functions)
+precmd_functions+=_precmd_update_vcs_info_msg
 # }}}
 
-# Prompts {{{
-setup_prompt(){
+# prompt vi mode {{{
+# http://chocokanpan.net/archives/224
+accept_line() {
+  VIMODE="ins"
+  setup_vi_prompt
+  builtin zle .accept-line
+}
+zle -N accept_line
+bindkey -M vicmd "^M" accept_line
+
+zle-keymap-select() {
+  VIMODE="${${KEYMAP/vicmd/nor}/(main|viins)/ins}"
+  setup_vi_prompt
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+# set vi prompt
+setup_vi_prompt(){
+  if [ ! $VIMODE ]; then
+    VIMODE="ins"
+  fi
+  if [ $VIMODE == "ins" ]; then
+  viprompt="%{$reset_color%}[%{[38;5;67m%}${VIMODE}%{$reset_color%}]"
+  RPROMPT=$viprompt
+else
+  viprompt="%{$reset_color%}[%{[38;5;182m%}${VIMODE}%{$reset_color%}]"
+  RPROMPT=$viprompt
+  fi
+}
+
+precmd_functions+=setup_vi_prompt
+# }}}
+
+setup_prompt(){ #{{{
   PROMPT=''
   if [[ X$DISPLAY != "X" ]];then
   PROMPT+="%F{8}┌%{$reset_color%}"
+else
+  PROMPT+="%F{8}-%{$reset_color%}"
 fi
   PROMPT+="%F{8}[%F{blue}%(5~,%-2~/../%2~,%~)%F{8}]%{$reset_color%}"
   # git prompt
@@ -299,8 +336,10 @@ fi
   PROMPT+=$'\n'
   if [[ X$DISPLAY != "X" ]];then
   PROMPT+="%F{8}└%{$reset_color%}"
+else
+  PROMPT+="%F{8}-%{$reset_color%}"
 fi
-  PROMPT+="%F{blue}>%F{246} "
+PROMPT+="%F{8}>%{[38;5;068m%} "
   PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
   SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
@@ -311,8 +350,10 @@ fi
   fi
 }
 setup_prompt
+#}}}
 # }}}
 
+# bindkeys {{{
 # History search keymap {{{
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
@@ -321,6 +362,17 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "\\ep" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 bindkey "\\en" history-beginning-search-forward-end
+# }}}
+
+# vi mode keys
+# -v -> viins
+# -a -> vicmd
+bindkey -v "^A" vi-beginning-of-line
+bindkey -v "^B" vi-backward-char
+bindkey -v "^E" vi-end-of-line
+bindkey -v "^F" vi-forward-char
+bindkey -v "^K" vi-kill-eol
+bindkey -v "^H" backward-delete-char # changing default
 # }}}
 
 # Functions {{{
@@ -720,39 +772,6 @@ ggr()  {
     ${=BROWSER} "http://www.google.com/search?&num=100&q=$*"
 }
 
-# prompt vi mode {{{
-# http://chocokanpan.net/archives/224
-accept_line() {
-  VIMODE="I"
-  setup_vi_prompt
-  builtin zle .accept-line
-}
-zle -N accept_line
-bindkey -M vicmd "^M" accept_line
-
-zle-keymap-select() {
-  VIMODE="${${KEYMAP/vicmd/nor}/(main|viins)/ins}"
-  setup_vi_prompt
-  zle reset-prompt
-}
-zle -N zle-keymap-select
-
-# set vi prompt
-setup_vi_prompt(){
-  if [ ! $VIMODE ]; then
-    VIMODE="ins"
-  fi
-  if [ $VIMODE == "ins" ]; then
-  viprompt="[%F{67}${VIMODE}%{$reset_color%}]"
-  RPROMPT=$viprompt
-else
-  viprompt="[%F{182}${VIMODE}%{$reset_color%}]"
-  RPROMPT=$viprompt
-  fi
-}
-
-precmd_functions=(setup_vi_prompt $precmd_functions)
-# }}}
 
 # color functions {{{
 # functions from
@@ -931,20 +950,21 @@ EOF
 
 colorm1934() { #{{{
 cat << EOF
-
+'
            ,____________                  __.  
-          /  ||||||     ~----------------~  || 
-       ()/___LLLLLL_____________________|-==|| 
+          /  ||||||     ^----------------~  || 
+      (~)/___LLLLLL_____________________|-==|| 
         /   ,------,  ()                |___|  
        <,  /      //  ,-,------/'~~~~~~~       
-         )/      //  /((      \(               
-        //      //   | \\     /                
-       //()    //.-=----'===-'                 
+         )/      //  /(/     \(               
+        //      //   | \\\\    /                
+       //()    //.-=----'==-'                 
       //  :po ///                              
      //      ///                               
     ( '------'/                                
-    "~~~~~~~\ (                                
-             '~ 
+    "~~~~~~~\(                                
+             '
+'
 EOF
 } #}}}
 

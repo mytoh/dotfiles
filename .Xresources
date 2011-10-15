@@ -79,29 +79,60 @@ urxvt.boldFont: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso8859-*, \
 
 
 ! colors from dzen wiki
-urxvt*color0:       #000000
-urxvt*color8:       #666666
+!*color0:       #000000
+!*color8:       #666666
 !! DarkRed + Red
-urxvt*color1:       #b45151
-urxvt*color9:       #fe8686
+!*color1:       #b45151
+!*color9:       #fe8686
 !! DarkGreen + Green
-urxvt*color2:       #8ba574
-urxvt*color10:      #a5dca5
+!*color2:       #8ba574
+!*color10:      #a5dca5
 !! DarkYellow + Yellow
-urxvt*color3:       Khaki3
-urxvt*color11:      #efe58b
+!*color3:       Khaki3
+!*color11:      #efe58b
 !! DarkBlue + Blue
-urxvt*color4:       #506070
-urxvt*color12:      #86cdea
+!*color4:       #506070
+!*color12:      #86cdea
 !! DarkMangenta + Mangenta
-urxvt*color5:       #aa6eaf
-urxvt*color13:      #b698b8
+!*color5:       #aa6eaf
+!*color13:      #b698b8
 !!DarkCyan + Cyan
-urxvt*color6:       #418179
-urxvt*color14:      #71bebe
+!*color6:       #418179
+!*color14:      #71bebe
 !! LightGrey + White
-urxvt*color7:       #bebebe
-urxvt*color15:      #ffffff
+!*color7:       #bebebe
+!*color15:      #ffffff
+
+
+  
+! = Side-A =! {{{
+*background: #000000
+*foreground: #575757 
+! Black 
+*color0:   #000000 
+*color8:   #444444 
+! Red 
+*color1:   #4C3A38 
+*color9:   #57423F 
+! Green 
+*color2:   #384C45 
+*color10:  #3A4F48 
+! Yellow 
+*color3:   #4C4B37 
+*color11:  #57563F 
+! Blue 
+*color4:   #383E4C 
+*color12:  #3F4557 
+! Magenta 
+*color5:   #4C3949  
+*color13:  #574153
+! Cyan 
+*color6:   #3C374C 
+*color14:  #403B52 
+! White 
+*color7:   #4C4C4C 
+*color15:  #575757
+!}}}
 
 
 !{{{
@@ -149,26 +180,8 @@ urxvt*color15:      #ffffff
 !-------------
 ! xterm
 ! ------------
-xterm*foreground: white
-xterm*background: black
 xterm*scrollBar: false
 
-xterm*color0: black
-xterm*color1: #705050
-xterm*color2: #60b48a
-xterm*color3: #dfaf8f
-xterm*color4: #9ab8d7
-xterm*color5: #dc8cc3
-xterm*color6: #8cd0d3
-xterm*color7: #dcdccc
-xterm*color8: #709080
-xterm*color9: #dca3a3 
-xterm*color10: #72d5a3
-xterm*color11: #f0dfaf
-xterm*color12: #94bff3
-xterm*color13: #ec93d3
-xterm*color14: #93e0e3
-xterm*color15: #ffffff
      
 !-------------
 ! xfontsel
