@@ -118,12 +118,14 @@ endif
 let mapleader = ","
 nmap     n nzz
 nmap     N Nzz
+
 nnoremap ; :
 nnoremap : ;
 nnoremap <space> i<space><esc>
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <leader>w :<c-u>up<cr>
 nnoremap <leader>q :<c-u>qa<cr>
+
 cnoremap <c-a>      <home>
 cnoremap <c-f>      <right>
 cnoremap <c-b>      <left>
@@ -147,7 +149,7 @@ aug myautocommands
   au bufread,bufnewfile *.twmrc                  set filetype=conf
   au bufread,bufnewfile .vimshrc,.vim-bundles    set filetype=vim
   au bufread,bufnewfile .vimperatorrc            set filetype=vim
-  au bufread,bufnewfile ~/.xcolours/*              set filetype=xdefaults
+  au bufread,bufnewfile ~/.xcolours/*            set filetype=xdefaults
   au filetype           xdefaults                call s:myfunc.xrdb()
   au bufwritepost       .vimrc                   source ~/.vimrc
   au bufwritepost       .zshrc                   silent !zcompile .zshrc
