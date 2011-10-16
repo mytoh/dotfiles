@@ -28,8 +28,8 @@ startup_no_warning=FALSE
 
 [Image View]
 imgwin_save_win_state=TRUE
-imgwin_width=1278
-imgwin_height=784
+imgwin_width=1280
+imgwin_height=786
 imgwin_fit_to_image=TRUE
 imgwin_open_new_win=FALSE
 imgwin_raise_window=TRUE
@@ -60,8 +60,8 @@ imgview_mouse_button=0,0,0,0; -1,-2,0,0; -2,0,0,0; 3,0,0,0; 2,0,0,0; 1,0,0,0
 
 [Thumbnail View]
 thumbwin_save_win_state=TRUE
-thumbwin_width=1278
-thumbwin_height=784
+thumbwin_width=1280
+thumbwin_height=786
 thumbwin_layout_type=4
 thumbwin_pane1_horizontal=TRUE
 thumbwin_pane2_horizontal=TRUE

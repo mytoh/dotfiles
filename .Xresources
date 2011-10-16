@@ -7,9 +7,9 @@ urxvt.termName: xterm-256color
 
 urxvt.depth: 24
 
-urxvt.background: rgba:0900/0900/0950/cccc
+!urxvt.background: rgba:0900/0900/0950/cccc
 !urxvt.background: [90]#262630
-urxvt.foreground: #383e4c
+!urxvt.foreground: #383e4c
 urxvt.geometry: 100x40+100+100
 urxvt.scrollBar: false
 urxvt.buffered: true

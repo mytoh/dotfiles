@@ -254,7 +254,7 @@ compdef _portmaster portbuilder
 
 # Zstyles {{{
 zstyle :compinstall filename $home/.zshrc
-zstyle ':completion:*' completer _oldlist _complete _match _history _ignored _approximate _prefix
+zstyle ':completion:*' completer _oldlist _complete _match _ignored _approximate _prefix
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]=** r:|=*' '+l:|=*' '+m:{A-Z}={a-z}'
