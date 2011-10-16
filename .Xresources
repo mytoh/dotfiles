@@ -7,8 +7,8 @@ urxvt.termName: xterm-256color
 
 urxvt.depth: 24
 
-urxvt.background: rgba:0900/0900/0950/cccc
-urxvt.foreground: #575757
+!urxvt.background: rgba:0900/0900/0950/cccc
+!urxvt.foreground: #575757
 urxvt.geometry: 100x40+100+100
 urxvt.scrollBar: false
 urxvt.buffered: true
@@ -59,7 +59,7 @@ urxvt.boldFont: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso8859-*, \
 ! colors
 !----------------------------------
 !
-!#include "/home/mytoh/.xcolours/dark"
+#include "/home/mytoh/.xcolours/dark"
 !*color0: black
 !*color1: red3
 !*color2: green3
