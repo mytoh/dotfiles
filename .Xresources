@@ -59,7 +59,7 @@ urxvt.boldFont: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso8859-*, \
 ! colors
 !----------------------------------
 !
-#include "/home/mytoh/.xcolours/dark"
+!#include "/home/mytoh/.xcolours/dark"
 !*color0: black
 !*color1: red3
 !*color2: green3
