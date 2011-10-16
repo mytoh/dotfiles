@@ -57,7 +57,7 @@ NeoBundle 'ujihisa/vimshell-ssh'
 NeoBundle 'mfumi/unite-mpc'
 NeoBundle 'mfumi/mpc.vim'
 
-" vim-scripts repo
+" official vim-scripts repo
 "NeoBundle 'gauref.vim'
 NeoBundle 'info.vim'
 NeoBundle 'eregex.vim'
@@ -65,6 +65,7 @@ NeoBundle 'sudo.vim'
 NeoBundle 'YankRing.vim'
 NeoBundle 'fluxbox.vim'
 NeoBundle 'matchit.zip'
+NeoBundle 'Align'
 "Bundle 'buftabs'
 " colorschemes
 NeoBundle 'jellybeans.vim'

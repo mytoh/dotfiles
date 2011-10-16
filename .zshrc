@@ -275,7 +275,7 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' stagedstr '%F{28}● '
 zstyle ':vcs_info:*' unstagedstr '%F{11}●'
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' enable git svn hg
+zstyle ':vcs_info:*' enable git svn
 
 _precmd_update_vcs_info_msg() {
   if [[ -e $PWD/.git ]]; then
@@ -330,7 +330,7 @@ setup_prompt(){ #{{{
   if [[ X$DISPLAY != "X" ]];then
   PROMPT+="%F{8}┌%{$reset_color%}"
 else
-  PROMPT+="%F{8}-%{$reset_color%}"
+  PROMPT+="%F{8}--%{$reset_color%}"
 fi
   PROMPT+="%F{8}[%F{blue}%(5~,%-2~/../%2~,%~)%F{8}]%{$reset_color%}"
   # git prompt
@@ -361,6 +361,7 @@ setup_prompt
 # }}}
 
 # bindkeys {{{
+
 # History search keymap {{{
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
@@ -371,7 +372,7 @@ bindkey "^N" history-beginning-search-forward-end
 bindkey "\\en" history-beginning-search-forward-end
 # }}}
 
-# vi mode keys
+# vi mode keys {{{
 # -v -> viins
 # -a -> vicmd
 bindkey -v "^A" vi-beginning-of-line
@@ -380,6 +381,7 @@ bindkey -v "^E" vi-end-of-line
 bindkey -v "^F" vi-forward-char
 bindkey -v "^K" vi-kill-eol
 bindkey -v "^H" backward-delete-char # changing default
+#}}}
 # }}}
 
 # Functions {{{

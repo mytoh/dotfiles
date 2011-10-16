@@ -1,0 +1,28 @@
+
+! = Side-A =! {{{
+*background: #000000
+*foreground: #575757
+! Black 
+*color0:   #000000
+*color8:   #444444
+! Red 
+*color1:   #4C3A38
+*color9:   #57423F
+! Green 
+*color2:   #384C45
+*color10:  #3A4F48
+! Yellow 
+*color3:   #4C4B37
+*color11:  #57563F
+! Blue 
+*color4:   #383E4C
+*color12:  #3F4557
+! Magenta 
+*color5:   #4C3949
+*color13:  #574153
+! Cyan 
+*color6:   #3C374C
+*color14:  #403B52
+! White 
+*color7:   #4C4C4C
+*color15:  #575757

@@ -24,7 +24,7 @@ set showmode
 set showcmd
 set showmatch
 set diffopt+=vertical
-set ambiwidth=double
+set ambiwidth=single
 " key sequence timeout length (default: 1000(ms))
 set timeoutlen=10000
 
@@ -101,7 +101,7 @@ endif
 " funcs {{{
 let s:myfunc = {}
 
-function! s:myfunc.isos(name)
+function! s:myfunc.isos(name) dict
   let os = tolower(substitute(system('uname'),"\n","",""))
   return os == a:name ? 1 : 0
   unlet os
@@ -132,25 +132,32 @@ cnoremap <c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<
 "}}}
 
 " autocommands{{{
+function! s:myfunc.xrdb() dict
+  if strlen(expand($DISPLAY))
+    silent !xrdb -remove
+    silent !xrdb -merge ~/.Xresources
+  endif
+endfunction
+
 aug myautocommands
   au!
-  au bufread,bufnewfile $HOME/.*                 retab
+  au bufread,bufnewfile ~/.*                     retab
   au bufread,bufnewfile .tmux.conf               set filetype=tmux
   au bufread,bufnewfile *.changelog              set filetype=changelog
   au bufread,bufnewfile *.twmrc                  set filetype=conf
   au bufread,bufnewfile .vimshrc,.vim-bundles    set filetype=vim
   au bufread,bufnewfile .vimperatorrc            set filetype=vim
+  au bufread,bufnewfile ~/.xcolours/*              set filetype=xdefaults
+  au filetype           xdefaults                call s:myfunc.xrdb()
   au bufwritepost       .vimrc                   source ~/.vimrc
-  au bufwritepost       .Xresources              silent !xrdb -remove
-  au bufwritepost       .Xresources              silent !xrdb -merge ~/.Xresources
   au bufwritepost       .zshrc                   silent !zcompile .zshrc
   au bufwritepost       .conkyrc                 silent !killall -SIGUSR1  conky
   au filetype           scheme                   setl cindent& lispwords=define,lambda,call-with-*
   au filetype           help                     nnoremap q :<c-u>q<cr>
+  au filetype           nerdtree                 let g:loaded_golden_ratio=1
   " for chalice buffers
   au filetype           2ch*                     setl fencs=cp932,iso-2022-jp-3,euc-jp
-  au filetype           2ch*                     let g:loaded_golden_ratio = 1
-  au filetype           nerdtree                     let g:loaded_golden_ratio = 1
+  au filetype           2ch*                     let g:loaded_golden_ratio=1
 aug end
 
 aug cch
@@ -407,6 +414,6 @@ set secure
 " hg clone https://vim.googlecode.com/hg/ vim
 " cd vim/src
 " ./configure --prefix=$HOME/local --enable-multibyte --enable-perlinterp=yes --with-x --enable-xim
-" make install
+" make install clean distclean
 
 " vim:set foldmethod=marker:

@@ -7,15 +7,14 @@ urxvt.termName: xterm-256color
 
 urxvt.depth: 24
 
-!urxvt.background: rgba:0900/0900/0950/cccc
-!urxvt.background: [90]#262630
-!urxvt.foreground: #383e4c
+urxvt.background: rgba:0900/0900/0950/cccc
+urxvt.foreground: #575757
 urxvt.geometry: 100x40+100+100
 urxvt.scrollBar: false
 urxvt.buffered: true
 urxvt.borderLess: false
 urxvt.internalBorder: 0
-!urxvt.transparent: fa lse
+!urxvt.transparent: false
 !urxvt.inheritPixmap: true
 urxvt.fading: 2%
 urxvt.fadeColor: grey
@@ -59,6 +58,8 @@ urxvt.boldFont: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso8859-*, \
 !-------------------------------------
 ! colors
 !----------------------------------
+!
+#include "/home/mytoh/.xcolours/dark"
 !*color0: black
 !*color1: red3
 !*color2: green3
@@ -76,106 +77,6 @@ urxvt.boldFont: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso8859-*, \
 !*color14: cyan
 !*color15: white
 !--------------------------------------
-
-
-! colors from dzen wiki
-!*color0:       #000000
-!*color8:       #666666
-!! DarkRed + Red
-!*color1:       #b45151
-!*color9:       #fe8686
-!! DarkGreen + Green
-!*color2:       #8ba574
-!*color10:      #a5dca5
-!! DarkYellow + Yellow
-!*color3:       Khaki3
-!*color11:      #efe58b
-!! DarkBlue + Blue
-!*color4:       #506070
-!*color12:      #86cdea
-!! DarkMangenta + Mangenta
-!*color5:       #aa6eaf
-!*color13:      #b698b8
-!!DarkCyan + Cyan
-!*color6:       #418179
-!*color14:      #71bebe
-!! LightGrey + White
-!*color7:       #bebebe
-!*color15:      #ffffff
-
-
-  
-! = Side-A =! {{{
-*background: #000000
-*foreground: #575757 
-! Black 
-*color0:   #000000 
-*color8:   #444444 
-! Red 
-*color1:   #4C3A38 
-*color9:   #57423F 
-! Green 
-*color2:   #384C45 
-*color10:  #3A4F48 
-! Yellow 
-*color3:   #4C4B37 
-*color11:  #57563F 
-! Blue 
-*color4:   #383E4C 
-*color12:  #3F4557 
-! Magenta 
-*color5:   #4C3949  
-*color13:  #574153
-! Cyan 
-*color6:   #3C374C 
-*color14:  #403B52 
-! White 
-*color7:   #4C4C4C 
-*color15:  #575757
-!}}}
-
-
-!{{{
-!urxvt.color0: #222222
-!urxvt.color1: #ffa0a0
-!urxvt.color2: #98fb98
-!urxvt.color3: #f0e68c
-!urxvt.color4: #3a93ff
-!urxvt.color5: #ffa0a0
-!urxvt.color6: #87ceeb
-!urxvt.color7: #ffffff
-!urxvt.color8: #333333
-!urxvt.color9: #ffa0a0
-!urxvt.color10: #9acd32
-!urxvt.color11: #f0e68c
-!urxvt.color12: #87ceeb
-!urxvt.color13: #ffa0a0
-!urxvt.color14: #87ceeb
-!urxvt.color15: #ffffff
-!}}}
-
-!{{{ --------------
-! kde konsole DarkPastel colorscheme
-! Background 2c2c2c, 2c4444
-!urxvt.color0:  #2c2c2c
-!urxvt.color1:  #705050
-!urxvt.color2:  #60b48a
-!urxvt.color3:  #dfaf8f
-!urxvt.color4:  #9ab8d7
-!urxvt.color5:  #dc8cc3
-!urxvt.color6:  #8cd0d3
-!urxvt.color7:  #dcdccc
-!urxvt.color8:  #709080
-!urxvt.color9:  #dca3a3
-!urxvt.color10: #72d5a3
-!urxvt.color11: #f0dfaf
-!urxvt.color12: #94bff3
-!urxvt.color13: #ec93d3
-!urxvt.color14: #93e0e3
-!urxvt.color15: #ffffff
-!}}}
-
-
 
 !-------------
 ! xterm

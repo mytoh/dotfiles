@@ -10,13 +10,15 @@
       cpu=$(top -b -d 2 | grep ^CPU | awk '{print $2,$6}')
       echo "${cpu}"
     }
-    sp=`echo -e "\x02::\x01"`
-    diskused=$(df -ch | grep total | awk '{print $3}' | cut -c 1-3)
-    disktotal=$(df -ch | grep total | awk '{print $2}')
+    disk(){
+      diskused=$(df -ch | grep total | awk '{print $3}' | cut -c 1-3)
+      disktotal=$(df -ch | grep total | awk '{print $2}')
+      echo "${diskused}/${disktotal}"
+    }
     freemem=$(vmstat -h |grep -n 2| awk '{print $6}')
     ip=$(curl ifconfig.me 2>/dev/null)
-    spaces="          "
-    xsetroot -name "$(cpu)$sp$freemem$sp$diskused/$disktotal$sp$ip$sp$(date +"%F %R")"
+    sp=`echo -e "\x02::\x01"`
+    xsetroot -name "$(cpu)$sp$freemem$sp$(disk)$sp$ip$sp$(date +"%F %R")"
     done &
 
   while true; do
