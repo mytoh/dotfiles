@@ -1,35 +1,28 @@
-! -------------------------------------------------
-! file:     .colours/dark                           
-! author:   jason ryan - http://jasonwryan.com/    
-!  updated:  26/04/11
-! vim:nu:ai:si:et:ts=4:sw=4:ft=txt:
-! -------------------------------------------------
 
-!! jwr dark
-URxvt.background: #121212
-URxvt.foreground: #999999
-
-!black
-*color0:#3D3D3D
-*color8:#5E5E5E
-!red
-*color1:#8A2F58
-*color9:#CF4F88
-!green
-*color2:#287373
-*color10:#53A6A6
-!yellow
-*color3:#914E89
-*color11:#BF85CC
-!blue
-*color4:#395573
-*color12:#4779B3
-!magenta
-*color5:#5E468C
-*color13:#7F62B3
-!cyan
-*color6:#2B7694
-*color14:#47959E
-!white
-*color7:#899CA1
-*color15:#C0C0C0
+! = Side-A =! {{{
+*background: #000000
+*foreground: #575757 
+! Black 
+*color0:   #000000 
+*color8:   #444444 
+! Red 
+*color1:   #4C3A38 
+*color9:   #57423F 
+! Green 
+*color2:   #384C45 
+*color10:  #3A4F48 
+! Yellow 
+*color3:   #4C4B37 
+*color11:  #57563F 
+! Blue 
+*color4:   #383E4C 
+*color12:  #3F4557 
+! Magenta 
+*color5:   #4C3949  
+*color13:  #574153
+! Cyan 
+*color6:   #3C374C 
+*color14:  #403B52 
+! White 
+*color7:   #4C4C4C 
+*color15:  #575757
