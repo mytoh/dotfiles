@@ -1001,6 +1001,7 @@ alias dwm-recompile='(\cd /usr/ports/x11-wm/dwm && sudo make deinstall && sudo m
 if check_com -c cdf ; then
 alias df='cdf -h'
 fi
+alias uzbl='uzbl-tabbed'
 alias unar=unpack
 # listing stuff
 alias dir="ls -lSrah"

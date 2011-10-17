@@ -28,8 +28,6 @@ set on_set          = request ON_SET
 set modmap          = request MODMAP
 # request IGNORE_KEY <glob>
 set ignore_key      = request IGNORE_KEY
-# request MODKEY_ADDITION <key1> <key2> <keyn> <result>
-set modkey_addition = request MODKEY_ADDITION
 # request TOGGLE_MODES <mode1> <mode2> ... <moden>
 set toggle_modes    = request TOGGLE_MODES
 
@@ -51,11 +49,11 @@ set download_handler    = sync_spawn @scripts_dir/download.sh
 
 #   What to do when a website wants to open a new window:
 # Open link in new window
-@on_event   NEW_WINDOW     sh 'uzbl-browser ${1:+-u "$1"}' %r
+#@on_event   NEW_WINDOW     sh 'uzbl-browser ${1:+-u "$1"}' %r
 # Open in current window (also see the REQ_NEW_WINDOW event handler below)
 #@on_event   NEW_WINDOW     uri %s
 # Open in new tab. Other options are NEW_TAB_NEXT, NEW_BG_TAB and NEW_BG_TAB_NEXT.
-#@on_event   NEW_WINDOW     event NEW_TAB %s
+@on_event   NEW_WINDOW     event NEW_TAB %s
 
 #   What to do when the user requests a new window:
 # If your the NEW_WINDOW handler opens the uri in the current window, you'll
@@ -201,9 +199,8 @@ set ebind     = @mode_bind global,-insert
 @ebind  <Ctrl>a      = event SET_CURSOR_POS 0
 @ebind  <Ctrl>e      = event SET_CURSOR_POS -1
 @ebind  <Ctrl>m      = event KEYCMD_EXEC_CURRENT
+@ebind  <Ctrl>h      = event KEYCMD_BACKSPACE
 
-@ebind <Ctrl>p       = event HISTORY_PREV
-@ebind <Ctrl>n       = event HISTORY_NEXT
 @ebind <Up>          = event HISTORY_PREV
 @ebind <Down>        = event HISTORY_NEXT
 @ebind <Ctrl>r<search:>_ = event HISTORY_SEARCH %s
@@ -232,8 +229,8 @@ set ebind     = @mode_bind global,-insert
 @cbind  k            = scroll vertical -20
 @cbind  h            = scroll horizontal -20
 @cbind  l            = scroll horizontal 20
-@cbind  <Ctrl>d      = scroll vertical  80
-@cbind  <Ctrl>u      = scroll vertical -80
+@cbind  <Ctrl>d      = scroll vertical 50%
+@cbind  <Ctrl>u      = scroll vertical -50%
 @cbind  <Page_Up>    = scroll vertical -100%
 @cbind  <Page_Down>  = scroll vertical 100%
 @cbind  <Ctrl>f      = scroll vertical 100%
@@ -247,13 +244,12 @@ set ebind     = @mode_bind global,-insert
 @cbind  <Space>      = scroll vertical end
 
 # Navigation binds
-@cbind b = back
-@cbind H = back
-@cbind m = forward
-@cbind L = forward
-@cbind S = stop
-@cbind r = reload
-@cbind R = reload_ign_cache
+@cbind  b   = back
+@cbind  H   = back
+@cbind  m   = forward
+@cbind  S   = stop
+@cbind  r   = reload
+@cbind  R   = reload_ign_cache
 
 # Zoom binds
 @cbind  +   = zoom_in
@@ -277,7 +273,7 @@ set ebind     = @mode_bind global,-insert
 
 # Web searching binds
 @cbind  gg<Google:>_         = uri http://www.google.com/search?q=\@<encodeURIComponent(%r)>\@
-@cbind  ddg<DuckDuckGo:>_    = uri http://duckduckgo.com/?q=%s
+#@cbind  ddg<DuckDuckGo:>_    = uri http://duckduckgo.com/?q=%s
 @cbind  \\awiki<Archwiki:>_  = uri http://wiki.archlinux.org/index.php/Special:Search?search=\@<encodeURIComponent(%r)>\@&go=Go
 @cbind  \\wiki<Wikipedia:>_  = uri http://en.wikipedia.org/w/index.php?title=Special:Search&search=\@<encodeURIComponent(%r)>\@&go=Go
 
@@ -342,7 +338,7 @@ set ebind     = @mode_bind global,-insert
 
 # Temporary bookmarks
 #@cbind  <Ctrl>d  = spawn @scripts_dir/insert_temp.sh
-#@cbind  D        = spawn @scripts_dir/load_url_from_temps.sh
+@cbind  D        = spawn @scripts_dir/load_url_from_temps.sh
 
 # Link following (similar to vimperator and konqueror)
 # Set custom keys you wish to use for navigation. Some common examples:
@@ -356,6 +352,8 @@ set follow_hint_keys = aoeuidhtns
 @cbind  fL*  = spawn @scripts_dir/follow.sh \@< uzbl.follow("\@follow_hint_keys", "%s", 'returnuri') >\@ set
 @cbind  FL*  = spawn @scripts_dir/follow.sh \@< uzbl.follow("\@follow_hint_keys", "%s", 'returnuri') >\@ clipboard
 @cbind  fi   = spawn @scripts_dir/go_input.sh
+
+@cbind  '*  = spawn @scripts_dir/follow.sh \@< uzbl.follow.followTextContent("%s", 'click') >\@
 
 # Form filler binds
 # This script allows you to configure (per domain) values to fill in form
@@ -378,6 +376,7 @@ set formfiller = spawn @scripts_dir/formfiller.sh
 
 # Closing / resting
 @cbind  gC              = exit
+@cbind  d              = exit
 @cbind  gQ              = event CLEAN_TABS
 
 # Tab navigating
