@@ -1,0 +1,39 @@
+body {
+  color: #404040;
+  background-color: #151515;
+  background: #151515;
+  border-color: #222;
+  font-family: "Terminus";
+  font-size: 12px;
+  line-height: 12px;
+  float: left;
+  position: relative
+  width: 500px;
+  margin-top: 20px;
+  margin-left: 30px;
+   }
+
+a {
+  text-decoration: none;
+}
+
+.delicious a {
+  color: #47959e;
+}
+
+.arch a {
+  color: #4779B3;
+}
+
+.google a {  
+  color: #914E89;
+}
+
+.googleinput input {
+  color: #999;
+  background-color: #151515;
+  border-width: 1px;
+  border-style: groove;
+  border-color: #010000;
+}
+
