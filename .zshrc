@@ -229,6 +229,7 @@ typeset -Uga chpwd_functions
 hash -d quatre=~/local/mnt/quatre
 hash -d desk=~/local/mnt/deskstar
 hash -d mypass=~/local/mnt/mypassport
+hash -d ports=/usr/ports
 # }}}
 
 # Autoloads {{{
@@ -893,8 +894,8 @@ cat << EOF
 EOF
 } #}}}
 
-dump-colors(){
-  xdef="$HOME/.Xresources"
+dump-colours(){
+  xdef="$HOME/.xcolours/$1"
   colors=( $( sed -re '/^!/d; /^$/d; /^#/d; s/(\*color)([0-9]):/\10\2:/g;' $xdef | grep 'color[01][0-9]:' | sort |sed 's/^.*: *//g' ) )
   echo -e "\e[37m
   Black   Red      Green   Yellow    Blue    Magenta   Cyan    White
@@ -976,7 +977,7 @@ EOF
 } #}}}
 
 #}}}
-
+#}}}
 
 
 # Aliases {{{

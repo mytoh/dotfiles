@@ -39,7 +39,7 @@ fbpanel &
 fi
 
 
-DEFAULT_SESSION="twm"
+DEFAULT_SESSION="dwm"
 case $1 in
   stumpwm) exec stumpwm ;;
   sawfish) exec sawfish ;;
@@ -51,7 +51,7 @@ case $1 in
   qvwm) exec qvwm ;;
   fvwm|fvwm2) exec fvwm2 ;;
   fvwm-themes*) exec fvwm-themes-start -s sa ;;
-  dwm) $HOME/.dwm/startdwm ;;
+  dwm) exec $HOME/.dwm/startdwm ;;
   swm) exec swm ;;
   afterstep) exec afterstep ;;
   awesome) exec awesome ;;

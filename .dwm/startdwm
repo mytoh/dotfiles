@@ -22,6 +22,6 @@
     done &
 
   while true; do
-   dwm || exit
+ exec $HOME/.dwm/startdwm || exit
   done
 
