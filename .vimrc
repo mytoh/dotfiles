@@ -150,6 +150,7 @@ aug myautocommands
   au bufread,bufnewfile .vimshrc,.vim-bundles    set filetype=vim
   au bufread,bufnewfile .vimperatorrc            set filetype=vim
   au bufread,bufnewfile ~/.xcolours/*            set filetype=xdefaults
+  au bufread,bufnewfile ~/.xcolours/*            ColorHighlight
   au filetype           xdefaults                call s:myfunc.xrdb()
   au bufwritepost       .vimrc                   source ~/.vimrc
   au bufwritepost       .zshrc                   silent !zcompile .zshrc
@@ -157,6 +158,7 @@ aug myautocommands
   au filetype           scheme                   setl cindent& lispwords=define,lambda,call-with-*
   au filetype           help                     nnoremap q :<c-u>q<cr>
   au filetype           nerdtree                 let g:loaded_golden_ratio=1
+  au filetype           css                      ColorHighlight
   " for chalice buffers
   au filetype           2ch*                     setl fencs=cp932,iso-2022-jp-3,euc-jp
   au filetype           2ch*                     let g:loaded_golden_ratio=1
