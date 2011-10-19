@@ -56,6 +56,8 @@ NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'ujihisa/vimshell-ssh'
 NeoBundle 'mfumi/unite-mpc'
 NeoBundle 'mfumi/mpc.vim'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'mileszs/ack.vim'
 
 " official vim-scripts repo
 "NeoBundle 'gauref.vim'
@@ -66,6 +68,7 @@ NeoBundle 'YankRing.vim'
 NeoBundle 'fluxbox.vim'
 NeoBundle 'matchit.zip'
 NeoBundle 'Align'
+NeoBundle 'Color-Sampler-Pack'
 "Bundle 'buftabs'
 " colorschemes
 NeoBundle 'jellybeans.vim'
