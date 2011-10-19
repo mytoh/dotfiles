@@ -145,8 +145,11 @@ HISTSIZE=50000
 SAVEHIST=$HISTSIZE
 
 # vim
-export EDITOR=vim
-if ! check_com -c vim; then
+if check_com -c vim; then
+  export EDITOR=vim
+  alias vi=vim
+else
+  export EDITOR=vi
   alias vim=vi
 fi
 export MYVIMRC=~/.vimrc
@@ -387,9 +390,8 @@ bindkey -v "^H" backward-delete-char # changing default
 
 # Functions {{{
 
+# preexec_update_title {{{
 if [[ "$TERM" == screen* ]]; then
-  chpwd_title () { printf "_`dirs -p|awk '{print $1;exit}'`\\" }
-  chpwd_functions='chpwd_title'
   preexec_functions+='preexec_update_title'
   preexec_update_title() {
     # see [zsh-workers:13180]
@@ -428,11 +430,15 @@ if [[ "$TERM" == screen* ]]; then
     echo -n "k$cmd[1]:t\\") 2>/dev/null
   }
 fi
+#}}}
 
+chpwd_title () { printf "_`dirs -p|awk '{print $1;exit}'`\\" }
+chpwd_functions+='chpwd_title'
 chpwd_ls(){
   ls -F
 }
-chpwd_functions=( $chpwd_functions chpwd_ls dirs)
+chpwd_functions+='chpwd_ls'
+chpwd_functions+='dirs'
 
 _precmd_rehash(){
   rehash
@@ -584,7 +590,7 @@ unpack() {
                 USES_STDOUT=false
                 ;;
             *.rar)
-                DECOMP_CMD="unrar x"
+                DECOMP_CMD="unrar x -ad"
                 USES_STDIN=false
                 USES_STDOUT=false
                 ;;
@@ -780,6 +786,15 @@ ggr()  {
     ${=BROWSER} "http://www.google.com/search?&num=100&q=$*"
 }
 
+cfg() {
+  case $1 in
+     rc) $EDITOR /etc/rc.conf.local ;;
+ loader) $EDITOR /boot/loader.conf.local ;;
+    zsh) $EDITOR $HOME/.zshrc ;;
+      *) $EDITOR $*
+  esac
+}
+
 
 # color functions {{{
 # functions from
@@ -895,7 +910,15 @@ EOF
 } #}}}
 
 dump-colours(){
-  xdef="$HOME/.xcolours/$1"
+  if [[ -n $1 ]]; then
+    xdef="$HOME/.xcolours/$1"
+  else
+    if [[ -f $HOME/.Xresources ]]; then
+      xdef="$HOME/.Xresources"
+    else
+      xdef="$HOME/.Xdefaults"
+    fi
+  fi
   colors=( $( sed -re '/^!/d; /^$/d; /^#/d; s/(\*color)([0-9]):/\10\2:/g;' $xdef | grep 'color[01][0-9]:' | sort |sed 's/^.*: *//g' ) )
   echo -e "\e[37m
   Black   Red      Green   Yellow    Blue    Magenta   Cyan    White
@@ -977,8 +1000,8 @@ EOF
 } #}}}
 
 #}}}
-#}}}
 
+#}}}
 
 # Aliases {{{
 alias chalice='vim -c Chalice'
