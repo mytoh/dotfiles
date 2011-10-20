@@ -17,6 +17,7 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 static const double shade           = 0.8;      /* Opacity of inactive windows */
+static const double baropacity      = 0.95;     /* Opacity for status bar */
 
 /* tagging */
 static const char *tags[] = {"А", "В", "Г", "Д"};
