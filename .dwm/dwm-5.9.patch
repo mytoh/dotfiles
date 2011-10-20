@@ -1,6 +1,6 @@
 diff -r b899c8748939 dwm.c
 --- a/dwm.c	Mon Aug 15 18:44:12 2011 +0200
-+++ b/dwm.c	Sun Oct 16 07:49:26 2011 +0900
++++ b/dwm.c	Thu Oct 20 14:11:43 2011 +0900
 @@ -48,6 +48,7 @@
  #define LENGTH(X)               (sizeof X / sizeof X[0])
  #define MAX(A, B)               ((A) > (B) ? (A) : (B))
@@ -308,3 +308,12 @@ diff -r b899c8748939 dwm.c
  	if(setfocus)
  		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
  }
+@@ -1783,6 +1838,8 @@
+ 		                          CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
+ 		XDefineCursor(dpy, m->barwin, cursor[CurNormal]);
+ 		XMapRaised(dpy, m->barwin);
++    unsigned long real_opacity[] = { baropacity * 0xffffffff };
++    XChangeProperty(dpy, m->barwin, netatom[NetWMWindowOpacity], XA_CARDINAL, 32, PropModeReplace, (unsigned char *)real_opacity, 1);
+ 	}
+ }
+ 

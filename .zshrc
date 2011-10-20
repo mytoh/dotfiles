@@ -728,7 +728,7 @@ pack() {
                 ;;
         esac
     else
-        smartcompress $1 tar.xz
+        pack $1 tar.xz
     fi
 }
 
