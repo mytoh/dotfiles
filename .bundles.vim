@@ -58,6 +58,7 @@ NeoBundle 'mfumi/unite-mpc'
 NeoBundle 'mfumi/mpc.vim'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'mileszs/ack.vim'
+NeoBundle 'trapd00r/vim-extendedcolors'
 
 " official vim-scripts repo
 "NeoBundle 'gauref.vim'
