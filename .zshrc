@@ -202,6 +202,7 @@ fpath=(~/.zsh/functions/completion ${fpath})
 
 manpath=(
 ~/local/*/man(N-/)
+~/local/*/share/man(N-/)
 /usr/local/man(N-/)
 /usr/local/*/man(N-/)
 /usr/share/man(N-/)
