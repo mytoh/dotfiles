@@ -1,3 +1,6 @@
+xft.dpi: 98
+xft.hinting: true
+xft.hintstyle: hintslight
 Xcursor.theme: whiteglass
 
 !---------------
