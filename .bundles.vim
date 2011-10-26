@@ -1,7 +1,12 @@
 
 if !isdirectory(expand("~/.bundle"))
   call mkdir(expand("~/.bundle"), "p")
+ if !isdirectory(expand("~.bundle/neobundle.vim"))
   call system("git clone " . "git://github.com/Shougo/neobundle.vim " . expand("~/.bundle/neobundle.vim"))
+endif
+if !isdirectory(expand("~/.bundle/vim-ambicmd"))
+  call system("git clone " . "git://github.com/thinca/vim-ambicmd " . expand("~/.bundle/vim-ambicmd"))
+endif
 endif
 
 

@@ -333,7 +333,7 @@ precmd_functions+='setup_vi_prompt'
 setup_prompt(){ #{{{
   PROMPT=''
   if [[ X$DISPLAY != "X" ]];then
-  PROMPT+="%F{8}┌%{$reset_color%}"
+  PROMPT+="%F{8}┌─%{$reset_color%}"
 else
   PROMPT+="%F{8}--%{$reset_color%}"
 fi
@@ -344,7 +344,6 @@ fi
   # ip
   #ip="(%F{yellow}$(curl ifconfig.me 2>/dev/null)%{$reset_color%})"
   #PROMPT+=$ip
-  ####
   PROMPT+=$'\n'
   if [[ X$DISPLAY != "X" ]];then
   PROMPT+="%F{8}└%{$reset_color%}"
@@ -363,8 +362,11 @@ PROMPT+="%F{8}>%{$reset_color%} "
 }
 setup_prompt
 #}}}
-# }}}
 
+#unicode characters
+# ─ ━ │ ┃ ┄ ┅ ┆ ┇ ┈ ┉ ┊ ┋ ┌ ┍ ┎ ┏
+
+# }}}
 # bindkeys {{{
 
 # History search keymap {{{
