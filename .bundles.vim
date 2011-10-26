@@ -14,8 +14,6 @@ if has('vim_starting')
   set runtimepath+=$HOME/.bundle/neobundle.vim
   filetype off
   call neobundle#rc(expand('~/.bundle'))
-  filetype plugin on
-  filetype indent on
 endif
 
 NeoBundle 'Shougo/neobundle.vim'
@@ -42,7 +40,6 @@ NeoBundle 'mattn/wwwrenderer-vim'
 "NeoBundle 'roman/golden-ratio'
 NeoBundle 'rson/vim-bufstat'
 NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'thinca/vim-ambicmd'
@@ -83,5 +80,7 @@ NeoBundle 'xoria256.vim'
 
 " }}}
 
+  filetype plugin on
+  filetype indent on
 
 " vim:set foldmethod=marker:
