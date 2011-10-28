@@ -10,7 +10,8 @@ static const char colors[NUMCOLORS][ColLast][8] = {
     { "#ff0000", "#ffffff", "#ff0000" },  // 3 = error
     // add more here
 };
-static const char font[]            = "-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*";
+
+static const char font[]            = "-*-terminusmod-medium-r-*-*-12-*-*-*-*-*-*-*";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappx     = 2;        /* gap pixel between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -20,7 +21,7 @@ static const double shade           = 0.8;      /* Opacity of inactive windows *
 static const double baropacity      = 0.95;     /* Opacity for status bar */
 
 /* tagging */
-static const char *tags[] = {"А", "В", "Г", "Д"};
+static const char *tags[] = {"null", "term", "net", "media"};
 
 static const Rule rules[] = {
   /* class       instance    title       tags mask     isfloating   monitor     opacity */
@@ -38,6 +39,7 @@ static const Rule rules[] = {
 
 /* layout(s) */
 static const float mfact      = 0.55; /* factor of master area size [0.05..0.95] */
+static const int nmaster      = 1;    /* number of clients in master area */
 static const Bool resizehints = False; /* True means respect size hints in tiled resizals */
 
 /* bstack layout */
@@ -46,11 +48,11 @@ static const Bool resizehints = False; /* True means respect size hints in tiled
 
 static const Layout layouts[] = {
   /* symbol     arrange function */
-  { "[]=",      tile },    /* first entry is default */
-  { "><>",      NULL },    /* no layout function means floating behavior */
+  { "ú",      tile },    /* first entry is default */
+  { "ÿ",      NULL },    /* no layout function means floating behavior */
   { "[M]",      monocle },
-  { "TTT",      bstack },
- { "===",      bstackhoriz },
+  { "ü",      bstack },
+  { "û",      bstackhoriz },
  { .symbol = NULL, .arrange = NULL }, /* for nextlayout function */
 };
 
