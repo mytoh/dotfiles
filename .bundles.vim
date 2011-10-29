@@ -61,6 +61,7 @@ NeoBundle 'mfumi/mpc.vim'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'trapd00r/vim-extendedcolors'
+NeoBundle 'cakebaker/scss-sytax.vim'
 
 " official vim-scripts repo
 "NeoBundle 'gauref.vim'
