@@ -7,9 +7,7 @@ Xcursor.theme: whiteglass
 ! urxvt
 !---------------
 urxvt.termName: xterm-256color
-
 urxvt.depth: 24
-
 !urxvt.background: rgba:0900/0900/0950/cccc
 !urxvt.foreground: #575757
 urxvt.geometry: 100x40+100+100
@@ -25,7 +23,7 @@ urxvt.shading: 20
 urxvt.tintcolor: black
 urxvt.preedittype: Root
 urxvt.savelines: 2000
-urxvt.mousewheelscrollpage: true
+urxvt.mousewheelscrollpage: false
 urxvt.urgentOnBell: true
 
 urxvt.perl-ext-common: default,matcher,clipboard-osc
