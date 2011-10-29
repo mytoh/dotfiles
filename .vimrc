@@ -149,7 +149,6 @@ aug myautocommands
   au bufread,bufnewfile *.twmrc                  set filetype=conf
   au bufread,bufnewfile .vimshrc,.vim-bundles    set filetype=vim
   au bufread,bufnewfile .vimperatorrc            set filetype=vim
-  au bufread,bufnewfile .scss                    set filetype=scss
   au bufread,bufnewfile ~/.xcolours/*            set filetype=xdefaults
   au bufread,bufnewfile ~/.xcolours/*            ColorHighlight
   au filetype           xdefaults                call s:myfunc.xrdb()

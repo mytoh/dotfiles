@@ -1,6 +1,14 @@
 @bgcolour: #151515;
 @fgcolour: #404040;
 
+// less mixin
+.rounded-corners (@radius: 5px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+//
+
 body {
   color: @fgcolour;
   background: @bgcolour;
@@ -32,6 +40,7 @@ a {
 }
 
 .googleinput input {
+  .rounded-corners;
   color: @fgcolour;
   background-color: @bgcolour;
   border-width: 1px;
