@@ -125,6 +125,7 @@ nnoremap <space> i<space><esc>
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <leader>w :<c-u>up<cr>
 nnoremap <leader>q :<c-u>qa<cr>
+nnoremap <leader>ff :<c-u>VimFiler<cr>
 
 cnoremap <c-a>      <home>
 cnoremap <c-f>      <right>
@@ -225,6 +226,7 @@ let g:neocomplcache_dictionary_filetype_lists = {
 let g:vimfiler_execute_file_list = {
       \ 'mkv' : 'mplayer',
       \ 'mpg' : 'mplayer',
+      \ 'mp4' : 'mplayer',
       \}
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
@@ -407,8 +409,8 @@ let g:openbrowser_open_rules = {
 " }}}
 
 " ambicmd {{{
-  cnoremap <expr> <Space> ambicmd#expand("\<Space>")
-  cnoremap <expr> <CR>    ambicmd#expand("\<CR>")
+cnoremap <expr> <Space> ambicmd#expand("\<Space>")
+cnoremap <expr> <CR>    ambicmd#expand("\<CR>")
 
 " }}}
 
