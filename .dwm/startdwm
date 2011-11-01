@@ -11,7 +11,7 @@
     icclk="É"
     icnet="¤"
     icdsk="ä"
-    icpac="º"
+    icorb="¼"
     cpu="$(top -b -d 2 | grep ^CPU | awk '{print $2,$6}')"
     #diskused="$(df -ch | grep total | awk '{print $3}' | cut -c 1-3)"
     diskused="$(df -ch | grep total | awk '{print $3}')"
@@ -21,7 +21,7 @@
     ip="$(curl ifconfig.me 2>/dev/null)"
     sp=$(echo -e "::")
     date="$(date +"%F %R")"
-    xsetroot -name "$icpac$cpu$icmem$freemem$icdsk$disk$icnet$ip$icclk$date"
+    xsetroot -name "$icorb$cpu$icmem$freemem$icdsk$disk$icnet$ip$icclk$date"
   done &
 
   while true
