@@ -422,7 +422,6 @@ let g:mpd_port = "6600"
 set secure
 
 " hg clone https://vim.googlecode.com/hg/ vim
-" cd vim/src
 " ./configure --prefix=$HOME/local --enable-multibyte --enable-perlinterp=yes --with-x --enable-xim
 " make install clean distclean
 
