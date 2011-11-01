@@ -2,22 +2,21 @@
 @fgcolour: #404040;
 
 // less mixin
-.mx-rounded-corners (@radius: 5px) {
+.mix-rounded-corners (@radius: 5px) {
   border-radius: @radius;
   -webkit-border-radius: @radius;
   -moz-border-radius: @radius;
 }
 
-.mx-font-terminus {
+.mix-font-terminus {
   font-family: "Terminus";
   font-size: 12px;
 }
 //
 
 body {
-  .mx-font-terminus;
+  .mix-font-terminus;
   color: @fgcolour;
-  background: @bgcolour;
   background-color: @bgcolour;
   border-color: #222;
   line-height: 12px;
@@ -44,7 +43,7 @@ a {
 }
 
 .googleinput input {
-  .mx-rounded-corners;
+  .mix-rounded-corners;
   color: @fgcolour;
   background-color: @bgcolour;
   border-width: 1px;
