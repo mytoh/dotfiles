@@ -1,6 +1,6 @@
-diff -r 0a1dabd9f1a3 dwm.c
---- a/dwm.c	Wed Oct 26 12:16:25 2011 +0100
-+++ b/dwm.c	Thu Oct 27 13:25:45 2011 +0900
+diff -r 904e923827cb dwm.c
+--- a/dwm.c	Mon Oct 31 20:09:27 2011 +0100
++++ b/dwm.c	Tue Nov 01 19:17:49 2011 +0900
 @@ -48,6 +48,7 @@
  #define LENGTH(X)               (sizeof X / sizeof X[0])
  #define MAX(A, B)               ((A) > (B) ? (A) : (B))
@@ -328,15 +328,15 @@ diff -r 0a1dabd9f1a3 dwm.c
  	dc.drawable = XCreatePixmap(dpy, root, DisplayWidth(dpy, screen), bh, DefaultDepth(dpy, screen));
  	dc.gc = XCreateGC(dpy, root, 0, NULL);
  	XSetLineAttributes(dpy, dc.gc, 1, LineSolid, CapButt, JoinMiter);
-@@ -1678,6 +1744,7 @@
- 			resize(c, m->wx + mw, m->wy + ((i - m->nmaster)*th), tw - (2*c->bw), th - (2*c->bw), False);
+@@ -1683,6 +1749,7 @@
+ 		}
  }
  
 +
  void
  togglebar(const Arg *arg) {
  	selmon->showbar = !selmon->showbar;
-@@ -1727,7 +1794,7 @@
+@@ -1732,7 +1799,7 @@
  	if(!c)
  		return;
  	grabbuttons(c, False);
@@ -345,7 +345,7 @@ diff -r 0a1dabd9f1a3 dwm.c
  	if(setfocus)
  		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
  }
-@@ -1783,6 +1850,8 @@
+@@ -1788,6 +1855,8 @@
  		                          CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
  		XDefineCursor(dpy, m->barwin, cursor[CurNormal]);
  		XMapRaised(dpy, m->barwin);
@@ -354,7 +354,7 @@ diff -r 0a1dabd9f1a3 dwm.c
  	}
  }
  
-@@ -2053,6 +2122,28 @@
+@@ -2058,6 +2127,28 @@
  }
  
  void
