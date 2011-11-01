@@ -144,7 +144,6 @@ endfunction
 
 aug myautocommands
   au!
-  au bufread,bufnewfile ~/.*                     retab
   au bufread,bufnewfile .tmux.conf               set filetype=tmux
   au bufread,bufnewfile *.changelog              set filetype=changelog
   au bufread,bufnewfile *.twmrc                  set filetype=conf
