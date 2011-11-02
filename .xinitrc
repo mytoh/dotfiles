@@ -17,6 +17,9 @@ xset fp+ /usr/local/lib/X11/fonts/TrueType
 xset fp+ /usr/local/lib/X11/fonts/cyrillic
 xset fp+ /usr/local/lib/X11/fonts/profont
 xset fp+ /usr/local/lib/X11/fonts/terminus-font
+xset fp+ /usr/local/lib/X11/fonts/bitstream-vera
+xset fp+ /usr/local/lib/X11/fonts/dejavu
+xset fp+ /usr/local/lib/X11/fonts/Droid
 xset fp+ $HOME/.fonts
 xset fp rehash
 urxvtcd &

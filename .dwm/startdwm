@@ -7,7 +7,7 @@
 
   while true
   do
-    icmem="Î"
+    icmem="À"
     icclk="É"
     icnet="¤"
     icdsk="ä"
