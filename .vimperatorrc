@@ -3,6 +3,7 @@ noremap l gt
 noremap : ;
 noremap ; :
 
+cnoremap <c-i> <tab>
 colorscheme sweets
 
 set hintchars=aoeuidhtns
@@ -47,4 +48,5 @@ options.setPref("network.http.pipelining.maxrequests", 8);
 options.setPref("nglayout.initialpaint.delay", 0);
 options.setPref("plugin.expose_full_path", true);
 options.setPref("ui.submenuDelay", 0);
+
 EOM
