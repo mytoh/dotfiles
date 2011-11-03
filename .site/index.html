@@ -14,44 +14,77 @@
     <script type="text/javascript" charset="utf-8">
       less.env = "development";
       less.watch();
-    </script>
+      </script>
 
-  </head>
+    </head>
 
-  <body>
+    <body>
 
-    <section>
+      <section>
 
-    <div id="bookmark">
-    <p class="delicious">
-    <a href="http://del.icio.us" target="_blank">delicious</a> >> <br>
-    </p>
+        <div id="bookmark">
+          <p class="delicious">
+            <a href="http://del.icio.us"            target="_blank">delicious</a> >> 
+            <a href="http://del.icio.us/tag/recent/zsh"    target="_blank">zsh</a> > 
+            <a href="http://del.icio.us/tag/recent/vim"    target="_blank">vim</a> > 
+            <a href="http://del.icio.us/tag/recent/scheme" target="_blank">scheme</a> > 
+            <br>
+          </p>
 
-    <p class="arch">
-    <a href="http://archlinux.org" target="_blank">archlinux</a> >> 
-    <a href="http://bbs.archlinux.org" target="_blank">forum</a> > <br>
-    </p>
-    </div>
+          <p class="arch">
+            <a href="http://archlinux.org" target="_blank">archlinux</a> >> 
+            <a href="http://bbs.archlinux.org" target="_blank">forum</a> > 
+            <br>
+          </p>
 
-    </section>
+          <p class="crunchbang">
+            <a href="http://crunchbanglinux.org" target="_blank">#!</a> >> 
+            <a href="http://crunchbanglinux.org/forums/forum/6/artwork-screenshots" target="_blank">artwork & screenshots</a> > 
+            <br>
+          </p>
 
-    <footer>
-    <br>
-    <p class="google">
-    <a href="http://google.com" target="_blank">google</a>
-    </p>
+          <p class="reddit">
+            <a href="http://www.reddit.com" target="_blank">reddit</a> >>
+            <a href="http://www.reddit.com/r/linuxactionshow" target="_blank">LAS</a> >
+            <a href="http://www.reddit.com/r/scheme" target="_blank">scheme</a> >
+            <a href="http://www.reddit.com/r/freebsd" target="_blank">freebsd</a> >
+            <a href="http://www.reddit.com/r/screenshots" target="_blank">screenshots</a> >
+            <br>
+          </p>
 
-    <form method="get" target="_blank" action="http://www.google.co.jp/search">
-       <table border="0" cellpadding="0"> 
-         <tr><td class="googleinput">
-              <input type=text name=q size=25 maxlength=255 value="" />
-              <input type=submit value="search" />
-        </td></tr>
-      </table>
-    </ form>
-    <br>
-    </footer>
+          <p class="fourchan">
+            <a href="http://www.4chan.org" target="_blank">4chan</a> //
+            <a href="http://boards.4chan.org/g" target="_blank">technology</a> /
+            <a href="http://boards.4chan.org/e" target="_blank">ecchi</a> /
+            <a href="http://boards.4chan.org/w" target="_blank">anime wallpaper</a> /
+            <a href="http://boards.4chan.org/t" target="_blank">torrent</a> /
+            <br>
+          </p>
 
-  </body>
+        </div>
 
-</html>
+      </section>
+
+      <footer>
+        <br>
+        <p class="google">
+          <a href="http://google.com" target="_blank">google</a>
+        </p>
+
+        <!--google search button and field-->
+        <form method="get" target="_blank" action="http://www.google.co.jp/search">
+          <table border="0" cellpadding="0"> 
+            <tr><td class="googleinput">
+                <input type=search name=q size=25 maxlength=255 value="" />
+                <input type=submit value="search" />
+            </td></tr>
+          </table>
+          </ form>
+          <br>
+          <!-- -->
+
+        </footer>
+
+      </body>
+
+    </html>
