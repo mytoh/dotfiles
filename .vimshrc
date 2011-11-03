@@ -10,6 +10,8 @@ alias ls='ls -G -F'
 alias pkg_add='pkg_add -v'
 alias ssh='iexe ssh'
 alias pd='popd'
+alias halt='sudo shutdown -p now'
+alias reboot='sudo shutdown -r now'
 # no working alias
 #alias pinst='sudo make  install distclean; rehash'
 #alias halt='sync;sync;sync;sudo shutdown -p now'
