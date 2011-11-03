@@ -159,6 +159,7 @@ aug myautocommands
   au filetype           help                     nnoremap q :<c-u>q<cr>
   au filetype           nerdtree                 let g:loaded_golden_ratio=1
   au filetype           css                      ColorHighlight
+  au filetype           less                      ColorHighlight
   " for chalice buffers
   au filetype           2ch*                     setl fencs=cp932,iso-2022-jp-3,euc-jp
   au filetype           2ch*                     let g:loaded_golden_ratio=1
@@ -226,6 +227,10 @@ let g:vimfiler_execute_file_list = {
       \ 'mkv' : 'mplayer',
       \ 'mpg' : 'mplayer',
       \ 'mp4' : 'mplayer',
+      \ 'jpg' : 'feh',
+      \ 'png' : 'feh',
+      \ 'cbz' : 'comix',
+      \ 'cbr' : 'comix',
       \}
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
@@ -422,6 +427,7 @@ let g:mpd_port = "6600"
 set secure
 
 " hg clone https://vim.googlecode.com/hg/ vim
+" cd vim/src
 " ./configure --prefix=$HOME/local --enable-multibyte --enable-perlinterp=yes --with-x --enable-xim
 " make install clean distclean
 
