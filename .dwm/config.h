@@ -4,14 +4,14 @@
 #define NUMCOLORS     4       // need at least 3
 static const char colors[NUMCOLORS][ColLast][8] = {
     // border   foreground  background
-    { "#222222", "#6d6d6d", "#222222" },  // 0 = normal
+    { "#151515", "#6d6d6d", "#222222" },  // 0 = normal
     { "#607080", "#607080", "#222222" },  // 1 = selected
     { "#607080", "#607080", "#6d6d6d" },  // 2 = urgent/warnig
     { "#ff0000", "#ffffff", "#ff0000" },  // 3 = error
     // add more here
 };
 
-static const char font[]            = "-*-terminusmod-medium-r-*-*-12-*-*-*-*-*-*-*";
+static const char font[]            = "-*-terminusmodmod-medium-r-normal--12-*-*-*-*-*-*-*";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappx     = 2;        /* gap pixel between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -24,17 +24,17 @@ static const double baropacity      = 0.95;     /* Opacity for status bar */
 static const char *tags[] = {"null", "term", "net", "media"};
 
 static const Rule rules[] = {
-  /* class       instance    title       tags mask     isfloating   monitor     opacity */
-  { "Gimp",      NULL,       NULL,       0,            True,        -1 ,        -1},
-  { "Firefox",   NULL,       NULL,       1 << 3,       False,       -1 ,        -1},
-  { "Dialog", NULL,       NULL,       0,            True,        -1 ,        0.90},
-  { "ROX-Filer", NULL,       NULL,       0,            True,        -1 ,        0.90},
-  { "feh",       NULL,       NULL,       0,            True,        -1 ,        -1},
-  { "Switch2",       NULL,       NULL,       0,            True,        -1 ,        -1},
-  { "Thunar",       NULL,       NULL,       0,            True,        -1,      -1 },
-  { "URxvt",       NULL,       NULL,       0,            False,        -1,      0.92 },
-  { "Comix",       NULL,       NULL,       0,            False,        -1,      0.92 },
-  { "GImageView",       NULL,       NULL,       0,            False,        -1,      0.92 },
+  /* class        instance    title       tags mask     isfloating   monitor     opacity */
+  { "Gimp",       NULL,       NULL,       0,            True,         -1,       -1   },
+  { "Firefox",    NULL,       NULL,       1 << 2,       False,        -1,       -1   },
+  { "Dialog",     NULL,       NULL,       0,            True,         -1,       0.90 },
+  { "ROX-Filer",  NULL,       NULL,       0,            True,         -1,       0.90 },
+  { "feh",        NULL,       NULL,       0,            True,         -1,       -1   },
+  { "Switch2",    NULL,       NULL,       0,            True,         -1,       -1   },
+  { "Thunar",     NULL,       NULL,       0,            True,         -1,       -1   },
+  { "URxvt",      NULL,       NULL,       0,            False,        -1,       0.92 },
+  { "Comix",      NULL,       NULL,       0,            False,        -1,       0.92 },
+  { "GImageView", NULL,       NULL,       0,            False,        -1,       0.92 },
 };
 
 /* layout(s) */

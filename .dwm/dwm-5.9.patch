@@ -1,6 +1,18 @@
-diff -r 904e923827cb dwm.c
---- a/dwm.c	Mon Oct 31 20:09:27 2011 +0100
-+++ b/dwm.c	Tue Nov 01 19:17:49 2011 +0900
+diff -r 183cedbebe52 config.mk
+--- a/config.mk	Fri Nov 04 20:02:35 2011 +0100
++++ b/config.mk	Sat Nov 05 14:58:14 2011 +0900
+@@ -4,7 +4,7 @@
+ # Customize below to fit your system
+ 
+ # paths
+-PREFIX = /usr/local
++PREFIX = ${HOME}/local
+ MANPREFIX = ${PREFIX}/share/man
+ 
+ X11INC = /usr/X11R6/include
+diff -r 183cedbebe52 dwm.c
+--- a/dwm.c	Fri Nov 04 20:02:35 2011 +0100
++++ b/dwm.c	Sat Nov 05 14:58:14 2011 +0900
 @@ -48,6 +48,7 @@
  #define LENGTH(X)               (sizeof X / sizeof X[0])
  #define MAX(A, B)               ((A) > (B) ? (A) : (B))
@@ -13,12 +25,12 @@ diff -r 904e923827cb dwm.c
  enum { CurNormal, CurResize, CurMove, CurLast };        /* cursor */
  enum { ColBorder, ColFG, ColBG, ColLast };              /* color */
  enum { NetSupported, NetWMName, NetWMState,
--       NetWMFullscreen, NetActiveWindow, NetLast };     /* EWMH atoms */
-+       NetWMFullscreen, NetActiveWindow, NetWMWindowOpacity, NetLast };     /* EWMH atoms */
+-       NetWMFullscreen, NetActiveWindow, NetWMWindowType,
++       NetWMFullscreen, NetActiveWindow, NetWMWindowOpacity, NetWMWindowType,
+        NetWMWindowTypeDialog, NetLast };     /* EWMH atoms */
  enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
  enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
-        ClkClientWin, ClkRootWin, ClkLast };             /* clicks */
-@@ -93,12 +94,12 @@
+@@ -94,12 +95,12 @@
  	Client *snext;
  	Monitor *mon;
  	Window win;
@@ -33,7 +45,7 @@ diff -r 904e923827cb dwm.c
  	Drawable drawable;
  	GC gc;
  	struct {
-@@ -150,6 +151,7 @@
+@@ -151,6 +152,7 @@
  	unsigned int tags;
  	Bool isfloating;
  	int monitor;
@@ -41,7 +53,7 @@ diff -r 904e923827cb dwm.c
  } Rule;
  
  /* function declarations */
-@@ -176,10 +178,12 @@
+@@ -177,10 +179,12 @@
  static Monitor *dirtomon(int dir);
  static void drawbar(Monitor *m);
  static void drawbars(void);
@@ -56,7 +68,7 @@ diff -r 904e923827cb dwm.c
  static void focus(Client *c);
  static void focusin(XEvent *e);
  static void focusmon(const Arg *arg);
-@@ -247,6 +251,9 @@
+@@ -249,6 +253,9 @@
  static int xerrorstart(Display *dpy, XErrorEvent *ee);
  static void zoom(const Arg *arg);
  
@@ -66,7 +78,7 @@ diff -r 904e923827cb dwm.c
  /* variables */
  static const char broken[] = "broken";
  static char stext[256];
-@@ -277,6 +284,7 @@
+@@ -279,6 +286,7 @@
  static DC dc;
  static Monitor *mons = NULL, *selmon = NULL;
  static Window root;
@@ -74,7 +86,7 @@ diff -r 904e923827cb dwm.c
  
  /* configuration, allows nested code to access above variables */
  #include "config.h"
-@@ -306,6 +314,7 @@
+@@ -308,6 +316,7 @@
  		&& (!r->instance || strstr(instance, r->instance)))
  		{
  			c->isfloating = r->isfloating;
@@ -82,7 +94,7 @@ diff -r 904e923827cb dwm.c
  			c->tags |= r->tags;
  			for(m = mons; m && m->num != r->monitor; m = m->next);
  			if(m)
-@@ -745,14 +754,13 @@
+@@ -747,14 +756,13 @@
  	dc.x = 0;
  	for(i = 0; i < LENGTH(tags); i++) {
  		dc.w = TEXTW(tags[i]);
@@ -101,7 +113,7 @@ diff -r 904e923827cb dwm.c
  	dc.x += dc.w;
  	x = dc.x;
  	if(m == selmon) { /* status is only drawn on selected monitor */
-@@ -762,19 +770,19 @@
+@@ -764,19 +772,19 @@
  			dc.x = x;
  			dc.w = m->ww - x;
  		}
@@ -126,12 +138,11 @@ diff -r 904e923827cb dwm.c
  	}
  	XCopyArea(dpy, dc.drawable, m->barwin, dc.gc, 0, 0, m->ww, bh, 0, 0);
  	XSync(dpy, False);
-@@ -789,10 +797,40 @@
+@@ -791,10 +799,40 @@
  }
  
  void
 -drawsquare(Bool filled, Bool empty, Bool invert, unsigned long col[ColLast]) {
-+
 +drawcoloredtext(char *text) {
 +	Bool first=True;
 +	char *buf = text, *ptr = buf, c = 1;
@@ -164,13 +175,13 @@ diff -r 904e923827cb dwm.c
 +void
 +drawsquare(Bool filled, Bool empty, unsigned long col[ColLast]) {
  	int x;
--
+ 
 -	XSetForeground(dpy, dc.gc, col[invert ? ColBG : ColFG]);
 +	XSetForeground(dpy, dc.gc, col[ ColFG ]);
  	x = (dc.font.ascent + dc.font.descent + 2) / 4;
  	if(filled)
  		XFillRectangle(dpy, dc.drawable, dc.gc, dc.x+1, dc.y+1, x+1, x+1);
-@@ -801,17 +839,17 @@
+@@ -803,17 +841,17 @@
  }
  
  void
@@ -192,7 +203,7 @@ diff -r 904e923827cb dwm.c
  	x = dc.x + (h / 2);
  	/* shorten text if necessary */
  	for(len = MIN(olen, sizeof buf); len && textnw(text, len) > dc.w - h; len--);
-@@ -820,7 +858,7 @@
+@@ -822,7 +860,7 @@
  	memcpy(buf, text, len);
  	if(len < olen)
  		for(i = len; i && i > len - 3; buf[--i] = '.');
@@ -201,7 +212,7 @@ diff -r 904e923827cb dwm.c
  	if(dc.font.set)
  		XmbDrawString(dpy, dc.drawable, dc.font.set, dc.gc, x, y, buf, len);
  	else
-@@ -856,12 +894,26 @@
+@@ -858,12 +896,27 @@
  }
  
  void
@@ -214,6 +225,7 @@ diff -r 904e923827cb dwm.c
 +    XDeleteProperty(dpy, c->win, netatom[NetWMWindowOpacity]);
 +  }
 +}
++
 +
 +void
  focus(Client *c) {
@@ -228,7 +240,7 @@ diff -r 904e923827cb dwm.c
  	if(c) {
  		if(c->mon != selmon)
  			selmon = c->mon;
-@@ -870,13 +922,14 @@
+@@ -872,13 +925,14 @@
  		detachstack(c);
  		attachstack(c);
  		grabbuttons(c, True);
@@ -244,7 +256,7 @@ diff -r 904e923827cb dwm.c
  }
  
  void
-@@ -1117,7 +1170,7 @@
+@@ -1119,7 +1173,7 @@
  		die("fatal: could not malloc() %u bytes\n", sizeof(Client));
  	c->win = w;
  	updatetitle(c);
@@ -253,14 +265,12 @@ diff -r 904e923827cb dwm.c
  		c->mon = t->mon;
  		c->tags = t->tags;
  	}
-@@ -1126,8 +1179,16 @@
+@@ -1128,8 +1182,14 @@
  		applyrules(c);
  	}
  	/* geometry */
 -	c->x = c->oldx = wa->x;
 -	c->y = c->oldy = wa->y;
-+/*	c->x = c->oldx = wa->x; */
-+/*	c->y = c->oldy = wa->y; */
 +  if(!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) {
 +    c->x = c->oldx = (c->mon->mw - wa->width) / 2;
 +    c->y = c->oldy = (c->mon->mh - wa->height) / 2;
@@ -272,16 +282,16 @@ diff -r 904e923827cb dwm.c
  	c->w = c->oldw = wa->width;
  	c->h = c->oldh = wa->height;
  	c->oldbw = wa->border_width;
-@@ -1150,7 +1211,7 @@
+@@ -1152,7 +1212,7 @@
  	}
  	wc.border_width = c->bw;
  	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
 -	XSetWindowBorder(dpy, w, dc.norm[ColBorder]);
 +	XSetWindowBorder(dpy, w, dc.colors[0][ColBorder]);
  	configure(c); /* propagates border_width, if size doesn't change */
+ 	updatewindowtype(c);
  	updatesizehints(c);
- 	updatewmhints(c);
-@@ -1336,10 +1397,15 @@
+@@ -1341,10 +1401,15 @@
  resizeclient(Client *c, int x, int y, int w, int h) {
  	XWindowChanges wc;
  
@@ -301,13 +311,15 @@ diff -r 904e923827cb dwm.c
  	wc.border_width = c->bw;
  	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
  	configure(c);
-@@ -1560,19 +1626,19 @@
+@@ -1565,21 +1630,21 @@
  	netatom[NetActiveWindow] = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", False);
  	netatom[NetSupported] = XInternAtom(dpy, "_NET_SUPPORTED", False);
  	netatom[NetWMName] = XInternAtom(dpy, "_NET_WM_NAME", False);
 +  netatom[NetWMWindowOpacity] = XInternAtom(dpy, "_NET_WM_WINDOW_OPACITY", False);
  	netatom[NetWMState] = XInternAtom(dpy, "_NET_WM_STATE", False);
  	netatom[NetWMFullscreen] = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
+ 	netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
+ 	netatom[NetWMWindowTypeDialog] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
  	/* init cursors */
 -	cursor[CurNormal] = XCreateFontCursor(dpy, XC_left_ptr);
 +	cursor[CurNormal] = XCreateFontCursor(dpy, XC_right_ptr);
@@ -328,15 +340,7 @@ diff -r 904e923827cb dwm.c
  	dc.drawable = XCreatePixmap(dpy, root, DisplayWidth(dpy, screen), bh, DefaultDepth(dpy, screen));
  	dc.gc = XCreateGC(dpy, root, 0, NULL);
  	XSetLineAttributes(dpy, dc.gc, 1, LineSolid, CapButt, JoinMiter);
-@@ -1683,6 +1749,7 @@
- 		}
- }
- 
-+
- void
- togglebar(const Arg *arg) {
- 	selmon->showbar = !selmon->showbar;
-@@ -1732,7 +1799,7 @@
+@@ -1739,7 +1804,7 @@
  	if(!c)
  		return;
  	grabbuttons(c, False);
@@ -345,7 +349,7 @@ diff -r 904e923827cb dwm.c
  	if(setfocus)
  		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
  }
-@@ -1788,6 +1855,8 @@
+@@ -1795,6 +1860,8 @@
  		                          CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
  		XDefineCursor(dpy, m->barwin, cursor[CurNormal]);
  		XMapRaised(dpy, m->barwin);
@@ -354,7 +358,7 @@ diff -r 904e923827cb dwm.c
  	}
  }
  
-@@ -2058,6 +2127,28 @@
+@@ -2084,6 +2151,28 @@
  }
  
  void
