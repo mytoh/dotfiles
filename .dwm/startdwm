@@ -1,34 +1,36 @@
 #!/bin/sh
 
-  if [ -x $HOME/.fehbg ]; then
-     $HOME/.fehbg &
-  fi
-  xcompmgr -n &
+if [ -x /usr/local/bin/nitrogen ]; then
+  nitrogen --restore
+elif [ -x $HOME/.fehbg ]; then
+    $HOME/.fehbg &
+fi
+xcompmgr -n &
 
-  while true
-  do
-    icmem="À"
-    icclk="É"
-    icnet="¤"
-    icdsk="Å"
-    icorb="¼"
-    iccpu="Á"
-    cpu="$(top -b -d 2 | grep ^CPU | awk '{print $2,$6}')"
-    #diskused="$(df -ch | grep total | awk '{print $3}' | cut -c 1-3)"
-    diskused="$(df -ch | grep total | awk '{print $3}')"
-    disktotal="$(df -ch | grep total | awk '{print $2}')"
-    disk="$diskused/$disktotal"
-    freemem="$(vmstat -h |grep -n 2| awk '{print $6}')"
-    ip="$(curl ifconfig.me 2>/dev/null)"
-    sp=$(echo -e "::")
-    date="$(date +"%F %R")"
-    release="$(uname -r)"
-    kernel="$(uname -i)"
-    xsetroot -name "$icorb $kernel$release $iccpu $cpu $icmem $freemem $icdsk $disk $icnet$ip $icclk $date"
-  done &
+while true
+do
+  icmem="À"
+  icclk="É"
+  icnet="¤"
+  icdsk="Å"
+  icorb="¼"
+  iccpu="Á"
+  cpu="$(top -b -d 2 | grep ^CPU | awk '{print $2,$6}')"
+  #diskused="$(df -ch | grep total | awk '{print $3}' | cut -c 1-3)"
+  diskused="$(df -ch | grep total | awk '{print $3}')"
+  disktotal="$(df -ch | grep total | awk '{print $2}')"
+  disk="$diskused/$disktotal"
+  freemem="$(vmstat -h |grep -n 2| awk '{print $6}')"
+  ip="$(curl ifconfig.me 2>/dev/null)"
+  sp=$(echo -e "::")
+  date="$(date +"%F %R")"
+  release="$(uname -r)"
+  kernel="$(uname -i)"
+  xsetroot -name "$icorb $kernel$release $iccpu $cpu $icmem $freemem $icdsk $disk $icnet $ip $icclk  $date"
+done &
 
-  while true
-  do
-    exec dwm || exit
-  done
+while true
+do
+  exec dwm || exit
+done
 
