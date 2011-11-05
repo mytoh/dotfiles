@@ -820,6 +820,14 @@ cfg() {
   esac
 }
 
+trl() { aria2c -S "$@" |grep "./" }
+
+4chimg() {
+  wget -O - $1 |
+  grep -Eo 'http://images.4chan.org/[^"]+' |
+  uniq |
+  xargs wget
+}
 
 # color functions {{{
 # functions from
@@ -1081,6 +1089,7 @@ alias radio3='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r3.asx'
 alias radio4='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r4.asx'
 alias radio6='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r6.asx'
 alias sumo='mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_haishin/asx/sumolive.asx'
+alias destep="figlet -w 80 -nkf rowancap DESTEP TRED | tr 'd' '▟' | tr 'P' '▛' | tr 'M' '█' | tr 'V' '▜' | tr '\"' ' ' | tr '.' ' ' | tr 'a' '▟' | tr 'b' '▙' | tr 'K' '█' | tr 'A' '▟' | tr 'F' '▛' | tr 'Y' '▜' | tr 'v' '█' | tr 'm' '█' | tr 'r' '▛' | toilet -w 80 --gay -f term"
 # suffix aliases
 alias -s txt=cat
 alias -s {zip,rar,tgb,tgz,tar,xz,gz,bz2}=unpack
