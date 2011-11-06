@@ -583,7 +583,7 @@ cd() {
     fi
 }
 
-unpack() {
+unpack() { # {{{
 # Usage: simple-extract <file>
 # Using option -d deletes the original archive file.
 #f5# Smart archive extractor
@@ -720,6 +720,7 @@ unpack() {
     done
     return $RC
 }
+# }}}
 
 __archive_or_uri()
 {
