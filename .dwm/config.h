@@ -27,6 +27,7 @@ static const Rule rules[] = {
   /* class        instance    title       tags mask     isfloating   monitor     opacity */
   { "Gimp",       NULL,       NULL,       0,            True,         -1,       -1   },
   { "Firefox",    NULL,       NULL,       1 << 2,       False,        -1,       -1   },
+  { NULL,NULL,"Firefox Preferences",      1 << 1,       True,         -1,       -1  },
   { "Dialog",     NULL,       NULL,       0,            True,         -1,       0.90 },
   { "ROX-Filer",  NULL,       NULL,       0,            True,         -1,       0.90 },
   { "feh",        NULL,       NULL,       0,            True,         -1,       -1   },
