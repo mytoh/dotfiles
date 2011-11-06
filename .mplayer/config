@@ -3,7 +3,7 @@
 [default]
 #vo=x11
 ao=oss
-fstype=fullscreen
+fstype=none
 #cache=8192
 #cache-min = 6
 autosync=100
