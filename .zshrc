@@ -1116,14 +1116,14 @@ if [[ $TERM = cons25 && -e `which jfbterm` ]]; then
   jfbterm
 fi
 
-if check_com -c fortune; then
-  if [ -f /usr/local/share/games/fortune/bible ]; then
-    fortune /usr/local/share/games/fortune/bible
-  else
-    fortune
-  fi
-  echo "\n"
-fi
+#if check_com -c fortune; then
+  #if [ -f /usr/local/share/games/fortune/bible ]; then
+    #fortune /usr/local/share/games/fortune/bible
+  #else
+    #fortune
+  #fi
+  #echo "\n"
+#fi
 # }}}
 
 # Os detection {{{
