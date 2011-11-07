@@ -36,7 +36,8 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 !urxvt.font: k12
 !urxvt.boldfont: k12
 urxvt.font: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*, \
-            -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-*-*
+            -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-*-*, \
+            -mplus-*-medium-r-normal-*-10-*-*-*-*-*-*-*
 
 urxvt.boldFont: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso8859-*, \
             -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*, \
