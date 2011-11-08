@@ -1,7 +1,7 @@
-xft.dpi: 98
-xft.hinting: true
-xft.hintstyle: hintslight
-Xcursor.theme: whiteglass
+!xft.dpi: 98
+!xft.hinting: true
+!xft.hintstyle: hintslight
+!Xcursor.theme: whiteglass
 
 !---------------
 ! urxvt
@@ -35,14 +35,13 @@ urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 !urxvt.boldFont:Terminus\-ja-12
 !urxvt.font: k12
 !urxvt.boldfont: k12
-urxvt.font: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*, \
-            -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-*-*, \
-            -mplus-*-medium-r-normal-*-10-*-*-*-*-*-*-*
+urxvt.font: -*-terminus-medium-r-normal--12-*-*-*-*-*-*-*, \
+            -mplus-gothic-medium-r-normal--10-*-*-*-*-*-*-*, \
+            -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*
 
-urxvt.boldFont: -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso8859-*, \
-            -*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*, \
-             -*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*, \
-            -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-*-*
+urxvt.boldFont:  -*-terminus-medium-r-normal--12-*-*-*-*-*-*-*, \   
+                 -mplus-gothic-medium-r-normal--10-*-*-*-*-*-*-*, \ 
+                 -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*
 
 !urxvt.boldfont: -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-*-*
 !urxvt.boldFont: 9x15bold,\
