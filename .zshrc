@@ -147,11 +147,17 @@ SAVEHIST=$HISTSIZE
 # vim
 if check_com -c vim; then
   export EDITOR=vim
-  alias vi=vim
 else
   export EDITOR=vi
-  alias vim=vi
 fi
+
+vim() {
+  if [ -n $DISPLAY ]; then
+    command vim $*
+  else
+    command vim -X $*
+  fi
+}
 export MYVIMRC=~/.vimrc
 #export VIMRUNTIME="~/.vim/vundle:"
 
@@ -478,14 +484,6 @@ tm() {
   fi
 }
 
-svim() {
-  if [[ -n `pgrep X` ]]; then
-    vim --servername VIM --remote-silent $1
-  else
-    vim $1
-  fi
-}
-
 
 ## 256色生成用便利関数
 # 
@@ -766,7 +764,7 @@ vman() {
         printf 'usage: vman <topic>\n'
         return 1
     fi
-    man "$@" | col -b | vim -X -R -c 'set ft=man nomod nolist' -
+    man "$@" | col -b | vim -X -R -c "set ft=man nomod nolist" -
 }
 compdef _man vman
 
@@ -823,11 +821,15 @@ cfg() {
 
 trl() { aria2c -S "$@" |grep "./" }
 
-4chimg() {
+4chget() {
   wget -O - $1 |
   grep -Eo 'http://images.4chan.org/[^"]+' |
   uniq |
   xargs wget
+}
+
+4ch() {
+  w3m http://boards.4chan.org/$1/
 }
 
 # color functions {{{
