@@ -277,18 +277,22 @@ let g:unite_split_rule = "belowright"
 " :help filename-modifiers
 let g:unite_source_file_mru_filename_format = ':p:~:.'
 let g:unite_source_file_mru_time_format = ''
-" buffer list
-nnoremap <silent> <leader>ub :<c-u>Unite bookmark<cr>
-nnoremap <silent> <leader>uf :<c-u>Unite -buffer-name=files file<cr>
-nnoremap <silent> <leader>um :<c-u>Unite -buffer-name=files file_mru<cr>
-" leave unite buffer
-aug unite
-  au!
-  au filetype unite nnoremap <silent> <buffer> <esc><esc> :q<cr>
-  au filetype unite inoremap <silent> <buffer> <esc><esc> <esc>:q<cr>
+" keymaps
+nnoremap [unite] <Nop>
+nmap     <Leader>u [unite]
+nnoremap <silent> [unite]b :<c-u>Unite bookmark<cr>
+nnoremap <silent> [unite]f :<c-u>Unite -buffer-name=files file<cr>
+nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
+
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()"{{{
+  " Overwrite settings.
+  imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
+  " <C-l>: manual neocomplcache completion.
+  inoremap <buffer> <C-l>  <C-x><C-u><C-p><Down>
   "call unite#custom_default_action('file', 'tabopen')
   "call unite#custom_default_action('bookmark', 'tabopen')
-aug end
+endfunction "}}}
 "}}}
 
 " eskk{{{
