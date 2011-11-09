@@ -822,7 +822,7 @@ cfg() {
 trl() { aria2c -S "$@" |grep "./" }
 
 4chget() {
-  wget -O - $1 |
+  mkdir $2
   cd $2
   wget -O - http://boards.4chan.org/$1/res/$2 |
   grep -Eo 'http://images.4chan.org/[^"]+' |
