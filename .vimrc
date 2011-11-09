@@ -432,7 +432,7 @@ set secure
 
 " hg clone https://vim.googlecode.com/hg/ vim
 " cd vim/src
-" ./configure --prefix=$HOME/local --enable-multibyte --enable-perlinterp=yes --with-x --enable-xim
+" ./configure --prefix=/home/mytoh/local --enable-multibyte --enable-perlinterp=yes --with-x --enable-xim --disable-darwin --disable-selinux --enable-fontset
 " make install clean distclean
 
 " vim:set foldmethod=marker:
