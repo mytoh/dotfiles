@@ -63,6 +63,7 @@ NeoBundle 'mileszs/ack.vim'
 NeoBundle 'trapd00r/vim-extendedcolors'
 "NeoBundle 'cakebaker/scss-sytax.vim'
 NeoBundle 'groenewege/vim-less'
+NeoBundle 'othree/html5.vim'
 
 " official vim-scripts repo
 "NeoBundle 'gauref.vim'
