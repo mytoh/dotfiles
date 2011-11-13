@@ -190,8 +190,8 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 # paths
 path=(
-~/local/*/{sbin,bin}(N-/)
 ~/local/bin(N-/)
+~/local/*/{sbin,bin}(N-/)
 /opt/X11/bin(N-/)
 /usr/X11/bin(N-/)
 /usr/games(N-/)
