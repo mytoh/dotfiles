@@ -177,7 +177,13 @@ export  LS_COLORS='di=34:ln=35:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:t
 fi
 
 # less
+if check_com -c vimpager; then
+  export PAGER="vimpager"
+  alias less="vimpager"
+  alias more="vimpager"
+else
 export PAGER="less"
+fi
 export LESS='-i  -w -z-4 -g -M -X -F -R -P%t?f%f \
   :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -827,7 +833,7 @@ trl() { aria2c -S "$@" |grep "./" }
   wget -O - http://boards.4chan.org/$1/res/$2 |
   grep -Eo 'http://images.4chan.org/[^"]+' |
   uniq |
-  xargs wget
+  xargs wget -nc
   cd ..
 }
 
@@ -835,6 +841,20 @@ trl() { aria2c -S "$@" |grep "./" }
   w3m http://boards.4chan.org/$1/
 }
 
+v2jp() {
+  mkdir -p tmp
+   ffmpeg -i $1 -t $2 -ss 00:00:00:00 ./tmp/vid-%d.jpg
+}
+
+aaa() {
+for f in ./*.jpg 
+do
+jp2a --colors $f
+tput cup 0 0
+#sleep 0.001
+done
+echo -ne '[55E'
+}
 # color functions {{{
 # functions from
 # http://crunchbanglinux.org/forums/post/126921/#p126921
