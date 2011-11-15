@@ -194,6 +194,13 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
+# remove duplicates
+typeset -U path cdpath  manpath infopath
+typeset -U  fpath 
+typeset -Uga preexec_functions
+typeset -Uga precmd_functions
+typeset -Uga chpwd_functions
+
 # paths
 path=(
 ~/local/bin(N-/)
@@ -212,6 +219,7 @@ fi
 ## zsh functions directory
 fpath=(~/.zsh/functions/completion ${fpath})
 
+MANPATH="`manpath`"
 manpath=(
 ~/local/*/man(N-/)
 ~/local/*/share/man(N-/)
@@ -219,6 +227,7 @@ manpath=(
 /usr/local/*/man(N-/)
 /usr/share/man(N-/)
 $manpath)
+export MANPATH
 
 unset INFOPATH
 typeset -xT INFOPATH infopath
@@ -228,15 +237,8 @@ infopath=(~/.info(N-/)
 /usr/local/*/info(N-/)
 $infopath)
 
-typeset -U cdpath
 cdpath=(~/local ~/local/var)
 
-# remove duplicates
-typeset -U path cdpath fpath manpath infopath
-
-typeset -Uga preexec_functions
-typeset -Uga precmd_functions
-typeset -Uga chpwd_functions
 
 # }}}
 
@@ -358,11 +360,11 @@ fi
   #PROMPT+=$ip
   PROMPT+=$'\n'
   if [[ X$DISPLAY != "X" ]];then
-  PROMPT+="%F{8}└%{$reset_color%}"
+  PROMPT+="%F{8}└┈%{$reset_color%}"
 else
   PROMPT+="%F{8}-%{$reset_color%}"
 fi
-PROMPT+="%F{8}>%{$reset_color%} "
+PROMPT+="%F{8}╸%{$reset_color%} "
   PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
   SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
@@ -595,6 +597,12 @@ unpack() { # {{{
     setopt extended_glob noclobber
     local DELETE_ORIGINAL DECOMP_CMD USES_STDIN USES_STDOUT GZTARGET WGET_CMD
     local RC=0
+    usage() {
+      print "Usage: unpack <file>"
+    }
+    if [[ ${#argv} == 0 ]]; then
+      usage
+      fi
     zparseopts -D -E "d=DELETE_ORIGINAL"
     for ARCHIVE in "${@}"; do
         case $ARCHIVE in
@@ -733,13 +741,13 @@ __archive_or_uri()
         '_urls:Remote Archives:_urls'
 }
 
-_simple_extract()
+_unpack()
 {
     _arguments \
         '-d[delete original archivefile after extraction]' \
         '*:Archive Or Uri:__archive_or_uri'
 }
-compdef _simple_extract unpack
+compdef _unpack unpack
 
 # Usage: smartcompress <file> (<type>)
 #f5# Smart archive creator
@@ -1115,7 +1123,9 @@ alias radio3='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r3.asx'
 alias radio4='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r4.asx'
 alias radio6='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r6.asx'
 alias sumo='mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_haishin/asx/sumolive.asx'
+alias jblive='mplayer rtsp://videocdn-us.geocdn.scaleengine.net/jblive/jblive.stream'
 alias destep="figlet -w 80 -nkf rowancap DESTEP TRED | tr 'd' '▟' | tr 'P' '▛' | tr 'M' '█' | tr 'V' '▜' | tr '\"' ' ' | tr '.' ' ' | tr 'a' '▟' | tr 'b' '▙' | tr 'K' '█' | tr 'A' '▟' | tr 'F' '▛' | tr 'Y' '▜' | tr 'v' '█' | tr 'm' '█' | tr 'r' '▛' | toilet -w 80 --gay -f term"
+alias vba="VisualBoyAdvance"
 # suffix aliases
 alias -s txt=cat
 alias -s {zip,rar,tgb,tgz,tar,xz,gz,bz2}=unpack
