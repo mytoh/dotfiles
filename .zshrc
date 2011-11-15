@@ -347,10 +347,10 @@ precmd_functions+='setup_vi_prompt'
 setup_prompt(){ #{{{
   PROMPT=''
   if [[ X$DISPLAY != "X" ]];then
-  PROMPT+="%F{8}┌─%{$reset_color%}"
-else
-  PROMPT+="%F{8}--%{$reset_color%}"
-fi
+    PROMPT+="%F{8}┌─%{$reset_color%}"
+  else
+    PROMPT+="%F{8}--%{$reset_color%}"
+  fi
   PROMPT+="%F{8}[%F{blue}%(5~,%-2~/../%2~,%~)%F{8}]%{$reset_color%}"
   # git prompt
   gitprompt="%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}"
@@ -360,11 +360,10 @@ fi
   #PROMPT+=$ip
   PROMPT+=$'\n'
   if [[ X$DISPLAY != "X" ]];then
-  PROMPT+="%F{8}└┈%{$reset_color%}"
-else
-  PROMPT+="%F{8}-%{$reset_color%}"
-fi
-PROMPT+="%F{8}╸%{$reset_color%} "
+    PROMPT+="%F{8}└┈╸%{$reset_color%} "
+  else
+    PROMPT+="%F{8}->%{$reset_color%} "
+  fi
   PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
   SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
@@ -851,18 +850,19 @@ trl() { aria2c -S "$@" |grep "./" }
 
 v2jp() {
   mkdir -p tmp
-   ffmpeg -i $1 -t $2 -ss 00:00:00:00 ./tmp/vid-%d.jpg
+  ffmpeg -i $1 -t $2 -ss 00:00:00:00 ./tmp/vid-%d.jpg
 }
 
 aaa() {
-for f in ./*.jpg 
-do
-jp2a --colors $f
-tput cup 0 0
-#sleep 0.001
-done
-echo -ne '[55E'
+  for f in ./*.jpg 
+  do
+    jp2a --colors $f
+    tput cup 0 0
+    #sleep 0.001
+  done
+  echo -ne '[55E'
 }
+
 # color functions {{{
 # functions from
 # http://crunchbanglinux.org/forums/post/126921/#p126921
