@@ -195,7 +195,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 # remove duplicates
-typeset -U path cdpath  manpath infopath
+typeset -U path cdpath  infopath
 typeset -U  fpath 
 typeset -Uga preexec_functions
 typeset -Uga precmd_functions
@@ -219,15 +219,18 @@ fi
 ## zsh functions directory
 fpath=(~/.zsh/functions/completion ${fpath})
 
-MANPATH="`manpath`"
-manpath=(
-~/local/*/man(N-/)
-~/local/*/share/man(N-/)
-/usr/local/man(N-/)
-/usr/local/*/man(N-/)
-/usr/share/man(N-/)
-$manpath)
-export MANPATH
+if [[ "$OSTYPE" != freebsd* ]]; then
+  typeset -U manpath
+  MANPATH="`manpath`"
+  manpath=(
+  ~/local/*/man(N-/)
+  ~/local/*/share/man(N-/)
+  /usr/local/man(N-/)
+  /usr/local/*/man(N-/)
+  /usr/share/man(N-/)
+  $manpath)
+  export MANPATH
+fi
 
 unset INFOPATH
 typeset -xT INFOPATH infopath
@@ -1094,6 +1097,7 @@ alias df='cdf -h'
 fi
 alias uzbl='uzbl-tabbed'
 alias unar=unpack
+alias vba="VisualBoyAdvance"
 # listing stuff
 alias dir="ls -lSrah"
 alias lad='ls -d .*(/)'                # only show dot-directories
@@ -1125,7 +1129,6 @@ alias radio6='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r6.asx'
 alias sumo='mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_haishin/asx/sumolive.asx'
 alias jblive='mplayer rtsp://videocdn-us.geocdn.scaleengine.net/jblive/jblive.stream'
 alias destep="figlet -w 80 -nkf rowancap DESTEP TRED | tr 'd' '▟' | tr 'P' '▛' | tr 'M' '█' | tr 'V' '▜' | tr '\"' ' ' | tr '.' ' ' | tr 'a' '▟' | tr 'b' '▙' | tr 'K' '█' | tr 'A' '▟' | tr 'F' '▛' | tr 'Y' '▜' | tr 'v' '█' | tr 'm' '█' | tr 'r' '▛' | toilet -w 80 --gay -f term"
-alias vba="VisualBoyAdvance"
 # suffix aliases
 alias -s txt=cat
 alias -s {zip,rar,tgb,tgz,tar,xz,gz,bz2}=unpack
