@@ -589,7 +589,7 @@ cd() {
 }
 
 unpack() { # {{{
-# Usage: simple-extract <file>
+# Usage: unpack <file>
 # Using option -d deletes the original archive file.
 #f5# Smart archive extractor
     emulate -L zsh
@@ -835,13 +835,23 @@ cfg() {
 trl() { aria2c -S "$@" |grep "./" }
 
 4chget() {
-  mkdir $2
-  cd $2
+  emulate -RL zsh
+  if [ ! -e $2 ];then
+    mkdir -p $2
+  fi
+  if [ -d $2 ]; then
+  builtin cd $2
   wget -O - http://boards.4chan.org/$1/res/$2 |
   grep -Eo 'http://images.4chan.org/[^"]+' |
   uniq |
   xargs wget -nc
   cd ..
+fi
+}
+4chgetall() {
+  emulate -RL zsh
+  for d in $(\ls)
+    4chget $1 $d
 }
 
 4ch() {
