@@ -125,7 +125,7 @@ nnoremap <space> i<space><esc>
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <leader>w :<c-u>up<cr>
 nnoremap <leader>q :<c-u>qa<cr>
-nnoremap <leader>ff :<c-u>VimFiler<cr>
+nnoremap <leader>ff :<c-u>VimFilerTab<cr>
 
 cnoremap <c-a>      <home>
 cnoremap <c-f>      <right>
@@ -153,7 +153,7 @@ aug myautocommands
   au bufread,bufnewfile ~/.xcolours/*            ColorHighlight
   au filetype           xdefaults                call s:myfunc.xrdb()
   au bufwritepost       .vimrc                   source ~/.vimrc
-  au bufwritepost       .zshrc                   silent !zcompile .zshrc
+  au bufwritepost       .zshrc                   silent !zcompile ~/.zshrc
   au bufwritepost       .conkyrc                 silent !killall -SIGUSR1  conky
   au filetype           scheme                   setl cindent& lispwords=define,lambda,call-with-*
   au filetype           help                     nnoremap q :<c-u>q<cr>
@@ -212,7 +212,8 @@ aug end
 " neocomplcache"{{{
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1 
-let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_ignore_case = 1 
+let g:neocomplcache_enable_camel_case_completion = 0
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_auto_select = 0
 let g:neocomplcache_dictionary_filetype_lists = {
@@ -250,8 +251,8 @@ let g:vimfiler_safe_mode_by_default = 0
 "}}}
 
 "{{{ rson's bufstat
-nnoremap gt :<c-u>bnext<cr>
-nnoremap gT :<c-u>bNext<cr>
+nnoremap gn :<c-u>bnext<cr>
+nnoremap gp :<c-u>bNext<cr>
 let g:bufstat_debug = 1
 let g:bufstat_surround_buffers = ':'
 let g:bufstat_number_before_bufname = 0
