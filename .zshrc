@@ -1108,6 +1108,9 @@ fi
 alias uzbl='uzbl-tabbed'
 alias unar=unpack
 alias vba="VisualBoyAdvance"
+if check_com -c hub; then
+  eval $(hub alias -s zsh)
+fi
 # listing stuff
 alias dir="ls -lSrah"
 alias lad='ls -d .*(/)'                # only show dot-directories
