@@ -1,7 +1,8 @@
 !xft.dpi: 98
 !xft.hinting: true
 !xft.hintstyle: hintslight
-!Xcursor.theme: whiteglass
+Xcursor.theme: whiteglass
+!
 
 !---------------
 ! urxvt
@@ -21,10 +22,11 @@ urxvt.fading: 2%
 urxvt.fadeColor: grey
 urxvt.shading: 20
 urxvt.tintcolor: black
-urxvt.preedittype: Root
+urxvt.preedittype: root
 urxvt.savelines: 2000
 urxvt.mousewheelscrollpage: false
 urxvt.urgentOnBell: true
+urxvt.inputMethod: uim
 
 urxvt.perl-ext-common: default,matcher,clipboard-osc
 urxvt.urlLauncher: firefox
