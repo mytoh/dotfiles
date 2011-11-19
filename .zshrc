@@ -336,12 +336,11 @@ setup_vi_prompt(){
     VIMODE="ins"
   fi
   if [ $VIMODE == "ins" ]; then
-  viprompt="%{$reset_color%}[%{[38;5;67m%}${VIMODE}%{$reset_color%}]"
-  RPROMPT=$viprompt
+  viprompt="%F{238}(%{[38;5;67m%}${VIMODE}%F{238})"
 else
-  viprompt="%{$reset_color%}[%{[38;5;182m%}${VIMODE}%{$reset_color%}]"
-  RPROMPT=$viprompt
+  viprompt="%F{238}[%{[38;5;182m%}${VIMODE}%F{238}]"
   fi
+  RPROMPT=$viprompt
 }
 
 precmd_functions+='setup_vi_prompt'
@@ -354,7 +353,7 @@ setup_prompt(){ #{{{
   else
     PROMPT+="%F{8}--%{$reset_color%}"
   fi
-  PROMPT+="%F{8}[%F{blue}%(5~,%-2~/../%2~,%~)%F{8}]%{$reset_color%}"
+  PROMPT+="%F{8}(%F{blue}%(5~,%-2~/../%2~,%~)%F{8})%{$reset_color%}"
   # git prompt
   gitprompt="%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}"
   PROMPT+=$gitprompt
