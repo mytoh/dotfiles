@@ -852,8 +852,9 @@ fi
 }
 4chgetall() {
   emulate -RL zsh
-  for d in $(\ls)
+  for d in $(\ls); do
     4chget $1 $d
+  done
 }
 
 4ch() {
@@ -1107,6 +1108,8 @@ fi
 alias uzbl='uzbl-tabbed'
 alias unar=unpack
 alias vba="VisualBoyAdvance"
+alias md='mkdir -p'
+alias xfont="xlsatoms | grep '-'"
 if check_com -c hub; then
   eval $(hub alias -s zsh)
 fi
@@ -1129,8 +1132,6 @@ alias rw-='chmod 600'
 alias rwx='chmod 700'
 alias r--='chmod 644'
 alias r-x='chmod 755'
-# some useful aliases
-alias md='mkdir -p'
 # network staff
 alias starwars='telnet towel.blinkenlights.nl'
 alias radio1='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r1.asx'
@@ -1164,6 +1165,13 @@ xsource ~/.zsh/plugins/zaw/zaw.zsh
 
 if [[ $TERM = cons25 && -e `which jfbterm` ]]; then
   jfbterm
+fi
+
+if [[ -e ~/.fonts ]]; then
+for d in ~/.fonts/*(/); do
+  xset +fp $d
+  xset fp rehash
+done
 fi
 
 #if check_com -c fortune; then
@@ -1206,20 +1214,13 @@ case ${OSTYPE} in
     squid_restart() {
       killall squid
       killall squid
-      kill `cat ~/.squid/logs/squid.pid`
-      kill `cat ~/.squid/logs/squid.pid`
+      kill $(cat ~/.squid/logs/squid.pid)
+      kill $(cat ~/.squid/logs/squid.pid)
       /bin/rm -rfv ~/.squid/cache/*
       squid -f ~/.squid/etc/squid.conf -z
       squid -f ~/.squid/etc/squid.conf
-      mplayer() {
-        if [ -e /Applications/mplayer2.app ]; then
-          /Applications/mplayer2.app/Contents/MacOS/mplayer-bin $*
-        else
-          mplayer
-        fi
-      }
-      export JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
     }
+    export JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
     ;;
 
   freebsd*)
