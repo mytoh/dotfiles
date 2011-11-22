@@ -1167,11 +1167,13 @@ if [[ $TERM = cons25 && -e `which jfbterm` ]]; then
   jfbterm
 fi
 
-if [[ -e ~/.fonts ]]; then
-for d in ~/.fonts/*(/); do
-  xset +fp $d
-  xset fp rehash
-done
+if [[ -n $DISPLAY ]];then
+  if [[ -e ~/.fonts ]]; then
+    for d in ~/.fonts/*(/); do
+      xset +fp $d
+      xset fp rehash
+    done
+  fi
 fi
 
 #if check_com -c fortune; then

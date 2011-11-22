@@ -59,7 +59,8 @@ set laststatus=2
 "set statusline=%<%1*\ %f\ %m%r%h%w\ %1*%{fugitive#statusline()}%1*%=\ %1*%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %9*(・x・)%*\ 
 " statusline for buftabs plugin
 let s:muridana='%9*(・x・)%*'
-set statusline=\ %=\ %{fugitive#statusline()}%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %*\ 
+  "set statusline=\ %=\ %{fugitive#statusline()}%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %*\ 
+  set statusline=\ %=\ %Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %*\ 
 " highlight for statusline
 " set colorscheme above
 " User1-9 => %{1-9}*
@@ -98,15 +99,15 @@ endif
 "}}}
 
 " funcs {{{
-let s:myfunc = {}
+let s:vimrc = {}
 
-function! s:myfunc.isos(name) dict
+function! s:vimrc.isos(name) dict
   let os = tolower(substitute(system('uname'),"\n","",""))
   return os == a:name ? 1 : 0
   unlet os
 endfunction
 
-if s:myfunc.isos('haiku')
+if s:vimrc.isos('haiku')
   let g:loaded_vimproc = 1
   set rtp^=~/.vim/
 endif
@@ -134,7 +135,7 @@ cnoremap <c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<
 "}}}
 
 " autocommands{{{
-function! s:myfunc.xrdb() dict
+function! s:vimrc.xrdb() dict
   if strlen(expand($DISPLAY))
     silent !xrdb -remove
     silent !xrdb -merge ~/.Xresources
@@ -150,7 +151,7 @@ aug myautocommands
   au bufread,bufnewfile .vimperatorrc            set filetype=vim
   au bufread,bufnewfile ~/.xcolours/*            set filetype=xdefaults
   au bufread,bufnewfile ~/.xcolours/*            ColorHighlight
-  au filetype           xdefaults                call s:myfunc.xrdb()
+  au filetype           xdefaults                call s:vimrc.xrdb()
   au bufwritepost       .vimrc                   source ~/.vimrc
   au bufwritepost       .zshrc                   silent !zcompile ~/.zshrc
   au bufwritepost       .conkyrc                 silent !killall -SIGUSR1  conky
@@ -174,7 +175,7 @@ hi clear cursorline
 hi cursorline gui=underline
 hi cursorline ctermbg=237 guibg=black
 
-if s:myfunc.isos('darwin')
+if s:vimrc.isos('darwin')
   au bufwritepost * call SetUTF8Xattr(expand("<afile>"))
   function! SetUTF8Xattr(file)
     let isutf8 = &fileencoding == "utf-8" || (&fileencoding == "" && &encoding == "utf-8")
@@ -228,10 +229,15 @@ let g:vimfiler_execute_file_list = {
       \ 'mpg' : 'mplayer',
       \ 'mp4' : 'mplayer',
       \ 'jpg' : 'feh',
+      \ 'JPG' : 'feh',
       \ 'png' : 'feh',
       \ 'cbz' : 'comix',
       \ 'cbr' : 'comix',
       \}
+call vimfiler#set_extensions(
+      \ 'archive', 'xz,txz,cbz,cbr,lzh,zip,gz,bz2,cab,rar,7z,tgz,tar'
+      \)
+
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
 " }}}
@@ -302,13 +308,13 @@ if has('vim_starting')
         \ 'sorted': 0,
         \ 'encoding': 'utf-8',
         \}
-  if s:myfunc.isos("darwin")
+  if s:vimrc.isos("darwin")
     let g:eskk#large_dictionary = {
           \ 'path': "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L",
           \ 'sorted': 1,
           \ 'encoding': 'euc-jp',
           \}
-  elseif s:myfunc.isos('freebsd')
+  elseif s:vimrc.isos('freebsd')
     let g:eskk#large_dictionary = {
           \ 'path': "/usr/local/share/skk/SKK-JISYO.L",
           \ 'sorted': 1,
@@ -319,43 +325,40 @@ endif
 
 "---
 " http://kstn.fc2web.com/seikana_zisyo.html
-aug eskk
-  au!
-  au User eskk-initialize-pre call s:eskk_initial_pre()
-  function! s:eskk_initial_pre()
-    " User can be allowed to modify
-    " eskk global variables (`g:eskk#...`)
-    " until `User eskk-initialize-pre` event.
-    " So user can do something heavy process here.
-    " (I'm a paranoia, eskk#table#new() is not so heavy.
-    " But it loads autoload/vice.vim recursively)
-    let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
-    call t.add_map('gwa', 'ぐゎ')
-    call t.add_map('gwe', 'ぐぇ')
-    call t.add_map('gwi', 'ぐぃ')
-    call t.add_map('gwo', 'ぐぉ')
-    call t.add_map('gwu', 'ぐ')
-    call t.add_map('kwa', 'くゎ')
-    call t.add_map('kwe', 'くぇ')
-    call t.add_map('kwi', 'くぃ')
-    call t.add_map('kwo', 'くぉ')
-    call t.add_map('kwu', 'く')
-    call t.add_map('we', 'ゑ')
-    call t.add_map('wha', 'うぁ')
-    call t.add_map('whe', 'うぇ')
-    call t.add_map('whi', 'うぃ')
-    call t.add_map('who', 'うぉ')
-    call t.add_map('whu', 'う')
-    call t.add_map('wi', 'ゐ')
-    call t.add_map(':',':')
-    call t.add_map(';',';')
-    call t.add_map('!','!')
-    call t.add_map('?','?')
-    call t.add_map('{','『')
-    call t.add_map('}','』')
-    call eskk#register_mode_table('hira', t)
-  endfunction
-aug end
+au myautocommands User eskk-initialize-pre call s:eskk_initial_pre()
+function! s:eskk_initial_pre()
+  " User can be allowed to modify
+  " eskk global variables (`g:eskk#...`)
+  " until `User eskk-initialize-pre` event.
+  " So user can do something heavy process here.
+  " (I'm a paranoia, eskk#table#new() is not so heavy.
+  " But it loads autoload/vice.vim recursively)
+  let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
+  call t.add_map('gwa', 'ぐゎ')
+  call t.add_map('gwe', 'ぐぇ')
+  call t.add_map('gwi', 'ぐぃ')
+  call t.add_map('gwo', 'ぐぉ')
+  call t.add_map('gwu', 'ぐ')
+  call t.add_map('kwa', 'くゎ')
+  call t.add_map('kwe', 'くぇ')
+  call t.add_map('kwi', 'くぃ')
+  call t.add_map('kwo', 'くぉ')
+  call t.add_map('kwu', 'く')
+  call t.add_map('we', 'ゑ')
+  call t.add_map('wha', 'うぁ')
+  call t.add_map('whe', 'うぇ')
+  call t.add_map('whi', 'うぃ')
+  call t.add_map('who', 'うぉ')
+  call t.add_map('whu', 'う')
+  call t.add_map('wi', 'ゐ')
+  call t.add_map(':',':')
+  call t.add_map(';',';')
+  call t.add_map('!','!')
+  call t.add_map('?','?')
+  call t.add_map('{','『')
+  call t.add_map('}','』')
+  call eskk#register_mode_table('hira', t)
+endfunction
 "---
 
 let g:eskk#egg_like_newline = 1
@@ -366,8 +369,10 @@ let g:eskk#show_annotation = 1
 "}}}
 
 " vimshell {{{
-let g:vimshell_prompt = '>>> '
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+"
+
+let g:vimshell_user_prompt = '"┌─" . "(" . fnamemodify(getcwd(), ":~") . ")"'
+let g:vimshell_prompt = '└┈╸ '
 let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 
 "if isdirectory(expand('~/.vim/bundle/vimproc/'))
@@ -377,6 +382,7 @@ let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 let g:vimshell_execute_file_list = {}
 let g:vimshell_execute_file_list['pl'] = 'perl'
 let g:vimshell_execute_file_list['scm'] = 'gosh'
+
 
 let g:vimshell_enable_smart_case = 1
 let g:vimshell_enable_auto_slash = 1
