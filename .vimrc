@@ -90,7 +90,6 @@ set splitright
 set splitbelow
 set fileformat=unix
 set fileformats=unix,mac,dos
-set autochdir
 set virtualedit=all
 if executable('ack')
   set grepprg=ack\ -a
