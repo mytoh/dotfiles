@@ -1173,7 +1173,7 @@ fi
 if [[ -n $DISPLAY ]];then
   if [[ -e ~/.fonts ]]; then
     for d in ~/.fonts/*(/); do
-      if [[ -e $d/font.dir ]]; then
+      if [[ -e $d/fonts.dir ]]; then
       xset +fp $d
     fi
       xset fp rehash
