@@ -65,7 +65,7 @@ NeoBundle 'othree/html5.vim'
 " official vim-scripts repo
 NeoBundle 'info.vim'
 NeoBundle 'eregex.vim'
-NeoBundle 'sudo.vim'
+NeoBundle 'SudoEdit.vim'
 NeoBundle 'fluxbox.vim'
 NeoBundle 'matchit.zip'
 "Bundle 'buftabs'
@@ -76,7 +76,7 @@ NeoBundle 'xoria256.vim'
 
 " }}}
 
-  filetype plugin on
-  filetype indent on
+filetype plugin on
+filetype indent on
 
 " vim:set foldmethod=marker:
