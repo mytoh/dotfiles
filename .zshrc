@@ -201,7 +201,7 @@ typeset -Uga preexec_functions
 typeset -Uga precmd_functions
 typeset -Uga chpwd_functions
 
-# paths
+# paths {{{
 path=(
 ~/local/bin(N-/)
 ~/local/*/{sbin,bin}(N-/)
@@ -209,7 +209,7 @@ path=(
 /usr/X11/bin(N-/)
 /usr/games(N-/)
 /usr/local/{sbin,bin}(N-/)
-/usr/local/*/{sbin,bin}(N-/)
+/usr/local/kde4/{sbin,bin}(N-/)
 /usr/{sbin,bin}(N-/)
 /{sbin,bin}(N-/))
 
@@ -241,6 +241,8 @@ infopath=(~/.info(N-/)
 $infopath)
 
 cdpath=(~/local ~/local/var)
+
+# }}}
 
 
 # }}}
