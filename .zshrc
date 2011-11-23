@@ -211,7 +211,8 @@ path=(
 /usr/local/{sbin,bin}(N-/)
 /usr/local/kde4/{sbin,bin}(N-/)
 /usr/{sbin,bin}(N-/)
-/{sbin,bin}(N-/))
+/{sbin,bin}(N-/)
+)
 
 if [ -d /usr/local/lib/cw ]; then
   path=( ~/.cw(N-/) $path )
