@@ -33,26 +33,12 @@ urxvt.urlLauncher: firefox
 urxvt.matcher.button: 1
 urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
-!urxvt.font:Terminus\-ja-12
-!urxvt.boldFont:Terminus\-ja-12
-!urxvt.font: k12
-!urxvt.boldfont: k12
-urxvt.font:  -artwiz-lime-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
-            k10,a10,r10, \
-            -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*
-
-urxvt.boldFont:  -artwiz-lime-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
-            k10,a10,r10, \
-            -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*
-
-!urxvt.boldfont: -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-*-*
-!urxvt.boldFont: 9x15bold,\
-!    -mplus-gothic-medium-r-normal-*-10-*-*-*-*-*-*-*, \
-!    -misc-fixed-bold-r-normal--15-140-75-75-75-c-90-iso10646-1,\
-!    -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1,\
-!    [codeset=JISX0208]xft:Kochi Gothic:antialias=false, \
-!    xft:Code200:antialias=false
-
+urxvt.font: -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
+           k10,a10,r10, \
+           -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*
+urxvt.boldFont: -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
+           k10,a10,r10, \
+           -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*
 
 
 
@@ -134,3 +120,19 @@ XFontsel*MenuButton*MenuButtonStyle: select
 .xfontsel.pane.fieldBox.MenuButton.internalHeight: 1
 .xfontsel.pane.fieldBox.MenuButton.internalWidth: 2
 .xfontsel.pane.fieldBox.MenuButton.shapeStyle: rectangle
+
+! fontforge
+!Gdraw.Foreground: #575757
+!Gdraw.Background: #121212
+!Gdraw.GGadget.Box.BorderBrightest: #404040
+!Gdraw.GGadget.Box.BorderBrighter: #606060
+!Gdraw.GGadget.Box.BorderDarker: #808080
+!Gdraw.GGadget.Box.BorderDarkest: #a0a0a0
+!Gdraw.GGadget.Box.DisableForeground:  #e0e0e0
+!Gdraw.GGadget.Box.DisableBackground:  #808080
+!Gdraw.GGadget.Box.PressedBackground: #707070
+!fontforge.CharView.WidthColor: #ffffff
+!fontforge.CharView.TransformOriginColor: #575757
+!fontforge.CharView.ForegroundOutlineColor: #57577
+
+
