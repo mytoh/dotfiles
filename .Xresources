@@ -16,6 +16,8 @@ urxvt.scrollBar: false
 urxvt.buffered: true
 urxvt.borderLess: false
 urxvt.internalBorder: 0
+urxvt.cursorUnderline: true
+urxvt.cursorColor: #303030
 !urxvt.transparent: false
 !urxvt.inheritPixmap: true
 urxvt.fading: 2%
