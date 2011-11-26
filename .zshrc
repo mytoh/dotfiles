@@ -1,6 +1,5 @@
 
 # Options {{{
-bindkey -v
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
@@ -408,15 +407,17 @@ setup_prompt
 # }}}
 
 # bindkeys {{{
-
+bindkey -v
 # History search keymap {{{
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
+bindkey "^P"   history-beginning-search-backward-end
 bindkey "\\ep" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
+bindkey "^N"   history-beginning-search-forward-end
 bindkey "\\en" history-beginning-search-forward-end
+bindkey "^R"   history-incremental-search-backward
+bindkey "^S"   history-incremental-search-forward
 # }}}
 
 # vi mode keys {{{
