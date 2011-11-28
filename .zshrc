@@ -364,7 +364,7 @@ setup_prompt(){ #{{{
   #PROMPT+=$ip
   PROMPT+=$'\n'
   if [[ X$DISPLAY != "X" ]];then
-    PROMPT+="%F{8}└┈╸%{$reset_color%} "
+    PROMPT+="%F{8}└┈╸%F{100} "
   else
     PROMPT+="%F{8}->%{$reset_color%} "
   fi
@@ -583,16 +583,16 @@ hex() {
     [[ -n "$1" ]] && printf "%x\n" $1 || { print 'Usage: hex <number-to-convert>' ; return 1 }
 }
 
-cd() {
-# smart cd function, allows switching to /etc when running 'cd /etc/fstab'
-    if (( ${#argv} == 1 )) && [[ -f ${1} ]]; then
-        [[ ! -e ${1:h} ]] && return 1
-        print "Correcting ${1} to ${1:h}"
-        builtin cd ${1:h}
-    else
-        builtin cd "$@"
-    fi
-}
+#cd() {
+## smart cd function, allows switching to /etc when running 'cd /etc/fstab'
+    #if (( ${#argv} == 1 )) && [[ -f ${1} ]]; then
+        #[[ ! -e ${1:h} ]] && return 1
+        #print "Correcting ${1} to ${1:h}"
+        #builtin cd ${1:h}
+    #else
+        #builtin cd "$@"
+    #fi
+#}
 
 unpack() { # {{{
 # Usage: unpack <file>
@@ -1112,6 +1112,7 @@ fi
 alias uzbl='uzbl-tabbed'
 alias unar=unpack
 alias vba="VisualBoyAdvance"
+alias mcomix="~/local/git/mcomix/mcomix/mcomixstarter.py"
 alias md='mkdir -p'
 alias xfont="xlsatoms | grep '-'"
 if check_com -c hub; then
