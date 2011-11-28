@@ -59,8 +59,10 @@
                 (lambda (srv)
                   (receive (a b c . rest) (http-get (string-append srv ".2chan.net") (string-append "/" bd "/res/" td ".htm")) (if (not (string=? a "404"))  c #f)))
                 servs))))
-        ((string=? bd "7")
+        ((string=? bd "7") ; ゆり
          (values-ref (http-get "zip.2chan.net" (string-append "/" bd "/res/" td ".htm")) 2))
+        ((string=? bd "40") ; 東方 
+         (values-ref (http-get "may.2chan.net" (string-append "/" bd "/res/" td ".htm")) 2))
         ))
 
 
