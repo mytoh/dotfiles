@@ -76,8 +76,7 @@ set ttymouse=xterm2
 scriptencoding=utf-8
 set termencoding=utf-8
 set enc=utf-8
-set fenc=utf-8
-set fencs=utf-8,iso-2022-jp-3,euc-jp,cp932
+set fencs=ucs-bom,iso-2022-jp-3,euc-jp,cp932
 
 set helplang=ja,en
 set wrapscan
@@ -89,7 +88,6 @@ set shortmess=atIToO
 set backspace=indent,eol,start
 set splitright
 set splitbelow
-set fileformat=unix
 set fileformats=unix,mac,dos
 set virtualedit=all
 if executable('ack')
