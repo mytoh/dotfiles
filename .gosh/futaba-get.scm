@@ -58,8 +58,9 @@
               (map 
                 (lambda (srv)
                   (receive (a b c . rest) (http-get (string-append srv ".2chan.net") (string-append "/" bd "/res/" td ".htm")) (if (not (string=? a "404"))  c #f)))
-                servs)))
-         )
+                servs))))
+        ((string=? bd "7")
+         (values-ref (http-get "zip.2chan.net" (string-append "/" bd "/res/" td ".htm")) 2))
         ))
 
 
