@@ -5,6 +5,7 @@
 (use gauche.process)
 (use gauche.charconv)
 (use file.util)
+(use gauche.collection) ;find
 
 
 (define (usage )
@@ -48,9 +49,17 @@
  )
 )
 
-(define (get-html b t)
-  (cond ((string=? b "l") ; 二次元壁紙
-         (values-ref (http-get  "dat.2chan.net"  (string-append "/" b "/res/" t ".htm" )) 2))
+(define (get-html bd td)
+  (cond ((string=? bd "l") ; 二次元壁紙
+         (values-ref (http-get  "dat.2chan.net"  (string-append "/" bd "/res/" td ".htm" )) 2))
+        ((string=? bd "b") ; 虹裏
+         (find string?
+         (let ((servs '("jun" "dec" "may")))
+              (map 
+                (lambda (srv)
+                  (receive (a b c . rest) (http-get (string-append srv ".2chan.net") (string-append "/" bd "/res/" td ".htm")) (if (not (string=? a "404"))  c #f)))
+                servs)))
+         )
         ))
 
 
@@ -59,7 +68,7 @@
       (usage)
  (let* ((board (cadr args))
         (thread (caddr args))
-        (html (ces-convert (get-html board thread) "*jp" "utf-8"))
+        (html (ces-convert  (get-html board thread) "*jp" "utf-8"))
        )
   (begin
    (mkdir thread)
