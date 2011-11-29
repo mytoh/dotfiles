@@ -50,38 +50,54 @@
 )
 
 (define (get-html bd td)
-  (cond ((string=? bd "l") ; 二次元壁紙
+  (let ((res 
+  (cond ((string=? bd "l") ;二次元壁紙
          (values-ref (http-get  "dat.2chan.net"  (string-append "/" bd "/res/" td ".htm" )) 2))
-        ((string=? bd "b") ; 虹裏
+        ((string=? bd "b") ;虹裏
          (find string?
          (let ((servs '("jun" "dec" "may")))
               (map 
                 (lambda (srv)
                   (receive (a b c . rest) (http-get (string-append srv ".2chan.net") (string-append "/" bd "/res/" td ".htm")) (if (not (string=? a "404"))  c #f)))
                 servs))))
-        ((string=? bd "7") ; ゆり
+        ((string=? bd "7") ;ゆり
          (values-ref (http-get "zip.2chan.net" (string-append "/" bd "/res/" td ".htm")) 2))
-        ((string=? bd "40") ; 東方 
+        ((string=? bd "40") ;東方 
          (values-ref (http-get "may.2chan.net" (string-append "/" bd "/res/" td ".htm")) 2))
-        ))
+        ) ;cond 
+  ))
+       (if (string? res)
+           (ces-convert res "*jp" "utf-8")
+           #f)
+       ) ;let
+  )
 
 (define (futaba-get args )
  (let* ((board (cadr args))
         (thread (caddr args))
-        (html (ces-convert  (get-html board thread) "*jp" "utf-8"))
-       )
-  (begin
-   (mkdir thread)
-   (cd thread)
-   (get-img html board)
-   (cd ".."))
-  )
-)
+        (html (get-html board thread))
+        )
+       (if (string? html)
+           (begin
+             (print thread)
+             (mkdir thread)
+             (cd thread)
+             (get-img html board)
+             (cd ".."))
+           (print (string-append thread "'s gone"))
+           )
+       ) ;let*
+ )
+ 
+
+;(define (futaba-get-all args )
+;)
 
 
 (define (main args)
   (if (null? (cdr args))
       (usage)
+
       (futaba-get args)
  )
 )
