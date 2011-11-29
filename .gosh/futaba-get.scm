@@ -52,7 +52,9 @@
 (define (get-html bd td)
   (let ((res 
   (cond ((string=? bd "l") ;二次元壁紙
-         (values-ref (http-get  "dat.2chan.net"  (string-append "/" bd "/res/" td ".htm" )) 2))
+          (values-ref (http-get  "dat.2chan.net"  (string-append "/" bd "/res/" td ".htm" )) 2))
+         ((string=? bd "k") ;壁紙                                                          
+          (values-ref (http-get  "cgi.2chan.net"  (string-append "/" bd "/res/" td ".htm" )) 2)) 
         ((string=? bd "b") ;虹裏
          (find string?
          (let ((servs '("jun" "dec" "may")))
