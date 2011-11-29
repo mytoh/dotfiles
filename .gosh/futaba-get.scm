@@ -82,12 +82,17 @@
         )
        (if (string? html)
            (begin
+             (display "[1;34m")
              (print thread)
+             (display "[0m")
              (mkdir thread)
              (cd thread)
              (get-img html board)
              (cd ".."))
-           (print (string-append thread "'s gone"))
+           (begin
+             (display "[1;30m") ;dark grey
+             (print (string-append thread "'s gone"))
+             (display "[0m"))
            )
        ) ;let*
  )
