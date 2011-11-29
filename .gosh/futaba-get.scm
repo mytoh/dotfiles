@@ -6,6 +6,7 @@
 (use gauche.charconv)
 (use file.util)
 (use gauche.collection) ;find
+(use gauche.parseopt)
 
 
 (define (usage )
@@ -75,8 +76,8 @@
   )
 
 (define (futaba-get args )
- (let* ((board (cadr args))
-        (thread (caddr args))
+ (let* ((board (car args))
+        (thread (cadr args))
         (html (get-html board thread))
         )
        (if (string? html)
@@ -92,14 +93,33 @@
  )
  
 
-;(define (futaba-get-all args )
-;)
+(define (futaba-get-all args )
+  (let ((board (car args))
+        (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0))
+        )
+       (if (not (null? dirs))
+           (for-each 
+             (lambda (d)
+               (futaba-get (list board d))
+               )
+             dirs)
+           (print "no directories")
+           )
+       ) ;let
+  )
 
 
 (define (main args)
-  (if (null? (cdr args))
-      (usage)
-
-      (futaba-get args)
- )
+  (let-args (cdr args)
+     ((all "a|all")
+      (else (opt . _) (print "Unknown option: " opt) (usage))
+      . restargs)
+     (cond ((null? restargs)
+           (usage))
+           (all
+            (futaba-get-all restargs))
+            (else
+              (futaba-get restargs))
+            )
+ ) ;let-args
 )
