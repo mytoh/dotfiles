@@ -21,7 +21,7 @@
 
 (define (fetch match)
   (if (string? match)
-    (run-process `(wget -nc ,match) :wait #t)) 
+    (run-process `(wget -nc -nv ,match) :wait #t)) 
   )
 
 (define (get-img str board)
@@ -65,10 +65,7 @@
          (values-ref (http-get "may.2chan.net" (string-append "/" bd "/res/" td ".htm")) 2))
         ))
 
-
-(define (main args)
-  (if (null? (cdr args))
-      (usage)
+(define (futaba-get args )
  (let* ((board (cadr args))
         (thread (caddr args))
         (html (ces-convert  (get-html board thread) "*jp" "utf-8"))
@@ -77,7 +74,14 @@
    (mkdir thread)
    (cd thread)
    (get-img html board)
-   (cd "..")
-  ))
+   (cd ".."))
+  )
+)
+
+
+(define (main args)
+  (if (null? (cdr args))
+      (usage)
+      (futaba-get args)
  )
 )
