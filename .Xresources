@@ -36,10 +36,12 @@ urxvt.matcher.button: 1
 urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
 
 urxvt.font: -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
-           k10,a10,r10, \
+           -misc-fixed-medium-r-normal--10-90-75-75-c-50-*, \
+           -misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0, \
            -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*
 urxvt.boldFont: -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
-           k10,a10,r10, \
+           -misc-fixed-medium-r-normal--10-90-75-75-c-50-*, \
+           -misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0, \
            -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*
 
 
