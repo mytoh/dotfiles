@@ -22,7 +22,7 @@
 
 (define (fetch match)
   (if (string? match)
-    (run-process `(wget -nc -nv ,match) :wait #t)) 
+            (run-process `(wget -nc -nv ,match) :wait #t)) 
   )
 
 (define (get-img str board)
@@ -31,9 +31,9 @@
    (port-for-each
     (lambda (line)
      (let ((match (parse-img line board)))
-      (fetch match)
+            (fetch match)
+          )
      )
-    )
     (cut read-line in #t)
    )))
  )
@@ -82,7 +82,7 @@
         )
        (if (string? html)
            (begin
-             (display "[1;34m")
+             (display "[0;34m")
              (print thread)
              (display "[0m")
              (mkdir thread)
@@ -90,7 +90,7 @@
              (get-img html board)
              (cd ".."))
            (begin
-             (display "[1;30m") ;dark grey
+             (display "[0;30m") ;dark grey
              (print (string-append thread "'s gone"))
              (display "[0m"))
            )
