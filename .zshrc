@@ -1115,6 +1115,9 @@ alias vba="VisualBoyAdvance"
 alias mcomix="~/local/git/mcomix/mcomix/mcomixstarter.py"
 alias md='mkdir -p'
 alias xfont="xlsatoms | grep '-'"
+if check_com -c ls++; then
+  alias ls='ls++'
+fi
 if check_com -c hub; then
   eval $(hub alias -s zsh)
 fi
