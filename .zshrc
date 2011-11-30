@@ -219,7 +219,7 @@ fi
 ## zsh functions directory
 fpath=(~/.zsh/functions/completion ${fpath})
 
-if [[ "$OSTYPE" != freebsd* ]]; then
+if [[ "$OSTYPE" != freebsd* && $OSTYPE != linux* ]]; then
   typeset -U manpath
   MANPATH="`manpath`"
   manpath=(
@@ -1231,6 +1231,12 @@ case ${OSTYPE} in
     }
     export JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
     ;;
+
+  linux*)
+    export LANG=en_US.UTF-8
+    export LC_ALL=en_US.UTF-8
+   alias pacman='sudo clyde'
+   ;;
 
   freebsd*)
     #http_proxy="http://192.168.1.3:3128"
