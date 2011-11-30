@@ -1239,6 +1239,7 @@ case ${OSTYPE} in
     export LANG=en_US.UTF-8
     export LC_ALL=en_US.UTF-8
    alias pacman='sudo clyde'
+    alias halt='sudo shutdown -P -h now'
    ;;
 
   freebsd*)
