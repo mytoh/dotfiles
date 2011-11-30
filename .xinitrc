@@ -73,7 +73,8 @@ case $1 in
   openbox) exec openbox ;;
   wmaker)   exec wmaker ;;
   oroborus)   exec oroborus ;;
-w9wm)         exec w9wm ;;
+  mate) exec ck-launch-session mate-session ;;
+  w9wm)         exec w9wm ;;
   *) exec $DEFAULT_SESSION ;;
 esac
 
