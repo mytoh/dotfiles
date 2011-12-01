@@ -62,6 +62,7 @@ NeoBundle 'trapd00r/vim-extendedcolors'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'gregsexton/MatchTag'
+NeoBundle 'djjcast/mirodark'
 
 " official vim-scripts repo
 NeoBundle 'info.vim'
