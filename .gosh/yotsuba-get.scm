@@ -8,6 +8,7 @@
 (use gauche.collection) ;find
 (use gauche.parseopt)
 
+
 (define (usage )
   (format (current-error-port)
           "Usage: ~a board thread \n" "get")
@@ -15,14 +16,27 @@
 
 (define (parse-img line)
  (rxmatch->string #/http\:\/\/images\.4chan\.org\/[^"]+/ line) 
- )
+ ) ;; "
 
-;; "
+(define (parse-url url)
+  (rxmatch-let (rxmatch #/^http:\/\/([-A-Za-z\d.]+)(:(\d+))?(\/.*)?/ url)
+      (#f host #f port path)
+      (values host port path)))
+
+(define (swget url)
+  (receive (host port path) (parse-url url)
+      (let ((file (receive (a fname ext) (decompose-path path) (string-append fname "." ext))))
+           (if (not (file-is-readable? file))
+               (http-get host path
+                         :sink (open-output-file file) :flusher (lambda (s h) (print file) #t))
+               )
+           ) ;let
+  )) ;define
 
 (define (fetch match)
   (if (string? match)
-    (run-process `(wget -nc -nv ,match) :wait #t)) 
-  )
+      (swget match)
+  ))
 
 (define (get-img str board)
  (call-with-input-string str
@@ -30,9 +44,9 @@
    (port-for-each
     (lambda (line)
      (let ((match (parse-img line)))
-      (fetch match)
+            (fetch match)
+          )
      )
-    )
     (cut read-line in #t)
    )))
  )
@@ -64,18 +78,21 @@
         )
        (if (string? html)
            (begin
+             (display "[0;34m")
              (print thread)
+             (display "[0m")
              (mkdir thread)
              (cd thread)
              (get-img html board)
              (cd ".."))
            (begin
-             (display "[1;30m") ;dark grey
+             (display "[0;30m") ;dark grey
              (print (string-append thread "'s gone"))
              (display "[0m"))
            )
        ) ;let*
  )
+ 
 
 (define (yotsuba-get-all args )
   (let ((board (car args))
@@ -107,4 +124,3 @@
             )
  ) ;let-args
 )
-
