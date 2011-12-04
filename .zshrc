@@ -1115,9 +1115,6 @@ alias vba="VisualBoyAdvance"
 alias mcomix="~/local/git/mcomix/mcomix/mcomixstarter.py"
 alias md='mkdir -p'
 alias xfont="xlsatoms | grep '-'"
-if check_com -c ls++; then
-  alias ls='ls++'
-fi
 if check_com -c hub; then
   eval $(hub alias -s zsh)
 fi
@@ -1238,6 +1235,9 @@ case ${OSTYPE} in
   linux*)
     export LANG=en_US.UTF-8
     export LC_ALL=en_US.UTF-8
+    if check_com -c ls++; then
+      alias ls='ls++'
+    fi
    alias pacman='sudo clyde'
     alias halt='sudo shutdown -P -h now'
    ;;
