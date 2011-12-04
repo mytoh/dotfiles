@@ -840,26 +840,6 @@ cfg() {
 
 trl() { aria2c -S "$@" |grep "./" }
 
-4chget() {
-  emulate -RL zsh
-  if [ ! -e $2 ];then
-    mkdir -p $2
-  fi
-  if [ -d $2 ]; then
-  builtin cd $2
-  wget -O - http://boards.4chan.org/$1/res/$2 |
-  grep -Eo 'http://images.4chan.org/[^"]+' |
-  uniq |
-  xargs wget -nc
-  cd ..
-fi
-}
-4chgetall() {
-  emulate -RL zsh
-  for d in $(\ls); do
-    4chget $1 $d
-  done
-}
 
 4ch() {
   w3m http://boards.4chan.org/$1/
@@ -1215,7 +1195,6 @@ case ${OSTYPE} in
     alias ls="ls  -F"
     ;;
   darwin*)
-    HOMEBREW_VERBOSE=true
     alias la="ls -G -a"
     alias ll="ls -G -hlA "
     alias ls="ls -G -F"
@@ -1229,7 +1208,9 @@ case ${OSTYPE} in
       squid -f ~/.squid/etc/squid.conf -z
       squid -f ~/.squid/etc/squid.conf
     }
+    export HOMEBREW_VERBOSE
     export JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
+     xsource `brew --prefix`/etc/autojump
     ;;
 
   linux*)
