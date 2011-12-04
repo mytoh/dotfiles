@@ -16,14 +16,27 @@
 
 (define (parse-img line board)
   (rxmatch->string (string->regexp (string-append "http\:\/\/(\\w+)\\.2chan\\.net\/(\\w+)\/" board "\/src\/[^\"]+")) line) 
- )
+ ) ;; "
 
-;; "
+(define (parse-url url)
+  (rxmatch-let (rxmatch #/^http:\/\/([-A-Za-z\d.]+)(:(\d+))?(\/.*)?/ url)
+      (#f host #f port path)
+      (values host port path)))
+
+(define (swget url)
+  (receive (host port path) (parse-url url)
+      (let ((file (receive (a fname ext) (decompose-path path) (string-append fname "." ext))))
+           (if (not (file-is-readable? file))
+               (http-get host path
+                         :sink (open-output-file file) :flusher (lambda (s h) (print file) #t))
+               )
+           ) ;let
+  )) ;define
 
 (define (fetch match)
   (if (string? match)
-            (run-process `(wget -nc -nv ,match) :wait #t)) 
-  )
+      (swget match)
+  ))
 
 (define (get-img str board)
  (call-with-input-string str
