@@ -15,7 +15,7 @@
   (exit 2))
 
 (define (parse-img line)
- (rxmatch->string #/http\:\/\/images\.4chan\.org\/[^"]+/ line) 
+ (rxmatch->string #/http\:\/\/images\.4chan\.org\/[^"]+/ line )
  ) ;; "
 
 (define (parse-url url)
