@@ -7,6 +7,7 @@
 (use file.util)
 (use gauche.collection) ;find
 (use gauche.parseopt)
+(use srfi-11)
 
 
 (define (usage )
@@ -64,12 +65,13 @@
 )
 
 (define (get-html bd td)
-  (let ((res (values-ref (http-get  "boards.4chan.org"  (string-append "/" bd "/res/" td)) 2)))
-       (if (string? res)
-           (ces-convert res "*jp" "utf-8")
-           #f)
-       ) ;let
-  )
+  (let-values (((status headers body ) (http-get  "boards.4chan.org"  (string-append "/" bd "/res/" td)) ))
+       (if  (string=? status "404")
+            #f
+           (ces-convert body "*jp" "utf-8")
+       ) 
+  ) ;let-values
+) ;define
 
 (define (yotsuba-get args )
  (let* ((board (car args))
