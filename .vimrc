@@ -13,7 +13,7 @@ language time C
 
 set nobackup
 set history=10000
-set clipboard=unnamed,autoselect
+set clipboard=autoselect
 set scrolloff=1
 set title
 set ruler
