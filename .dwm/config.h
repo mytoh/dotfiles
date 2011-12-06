@@ -21,7 +21,7 @@ static const double shade           = 0.8;      /* Opacity of inactive windows *
 static const double baropacity      = 0.95;     /* Opacity for status bar */
 
 /* tagging */
-static const char *tags[] = {"null", "term", "net", "media"};
+static const char *tags[] = {"tyhjä", "pääte", "net", "media"};
 
 static const Rule rules[] = {
   /* class        instance    title       tags mask     isfloating   monitor     opacity */
