@@ -76,7 +76,6 @@ set ttymouse=xterm2
 scriptencoding=utf-8
 set termencoding=utf-8
 set enc=utf-8
-set fencs=ucs-bom,iso-2022-jp-3,euc-jp,cp932
 
 set helplang=ja,en
 set wrapscan
