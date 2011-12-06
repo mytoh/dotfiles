@@ -7,6 +7,7 @@
 (use file.util)
 (use gauche.collection) ;find
 (use gauche.parseopt)
+(use srfi-11)
 
 
 (define (usage )
@@ -64,28 +65,38 @@
 )
 
 (define (get-html bd td)
-  (let ((res 
+  (let-values (((status headers body) 
   (cond ((string=? bd "l") ;二次元壁紙
-          (values-ref (http-get  "dat.2chan.net"  (string-append "/" bd "/res/" td ".htm" )) 2))
-         ((string=? bd "k") ;壁紙                                                          
-          (values-ref (http-get  "cgi.2chan.net"  (string-append "/" bd "/res/" td ".htm" )) 2)) 
+           (http-get  "dat.2chan.net"  (string-append "/" bd "/res/" td ".htm" ))
+           )
+         ((string=? bd "k") ;壁紙
+          (http-get  "cgi.2chan.net"  (string-append "/" bd "/res/" td ".htm" ))
+          )
         ((string=? bd "b") ;虹裏
-         (find string?
-         (let ((servs '("jun" "dec" "may")))
-              (map 
-                (lambda (srv)
-                  (receive (a b c . rest) (http-get (string-append srv ".2chan.net") (string-append "/" bd "/res/" td ".htm")) (if (not (string=? a "404"))  c #f)))
-                servs))))
+         (let ( (servs '("jun" "dec" "may"))
+                (get-res (lambda (srv)
+                           (receive (a b c) (http-get (string-append  srv ".2chan.net") (string-append "/" bd "/res/" td ".htm")) (if (not (string=? a "404")) srv #f))))
+                (get-values (lambda (srv)
+                              (receive (a b c) (http-get (string-append  srv ".2chan.net") (string-append "/" bd "/res/" td ".htm")) (if (not (string=? a "404")) (values a b c)))))
+                )
+               (or (and-let* ((s (get-res "jun")))
+                         (get-values "jun"))
+                   (and-let* ((s (get-res "dec")))
+                             (get-values "dec"))
+                   (and-let* ((s (get-res "may")))
+                             (get-values "may"))
+                   (values "404" #f #f)
+                   )))
         ((string=? bd "7") ;ゆり
-         (values-ref (http-get "zip.2chan.net" (string-append "/" bd "/res/" td ".htm")) 2))
+          (http-get "zip.2chan.net" (string-append "/" bd "/res/" td ".htm")))
         ((string=? bd "40") ;東方 
-         (values-ref (http-get "may.2chan.net" (string-append "/" bd "/res/" td ".htm")) 2))
+         (http-get "may.2chan.net" (string-append "/" bd "/res/" td ".htm")))
         ) ;cond 
   ))
-       (if (string? res)
-           (ces-convert res "*jp" "utf-8")
+       (if (not (string=? status "404") )
+           (ces-convert body "*jp" "utf-8")
            #f)
-       ) ;let
+       ) ;let-values
   )
 
 (define (futaba-get args )
