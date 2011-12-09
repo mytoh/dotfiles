@@ -93,13 +93,13 @@
          (http-get "may.2chan.net" (string-append "/" bd "/res/" td ".htm")))
         ) ;cond 
   ))
-       (if (not (string=? status "404") )
-           (let ((html (ces-convert body "*jp" "utf-8")))
-           (if (string-incomplete? html)
-           (string-incomplete->complete html)
-                html))
-           #f)
-       ) ;let-values
+  (if (not (string=? status "404"))
+   (let ((html (ces-convert body "*jp" "utf-8")))
+    (if (string-incomplete? html)
+    (string-incomplete->complete html)
+    html))
+#f)
+   ) ;let-values
   )
 
 (define (futaba-get args )
