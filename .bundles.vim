@@ -20,7 +20,7 @@ NeoBundle 'Shougo/neobundle.vim'
 
 " my bundles here {{{
 "
-" github repo
+" github repo {{{
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
@@ -36,6 +36,7 @@ NeoBundle 'mattn/unite-remotefile'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/wwwrenderer-vim'
 NeoBundle 'mattn/learn-vimscript'
+NeoBundle 'mattn/gist-vim'
 NeoBundle 'rson/vim-bufstat'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'thinca/vim-quickrun'
@@ -63,8 +64,9 @@ NeoBundle 'groenewege/vim-less'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'gregsexton/MatchTag'
 NeoBundle 'djjcast/mirodark'
+" }}}
 
-" official vim-scripts repo
+" official vim-scripts repo {{{
 NeoBundle 'info.vim'
 NeoBundle 'eregex.vim'
 NeoBundle 'SudoEdit.vim'
@@ -74,6 +76,7 @@ NeoBundle 'matchit.zip'
 " colorschemes
 NeoBundle 'jellybeans.vim'
 NeoBundle 'xoria256.vim'
+" }}}
 " other git repo
 
 " }}}

@@ -429,6 +429,21 @@ cnoremap <expr> <CR>    ambicmd#expand("\<CR>")
 let g:mpd_host = "192.168.1.3"
 let g:mpd_port = "6600"
 " }}}
+
+" gist.vim {{{
+if s:vimrc.isos('darwin')
+    let g:gist_clip_command = 'pbcopy'
+  elseif s:vimrc.isos('freebsd')
+    let g:gist_clip_command = 'xclip -selection clipboard'
+endif
+
+let g:gist_detect_filetype = 1
+
+" show private gists with ':Gist -l'
+let g:gist_show_privates = 1
+
+
+"}}}
 " }}}
 
 set secure
