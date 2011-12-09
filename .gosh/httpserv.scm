@@ -1,5 +1,6 @@
 
 (use gauche.net)
+(use file.util)
 
 (define sock #f)
 
@@ -16,5 +17,5 @@
 
 (define (main arg)
   (let ((server (server-start))
-        (file (port->string (open-input-file "/Users/kazuki/.site/index.html"))))
+        (file (port->string (open-input-file (string-append (home-directory) "/.site/index.html")))))
        (server-accept server file)))
