@@ -3,7 +3,9 @@
 (use rfc.http)
 (use gauche.charconv)
 (use gauche.collection)
+(use gauche.parseopt)
 (use file.util)
+
 
 (define (cd dir)
  (if (file-is-directory? dir)
@@ -75,9 +77,36 @@
   (cd "..")
   )
 
+(define (ningen-ng-all)
+  (let ((dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
+       (if (not (null? dirs))
+           (for-each
+             (lambda (d)
+               (ningen-ng d))
+             dirs)
+           (print "no directries"))
+       ) ;let
+  )
+
+
+(define (usage )
+  (format (current-error-port)
+          "Usage: ~a thread \n ex) ~a 8820\n -a|all : get images under current directries" *program-name* "script" )
+  (exit 2))
 
 (define (main args)
-  (let ((thread (cadr args)))
-       (ningen-ng thread)
-  )
+  (let-args (cdr args)
+    ((all "a|all")
+     (else (opt . _) (print "Unknown option: " opt) (usage))
+     . restargs)
+    (cond (all
+            (ningen-ng-all))
+          (else
+            (if (null? restargs)
+                (usage)
+             (ningen-ng (car restargs))
+            )
+            )
+          )
+    ) ;let-args
   )
