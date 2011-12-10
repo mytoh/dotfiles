@@ -36,6 +36,7 @@ NeoBundle 'mattn/unite-remotefile'
 NeoBundle 'mattn/webapi-vim'
 NeoBundle 'mattn/wwwrenderer-vim'
 NeoBundle 'mattn/learn-vimscript'
+NeoBundle 'mattn/hahhah-vim'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'rson/vim-bufstat'
 NeoBundle 'scrooloose/nerdcommenter'
@@ -64,6 +65,7 @@ NeoBundle 'groenewege/vim-less'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'gregsexton/MatchTag'
 NeoBundle 'djjcast/mirodark'
+NeoBundle 'houtsnip/vim-emacscommandline'
 " }}}
 
 " official vim-scripts repo {{{
