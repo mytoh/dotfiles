@@ -284,7 +284,9 @@ zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]=** r:|=*' '+l:|=*' '+m:{A-Z}={a-z}'
 zstyle ':completion:*' format 'Completing %F{blue}%d%F{white}'
 zstyle ':completion:*' group-name ''
-zstyle ':completion:*' use-cache true
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh.d/cache
+zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*:functions' ignore-patterns '_*'
 # complete $cdpath directories when no candidates in local directory
 zstyle ':completion:*:cd:*' tag-order local-directories path-directories
@@ -1063,6 +1065,32 @@ cat << EOF
 EOF
 } #}}}
 
+s() {
+  case $1 in
+    g|gauche|gosh)
+      print "gauche"
+      rlwrap -pBlue -b '(){}[],#;| ' gosh
+      ;;
+    sc|scsh)
+      print "scsh"
+      rlwrap -pBlue -b '(){}[],#;| ' scsh
+      ;;
+    s4|scheme48)
+      print "scheme48"
+      rlwrap -pBlue -b '(){}[],#;| ' scheme48
+      ;;
+    e|elk)
+      print "elk"
+      rlwrap -pBlue -b '(){}[],#;| ' elk
+      ;;
+    *)
+      print "  g  gauche"
+      print "  sc scsh"
+      print "  s4 scheme48"
+      print "  e elk"
+      ;;
+  esac
+}
 #}}}
 
 #}}}
@@ -1074,8 +1102,6 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias cup="cpan-outdated && cpan-outdated | xargs cpanm -v"
 #alias view="vim -X -R -"
-alias scsh="rlwrap scsh"
-alias goshrl="rlwrap -pBlue -b '(){}[],#;| ' gosh"
 alias single="sudo shutdown now"
 alias halt="sync;sync;sync;sudo shutdown -p now"
 alias reboot="sync;sync;sync;sudo shutdown -r now"
