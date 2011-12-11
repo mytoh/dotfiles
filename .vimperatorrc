@@ -10,6 +10,7 @@ set hintchars=aoeuidhtns
 set complete=lsb
 set defsearch="google"
 set editor="vim"
+set gui=notabs
 set toolbars=noaddons,nobookmarks,menu,nonavigation,tabs
 
 " plugin_loader
@@ -26,8 +27,8 @@ lazy fmaps -u='www\.google\.(co\.jp|com)/reader' -events=vkeypress j k n p m s v
 " Google Reader Full Feed
 lazy fmaps -u='www\.google\.(co\.jp|com)/reader' -events=vkeyup z
 
-"statusline-toolbar
-set statuslinetoolbars=feed-button
+" statusline-toolbar
+"set statustoolbars=bookmarks-menu-button-container
 
 " delicious_search.js
 autocmd VimperatorEnter ".*" :set complete+=D
@@ -60,6 +61,87 @@ options.setPref("extensions.checkCompatibility.7.0",false);
 options.setPref("extensions.checkCompatibility.8.0",false);
 options.setPref("browser.fullscreen.autohide", false);
 options.setPref("browser.fullscreen.animateUp", 0);
+options.setPref("network.http.spdy.enabled", true);
 
 EOM
+
+style -name tab chrome://* <<EOM
+/*active tab*/
+.tabbrowser-tabs tab[selected="true"] {
+  -moz-appearance: none !important;
+  color: #121212
+  background-image: none !important;
+  background-color: #dedede !important;
+  [>border: 1px solid #000000 !important;<]
+}
+
+.tabbrowser-tabs tab:not([selected="true"]) {
+  -moz-appearance: none !important;
+  color: #dedede !important;
+  background-image: none !important;
+  background-color: #121212 !important;
+  [>border: 1px solid #000000 !important;<]
+}
+
+.tabbrowser-tabs tab {
+  -moz-appearance: none !important;
+  background-color: #121212 !important;
+}
+
+.tab-stack {
+  background-color: #121212 !important;
+}
+
+.scrollbox-innerbox {
+  background-color: #121212 !important;
+}
+EOM
+
+style -name statusbar chrome://* <<EOM
+#status-bar statusbarpanel {
+  -moz-appearance: none !important;
+  background-color: #212121 !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+EOM
+
+style -name toolbar chrome://* <<EOM
+#aios-toolbar {
+  -moz-appearance: none !important;
+  background-color: #121212 !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+EOM
+
+style -name toolbarbutton chrome://* <<EOM
+
+.toolbarbutton-1 {
+  -moz-appearance: none !important;
+  background-color: transparent !important;
+}
+
+.toolbarbutton-menubutton-button {
+  -moz-appearance: none !important;
+  background-color: transparent !important;
+}
+
+.toolbarbutton-menubutton-dropmarker {
+  -moz-appearance: none !important;
+  background-color: transparent !important;
+}
+
+
+EOM
+
+style -name pano chrome://* <<EOM
+#panoTabGroupTree {
+background-color: #212121 !important;
+}
+EOM
+
+
 
