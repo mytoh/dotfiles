@@ -65,11 +65,16 @@
 )
 
 (define (get-html bd td)
-  (let-values (((status headers body ) (http-get  "boards.4chan.org"  (string-append "/" bd "/res/" td)) ))
-       (if  (string=? status "404")
-            #f
-           (ces-convert body "*jp" "utf-8")
-       ) 
+ (let-values (((status headers body ) (http-get  "boards.4chan.org"  (string-append "/" bd "/res/" td)) ))
+  (if  (string=? status "404")
+    #f
+   (if (string-incomplete? body)
+   (let ((html (string-incomplete->complete body)))
+   (if html
+   html
+   (ces-convert body "*jp" "utf-8")))
+       (ces-convert body "*jp" "utf-8"))
+  )
   ) ;let-values
 ) ;define
 
