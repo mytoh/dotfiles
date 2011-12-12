@@ -145,7 +145,6 @@ aug myautocommands
   au bufread,bufnewfile *.changelog              set filetype=changelog
   au bufread,bufnewfile *.twmrc                  set filetype=conf
   au bufread,bufnewfile .vimshrc,.vim-bundles    set filetype=vim
-  au bufread,bufnewfile .vimperatorrc            set filetype=vim
   au bufread,bufnewfile ~/.xcolours/*            set filetype=xdefaults
   au bufread,bufnewfile ~/.xcolours/*            ColorHighlight
   au filetype           xdefaults                call s:vimrc.xrdb()
@@ -391,7 +390,7 @@ aug vimshell
   function! g:my_chpwd(args, context)
     call vimshell#execute('ls')
   endfunction
-  "call vimshell#execute('source ~/.zshrc')
+  call unite#custom_default_action("vimshell/history", "insert")
 aug end
 
 nmap <leader>ss <plug>(vimshell_switch)
