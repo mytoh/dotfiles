@@ -210,14 +210,13 @@ path=(
 /usr/local/{sbin,bin}(N-/)
 /usr/local/kde4/{sbin,bin}(N-/)
 /usr/{sbin,bin}(N-/)
-/{sbin,bin}(N-/)
-)
+/{sbin,bin}(N-/))
 
 if [ -d /usr/local/lib/cw ]; then
   path=( ~/.cw(N-/) $path )
 fi
 ## zsh functions directory
-fpath=(~/.zsh/functions/completion ${fpath})
+fpath=(~/.zsh.d/functions/completion ${fpath})
 
 if [[ "$OSTYPE" != freebsd* && $OSTYPE != linux* ]]; then
   typeset -U manpath
@@ -241,9 +240,7 @@ infopath=(~/.info(N-/)
 $infopath)
 
 cdpath=(~/local ~/local/var)
-
 # }}}
-
 
 # }}}
 
@@ -1233,6 +1230,7 @@ case ${OSTYPE} in
     export HOMEBREW_VERBOSE
     export JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
      xsource `brew --prefix`/etc/autojump
+     xsource `brew --prefix`/etc/bash_completion.d/git-completion.bash
     ;;
 
   linux*)
