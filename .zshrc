@@ -132,7 +132,6 @@ REPORTTIME=3
 
 export GAUCHE_LOAD_PATH="$home/.gosh"
 export FTP_PASSIVE_MODE=true
-export MYGITDIR=~/local/git
 export G_FILENAME_ENCODING=@locale
 export RLWRAP_HOME=~/.rlwrap
 export LISTMAX=0
@@ -200,7 +199,7 @@ typeset -Uga preexec_functions
 typeset -Uga precmd_functions
 typeset -Uga chpwd_functions
 
-# paths {{{
+# paths
 path=(
 ~/local/bin(N-/)
 ~/local/*/{sbin,bin}(N-/)
@@ -208,7 +207,7 @@ path=(
 /usr/X11/bin(N-/)
 /usr/games(N-/)
 /usr/local/{sbin,bin}(N-/)
-/usr/local/kde4/{sbin,bin}(N-/)
+/usr/local/*/{sbin,bin}(N-/)
 /usr/{sbin,bin}(N-/)
 /{sbin,bin}(N-/))
 
@@ -242,13 +241,12 @@ $infopath)
 cdpath=(~/local ~/local/var)
 # }}}
 
-# }}}
-
 # named directories {{{
 # $ cd ~dir
 hash -d quatre=~/local/mnt/quatre
 hash -d desk=~/local/mnt/deskstar
 hash -d mypass=~/local/mnt/mypassport
+hash -d git=~/local/git
 hash -d ports=/usr/ports
 # }}}
 
@@ -1047,7 +1045,7 @@ cat << EOF
         /   ,------,  ()                |___|
        <,  /      //  ,-,------/'~~~~~~~
          )/      //  /(/     \(
-        //      //   | \\\\  /
+        //      //   | \\\\    /
        //()    //.-=----'==-'
       //  :po ///
      //      ///
@@ -1084,6 +1082,11 @@ s() {
       ;;
   esac
 }
+
+spc2ubar() {
+  emulate -L zsh
+   \zmv -v '* *' '$f:gs/ /_'
+}
 #}}}
 
 #}}}
@@ -1091,8 +1094,6 @@ s() {
 # Aliases {{{
 alias chalice='vim -c Chalice'
 alias pd=popd
-alias ...='cd ../..'
-alias ....='cd ../../..'
 alias cup="cpan-outdated && cpan-outdated | xargs cpanm -v"
 #alias view="vim -X -R -"
 alias single="sudo shutdown now"
@@ -1104,7 +1105,6 @@ alias zmv='noglob zmv -v -W'
 alias mv='mv -iv'
 alias cp='cp -iv'
 alias rr='command rm -rfv'
-alias dwm-recompile='(\cd /usr/ports/x11-wm/dwm && sudo make deinstall && sudo make install clean)'
 if check_com -c cdf ; then
 alias df='cdf -h'
 fi
@@ -1152,6 +1152,15 @@ alias -s {zip,rar,tgb,tgz,tar,xz,gz,bz2}=unpack
 alias -s {gif,jpg,jpeg,png}=xli
 alias -s {m3u,mp3,flac}=audacious
 alias -s {mp4,flv,mkv,mpg,mpeg,avi,mov}=mplayer
+
+# global aliases
+alias -g ND='*(/om[1])'
+alias -g NF='*(.om[1])'
+# cd upper directory or mv file .../.
+alias '..'='cd ..'
+alias -g '...'='../..'
+alias -g '....'='../../..'
+alias -g '....'='../../../..'
 # }}}
 
 # misc {{{
