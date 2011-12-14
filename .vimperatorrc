@@ -8,7 +8,10 @@ colorscheme sweets
 
 set hintchars=aoeuidhtns
 set complete=lsb
-set defsearch="google"
+"- ddg with google suggestions 
+"  http://ddgg.nfriendly.com/#oneclick
+"- edit about:config/keyword.url for parameterize url
+set defsearch="duck"
 set editor="vim"
 set gui=notabs
 set toolbars=noaddons,nobookmarks,menu,nonavigation,tabs
@@ -67,29 +70,26 @@ EOM
 
 style -name tab chrome://* <<EOM
 /*active tab*/
-.tabbrowser-tabs tab[selected="true"] {
+.tabbrowser-tab tab[selected="true"] {
   -moz-appearance: none !important;
-  color: #121212
+  color: #dedede
   background-image: none !important;
-  background-color: #dedede !important;
+  background-color: #333333 !important;
   [>border: 1px solid #000000 !important;<]
 }
 
-.tabbrowser-tabs tab:not([selected="true"]) {
+/*inactive tabs*/
+.tabbrowser-tab tab:not([selected="true"]) {
   -moz-appearance: none !important;
-  color: #dedede !important;
+  color: #aaaaaa !important;
   background-image: none !important;
   background-color: #121212 !important;
   [>border: 1px solid #000000 !important;<]
 }
 
-.tabbrowser-tabs tab {
-  -moz-appearance: none !important;
-  background-color: #121212 !important;
-}
 
-.tab-stack {
-  background-color: #121212 !important;
+.tab-background {
+  background-color: #000000 !important;
 }
 
 .scrollbox-innerbox {
