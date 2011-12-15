@@ -11,7 +11,7 @@
 DefaultIcon		= "def16.ani"	; default titlebar/taskbar-button icon
 DefaultLargeIcon	= "def32.ani"	; default task switcher icon
 DefaultShortcutIcon	= "icon32.ani"	; default shortcut icon
-DefaultFont		= "-mplus-fxd-medium-r-normal-*-12-*-*-*-*-*-*-*"
+DefaultFont		= "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
 
 ; desktop
 WallPaper		= ~/local/var/pic/wallpaper.jpg	; image tiled in the desktop
@@ -31,7 +31,7 @@ TitlebarActiveColor	= qvblue	; titlebar color (active)
 TitlebarActiveColor2	= qvlightblue	; titlebar right-side color (active)
 TitleStringColor	= qvgray	; title string color (inactive)
 TitleStringActiveColor	= white		; title string color (active)
-TitleFont		= "-*-*-medium-r-normal-*-12-*-*-*-*-*-*-*"
+TitleFont		=  "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
 
 ; frame
 FrameBorderWidth	= 1
@@ -52,9 +52,9 @@ TaskbarButtonHeight	= 18
 ;TaskbarImage		= ""		; taskbar background image
 TaskbarColor		= qvgray	; taskbar color
 ClockStringColor	= black		; clock string color
-UseBoldFont		= True		; use bold font for emphasis
-TaskbarFont		= "-*-*-medium-r-normal-*-12-*-*-*-*-*-*-*"
-TaskbarBoldFont		= "-*-*-bold-r-normal-*-12-*-*-*-*-*-*-*"
+UseBoldFont		= False		; use bold font for emphasis
+TaskbarFont		=   "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
+TaskbarBoldFont = "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
 
 ; indicator
 IndicatorSize		= 16
@@ -67,7 +67,7 @@ IconStringColor		= white
 IconStringActiveColor	= white
 IconForeColor		= black		; icon foreground color
 IconBackColor		= white		; icon background color
-IconFont		= "-*-*-medium-r-normal-*-12-*-*-*-*-*-*-*"
+IconFont		=  "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
 
 ; menu
 ;MenuImage		= ""		; menu background image
@@ -76,7 +76,7 @@ MenuColor		= qvgray	; menu color
 MenuActiveColor		= qvblue	; selected menu item color
 MenuStringColor		= black		; menu string color (unselected)
 MenuStringActiveColor	= white		; menu string color (selected)
-CtrlMenuFont		= "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*"
+CtrlMenuFont		=  "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
 
 ; startmenu
 ;StartMenuLogoImage	= ""

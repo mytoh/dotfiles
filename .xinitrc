@@ -74,7 +74,8 @@ case $1 in
   wmaker)   exec wmaker ;;
   oroborus)   exec oroborus ;;
   mate) exec ck-launch-session mate-session ;;
-  w9wm)         exec w9wm ;;
+  w9wm) exec w9wm ;;
+  jwm)  exec jwm ;;
   *) exec $DEFAULT_SESSION ;;
 esac
 
