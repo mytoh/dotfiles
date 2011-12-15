@@ -16,7 +16,7 @@ urxvt.scrollBar: false
 urxvt.buffered: true
 urxvt.borderLess: false
 urxvt.internalBorder: 0
-urxvt.cursorUnderline: true
+urxvt.cursorUnderline: false
 urxvt.cursorColor: #303030
 !urxvt.transparent: false
 !urxvt.inheritPixmap: true
@@ -28,6 +28,7 @@ urxvt.preedittype: root
 urxvt.savelines: 2000
 urxvt.mousewheelscrollpage: false
 urxvt.urgentOnBell: true
+urxvt.modifier: alt
 urxvt.inputMethod: uim
 
 urxvt.perl-ext-common: default,matcher,clipboard-osc
@@ -39,10 +40,15 @@ urxvt.font: -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
            -misc-fixed-medium-r-normal--10-90-75-75-c-50-*, \
            -misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0, \
            -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*
+    k10, k10rk, k10b,\
+    -aaron-*-*-*-*--10-*-*-*-*-*-iso8859-1
+
 urxvt.boldFont: -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
            -misc-fixed-medium-r-normal--10-90-75-75-c-50-*, \
            -misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0, \
            -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*
+    k10, k10rk, k10b, \
+    -aaron-*-*-*-*-*-10-*-*-*-*-*-iso8859-1
 
 
 
@@ -79,6 +85,7 @@ xterm*scrollBar: false
 ! xfontsel
 ! -----------
 !XFontSel*sampleText.background: TEXTBG
+XFontSel.font: -artwiz-lime-medium-r-normal--10-110-75-75-m-50-iso8859-1
 XFontSel*menu*showUnselectable: false
 XFontSel*MenuButton.shadowWidth: 0
 XFontsel*Toggle*ToggleStyle: check
