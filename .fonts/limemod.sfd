@@ -42,7 +42,7 @@ NameList: Adobe Glyph List
 DisplaySize: 10
 AntiAlias: 1
 FitToEm: 1
-WinInfo: 26 26 8
+WinInfo: 0 26 13
 OnlyBitmaps: 1
 BeginPrivate: 0
 EndPrivate
@@ -1815,7 +1815,7 @@ J:N0#!.Y%L
 BDFChar: 34 34 5 1 3 4 6
 TV.qX
 BDFChar: 35 35 5 0 4 0 4
-:tSUs:]LIq
+;#!l^:]LIq
 BDFChar: 36 36 5 0 4 0 6
 +F'Pu..A>Z
 BDFChar: 37 37 5 1 4 0 5
@@ -1960,8 +1960,8 @@ BDFChar: 106 106 5 1 3 -2 6
 +93N,+<VdL^]4?7
 BDFChar: 107 107 5 1 4 0 6
 J:N`S^n?bh
-BDFChar: 108 108 5 3 3 0 6
-J:N0#J:N.M
+BDFChar: 108 108 5 2 4 -1 7
+!5Lib5X7SBz
 BDFChar: 109 109 5 1 4 0 4
 ORTK9O8o7\
 BDFChar: 110 110 5 1 4 0 4
@@ -2026,8 +2026,8 @@ BDFChar: 139 185 5 0 3 -2 7
 :f(!8&C=6M:f%,l
 BDFChar: 140 186 5 1 3 -2 7
 TV.sNTV.sNTV)8b
-BDFChar: 141 187 5 0 3 -2 4
-n.<rC:f'sg
+BDFChar: 141 187 5 0 4 0 4
+TMR%5TE"rl
 BDFChar: 142 188 5 0 3 2 7
 :f(!8&F]Z"
 BDFChar: 143 189 5 0 3 3 7
@@ -2058,8 +2058,8 @@ BDFChar: 155 201 5 1 4 -2 4
 n:7a9TV.qX
 BDFChar: 156 202 5 0 4 2 7
 :f(!@!;HNo
-BDFChar: 157 203 5 -2 4 -8 7
-,QKqL3$9>+zz
+BDFChar: 157 203 5 0 3 0 7
+O9"d#i.-@I
 BDFChar: 158 204 5 1 4 -2 7
 TV.s^J?Y]>TV)8b
 BDFChar: 159 205 5 0 4 2 4
@@ -2080,8 +2080,8 @@ BDFChar: 166 212 5 2 4 2 7
 J:N1.JD^D-
 BDFChar: 167 213 5 2 4 -2 4
 i.0a9J:N.M
-BDFChar: 168 214 5 0 4 -3 5
-O8r[MOH>Q3z
+BDFChar: 168 214 5 1 4 -2 3
+n=ZGITV)8b
 BDFChar: 169 215 5 0 4 -2 7
 :f'tbpeXd`:f%,l
 BDFChar: 170 216 5 0 4 -2 7
