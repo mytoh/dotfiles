@@ -440,9 +440,12 @@ let g:gist_detect_filetype = 1
 
 " show private gists with ':Gist -l'
 let g:gist_show_privates = 1
-
-
 "}}}
+
+" sudo.vim {{{
+"let g:sudoAuth="ssh"
+"let g:sudoAuthArg="root@localhost"
+" }}}
 " }}}
 
 set secure

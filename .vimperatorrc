@@ -133,8 +133,6 @@ style -name toolbarbutton chrome://* <<EOM
   -moz-appearance: none !important;
   background-color: transparent !important;
 }
-
-
 EOM
 
 style -name pano chrome://* <<EOM
