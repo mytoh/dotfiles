@@ -37,6 +37,7 @@ xset fp rehash
 urxvtcd &
 xbindkeys &
 Thunar --daemon &
+spiffy &
 #parcellite &
 
 if [ "$1" = "twm" -o "$1" = "openbox" -o "$1" = "flwm" ]; then

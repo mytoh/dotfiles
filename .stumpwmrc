@@ -67,9 +67,9 @@
 (if (not (head-mode-line (current-head)))
     (toggle-mode-line (current-screen) (current-head)))
 
-(setf *screen-mode-line-format*  ;; ^n use the normal bg and fg color
-      (list "%g ^8*|^n %W "
-            "^8*|^n "
+(setf *screen-mode-line-format*  ;; ^n : normal bg and fg color
+      (list "%g ^8*|^n "
+            "^2*%W ^8*|^n "
             '(:eval (run-shell-command "~/.stumpwm/modeline.scm" t))
             "^8*|^n %d "
             ))

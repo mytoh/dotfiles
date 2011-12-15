@@ -91,7 +91,7 @@
 (define (display-status-line )
   (let ((information-line (format
                            #f
-                           "^5*Cpu:~3@a% ^8*|^n ^6*Mem:~3@a% "
+                           "^9*Cpu:~3@a% ^8*|^n ^6*Mem:~3@a% "
                            (inexact->exact (round (vector-ref *CPU-LOADS* 0)))
                            *MEM-USED*
                            )))
