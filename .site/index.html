@@ -83,24 +83,17 @@
       </section>
 
       <footer>
-        <p class="google">
-          <a href="http://google.com" target="_blank">google</a>
+
+        <p id="ddg">
+          <a href="http://duckduckgo.com" target="_blank">ddg</a>
         </p>
 
-        <!--google search button and field-->
-        <form method="get" target="_blank" action="http://www.google.co.jp/search">
-          <table > 
-            <tr><td class="googleinput">
-                <input type=search name=q size=25 maxlength=255 value="" />
-                <input type=submit value="search" />
-            </td></tr>
-          </table>
-          </form>
-          <br>
-          <!-- -->
+        <form id="searchbox" action="http://duckduckgo.com/?kl=jp-jp&kp=-1" target="_blank">
+          <input type="text" name="q" value="">
+          <input type="submit" value="Search">
+          <input type="hidden" name="t" value="">
+        </form>
 
         </footer>
-
       </body>
-
     </html>
