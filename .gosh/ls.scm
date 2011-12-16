@@ -1,6 +1,7 @@
 #!/usr/bin/env gosh
 
 ;; lesser copy of ls++ by trapd00r
+;; colour codes are hardcoded
 
 (use gauche.process)
 (use gauche.parseopt)
@@ -9,6 +10,9 @@
 (define colour-list
       '((scm  . 72  )
         (zip  . 83  )
+        (rar  . 83  )
+        (txz  . 68  )
+        (xz  .  68  )
         (cbz  . 111 )
         (cbr  . 192 )
         (html . 38  )
@@ -48,12 +52,12 @@
                (case type
                      ((regular)   (make-colour 7 file ))
                      ((directory) (string-append (make-colour 1 file ) (make-colour 0 "/")))
+                     ((symlink)   (string-append (make-colour 5 file ) (make-colour 0 "@")))
                      ((character) (make-colour 2 file ))
                      ((block)     (make-colour 3 file ))
                      ((fifo)      (make-colour 4 file ))
-                     ((symlink)   (make-colour 5 file ))
                      ((socket)    (make-colour 6 file ))
-                     (else        (make-colour 1 file)))
+                     (else        (make-colour 0 file)))
                )))
 
 (define (print-permermission f)
