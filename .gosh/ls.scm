@@ -16,7 +16,7 @@
         (if ext
             (let ((ext (string->symbol ext)))
             (case ext
-                  ((scm)  (make-colour  42 file ))
+                  ((scm)  (make-colour  72 file ))
                   ((zip)  (make-colour  83 file ))
                   ((cbz)  (make-colour  113 file ))
                   ((cbr)  (make-colour  201 file ))
@@ -24,7 +24,17 @@
                   ((vim)  (make-colour  162 file ))
                   ((conf) (make-colour  12 file ))
                   ((d)    (make-colour  1 file ))
-                  (else (make-colour 0 file ))
+                  (else (case type
+                              ((regular)   (make-colour 7 file ))
+                              ((directory) (make-colour 1 file ))
+                              ((character) (make-colour 2 file ))
+                              ((block)     (make-colour 3 file ))
+                              ((fifo)      (make-colour 4 file ))
+                              ((symlink)   (make-colour 5 file ))
+                              ((socket)    (make-colour 6 file ))
+                              (else        (make-colour 0 file))
+                              )
+                    )
                   )
             )
             (case type
@@ -36,7 +46,8 @@
                   ((symlink)   (make-colour 5 file ))
                   ((socket)    (make-colour 6 file ))
                   (else        (make-colour 0 file))
-                  ))))
+                  )
+            )))
 
 (define (print-permermission f)
   (let* ((perms (format #f "~3O" (file-perm f :follow-link? #f)))
@@ -60,9 +71,11 @@
                                          ((7) (string-append  rchar wchar xchar))
                                          ))) lst))
                           "")))
-        (if (eqv? type 'directory)
-            (string-append "[33m" "d" p) 
-            (string-append "[31m" "-" p))
+        (case type 
+            ((directory) (string-append (make-colour 1 "d") p))
+            ((symlink) (string-append (make-colour 5 "l") p))
+            (else (string-append (make-colour 31 "-") p))
+            )
         )
   )
 
