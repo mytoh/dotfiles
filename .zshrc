@@ -1060,7 +1060,12 @@ s() {
   case $1 in
     g|gauche|gosh)
       print "gauche"
-      rlwrap -pBlue -b '(){}[],#;| ' gosh
+      if [[ -e $home/.goshrc ]]; then
+      rlwrap -pBlue -b '(){}[],#;| ' gosh -l $home/.goshrc
+      else
+      rlwrap -pBlue -b '(){}[],#;| ' gosh 
+    fi
+
       ;;
     sc|scsh)
       print "scsh"
