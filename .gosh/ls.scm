@@ -6,26 +6,36 @@
 (use gauche.parseopt)
 (use file.util)
 
+(define colour-list
+      '((scm  . 72  )
+        (zip  . 83  )
+        (cbz  . 111 )
+        (cbr  . 192 )
+        (html . 38  )
+        (vim  . 162 )
+        (conf . 12  )
+        (d    . 1   )
+        (md    . 40   )
+        ))
+
+
+
+
 (define (make-colour colour str)
   (string-append "[38;5;" (x->string colour) "m" str "[0m")
   )
 
 (define (print-filename filename)
-  (letrec  ((file (sys-basename filename))
+  (let*  ((file (sys-basename filename))
             (type (file-type file :follow-link? #f))
-            (ext  (path-extension file)))
-           (if ext
-               (let ((ext (string->symbol ext)))
-                    (case ext
-                          ((scm)  (make-colour  72 file ))
-                          ((zip)  (make-colour  83 file ))
-                          ((cbz)  (make-colour  111 file ))
-                          ((cbr)  (make-colour  192 file ))
-                          ((html) (make-colour  38 file ))
-                          ((vim)  (make-colour  162 file ))
-                          ((conf) (make-colour  12 file ))
-                          ((d)    (make-colour  1 file ))
-                          (else (case type
+            (extension  (path-extension file)))
+           (if extension
+               (let* ((ext (string->symbol extension))
+                     (e (assoc ext colour-list))
+                     )
+                    (if e
+                        (make-colour (cdr e) file)
+                           (case type
                                       ((regular)   (make-colour 7 file ))
                                       ((directory) (string-append (make-colour 1 file ) (make-colour 0 "/")))
                                       ((character) (make-colour 2 file ))
@@ -33,17 +43,17 @@
                                       ((fifo)      (make-colour 4 file ))
                                       ((symlink)   (make-colour 5 file ))
                                       ((socket)    (make-colour 6 file ))
-                                      (else        (make-colour 0 file))
-                                      ))))
+                                      (else        (make-colour 1 file))
+                                      )))
                (case type
-                     ((regular)   (make-colour 0 file ))
+                     ((regular)   (make-colour 7 file ))
                      ((directory) (string-append (make-colour 1 file ) (make-colour 0 "/")))
                      ((character) (make-colour 2 file ))
                      ((block)     (make-colour 3 file ))
                      ((fifo)      (make-colour 4 file ))
                      ((symlink)   (make-colour 5 file ))
                      ((socket)    (make-colour 6 file ))
-                     (else        (make-colour 0 file)))
+                     (else        (make-colour 1 file)))
                )))
 
 (define (print-permermission f)
@@ -108,16 +118,23 @@
            )
        ))
 
-(define (ls-file dirs)
-  (for-each
-    display
-    (map
-      (lambda (f)
-        (format "~a " (print-filename f))
-        )
-      (directory-list dirs :children? #t))
-    )
-  )
+(define (ls-file directories)
+  (let ((ls (lambda (dir)
+              (for-each
+                (lambda (e) (display e) (newline))
+                (map (lambda (f)
+                       (format "~a " (print-filename f)))
+                     (directory-list dir :children? #t))))))
+       (if (null? directories)
+           (ls (current-directory))
+           (let loop ((dirs  directories))
+                (if (null? dirs)
+                    (read-from-string "") ;return EOF
+                    (begin 
+                      (ls (car dirs))
+                      (loop (cdr dirs)))
+                    )))
+       ))
 
 (define (usage)
   (print "help")
@@ -128,7 +145,7 @@
       ((pf "pf|l")
       . directories)
       ;(cond ((pf (ls-perm-file filenames))
-      (cond ((and (null? directories) (not pf))(ls-file (current-directory)))
+      (cond ((and (null? directories) (not pf))(ls-file (list (current-directory))))
              (pf (ls-perm-file directories)
                  )
              (else (ls-file directories))
