@@ -3,7 +3,7 @@
 ;; lesser copy of ls++ by trapd00r
 ;; colour codes are hardcoded
 
-(use gauche.process)
+(use gauche.collection)
 (use gauche.parseopt)
 (use file.util)
 
@@ -29,6 +29,9 @@
   (string-append "[38;5;" (x->string colour) "m" str "[0m")
   )
 
+
+;;  file-is-executable?
+;; 
 (define (print-filename filename)
   (let*  ((file (sys-basename filename))
             (type (file-type file :follow-link? #f))
@@ -98,7 +101,14 @@
         )
   )
 
-(define (ls-perm-file directories)
+(define (normal-files directories)
+  (let ((dotfile (lambda (f) (rxmatch->string #/.*\/(\.)[^\/]*$/ f)))
+        (files (directory-list directories :children? #t :add-path? #t)))
+       (remove dotfile files)
+  )
+  )
+
+(define (ls-perm-file directories allfiles)
   (let ((ls (lambda (dir)
               (for-each
                 (lambda (e) (display e) (newline))
@@ -108,7 +118,11 @@
                             (print-permermission f)
                             (print-delim 2)
                             (print-filename f)))
-                  (directory-list dir :children? #t :add-path? #t))))
+                     (if allfiles
+                     (directory-list dir :children? #t :add-path? #t)
+                     (normal-files dir)
+                     )
+                  )))
                   ))
        (if (null? directories)
            (ls (current-directory))
@@ -122,13 +136,17 @@
            )
        ))
 
-(define (ls-file directories)
+(define (ls-file directories allfiles)
   (let ((ls (lambda (dir)
               (for-each
                 (lambda (e) (display e) (newline))
                 (map (lambda (f)
                        (format "~a " (print-filename f)))
-                     (directory-list dir :children? #t))))))
+                     (if allfiles
+                     (directory-list dir :children? #t :add-path? #t)
+                     (normal-files dir)
+                     )
+                     )))))
        (if (null? directories)
            (ls (current-directory))
            (let loop ((dirs  directories))
@@ -146,13 +164,13 @@
 
 (define (main args)
   (let-args (cdr args)
-      ((pf "pf|l")
+      ((pf "pf")
+       (all "a|all")
       . directories)
-      ;(cond ((pf (ls-perm-file filenames))
-      (cond ((and (null? directories) (not pf))(ls-file (list (current-directory))))
-             (pf (ls-perm-file directories)
+      (cond ((and (null? directories) (not pf))(ls-file (list (current-directory)) all))
+             (pf (ls-perm-file directories all)
                  )
-             (else (ls-file directories))
+             (else (ls-file directories all))
              )
       ) ;let-args
   )
