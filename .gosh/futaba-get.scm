@@ -96,7 +96,7 @@
   (if (not (string=? status "404"))
    (let ((html (ces-convert body "*jp" "utf-8")))
     (if (string-incomplete? html)
-    (string-incomplete->complete html)
+    (string-incomplete->complete html :omit)
     html))
 #f)
    ) ;let-values

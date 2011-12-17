@@ -69,7 +69,7 @@
   (if  (string=? status "404")
     #f
    (if (string-incomplete? body)
-   (let ((html (string-incomplete->complete body)))
+   (let ((html (string-incomplete->complete body :omit)))
    (if html
    html
    (ces-convert body "*jp" "utf-8")))
