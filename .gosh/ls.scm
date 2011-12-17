@@ -29,38 +29,43 @@
   (string-append "[38;5;" (x->string colour) "m" str "[0m")
   )
 
+(define (colour-filename name type . ecolour)
+  (if  (not (null? ecolour))
+  (let ((e  (cdar ecolour)))
+  (case type
+        ((regular) (if (file-is-executable? name)
+                       (string-append (make-colour e name) (make-colour 7 "*"))
+                       (make-colour e name)))
+        ((directory) (string-append (make-colour e name) (make-colour 7 "/")))
+        ((symlink) (string-append (make-colour e name) (make-colour 7 "@")))
+        (else        (make-colour e name)))
+  )
+  (case type
+        ((regular)   (if (file-is-executable? name)
+                         (string-append (make-colour 7 name) (make-colour 7 "*"))
+                          (make-colour 7 name )))
+        ((directory) (string-append (make-colour 1 name ) (make-colour 0 "/")))
+        ((character) (make-colour 2 name ))
+        ((block)     (make-colour 3 name ))
+        ((fifo)      (make-colour 4 name ))
+        ((symlink) (string-append (make-colour 5 name) (make-colour 7 "@")))
+        ((socket)    (make-colour 6 name ))
+        (else        (make-colour 7 name)))
+        )
+  )
 
-;;  file-is-executable?
-;; 
+
 (define (print-filename filename)
   (let*  ((file (sys-basename filename))
             (type (file-type file :follow-link? #f))
             (extension  (path-extension file)))
            (if extension
-               (let* ((ext (string->symbol extension))
-                     (e (assoc ext colour-list))
-                     )
-                    (if e
-                        (make-colour (cdr e) file)
-                           (case type
-                                      ((regular)   (make-colour 7 file ))
-                                      ((directory) (string-append (make-colour 1 file ) (make-colour 0 "/")))
-                                      ((character) (make-colour 2 file ))
-                                      ((block)     (make-colour 3 file ))
-                                      ((fifo)      (make-colour 4 file ))
-                                      ((symlink)   (make-colour 5 file ))
-                                      ((socket)    (make-colour 6 file ))
-                                      (else        (make-colour 1 file))
-                                      )))
-               (case type
-                     ((regular)   (make-colour 7 file ))
-                     ((directory) (string-append (make-colour 1 file ) (make-colour 0 "/")))
-                     ((symlink)   (string-append (make-colour 5 file ) (make-colour 0 "@")))
-                     ((character) (make-colour 2 file ))
-                     ((block)     (make-colour 3 file ))
-                     ((fifo)      (make-colour 4 file ))
-                     ((socket)    (make-colour 6 file ))
-                     (else        (make-colour 0 file)))
+               (let ((e (assoc (string->symbol extension) colour-list)))
+                    (if  e
+                        (colour-filename file type e)
+                        (colour-filename file type)
+                        ))
+               (colour-filename file type)
                )))
 
 (define (print-permermission f)
@@ -91,6 +96,9 @@
               (else (string-append (make-colour 0 "-") p))
               )
         )
+  )
+
+(define (print-size file)
   )
 
 (define (print-delim num)
