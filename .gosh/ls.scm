@@ -1,7 +1,7 @@
 #!/usr/bin/env gosh
 
 ;; lesser copy of ls++ by trapd00r
-;; colour codes are hardcoded
+;; colour codes are hardcoded so edit this file
 
 (use gauche.collection)
 (use gauche.parseopt)
@@ -99,13 +99,34 @@
   )
 
 (define (print-size file)
+  (let* ((filesize (file-size file))
+        (size (cond
+                ((> filesize 1073741824) (string-append (number->string (truncate (/ (/ (/ filesize 1024) 1024) 1024))) (make-colour 5 "G")))
+                ((> filesize 1048576) (string-append (number->string (truncate (/ (/ filesize 1024) 1024))) (make-colour 4 "M")))
+                ((> filesize 1024)    (string-append (number->string (truncate (/ filesize 1024))) (make-colour 2 "K")))
+                ((< filesize 1024)    (string-append (number->string filesize) (make-colour 3 "B")))
+                ))
+        )
+        (format "~19@a"
+                size
+                )
+        )
   )
+
+;(define (print-size file)
+  ;(let ((filesize (file-size file)))
+        ;(if (number? filesize)
+            ;"number"
+            ;filesize
+            ;)
+       ;)
+  ;)
 
 (define (print-delim num)
   (case num
         ((1) (make-colour 0 "├"))
         ((2) (make-colour 0 "┤"))
-        ((3) (make-colour 0 "▕▏"))
+        ((3) (make-colour 0 "│"))
         )
   )
 
@@ -116,6 +137,37 @@
   )
   )
 
+(define (ls-perm-size-file directories allfiles)
+  (let ((ls (lambda (dir)
+              (for-each
+                (lambda (e) (display e) (newline))
+                (map (lambda (f)
+                       (format "~a~10a~a~a~a~a"
+                            (print-delim 1)
+                            (print-permermission f)
+                            (print-delim 2)
+                            (print-size f)
+                            (print-delim 3)
+                            (print-filename f)
+                            ))
+                     (if allfiles
+                     (directory-list dir :children? #t :add-path? #t)
+                     (normal-files dir)
+                     )
+                  )))
+                  ))
+       (if (null? directories)
+           (ls (current-directory))
+           (let loop ((dirs  directories))
+                (if (null? dirs)
+                    (read-from-string "") ;return EOF
+                    (begin 
+                    (ls (car dirs))
+                    (loop (cdr dirs)))
+                    ))
+           )
+       ))
+
 (define (ls-perm-file directories allfiles)
   (let ((ls (lambda (dir)
               (for-each
@@ -125,7 +177,8 @@
                             (print-delim 1)
                             (print-permermission f)
                             (print-delim 2)
-                            (print-filename f)))
+                            (print-filename f)
+                            ))
                      (if allfiles
                      (directory-list dir :children? #t :add-path? #t)
                      (normal-files dir)
@@ -173,11 +226,12 @@
 (define (main args)
   (let-args (cdr args)
       ((pf "pf")
+       (pfs "pfs")
        (all "a|all")
       . directories)
-      (cond ((and (null? directories) (not pf))(ls-file (list (current-directory)) all))
-             (pf (ls-perm-file directories all)
-                 )
+      (cond (pf (ls-perm-file directories all))
+             (pfs (ls-perm-size-file directories all))
+             ((null? directories) (ls-file (list (current-directory)) all))
              (else (ls-file directories all))
              )
       ) ;let-args
