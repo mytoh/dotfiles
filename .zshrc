@@ -966,7 +966,7 @@ cat << EOF
 EOF
 } #}}}
 
-dump-colours(){
+dump-colours(){ #{{{
   if [[ -n $1 ]]; then
     xdef="$HOME/.xcolours/$1"
   else
@@ -985,8 +985,9 @@ dump-colours(){
     for i in {8..15}; echo -en "\e[1;$((22+$i))m $colors[i+1] \e[0m"
       echo -e "\n"
 }
+#}}}
 
-color-blocks () {
+color-blocks () { #{{{
     echo
     local width=$(( ($COLUMNS / 16) -1 ))
     local chars
@@ -996,8 +997,10 @@ color-blocks () {
     for ((i=0; i<=7; i++)); echo -en "\e[3${i}m${chars} \e[1;3${i}m${chars}\e[m "; echo; echo
     unset i
 }
+#}}}
 
-color-numbers(){
+color-numbers() #{{{
+{
  for i in {000..255..16}; do 
    for j in {$i..$((i+15))}; do 
      echo -en "\e[38;5;${j}m $j \e[0m"; 
@@ -1005,8 +1008,10 @@ color-numbers(){
    echo; 
  done
  }
+#}}}
 
-colorguns() { #{{{
+colorguns()  #{{{
+{
 #
 # ANSI color scheme script by pfh
 #
@@ -1056,6 +1061,8 @@ cat << EOF
 EOF
 } #}}}
 
+#}}}
+
 s() {
   case $1 in
     g|gauche|gosh)
@@ -1092,7 +1099,6 @@ spc2ubar() {
   emulate -L zsh
    \zmv -v '* *' '$f:gs/ /_'
 }
-#}}}
 
 #}}}
 
@@ -1262,9 +1268,18 @@ case ${OSTYPE} in
     #ftp_proxy=""
     #FTP_TIMEOUT=30
     PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages/Latest/"
+    if check_com -c gosh; then
+      if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
+        alias la="gosh ls.scm -a"
+        alias ll="gosh ls.scm -pfs"
+        alias lla="gosh ls.scm -pfs -a"
+        alias l="gosh ls.scm "
+      fi
+    else
     alias la="ls -G -a"
     alias ll="ls -G -hlA "
     alias ls="ls -G -F"
+    fi
     alias pup="sudo portsnap fetch update "
     alias pcheck='sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends'
     alias pfetch="sudo make  fetch-recursive"
