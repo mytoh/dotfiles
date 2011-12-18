@@ -129,7 +129,7 @@
                 ((< filesize 1024)    (string-append (make-colour 7 (number->string filesize)) (make-colour 14 "B")))
                 ))
         )
-        (format "~19@a"
+        (format "~35@a"
                 size
                 )
         )
