@@ -7,7 +7,7 @@
 (use gauche.parseopt)
 (use file.util)
 
-(define colour-list
+(define *colour-list*
       '((scm  . 72  )
         (zip  . 83  )
         (rar  . 83  )
@@ -60,7 +60,7 @@
             (type (file-type file :follow-link? #f))
             (extension  (path-extension file)))
            (if extension
-               (let ((e (assoc (string->symbol extension) colour-list)))
+               (let ((e (assoc (string->symbol extension) *colour-list*)))
                     (if  e
                         (colour-filename file type e)
                         (colour-filename file type)
