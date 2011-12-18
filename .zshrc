@@ -1095,10 +1095,6 @@ s() {
   esac
 }
 
-spc2ubar() {
-  emulate -L zsh
-   \zmv -v '* *' '$f:gs/ /_'
-}
 
 #}}}
 
@@ -1157,6 +1153,19 @@ alias radio6='mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r6.asx'
 alias sumo='mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_haishin/asx/sumolive.asx'
 alias jblive='mplayer rtsp://videocdn-us.geocdn.scaleengine.net/jblive/jblive.stream'
 alias destep="figlet -w 80 -nkf rowancap DESTEP TRED | tr 'd' '▟' | tr 'P' '▛' | tr 'M' '█' | tr 'V' '▜' | tr '\"' ' ' | tr '.' ' ' | tr 'a' '▟' | tr 'b' '▙' | tr 'K' '█' | tr 'A' '▟' | tr 'F' '▛' | tr 'Y' '▜' | tr 'v' '█' | tr 'm' '█' | tr 'r' '▛' | toilet -w 80 --gay -f term"
+
+# gauche alias
+if check_com -c gosh; then
+  if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
+    alias la="gosh ls.scm -a"
+    alias ll="gosh ls.scm -pfs"
+    alias lla="gosh ls.scm -pfs -a"
+    alias l="gosh ls.scm "
+    alias yotsu="gosh yotsuba-get.scm"
+    alias futaba="gosh futaba-get.scm"
+    alias spc2ubar="gosh space2underbar.scm"
+  fi
+fi
 # suffix aliases
 alias -s txt=cat
 alias -s {zip,rar,tgb,tgz,tar,xz,gz,bz2}=unpack
@@ -1268,18 +1277,6 @@ case ${OSTYPE} in
     #ftp_proxy=""
     #FTP_TIMEOUT=30
     PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages/Latest/"
-    if check_com -c gosh; then
-      if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
-        alias la="gosh ls.scm -a"
-        alias ll="gosh ls.scm -pfs"
-        alias lla="gosh ls.scm -pfs -a"
-        alias l="gosh ls.scm "
-      fi
-    else
-    alias la="ls -G -a"
-    alias ll="ls -G -hlA "
-    alias ls="ls -G -F"
-    fi
     alias pup="sudo portsnap fetch update "
     alias pcheck='sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends'
     alias pfetch="sudo make  fetch-recursive"
