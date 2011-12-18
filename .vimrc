@@ -52,7 +52,7 @@ set showfulltag
 
 " colors
 set t_Co=256
-colorscheme mirodark
+colorscheme jellybeans
 
 " statusline
 set laststatus=2
