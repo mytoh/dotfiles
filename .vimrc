@@ -139,6 +139,13 @@ function! s:vimrc.xrdb() dict
   endif
 endfunction
 
+function! s:vimrc.gauche() dict
+  setl lispwords=define,lambda,call-with-*
+  if filereadable('~/.gosh_completions')
+    setlocal dictionary=~/.gosh_completions
+  endif
+endfunction
+
 aug myautocommands
   au!
   au bufread,bufnewfile .tmux.conf               set filetype=tmux
@@ -151,7 +158,7 @@ aug myautocommands
   au bufwritepost       .vimrc                   source ~/.vimrc
   au bufwritepost       .zshrc                   silent !zcompile ~/.zshrc
   au bufwritepost       .conkyrc                 silent !killall -SIGUSR1  conky
-  au filetype           scheme                   setl cindent& lispwords=define,lambda,call-with-*
+  au filetype           scheme                   call s:vimrc.gauche()
   au filetype           help                     nnoremap q :<c-u>q<cr>
   au filetype           nerdtree                 let g:loaded_golden_ratio=1
   au filetype           css                      ColorHighlight
@@ -214,7 +221,7 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_auto_select = 0
 let g:neocomplcache_dictionary_filetype_lists = {
       \ 'default'  : '',
-      \ 'scheme'   : $HOME . '/.rlwrap/gosh_completions',
+      \ 'scheme'   : $HOME . '/.gosh_completions',
       \ 'vimshell' : $HOME . '/.vimshell/command-history'
       \ }
 "}}}
