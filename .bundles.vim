@@ -28,6 +28,7 @@ NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'hakobe/unite-script'
 NeoBundle 'koron/chalice'
+NeoBundle 'koron/nyancat-vim'
 NeoBundle 'choplin/unite-vim_hacks'
 NeoBundle 'lilydjwg/colorizer'
 NeoBundle 'mattn/googlereader-vim'
@@ -66,6 +67,7 @@ NeoBundle 'othree/html5.vim'
 NeoBundle 'gregsexton/MatchTag'
 NeoBundle 'djjcast/mirodark'
 NeoBundle 'houtsnip/vim-emacscommandline'
+NeoBundle 'h1mesuke/unite-outline'
 " }}}
 
 " official vim-scripts repo {{{
