@@ -7,50 +7,72 @@
 (use gauche.parseopt)
 (use file.util)
 
-(define *colour-list*
+(define *extension-colours*
       '((scm  . 72  )
         (zip  . 83  )
         (rar  . 83  )
         (txz  . 68  )
-        (xz  .  68  )
+        (xz   . 68  )
         (cbz  . 111 )
         (cbr  . 192 )
         (html . 38  )
         (vim  . 162 )
         (conf . 12  )
         (d    . 1   )
-        (md    . 40   )
+        (md   . 40  )
         ))
 
+(define *colours*
+  '((0  . 237)
+    (1  . 131)
+    (2  . 107)
+    (3  . 75 )
+    (4  . 240)
+    (5  . 209)
+    (6  . 185)
+    (7  . 216)
+    (8  . 220)
+    (9  . 208)
+    (10 . 243)
+    (11 . 161)
+    (12 . 240)
+    (13 . 025)
+    (14 . 248)
+    (15 . 196)
+    ))
 
 
 
 (define (make-colour colour str)
-  (string-append "[38;5;" (x->string colour) "m" str "[0m")
-  )
+  (if (<= colour 16)
+      (let ((c (cdr (assoc colour *colours*))))
+           (string-append "[38;5;" (x->string c) "m" str "[0m")
+           )
+      (string-append "[38;5;" (x->string colour) "m" str "[0m")
+      ))
 
 (define (colour-filename name type . ecolour)
   (if  (not (null? ecolour))
   (let ((e  (cdar ecolour)))
   (case type
         ((regular) (if (file-is-executable? name)
-                       (string-append (make-colour e name) (make-colour 7 "*"))
+                       (string-append (make-colour e name) (make-colour 2 "*"))
                        (make-colour e name)))
-        ((directory) (string-append (make-colour e name) (make-colour 7 "/")))
-        ((symlink) (string-append (make-colour e name) (make-colour 7 "@")))
+        ((directory) (string-append (make-colour e name) (make-colour 2 "/")))
+        ((symlink) (string-append (make-colour e name) (make-colour 2 "@")))
         (else        (make-colour e name)))
   )
   (case type
         ((regular)   (if (file-is-executable? name)
-                         (string-append (make-colour 7 name) (make-colour 7 "*"))
-                          (make-colour 7 name )))
-        ((directory) (string-append (make-colour 1 name ) (make-colour 0 "/")))
+                         (string-append (make-colour 14 name) (make-colour 2 "*"))
+                          (make-colour 14 name )))
+        ((directory) (string-append (make-colour 1 name ) (make-colour 2 "/")))
         ((character) (make-colour 2 name ))
         ((block)     (make-colour 3 name ))
         ((fifo)      (make-colour 4 name ))
-        ((symlink) (string-append (make-colour 5 name) (make-colour 7 "@")))
+        ((symlink) (string-append (make-colour 5 name) (make-colour 2 "@")))
         ((socket)    (make-colour 6 name ))
-        (else        (make-colour 7 name)))
+        (else        (make-colour 14 name)))
         )
   )
 
@@ -60,7 +82,7 @@
             (type (file-type file :follow-link? #f))
             (extension  (path-extension file)))
            (if extension
-               (let ((e (assoc (string->symbol extension) *colour-list*)))
+               (let ((e (assoc (string->symbol extension) *extension-colours*)))
                     (if  e
                         (colour-filename file type e)
                         (colour-filename file type)
@@ -76,9 +98,9 @@
                             ,(map (lambda (char) 
                                     (let ((c (digit->integer char))
                                           (nchar (make-colour 0 "-"))
-                                          (rchar (make-colour 5 "r"))
-                                          (wchar (make-colour 2 "w"))
-                                          (xchar (make-colour 7 "x"))
+                                          (rchar (make-colour 6 "r"))
+                                          (wchar (make-colour 7 "w"))
+                                          (xchar (make-colour 5 "x"))
                                           )
                                          (case c
                                                ((0) (string-append  nchar nchar nchar))
@@ -101,10 +123,10 @@
 (define (print-size file)
   (let* ((filesize (file-size file))
         (size (cond
-                ((> filesize 1073741824) (string-append (number->string (truncate (/ (/ (/ filesize 1024) 1024) 1024))) (make-colour 5 "G")))
-                ((> filesize 1048576) (string-append (number->string (truncate (/ (/ filesize 1024) 1024))) (make-colour 4 "M")))
-                ((> filesize 1024)    (string-append (number->string (truncate (/ filesize 1024))) (make-colour 2 "K")))
-                ((< filesize 1024)    (string-append (number->string filesize) (make-colour 3 "B")))
+                ((> filesize 1073741824) (string-append (make-colour 7 (number->string (truncate (/ (/ (/ filesize 1024) 1024) 1024)))) (make-colour 3 "G")))
+                ((> filesize 1048576) (string-append (make-colour 7 (number->string (truncate (/ (/ filesize 1024) 1024)))) (make-colour 7 "M")))
+                ((> filesize 1024)    (string-append (make-colour 7 (number->string (truncate (/ filesize 1024)))) (make-colour 2 "K")))
+                ((< filesize 1024)    (string-append (make-colour 7 (number->string filesize)) (make-colour 14 "B")))
                 ))
         )
         (format "~19@a"
@@ -113,14 +135,6 @@
         )
   )
 
-;(define (print-size file)
-  ;(let ((filesize (file-size file)))
-        ;(if (number? filesize)
-            ;"number"
-            ;filesize
-            ;)
-       ;)
-  ;)
 
 (define (print-delim num)
   (case num
