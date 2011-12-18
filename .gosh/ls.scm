@@ -42,7 +42,6 @@
     ))
 
 
-
 (define (make-colour colour str)
   (if (<= colour 16)
       (let ((c (cdr (assoc colour *colours*))))
@@ -64,7 +63,7 @@
   )
   (case type
         ((regular)   (if (file-is-executable? name)
-                         (string-append (make-colour 14 name) (make-colour 2 "*"))
+                         (string-append (make-colour 4 name) (make-colour 2 "*"))
                           (make-colour 14 name )))
         ((directory) (string-append (make-colour 1 name ) (make-colour 2 "/")))
         ((character) (make-colour 2 name ))
