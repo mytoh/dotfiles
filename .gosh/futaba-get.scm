@@ -10,12 +10,12 @@
 (use srfi-11)
 
 
-(define (usage )
+(define (usage)
   (format (current-error-port)
           "Usage: ~a board thread \n" "get")
   (exit 2))
 
-(define (parse-img line board)
+(define (parse-img-url line board)
   (rxmatch->string (string->regexp (string-append "http\:\/\/(\\w+)\\.2chan\\.net\/(\\w+)\/" board "\/src\/[^\"]+")) line) 
  ) ;; "
 
@@ -26,12 +26,12 @@
 
 (define (swget url)
   (receive (host port path) (parse-url url)
-      (let ((file (receive (dir fname ext) (decompose-path path) (string-append fname "." ext))))
-           (if (not (file-is-readable? file))
+      (let1 file (receive (dir fname ext) (decompose-path path) (string-append fname "." ext))
+            (if (not (file-is-readable? file))
                (http-get host path
                          :sink (open-output-file file) :flusher (lambda (s h) (print file) #t))
-               )
-           ) ;let
+           )
+            ) ;let1
   )) ;define
 
 (define (fetch match)
@@ -44,7 +44,7 @@
   (lambda (in) 
    (port-for-each
     (lambda (line)
-     (let ((match (parse-img line board)))
+     (let ((match (parse-img-url line board)))
             (fetch match)
           )
      )
