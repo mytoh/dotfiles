@@ -13,9 +13,9 @@
                 (begin
                   (display "=> ")
                   (display (car dirs) )
-                  (display "\n" )
+                  (newline)
                   (run-process '(git pull) :wait #t :directory (car dirs))
-                  (display "\n")
+                  (newline)
                   (loop (cdr dirs)))))))
 
 (update-gitdir gitdir)
