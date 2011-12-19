@@ -140,9 +140,12 @@ function! s:vimrc.xrdb() dict
 endfunction
 
 function! s:vimrc.gauche() dict
-  setl lispwords=define,lambda,call-with-*
+  setlocal shiftwidth=1
   if filereadable('~/.gosh_completions')
     setlocal dictionary=~/.gosh_completions
+  endif
+  if filereadable('~/.vim/syntax/scheme.vim')
+   let is_gauche=1
   endif
 endfunction
 
