@@ -64,41 +64,50 @@
  )
 )
 
-(define (get-html bd td)
+(define (get-html board td)
   (let-values (((status headers body) 
-  (cond ((string=? bd "l") ;二次元壁紙
-           (http-get  "dat.2chan.net"  (string-append "/" bd "/res/" td ".htm" ))
-           )
-         ((string=? bd "k") ;壁紙
-          (http-get  "cgi.2chan.net"  (string-append "/" bd "/res/" td ".htm" ))
-          )
-        ((string=? bd "b") ;虹裏
-         (let ( (servs '("jun" "dec" "may"))
-                (get-res (lambda (srv)
-                           (receive (a b c) (http-get (string-append  srv ".2chan.net") (string-append "/" bd "/res/" td ".htm")) (if (not (string=? a "404")) srv #f))))
-                (get-values (lambda (srv)
-                              (receive (a b c) (http-get (string-append  srv ".2chan.net") (string-append "/" bd "/res/" td ".htm")) (if (not (string=? a "404")) (values a b c)))))
-                )
-               (or (and-let* ((s (get-res "jun")))
-                         (get-values "jun"))
-                   (and-let* ((s (get-res "dec")))
-                             (get-values "dec"))
-                   (and-let* ((s (get-res "may")))
-                             (get-values "may"))
-                   (values "404" #f #f)
-                   )))
-        ((string=? bd "7") ;ゆり
-          (http-get "zip.2chan.net" (string-append "/" bd "/res/" td ".htm")))
-        ((string=? bd "40") ;東方 
-         (http-get "may.2chan.net" (string-append "/" bd "/res/" td ".htm")))
-        ) ;cond 
-  ))
+       (let* ((bd (string->symbol board))
+              (fget (lambda (server)
+                      (http-get (string-append server ".2chan.net") 
+                                (string-append "/" board "/res/" td ".htm"))))
+              )
+             (case bd
+               ((l) ;二次元壁紙
+                (fget  "dat" ))
+               ((k) ;壁紙
+                (fget "cgi"))
+               ((b) ;虹裏
+                (let ((servs '("jun" "dec" "may"))
+                      (get-res (lambda (srv)
+                                 (receive (a b c)
+                                          (fget srv)
+                                          (if (not (string=? a "404")) srv #f))))
+                      (get-values (lambda (srv)
+                                    (receive (a b c)
+                                             (fget srv)
+                                             (if (not (string=? a "404")) (values a b c)))))
+                      )
+                  (or (and-let* ((s (get-res "jun")))
+                                (get-values "jun"))
+                    (and-let* ((s (get-res "dec")))
+                              (get-values "dec"))
+                    (and-let* ((s (get-res "may")))
+                              (get-values "may"))
+                    (values "404" #f #f)
+                    )))
+               ((7) ;ゆり
+                (fget "zip"))
+               ((40) ;東方 
+                 (fget "may"))
+               ) ;case
+             ) ;let*
+       ))
   (if (not (string=? status "404"))
    (let ((html (ces-convert body "*jp" "utf-8")))
     (if (string-incomplete? html)
     (string-incomplete->complete html :omit)
     html))
-#f)
+   #f)
    ) ;let-values
   )
 

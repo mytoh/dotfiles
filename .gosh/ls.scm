@@ -8,7 +8,7 @@
 (use file.util)
 (use srfi-1)
 
-(define *extension-colours*
+(define-constant *extension-colours*
       '((scm  . 72  )
         (zip  . 83  )
         (rar  . 83  )
@@ -23,7 +23,7 @@
         (md   . 40  )
         ))
 
-(define *colours*
+(define-constant *colours*
   '((0  . 237)
     (1  . 131)
     (2  . 107)
@@ -45,7 +45,7 @@
 
 (define (make-colour colour str)
   (if (<= colour (count car *colours*))
-      (let ((c (cdr (assoc colour *colours*))))
+      (let1 c (cdr (assoc colour *colours*))
            (string-append "[38;5;" (x->string c) "m" str "[0m")
            )
       (string-append "[38;5;" (x->string colour) "m" str "[0m")
@@ -53,7 +53,7 @@
 
 (define (colour-filename name type . ecolour)
   (if  (not (null? ecolour))
-  (let ((e  (cdar ecolour)))
+  (let1 e  (cdar ecolour)
   (case type
         ((regular) (if (file-is-executable? name)
                        (string-append (make-colour e name) (make-colour 2 "*"))
@@ -82,11 +82,10 @@
             (type (file-type file :follow-link? #f))
             (extension  (path-extension file)))
            (if extension
-               (let ((e (assoc (string->symbol extension) *extension-colours*)))
-                    (if  e
+               (if-let1 e (assoc (string->symbol extension) *extension-colours*)
                         (colour-filename file type e)
                         (colour-filename file type)
-                        ))
+                        )
                (colour-filename file type)
                )))
 

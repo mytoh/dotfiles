@@ -3,7 +3,7 @@
 (use gauche.process) ; run-process 
 (use file.util) ; directory-list, current-directory
 
-(define gitdir  "~/local/git/")
+(define-constant gitdir  "~/local/git/")
 
 (define (update-gitdir gitdir)
   (let ((dirs (list (directory-list (expand-path gitdir) :children? #t :add-path? #t))))
