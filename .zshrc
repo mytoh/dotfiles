@@ -1156,7 +1156,7 @@ alias destep="figlet -w 80 -nkf rowancap DESTEP TRED | tr 'd' 'â–Ÿ' | tr 'P' 'â–
 
 # gauche alias
 if check_com -c gosh; then
-    alias yotsu="gosh yotsuba-get.scm"
+    alias yotsuba="gosh yotsuba-get.scm"
     alias futaba="gosh futaba-get.scm"
     alias spc2ubar="gosh space2underbar.scm"
   if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
