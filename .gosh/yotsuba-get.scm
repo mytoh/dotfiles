@@ -65,24 +65,23 @@
 )
 
 (define (get-html bd td)
- (let-values (((status headers body ) (http-get  "boards.4chan.org"  (string-append "/" bd "/res/" td)) ))
-  (if  (string=? status "404")
-    #f
-   (if (string-incomplete? body)
-   (let ((html (string-incomplete->complete body :omit)))
-   (if html
-   html
-   (ces-convert body "*jp" "utf-8")))
-       (ces-convert body "*jp" "utf-8"))
-  )
-  ) ;let-values
-) ;define
+  (let-values (((status headers body ) (http-get  "boards.4chan.org"  (string-append "/" bd "/res/"  td)) ))
+              (if  (string=? status "404")
+                #f
+                (if (string-incomplete? body)
+                  (if-let1 html (string-incomplete->complete body :omit)
+                           html
+                           (ces-convert body "*jp" "utf-8"))
+                (ces-convert body "*jp" "utf-8"))
+                )
+              ) ;let-values
+  ) ;define
 
-(define (yotsuba-get args )
- (let* ((board (car args))
-        (thread (cadr args))
-        (html (get-html board thread))
-        )
+(define (yotsuba-get restargs )
+     (let* ((board (car restargs))
+           (thread (cadr restargs))
+           (html (get-html board thread))
+           )
        (if (string? html)
            (begin
              (display "[0;34m")
@@ -101,14 +100,13 @@
  )
  
 
-(define (yotsuba-get-all args )
-  (let ((board (car args))
-        (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0))
-        )
+(define (yotsuba-get-all restargs )
+  (let ((bd (car restargs))
+        (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
        (if (not (null? dirs))
            (for-each 
              (lambda (d)
-               (yotsuba-get (list board d))
+               (yotsuba-get (list bd d))
                )
              dirs)
            (print "no directories")
@@ -122,12 +120,10 @@
      ((all "a|all")
       (else (opt . _) (print "Unknown option: " opt) (usage))
       . restargs)
-     (cond ((null? restargs)
-           (usage))
-           (all
-            (yotsuba-get-all restargs))
-            (else
-              (yotsuba-get restargs))
-            )
+     (cond ((null? restargs) (usage))
+           (all (yotsuba-get-all restargs))
+           (else (yotsuba-get restargs))
+           )
+     
  ) ;let-args
 )
