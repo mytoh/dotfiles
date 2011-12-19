@@ -6,6 +6,7 @@
 (use gauche.collection)
 (use gauche.parseopt)
 (use file.util)
+(use srfi-1)
 
 (define *extension-colours*
       '((scm  . 72  )
@@ -43,7 +44,7 @@
 
 
 (define (make-colour colour str)
-  (if (<= colour 16)
+  (if (<= colour (count car *colours*))
       (let ((c (cdr (assoc colour *colours*))))
            (string-append "[38;5;" (x->string c) "m" str "[0m")
            )
