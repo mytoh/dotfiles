@@ -7,6 +7,9 @@
 (use gauche.parseopt)
 (use file.util)
 (use srfi-1)
+(use gauche.process)
+(use util.list)
+(use gauche.sequence)
 
 (define-constant *extension-colours*
       '((scm  . 72  )
@@ -143,9 +146,9 @@
         )
   )
 
-(define (normal-files directories)
+(define (normal-files directory)
   (let ((dotfile (lambda (f) (rxmatch->string #/.*\/(\.)[^\/]*$/ f)))
-        (files (directory-list directories :children? #t :add-path? #t)))
+        (files (directory-list directory :children? #t :add-path? #t)))
        (remove dotfile files)
   )
   )
@@ -213,7 +216,7 @@
 (define (ls-file directories allfiles)
   (let ((ls (lambda (dir)
               (for-each
-                (lambda (e) (display e) (newline))
+                (lambda (e) (display e) )
                 (map (lambda (f)
                        (format "~a " (print-filename f)))
                      (if allfiles
@@ -222,19 +225,64 @@
                      )
                      )))))
        (if (null? directories)
-           (ls (current-directory))
+           (printcol (current-directory) allfiles)
            (let loop ((dirs  directories))
                 (if (null? dirs)
                     (read-from-string "") ;return EOF
                     (begin 
-                      (ls (car dirs))
+                      (printcol (car dirs) allfiles)
                       (loop (cdr dirs)))
                     )))
        ))
 
+(define (printcol directory allfiles)
+  (let* ((tabwidth 8)
+         (termwidth (string->number (process-output->string '(tput columns))))
+         (currentlist (directory-list directory :children? #t :add-path? #t))
+         (colwidth (logand (+ (apply max (map string-length (map sys-basename currentlist)))
+                              tabwidth) (lognot (- tabwidth 1))))
+         (num (length currentlist))
+         )
+    (if (< termwidth (* 2 colwidth))
+
+      (for-each
+        (lambda (e) (display e) (newline))
+        (map (lambda (f)
+               (format "~a" (print-filename f)))
+             (if allfiles
+                (cdr currentlist)
+               (normal-files  directory))))
+
+      (let*  ((numcols  (round->exact (/. termwidth colwidth)))
+              (numrows  (round->exact (/. num numcols))))
+        (let ((numrows-new (if  (< 0 (modulo num numcols))
+                             (+  numrows 1)
+                             numrows)))
+          (let ((lst (map (lambda (f)
+                            (print-filename f)
+                            ;(print numcols)
+                            )
+                          (if allfiles
+                            (cdr currentlist)
+                            (normal-files directory))))
+                )
+            (for-each
+              (lambda (e)
+            (display (format "~v'\ta" (round->exact (/. termwidth numcols)) e))
+            )
+              lst)
+                  )
+                )
+          ) ;let*
+      )
+    ) ;let*
+  ) ;define
+
+
 (define (usage)
   (print "help")
   )
+
 
 (define (main args)
   (let-args (cdr args)
