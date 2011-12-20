@@ -75,7 +75,7 @@
       ((fifo)      (make-colour 4 name ))
       ((symlink) (string-append (make-colour 5 name) (make-colour 2 "@")))
       ((socket)    (make-colour 6 name ))
-      (else        (make-colour 14 name))
+      (else        (make-colour 2 name))
       )
   )
   )
@@ -83,7 +83,7 @@
 
 (define (print-filename filename)
   (let*  ((file (sys-basename filename))
-          (type (file-type file :follow-link? #f))
+          (type (file-type filename :follow-link? #f))
           (extension  (path-extension file)))
     (if extension
       (if-let1 e (assoc (string->symbol extension) *extension-colours*)
@@ -284,8 +284,9 @@
              . directories)
             (cond (pf (ls-perm-file directories all))
               (psf (ls-perm-size-file directories all))
-              ((null? directories) (ls-file (list (current-directory)) all))
+              ;((null? directories) (ls-file (list (current-directory)) all))
               (else (ls-file directories all))
+              ;(else (write directories))
               )
             ) ;let-args
   )
