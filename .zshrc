@@ -133,7 +133,7 @@ REPORTTIME=3
 export GAUCHE_LOAD_PATH="$home/.gosh"
 export FTP_PASSIVE_MODE=true
 export G_FILENAME_ENCODING=@locale
-#export RLWRAP_HOME=~/.rlwrap
+export RLWRAP_HOME=~/.rlwrap
 export LISTMAX=0
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
@@ -1068,15 +1068,15 @@ s() {
     g|gauche|gosh)
       print "gauche"
       if [[ -e $home/.goshrc ]]; then
-      rlwrap -pBlue -b '(){}[].,#@;|' -c gosh -l $home/.goshrc
+      rlwrap -pBlue -b '(){}[].,#@;|' -c gosh -l $home/.goshrc 
       else
-      rlwrap -pBlue -b '(){}[],#;| ' gosh 
+      rlwrap -pBlue -b '(){}[],#;| ' -c gosh 
     fi
 
       ;;
     sc|scsh)
       print "scsh"
-      rlwrap -pBlue -b '(){}[],#;| ' scsh
+      rlwrap -pBlue -b '(){}[],#;| ' scsh   
       ;;
     s4|scheme48)
       print "scheme48"
@@ -1084,7 +1084,7 @@ s() {
       ;;
     e|elk)
       print "elk"
-      rlwrap -pBlue -b '(){}[],#;| ' elk
+      rlwrap -pBlue -b '(){}[],#;| ' elk 
       ;;
     *)
       print "  g  gauche"
