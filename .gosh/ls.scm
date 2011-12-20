@@ -237,7 +237,7 @@
 
 (define (printcol directory allfiles)
   (let* ((tabwidth 8)
-         (termwidth (string->number (process-output->string '(tput columns))))
+         (termwidth (string->number (process-output->string '(tput cols))))
          (currentlist (directory-list directory :children? #t :add-path? #t))
          (colwidth (logand (+ (apply max (map string-length (map sys-basename currentlist)))
                               tabwidth) (lognot (- tabwidth 1))))
