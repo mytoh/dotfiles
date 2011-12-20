@@ -4,8 +4,8 @@
 #define NUMCOLORS     4       // need at least 3
 static const char colors[NUMCOLORS][ColLast][8] = {
     // border   foreground  background
-    { "#151515", "#6d6d6d", "#222222" },  // 0 = normal
-    { "#607080", "#607080", "#222222" },  // 1 = selected
+    { "#151515", "#6d6d6d", "#191919" },  // 0 = normal
+    { "#607080", "#2b425b", "#191919" },  // 1 = selected
     { "#607080", "#607080", "#6d6d6d" },  // 2 = urgent/warnig
     { "#ff0000", "#ffffff", "#ff0000" },  // 3 = error
     // add more here
@@ -21,13 +21,13 @@ static const double shade           = 0.8;      /* Opacity of inactive windows *
 static const double baropacity      = 0.95;     /* Opacity for status bar */
 
 /* tagging */
-static const char *tags[] = {"tyhjä", "pääte", "net", "media"};
+static const char *tags[] = { "pääte", "net", "media", "tyhjä" };
 
 static const Rule rules[] = {
   /* class        instance    title       tags mask     isfloating   monitor     opacity */
   { "Gimp",       NULL,       NULL,       0,            True,         -1,       -1   },
-  { "Firefox",    NULL,       NULL,       1 << 2,       False,        -1,       -1   },
-  { NULL,NULL,"Firefox Preferences",      1 << 1,       True,         -1,       -1  },
+  { "Firefox",    NULL,       NULL,       0 << 2,       False,        -1,       -1   },
+  { NULL,NULL,"Firefox Preferences",      1 << 2,       True,         -1,       -1  },
   { "Dialog",     NULL,       NULL,       0,            True,         -1,       0.90 },
   { "ROX-Filer",  NULL,       NULL,       0,            True,         -1,       0.90 },
   { "feh",        NULL,       NULL,       0,            True,         -1,       -1   },
