@@ -1160,6 +1160,7 @@ if check_com -c gosh; then
     alias futaba="gosh futaba-get.scm"
     alias spc2ubar="gosh space2underbar.scm"
   if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
+    alias ls="gosh ls.scm"
     alias la="gosh ls.scm -a"
     alias ll="gosh ls.scm -pfs"
     alias lla="gosh ls.scm -pfs -a"
@@ -1243,10 +1244,9 @@ case ${OSTYPE} in
     alias ls="ls  -F"
     ;;
   darwin*)
-    alias la="ls -G -a"
-    alias ll="ls -G -hlA "
-    alias ls="ls -G -F"
     alias mp2="/Applications/mplayer2.app/Contents/MacOS/mplayer-bin"
+    alias bsearch="brew search "
+    alias binst="brew install -v"
     squid_restart() {
       killall squid
       killall squid
