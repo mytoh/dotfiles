@@ -68,6 +68,7 @@ NeoBundle 'gregsexton/MatchTag'
 NeoBundle 'djjcast/mirodark'
 NeoBundle 'houtsnip/vim-emacscommandline'
 NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'h1mesuke/vim-alignta'
 " }}}
 
 " official vim-scripts repo {{{
