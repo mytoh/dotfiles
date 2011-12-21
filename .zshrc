@@ -289,28 +289,6 @@ zstyle ':completion:*:cd:*' tag-order local-directories path-directories
 
 # Prompts {{{
 
-# git prompt {{{
-# briancarper.net/tag/249/zsh 
-autoload -Uz vcs_info
-
-zstyle ':vcs_info:*' stagedstr '%F{28}● '
-zstyle ':vcs_info:*' unstagedstr '%F{11}●'
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' enable git svn
-
-_precmd_update_vcs_info_msg() {
-  if [[ -e $PWD/.git ]]; then
-    if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-      zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{blue}]'
-    } else {
-    zstyle ':vcs_info:*' formats ' [%F{green}%b%c%u%F{red}+%F{blue}]'
-  }
-fi
-vcs_info
-}
-
-precmd_functions+='_precmd_update_vcs_info_msg'
-# }}}
 
 # prompt vi mode {{{
 # http://chocokanpan.net/archives/224
@@ -347,28 +325,24 @@ precmd_functions+='setup_vi_prompt'
 
 setup_prompt(){ #{{{
   PROMPT=''
-  if [[ X$DISPLAY != "X" ]];then
+  if [[ -n $DISPLAY ]];then
     PROMPT+="%F{8}┌─%{$reset_color%}"
   else
     PROMPT+="%F{8}--%{$reset_color%}"
   fi
+  # current directory
   PROMPT+="%F{8}(%F{blue}%(5~,%-2~/../%2~,%~)%F{8})%{$reset_color%}"
-  # git prompt
-  gitprompt="%F{blue}${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%{$reset_color%}"
-  PROMPT+=$gitprompt
-  # ip
-  #ip="(%F{yellow}$(curl ifconfig.me 2>/dev/null)%{$reset_color%})"
-  #PROMPT+=$ip
+  # remote host
+  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
+    PROMPT+="%F{8}─(%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]')%F{8})"
   PROMPT+=$'\n'
-  if [[ X$DISPLAY != "X" ]];then
+  if [[ -n $DISPLAY ]];then
     PROMPT+="%F{8}└┈╸%F{100} "
   else
     PROMPT+="%F{8}->%{$reset_color%} "
   fi
   PROMPT2="%{$fg[cyan]%}%_%%%{$reset_color%} "
   SPROMPT="%{$fg[cyan]%}%r is correct? [n,y,a,e]:%{^[[m%} "
-  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-    PROMPT="%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') $PROMPT"
   if [[ $TERM != cons25 && $TERM != xterm ]]; then
     local muridana="%{$fg[cyan]%}(・x・) %{$reset_color%}"
     #RPROMPT=$muridana
@@ -475,9 +449,17 @@ fi
 
 chpwd_title () { printf "_`dirs -p|awk '{print $1;exit}'`\\" }
 chpwd_functions+='chpwd_title'
+if check_com -c gosh && [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
 chpwd_ls(){
+    gosh ls.scm
+}
+else
+chpwd_ls(){
+  emulate -L zsh
   ls -F
 }
+
+fi
 chpwd_functions+='chpwd_ls'
 chpwd_functions+='dirs'
 
@@ -1162,8 +1144,8 @@ if check_com -c gosh; then
   if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
     alias ls="gosh ls.scm"
     alias la="gosh ls.scm -a"
-    alias ll="gosh ls.scm -pfs"
-    alias lla="gosh ls.scm -pfs -a"
+    alias ll="gosh ls.scm -psf"
+    alias lla="gosh ls.scm -psf -a"
     alias l="gosh ls.scm "
   fi
 fi
@@ -1290,9 +1272,6 @@ case ${OSTYPE} in
     fbgenmmaker() {
       mmaker -f fluxbox
       echo "[include] (~/.fluxbox/usermenu)" >> ~/.fluxbox/menu 
-    }
-    chpwd_ls(){
-      ls -F -G
     }
   beastie() {
     echo '
