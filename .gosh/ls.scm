@@ -257,7 +257,7 @@
                (lst (drop* lst numcols))
                )
          (if (null? l)
-             (newline)
+             #t
              (begin
                ;(print l)
                (for-each
