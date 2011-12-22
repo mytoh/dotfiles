@@ -264,7 +264,6 @@
                  (lambda (e)
                    (display (format "~a\t"  (print-filename e))))
                  l)
-               (newline)
                (loop (take* lst numcols ) (drop* lst numcols))
                )))
 
