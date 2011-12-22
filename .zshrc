@@ -195,9 +195,6 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # remove duplicates
 typeset -U path cdpath  infopath
 typeset -U  fpath 
-typeset -Uga preexec_functions
-typeset -Uga precmd_functions
-typeset -Uga chpwd_functions
 
 # paths
 path=(
@@ -289,6 +286,29 @@ zstyle ':completion:*:cd:*' tag-order local-directories path-directories
 
 # Prompts {{{
 
+# git {{{
+autoload -Uz add-zsh-hook
+autoload -Uz vcs_info
+
+zstyle ':vcs_info:*' enable git svn hg bzr
+zstyle ':vcs_info:*' formats '(%s)-[%b]'
+zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
+zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
+zstyle ':vcs_info:bzr:*' use-simple true
+
+zstyle ':vcs_info:git:*' check_for-changes true
+zstyle ':vcs_info:git:*' stagedstr "+"
+zstyle ':vcs_info:git:*' unstagedstr "-"
+zstyle ':vcs_info:git:*' formats '(%s)-[%b] %c%u'
+zstyle ':vcs_info:git:*' actionformats '(%s)-[%b|%a] %c%u'
+
+function _precmd_update_vcs_info_msg() {
+  psvar=()
+  LANG=en_US.UTF-8 vcs_info
+  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+}
+add-zsh-hook precmd _precmd_update_vcs_info_msg
+# }}}
 
 # prompt vi mode {{{
 # http://chocokanpan.net/archives/224
@@ -302,13 +322,13 @@ bindkey -M vicmd "^M" accept_line
 
 zle-keymap-select() {
   VIMODE="${${KEYMAP/vicmd/nor}/(main|viins)/ins}"
-  setup_vi_prompt
+  _precmd_setup_vi_prompt
   zle reset-prompt
 }
 zle -N zle-keymap-select
 
 # set vi prompt
-setup_vi_prompt(){
+_precmd_setup_vi_prompt(){
   if [ ! $VIMODE ]; then
     VIMODE="ins"
   fi
@@ -320,7 +340,7 @@ else
   RPROMPT=$viprompt
 }
 
-precmd_functions+='setup_vi_prompt'
+add-zsh-hook precmd _precmd_setup_vi_prompt
 # }}}
 
 setup_prompt(){ #{{{
@@ -332,6 +352,8 @@ setup_prompt(){ #{{{
   fi
   # current directory
   PROMPT+="%F{8}(%F{blue}%(5~,%-2~/../%2~,%~)%F{8})%{$reset_color%}"
+  # git status
+  PROMPT+="%1(v|%F{green}%1v%f|)"
   # remote host
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
     PROMPT+="%F{8}─(%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]')%F{8})"
@@ -405,10 +427,10 @@ bindkey -v "^H" backward-delete-char # changing default
 
 # Functions {{{
 
-# preexec_update_title {{{
+# _preexec_update_title {{{
 if [[ "$TERM" == screen* ]]; then
-  preexec_functions+='preexec_update_title'
-  preexec_update_title() {
+  add-zsh-hook preexec _preexec_update_title
+  _preexec_update_title() {
     # see [zsh-workers:13180]
     # http://www.zsh.org/mla/workers/2000/msg03993.html
     emulate -L zsh
@@ -447,26 +469,25 @@ if [[ "$TERM" == screen* ]]; then
 fi
 #}}}
 
-chpwd_title () { printf "_`dirs -p|awk '{print $1;exit}'`\\" }
-chpwd_functions+='chpwd_title'
+_chpwd_title() { printf "_`echo $PWD|awk '{print $1;exit}'`\\" }
 if check_com -c gosh && [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
-chpwd_ls(){
+_chpwd_ls(){
     gosh ls.scm
 }
 else
-chpwd_ls(){
+_chpwd_ls(){
   emulate -L zsh
   ls -F
 }
 
 fi
-chpwd_functions+='chpwd_ls'
-chpwd_functions+='dirs'
+add-zsh-hook chpwd _chpwd_title
+add-zsh-hook chpwd _chpwd_ls
 
 _precmd_rehash(){
   rehash
 }
-precmd_functions+='_precmd_rehash'
+add-zsh-hook precmd _precmd_rehash
 
 tm() {
     tmux attach
@@ -560,7 +581,7 @@ hex() {
 
 #cd() {
 ## smart cd function, allows switching to /etc when running 'cd /etc/fstab'
-    #if (( ${#argv} == 1 )) && [[ -f ${1} ]]; then
+    #if (( ${#argv} == 1 )) && [[ -f $<1:> ]]; then
         #[[ ! -e ${1:h} ]] && return 1
         #print "Correcting ${1} to ${1:h}"
         #builtin cd ${1:h}
