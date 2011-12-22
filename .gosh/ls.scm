@@ -222,63 +222,57 @@
         (read-from-string "") ;return EOF
         (begin 
           (printcol (car dirs) allfiles)
-          (loop (cdr dirs)))
-        )))
-  )
+          (loop (cdr dirs)))))))
 
 (define (printcol directory allfiles)
   (let ((currentlist (directory-list directory :children? #t :add-path? #t)))
-     (if (null? currentlist)
-         #t
-  (let* ((tabwidth 8)
-         (termwidth (string->number (process-output->string '(tput cols))))
-         (maxwidth (logand (+ (apply max (map string-length (map sys-basename currentlist)))
-                              tabwidth) (lognot (- tabwidth 1))))
-         (num (length currentlist))
-         )
-    (if
-      (< termwidth (* 2 maxwidth))
-
-      (for-each
-        (lambda (e) (display e) (newline))
-        (map (lambda (f)
-               (format "~a" (print-filename f)))
-             (if allfiles
-               (cdr currentlist)
-               (normal-files  directory))))
-
-      (let*  ((numcols  (round->exact (/. termwidth maxwidth)))
-              (numrows  (round->exact (/. num numcols)))
-              (numrows-new (if  (< 0 (modulo num numcols))
-                             (+  numrows 1)
-                             numrows))
-              (lst (if allfiles
-                          (cdr currentlist)
-                          (normal-files directory)))
-              (col (round->exact (/. termwidth numcols))))
-    (let loop ((l (filter string? (take* lst numcols #t)))
-               (lst (filter string? (drop* lst numcols)))
-               )
-        
-         (if (null? l)
-             #t
-             (begin
-               ;(print l)
-               (for-each
-                 (lambda (e)
-                   (display (format "~a\t"  (print-filename e))))
-                 l)
-               (newline)
-               (loop (take* lst numcols ) (drop* lst numcols))
-               )))
-
-        ) ;let*
-      )
-    ) ;let*
-  ) ;if
-     )
-  ) ;define
-
+       (if (null? currentlist)
+           #t
+           (let* ((tabwidth 4)
+                  (termwidth (string->number (process-output->string '(tput cols))))
+                  (maxwidth (if allfiles 
+                                (logand (+ (apply max (map string-length (map sys-basename currentlist)))
+                                       tabwidth) (lognot (- tabwidth 1)))
+                                (logand (+ (apply max (map string-length (map sys-basename (normal-files directory))))
+                                       tabwidth) (lognot (- tabwidth 1)))
+                                )
+                                )
+                  (num (if allfiles (length currentlist) (length (normal-files directory))))
+                  )
+                 (if
+                   (< termwidth (* 2 maxwidth))
+                   (for-each
+                     (lambda (e) (display e) (newline))
+                     (map (lambda (f)
+                            (format "~a" (print-filename f)))
+                          (if allfiles
+                               currentlist
+                              (normal-files  directory))))
+                   (let*  ((numcols  (round->exact (/. termwidth maxwidth)))
+                           (numrows  (round->exact (/. num numcols)))
+                           (numrows-new (if  (< 0 (modulo num numcols))
+                                             (+  numrows 1)
+                                             numrows))
+                           (lst (if allfiles
+                                    currentlist
+                                    (normal-files directory)))
+                           (col (round->exact (/. termwidth numcols))))
+                          ;(print termwidth)
+                          ;(print maxwidth)
+                          ;(print numcols)
+                          (let loop ((l (filter string? (take* lst numcols #t)))
+                                     (lst (filter string? (drop* lst numcols))))
+                               (if (null? l)
+                                   #t
+                                   (begin
+                                     ;(print l)
+                                     (for-each
+                                       (lambda (e)
+                                         (display (format "~a\t"  (print-filename e))))
+                                       l)
+                                     (newline)
+                                     (loop (take* lst numcols ) (drop* lst numcols)))))
+                          )))))) 
 
 (define (usage)
   (print "help")
