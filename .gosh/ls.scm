@@ -229,7 +229,11 @@
 (define (printcol directory allfiles)
   (let* ((tabwidth 8)
          (termwidth (string->number (process-output->string '(tput cols))))
-         (currentlist (directory-list directory :children? #t :add-path? #t))
+         (currentlist (if allfiles 
+                          (directory-list directory :children? #t :add-path? #t)
+                          (let ((dotfile (lambda (f) (rxmatch->string #/.*\/(\.)[^\/]*$/ f)))
+                                (files (directory-list directory :children? #t :add-path? #t)))
+                               (remove dotfile files))))
          (maxwidth (logand (+ (apply max (map string-length (map sys-basename currentlist)))
                               tabwidth) (lognot (- tabwidth 1))))
          (num (length currentlist))
@@ -257,13 +261,14 @@
                (lst (drop* lst numcols))
                )
          (if (null? l)
-             (newline)
+             #t
              (begin
                ;(print l)
                (for-each
                  (lambda (e)
                    (display (format "~a\t"  (print-filename e))))
                  l)
+               (newline)
                (loop (take* lst numcols ) (drop* lst numcols))
                )))
 
