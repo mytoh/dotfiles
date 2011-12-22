@@ -6,9 +6,9 @@
 (use gauche.collection)
 (use gauche.parseopt)
 (use file.util)
-(use srfi-1)
+(use srfi-1) ;last
 (use gauche.process)
-(use util.list)
+(use util.list) ;take*
 (use gauche.sequence)
 
 (define-constant *extension-colours*
@@ -249,22 +249,25 @@
               (numrows-new (if  (< 0 (modulo num numcols))
                              (+  numrows 1)
                              numrows))
-              (lst (map (lambda (f)
-                          (print-filename f)
-                          )
-                        (if allfiles
+              (lst (if allfiles
                           (cdr currentlist)
-                          (normal-files directory))))
-              (col (round->exact (/. termwidth numcols)))
-              )
+                          (normal-files directory)))
+              (col (round->exact (/. termwidth numcols))))
+    (let loop ((l (take* lst numcols #t))
+               (lst (drop* lst numcols))
+               )
+         (if (null? l)
+             (newline)
+             (begin
+               ;(print l)
+               (for-each
+                 (lambda (e)
+                   (display (format "~a\t"  (print-filename e))))
+                 l)
+               (newline)
+               (loop (take* lst numcols ) (drop* lst numcols))
+               )))
 
-        (for-each
-          (lambda (e)
-            ;(display (format "~va" (+ col 40) e))
-            (display (format "~a\t"  e))
-            )
-          lst)
-        (newline)
         ) ;let*
       )
     ) ;let*
