@@ -353,7 +353,7 @@ setup_prompt(){ #{{{
   # current directory
   PROMPT+="%F{8}(%F{blue}%(5~,%-2~/../%2~,%~)%F{8})%{$reset_color%}"
   # git status
-  PROMPT+="─%1(v|%F{green}%1v%f|)"
+  PROMPT+="%1(v|%F{8}─%F{green}%1v%f|)"
   # remote host
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
     PROMPT+="%F{8}─(%{$fg[red]%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]')%F{8})"
