@@ -214,17 +214,26 @@
       )
     ))
 
-(define (ls-file directories allfiles)
+(define (ls-file directories allfiles dfirst)
   (if (null? directories)
-    (printcol (current-directory) allfiles)
+    (printcol (current-directory) allfiles dfirst)
     (let loop ((dirs  directories))
       (if (null? dirs)
         (read-from-string "") ;return EOF
         (begin 
-          (printcol (car dirs) allfiles)
+          (printcol (car dirs) allfiles dfirst)
           (loop (cdr dirs)))))))
 
-(define (printcol directory allfiles)
+(define (directory-first dirlist)
+  (receive (a b)
+    (partition 
+      file-is-directory?
+       dirlist)
+    (append a b)
+    )
+  )
+
+(define (printcol directory allfiles dfirst)
   (let ((currentlist (directory-list directory :children? #t :add-path? #t)))
        (if (null? currentlist)
            #t
@@ -234,28 +243,29 @@
                                 (logand (+ (apply max (map string-length (map sys-basename currentlist)))
                                        tabwidth) (lognot (- tabwidth 1)))
                                 (logand (+ (apply max (map string-length (map sys-basename (normal-files directory))))
-                                       tabwidth) (lognot (- tabwidth 1)))
-                                )
-                                )
-                  (num (if allfiles (length currentlist) (length (normal-files directory))))
+                                       tabwidth) (lognot (- tabwidth 1)))))
+                  (num (if allfiles 
+                           (length currentlist) 
+                           (length (normal-files directory))))
+                  (fullpath-list (cond ((and allfiles dfirst) 
+                                        (directory-first  currentlist))
+                                       (allfiles currentlist)
+                                       (dfirst   (directory-first (normal-files directory)))
+                                       (else (normal-files directory))
+                                       ))
                   )
-                 (if
-                   (< termwidth (* 2 maxwidth))
+                 (if (< termwidth (* 2 maxwidth))
                    (for-each
                      (lambda (e) (display e) (newline))
                      (map (lambda (f)
                             (format "~a" (print-filename f)))
-                          (if allfiles
-                               currentlist
-                              (normal-files  directory))))
+                          fullpath-list))
                    (let*  ((numcols  (round->exact (/. termwidth maxwidth)))
                            (numrows  (round->exact (/. num numcols)))
                            (numrows-new (if  (< 0 (modulo num numcols))
                                              (+  numrows 1)
                                              numrows))
-                           (lst (if allfiles
-                                    currentlist
-                                    (normal-files directory)))
+                           (lst fullpath-list)
                            (col (round->exact (/. termwidth numcols))))
                           ;(print termwidth)
                           ;(print maxwidth)
@@ -272,7 +282,7 @@
                                        l)
                                      (newline)
                                      (loop (take* lst numcols ) (drop* lst numcols)))))
-                          )))))) 
+                          ))))))
 
 (define (usage)
   (print "help")
@@ -284,12 +294,12 @@
             ((pf "pf")
              (psf "psf")
              (all "a|all")
+             (dfirst "d|directory-first")
              . directories)
             (cond (pf (ls-perm-file directories all))
               (psf (ls-perm-size-file directories all))
-              ;((null? directories) (ls-file (list (current-directory)) all))
-              (else (ls-file directories all))
-              ;(else (write directories))
+              (dfirst (ls-file directories all dfirst))
+              (else (ls-file directories all dfirst))
               )
             ) ;let-args
   )
