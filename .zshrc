@@ -1077,15 +1077,15 @@ s() {
       ;;
     sc|scsh)
       print "scsh"
-      rlwrap -pBlue -b '(){}[],#;| ' scsh   
+      rlwrap -pBlue -b '(){}[],#;| ' -c scsh   
       ;;
     s4|scheme48)
       print "scheme48"
-      rlwrap -pBlue -b '(){}[],#;| ' scheme48
+      rlwrap -pBlue -b '(){}[],#;| ' -c scheme48
       ;;
     e|elk)
       print "elk"
-      rlwrap -pBlue -b '(){}[],#;| ' elk 
+      rlwrap -pBlue -b '(){}[],#;| ' -c elk 
       ;;
     *)
       print "  g  gauche"
@@ -1161,11 +1161,11 @@ if check_com -c gosh; then
     alias futaba="gosh futaba-get.scm"
     alias spc2ubar="gosh space2underbar.scm"
   if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
-    alias ls="gosh ls.scm"
-    alias la="gosh ls.scm -a"
-    alias ll="gosh ls.scm -psf"
-    alias lla="gosh ls.scm -psf -a"
-    alias l="gosh ls.scm "
+    alias ls="gosh ls.scm -d"
+    alias la="gosh ls.scm -d -a"
+    alias ll="gosh ls.scm -d -psf"
+    alias lla="gosh ls.scm -d -psf -a"
+    alias l="gosh ls.scm -d"
   fi
 fi
 # suffix aliases
