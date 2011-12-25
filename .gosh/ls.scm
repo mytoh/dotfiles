@@ -293,7 +293,7 @@
   (let ((currentlist (directory-list directory :children? #t :add-path? #t)))
     (if (null? currentlist)
         #t
-      (let* ((tabwidth 4)
+      (let* ((tabwidth 2)
              (termwidth (string->number (process-output->string '(tput cols))))
              (maxwidth (if allfiles
                            (logand (+ (apply max (map string-length (map sys-basename currentlist)))
