@@ -470,7 +470,7 @@ fi
 _chpwd_title() { printf "_`echo $PWD|awk '{print $1;exit}'`\\" }
 if check_com -c gosh && [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
 _chpwd_ls(){
-    gosh ls.scm
+    gosh ls.scm -d
 }
 else
 _chpwd_ls(){
