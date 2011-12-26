@@ -145,13 +145,13 @@ function! s:vimrc.gauche() dict
     setlocal dictionary=~/.gosh_completions
   endif
   if filereadable('~/.vim/syntax/scheme.vim')
-   let is_gauche=1
+    let is_gauche=1
   endif
   if executable('scmindent.scm') 
     if executable('racket')
-    setlocal equalprg=scmindent.scm
+      setlocal equalprg=scmindent.scm
     endif
-    endif
+  endif
 endfunction
 
 aug myautocommands
