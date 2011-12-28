@@ -65,6 +65,8 @@ options.setPref("extensions.checkCompatibility.8.0",false);
 options.setPref("browser.fullscreen.autohide", false);
 options.setPref("browser.fullscreen.animateUp", 0);
 options.setPref("network.http.spdy.enabled", true);
+options.setPref("config.trim_on_minimize", true);
+options.setPref("dom.popup_allowed_events", "");
 
 EOM
 
@@ -87,10 +89,6 @@ style -name tab chrome://* <<EOM
   [>border: 1px solid #000000 !important;<]
 }
 
-
-.tab-background {
-  background-color: #000000 !important;
-}
 
 .scrollbox-innerbox {
   background-color: #121212 !important;
@@ -131,6 +129,7 @@ style -name toolbarbutton chrome://* <<EOM
 
 .toolbarbutton-menubutton-dropmarker {
   -moz-appearance: none !important;
+  color: #000000
   background-color: transparent !important;
 }
 EOM
@@ -141,5 +140,338 @@ background-color: #212121 !important;
 }
 EOM
 
+style -name delecious-sidebar chrome://* <<EOM
+#ybbookmarks-tree-tags *  {
+  -moz-appearance: none !important;
+  background-color: #121212 !important;
+}
+EOM
+
+style -name shingetsu http://localhost:8000/* <<EOM
+body {
+  background-color: #121212 !important;
+
+}
+EOM
+
+style -name vertical_tabbar chrome://* <<EOM
+/* 
+ style from vertical tabs addon
+ base.css
+ */
+ /* Ensure the statuspanel doesn't overlap with the tabs toolbar */
+statuspanel[mirror] {
+    pointer-events: none;
+}
+
+statuspanel:-moz-locale-dir(rtl)[mirror],
+statuspanel:-moz-locale-dir(ltr):not([mirror]) {
+    position: relative !important;
+    display: block;
+}
+
+statuspanel:-moz-locale-dir(rtl)[mirror] .statuspanel-inner,
+statuspanel:-moz-locale-dir(ltr):not([mirror]) .statuspanel-inner {
+    width: auto;
+    max-width: 50%;
+}
+
+/* Style the scrollbox for vertical arrangements. */
+.tabbrowser-arrowscrollbox > scrollbox {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+/* Since we get an actual scrollbar in this vertical arrangement, we
+   don't need these extra scroll buttons. */
+.tabbrowser-arrowscrollbox > .scrollbutton-up,
+.tabbrowser-arrowscrollbox > .scrollbutton-down {
+    visibility: collapse !important;
+}
+
+/* Ensure the tab favicon doesn't stretch. */
+.tab-icon-image {
+    max-width: 16px;
+    max-height: 16px;
+}
+
+/* Hide the original tab toolbar buttons. */
+.tabs-newtab-button {
+    visibility: collapse;
+}
+
+/* No special treatment for app tabs (for now). */
+.tabbrowser-tab[pinned] {
+    position: inherit;
+}
+.tabbrowser-tab[pinned] > .tab-text {
+    display: inherit;
+}
+
+/* Ensure the twisty image doesn't stretch. */
+.verticaltabs-twisty-container {
+    -moz-box-pack: start;
+    -moz-box-align: center;
+}
+
+/* Collapse/expand animation */
+.tabbrowser-tab[fadein]:not([pinned]) {
+    -moz-transition-property: visibility, height, min-height, max-height, padding-left;
+    -moz-transition-duration: .1s;
+    -moz-transition-timing-function: ease-out;
+}
+.verticaltabs-collapsed {
+    height: 0px !important;  /* animation shrinks height */
+    min-height: 0px !important;
+    max-height: 0px !important;
+    visibility: collapse;
+}
+
+/* osx.css */
+/* Background colour for the tree sidebar (light blue when window is
+   active, grey otherwise) */
+.tabbrowser-tabs {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-width: 10ex;
+    background: transparent !important;
+    background-color: #d4dde5 !important;
+}
+.tabbrowser-tabs:-moz-window-inactive {
+    background-color: #e8e8e8 !important;
+}
+
+.tabbrowser-arrowscrollbox > .arrowscrollbox-scrollbox {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Use the splitter to display the border of .tabbrowser-tabs */
+#verticaltabs-splitter {
+    width: 1px !important;
+    min-width: 1px !important;
+    background-image: none;
+    background-color: #404040;
+}
+#verticaltabs-splitter:-moz-window-inactive {
+    background-color: #868686;
+}
+
+/* Style tabs themselves.  Get rid of most of the initial XUL styling */
+.tabbrowser-tab {
+    -moz-box-pack: start;
+    -moz-box-flex: 0;
+    -moz-appearance: none !important;
+    background: transparent !important;
+    -moz-border-top-colors: none !important;
+    -moz-border-bottom-colors: none !important;
+    -moz-border-right-colors: none !important;
+    -moz-border-left-colors: none !important;
+    -moz-border-radius: 0 !important;
+    -moz-box-align: stretch !important;
+    margin: 0 !important;
+    padding: 2px 3px 2px 10px !important;
+    height: 21px !important;     /* height including border! */
+    min-height: 21px !important;
+    max-height: 21px !important;
+    text-align: left !important;
+    border: none;
+    border-top: 1px solid transparent !important;
+    overflow: hidden;  /* so that the heigh transition for collapsed works */
+}
+
+.tabbrowser-tab[selected="true"],
+.tabbrowser-tab[multiselect="true"] {
+    border-top: 1px solid #94A1C0 !important;
+    background: -moz-linear-gradient(top, #A0B0CF, #7386AB) repeat-x !important;
+}
+.tabbrowser-tab[selected="true"]:-moz-window-inactive,
+.tabbrowser-tab[multiselect="true"]:-moz-window-inactive {
+    border-top: 1px solid #979797 !important;
+    background: -moz-linear-gradient(top, #B4B4B4, #8A8A8A) repeat-x !important;
+}
+
+.tab-background-start, .tab-background-middle, .tab-background-end {
+    background-color: #121212 !important;
+}
+
+.tab-content {
+    margin-top: -1px !important;
+    border-width: 0 3px 0 0 !important;
+    -moz-border-image: none !important;
+}
+
+/* Keep the close button at a safe distance from the tab label. */
+.tab-close-button {
+    -moz-image-region: auto !important;
+    display: -moz-box;
+    margin-left: 3px;
+    list-style-image: url("resource://verticaltabs/skin/osx/closetab.png");
+    opacity: 0.27;  /* turn black into #b9b9b9 */
+}
+.tab-close-button:active {
+    opacity: 0.46;  /* turn black into #8a8a8a */
+}
+.tabbrowser-tab[selected="true"] .tab-close-button,
+.tabbrowser-tab[multiselect="true"] .tab-close-button {
+    list-style-image: url("resource://verticaltabs/skin/osx/closetab-white.png");
+    opacity: 1;
+}
+
+.tabbrowser-tab:not(:hover):not([selected="true"]) .tab-close-button {
+    visibility: collapse !important;
+}
+
+/* Always display the favicon at 100% opacity */
+.tabbrowser-tab .tab-icon-image {
+    opacity: 1.0 !important;
+}
+
+/* Ensure app tab labels are not too close to the icon. */
+.tab-label[pinned] {
+    margin: 2px 6px !important;
+}
+
+/* Tab label is without special decoration except when selected: then
+   the text is white and bold. */
+.tab-text {
+    font-size: 11px;
+    font-weight: normal !important;
+    color: #acacac !important;
+    text-shadow: none !important;
+    margin-bottom: 1px;
+}
+.tabbrowser-tab[selected="true"] .tab-text,
+.tabbrowser-tab[multiselect="true"] .tab-text {
+    font-weight: bold !important;
+    color: #ffffff !important;
+    text-shadow: 0 1px #404040 !important;
+}
+
+
+/* Drop indicator for drag'n'drop of tabs */
+.tab-drop-indicator {
+    list-style-image: url("resource://verticaltabs/skin/osx/dropmarker.png");
+    margin-top: -12px !important; /* height of the above image */
+    margin-bottom: 0 !important;
+}
+
+/* Tab toolbar styling */
+
+#TabsToolbar[tabsontop="false"]:not(:-moz-lwtheme),
+#TabsToolbar[tabsontop="false"]:not(:-moz-lwtheme):-moz-window-inactive {
+    background: none;
+    background-color: transparent;
+}
+
+#verticaltabs-groupbutton {
+    /* TODO need icon to symbolize tab group */
+    list-style-image: url("chrome://browser/skin/Toolbar.png");
+    -moz-image-region: rect(0, 280px, 20px, 260px);
+}
+
+
+
+/* Personas */
+
+.tabbrowser-tab > .tab-stack > .tab-background > .tab-background-start:-moz-lwtheme-brighttext:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-background > .tab-background-middle:-moz-lwtheme-brighttext:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-background > .tab-background-end:-moz-lwtheme-brighttext:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-background > .tab-background-start:-moz-lwtheme-darktext:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-background > .tab-background-middle:-moz-lwtheme-darktext:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-background > .tab-background-end:-moz-lwtheme-darktext:not([selected="true"]) {
+    background-image: none !important;
+}
+
+
+/*** Group related styles  ***/
+
+.tabbrowser-tab[verticaltabs-ingroup] {
+    padding-left: 20px !important;
+}
+
+.tabbrowser-tab[verticaltabs-group] {
+    padding-top: 1px !important;
+}
+
+.tabbrowser-tab[verticaltabs-group] .tab-close-button {
+    opacity: 1 !important;
+}
+
+.tabbrowser-tab[verticaltabs-group] .tab-text {
+    color: #738192 !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    text-shadow: 0 1px #ffffff !important;
+}
+.tabbrowser-tab[selected="true"][verticaltabs-group] .tab-text {
+    color: #ffffff !important;
+    text-shadow: 0 1px #404040 !important;
+}
+
+.verticaltabs-textbox {
+    font-size: 11px;
+    margin: 0 0 0 6px;
+}
+
+.verticaltabs-counter {
+    visibility: collapse;
+    font-size: 11px;
+    margin: 0;
+    padding: 0 6px;
+    height: 14px;
+    max-height: 14px;
+    -moz-border-radius: 8px;
+    background-color: #91a0c0;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: none;
+}
+.tabbrowser-tab[verticaltabs-collapsed="true"] .verticaltabs-counter {
+    visibility: visible;
+}
+.tabbrowser-tab[selected="true"] .verticaltabs-counter {
+    background-color: #ffffff;
+    color: #91a0c0;
+}
+.verticaltabs-counter:-moz-window-inactive {
+    background-color: #b5b5b5;
+}
+.tabbrowser-tab[selected="true"] .verticaltabs-counter:-moz-window-inactive {
+    background-color: #ffffff;
+    color: #929292;
+}
+
+.verticaltabs-droptarget {
+    border: 2px solid #577bf3 !important; /* not OSX's colour but Firefox's */
+    background: #d0def5 !important;
+    -moz-border-radius: 8px !important;
+    /* TODO avoid increasing the overall height */
+}
+
+.verticaltabs-dropingroup {
+    margin-left: 10px !important;
+}
+
+.verticaltabs-droptonewgroup {
+    /* TODO need icon to symbolize tab group */
+    list-style-image: url("chrome://browser/skin/Toolbar.png");
+    -moz-image-region: rect(0, 280px, 20px, 260px);
+}
+
+.verticaltabs-twisty {
+    list-style-image: url("resource://verticaltabs/skin/osx/twisty.png");
+    opacity: 0.38;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: .1s;
+}
+.tabbrowser-tab[verticaltabs-collapsed="true"] .verticaltabs-twisty {
+    -moz-transform: rotate(-90deg);
+}
+
+.verticaltabs-twisty:active {
+    opacity: 1.0;
+}
+EOM
 
 
