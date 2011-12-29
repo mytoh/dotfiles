@@ -159,6 +159,23 @@
 (define (print-filename filename)
   (let*  ((file (sys-basename filename))
           (type (file-type filename :follow-link? #f))
+          (realname (sys-realpath filename))
+          (extension  (path-extension file)))
+    (case type
+      ((symlink)  (if extension
+                      (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
+                               (string-append (colour-filename file type ext) " -> " (make-colour 4 realname))
+                               (string-append (colour-filename file type) " -> " (make-colour 4 realname)))
+                    (string-append (colour-filename file type) " -> " (make-colour 4 realname))))
+      (else (if extension
+                (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
+                         (colour-filename file type ext)
+                         (colour-filename file type))
+              (colour-filename file type))))))
+
+(define (print-filename-col filename)
+  (let*  ((file (sys-basename filename))
+          (type (file-type filename :follow-link? #f))
           (extension  (path-extension file)))
     (if extension
         (if-let1 e (assoc (string->symbol extension) *extension-colours*)
@@ -283,11 +300,11 @@
          (loop (cdr dirs)))))))
 
 (define (directory-first dirlist)
-  (receive (a b)
+  (receive (dirs files)
            (partition
             file-is-directory?
             dirlist)
-           (append a b)))
+           (append dirs files)))
 
 (define (printcol directory allfiles dfirst)
   (let ((currentlist (directory-list directory :children? #t :add-path? #t)))
@@ -312,7 +329,7 @@
             (for-each
              (lambda (e) (display e) (newline))
              (map (lambda (f)
-                    (format "~a" (print-filename f)))
+                    (format "~a" (print-filename-col f)))
                   fullpath-list))
           (let*  ((numcols  (round->exact (/. termwidth maxwidth)))
                   (numrows  (round->exact (/. num numcols)))
@@ -321,18 +338,14 @@
                                  numrows))
                   (lst fullpath-list)
                   (col (round->exact (/. termwidth numcols))))
-            ;(print termwidth)
-            ;(print maxwidth)
-            ;(print numcols)
             (let loop ((l (filter string? (take* lst numcols #t)))
                        (lst (filter string? (drop* lst numcols))))
               (if (null? l)
                   #t
                 (begin
-                 ;(print l)
                  (for-each
                   (lambda (e)
-                    (display (format "~a\t"  (print-filename e))))
+                    (display (format "~a\t"  (print-filename-col e))))
                   l)
                  (newline)
                  (loop (take* lst numcols ) (drop* lst numcols)))))))))))
