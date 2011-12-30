@@ -69,6 +69,12 @@ NeoBundle 'djjcast/mirodark'
 NeoBundle 'houtsnip/vim-emacscommandline'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'h1mesuke/vim-alignta'
+NeoBundle 'baskerville/bubblegum'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'basyura/twibill.vim'
+NeoBundle 'basyura/bitly.vim'
+NeoBundle 'basyura/TweetVim'
+
 " }}}
 
 " official vim-scripts repo {{{
