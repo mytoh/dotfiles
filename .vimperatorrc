@@ -11,7 +11,7 @@ set complete=lsb
 "- ddg with google suggestions 
 "  http://ddgg.nfriendly.com/#oneclick
 "- edit about:config/keyword.url for parameterize url
-set defsearch="duck"
+set defsearch="google"
 set editor="vim"
 set gui=notabs
 set toolbars=noaddons,nobookmarks,menu,nonavigation,tabs
@@ -38,7 +38,9 @@ autocmd VimperatorEnter ".*" :set complete+=D
 
 " user prefs
 js <<EOM
-options.setPref("browser.cache.memory.capacity", 32768);
+options.setPref("browser.cache.memory.enable", true);
+options.setPref("browser.cache.memory.capacity", 65536);
+options.setPref("browser.sessionhistory.max_total_viewers", 0);
 options.setPref("content.interrupt.parsing", true);
 options.setPref("content.max.tokenizing.time", 2250000);
 options.setPref("content.notify.backoffcount", 5);
@@ -132,6 +134,8 @@ style -name toolbarbutton chrome://* <<EOM
   color: #000000
   background-color: transparent !important;
 }
+
+
 EOM
 
 style -name pano chrome://* <<EOM
@@ -203,6 +207,7 @@ statuspanel:-moz-locale-dir(ltr):not([mirror]) .statuspanel-inner {
 /* No special treatment for app tabs (for now). */
 .tabbrowser-tab[pinned] {
     position: inherit;
+    max-width: 16px;
 }
 .tabbrowser-tab[pinned] > .tab-text {
     display: inherit;
@@ -234,6 +239,7 @@ statuspanel:-moz-locale-dir(ltr):not([mirror]) .statuspanel-inner {
     margin: 0 !important;
     padding: 0 !important;
     min-width: 10ex;
+    max-width: 100px;
     background: transparent !important;
     background-color: #d4dde5 !important;
 }
