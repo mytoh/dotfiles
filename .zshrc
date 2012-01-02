@@ -136,6 +136,9 @@ export G_FILENAME_ENCODING=@locale
 export RLWRAP_HOME=~/.rlwrap
 export LISTMAX=0
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+if [[ -d $HOME/local/stow ]]; then
+  export STOW=$HOME/local/stow
+fi
 
 # history
 HISTFILE=~/.zsh_history
@@ -1194,8 +1197,17 @@ fi
 
 xsource ~/perl5/perlbrew/etc/bashrc
 
+# plugins {{{
 xsource ~/.zsh.d/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 xsource ~/.zsh.d/plugins/zsh-syntax-highlighting-filetypes/zsh-syntax-highlighting-filetypes.zsh
+if xsource ~/.zsh.d/plugins/z-zsh/z.sh; then
+  _precmd_z-zsh() {
+    z --add "$(pwd -P)"
+  }
+  add-zsh-hook precmd _precmd_z-zsh
+fi
+
+# }}}
 
 #[[ -s $home/.rvm/scripts/rvm ]] && source $home/.rvm/scripts/rvm
 
