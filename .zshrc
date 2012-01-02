@@ -1113,7 +1113,6 @@ alias reboot="sync;sync;sync;sudo shutdown -r now"
 alias sudo="sudo -E "
 alias zln="noglob zmv -L -s -W"
 alias zmv='noglob zmv -v -W'
-alias mv='mv -iv'
 alias cp='cp -iv'
 alias rr='command rm -rfv'
 if check_com -c cdf ; then
@@ -1198,15 +1197,24 @@ fi
 xsource ~/perl5/perlbrew/etc/bashrc
 
 # plugins {{{
-xsource ~/.zsh.d/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-xsource ~/.zsh.d/plugins/zsh-syntax-highlighting-filetypes/zsh-syntax-highlighting-filetypes.zsh
-if xsource ~/.zsh.d/plugins/z-zsh/z.sh; then
-  _precmd_z-zsh() {
-    z --add "$(pwd -P)"
-  }
-  add-zsh-hook precmd _precmd_z-zsh
-fi
-
+_set-zsh-plugins() {
+  emulate -L zsh
+  ZSH="$HOME/.zsh.d"
+  ZSH_PLUGINS="$ZSH/plugins"
+  plugins=(zsh-syntax-highlighting)
+  for plugin ($plugins); do
+    xsource $ZSH_PLUGINS/$plugin/$plugin.plugin.zsh
+  done
+  xsource $ZSH_PLUGINS/zsh-syntax-highlighting-filetypes/zsh-syntax-highlighting-filetypes.zsh
+  xsource $ZSH_PLUGINS/z-zsh/z.sh
+  if [[ -e $ZSH_PLUGINS/z-zsh ]]; then
+    _precmd_z-zsh() {
+      z --add "$(pwd -P)"
+    }
+    add-zsh-hook precmd _precmd_z-zsh
+  fi
+}
+_set-zsh-plugins
 # }}}
 
 #[[ -s $home/.rvm/scripts/rvm ]] && source $home/.rvm/scripts/rvm
