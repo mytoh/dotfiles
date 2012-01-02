@@ -1,6 +1,6 @@
-xzft.dpi: 98
-xft.hinting: true
-xft.hintstyle: hintslight
+!xft.dpi: 98
+!xft.hinting: true
+!xft.hintstyle: hintslight
 Xcursor.theme: whiteglass
 
 !---------------
@@ -56,7 +56,7 @@ urxvt.boldFont: -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
 ! colors
 !----------------------------------
 !
-#include "/Users/kazuki/.xcolours/darkblue"
+#include "/home/mytoh/.xcolours/darkblue"
 !*color0: black
 !*color1: red3
 !*color2: green3

@@ -239,7 +239,6 @@ statuspanel:-moz-locale-dir(ltr):not([mirror]) .statuspanel-inner {
     margin: 0 !important;
     padding: 0 !important;
     min-width: 10ex;
-    max-width: 100px;
     background: transparent !important;
     background-color: #d4dde5 !important;
 }

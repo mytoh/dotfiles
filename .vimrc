@@ -500,6 +500,13 @@ let g:gist_show_privates = 1
 "let g:sudoAuth="ssh"
 "let g:sudoAuthArg="root@localhost"
 " }}}
+
+" syntastic {{{
+let g:syntastic_enable_balloons = 1
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_auto_loc_list = 2
+" }}}
 " }}}
 
 set secure

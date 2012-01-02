@@ -1195,6 +1195,7 @@ fi
 xsource ~/perl5/perlbrew/etc/bashrc
 
 xsource ~/.zsh.d/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+xsource ~/.zsh.d/plugins/zsh-syntax-highlighting-filetypes/zsh-syntax-highlighting-filetypes.zsh
 
 #[[ -s $home/.rvm/scripts/rvm ]] && source $home/.rvm/scripts/rvm
 
