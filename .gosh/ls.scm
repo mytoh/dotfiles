@@ -19,6 +19,7 @@
     (bat  . 2)
     (sh   . 2)
     (csh  . 2)
+
     (tar  . 1)
     (tgz  . 1)
     (arj  . 1)
@@ -44,6 +45,7 @@
     (cpio . 1)
     (7z   . 1)
     (rz   . 1)
+
     (jpg  . 5)
     (jpeg . 5)
     (gif  . 5)
@@ -58,6 +60,7 @@
     (mng  . 5)
     (xcf  . 5)
     (pcx  . 5)
+
     (mpg  . 5)
     (mpeg . 5)
     (m2v  . 5)
@@ -75,6 +78,16 @@
     (asf  . 5)
     (rm   . 5)
     (rmvb . 5)
+
+    (mp3  . 6)
+    (wav  . 6)
+    (mid  . 6)
+    (midi . 6)
+    (au   . 6)
+    (ogg  . 6)
+    (flac . 6)
+    (aac  . 6)
+
     (flc  . 5)
     (fli  . 5)
     (gl   . 5)
@@ -87,14 +100,7 @@
     (log  . 2)
     (tex  . 2)
     (doc  . 2)
-    (mp3  . 6)
-    (wav  . 6)
-    (mid  . 6)
-    (midi . 6)
-    (au   . 6)
-    (ogg  . 6)
-    (flac . 6)
-    (aac  . 6)
+
     (scm  . 72)
     (pl  . 72)
     (html . 38)
@@ -127,9 +133,10 @@
     ))
 
 
+
 (define (make-colour colour str)
   (if (<= colour (count car *colours*))
-      (let1 c (cdr (assoc colour *colours*))
+      (let1 c  (assoc-ref *colours* colour)
             (string-append "[38;5;" (x->string c) "m" str "[0m"))
     (string-append "[38;5;" (x->string colour) "m" str "[0m")))
 

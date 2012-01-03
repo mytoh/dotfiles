@@ -140,7 +140,6 @@
            )
        ) ;let*
  )
- 
 
 (define (futaba-get-all args )
   (let ((board (car args))
@@ -150,6 +149,40 @@
            (for-each 
              (lambda (d)
                (futaba-get (list board d))
+               )
+             dirs)
+           (print "no directories")
+           )
+       ) ;let
+  )
+
+(define (futaba-get-repeat args)
+ (let* ((board (car args))
+        (thread (cadr args))
+        (html (get-html board thread))
+        )
+       (if (string? html)
+           (begin
+             (display "[0;34m")
+             (print thread)
+             (display "[0m")
+             (mkdir thread)
+             (cd thread)
+             (get-img html board)
+             (cd ".."))
+             #t
+           )
+       ) ;let*
+  )
+
+(define (futaba-get-repeat-all args)
+  (let ((board (car args))
+        (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0))
+        )
+       (if (not (null? dirs))
+           (for-each 
+             (lambda (d)
+               (futaba-get-repeat (list board d))
                )
              dirs)
            (print "no directories")
@@ -167,8 +200,8 @@
      (cond ((null? restargs)
            (usage))
            ((and all repeat)
-            (forever (futaba-get-all restargs)))
-           (repeat (forever (futaba-get restargs)))
+            (forever (futaba-get-repeat-all restargs)))
+           (repeat (forever (futaba-get-repeat restargs)))
            (all
             (futaba-get-all restargs))
             (else

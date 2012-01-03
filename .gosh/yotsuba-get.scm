@@ -101,6 +101,33 @@
       (print "no directories")
       )))
 
+(define (yotsuba-get-repeat restargs )
+  (let* ((board (car restargs))
+         (thread (cadr restargs))
+         (html (get-html board thread)))
+    (if (string? html)
+        (begin
+         (display "[0;34m")
+         (print thread)
+         (display "[0m")
+         (mkdir thread)
+         (cd thread)
+         (get-img html board)
+         (cd ".."))
+        #t)))
+
+(define (yotsuba-get-repeat-all restargs )
+  (let ((bd (car restargs))
+        (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
+    (if (not (null? dirs))
+        (for-each
+         (lambda (d)
+           (yotsuba-get-repeat (list bd d)))
+         dirs)
+      (print "no directories")
+      )))
+
+
 
 (define (main args)
   (let-args (cdr args)
@@ -109,7 +136,7 @@
              (else (opt . _) (print "Unknown option: " opt) (usage))
              . restargs)
             (cond ((null? restargs) (usage))
-                  ((and all repeat) (forever (yotsuba-get-all restargs)))
-                  (repeat (forever (yotsuba-get restargs)))
+                  ((and all repeat) (forever (yotsuba-get-repeat-all restargs)))
+                  (repeat (forever (yotsuba-get-repeat restargs)))
                   (all (yotsuba-get-all restargs))
                   (else (yotsuba-get restargs)))))

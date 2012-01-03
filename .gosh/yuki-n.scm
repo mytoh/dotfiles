@@ -61,7 +61,7 @@
 (define (tput c)
   (run-process `(tput ,(symbol->string c)) :wait #t))
 
-(define (nap n)
+(define (休む n)
   (lazy (sys-nanosleep (* (expt 10 8) n))))
 
 (define (clear)
@@ -79,7 +79,7 @@
   (tput 'blink); set blink attr
   (display "_")
   (flush)
-  (force (nap n))
+  (force (休む n))
   (flush)
   (tput 'cub1) ;move left cursor
   (tput 'dch1) ;delete one character
@@ -87,7 +87,7 @@
 )
   
 (define (prompt s)
-  (force (nap 5))
+  (force (休む 5))
   (flush)
   (if (not (string? s))
       (tput s)
@@ -96,7 +96,7 @@
    (lambda (c)
      (display  c)
        (flush (standard-output-port))
-       (force (nap 1)) ; 0.x seconds
+       (force (休む 1)) ; 0.x seconds
      )
    (string->list s))
   (cursor 20)))
