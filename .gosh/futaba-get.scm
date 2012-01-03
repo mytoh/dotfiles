@@ -15,6 +15,14 @@
           "Usage: ~a board thread \n" "get")
   (exit 2))
 
+(define-syntax forever 
+  (syntax-rules ()
+    ((_ e1 e2 ...)
+     (let loop () e1 e2 ... 
+          (sys-nanosleep (* (expt 10 8) 3000)) ; sleep 5 minutes
+          (loop)))))
+
+
 (define (parse-img-url line board)
   (rxmatch->string (string->regexp (string-append "http\:\/\/(\\w+)\\.2chan\\.net\/(\\w+)\/" board "\/src\/[^\"]+")) line) 
  ) ;; "
@@ -153,10 +161,14 @@
 (define (main args)
   (let-args (cdr args)
      ((all "a|all")
+      (repeat "r|repeat")
       (else (opt . _) (print "Unknown option: " opt) (usage))
       . restargs)
      (cond ((null? restargs)
            (usage))
+           ((and all repeat)
+            (forever (futaba-get-all restargs)))
+           (repeat (forever (futaba-get restargs)))
            (all
             (futaba-get-all restargs))
             (else

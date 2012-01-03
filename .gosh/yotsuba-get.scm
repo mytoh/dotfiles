@@ -15,6 +15,13 @@
           "Usage: ~a board thread \n" "get")
   (exit 2))
 
+(define-syntax forever 
+  (syntax-rules ()
+    ((_ e1 e2 ...)
+     (let loop () e1 e2 ... 
+          (sys-nanosleep (* (expt 10 8) 3000)) ; sleep 5 minutes
+          (loop)))))
+
 (define (parse-img line)
  (rxmatch->string #/http\:\/\/images\.4chan\.org\/[^"]+/ line )
  ) 
@@ -98,8 +105,11 @@
 (define (main args)
   (let-args (cdr args)
             ((all "a|all")
+             (repeat "r|repeat")
              (else (opt . _) (print "Unknown option: " opt) (usage))
              . restargs)
             (cond ((null? restargs) (usage))
+                  ((and all repeat) (forever (yotsuba-get-all restargs)))
+                  (repeat (forever (yotsuba-get restargs)))
                   (all (yotsuba-get-all restargs))
                   (else (yotsuba-get restargs)))))
