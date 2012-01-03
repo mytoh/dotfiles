@@ -5,6 +5,8 @@
 (define (main args)
       (clear)
       (display " ")
+      (newline)
+      (newline)
       (cursor 50)
     (for-each
     (lambda (l)
@@ -17,7 +19,7 @@
     (fin))
 
 (define-constant *script*
-  '("YUKI.N>みえてる?"
+  '(" YUKI.N>みえてる?"
     " ああ"
     " YUKI.N>そっちの時空間とは
 \tまだ完全には連結を絶たれていない。
@@ -32,9 +34,28 @@
     " YUKI.N>涼宮ハルヒは
 \t何もない所から
 \t情報を生み出す力を
-\t持っていた。
-\tそれは情報統合思念体にも
-\tない力。"
+\t持っていた。"
+   clear
+   "\tそれは情報統合思念体にも
+    \tない力。"
+    clear
+    "\tその情報創造能力を解析すれば"
+    clear
+    "\t自立進化への糸口が
+     \tつかめるかもしれないと考えた。"
+     clear
+     " YUKI.N>あなたに賭ける。"
+     clear
+     " 何をだよ"
+     " YUKI.N>もう一度こちらへ回帰することを
+     \t我々は望んでいる。
+     \t涼宮ハルヒは重要な観察対象。
+     \tわたしという個体も
+     \tあなたには戻ってきて欲しいと感じている。"
+     clear
+     " YUKI.N>また図書館に"
+     clear
+     " YUKI.N> sleeping beauty"
        ))
 
 (define (tput c)
