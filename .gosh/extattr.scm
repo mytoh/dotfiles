@@ -30,9 +30,9 @@
            (out (string-split str #\space))
            )
       (print (car out))
-      (print (string-append "[38;5;89m" attr-name-space "[0m" "." "[38;5;30m" attr-name "[0m"
+      (print (string-append (make-colour 89 attr-name-space) "." (make-colour 30 attr-name)
                             " -> "
-                            "[38;5;60m" (cadr out) "[0m"))))
+                            (make-colour 60 (cadr out))))))
   
   (define (delete-attr args)
     (let ((attr-name-space (car args))
@@ -41,7 +41,7 @@
       (run-process `(rmextattr ,attr-name-space ,attr-name ,file-name))
       (print file-name)
       (display "removed ")
-      (print (string-append "[38;5;38m" attr-name-space "[0m" "." "[38;5;30m" attr-name "[0m"))))
+      (print (string-append (make-colour 38 attr-name-space) "." (make-colour 30 attr-name )))))
   
   (define (list-attr args)
     (let* ((attr-name-space (car args))
@@ -54,7 +54,7 @@
       (print file)
       (for-each
        (lambda (a)
-         (display (string-append "[38;5;30m" a "[0m"))
+         (display (string-append (make-colour 30 a)))
          (display " "))
        attributes)
       (newline)))
@@ -97,7 +97,7 @@
           (print resource)
       (for-each
        (lambda (a)
-         (display (string-append "[38;5;30m" a "[0m"))
+         (display (string-append (make-colour 30 a)))
          (display " "))
        attributes)
       (newline)))

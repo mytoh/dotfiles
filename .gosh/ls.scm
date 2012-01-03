@@ -146,20 +146,20 @@
       (let1 e  (cdar ecolour)
             (case type
               ((regular) (if (file-is-executable? name)
-                             (string-append (ls-make-colour e name) (ls-make-colour 2 "*"))
+                             #`",(ls-make-colour e name),(ls-make-colour 2 \"*\")"
                            (ls-make-colour e name)))
-              ((directory) (string-append (ls-make-colour e name) (ls-make-colour 2 "/")))
-              ((symlink)   (string-append (ls-make-colour e name) (ls-make-colour 2 "@")))
+              ((directory) #`",(ls-make-colour e name),(ls-make-colour 2 \"/\")")
+              ((symlink)   #`",(ls-make-colour e name),(ls-make-colour 2 \"@\")")
               (else        (ls-make-colour e name))))
     (case type
       ((regular)   (if (file-is-executable? name)
-                       (string-append (ls-make-colour 4 name) (ls-make-colour 2 "*"))
+                       #`",(ls-make-colour 4 name),(ls-make-colour 2 \"*\")"
                      (ls-make-colour 14 name )))
-      ((directory) (string-append (ls-make-colour 1 name) (ls-make-colour 2 "/")))
+      ((directory) #`",(ls-make-colour 1 name),(ls-make-colour 2 \"/\")")
       ((character) (ls-make-colour 2 name))
       ((block)     (ls-make-colour 3 name))
       ((fifo)      (ls-make-colour 4 name))
-      ((symlink)   (string-append (ls-make-colour 5 name) (ls-make-colour 2 "@")))
+      ((symlink)   #`",(ls-make-colour 5 name),(ls-make-colour 2 \"@\")")
       ((socket)    (ls-make-colour 6 name))
       (else        (ls-make-colour 2 name)))))
 

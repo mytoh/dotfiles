@@ -8,19 +8,13 @@
 (use gauche.collection) ;find
 (use gauche.parseopt)
 (use srfi-11)
+(load "util") ; forever
 
 
 (define (usage)
   (format (current-error-port)
           "Usage: ~a board thread \n" "get")
   (exit 2))
-
-(define-syntax forever 
-  (syntax-rules ()
-    ((_ e1 e2 ...)
-     (let loop () e1 e2 ... 
-          (sys-nanosleep (* (expt 10 8) 3000)) ; sleep 5 minutes
-          (loop)))))
 
 
 (define (parse-img-url line board)
