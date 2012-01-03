@@ -10,6 +10,7 @@
 (use gauche.process)
 (use util.list) ;take*
 (use gauche.sequence)
+(load "util.scm") ; make-colour
 
 (define-constant *extension-colours*
   '((cmd  . 2)
@@ -134,33 +135,33 @@
 
 
 
-(define (make-colour colour str)
+(define (ls-make-colour colour str)
   (if (<= colour (count car *colours*))
       (let1 c  (assoc-ref *colours* colour)
-            (string-append "[38;5;" (x->string c) "m" str "[0m"))
-    (string-append "[38;5;" (x->string colour) "m" str "[0m")))
+            (make-colour c str))
+    (make-colour colour str)))
 
 (define (colour-filename name type . ecolour)
   (if  (not (null? ecolour))
       (let1 e  (cdar ecolour)
             (case type
               ((regular) (if (file-is-executable? name)
-                             (string-append (make-colour e name) (make-colour 2 "*"))
-                           (make-colour e name)))
-              ((directory) (string-append (make-colour e name) (make-colour 2 "/")))
-              ((symlink)   (string-append (make-colour e name) (make-colour 2 "@")))
-              (else        (make-colour e name))))
+                             (string-append (ls-make-colour e name) (ls-make-colour 2 "*"))
+                           (ls-make-colour e name)))
+              ((directory) (string-append (ls-make-colour e name) (ls-make-colour 2 "/")))
+              ((symlink)   (string-append (ls-make-colour e name) (ls-make-colour 2 "@")))
+              (else        (ls-make-colour e name))))
     (case type
       ((regular)   (if (file-is-executable? name)
-                       (string-append (make-colour 4 name) (make-colour 2 "*"))
-                     (make-colour 14 name )))
-      ((directory) (string-append (make-colour 1 name) (make-colour 2 "/")))
-      ((character) (make-colour 2 name))
-      ((block)     (make-colour 3 name))
-      ((fifo)      (make-colour 4 name))
-      ((symlink)   (string-append (make-colour 5 name) (make-colour 2 "@")))
-      ((socket)    (make-colour 6 name))
-      (else        (make-colour 2 name)))))
+                       (string-append (ls-make-colour 4 name) (ls-make-colour 2 "*"))
+                     (ls-make-colour 14 name )))
+      ((directory) (string-append (ls-make-colour 1 name) (ls-make-colour 2 "/")))
+      ((character) (ls-make-colour 2 name))
+      ((block)     (ls-make-colour 3 name))
+      ((fifo)      (ls-make-colour 4 name))
+      ((symlink)   (string-append (ls-make-colour 5 name) (ls-make-colour 2 "@")))
+      ((socket)    (ls-make-colour 6 name))
+      (else        (ls-make-colour 2 name)))))
 
 
 (define (print-filename filename)
@@ -171,9 +172,9 @@
     (case type
       ((symlink)  (if extension
                       (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
-                               (string-append (colour-filename file type ext) " -> " (make-colour 4 realname))
-                               (string-append (colour-filename file type) " -> " (make-colour 4 realname)))
-                    (string-append (colour-filename file type) " -> " (make-colour 4 realname))))
+                               (string-append (colour-filename file type ext) " -> " (ls-make-colour 4 realname))
+                               (string-append (colour-filename file type) " -> " (ls-make-colour 4 realname)))
+                    (string-append (colour-filename file type) " -> " (ls-make-colour 4 realname))))
       (else (if extension
                 (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
                          (colour-filename file type ext)
@@ -197,10 +198,10 @@
          (p (string-join  (quasiquote
                            ,(map (lambda (char)
                                    (let ((c (digit->integer char))
-                                         (n (make-colour 0 "-"))
-                                         (r (make-colour 6 "r"))
-                                         (w (make-colour 7 "w"))
-                                         (x (make-colour 5 "x"))
+                                         (n (ls-make-colour 0 "-"))
+                                         (r (ls-make-colour 6 "r"))
+                                         (w (ls-make-colour 7 "w"))
+                                         (x (ls-make-colour 5 "x"))
                                          )
                                      (case c
                                        ((0) (string-append  n n n))
@@ -215,30 +216,30 @@
                                  lst))
                          "")))
     (case type
-      ((directory) (string-append (make-colour 1 "d") p))
-      ((block) (string-append (make-colour 2 "b") p))
-      ((character) (string-append (make-colour 3 "c") p))
-      ((symlink) (string-append (make-colour 4 "l") p))
-      ((fifo) (string-append (make-colour 6 "p") p))
-      ((socket) (string-append (make-colour 7 "s") p))
-      (else (string-append (make-colour 0 "-") p)))))
+      ((directory) (string-append (ls-make-colour 1 "d") p))
+      ((block) (string-append (ls-make-colour 2 "b") p))
+      ((character) (string-append (ls-make-colour 3 "c") p))
+      ((symlink) (string-append (ls-make-colour 4 "l") p))
+      ((fifo) (string-append (ls-make-colour 6 "p") p))
+      ((socket) (string-append (ls-make-colour 7 "s") p))
+      (else (string-append (ls-make-colour 0 "-") p)))))
 
 (define (print-size file)
   (let* ((filesize (file-size file))
          (size (cond
-                ((> filesize 1073741824) (string-append (make-colour 7 (number->string (truncate (/ (/ (/ filesize 1024) 1024) 1024)))) (make-colour 3 "G")))
-                ((> filesize 1048576) (string-append (make-colour 7 (number->string (truncate (/ (/ filesize 1024) 1024)))) (make-colour 7 "M")))
-                ((> filesize 1024)    (string-append (make-colour 7 (number->string (truncate (/ filesize 1024)))) (make-colour 2 "K")))
-                ((< filesize 1024)    (string-append (make-colour 7 (number->string filesize)) (make-colour 14 "B"))))))
+                ((> filesize 1073741824) (string-append (ls-make-colour 7 (number->string (truncate (/ (/ (/ filesize 1024) 1024) 1024)))) (ls-make-colour 3 "G")))
+                ((> filesize 1048576) (string-append (ls-make-colour 7 (number->string (truncate (/ (/ filesize 1024) 1024)))) (ls-make-colour 7 "M")))
+                ((> filesize 1024)    (string-append (ls-make-colour 7 (number->string (truncate (/ filesize 1024)))) (ls-make-colour 2 "K")))
+                ((< filesize 1024)    (string-append (ls-make-colour 7 (number->string filesize)) (ls-make-colour 14 "B"))))))
     (format "~35@a"
             size)))
 
 
 (define (print-delim num)
   (case num
-    ((1) (make-colour 0 "├"))
-    ((2) (make-colour 0 "┤"))
-    ((3) (make-colour 0 "│"))))
+    ((1) (ls-make-colour 0 "├"))
+    ((2) (ls-make-colour 0 "┤"))
+    ((3) (ls-make-colour 0 "│"))))
 
 (define (normal-files directory)
   (let ((dotfile (lambda (f) (rxmatch->string #/.*\/(\.)[^\/]*$/ f)))

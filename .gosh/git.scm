@@ -2,11 +2,10 @@
 
 (use gauche.process) ; run-process 
 (use file.util) ; directory-list, current-directory
+(load "util.scm") #; 'make-colour
 
 (define-constant gitdir  "~/local/git/")
 
-(define (make-colour colour str)
-    (string-append "[38;5;" (x->string colour) "m" str "[0m"))
 
 (define (update-gitdir gitdir)
   (let ((dirs (list (directory-list (expand-path gitdir) :children? #t :add-path? #t))))

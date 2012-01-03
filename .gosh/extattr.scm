@@ -2,6 +2,12 @@
 ; works on only freebsd
 (use gauche.process)
 (use gauche.parseopt)
+(load "util.scm") ; make-colour
+
+(define-constant *os*
+  (string->lowercase
+   (process-output->string '(uname -o)))
+  )
 
 (define (write-attr args)
   (let ((attr-name-space (car args))
@@ -10,9 +16,9 @@
        (file-name        (cadddr args)))
     (run-process `(setextattr ,attr-name-space ,attr-name ,attr-value ,file-name))
     (print file-name)
-    (print (string-append "[38;5;89m" attr-name-space "[0m" "." "[38;5;30m" attr-name "[0m"
+    (print (string-append (make-colour 89 attr-name-space) "." (make-colour 30 attr-name)
                           " -> "
-                          "[38;5;60m" attr-value "[0m"))))
+                          (make-colour 60 attr-value)))))
 
 (define (print-attr args)
   (let* ((attr-name-space (car args))
@@ -49,11 +55,9 @@
     (for-each
      (lambda (a)
        (display (string-append "[38;5;30m" a "[0m"))
-       (display " ")
-       )
+       (display " "))
      attributes)
-    (newline)
-    )
+    (newline))
   )
 
 (define (main args)
