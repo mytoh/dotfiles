@@ -22,7 +22,8 @@ do
   date="$(date +"%F %R")"
   release="$(uname -r)"
   kernel="$(uname -i)"
-  xsetroot -name "$icorb $kernel$release $iccpu $cpu $icmem $freemem $icdsk $disk $icnet $ip $icclk  $date"
+  mpd="$(mpc current)"
+  xsetroot -name "$icorb $kernel$release $iccpu $cpu $icmem $freemem $icdsk $disk $icnet $ip $icclk $date"
 done &
 
 while true
