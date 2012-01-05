@@ -18,3 +18,17 @@
           (sys-nanosleep (* (expt 10 8) 3000)) ; sleep 5 minutes
           (loop)))))
 
+
+(define get-os-type
+  #;"returns symbol"
+  (lambda ()
+   (string->symbol (string->lowercase
+    (process-output->string '(uname -s))))))
+
+(define (tap f x)
+  (f x) x)
+
+(define (p x)
+  (display x) 
+  (newline)
+  x)

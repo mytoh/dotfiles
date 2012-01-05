@@ -2,21 +2,16 @@
 ; works on only freebsd
 (use gauche.process)
 (use gauche.parseopt)
-(load "util.scm") ; make-colour string->lowercase
-
-(define-constant *os*
-  (string->lowercase
-   (process-output->string '(uname -o)))
-  )
+(load "util") ; make-colour string->lowercase
 
 (cond
- ((string=? *os* "freebsd")
+ ((eq? (get-os-type) 'freebsd)
   (define (write-attr args)
     (let ((attr-name-space (car args))
           (attr-name       (cadr args))
           (attr-value      (caddr args))
           (file-name        (cadddr args)))
-      (run-process `(setextattr ,attr-name-space ,attr-name ,attr-value ,file-name))
+      (run-process `(setextattr ,attr-name-space ,attr-name ,attr-value ,file-name) :wait #t)
       (print file-name)
       (print (string-append (make-colour 89 attr-name-space) "." (make-colour 30 attr-name)
                             " -> "
@@ -38,7 +33,7 @@
     (let ((attr-name-space (car args))
           (attr-name       (cadr args))
           (file-name        (caddr args)))
-      (run-process `(rmextattr ,attr-name-space ,attr-name ,file-name))
+      (run-process `(rmextattr ,attr-name-space ,attr-name ,file-name) :wait #t)
       (print file-name)
       (display "removed ")
       (print (string-append (make-colour 38 attr-name-space) "." (make-colour 30 attr-name )))))
@@ -60,7 +55,7 @@
       (newline)))
   )
 
- ((string=? *os* "darwin")
+ ((eq? (get-os-type) 'darwin)
   (define (print-attr args)
     (let* ((attr-name (car args))
            (file-name (cadr args))
@@ -74,7 +69,7 @@
     (let ((attr-name  (car args))
           (attr-value (cadr args))
           (file-name  (caddr args)))
-      (run-process `(xattr -w ,attr-name ,attr-value ,file-name))
+      (run-process `(xattr -w ,attr-name ,attr-value ,file-name) :wait #t)
       (print file-name)
       (print (string-append (make-colour 30 attr-name)
                             " -> "
@@ -83,7 +78,7 @@
   (define (delete-attr args)
     (let ((attr-name (car args))
           (file-name (cadr args)))
-      (run-process `(xattr -d  ,attr-name ,file-name))
+      (run-process `(xattr -d  ,attr-name ,file-name) :wait #t)
       (print file-name)
       (display "removed ")
       (print (make-colour 30 attr-name))))
@@ -102,9 +97,7 @@
        attributes)
       (newline)))
   )
-
  )
-
 
 (define (main args)
   (let-args (cdr args)
@@ -117,3 +110,4 @@
               (p (print-attr restargs))
               (d (delete-attr restargs))
               (else (list-attr restargs)))))
+
