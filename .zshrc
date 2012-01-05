@@ -141,7 +141,7 @@ if [[ -d $HOME/local/stow ]]; then
 fi
 
 # history
-HISTFILE=~/.zsh_history
+HISTFILE=~/.zsh-history
 HISTSIZE=50000
 SAVEHIST=$HISTSIZE
 
@@ -1162,6 +1162,7 @@ if check_com -c gosh; then
     alias yotsuba="gosh yotsuba-get.scm"
     alias futaba="gosh futaba-get.scm"
     alias spc2ubar="gosh space2underbar.scm"
+    alias ea="gosh extattr.scm"
   if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
     alias ls="gosh ls.scm -d"
     alias la="gosh ls.scm -d -a"
@@ -1212,6 +1213,9 @@ _set-zsh-plugins() {
       z --add "$(pwd -P)"
     }
     add-zsh-hook precmd _precmd_z-zsh
+  fi
+  if [[ -e $ZSH_PLUGINS/zsh-completions ]]; then
+    fpath=($ZSH_PLUGINS/zsh-completions $fpath)
   fi
 }
 _set-zsh-plugins
