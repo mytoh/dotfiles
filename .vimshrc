@@ -13,5 +13,7 @@ alias reboot='sync;sync;sync;sudo shutdown -r now'
 alias pkg_add='pkg_add -v'
 alias rr='rm -rf'
 alias feh='feh -ZB'
+alias md='mkdir -p'
+alias pd='popd'
+alias df='cdf -h'
 
-source (expand('~/.zshrc'))
