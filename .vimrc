@@ -55,19 +55,29 @@ set t_Co=256
 colorscheme jellybeans
 set background=dark
 
-" statusline
+" statusline {{{
 set laststatus=2
-"set statusline=%<%1*\ %f\ %m%r%h%w\ %1*%{fugitive#statusline()}%1*%=\ %1*%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %9*(・x・)%*\ 
-" statusline for buftabs plugin
-let s:muridana='%9*(・x・)%*'
-  "set statusline=\ %=\ %{fugitive#statusline()}%Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %*\ 
-  set statusline=\ %=\ %Y\ %{&fenc}\ %{&ff}\ %l/%L\ %c%V%8P\ %*\ 
 " highlight for statusline
 " set colorscheme above
 " User1-9 => %{1-9}*
 hi User1 ctermfg=white ctermbg=235 cterm=none
+hi User2 ctermfg=white ctermbg=237
 hi User9 ctermfg=4 ctermbg=235 cterm=none
-"hi link User2 Statement
+" statusline for buftabs plugin
+set stl=\   " left side
+set stl+=%= " separator
+set stl+=(%<%{fnamemodify(getcwd(),':~')})\   "get filepath
+set stl+=%{fugitive#statusline()}\  "git repo info
+set stl+=%y\  "filetype
+set stl+=%{&fenc}\  "fileencoding
+set stl+=%{&ff}\    "fileformat
+set stl+=%3.3b,%2.2B\  " ascii, hex under cursor
+set stl+=%l,  "current line number
+set stl+=%c   "columns
+set stl+=/%L\   "total line number
+set stl+=%3p%%\  "percentage of current line
+set stl+=%*    "reset color
+"}}}
 
 " set mouse
 set mouse=a
@@ -355,6 +365,15 @@ function! s:unite_my_settings()"{{{
 endfunction "}}}
 "}}}
 
+" unite-launch {{{
+    let g:unite_launch_apps = [
+	  \ 'rake',
+	  \ 'make',
+    \ 'scss2css',
+	  \ 'git pull',
+	  \ 'git push' ]
+"}}}
+
 " eskk{{{
 if has('vim_starting')
   let g:eskk#dictionary = {
@@ -455,7 +474,11 @@ aug vimshell
 		\ 'input' : vimshell#get_cur_text()})
 aug end
 
-nmap <leader>ss <plug>(vimshell_switch)
+nnoremap [vimshell] <nop>
+nmap     <leader>s [vimshell]
+nmap <silent> [vimshell]s <Plug>(vimshell_split_create)
+nmap <silent> [vimshell]c <Plug>(vimshell_create)
+nnoremap <silent> [vimshell]p :<c-u>VimShellPop<cr>
 "}}}
 
 " vimproc{{{
