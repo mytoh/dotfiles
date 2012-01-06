@@ -53,6 +53,7 @@ set showfulltag
 " colors
 set t_Co=256
 colorscheme jellybeans
+set background=dark
 
 " statusline
 set laststatus=2
@@ -83,6 +84,7 @@ set autoread
 set hidden
 set wildmenu
 set wildmode=list:full
+set wildignore+=*/.neocon/*
 set shortmess=atIToO
 set backspace=indent,eol,start
 set splitright
@@ -140,7 +142,6 @@ function! s:vimrc.xrdb() dict
 endfunction
 
 function! s:vimrc.gauche() dict
-  setlocal shiftwidth=1
   if filereadable('~/.gosh_completions')
     setlocal dictionary=~/.gosh_completions
   endif
@@ -252,6 +253,7 @@ inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType less setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
@@ -321,23 +323,25 @@ let g:bufstat_inactive_hl_group = "InactiveBuffer"
 "}}}
 
 " quickrun{{{
-if executable('gosh')
-  let g:quickrun_config = { '*': { 'split': ''}, 'scheme': { 'command': 'gosh'}}
-endif
+let g:quickrun_config = {}
+let g:quickrun_config['*'] = { 'runmode': "async:remote:vimproc", 'split': 'below', 'scheme': { 'command': 'gosh'}}
 "}}}
 
 " unite{{{
-"let g:unite_enable_start_insert=1
+let g:unite_enable_start_insert=1
 let g:unite_split_rule = "belowright"
 " fnamemodify() format
 " :help filename-modifiers
 let g:unite_source_file_mru_filename_format = ':p:~:.'
 let g:unite_source_file_mru_time_format = ''
+let g:unite_cursor_line_highlight = 'TabLineSel'
+let g:unite_abbr_highlight = 'TabLine'
 " keymaps
 nnoremap [unite] <Nop>
 nmap     <Leader>u [unite]
+nnoremap <silent> [unite]f  :<C-u>UniteWithBufferDir -buffer-name=files -prompt=%\  buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]c  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
 nnoremap <silent> [unite]b :<c-u>Unite bookmark<cr>
-nnoremap <silent> [unite]f :<c-u>Unite -buffer-name=files file<cr>
 nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
 
 autocmd FileType unite call s:unite_my_settings()
@@ -441,10 +445,14 @@ let g:vimshell_split_command = 'split'
 aug vimshell
   au!
   au filetype vimshell  call vimshell#hook#set('chpwd', ['g:my_chpwd'])
+  au filetype vimshell  call unite#custom_default_action('vimshell/history', 'insert')
   function! g:my_chpwd(args, context)
     call vimshell#execute('ls')
   endfunction
-  call unite#custom_default_action("vimshell/history", "insert")
+		inoremap <buffer><expr> <C-l> unite#start_complete(
+		\ ['vimshell/history'], {
+		\ 'start_insert' : 0,
+		\ 'input' : vimshell#get_cur_text()})
 aug end
 
 nmap <leader>ss <plug>(vimshell_switch)
@@ -501,11 +509,23 @@ let g:gist_show_privates = 1
 "let g:sudoAuthArg="root@localhost"
 " }}}
 
+" ctrlp.vim {{{
+
+let g:ctrlp_working_path_mode = 2
+
+" }}}
 " syntastic {{{
 let g:syntastic_enable_balloons = 1
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 2
+" }}}
+
+" indent-guides {{{
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg=235
+autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=233
 " }}}
 " }}}
 
