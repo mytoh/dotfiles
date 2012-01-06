@@ -8,6 +8,7 @@
 (use gauche.collection) ;find
 (use gauche.parseopt)
 (use srfi-11)
+(load "util")
 
 
 (define (usage )
@@ -124,8 +125,9 @@
          (lambda (d)
            (yotsuba-get-repeat (list bd d)))
          dirs)
-      (print "no directories")
-      )))
+      (print "no directories"))
+      (print (make-colour 237 "----------"))
+    ))
 
 
 

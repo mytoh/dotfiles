@@ -181,6 +181,7 @@
              dirs)
            (print "no directories")
            )
+       (print (make-colour 237 "----------"))
        ) ;let
   )
 
