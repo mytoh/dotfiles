@@ -1207,12 +1207,12 @@ _set-zsh-plugins() {
     xsource $ZSH_PLUGINS/$plugin/$plugin.plugin.zsh
   done
   xsource $ZSH_PLUGINS/zsh-syntax-highlighting-filetypes/zsh-syntax-highlighting-filetypes.zsh
-  xsource $ZSH_PLUGINS/z-zsh/z.sh
-  if [[ -e $ZSH_PLUGINS/z-zsh ]]; then
-    _precmd_z-zsh() {
-      z --add "$(pwd -P)"
+  xsource $ZSH_PLUGINS/z/z.sh
+  if [[ -e $ZSH_PLUGINS/z ]]; then
+    _precmd_z() {
+      _z --add "$(pwd -P)"
     }
-    add-zsh-hook precmd _precmd_z-zsh
+    add-zsh-hook precmd _precmd_z
   fi
   if [[ -e $ZSH_PLUGINS/zsh-completions ]]; then
     fpath=($ZSH_PLUGINS/zsh-completions $fpath)
