@@ -39,7 +39,7 @@
     (rkitover      vimpager)
     (GGLucas       vimperator-buftabs)
     (vimpr         vimperator-plugins)
-    (sjl           z-zsh)
+    (rupa           z)
     (zsh-users     zsh-completions)
     (zsh-users     zsh-syntax-highlighting)
     (trapd00r      zsh-syntax-highlighting-filetypes)
@@ -83,7 +83,7 @@
     *repos*)
     )
 
-(define (main )
+(define (main args)
   (let ((previous-directory (current-directory)))
   (current-directory *gitdir*)
   (print (string-append (make-colour 3 "cloning ") "repositories"))
