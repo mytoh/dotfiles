@@ -69,19 +69,15 @@
          (clone (cadr l))
          #t))
          (repo-url-directory-list))
-       #t
-  )
-)
+       #t))
 
 (define (repo-url-directory-list)
   (map
     (lambda (e)
       (cond ((string? e) (list (sys-basename (path-sans-extension e)) e))
             ((list? e)  (list (cadr e) #`"git://github.com/,(car e)/,(cadr e)"))
-            ((symbol? e) (list e #`"git@github.com:mytoh/,|e|"))
-            ))
-    *repos*)
-    )
+            ((symbol? e) (list e #`"git@github.com:mytoh/,|e|"))))
+    *repos*))
 
 (define (main args)
   (let ((previous-directory (current-directory)))
@@ -91,8 +87,6 @@
   (newline)
   (print (string-append (make-colour 8 "updating ") "repositories"))
   (update-gitdir)
-  (current-directory previous-directory)
-  )
-       )
+  (current-directory previous-directory)))
 
 
