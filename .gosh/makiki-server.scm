@@ -81,6 +81,13 @@
                   (a (@ (href "http://boards.4chan.org/u") (target "_blank")) "u" (span (@ (class popup)) "yuri"))
                   "))")
             ) ;div
+       (footer
+         (p (@ (id "ddg"))
+            (a (@ (href "http:/duckduckgo.com") (target "_blank")) "ddg")))
+         (form (@ (id "searchbox") (action "http://duckduckgo.com/?kl=jp-jp&kp=-1") (target "_blank"))
+               (input (@ (type "text") (name "q") (value "")))
+               (input (@ (type "submit") (value "Search")))
+               (input (@ (type "hidden") (name "t") (value ""))))
        ))
     )
   )))
