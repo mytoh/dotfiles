@@ -8,13 +8,14 @@
 (use makiki)
 (use sxml.tools)
 (use file.util)
+(load "util") ;daemonize
 
 (define (main args)
+  (daemonize
   (start-http-server :access-log #t :error-log #t
                      :document-root #`",(home-directory)/.site"
-                     :port 8888
-                     )
-  0)
+                     :port 8888))
+  )
 
 (define-http-handler #/^\/$/
   (^[req app]

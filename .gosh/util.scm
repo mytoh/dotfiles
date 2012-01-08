@@ -10,7 +10,7 @@
     #`"[38;5;,(x->string colour)m,|str|[0m")
 
 
-(define-syntax forever 
+(define-syntax forever
    #;"macro for endless loop"
   (syntax-rules ()
     ((_ e1 e2 ...)
@@ -32,3 +32,19 @@
   (display x) 
   (newline)
   x)
+
+(define (daemonize)
+  #;"make daemon process, function from gauche cookbook"
+  (proc)
+  (when (positive? (sys-fork))
+        (sys-exit 0))
+  (sys-setsid)
+  (sys-chdir "/")
+  (sys-umask 0)
+  (call-with-input-file "/dev/null"
+     (cut port-fd-dup! (standard-input-port) <>))
+  (call-with-output-file "/dev/null"
+    (lambda (out)
+      (port-fd-dup! (standard-output-port) out)
+      (port-fd-dup! (standard-error-port) out)))
+  )
