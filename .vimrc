@@ -13,6 +13,10 @@ language time C
 
 set nobackup
 set history=10000
+if has('persistent_undo')
+  set undodir=~/.vim/undo
+  set undofile
+endif
 set clipboard=autoselect
 set scrolloff=1
 set title
@@ -31,11 +35,13 @@ set timeoutlen=10000
 " indent
 set autoindent
 set smartindent
+set shiftround
 set smarttab
+
+" tab
 set expandtab
 set tabstop=2
-set softtabstop=2
-set shiftround
+set softtabstop&
 set shiftwidth=2
 
 " search
@@ -58,17 +64,19 @@ set background=dark
 " statusline {{{
 set laststatus=2
 " highlight for statusline
-" set colorscheme above
+" set colorscheme above these settings
 " User1-9 => %{1-9}*
 hi User1 ctermfg=white ctermbg=235 cterm=none
 hi User2 ctermfg=white ctermbg=237
 hi User9 ctermfg=4 ctermbg=235 cterm=none
 " statusline for buftabs plugin
-set stl=\   " left side
-set stl+=%= " separator
+set stl=     " clear statusline when reloaded
+set stl=\    " left side
+set stl+=%=  " separator
 set stl+=(%<%{fnamemodify(getcwd(),':~')})\   "get filepath
 set stl+=%{fugitive#statusline()}\  "git repo info
 set stl+=%y\  "filetype
+set stl+=%{&dictionary}
 set stl+=%{&fenc}\  "fileencoding
 set stl+=%{&ff}\    "fileformat
 set stl+=%3.3b,%2.2B\  " ascii, hex under cursor
@@ -163,6 +171,9 @@ function! s:vimrc.gauche() dict
       setlocal equalprg=scmindent.scm
     endif
   endif
+  call rainbow_parenthsis#LoadSquare ()
+  call rainbow_parenthsis#LoadRound ()
+  call rainbow_parenthsis#Activate ()
 endfunction
 
 aug myautocommands
@@ -173,6 +184,7 @@ aug myautocommands
   au bufread,bufnewfile .vimshrc,.vim-bundles    set filetype=vim
   au bufread,bufnewfile ~/.xcolours/*            set filetype=xdefaults
   au bufread,bufnewfile ~/.xcolours/*            ColorHighlight
+  au bufread,bufnewfile *.scss                   set filetype=scheme
   au filetype           xdefaults                call s:vimrc.xrdb()
   au bufwritepost       .vimrc                   source ~/.vimrc
   au bufwritepost       .zshrc                   silent !zcompile ~/.zshrc
@@ -235,27 +247,25 @@ aug end
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1 
 let g:neocomplcache_enable_ignore_case = 1 
-let g:neocomplcache_enable_camel_case_completion = 0
+let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_auto_select = 0
 let g:neocomplcache_dictionary_filetype_lists = {
       \ 'default'  : '',
       \ 'scheme'   : $HOME . '/.gosh_completions',
-      \ 'vimshell' : $HOME . '/.vimshell/command-history'
-      \ }
+      \ 'vimshell' : $HOME . '/.vimshell/command-history' }
 " Define keyword.
 if !exists('g:neocomplcache_keyword_patterns')
   let g:neocomplcache_keyword_patterns = {}
 endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neocomplcache_snippets_expand)
 smap <C-k>     <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 inoremap <expr><C-l>     neocomplcache#complete_common_string()
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><CR>  neocomplcache#close_popup() . "\<CR>"
+"inoremap <expr><CR>  neocomplcache#close_popup() . "\<CR>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
@@ -264,6 +274,7 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType less setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType scss setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
@@ -338,6 +349,7 @@ let g:quickrun_config['*'] = { 'runmode': "async:remote:vimproc", 'split': 'belo
 "}}}
 
 " unite{{{
+
 let g:unite_enable_start_insert=1
 let g:unite_split_rule = "belowright"
 " fnamemodify() format
@@ -345,7 +357,8 @@ let g:unite_split_rule = "belowright"
 let g:unite_source_file_mru_filename_format = ':p:~:.'
 let g:unite_source_file_mru_time_format = ''
 let g:unite_cursor_line_highlight = 'TabLineSel'
-let g:unite_abbr_highlight = 'TabLine'
+" let g:unite_abbr_highlight = 'TabLine'
+
 " keymaps
 nnoremap [unite] <Nop>
 nmap     <Leader>u [unite]
@@ -442,7 +455,6 @@ let g:eskk#show_annotation = 1
 "}}}
 
 " vimshell {{{
-"
 
 let g:vimshell_user_prompt = '"┌─" . "(" . fnamemodify(getcwd(), ":~") . ")"'
 let g:vimshell_prompt = '└┈╸ '
@@ -468,6 +480,7 @@ aug vimshell
   function! g:my_chpwd(args, context)
     call vimshell#execute('ls')
   endfunction
+  "inoremap <buffer> <expr><silent> <C-l>  unite#sources#vimshell_history#start_complete()
 		inoremap <buffer><expr> <C-l> unite#start_complete(
 		\ ['vimshell/history'], {
 		\ 'start_insert' : 0,
@@ -499,8 +512,7 @@ let g:changelog_spacing_errors = 0
 let g:netrw_nogx = 1
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
-let g:openbrowser_open_rules = {
-        \   'w3m':           '{browser} {shellescape(uri)} ', }
+let g:openbrowser_open_rules = { 'w3m': '{browser} {shellescape(uri)} ', }
 " }}}
 
 " ambicmd {{{
@@ -510,7 +522,7 @@ cnoremap <expr> <CR>    ambicmd#expand("\<CR>")
 " }}}
 
 " mpc.vim {{{
-let g:mpd_host = "192.168.1.3"
+let g:mpd_host = "localhost"
 let g:mpd_port = "6600"
 " }}}
 
@@ -537,6 +549,7 @@ let g:gist_show_privates = 1
 let g:ctrlp_working_path_mode = 2
 
 " }}}
+
 " syntastic {{{
 let g:syntastic_enable_balloons = 1
 let g:syntastic_enable_highlighting = 1
@@ -550,6 +563,8 @@ let g:indent_guides_start_level = 2
 autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg=235
 autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=233
 " }}}
+
+
 " }}}
 
 set secure
@@ -560,3 +575,4 @@ set secure
 " make install clean distclean
 
 " vim:set foldmethod=marker:
+

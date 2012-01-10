@@ -414,13 +414,11 @@ setup_prompt
 # bindkeys {{{
 bindkey -v
 # History search keymap {{{
-autoload history-search-end
+autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P"   history-beginning-search-backward-end
-bindkey "\\ep" history-beginning-search-backward-end
 bindkey "^N"   history-beginning-search-forward-end
-bindkey "\\en" history-beginning-search-forward-end
 bindkey "^R"   history-incremental-pattern-search-backward
 bindkey "^S"   history-incremental-pattern-search-forward
 # }}}
@@ -1239,9 +1237,9 @@ _set-zsh-plugins() {
     zle-line-init () {auto-fu-init;}; zle -N zle-line-init
       zle -N zle-keymap-select auto-fu-zle-keymap-select
     }
-    if [[ -e $ZSH_PLUGINS/auto-fu.zsh ]]; then
-      _auto-fu-set-up
-    fi
+    # if [[ -e $ZSH_PLUGINS/auto-fu.zsh ]]; then
+    #   _auto-fu-set-up
+    # fi
   }
 _set-zsh-plugins
 # }}}
