@@ -8,7 +8,7 @@
 (use makiki)
 (use sxml.tools)
 (use file.util)
-(load "util") ;daemonize
+(load "kirkasto") ;daemonize
 
 (define (main args)
   (daemonize

@@ -2,7 +2,7 @@
 ; works on only freebsd
 (use gauche.process)
 (use gauche.parseopt)
-(load "util") ; make-colour string->lowercase
+(load "kirjasto") ; make-colour string->lowercase
 
 (cond
  ((eq? (get-os-type) 'freebsd)

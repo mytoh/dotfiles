@@ -10,7 +10,7 @@
 (use gauche.process)
 (use util.list) ;take*
 (use gauche.sequence)
-(load "util.scm") ; make-colour
+(load "kirjasto") ; make-colour
 
 (define-constant *extension-colours*
   '((cmd  . 2)
