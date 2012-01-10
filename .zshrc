@@ -126,7 +126,6 @@ home=$HOME
 
 #export UNAME_r=9.9-CURRENT
 
-export LC_ALL=fi_FI.UTF-8
 export LANG=fi_FI.UTF-8
 REPORTTIME=3
 
@@ -267,6 +266,17 @@ zmodload zsh/complist
 
 # compdef {{{
 compdef _portmaster portbuilder 
+compdef _gosh gosh
+_gosh() {
+  _arguments -s : \
+    '::scheme files:_files -W $GAUCHE_LOAD_PATH -g "*.scm" ' \
+    ':file:_files' \
+    && return 0
+
+  _
+
+  return 1
+  }
 # }}}
 
 # Zstyles {{{
@@ -274,7 +284,8 @@ zstyle :compinstall filename $home/.zshrc
 zstyle ':completion:*' completer _oldlist _complete _match _ignored _approximate _prefix
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:default' menu select=2
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]=** r:|=*' '+l:|=*' '+m:{A-Z}={a-z}'
+# zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]=** r:|=*' '+l:|=*' '+m:{A-Z}={a-z}'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'  '+m:[-._]=[-._] r:|[-._]=** r:|=*' '+l:|=*' '+m:{A-Z}={a-z}'
 zstyle ':completion:*' format 'Completing %F{blue}%d%F{white}'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' use-cache on
@@ -410,8 +421,8 @@ bindkey "^P"   history-beginning-search-backward-end
 bindkey "\\ep" history-beginning-search-backward-end
 bindkey "^N"   history-beginning-search-forward-end
 bindkey "\\en" history-beginning-search-forward-end
-bindkey "^R"   history-incremental-search-backward
-bindkey "^S"   history-incremental-search-forward
+bindkey "^R"   history-incremental-pattern-search-backward
+bindkey "^S"   history-incremental-pattern-search-forward
 # }}}
 
 # vi mode keys {{{
@@ -857,6 +868,10 @@ aaa() {
   echo -ne '[55E'
 }
 
+exif-remove(){
+  mogrify -strip -verbose $*
+}
+
 # color functions {{{
 # functions from
 # http://crunchbanglinux.org/forums/post/126921/#p126921
@@ -1188,15 +1203,6 @@ alias -g '....'='../../..'
 alias -g '....'='../../../..'
 # }}}
 
-# misc {{{
-
-# set default browser
-if [[ -z "$BROWSER" ]] ; then
-        check_com -c w3m && export BROWSER=w3m
-fi
-
-xsource ~/perl5/perlbrew/etc/bashrc
-
 # plugins {{{
 _set-zsh-plugins() {
   emulate -L zsh
@@ -1217,9 +1223,38 @@ _set-zsh-plugins() {
   if [[ -e $ZSH_PLUGINS/zsh-completions ]]; then
     fpath=($ZSH_PLUGINS/zsh-completions $fpath)
   fi
-}
+
+  # auto-fu.zsh
+  _auto-fu-set-up(){
+    if [[ ! -e $ZSH_PLUGINS/auto-fu.zsh/auto-fu.zwc ]]; then
+      A=$ZSH_PLUGINS/auto-fu.zsh/auto-fu.zsh
+      (zsh -c "source $A; auto-fu-zcompile $A $ZSH_PLUGINS/auto-fu.zsh")
+    fi
+    source $ZSH_PLUGINS/auto-fu.zsh/auto-fu; auto-fu-install
+    zstyle ':auto-fu:highlight' input bold
+    zstyle ':auto-fu:highlight' completion fg=black,bold
+    zstyle ':auto-fu:highlight' completion/one fg=white,bold,underline
+    zstyle ':auto-fu:var' track-keymap-skip opp
+    #zstyle ':auto-fu:var' disable magic-space
+    zle-line-init () {auto-fu-init;}; zle -N zle-line-init
+      zle -N zle-keymap-select auto-fu-zle-keymap-select
+    }
+    if [[ -e $ZSH_PLUGINS/auto-fu.zsh ]]; then
+      _auto-fu-set-up
+    fi
+  }
 _set-zsh-plugins
 # }}}
+
+# misc {{{
+
+# set default browser
+if [[ -z "$BROWSER" ]] ; then
+        check_com -c w3m && export BROWSER=w3m
+fi
+
+xsource ~/perl5/perlbrew/etc/bashrc
+
 
 #[[ -s $home/.rvm/scripts/rvm ]] && source $home/.rvm/scripts/rvm
 
@@ -1290,7 +1325,6 @@ case ${OSTYPE} in
 
   linux*)
     export LANG=en_US.UTF-8
-    export LC_ALL=en_US.UTF-8
     if check_com -c ls++; then
       alias ls='ls++'
     fi
