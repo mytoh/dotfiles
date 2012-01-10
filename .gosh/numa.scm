@@ -4,7 +4,7 @@
 (use rfc.http)
 (use gauche.parseopt)
 (use gauche.collection)
-(load "kirkasto")
+(load "kirjasto")
 
 (define (parse-img-url str)
   (let ((url (lambda (line) 

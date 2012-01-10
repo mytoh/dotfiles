@@ -1,6 +1,6 @@
 #!/usr/bin/env gosh
 
-(load "kirkasto") ;swget,mkdir,cd,make-colour
+(load "kirjasto") ;swget,mkdir,cd,make-colour
 (use text.html-lite)
 (use sxml.ssax)
 (use sxml.sxpath)

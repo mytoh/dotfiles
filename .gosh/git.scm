@@ -2,7 +2,7 @@
 
 (use gauche.process) ; run-process
 (use file.util) ; directory-list, current-directory
-(load "kirkasto") #; 'make-colour
+(load "kirjasto") #; 'make-colour
 
 (define-constant *gitdir*  (expand-path "~/local/git/"))
 

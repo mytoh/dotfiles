@@ -8,7 +8,7 @@
 (use gauche.collection) ;find
 (use gauche.parseopt)
 (use srfi-11)
-(load "kirkasto")
+(load "kirjasto")
 
 
 (define (usage )

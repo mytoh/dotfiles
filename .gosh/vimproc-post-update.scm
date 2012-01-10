@@ -4,7 +4,7 @@
 
 (use gauche.process)
 (use file.util)
-(load "kirkasto")
+(load "kirjasto")
 
 (let* ((hook-dir (current-directory)) #;"git_hook directory"
        (proc-dir (resolve-path (build-path hook-dir 'up 'up))) #;"vimproc directory"
