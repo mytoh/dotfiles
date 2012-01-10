@@ -27,14 +27,8 @@
                                                               (ssax:xml->sxml in ())))))
              (caddr (find-max
                      ((node-closure (ntype-names?? '(a))) page)
-                     :key (lambda (e) (x->number (caddr e))))
-                    ))
+                     :key (lambda (e) (x->number (caddr e))))))
            1
-           ; (pagination)
-           ;(rxmatch->string #/(?:<a href\=\"\/post\?page\=(\d+))/
-           ;str 1)
-           ; (rxmatch->string  #/\.\.\. <a href\=\"\/post\?page\=\d+\&amp\;tags/
-           ;                   str 1)
            ))
 
 
@@ -46,12 +40,11 @@
 (define (get-tags-pages tag)
   (let ((last (x->number (parse-last-page-number (get-tags-page 1 tag)))))
     (dotimes (num last)
-      (print (make-colour 99 (+ num 1)))
+      (print (string-append (make-colour 99 "getting page ") (make-colour 33 (+ num 1))))
       (map
        (lambda (u)
          (swget u))
        (parse-img-url (get-tags-page (+ num 1) tag))))))
-
 
 (define (main args)
   (let-args (cdr args)
@@ -62,3 +55,4 @@
             (get-tags-pages tag)
             (cd "..")))
 
+)
