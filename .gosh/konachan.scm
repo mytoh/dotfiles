@@ -1,6 +1,6 @@
 #!/usr/bin/env gosh
 
-(load "util")
+(load "util") ;swget,mkdir,cd,make-colour
 (use text.html-lite)
 (use sxml.ssax)
 (use sxml.sxpath)
@@ -37,17 +37,6 @@
            ;                   str 1)
            ))
 
-(define (parse-url url)
-  (rxmatch-let (rxmatch #/^http:\/\/([-A-Za-z\d.]+)(:(\d+))?(\/.*)?/ url)
-               (#f host #f port path)
-               (values host port path)))
-
-(define (swget url)
-  (receive (host port path) (parse-url url)
-           (let ((file (receive (a fname ext) (decompose-path path) (string-append fname "." ext))))
-             (if (not (file-is-readable? file))
-                 (http-get host path
-                           :sink (open-output-file file) :flusher (lambda (s h) (print file) #t))))))
 
 (define (get-tags-page page-number tag)
   (receive (status head body)
@@ -63,13 +52,6 @@
          (swget u))
        (parse-img-url (get-tags-page (+ num 1) tag))))))
 
-(define (mkdir dir)
-  (if (not (file-exists? dir))
-      (make-directory* dir)))
-
-(define (cd dir)
-  (if (file-is-directory? dir)
-      (current-directory dir)))
 
 (define (main args)
   (let-args (cdr args)
