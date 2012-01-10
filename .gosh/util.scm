@@ -1,5 +1,8 @@
 
 (use text.tr)
+(use gauche.net)
+(use file.util)
+(use rfc.http)
 
 (define string->lowercase
   (let1 ptr (build-transliterator "A-Z" "a-z")
@@ -11,7 +14,7 @@
 
 
 (define-syntax forever
-   #;"macro for endless loop"
+   ;;macro for endless loop
   (syntax-rules ()
     ((_ e1 e2 ...)
      (let loop () e1 e2 ... 
@@ -20,7 +23,7 @@
 
 
 (define get-os-type
-  #;"returns symbol"
+  ;;returns symbol
   (lambda ()
    (string->symbol (string->lowercase
     (process-output->string '(uname -s))))))
@@ -34,7 +37,7 @@
   x)
 
 (define (daemonize)
-  #;"make daemon process, function from gauche cookbook"
+  ;;make daemon process, function from gauche cookbook
   (proc)
   (when (positive? (sys-fork))
         (sys-exit 0))
@@ -48,3 +51,16 @@
       (port-fd-dup! (standard-output-port) out)
       (port-fd-dup! (standard-error-port) out)))
   )
+
+
+
+(define (swget url)
+  (let ((parse-url 
+  (rxmatch-let (rxmatch #/^http:\/\/([-A-Za-z\d.]+)(:(\d+))?(\/.*)?/ u)
+               (#f h #f pt ph)
+               (values h pt ph))))
+  (receive (host port path) (parse-url url)
+           (let ((file (receive (a fname ext) (decompose-path path) (string-append fname "." ext))))
+             (if (not (file-is-readable? file))
+                 (http-get host path
+                           :sink (open-output-file file) :flusher (lambda (s h) (print file) #t)))))))

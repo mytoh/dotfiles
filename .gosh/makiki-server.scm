@@ -27,7 +27,7 @@
            (link (@ (rel "stylesheet") (href "http://fonts.googleapis.com/css?family=Convergence") (type "text.css")))
            )
      (body
-       ; (img (@ (src "image/sicp-mod.png")))
+       (img (@ (class "bg") (src "image/sicp-mod.png") (alt "")))
        (div (@ (id "bookmark"))
             (p (@ (class "delicious"))
              "(" (a (@ (href "http://d.me") (target "_blank")) "delicious") (br)

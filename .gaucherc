@@ -2,5 +2,6 @@
 (use gauche.process)
 (use file.util)
 (use srfi-1)
+(load "util")
 
 (read-eval-print-loop #f #f #f (lambda () (display "gosh> ") (flush)))

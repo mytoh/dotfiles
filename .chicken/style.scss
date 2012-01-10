@@ -16,7 +16,7 @@
          (font-size ,font-size)
          (color "#404040")
          (background-color "#151515")
-         (background-image "url(../image/sicp-mod.png)")
+         ;(background-image "url(../image/sicp-mod.png)")
          (background-repeat no-repeat)
          (background-position "center center")
          (filter "mask(color=#151515)")
@@ -26,9 +26,22 @@
          (position relative)
          (width "500px")
          (margin-top "20px")
-         (margin-left "30px")
-         )
+         (margin-left "30px"))
+
+   (img.bg (min-height "100%")
+           ; (min-width  "1024px")
+           (height     "100%")
+           (position   fixed)
+           (top        "0")
+           (left       "50%")
+           (margin-left "-512px")
+           )
+
    (a (text-decoration none))
+
+
+   (|div#bookmark|
+      (position relative))
 
    ((// |#bookmark|)
    ((// a) (padding-right "3px"))
