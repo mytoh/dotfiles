@@ -87,6 +87,7 @@ NeoBundle 'Rykka/ColorV'
 NeoBundle 'Lokaltog/vim-easymotion'
 " NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'behaghel/Rainbow_Parenthsis_Bundle'
+NeoBundle 'kergoth/fish.vim'
 " }}}
 
 " official vim-scripts repo {{{

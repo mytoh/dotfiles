@@ -14,6 +14,7 @@
     "git://a-chinaman.com/nuscsh"
     "git://git.savannah.gnu.org/screen.git"
     "git://git.savannah.nongnu.org/stumpwm"
+    "git://gitorious.org/fish-shell/fish-shell.git"
     configs
     dotfiles
     (VoQn          Gauche-Color)
