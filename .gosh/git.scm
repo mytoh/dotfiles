@@ -18,6 +18,7 @@
     dotfiles
     (VoQn          Gauche-Color)
     (shirok        Gauche-makiki)
+    (shirok        Gauche-gtk2)
     (tmbinc        bgrep)
     (ninjaaron     bitocra)
     (koron         chalice)
