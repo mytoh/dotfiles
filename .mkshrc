@@ -37,10 +37,8 @@ for p in ~/local/bin; do
 done
 #}}}
 
-export SHELL=$MKSH MANWIDTH=80 LESSHISTFILE=-
 HISTFILE=~/.mksh_history
 HISTSIZE=999999
-
 
 # functions {{{
 
