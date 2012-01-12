@@ -42,6 +42,7 @@
     (GGLucas       vimperator-buftabs)
     (vimpr         vimperator-plugins)
     (rupa           z)
+    (clvv           f)
     (zsh-users     zsh-completions)
     (zsh-users     zsh-syntax-highlighting)
     (trapd00r      zsh-syntax-highlighting-filetypes)

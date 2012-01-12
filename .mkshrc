@@ -29,27 +29,68 @@ printf "%s%s%s\n%s"       \
 }
 PS1='$(set-prompt)'
 
+# environmet variables
 
 # path setting {{{
-for p in ~/local/bin; do
-  [[ -d $p/. ]] || continue
-  [[ :$PATH: = *:$p:* ]] || PATH=$p:$PATH
+# for p in /opt/X11/bin/         \
+#         ~/local/homebrew/bin  \
+#         ~/local/homebrew/sbin \
+#         ~/local/bin           \
+# do
+#   [[ -d $p/. ]] || \
+#   [[ :$PATH: = *:$p:* ]] || \
+#     PATH=${p}:${PATH}
+# done
+
+for p in \
+     /opt/X11/bin \
+    ~/local/homebrew/bin \
+    ~/local/homebrew/sbin \
+    ~/local/bin
+  do
+	[[ -d $p/. ]] || continue
+	[[ :$PATH: = *:$p:* ]] || PATH=$p:$PATH
 done
 #}}}
 
+MKSH=$(whence -p mksh)
+[[ $HOSTNAME = @(localhost|*([	 ])) ]] && HOSTNAME=$(ulimit -c 0;hostname 2>&-)
+export HOSTNAME
 export SHELL=$MKSH MANWIDTH=80 LESSHISTFILE=-
-HISTFILE=~/.mksh_history
-HISTSIZE=999999
+export HISTFILE=~/.mksh_history
+export HISTSIZE=999999
+export GAUCHE_LOAD_PATH=~/.gosh
+if [[ -d $HOME/local/stow ]]; then
+  export STOW=$HOME/local/stow
+fi
 
+export CDPATH=~/local:~/local/var
+
+#}}}
 
 # functions {{{
 
 # give MidnightBSD's laffer1 a bit of csh feeling
-function setenv {
+function setenv() {
 	eval export $1'="$2"'
 }
 
-function color-numbers {
+if whence -p gosh >&- && [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
+function cd {
+	builtin cd $@
+  gosh ls.scm -d
+}
+else
+  function cd {
+  buitin cd $@
+}
+fi
+
+function tm() {
+    tmux attach
+}
+
+function color-numbers() {
   for i in $(seq 000 16 255)
   do
     for j in $(seq ${i} $((i + 15)))
@@ -59,12 +100,53 @@ function color-numbers {
     echo
   done
 }
+
+function xsource() { # {{{
+# from grml zshrc
+# Check if we can read given files and source those we can.
+    if (( $# < 1 )) ; then
+        printf 'usage: xsource FILE(s)...\n' >&2
+        return 1
+    fi
+
+    while (( $# > 0 )) ; do
+        [[ -r "$1" ]] && source "$1"
+        shift
+    done
+    return 0
+}
+#}}}
+
+# aliases {{{
+if whence -p gosh >&- ; then
+    alias yotsuba='gosh yotsuba-get.scm'
+    alias futaba='gosh futaba-get.scm'
+    alias spc2ubar='gosh space2underbar.scm'
+    alias ea='gosh extattr.scm'
+  if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
+    alias ls='gosh ls.scm -d'
+    alias la='gosh ls.scm -d -a'
+    alias ll='gosh ls.scm -d -psf'
+    alias lla='gosh ls.scm -d -psf -a'
+    alias l='gosh ls.scm -d'
+  fi
+fi
+
+alias which='whence -p'
 #}}}
 
 # key bindings
 bind '^P'=search-history-up
 
-
+# misc {{{
+if [[ -e $HOME/local/git/f/f.sh ]]; then
+  xsource $HOME/local/git/f/f.sh
+  alias z='f -d -e cd'
+  alias v='f -e vim'
+  alias m='f -e mplayer'
+  alias o='f -e xdg-open'
+fi
+#}}}
 
 
 

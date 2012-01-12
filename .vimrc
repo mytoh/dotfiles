@@ -185,6 +185,7 @@ aug myautocommands
   au bufread,bufnewfile ~/.xcolours/*            set filetype=xdefaults
   au bufread,bufnewfile ~/.xcolours/*            ColorHighlight
   au bufread,bufnewfile *.scss                   set filetype=scheme
+  au bufread,bufnewfile .mkshrc                  set filetype=sh
   au filetype           xdefaults                call s:vimrc.xrdb()
   au bufwritepost       .vimrc                   source ~/.vimrc
   au bufwritepost       .zshrc                   silent !zcompile ~/.zshrc
