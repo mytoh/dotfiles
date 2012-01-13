@@ -1,4 +1,10 @@
 
+# options {{{
+set -o utf8-mode
+set -o ignoreeof
+set -o vi
+#}}}
+
 # variables
 blue="[38;5;004m"
 normal_color="[38;5;8m"
@@ -7,50 +13,76 @@ reset_color="[0m"
 
 # prompt
 function precmd {
-  local e=$?
+local e=$?
 
-  (( e )) && print -n "$e|"
+(( e )) && print -n "$e|"
 }
 
 
 function current_directory {
-	local d=${PWD:-?} p=~; [[ $p = ?(*/) ]] || \
-	d=${d/#$p/~}; local m=${%d} n p=...; (( m > 0 )) || m=${#d}
-	(( m > (n = (COLUMNS/3 < 7 ? 7 : COLUMNS/3)) )) && d=${d:(-n)} || \
-	p=; print -nr -- "$p$d"
+local d=${PWD:-?} p=~; [[ $p = ?(*/) ]] || \
+  d=${d/#$p/~}; local m=${%d} n p=...; (( m > 0 )) || m=${#d}
+(( m > (n = (COLUMNS/3 < 7 ? 7 : COLUMNS/3)) )) && d=${d:(-n)} || \
+  p=; print -nr -- "$p$d"
 }
 
 function set-prompt {
 printf "%s%s%s\n%s"       \
   "${blue}${precmd}" "${normal_color}┌─$reset_color" "${normal_color}(${blue}$(current_directory)${normal_color})"  \
-       "${normal_color}└┈╸${reset_color} "
-    
+  "${normal_color}└┈╸${reset_color} "
+
 
 }
 PS1='$(set-prompt)'
 
-# environmet variables
+# environmet variables {{{
 
-# path setting {{{
-# for p in /opt/X11/bin/         \
-#         ~/local/homebrew/bin  \
-#         ~/local/homebrew/sbin \
-#         ~/local/bin           \
-# do
-#   [[ -d $p/. ]] || \
-#   [[ :$PATH: = *:$p:* ]] || \
-#     PATH=${p}:${PATH}
-# done
-
+# path {{{
+function set-path {
+unset PATH
+local p
 for p in \
-     /opt/X11/bin \
-    ~/local/homebrew/bin \
-    ~/local/homebrew/sbin \
-    ~/local/bin
-  do
-	[[ -d $p/. ]] || continue
-	[[ :$PATH: = *:$p:* ]] || PATH=$p:$PATH
+  /sbin                \
+  /bin                 \
+  /usr/local/sbin      \
+  /usr/local/bin       \
+  /usr/sbin            \
+  /usr/bin             \
+  /usr/X11/bin         \
+  /usr/games           \
+  /opt/X11/bin         \
+  ~/local/homebrew/bin \
+  ~/local/homebrew/sbin \
+  ~/local/bin      ;
+do
+  [[ -d $p/. ]] || continue
+  [[ :$PATH: = *:$p:* ]] || PATH=$p:$PATH
 done
+export PATH
+}
+set-path
+
+function set-manpath {
+local m
+MANPATH="$(manpath)"
+for m in     \
+    /usr/share/man/              \
+    /usr/local/share/man         \
+    ~/local/homebrew/share/man \
+    ~/local/share/man \
+    ~/local/man ;    
+  do
+    [[ -d $m/. ]] || continue
+    [[ :$MANPATH: = *:$m:* ]] || MANPATH=$m:$MANPATH
+  done
+  export MANPATH
+}
+if [[ "$(uname -o)" != Freebsd ]]; then
+  set-manpath
+fi
+
+
+export CDPATH=~/local:~/local/var
 #}}}
 
 MKSH=$(whence -p mksh)
@@ -60,69 +92,89 @@ export SHELL=$MKSH MANWIDTH=80 LESSHISTFILE=-
 export HISTFILE=~/.mksh_history
 export HISTSIZE=999999
 export GAUCHE_LOAD_PATH=~/.gosh
+export DYLD_FALLBACK_LIBRARY_PATH=$HOME/local/lib:$HOME/local/homebrew/lib
 if [[ -d $HOME/local/stow ]]; then
   export STOW=$HOME/local/stow
 fi
 
-export CDPATH=~/local:~/local/var
+# pager
+export LESS='-i  -w -z-4 -g -M -X -F -R -P%t?f%f \
+  :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
 
+
+# set default browser
+if whence -p w3m >&-; then
+  export BROWSER=w3m
+fi
 #}}}
 
 # functions {{{
 
 # give MidnightBSD's laffer1 a bit of csh feeling
 function setenv() {
-	eval export $1'="$2"'
+eval export $1'="$2"'
 }
 
 if whence -p gosh >&- && [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
-function cd {
-	builtin cd $@
-  gosh ls.scm -d
+  function cd {
+  builtin cd "$@"
+  gosh ls.scm -d .
 }
 else
   function cd {
-  buitin cd $@
+  buitin cd "$@"
 }
 fi
 
 function tm() {
-    tmux attach
+tmux attach
 }
 
 function color-numbers() {
-  for i in $(seq 000 16 255)
+for i in $(seq 000 16 255)
+do
+  for j in $(seq ${i} $((i + 15)))
   do
-    for j in $(seq ${i} $((i + 15)))
-    do
-      echo -en "[38;5;${j}m $j [0m"
-    done
-    echo
+    echo -en "[38;5;${j}m $j [0m"
   done
+  echo
+done
 }
 
 function xsource() { # {{{
 # from grml zshrc
 # Check if we can read given files and source those we can.
-    if (( $# < 1 )) ; then
-        printf 'usage: xsource FILE(s)...\n' >&2
-        return 1
-    fi
+if (( $# < 1 )) ; then
+  printf 'usage: xsource FILE(s)...\n' >&2
+  return 1
+fi
 
-    while (( $# > 0 )) ; do
-        [[ -r "$1" ]] && source "$1"
-        shift
-    done
-    return 0
+while (( $# > 0 )) ; do
+  [[ -r "$1" ]] && source "$1"
+  shift
+done
+return 0
+}
+
+function ggr()  {
+# Search Google
+${BROWSER} "http://www.google.com/search?&num=100&q=$*"
 }
 #}}}
 
 # aliases {{{
 if whence -p gosh >&- ; then
-    alias yotsuba='gosh yotsuba-get.scm'
-    alias futaba='gosh futaba-get.scm'
-    alias spc2ubar='gosh space2underbar.scm'
-    alias ea='gosh extattr.scm'
+  alias yotsuba='gosh yotsuba-get.scm'
+  alias futaba='gosh futaba-get.scm'
+  alias spc2ubar='gosh space2underbar.scm'
+  alias ea='gosh extattr.scm'
   if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
     alias ls='gosh ls.scm -d'
     alias la='gosh ls.scm -d -a'
