@@ -3,6 +3,7 @@
 (use gauche.net)
 (use file.util)
 (use rfc.http)
+(use rfc.uri)
 
 (define string->lowercase
   (let1 ptr (build-transliterator "A-Z" "a-z")
@@ -61,14 +62,22 @@
   (if (file-is-directory? dir)
       (current-directory dir)))
 
+(define (whitespace->underbar str)
+  (regexp-replace-all #/\s+/ str "_")
+  )
+
+(define (whitespace->dash str)
+  (regexp-replace-all #/\s+/ str "-")
+  )
+
 
 (define (swget url)
   (let ((parse-url 
   (lambda (u) (rxmatch-let (rxmatch #/^http:\/\/([-A-Za-z\d.]+)(:(\d+))?(\/.*)?/ u)
                (#f h #f pt ph)
-               (values h pt ph)))))
+               (values h pt (uri-decode-string ph))))))
   (receive (host port path) (parse-url url)
-           (let ((file (receive (a fname ext) (decompose-path path) #`",|fname|.,|ext|")))
+           (let ((file (receive (a fname ext) (decompose-path (whitespace->dash path)) #`",|fname|.,|ext|")))
              (if (not (file-is-readable? file))
                  (http-get host path
                            :sink (open-output-file file) :flusher (lambda (s h) (print file) #t)))))))

@@ -2,7 +2,7 @@
 # options {{{
 set -o utf8-mode
 set -o ignoreeof
-set -o vi
+set -o emacs
 #}}}
 
 # variables
@@ -18,6 +18,10 @@ local e=$?
 (( e )) && print -n "$e|"
 }
 
+function reload-rc {
+source ~/.mkshrc
+}
+
 
 function current_directory {
 local d=${PWD:-?} p=~; [[ $p = ?(*/) ]] || \
@@ -27,13 +31,13 @@ local d=${PWD:-?} p=~; [[ $p = ?(*/) ]] || \
 }
 
 function set-prompt {
-printf "%s%s%s\n%s"       \
-  "${blue}${precmd}" "${normal_color}┌─$reset_color" "${normal_color}(${blue}$(current_directory)${normal_color})"  \
+printf "%s%s\n%s"       \
+  "${normal_color}┌─$reset_color" "${normal_color}(${blue}$(current_directory)${normal_color})"  \
   "${normal_color}└┈╸${reset_color} "
 
 
 }
-PS1='$(set-prompt)'
+PS1='$(reload-rc)$(precmd)$(set-prompt)'
 
 # environmet variables {{{
 
@@ -66,23 +70,23 @@ function set-manpath {
 local m
 MANPATH="$(manpath)"
 for m in     \
-    /usr/share/man/              \
-    /usr/local/share/man         \
-    ~/local/homebrew/share/man \
-    ~/local/share/man \
-    ~/local/man ;    
+  /usr/share/man/              \
+  /usr/local/share/man         \
+  ~/local/homebrew/share/man \
+  ~/local/share/man \
+  ~/local/man ;    
   do
     [[ -d $m/. ]] || continue
     [[ :$MANPATH: = *:$m:* ]] || MANPATH=$m:$MANPATH
   done
   export MANPATH
 }
-if [[ "$(uname -o)" != Freebsd ]]; then
+if [[ "$(uname -s)" != Freebsd ]]; then
   set-manpath
 fi
 
-
-export CDPATH=~/local:~/local/var
+# must contain "." for current directory
+export CDPATH=.:~/local:~/local/var
 #}}}
 
 MKSH=$(whence -p mksh)
@@ -157,7 +161,7 @@ if (( $# < 1 )) ; then
 fi
 
 while (( $# > 0 )) ; do
-  [[ -r "$1" ]] && source "$1"
+  [[ -r "$1" ]] && source "$1" > /dev/null 2>&1 ;
   shift
 done
 return 0
@@ -166,6 +170,13 @@ return 0
 function ggr()  {
 # Search Google
 ${BROWSER} "http://www.google.com/search?&num=100&q=$*"
+}
+
+function recent-directory() {
+find . -type d -exec stat -t {} \;|sort -r -n -k 13,13 |head -n "$1" |tail -n "$1" | sed 's/\ .*$//'
+}
+function recent-file() {
+command ls -c -t -1 |head -n "$1"|tail -n 1
 }
 #}}}
 
@@ -185,14 +196,19 @@ if whence -p gosh >&- ; then
 fi
 
 alias which='whence -p'
+alias rr='command rm -rfv'
+alias mkd='command mkdir -p'
+alias sumo='mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_haishin/asx/sumolive.asx'
+alias sumo2='mplayer mms://a776.l12513450775.c125134.a.lm.akamaistream.net/D/776/125134/v0001/reflector:50775'
+alias sumo3='mplayer mms://a792.l12513450791.c125134.a.lm.akamaistream.net/D/792/125134/v0001/reflector:50791'
 #}}}
 
 # key bindings
-bind '^P'=search-history-up
+bind ''=search-history-up
 
 # misc {{{
 if [[ -e $HOME/local/git/f/f.sh ]]; then
-  xsource $HOME/local/git/f/f.sh
+  xsource $HOME/local/git/f/f.sh 
   alias z='f -d -e cd'
   alias v='f -e vim'
   alias m='f -e mplayer'

@@ -66,23 +66,23 @@ set laststatus=2
 " highlight for statusline
 " set colorscheme above these settings
 " User1-9 => %{1-9}*
-hi User1 ctermfg=white ctermbg=235 cterm=none
-hi User2 ctermfg=white ctermbg=237
+hi User1 ctermfg=white ctermbg=233 cterm=none
+hi User2 ctermfg=60   ctermbg=233
 hi User9 ctermfg=4 ctermbg=235 cterm=none
 " statusline for buftabs plugin
 set stl=     " clear statusline when reloaded
-set stl=\    " left side
+set stl=%1*\    " left side
 set stl+=%=  " separator
-set stl+=(%<%{fnamemodify(getcwd(),':~')})\   "get filepath
+set stl+=%2*(%1*%<%{fnamemodify(getcwd(),':~')}%2*)%1*\   "get filepath
 set stl+=%{fugitive#statusline()}\  "git repo info
 set stl+=%y\  "filetype
 set stl+=%{&dictionary}
 set stl+=%{&fenc}\  "fileencoding
 set stl+=%{&ff}\    "fileformat
-set stl+=%3.3b,%2.2B\  " ascii, hex under cursor
-set stl+=%l,  "current line number
+set stl+=%2*(%1*%3.3b,%2.2B%2*)%1*\  " ascii, hex under cursor
+set stl+=%2*(%1*%l,  "current line number
 set stl+=%c   "columns
-set stl+=/%L\   "total line number
+set stl+=/%L%2*)%1*\   "total line number
 set stl+=%3p%%\  "percentage of current line
 set stl+=%*    "reset color
 "}}}
