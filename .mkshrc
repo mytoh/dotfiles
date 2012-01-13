@@ -12,16 +12,10 @@ green="[38;5;6m"
 reset_color="[0m"
 
 # prompt
-function precmd {
-local e=$?
-
-(( e )) && print -n "$e|"
-}
 
 function reload-rc {
 source ~/.mkshrc
 }
-
 
 function current_directory {
 local d=${PWD:-?} p=~; [[ $p = ?(*/) ]] || \
@@ -37,7 +31,7 @@ printf "%s%s\n%s"       \
 
 
 }
-PS1='$(reload-rc)$(precmd)$(set-prompt)'
+PS1='$(reload-rc)$(set-prompt)'
 
 # environmet variables {{{
 
@@ -81,7 +75,7 @@ for m in     \
   done
   export MANPATH
 }
-if [[ "$(uname -s)" != Freebsd ]]; then
+if [[ "$(uname -s)" != FreeBSD ]]; then
   set-manpath
 fi
 
