@@ -9,7 +9,7 @@
 (use srfi-1)
 
 (define (parse-img-url str)
-  (let ((url (lambda (line) (rxmatch->string (string->regexp (string-append "http\:\/\/konachan\\.com\/(image|jpeg)\/[^\"]+")) line))))
+  (let ((url (lambda (line) (rxmatch->string #/http\:\/\/konachan\\.com\/(image|jpeg)\/[^\"]+/ line))))
     (remove not ;; remove #f
             (delete-duplicates
              (call-with-input-string str
@@ -55,4 +55,3 @@
             (get-tags-pages tag)
             (cd "..")))
 
-)

@@ -3,10 +3,9 @@
 ;; lesser copy of ls++ by trapd00r
 ;; colour codes are hardcoded so edit this file
 
-(use gauche.collection)
 (use gauche.parseopt)
 (use file.util)
-(use srfi-1) ;last
+(use srfi-1) ;count
 (use gauche.process)
 (use util.list) ;take*
 (use gauche.sequence)
@@ -172,9 +171,9 @@
     (case type
       ((symlink)  (if extension
                       (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
-                               (string-append (colour-filename file type ext) " -> " (ls-make-colour 4 realname))
-                               (string-append (colour-filename file type) " -> " (ls-make-colour 4 realname)))
-                    (string-append (colour-filename file type) " -> " (ls-make-colour 4 realname))))
+                               #`",(colour-filename file type ext) -> ,(ls-make-colour 4 realname)"
+                               #`",(colour-filename file type) -> ,(ls-make-colour 4 realname)")
+                               #`",(colour-filename file type) -> ,(ls-make-colour 4 realname)"))
       (else (if extension
                 (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
                          (colour-filename file type ext)
@@ -192,9 +191,9 @@
       (colour-filename file type))))
 
 (define (print-permission f)
-  (let* ((perms (format #f "~3O" (file-perm f :follow-link? #f)))
+  (let* ((perm (format #f "~3O" (slot-ref (sys-stat f ) 'perm)))
          (type (file-type f :follow-link? #f))
-         (lst (map (lambda (e) (if (char-numeric? e) e #\0))(string->list perms)))
+         (lst (map (lambda (e) (if (char-numeric? e) e #\0)) (string->list perm)))
          (p (string-join  (quasiquote
                            ,(map (lambda (char)
                                    (let ((c (digit->integer char))
@@ -204,33 +203,33 @@
                                          (x (ls-make-colour 5 "x"))
                                          )
                                      (case c
-                                       ((0) (string-append  n n n))
-                                       ((1) (string-append  n n x))
-                                       ((2) (string-append  n w n))
-                                       ((3) (string-append  n w x))
-                                       ((4) (string-append  r n n))
-                                       ((5) (string-append  r n x))
-                                       ((6) (string-append  r w n))
-                                       ((7) (string-append  r w x))
+                                       ((0) #`",n,n,n")
+                                       ((1) #`",n,n,x")
+                                       ((2) #`",n,w,n")
+                                       ((3) #`",n,w,x")
+                                       ((4) #`",r,n,n")
+                                       ((5) #`",r,n,x")
+                                       ((6) #`",r,w,n")
+                                       ((7) #`",r,w,x")
                                        )))
                                  lst))
                          "")))
     (case type
-      ((directory) (string-append (ls-make-colour 1 "d") p))
-      ((block) (string-append (ls-make-colour 2 "b") p))
-      ((character) (string-append (ls-make-colour 3 "c") p))
-      ((symlink) (string-append (ls-make-colour 4 "l") p))
-      ((fifo) (string-append (ls-make-colour 6 "p") p))
-      ((socket) (string-append (ls-make-colour 7 "s") p))
-      (else (string-append (ls-make-colour 0 "-") p)))))
+      ((directory) #`",(ls-make-colour 1 \"d\"),p")
+      ((block)     #`",(ls-make-colour 2 \"b\"),p")
+      ((character) #`",(ls-make-colour 3 \"c\"),p")
+      ((symlink)   #`",(ls-make-colour 4 \"l\"),p")
+      ((fifo)      #`",(ls-make-colour 6 \"p\"),p")
+      ((socket)    #`",(ls-make-colour 7 \"s\"),p")
+      (else        #`",(ls-make-colour 0 \"-\"),p"))))
 
 (define (print-size file)
-  (let* ((filesize (file-size file))
+  (let* ((filesize (slot-ref (sys-stat file) 'size))
          (size (cond
-                ((> filesize 1073741824) (string-append (ls-make-colour 7 (number->string (truncate (/ (/ (/ filesize 1024) 1024) 1024)))) (ls-make-colour 3 "G")))
-                ((> filesize 1048576) (string-append (ls-make-colour 7 (number->string (truncate (/ (/ filesize 1024) 1024)))) (ls-make-colour 7 "M")))
-                ((> filesize 1024)    (string-append (ls-make-colour 7 (number->string (truncate (/ filesize 1024)))) (ls-make-colour 2 "K")))
-                ((< filesize 1024)    (string-append (ls-make-colour 7 (number->string filesize)) (ls-make-colour 14 "B"))))))
+                ((> filesize 1073741824) #`",(ls-make-colour 7 (number->string (truncate (/ (/ (/ filesize 1024) 1024) 1024)))),(ls-make-colour 3 \"G\")")
+                ((> filesize 1048576) #`",(ls-make-colour 7 (number->string (truncate (/ (/ filesize 1024) 1024)))),(ls-make-colour 7 \"M\")")
+                ((> filesize 1024)    #`",(ls-make-colour 7 (number->string (truncate (/ filesize 1024)))),(ls-make-colour 2 \"K\")")
+                ((< filesize 1024)    #`",(ls-make-colour 7 (number->string filesize)),(ls-make-colour 14 \"B\")"))))
     (format "~35@a"
             size)))
 

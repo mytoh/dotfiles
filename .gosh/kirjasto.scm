@@ -68,7 +68,7 @@
                (#f h #f pt ph)
                (values h pt ph)))))
   (receive (host port path) (parse-url url)
-           (let ((file (receive (a fname ext) (decompose-path path) (string-append fname "." ext))))
+           (let ((file (receive (a fname ext) (decompose-path path) #`",|fname|.,|ext|")))
              (if (not (file-is-readable? file))
                  (http-get host path
                            :sink (open-output-file file) :flusher (lambda (s h) (print file) #t)))))))
