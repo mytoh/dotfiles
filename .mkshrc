@@ -112,6 +112,16 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 if whence -p w3m >&-; then
   export BROWSER=w3m
 fi
+
+# named directories {{{
+# $ cd ~dir
+alias -d quatre=~/local/mnt/quatre
+alias -d desk=~/local/mnt/deskstar
+alias -d mypass=~/local/mnt/mypassport
+alias -d git=~/local/git
+alias -d ports=/usr/ports
+alias -d tmp=~/local/tmp
+# }}}
 #}}}
 
 # functions {{{
@@ -124,7 +134,7 @@ setenv() {
 if whence -p gosh >&- && [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
   cd() {
     builtin cd "$@" && \
-    gosh ls.scm -d .
+    command gosh ls.scm -d .
   }
 else
   cd() {
@@ -170,20 +180,48 @@ ggr()  {
 recent-file() {
 command ls -c -t -1 |head -n "$1"|tail -n 1
 }
+
+scm() {
+  case $1 in
+    g|gauche|gosh)
+      print "gauche"
+      rlwrap -pBlue -b '(){}[].,#@;| ' -c gosh 
+      ;;
+    sc|scsh)
+      print "scsh"
+      rlwrap -pBlue -b '(){}[],#;| ' -c scsh   
+      ;;
+    s4|scheme48)
+      print "scheme48"
+      rlwrap -pBlue -b '(){}[],#;| ' -c scheme48
+      ;;
+    e|elk)
+      print "elk"
+      rlwrap -pBlue -b '(){}[],#;| ' -c elk 
+      ;;
+    *)
+      print "  g  gauche"
+      print "  sc scsh"
+      print "  s4 scheme48"
+      print "  e elk"
+      ;;
+  esac
+}
+
 #}}}
 
 # aliases {{{
 if whence -p gosh >&- ; then
-  alias yotsuba='gosh yotsuba-get.scm'
-  alias futaba='gosh futaba-get.scm'
-  alias spc2ubar='gosh space2underbar.scm'
-  alias ea='gosh extattr.scm'
+  alias yotsuba='command gosh yotsuba-get.scm'
+  alias futaba='command gosh futaba-get.scm'
+  alias spc2ubar='command gosh space2underbar.scm'
+  alias ea='command gosh extattr.scm'
   if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
-    alias ls='gosh ls.scm -d'
-    alias la='gosh ls.scm -d -a'
-    alias ll='gosh ls.scm -d -psf'
-    alias lla='gosh ls.scm -d -psf -a'
-    alias l='gosh ls.scm -d'
+    alias ls='command gosh ls.scm -d'
+    alias la='command gosh ls.scm -d -a'
+    alias ll='command gosh ls.scm -d -psf'
+    alias lla='command gosh ls.scm -d -psf -a'
+    alias l='command gosh ls.scm -d'
   fi
 fi
 
@@ -200,6 +238,8 @@ bind ''=search-history-up
 
 # misc {{{
 if [[ -e $HOME/local/git/f/f.sh ]]; then
+  # MAX total score/weight, defaults to 2000
+  _F_MAX=10000
   xsource $HOME/local/git/f/f.sh 
   alias z='f -d -e cd'
   alias v='f -e vim'

@@ -66,6 +66,7 @@
                   (a (@ (href "http://www.reddit.com/r/scheme")    (target "_blank")) "scheme")
                   (a (@ (href "http://www.reddit.com/r/freebsd")    (target "_blank")) "freebsd")
                   (a (@ (href "http://www.reddit.com/r/screenshots")    (target "_blank")) "screenshots")
+                  (a (@ (href "http://www.reddit.com/r/commandline")    (target "_blank")) "commandline")
                   "))")
 
             (p (@ (class "fourchan"))
