@@ -84,8 +84,9 @@ export CDPATH=.:~/local:~/local/var
 #}}}
 
 MKSH=$(whence -p mksh)
+: ${EDITOR:=vim} ${TERM:=xterm} ${LANG:=en_GB.UTF-8}
 [[ $HOSTNAME = @(localhost|*([	 ])) ]] && HOSTNAME=$(ulimit -c 0;hostname 2>&-)
-export HOSTNAME
+export HOSTNAME EDITOR TERM LANG
 export SHELL=$MKSH MANWIDTH=80 LESSHISTFILE=-
 export HISTFILE=~/.mksh_history
 export HISTSIZE=999999
@@ -132,7 +133,7 @@ else
 fi
 
 tm() {
-  tmux attach
+  tmux -u attach
 }
 
 color-numbers() {
