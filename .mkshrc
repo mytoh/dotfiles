@@ -3,6 +3,7 @@
 set -o utf8-mode
 set -o ignoreeof
 set -o physical
+set -o trackall
 #}}}
 
 # variables
@@ -31,7 +32,7 @@ printf "%s%s\n%s"       \
 
 
 }
-PS1='$(reload-rc)$(set-prompt)'
+PS1='$(set-prompt)''$(reload-rc)'
 
 # environmet variables {{{
 
@@ -134,7 +135,7 @@ setenv() {
 if whence -p gosh >&- && [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
   cd() {
     builtin cd "$@" && \
-    command gosh ls.scm -d .
+      command gosh ls.scm -d .
   }
 else
   cd() {
@@ -208,6 +209,13 @@ scm() {
   esac
 }
 
+vim() {
+  if [ -n $DISPLAY ]; then
+    command vim $*
+  else
+    command vim -X $*
+  fi
+}
 #}}}
 
 # aliases {{{
@@ -216,6 +224,7 @@ if whence -p gosh >&- ; then
   alias futaba='command gosh futaba-get.scm'
   alias spc2ubar='command gosh space2underbar.scm'
   alias ea='command gosh extattr.scm'
+  alias unpack='command gosh unpack.scm'
   if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
     alias ls='command gosh ls.scm -d'
     alias la='command gosh ls.scm -d -a'

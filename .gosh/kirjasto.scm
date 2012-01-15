@@ -22,6 +22,14 @@
           (sys-nanosleep (* (expt 10 8) 3000)) ; sleep 5 minutes
           (loop)))))
 
+(define-syntax while
+  (syntax-rules ()
+    ((_ cond? body ...)
+     (let loop ()
+       (when cond?
+	 body ...
+	 (loop))))))
+
 
 (define get-os-type
   ;;returns symbol

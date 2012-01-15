@@ -12,8 +12,16 @@
 
 
 (define (usage )
-  (format (current-error-port)
-          "Usage: ~a board thread \n" "get")
+  (print "Usage: yotsuba board thread")
+  (print "  option)")
+  (print "\t-a|all      get thread number from directories under cwd")
+  (print "\t-r|repeat   repeat script with interval 5 minutes")
+  (print "\tboard       b g a v hc ...")
+  (print "\tthread      3839 2230 93988 482208 ...")
+  (print "  expamle) ")
+  (print "\t$ yotsuba b 999999        # get images from /b/999999 with repeat option" )
+  (print "\t$ yotsuba -r g 9999       # get images from /g/9999 with repeat option" )
+  (print "\t$ yotsuba -a b            # get images from b with directory name as thread number" )
   (exit 2))
 
 (define-syntax forever 
