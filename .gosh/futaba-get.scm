@@ -19,9 +19,9 @@
   (print "\tboard      only supports b,k,l,7,40")
   (print "\tthread      3839 2230 93988 482208 ...")
   (print "  expamle) ")
-  (print "\t$ yotsuba b 222222         # get images from /b/222222 with repeat option" )
-  (print "\t$ yotsuba -r id 9999       # get images from /id/9999 with repeat option" )
-  (print "\t$ yotsuba -a b             # get images from b with directory name as thread number" )
+  (print "\t$ futaba b 222222         # get images from /b/222222 with repeat option" )
+  (print "\t$ futaba -r id 9999       # get images from /id/9999 with repeat option" )
+  (print "\t$ futaba -a b             # get images from b with directory name as thread number" )
   (exit 2))
 
 
