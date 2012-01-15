@@ -5,11 +5,10 @@
 
 (use gauche.parseopt)
 (use file.util)
+(use gauche.process) ;process-output->string
 (use srfi-1) ;count
-(use gauche.process)
 (use util.list) ;take*
-(use gauche.sequence)
-(load "kirjasto") ; make-colour
+(use gauche.sequence) ;remove
 
 (define-constant *extension-colours*
   '((cmd  . 2)
@@ -136,9 +135,13 @@
 
 (define (ls-make-colour colour str)
   (if (<= colour (count car *colours*))
-      (let1 c  (assoc-ref *colours* colour)
-            (make-colour c str))
-    (make-colour colour str)))
+    (let1 c  (assoc-ref *colours* colour)
+          ((lambda (colour s)
+             #`"[38;5;,(x->string colour)m,|s|[0m")
+                   c str))
+          ((lambda (colour s)
+             #`"[38;5;,(x->string colour)m,|s|[0m")
+                   colour str)))
 
 (define (colour-filename name type . ecolour)
   (if  (not (null? ecolour))
@@ -163,26 +166,26 @@
       (else        (ls-make-colour 2 name)))))
 
 
-(define (print-filename filename)
+(define (print-filename filename stat)
   (let*  ((file (sys-basename filename))
-          (type (file-type filename :follow-link? #f))
+          (type (slot-ref stat 'type))
           (realname (sys-realpath filename))
           (extension  (path-extension file)))
     (case type
       ((symlink)  (if extension
                       (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
-                               #`",(colour-filename file type ext) -> ,(ls-make-colour 4 realname)"
-                               #`",(colour-filename file type) -> ,(ls-make-colour 4 realname)")
-                               #`",(colour-filename file type) -> ,(ls-make-colour 4 realname)"))
+                               #`",(colour-filename file type ext) -> ,(ls-make-colour 10 realname)"
+                               #`",(colour-filename file type) -> ,(ls-make-colour 10 realname)")
+                               #`",(colour-filename file type) -> ,(ls-make-colour 10 realname)"))
       (else (if extension
                 (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
                          (colour-filename file type ext)
                          (colour-filename file type))
               (colour-filename file type))))))
 
-(define (print-filename-col filename)
+(define (print-filename-col filename stat)
   (let*  ((file (sys-basename filename))
-          (type (file-type filename :follow-link? #f))
+          (type (slot-ref stat 'type))
           (extension  (path-extension file)))
     (if extension
         (if-let1 e (assoc (string->symbol extension) *extension-colours*)
@@ -190,9 +193,9 @@
                  (colour-filename file type))
       (colour-filename file type))))
 
-(define (print-permission f)
-  (let* ((perm (format #f "~3O" (slot-ref (sys-stat f ) 'perm)))
-         (type (file-type f :follow-link? #f))
+(define (print-permission f stat)
+  (let* ((perm (format #f "~3O" (slot-ref stat 'perm)))
+         (type (slot-ref stat 'type))
          (lst (map (lambda (e) (if (char-numeric? e) e #\0)) (string->list perm)))
          (p (string-join  (quasiquote
                            ,(map (lambda (char)
@@ -223,13 +226,13 @@
       ((socket)    #`",(ls-make-colour 7 \"s\"),p")
       (else        #`",(ls-make-colour 0 \"-\"),p"))))
 
-(define (print-size file)
-  (let* ((filesize (slot-ref (sys-stat file) 'size))
+(define (print-size file stat)
+  (let* ((filesize (slot-ref stat 'size))
          (size (cond
-                ((> filesize 1073741824) #`",(ls-make-colour 7 (number->string (truncate (/ (/ (/ filesize 1024) 1024) 1024)))),(ls-make-colour 3 \"G\")")
-                ((> filesize 1048576) #`",(ls-make-colour 7 (number->string (truncate (/ (/ filesize 1024) 1024)))),(ls-make-colour 7 \"M\")")
-                ((> filesize 1024)    #`",(ls-make-colour 7 (number->string (truncate (/ filesize 1024)))),(ls-make-colour 2 \"K\")")
-                ((< filesize 1024)    #`",(ls-make-colour 7 (number->string filesize)),(ls-make-colour 14 \"B\")"))))
+                ((> filesize 1073741824) #`",(ls-make-colour 7 (truncate (/ (/ (/ filesize 1024) 1024) 1024))),(ls-make-colour 3 \"G\")")
+                ((> filesize 1048576) #`",(ls-make-colour 7  (truncate (/ (/ filesize 1024) 1024))),(ls-make-colour 7 \"M\")")
+                ((> filesize 1024)    #`",(ls-make-colour 7  (truncate (/ filesize 1024))),(ls-make-colour 2 \"K\")")
+                ((< filesize 1024)    #`",(ls-make-colour 7  filesize),(ls-make-colour 14 \"B\")"))))
     (format "~35@a"
             size)))
 
@@ -255,14 +258,14 @@
                 (for-each
                  (lambda (e) (display e) (newline))
                  (map (lambda (f)
+                        (let1 stat (sys-lstat f)
                         (format "~a~10a~a~a~a~a"
                                 (print-delim 1)
-                                ;(print (file-perm f :follow-link? #f))
-                                (print-permission f)
+                                (print-permission f stat)
                                 (print-delim 2)
-                                (print-size f)
+                                (print-size f stat)
                                 (print-delim 3)
-                                (print-filename f)))
+                                (print-filename f stat))))
                       fullpath-list))))))
     (if (null? directories)
         (ls (current-directory))
@@ -278,12 +281,13 @@
               (for-each
                (lambda (e) (display e) (newline))
                (map (lambda (f)
+                      (let1 stat (sys-lstat f)
                       (format "~1a~10a~a~a"
                               (print-delim 1)
-                              (print-permission f)
+                              (print-permission f stat)
                               (print-delim 2)
-                              (print-filename f)
-                              ))
+                              (print-filename f stat)
+                              )))
                     (if allfiles
                         (directory-list dir :children? #t :add-path? #t)
                       (normal-files dir)))))))
@@ -336,7 +340,8 @@
             (for-each
              (lambda (e) (display e) (newline))
              (map (lambda (f)
-                    (format "~a" (print-filename-col f)))
+                    (let1 stat (sys-stat f)
+                    (format "~a" (print-filename-col f stat))))
                   fullpath-list))
           (let*  ((numcols  (round->exact (/. termwidth maxwidth)))
                   (numrows  (round->exact (/. num numcols)))
@@ -351,8 +356,9 @@
                   #t
                 (begin
                  (for-each
-                  (lambda (e)
-                    (display (format "~a\t"  (print-filename-col e))))
+                  (lambda (f)
+                    (let1 stat (sys-stat f)
+                    (display (format "~a\t"  (print-filename-col f stat)))))
                   l)
                  (newline)
                  (loop (take* lst numcols ) (drop* lst numcols)))))))))))
