@@ -234,9 +234,15 @@ if whence -p gosh >&- ; then
   fi
 fi
 
+if whence -p cdf >&- ; then
+  alias df='cdf -h'
+else
+  alias df='df -h'
+fi
 alias which='whence -p'
 alias rr='command rm -rfv'
 alias mkd='command mkdir -p'
+alias stow='stow --verbose=3'
 alias sumo='mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_haishin/asx/sumolive.asx'
 alias sumo2='mplayer mms://a776.l12513450775.c125134.a.lm.akamaistream.net/D/776/125134/v0001/reflector:50775'
 alias sumo3='mplayer mms://a792.l12513450791.c125134.a.lm.akamaistream.net/D/792/125134/v0001/reflector:50791'
@@ -247,9 +253,11 @@ bind ''=search-history-up
 
 # misc {{{
 if [[ -e $HOME/local/git/f/f.sh ]]; then
-  # MAX total score/weight, defaults to 2000
+  # MAX total score/weight, default is 2000
   _F_MAX=10000
   xsource $HOME/local/git/f/f.sh 
+  # ignore commands , default "_f cd ls echo"
+  _F_IGNORE+=" make gnumake gmake ./configure"
   alias z='f -d -e cd'
   alias v='f -e vim'
   alias m='f -e mplayer'

@@ -1,3 +1,17 @@
+(define-module kirjasto
+  (export string->lowercase
+          make-colour
+          forever
+          while
+          get-os-type
+          tap
+          p
+          daemonize
+          mkdir
+          cd
+          whitespace->dash
+          whitespace->underbar
+          swget)
 
 (use text.tr)
 (use gauche.net)
@@ -11,6 +25,7 @@
           (with-string-io str ptr))))
 
 (define (make-colour colour str)
+  ;; take any -> return string
     #`"[38;5;,(x->string colour)m,|str|[0m")
 
 
@@ -89,3 +104,7 @@
              (if (not (file-is-readable? file))
                  (http-get host path
                            :sink (open-output-file file) :flusher (lambda (s h) (print file) #t)))))))
+
+
+;; module end
+)

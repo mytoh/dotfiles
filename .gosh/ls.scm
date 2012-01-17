@@ -168,7 +168,7 @@
 
 (define (print-filename filename stat)
   (let*  ((file (sys-basename filename))
-          (type (slot-ref stat 'type))
+          (type (~ stat 'type))
           (realname (sys-realpath filename))
           (extension  (path-extension file)))
     (case type
@@ -185,7 +185,7 @@
 
 (define (print-filename-col filename stat)
   (let*  ((file (sys-basename filename))
-          (type (slot-ref stat 'type))
+          (type (ref stat 'type))
           (extension  (path-extension file)))
     (if extension
         (if-let1 e (assoc (string->symbol extension) *extension-colours*)
@@ -194,8 +194,8 @@
       (colour-filename file type))))
 
 (define (print-permission f stat)
-  (let* ((perm (format #f "~3O" (slot-ref stat 'perm)))
-         (type (slot-ref stat 'type))
+  (let* ((perm (format #f "~3O" (ref stat 'perm)))
+         (type (ref stat 'type))
          (lst (map (lambda (e) (if (char-numeric? e) e #\0)) (string->list perm)))
          (p (string-join  (quasiquote
                            ,(map (lambda (char)
@@ -227,7 +227,7 @@
       (else        #`",(ls-make-colour 0 \"-\"),p"))))
 
 (define (print-size file stat)
-  (let* ((filesize (slot-ref stat 'size))
+  (let* ((filesize (ref stat 'size))
          (size (cond
                 ((> filesize 1073741824) #`",(ls-make-colour 7 (truncate (/ (/ (/ filesize 1024) 1024) 1024))),(ls-make-colour 3 \"G\")")
                 ((> filesize 1048576) #`",(ls-make-colour 7  (truncate (/ (/ filesize 1024) 1024))),(ls-make-colour 7 \"M\")")

@@ -8,7 +8,7 @@
 (use makiki)
 (use sxml.tools)
 (use file.util)
-(load "kirjasto") ;daemonize
+(use kirjasto) ;daemonize
 
 (define (main args)
   (daemonize
