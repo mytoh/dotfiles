@@ -25,7 +25,7 @@ current-directory() {
     p=; print -nr -- "$p$d"
 }
 
-parse-git-branch() {
+parse-git-branch() { #{{{
   if [[ -e $PWD/.git ]]; then
     gitver=$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')
     echo -ne "${normal_color}─($(branch-color)${gitver}${normal_color})"
@@ -38,12 +38,13 @@ parse-git-branch() {
     local color=""
     if git diff --quiet 2>/dev/null >&2
     then
-      color="$(tput setaf 2)"
+      color="[38;5;2m"
     else
-      color="$(tput setaf 1)"
+      color="[38;5;1m"
     fi
     echo -ne $color
   }
+  #}}}
 
 set-prompt() {
 printf "%s%s%s\n%s"       \
