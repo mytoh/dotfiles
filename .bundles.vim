@@ -87,6 +87,8 @@ NeoBundle 'Lokaltog/vim-easymotion'
 " NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'behaghel/Rainbow_Parenthsis_Bundle'
 NeoBundle 'kergoth/fish.vim'
+NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'kana/vim-textobj-line'
 " }}}
 
 " official vim-scripts repo {{{
