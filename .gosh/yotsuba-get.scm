@@ -8,7 +8,7 @@
 (use gauche.collection) ;find
 (use gauche.parseopt)
 (use srfi-11)
-(use kirjasto)
+(use kirjasto) ; forever cd  mkdir
 
 
 (define (usage )
@@ -24,30 +24,12 @@
   (print "\t$ yotsuba -a b            # get images from b with directory name as thread number" )
   (exit 2))
 
-(define-syntax forever 
-  (syntax-rules ()
-    ((_ e1 e2 ...)
-     (let loop () e1 e2 ... 
-          (sys-nanosleep (* (expt 10 8) 3000)) ; sleep 5 minutes
-          (loop)))))
 
 (define (parse-img line)
  (rxmatch->string #/http\:\/\/images\.4chan\.org\/[^"]+/ line )
  ) 
 ;; "
 
-
-(define (parse-url url)
-  (rxmatch-let (rxmatch #/^http:\/\/([-A-Za-z\d.]+)(:(\d+))?(\/.*)?/ url)
-               (#f host #f port path)
-               (values host port path)))
-
-(define (swget url)
-  (receive (host port path) (parse-url url)
-           (let ((file (receive (a fname ext) (decompose-path path) (string-append fname "." ext))))
-             (if (not (file-is-readable? file))
-                 (http-get host path
-                           :sink (open-output-file file) :flusher (lambda (s h) (print file) #t))))))
 
 (define (fetch match)
   (if (string? match)
@@ -62,13 +44,6 @@
                                  (fetch match)))
                              (cut read-line in #t)))))
 
-(define (mkdir dir)
-  (if (not (file-exists? dir))
-      (make-directory* dir)))
-
-(define (cd dir)
-  (if (file-is-directory? dir)
-      (current-directory dir)))
 
 (define (get-html bd td)
   (let-values (((status headers body ) (http-get  "boards.4chan.org"  (string-append "/" bd "/res/"  td)) ))
@@ -86,17 +61,14 @@
          (html (get-html board thread)))
     (if (string? html)
         (begin
-         (display "[0;34m")
-         (print thread)
-         (display "[0m")
+         (print (make-colour 4 thread))
          (mkdir thread)
          (cd thread)
          (get-img html board)
          (cd ".."))
       (begin
-       (display "[0;30m") ;dark grey
-       (print (string-append thread "'s gone"))
-       (display "[0m")))))
+       (print (make-colour 0 (string-append thread "'s gone")))
+       ))))
 
 
 (define (yotsuba-get-all restargs )
@@ -116,13 +88,13 @@
          (html (get-html board thread)))
     (if (string? html)
         (begin
-         (display "[0;34m")
-         (print thread)
-         (display "[0m")
+         (print (make-colour 4 thread))
          (mkdir thread)
          (cd thread)
          (get-img html board)
-         (cd ".."))
+         (print (make-colour 237 "----------"))
+         (cd "..")
+         )
         #t)))
 
 (define (yotsuba-get-repeat-all restargs )
