@@ -51,7 +51,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-afterimage'
 NeoBundle 'tpope/vim-markdown'
 "dont map <cr> if install vim-endwise
-NeoBundle 'tpope/vim-endwise'   
+NeoBundle 'tpope/vim-endwise'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tyru/eskk.vim'
 NeoBundle 'tyru/skkdict.vim'
