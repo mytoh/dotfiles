@@ -17,6 +17,7 @@
     "git://git.savannah.gnu.org/screen.git"
     "git://git.savannah.nongnu.org/stumpwm"
     "git://gitorious.org/fish-shell/fish-shell.git"
+    "git://gitorious.org/~otherchirps/fish-shell/otherchirps-fish-shell.git"
     ; minun github repo
     configs
     dotfiles
@@ -48,11 +49,15 @@
     (vimpr         vimperator-plugins)
     (rupa           z)
     (clvv           f)
+    (sjl            z-fish)
     (zsh-users     zsh-completions)
     (zsh-users     zsh-syntax-highlighting)
     (trapd00r      zsh-syntax-highlighting-filetypes)
     (hchbaw        auto-fu.zsh)
     (buntine       Fractals)
+    (SanskritFritz fish_completion)
+    (esodax        fishystuff)
+    (zmalltalker        fish-nuggets)
     )
   )
 
