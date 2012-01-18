@@ -7,7 +7,9 @@
 (define-constant *gitdir*  (expand-path "~/local/git/"))
 
 (define-constant *repos*
-  '("git://gauche.git.sourceforge.net/gitroot/gauche/Gauche"
+    
+  '(; normal repo
+    "git://gauche.git.sourceforge.net/gitroot/gauche/Gauche"
     "git://code.call-cc.org/chicken-core"
     "git://gitorious.org/cmus/cmus.git"
     "git://derf.homelinux.org/feh"
@@ -15,15 +17,18 @@
     "git://git.savannah.gnu.org/screen.git"
     "git://git.savannah.nongnu.org/stumpwm"
     "git://gitorious.org/fish-shell/fish-shell.git"
+    ; minun github repo
     configs
     dotfiles
+    ; github repo
     (VoQn          Gauche-Color)
     (shirok        Gauche-makiki)
     (shirok        Gauche-gtk2)
+    (podhmo        gauche-imlib2)
+    (naoyat        gauche-naoyat-lib)
     (tmbinc        bgrep)
     (ninjaaron     bitocra)
     (koron         chalice)
-    (podhmo        gauche-imlib2)
     (adamv         homebrew-alt)
     (adamv         homebrew)
     (rossy2401     img2xterm)
@@ -36,7 +41,7 @@
     (bmizerany     roundup)
     (holman        spark)
     (muennich      sxiv)
-    (alice0775     userChromejs)
+    (alice0775     userChrome.js)
     (Griever       userChromeJS)
     (rkitover      vimpager)
     (GGLucas       vimperator-buftabs)
@@ -47,6 +52,7 @@
     (zsh-users     zsh-syntax-highlighting)
     (trapd00r      zsh-syntax-highlighting-filetypes)
     (hchbaw        auto-fu.zsh)
+    (buntine       Fractals)
     )
   )
 
@@ -57,7 +63,7 @@
           (display "update finished!\n")
         (begin
          (display (make-colour 4 "=> "))
-         (display (build-path (sys-dirname (car dirs)) (make-colour 3 (sys-basename (car dirs)))))
+         (display (make-colour 3 (sys-basename (car dirs))))
          (newline)
          (if (file-is-directory? (car dirs))
              (run-process '(git pull) :wait #t :directory (car dirs))
