@@ -11,12 +11,18 @@ syntax enable
 language messages C
 language time C
 
+" fix problem when vim on fish shell
+if $SHELL =~ '/fish$'
+  set shell=zsh
+endif
+
 set nobackup
 set history=10000
 if has('persistent_undo')
   set undodir=~/.vim/undo
   set undofile
 endif
+set directory^=~/.vim/swap
 set clipboard=autoselect
 set scrolloff=1
 set title
@@ -112,6 +118,16 @@ set virtualedit=all
 if executable('ack')
   set grepprg=ack\ -a
 endif
+
+" change cursor colour
+let &t_SI  = "\<Esc>]12;orange\x7"
+let &t_EI  = "\<Esc>]12;red\x7"
+silent !echo -ne "\033]12;red\007"
+autocmd VimLeave * silent !echo -ne "\033]112\007"
+
+" change cursor when insert mode
+let &t_SI .= "[4 q"
+let &t_EI .= "[2 q"
 
 "}}}
 
