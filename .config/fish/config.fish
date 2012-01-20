@@ -1,13 +1,20 @@
 # environment {{{
-if status --is-login
-  for i in ~/local/bin ~/local/sbin ~/local/homebrew/bin ~/local/homebrew/sbin
-    if test -d $i
-      if not contains $i $PATH
-        set -x PATH $i $PATH
+
+# gentoo prefix
+set -x EPREFIX $HOME/local/gentoo
+
+# remove PATH
+set -e PATH
+set PATH /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/X11/bin  /opt/X11/bin 
+
+# reverse order
+	for p in $HOME/local/homebrew/sbin $HOME/local/homebrew/bin $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin $HOME/local/bin $HOME/local/sbin
+		if test -d $p
+      if not contains $p $PATH
+			set -x PATH $p $PATH
       end
-    end
-  end
-end
+		end
+	end
 
 set -x MANWIDTH 80
 set -x GAUCHE_LOAD_PATH "$HOME/.gosh"
@@ -18,6 +25,7 @@ end
 
 # pager
 set -x LESS "-i  -w -z-4 -g -M -X -F -R -P%t?f%f :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-..."
+
 
 set -x LESS_TERMCAP_md "[01;31m"
 set -x LESS_TERMCAP_me "[0m"
@@ -119,6 +127,10 @@ end
 function ggr
 # Search Google
     w3m "http://www.google.com/search?&num=100&q=$argv"
+end
+
+function recent-file
+command ls -c -t -1 |head -n $argv[1]|tail -n 1
 end
 # }}}
 

@@ -31,18 +31,18 @@ let g:plugin_loader_plugins = "_libly,delicious_search,stella,autoIgnoreKey,dire
 let g:direct_sbm_use_services_by_tag = "hd"
 let g:direct_sbm_use_services_by_post = "d"
 
+" commans {{{
 command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+"}}}
+
 " Google Reader
 lazy fmaps -u='www\.google\.(co\.jp|com)/reader' -events=vkeypress j k n p m s v A r S N P X O gh gd gs gt gu u / ? J K
 " Google Reader Full Feed
 lazy fmaps -u='www\.google\.(co\.jp|com)/reader' -events=vkeyup z
 
-" statusline-toolbar
-"set statustoolbars=bookmarks-menu-button-container
-
-" delicious_search.js
-" lazy set complete+=D
-" lazy :btags
+" auto_source
+lazy autosource ~/.vimperator/userContent.vimp
+lazy autosource ~/.vimperator/userChrome.vimp
 
 source! ~/.vimperator/userContent.vimp
 source! ~/.vimperator/userChrome.vimp

@@ -50,7 +50,7 @@
             (p (@ (class "arch"))
              "(" (a (@ (href "http://archlinux.org") (target "_blank")) "archlinux") (br)
              (span "(" )
-                  (a (@ (href="http://bbs.archlinux.org") (target "_blank")) "forum")
+                  (a (@ (href "http://bbs.archlinux.org") (target "_blank")) "forum")
                   "))")
 
             (p (@ (class "crunchbang"))

@@ -7,6 +7,7 @@
 (use gauche.parseopt)
 (use gauche.collection)
 (use srfi-1)
+(use rfc.http)
 
 (define (parse-img-url str)
   (let ((url (lambda (line) (rxmatch->string #/http\:\/\/konachan\.com\/(image|jpeg)\/[^"]+/ line)))) ;; "

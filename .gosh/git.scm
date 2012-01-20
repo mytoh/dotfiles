@@ -18,6 +18,7 @@
     "git://git.savannah.nongnu.org/stumpwm"
     "git://gitorious.org/fish-shell/fish-shell.git"
     "git://gitorious.org/~otherchirps/fish-shell/otherchirps-fish-shell.git"
+    "git://git.infradead.org/get_iplayer.git"
     ; minun github repo
     configs
     dotfiles
@@ -55,9 +56,10 @@
     (trapd00r      zsh-syntax-highlighting-filetypes)
     (hchbaw        auto-fu.zsh)
     (buntine       Fractals)
-    (SanskritFritz fish_completion)
+    (SanskritFritz fish_completions)
     (esodax        fishystuff)
     (zmalltalker        fish-nuggets)
+    (Nandaka       DanbooruDownloader)
     )
   )
 
@@ -86,6 +88,23 @@
          (repo-url-directory-list))
        #t))
 
+(define (clean-gitdir)
+  (let ((dirs (list (directory-list (expand-path *gitdir*) :children? #t :add-path? #t))))
+    (let loop ((dirs (car dirs)))
+      (if (null? dirs)
+        (display "cleaning finished!\n")
+        (begin
+        (if (file-is-directory? (car dirs))
+          (begin
+            (display (make-colour 4 "=> "))
+            (display (make-colour 3 (sys-basename (car dirs))))
+            (newline)
+            (run-process '(git gc) :wait #t :directory (car dirs))
+            (newline))
+          #t)
+        (loop (cdr dirs)))))))
+
+
 (define (repo-url-directory-list)
   (map
     (lambda (e)
@@ -102,6 +121,8 @@
   (newline)
   (print (string-append (make-colour 8 "updating ") "repositories"))
   (update-gitdir)
-  (current-directory previous-directory)))
+  (clean-gitdir)
+  (current-directory previous-directory))
+  )
 
 
