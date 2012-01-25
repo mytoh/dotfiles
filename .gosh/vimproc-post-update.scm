@@ -16,6 +16,3 @@
          ((freebsd) (proc-make "make_gcc.mak"))
          ((linux)   (proc-make "make_gcc.mak"))
          (else (print "this os is not supported"))))
-  
-  
-  

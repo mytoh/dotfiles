@@ -13,7 +13,7 @@ language time C
 
 " fix problem when vim on fish shell
 if $SHELL =~ '/fish$'
-  set shell=zsh
+  set shell=bash
 endif
 
 set nobackup
@@ -131,6 +131,16 @@ let &t_EI .= "[2 q"
 
 "}}}
 
+" highlights {{{
+hi clear cursorline
+hi cursorline     ctermbg=237  gui=underline guibg=black
+hi StatusLine     ctermfg=gray ctermbg=235 cterm=none
+hi ActiveBuffer   ctermfg=blue ctermbg=235 cterm=none
+hi InactiveBuffer ctermfg=gray ctermbg=235 cterm=none
+hi Comment        ctermfg=244 ctermbg=234 cterm=bold
+
+" }}}
+
 " funcs {{{
 let s:vimrc = {}
 
@@ -156,10 +166,15 @@ nnoremap ; :
 nnoremap : ;
 nnoremap <space> i<space><esc>
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
-nnoremap <leader>w :<c-u>up<cr>
-nnoremap <leader>q :<c-u>qa<cr>
-nnoremap <leader>ff :<c-u>VimFilerTab<cr>
 
+nmap [vim-keymap] <nop>
+nmap     <leader>v [vim-keymap]
+nnoremap <silent> [vim-keymap]w :<c-u>up<cr>
+nnoremap <silent> [vim-keymap]q :<c-u>qa<cr>
+nnoremap <silent> [vim-keymap]bd :<c-u>bp<bar>sp<bar>bn<bar>bd<cr>
+
+
+nnoremap <leader>ff :<c-u>VimFilerTab<cr>
 cnoremap <c-a>      <home>
 cnoremap <c-f>      <right>
 cnoremap <c-b>      <left>
@@ -179,10 +194,7 @@ function! s:vimrc.gauche() dict
   if filereadable('~/.gosh_completions')
     setlocal dictionary=~/.gosh_completions
   endif
-  if filereadable('~/.vim/syntax/scheme.vim')
-    let is_gauche=1
-  endif
-  if executable('scmindent.scm') 
+  if executable('scmindent.scm')
     if executable('racket')
       setlocal equalprg=scmindent.scm
     endif
@@ -202,6 +214,7 @@ aug myautocommands
   au bufread,bufnewfile ~/.xcolours/*            ColorHighlight
   au bufread,bufnewfile *.scss                   set filetype=scheme
   au bufread,bufnewfile .mkshrc                  set filetype=sh
+  au bufread,bufnewfile *stumpwmrc*              set filetype=lisp
   au filetype           xdefaults                call s:vimrc.xrdb()
   au bufwritepost       .vimrc                   source ~/.vimrc
   au bufwritepost       .zshrc                   silent !zcompile ~/.zshrc
@@ -222,9 +235,6 @@ aug cch
   au winenter,bufread * set cursorline
 aug end
 
-hi clear cursorline
-hi cursorline gui=underline
-hi cursorline ctermbg=237 guibg=black
 
 if s:vimrc.isos('darwin')
   au bufwritepost * call SetUTF8Xattr(expand("<afile>"))
@@ -352,9 +362,6 @@ let g:bufstat_debug = 1
 let g:bufstat_surround_buffers = ':'
 let g:bufstat_number_before_bufname = 0
 
-highlight StatusLine ctermfg=gray ctermbg=235 cterm=none
-highlight ActiveBuffer ctermfg=blue ctermbg=235 cterm=none
-highlight InactiveBuffer ctermfg=gray ctermbg=235 cterm=none
 let g:bufstat_active_hl_group = "ActiveBuffer"
 let g:bufstat_inactive_hl_group = "InactiveBuffer"
 
@@ -506,8 +513,8 @@ aug end
 
 nnoremap [vimshell] <nop>
 nmap     <leader>s [vimshell]
-nmap <silent> [vimshell]s <Plug>(vimshell_split_create)
-nmap <silent> [vimshell]c <Plug>(vimshell_create)
+nmap     <silent> [vimshell]s <Plug>(vimshell_split_create)
+nmap     <silent> [vimshell]c <Plug>(vimshell_create)
 nnoremap <silent> [vimshell]p :<c-u>VimShellPop<cr>
 "}}}
 
@@ -581,6 +588,10 @@ autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg=235
 autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=233
 " }}}
 
+" scheme.vim {{{
+" not work on autocmd
+let is_gauche=1
+" }}}
 
 " }}}
 

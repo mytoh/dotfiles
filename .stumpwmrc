@@ -13,7 +13,7 @@
 (set-border-color "grey10")
 (set-msg-border-width 1)
 ;(set-font "-mplus-goth_p-medium-r-normal-*-10-*-*-*-*-*-iso10646-*"
-(set-font "-xos4-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*")
+(set-font "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1")
 ;; windows
 (set-focus-color "khaki")
 (set-unfocus-color "grey10")
@@ -24,20 +24,25 @@
 
 ;; options
 (setf
+  *startup-message*                 nil
+  ; border
   *normal-border-width*             1
   *maxsize-border-width*            1
   *transient-border-width*          1
-  *window-border-style*             :thin ;; thick,thin,none,tight
-  *startup-message*                 nil
+  *window-border-style*             :tight ;; thick,thin,none,tight
+  ; number map
   *frame-number-map*                "aoeuidhtnspyfgcrlqjkxbmwvz"
   *window-number-map*               "aoeuidhtns"
   *group-number-map*                "aoeuidhtns"
+  ; focus
   *mouse-focus-policy*              :sloppy
+  *run-or-raise-all-groups*         t
+  *new-window-preferred-frame*      '(:empty :focused)
+  ; gravity
   *message-window-gravity*          :bottom-left
   *input-window-gravity*            :bottom-left
-  *run-or-raise-all-groups*         t
   *input-history-ignore-duplicates* t
-  *new-window-preferred-frame*      '(:empty :focused)
+  ; mode-line
   *mode-line-background-color*      "grey20"
   *mode-line-foreground-color*      "DarkKhaki"
   *mode-line-border-color*          "pink"
@@ -46,9 +51,37 @@
   *mode-line-pad-x*                 1
   *mode-line-pad-y*                 1
   *mode-line-timeout*               5
+  ; formats
   *window-format*                   "^9*(%n%m%15t)^n" ;;^5 magenta
   *group-format*                    "^7*%t%s^n" ;;^7 white
   )
+
+;;; {{{ hooks
+;; {{{ mouse click hook
+(setf *mode-line-click-hook*
+      (list (lambda (&rest args)
+              (cond ((eq (second args) 5)
+                     (run-commands "gnext"))
+                    ((eq (second args) 4)
+                     (run-commands "gprev"))))))
+;;; }}}
+
+;; {{{ Male's code for key sequence display
+(defun key-press-hook (key key-seq cmd)
+  (declare (ignore key))
+  (unless (eq *top-map* *resize-map*)
+    (let ((*message-window-gravity* :bottom-left))
+      (message "Key sequence: ~A" (print-key-seq (reverse key-seq))))
+    (when (stringp cmd)
+      ;; Give 'em time to read it.
+      (sleep 0.01))))
+(defmacro replace-hook (hook fn)
+  `(remove-hook ,hook ,fn)
+  `(add-hook ,hook ,fn))
+(replace-hook *key-press-hook* 'key-press-hook)
+;;}}}
+;;;}}}
+
 
 ;; set color slots
  (setf *colors* (list "grey"          ; 0 black
@@ -70,41 +103,70 @@
 (setf *screen-mode-line-format*  ;; ^n : normal bg and fg color
       (list "%g ^8*|^n "
             "^2*%W ^8*|^n "
-            '(:eval (run-shell-command "~/.stumpwm/modeline.scm" t))
+            '(:eval (run-shell-command "~/.stumpwm.d/modeline.scm" t))
             "^8*|^n %d "
             ))
 
 ;; startup programmes
 ;(run-shell-command "exec trayer --expand true --alpha 100  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype request --width 100 " )
 ;(run-shell-command "stalonetray" )
-;(run-shell-command "exec feh --bg-scale ~/.wallpaper" )
-(run-shell-command "exec gm display -window root ~/.wallpaper" )
+(run-shell-command "exec feh --bg-scale ~/.wallpaper" )
 (run-shell-command "exec xcompmgr -n " )
-(run-shell-command "exec ~/.stumpwm/dzen.sh" )
+(run-shell-command "exec ~/.stumpwm.d/dzen.sh" )
 
-;; commands
-(defcommand terminal () () (run-shell-command "exec urxvtcd"))
-(defcommand firefox () () (run-or-raise "exec firefox" '(:class "firefox")))
-(defcommand thunar () () (run-or-raise "exec thunar" '(:class "Thunar")))
-(defcommand dmenu () () (run-shell-command "exec dmenu_run -i -b -nb '#4d3e41' -nf '#947988' -sb '#947988' -sf '#4d3e41' "))
+;;; commands {{{
 
-;;; keymap
+;;{{{ menu
+;; from wiki tips_and_tricks page
+(defcommand mymenu () ()
+  (labels ((pick (options)
+                 (let ((selection (select-from-menu (current-screen) options "")))
+                   (cond
+                     ((null selection)
+                      (throw 'stumpwm::error "Abort."))
+                     ((stringp (second selection))
+                      (second selection))
+                     (t
+                       (pick (cdr selection)))))))
+          (let ((choice (pick *app-menu*)))
+            (run-shell-command choice))))
+
+(defparameter *app-menu* '(("net"
+                            ;; sub menu
+                              ("firefox" "firefox"))
+                           ("fun"
+                            ;; sub menu
+                            ("option 2" "xlogo")
+                            ("gnuchess" "xboard"))
+                           ("work"
+                            ;; sub menu
+                            ("gvim" "gvim"))
+                           ("graphics"
+                            ;;sub menu
+                            ("gimp" "gimp"))))
+;;}}}
+
+;;;}}}
+
+;;; keymap {{{
 ;;;
 ;;;  modifier keys are defined in 
 ;;;  keytrans.lisp 
 ;;;
-;; apps
-(define-key *root-map* (kbd "c")     "terminal")
-(define-key *root-map* (kbd "f")     "browser")
-(define-key *root-map* (kbd "t")     "filer")
-(define-key *top-map*  (kbd "M-SPC") "dmenu")
+; applications
+(defprogram-shortcut terminal :command "exec urxvtc" :key (kbd "c") :map *root-map*)
+(defprogram-shortcut browser :command "exec firefox" :key (kbd "f") :map *root-map*)
+(defprogram-shortcut filer   :command "exec thunar" :key (kbd "t") :map *root-map*)
+(defprogram-shortcut dmenu :command "exec dmenu_run -i -b -nb '#4d3e41' -nf '#947988' -sb '#947988' -sf '#4d3e41' "
+                           :key (kbd "d") :map *root-map*)
+(define-key *root-map* (kbd "C-.")   "mymenu")
 
 ;; window operation
 (define-key *root-map* (kbd "C-f")   "fullscreen")
 (define-key *top-map*  (kbd "s-RET") "fullscreen")
 (define-key *root-map* (kbd "C-o")   "fnext") ; default key "C-t o"
 (define-key *top-map*  (kbd "M-TAB") "next")
-(define-key *top-map*  (kbd "s-r")   "restart-hard")
+(define-key *root-map*  (kbd "C-r")   "restart-hard")
  
 ;;input window keymap
 (define-key *input-map* (kbd "C-i") 'input-complete-forward)
@@ -113,21 +175,12 @@
 
 ;; group key map
 (define-key *groups-map* (kbd "f") "gmove media")
+(define-key *top-map*   (kbd "M-1") "gselect main")
+(define-key *top-map*   (kbd "M-2") "gselect web") 
+(define-key *top-map*   (kbd "M-3") "gselect media") 
 
-;; display the key sequence in progress
-;(defun key-press-hook (key key-seq cmd)
- ;(declare (ignore key))
- ;(unless (eq *top-map* *resize-map*)
-  ;(let ((*message-window-gravity* :center))
-   ;(message "Key sequence: ~a" (print-key-seq (reverse key-seq))))
-  ;(when (stringp cmd)
-   ;(sleep 0.5))))
+;;; }}}
 
-;(defmacro replace-hook (hook fn)
- ;`(remove-hook ,hook ,fn)
- ;`(add-hook ,hook ,fn))
-
-;(replace-hook *key-press-hook* 'key-press-hook)
 
 ;; groups
 ; rename the first group to main
@@ -141,16 +194,14 @@
 
 (define-frame-preference "web"
      ;; fnumber raise lock (lock AND raise == jumpto)
-      (0 t t :class "Opera"))
-
-(define-frame-preference "web"
+      (0 t t :class "Opera")
       (0 t t :class "Firefox"))
 
 (define-frame-preference "media"
-      (0 t t :class "Audacious"))
-
-(define-frame-preference "media"
-      (0 t t :class "MPlayer"))
+      (0 t t :class "Audacious")
+      (0 t t :class "MPlayer")
+      (0 t t :class "feh")
+      )
 
 (setf *debug-level* 10)
 

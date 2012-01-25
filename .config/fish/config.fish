@@ -8,13 +8,13 @@ set -e PATH
 set PATH /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/X11/bin  /opt/X11/bin 
 
 # reverse order
-	for p in $HOME/local/homebrew/sbin $HOME/local/homebrew/bin $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin $HOME/local/bin $HOME/local/sbin
-		if test -d $p
+  for p in  $HOME/local/homebrew/sbin $HOME/local/homebrew/bin $HOME/local/bin $HOME/local/sbin  
+    if test -d $p
       if not contains $p $PATH
-			set -x PATH $p $PATH
+      set -x PATH $p $PATH
       end
-		end
-	end
+    end
+  end
 
 set -x MANWIDTH 80
 set -x GAUCHE_LOAD_PATH "$HOME/.gosh"
@@ -45,7 +45,7 @@ function __gosh_completion
 set -l load_path (echo $GAUCHE_LOAD_PATH | tr ':' '\n')
 for i in $load_path
   for j in  $i/*.scm
-    echo $j
+    echo (basename $j)
     end
   end
 end
@@ -111,15 +111,49 @@ function xsource
   end
 end
 
+
+function original_cd --description "Change directory" #{{{
+
+        # Skip history in subshells
+        if status --is-command-substitution
+                builtin cd $argv
+                return $status
+        end
+
+        # Avoid set completions
+        set -l previous $PWD
+
+        if test $argv[1] = - ^/dev/null
+                if test "$__fish_cd_direction" = next ^/dev/null
+                        nextd
+                else
+                        prevd
+                end
+                return $status
+        end
+
+        builtin cd $argv[1]
+        set -l cd_status $status
+
+        if test $cd_status = 0 -a "$PWD" != "$previous"
+                set -g dirprev $dirprev $previous
+                set -e dirnext
+                set -g __fish_cd_direction prev
+        end
+
+        return $cd_status
+end
+#}}}
+
 if which gosh > /dev/null
   if test -e $GAUCHE_LOAD_PATH/ls.scm
     function cd
-      builtin cd $argv
+      original_cd $argv
       command gosh ls.scm -d .
     end
   else
     function cd
-      builtin cd $argv
+     original_cd
     end
   end
 end
@@ -129,9 +163,34 @@ function ggr
     w3m "http://www.google.com/search?&num=100&q=$argv"
 end
 
+function 4ch
+  w3m "http://boards.4chan.org/$argv[1]/"
+end
+
 function recent-file
 command ls -c -t -1 |head -n $argv[1]|tail -n 1
 end
+
+function scm
+  switch $argv[1]
+    case g gauche gosh 
+      rlwrap -pBlue -b '(){}[].,#@;| ' gosh
+    case sc scsh
+      rlwrap -pBlue -b '(){}[],#;| '  scsh
+    case s4 scheme48
+      rlwrap -pBlue -b '(){}[],#;| '  scheme48
+    case e elk
+      rlwrap -pBlue -b '(){}[],#;| '  elk
+    case '*'
+    begin
+      echo   g  gauche
+      echo   sc scsh
+      echo   s4 scheme48
+      echo   e elk
+      end
+  end
+end
+
 # }}}
 
 # aliases {{{

@@ -19,7 +19,7 @@
                                         (lambda (line)
                                           (let ((match (url line)))
                                                (if match
-                                            (string-append "http://vanilla.jp.nu-ma.net" match)
+                                            (string-append "http://vanilla.nu-ma.net" match)
                                             #f)))
                                         (cut read-line in #t)))))))
 
@@ -27,7 +27,7 @@
 
 (define (get-thread id)
   (receive (status head body)
-              (http-get "vanilla.jp.nu-ma.net" (string-append "/thread.php?threadId=" (x->string id)))
+              (http-get "vanilla.nu-ma.net" (string-append "/thread.php?threadId=" (x->string id)))
               body
   )
  )

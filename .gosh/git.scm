@@ -1,4 +1,4 @@
-#!/usr/local/bin/gosh
+#!/usr/bin/env gosh
 
 (use gauche.process) ; run-process
 (use file.util) ; directory-list, current-directory
@@ -7,7 +7,6 @@
 (define-constant *gitdir*  (expand-path "~/local/git/"))
 
 (define-constant *repos*
-    
   '(; normal repo
     "git://gauche.git.sourceforge.net/gitroot/gauche/Gauche"
     "git://code.call-cc.org/chicken-core"
@@ -18,7 +17,9 @@
     "git://git.savannah.nongnu.org/stumpwm"
     "git://gitorious.org/fish-shell/fish-shell.git"
     "git://gitorious.org/~otherchirps/fish-shell/otherchirps-fish-shell.git"
+    "git://gitorious.org/~ridiculousfish/fish-shell/fishfish.git"
     "git://git.infradead.org/get_iplayer.git"
+    "git://git.mplayer2.org/mplayer2.git"
     ; minun github repo
     configs
     dotfiles
@@ -28,6 +29,7 @@
     (shirok        Gauche-gtk2)
     (podhmo        gauche-imlib2)
     (naoyat        gauche-naoyat-lib)
+    (okuoku        mosh)
     (tmbinc        bgrep)
     (ninjaaron     bitocra)
     (koron         chalice)
@@ -60,6 +62,9 @@
     (esodax        fishystuff)
     (zmalltalker        fish-nuggets)
     (Nandaka       DanbooruDownloader)
+    (frytvm        XS)
+    (joelagnel     stumpwm-goodies)
+    (dss-project   dswm)
     )
   )
 
@@ -67,26 +72,26 @@
   (let ((dirs (list (directory-list (expand-path *gitdir*) :children? #t :add-path? #t))))
     (let loop ((dirs (car dirs)))
       (if (null? dirs)
-          (display "update finished!\n")
+        (display "update finished!\n")
         (begin
-         (display (make-colour 4 "=> "))
-         (display (make-colour 3 (sys-basename (car dirs))))
-         (newline)
-         (if (file-is-directory? (car dirs))
-             (run-process '(git pull) :wait #t :directory (car dirs))
-           #t)
-         (newline)
-         (loop (cdr dirs)))))))
+          (display (make-colour 4 "=> "))
+          (display (make-colour 3 (sys-basename (car dirs))))
+          (newline)
+          (if (file-is-directory? (car dirs))
+            (run-process '(git pull) :wait #t :directory (car dirs))
+            #t)
+          (newline)
+          (loop (cdr dirs)))))))
 
 (define (clone-gitdir)
   (let ((clone (lambda (url) (run-process `(git clone ,url) :wait #t))))
-       (for-each
-         (lambda (l)
-           (if (not (file-is-directory? (x->string (car l))))
-         (clone (cadr l))
-         #t))
-         (repo-url-directory-list))
-       #t))
+    (for-each
+      (lambda (l)
+        (if (not (file-is-directory? (x->string (car l))))
+          (clone (cadr l))
+          #t))
+      (repo-url-directory-list))
+    #t))
 
 (define (clean-gitdir)
   (let ((dirs (list (directory-list (expand-path *gitdir*) :children? #t :add-path? #t))))
@@ -94,35 +99,35 @@
       (if (null? dirs)
         (display "cleaning finished!\n")
         (begin
-        (if (file-is-directory? (car dirs))
-          (begin
-            (display (make-colour 4 "=> "))
-            (display (make-colour 3 (sys-basename (car dirs))))
-            (newline)
-            (run-process '(git gc) :wait #t :directory (car dirs))
-            (newline))
-          #t)
-        (loop (cdr dirs)))))))
+          (if (file-is-directory? (car dirs))
+            (begin
+              (display (make-colour 4 "=> "))
+              (display (make-colour 3 (sys-basename (car dirs))))
+              (newline)
+              (run-process '(git gc) :wait #t :directory (car dirs))
+              (newline))
+            #t)
+          (loop (cdr dirs)))))))
 
 
 (define (repo-url-directory-list)
   (map
     (lambda (e)
       (cond ((string? e) (list (sys-basename (path-sans-extension e)) e))
-            ((list? e)  (list (cadr e) #`"git://github.com/,(car e)/,(cadr e)"))
-            ((symbol? e) (list e #`"git@github.com:mytoh/,|e|"))))
+        ((list? e)  (list (cadr e) #`"git://github.com/,(car e)/,(cadr e)"))
+        ((symbol? e) (list e #`"git@github.com:mytoh/,|e|"))))
     *repos*))
 
 (define (main args)
   (let ((previous-directory (current-directory)))
-  (current-directory *gitdir*)
-  (print (string-append (make-colour 3 "cloning ") "repositories"))
-  (clone-gitdir)
-  (newline)
-  (print (string-append (make-colour 8 "updating ") "repositories"))
-  (update-gitdir)
-  (clean-gitdir)
-  (current-directory previous-directory))
+    (current-directory *gitdir*)
+    (print (string-append (make-colour 3 "cloning ") "repositories"))
+    (clone-gitdir)
+    (newline)
+    (print (string-append (make-colour 8 "updating ") "repositories"))
+    (update-gitdir)
+    (clean-gitdir)
+    (current-directory previous-directory))
   )
 
 

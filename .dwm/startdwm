@@ -1,7 +1,6 @@
 #!/bin/sh
 
 ~/local/bin/setback &
-xcompmgr -n &
 
 while true
 do

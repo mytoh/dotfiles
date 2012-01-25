@@ -11,9 +11,9 @@ endif
 
 
 if has('vim_starting')
-  set runtimepath+=$HOME/.bundle/neobundle.vim
+  set runtimepath^=$HOME/.bundle/neobundle.vim
   filetype off
-  call neobundle#rc(expand('~/.bundle'))
+  call neobundle#rc(expand('$HOME/.bundle'))
 endif
 
 NeoBundle 'Shougo/neobundle.vim'

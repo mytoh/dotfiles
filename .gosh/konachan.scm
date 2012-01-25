@@ -13,13 +13,13 @@
   (let ((url (lambda (line) (rxmatch->string #/http\:\/\/konachan\.com\/(image|jpeg)\/[^"]+/ line)))) ;; "
     (remove not ;; remove #f
             (delete-duplicates
-             (call-with-input-string str
-                                     (lambda (in)
-                                       (port-map
-                                        (lambda (line)
-                                          (let ((match (url line)))
-                                            match))
-                                        (cut read-line in #t))))))))
+              (call-with-input-string str
+                                      (lambda (in)
+                                        (port-map
+                                          (lambda (line)
+                                            (let ((match (url line)))
+                                              match))
+                                          (cut read-line in #t))))))))
 
 (define (parse-last-page-number str)
   (if-let1 pagination  (rxmatch->string #/<div class\=\"pagination\">.*?<\/div>/
@@ -29,8 +29,7 @@
              (caddr (find-max
                      ((node-closure (ntype-names?? '(a))) page)
                      :key (lambda (e) (x->number (caddr e))))))
-           1
-           ))
+           1))
 
 
 (define (get-tags-page page-number tag)

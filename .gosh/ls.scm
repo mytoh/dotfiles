@@ -137,10 +137,10 @@
   (if (<= colour (count car *colours*))
     (let1 c  (assoc-ref *colours* colour)
           ((lambda (colour s)
-             #`"[38;5;,(x->string colour)m,|s|[0m")
+             (string-append "[38;5;" (x->string colour) "m"  (x->string s) "[0m"))
                    c str))
           ((lambda (colour s)
-             #`"[38;5;,(x->string colour)m,|s|[0m")
+             (string-append "[38;5;" (x->string colour) "m"  (x->string s) "[0m"))
                    colour str)))
 
 (define (colour-filename name type . ecolour)
@@ -286,8 +286,7 @@
                               (print-delim 1)
                               (print-permission f stat)
                               (print-delim 2)
-                              (print-filename f stat)
-                              )))
+                              (print-filename f stat))))
                     (if allfiles
                         (directory-list dir :children? #t :add-path? #t)
                       (normal-files dir)))))))

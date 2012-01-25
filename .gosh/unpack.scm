@@ -16,16 +16,18 @@
 (define (lha-unpacker file)
   (run-process `(lha xq ,file) :wait #t))
 
-(define (txz-unpacker file)
+(define (tar-unpacker file)
   (run-process `(tar xvf ,file) :wait #t))
 
 (define-constant *unpacker-alist*
   `(("zip" ,zip-unpacker)
     ("rar" ,rar-unpacker)
     ("lha" ,lha-unpacker)
-    ("txz" ,txz-unpacker)
-    )
-  )
+    ("txz" ,tar-unpacker)
+    ("gz" ,tar-unpacker)
+    ("bz2" ,tar-unpacker)
+    ("xz" ,tar-unpacker)
+    ("tar" ,tar-unpacker)))
 
 (define (unpack file)
   (let ((unpacker (assoc (path-extension file)
