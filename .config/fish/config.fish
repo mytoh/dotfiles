@@ -4,7 +4,7 @@
 set -x EPREFIX $HOME/local/gentoo
 
 set -Uge PATH #remove PATH
-set PATH /sbin /bin /usr/sbin /usr/bin /usr/local/sbin /usr/local/bin /usr/games/ 
+set PATH /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin /usr/games/ 
 
 for p in /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/sbin $HOME/local/homebrew/bin $HOME/local/bin $HOME/local/sbin
 if test -d $p
@@ -246,5 +246,94 @@ if xsource ~/local/git/z-fish/z.fish
 function --on-event fish_prompt z-fish
     z --add "$PWD"
 end
+end
+#}}}
+
+# os {{{
+switch (uname) 
+  case FreeBSD
+    # PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages/Latest/"
+    alias pup "sudo portsnap fetch update "
+    alias pcheck 'sudo portmaster -PBidav; and sudo portaudit -Fdav; and sudo portmaster -y --clean-packages --clean-distfiles --check-depends'
+    alias pfetch "sudo make  fetch-recursive"
+    alias pinst "sudo make  install distclean; rehash"
+    alias pconf "sudo make config-recursive"
+    alias pclean "sudo make  clean "
+    alias pkg_add "pkg_add -v"
+    alias pcreate "pkg_create -RJvnb"
+    alias pcreateall "pkg_info -Ea |xargs -n 1 sudo pkg_create -Jnvb"
+
+if test $TERM = "cons25"
+if test -e (which jfbterm)
+  jfbterm
+end
+end
+
+function beastie
+    echo '
+    
+    
+                [31m,        ,                              
+               /(        )`                                   
+               \ \___   / |                                   
+               /- [37m_[31m  `-/  '\''                      
+              ([37m/\/ \[31m \   /\                       
+              [37m/ /   |[31m `    \                      
+              [34mO O   [37m) [31m/    |                
+              [37m`-^--'\''[31m`<     '\''                      
+             (_.)  _  )   /                                   
+              `.___/`    /                                   
+                `-----'\'' /                                     
+   [33m<----.[31m     __ / __   \                         
+   [33m<----|====[31mO)))[33m==[31m) \) /[33m====]  
+   [33m<----'\''[31m    `--'\'' `.__,'\'' \                        
+               |        |                                    
+                \       /       /\                           
+           [36m______[31m( (_  / \______/                
+         [36m,'\''  ,-----'\''   |                               
+         `--{__________)[37m                                 '
+
+
+
+end
+
+function orb
+  echo '
+     [31m```                        [31;1m`[31m    
+[31;1m    s` `.....---...[31;1m....--.```   -/[31m         
+    +o   .--`         [31;1m/y:`      +.[31m         
+     yo`:.            [31;1m:o      `+-[31m          
+      y/               [31;1m-/`   -o/[31m           
+     .-                  [31;1m::/sy+:.[31m          
+[37m     /                     [31;1m`--  /[31m          
+[37m    `[31m:                          [31;1m:`[31m         
+[37m    `[31m:                          [31;1m:`[31m         
+[37m     /                          [31;1m/[31m          
+[37m     .[31m-                        [31;1m-.[31m          
+      --                      [31;1m-.[31m           
+       `:`                  [01;31m`:`                  
+         [31;1m.--             [37m`-[33m-.                    
+            .---...[33m...----                         '
+
+end
+
+
+  case Darwin
+    alias mp2 "/Applications/mplayer2.app/Contents/MacOS/mplayer-bin"
+    alias bsearch "brew search "
+    alias binst "brew install -v"
+    function squid_restart
+      killall squid
+      killall squid
+      kill (cat ~/.squid/logs/squid.pid)
+      kill (cat ~/.squid/logs/squid.pid)
+      /bin/rm -rfv ~/.squid/cache/*
+      squid -f ~/.squid/etc/squid.conf -z
+      squid -f ~/.squid/etc/squid.conf
+    end
+    set -x HOMEBREW_VERBOSE
+    set -x JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
+     xsource (brew --prefix)/etc/autojump
+     xsource (brew --prefix)/etc/bash_completion.d/git-completion.bash
 end
 #}}}
