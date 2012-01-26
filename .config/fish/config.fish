@@ -333,7 +333,5 @@ end
     end
     set -x HOMEBREW_VERBOSE
     set -x JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
-     xsource $HOME/local/homebrew/etc/autojump
-     xsource $HOEM/local/homebrew/etc/bash_completion.d/git-completion.bash
 end
 #}}}
