@@ -1,9 +1,9 @@
 
-TitleFont       "-*-terminus-medium-r-normal---12-120-*-*-*-*-iso10646-1"
-ResizeFont      "-*-terminus-medium-r-normal---12-120-*-*-*-*-iso10646-1"
-MenuFont        "-*-terminus-medium-r-normal---12-120-*-*-*-*-iso10646-1"
-IconFont        "-*-terminus-medium-r-normal---12-120-*-*-*-*-iso10646-1"
-IconManagerFont "-*-terminus-medium-r-normal---12-120-*-*-*-*-iso10646-1"
+TitleFont       "-*-*-medium-r-normal---12-120-*-*-*-*-iso10646-1"
+ResizeFont      "-*-*-medium-r-normal---12-120-*-*-*-*-iso10646-1"
+MenuFont        "-*-*-medium-r-normal---12-120-*-*-*-*-iso10646-1"
+IconFont        "-*-*-medium-r-normal---12-120-*-*-*-*-iso10646-1"
+IconManagerFont "-*-*-medium-r-normal---12-120-*-*-*-*-iso10646-1"
 
 AutoRelativeResize
 BorderWidth 1

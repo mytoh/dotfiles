@@ -3,18 +3,17 @@
 # gentoo prefix
 set -x EPREFIX $HOME/local/gentoo
 
-# remove PATH
-set -e PATH
-set PATH /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/X11/bin  /opt/X11/bin 
+set -ge PATH #remove PATH
+set -x PATH /sbin /bin /usr/sbin /usr/bin /usr/local/sbin /usr/local/bin /usr/games/ 
 
-# reverse order
-  for p in  $HOME/local/homebrew/sbin $HOME/local/homebrew/bin $HOME/local/bin $HOME/local/sbin  
-    if test -d $p
-      if not contains $p $PATH
-      set -x PATH $p $PATH
-      end
-    end
-  end
+for p in $HOME/local/homebrew/sbin $HOME/local/homebrew/bin $HOME/local/bin $HOME/local/sbin
+if test -d $p
+if not contains $p $PATH
+set -x PATH $p $PATH
+end
+end
+end
+
 
 set -x MANWIDTH 80
 set -x GAUCHE_LOAD_PATH "$HOME/.gosh"
@@ -25,7 +24,6 @@ end
 
 # pager
 set -x LESS "-i  -w -z-4 -g -M -X -F -R -P%t?f%f :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-..."
-
 
 set -x LESS_TERMCAP_md "[01;31m"
 set -x LESS_TERMCAP_me "[0m"
