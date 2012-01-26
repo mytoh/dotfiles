@@ -89,6 +89,7 @@ NeoBundle 'behaghel/Rainbow_Parenthsis_Bundle'
 NeoBundle 'kergoth/fish.vim'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kana/vim-textobj-line'
+NeoBundle 'Raimondi/delimitMate'
 " }}}
 
 " official vim-scripts repo {{{
