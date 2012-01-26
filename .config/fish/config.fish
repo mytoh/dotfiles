@@ -6,7 +6,7 @@ set -x EPREFIX $HOME/local/gentoo
 set -ge PATH #remove PATH
 set -x PATH /sbin /bin /usr/sbin /usr/bin /usr/local/sbin /usr/local/bin /usr/games/ 
 
-for p in $HOME/local/homebrew/sbin $HOME/local/homebrew/bin $HOME/local/bin $HOME/local/sbin
+for p in /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/sbin $HOME/local/homebrew/bin $HOME/local/bin $HOME/local/sbin
 if test -d $p
 if not contains $p $PATH
 set -x PATH $p $PATH
