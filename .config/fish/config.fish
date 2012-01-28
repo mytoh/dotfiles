@@ -3,7 +3,7 @@
 # gentoo prefix
 set -x EPREFIX $HOME/local/gentoo
 
-set -ge PATH #remove PATH
+set -Uge PATH #remove PATH
 set PATH /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin /usr/games/ 
 
 for p in /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/sbin $HOME/local/homebrew/bin $HOME/local/bin $HOME/local/sbin
