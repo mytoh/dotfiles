@@ -3,7 +3,7 @@
 # gentoo prefix
 set -x EPREFIX $HOME/local/gentoo
 
-set -Uge PATH #remove PATH
+set -ge PATH #remove PATH
 set PATH /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin /usr/games/ 
 
 for p in /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/sbin $HOME/local/homebrew/bin $HOME/local/bin $HOME/local/sbin
@@ -221,7 +221,7 @@ end
 alias single "sudo shutdown now"
 alias halt "sync;sync;sync;sudo shutdown -p now"
 alias reboot "sync;sync;sync;sudo shutdown -r now"
-alias sudo "sudo -E "
+alias sudo 'sudo -E '
 alias xfont "xlsatoms | grep '-'"
 alias rr 'command rm -rfv'
 alias mkd 'command mkdir -p'
@@ -256,18 +256,19 @@ switch (uname)
     alias pup "sudo portsnap fetch update "
     alias pcheck 'sudo portmaster -PBidav; and sudo portaudit -Fdav; and sudo portmaster -y --clean-packages --clean-distfiles --check-depends'
     alias pfetch "sudo make  fetch-recursive"
-    alias pinst "sudo make  install distclean; rehash"
+    alias pinst "sudo make install distclean"
     alias pconf "sudo make config-recursive"
     alias pclean "sudo make  clean "
     alias pkg_add "pkg_add -v"
     alias pcreate "pkg_create -RJvnb"
     alias pcreateall "pkg_info -Ea |xargs -n 1 sudo pkg_create -Jnvb"
+    alias tm 'tmux -u2 a'
 
-if test $TERM = "cons25"
-if test -e (which jfbterm)
-  jfbterm
-end
-end
+#if test $TERM = "cons25"
+#if test -e (which jfbterm)
+#  jfbterm
+#end
+#end
 
 function beastie
     echo '

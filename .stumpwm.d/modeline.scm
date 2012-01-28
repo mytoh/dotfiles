@@ -52,7 +52,7 @@
 
 ;; status 
 (define (update-cpu-loads)
-  (call-for-each-line-in-file "/compat/linux/proc/stat"
+  (call-for-each-line-in-file "/proc/stat"
     (lambda (line break)
       (if (string= line "cpu" 0 3)
           (let* ((tokens (string-tokenize line))
@@ -68,14 +68,14 @@
                   (vector-set! *CPU-LOADS* core cpu-load))))))))
  
 (define (update-mem-loads)
-  (let* ((file (file->string "/compat/linux/proc/meminfo"))
+  (let* ((file (file->string "/proc/meminfo"))
          (tokens (drop (string-tokenize file) 7))
          (total (string->number(car tokens)))
          (used (string->number(cadr tokens))))
        (set! *MEM-USED* (round->exact (*(/. used total) 100)))))
 
 (define (update-net-loads)
-  (call-for-each-line-in-file "/compat/linux/proc/net/dev"
+  (call-for-each-line-in-file "/proc/net/dev"
     (lambda (line break)
       (if (string= line "eth0" 2 6)
           (let* ((tokens (string-tokenize line))

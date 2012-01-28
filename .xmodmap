@@ -1,0 +1,20 @@
+
+! clear Mod1
+! clear Mod2
+! keycode 63 = Mode_switch
+! keycode 63 = Meta_L
+! add Mod1 = Meta_L
+! add Mod2 = Mode_switch
+
+! remove capslock key {{{
+keycode 66 = Control_L
+clear Lock
+add Control = Control_L  
+!}}}
+
+! left handed mouse {{{
+pointer = 3 2 1
+! }}}
+
+
+

@@ -1,4 +1,4 @@
-
+set shell=sh
 if !isdirectory(expand("~/.bundle"))
   call mkdir(expand("~/.bundle"), "p")
  if !isdirectory(expand("~.bundle/neobundle.vim"))

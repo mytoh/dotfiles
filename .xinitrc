@@ -20,8 +20,8 @@ export UIM_CANDWIN_PROG=uim-candwin-gtk
 
 export PATH="$HOME/local/bin:$PATH"
 xrdb -merge $HOME/.Xresources
-xmodmap $HOME/.Xmodmap
 setxkbmap dvorak
+xmodmap $HOME/.xmodmap
 xsetroot -cursor_name right_ptr &
 xset fp+ /usr/local/lib/X11/fonts/local
 xset fp+ /usr/local/lib/X11/fonts/TrueType
