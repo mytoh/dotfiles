@@ -52,6 +52,10 @@ if [ "$1" = "twm" -o "$1" = "openbox" -o "$1" = "flwm" ]; then
   fbpanel &
 fi
 
+if [ "$1" = "stumpwm"]; then
+  $HOME/.fehbg &
+  xcompmgr -c
+fi
 
 DEFAULT_SESSION="dwm"
 case $1 in
