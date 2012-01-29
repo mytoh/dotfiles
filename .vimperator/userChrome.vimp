@@ -53,3 +53,11 @@ statusbarpanel > * { margin: 0 !important; padding: 0 !important; }
 }
 EOM
 
+style -name tabs chrome://* <<EOM
+.tabbrowser-tab {
+  height: 14px !important;
+  }
+.scrollbutton-up {
+  display: none;
+  }
+EOM

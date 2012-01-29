@@ -32,7 +32,7 @@ set -x LESS_TERMCAP_so "[01;44;33m"
 set -x LESS_TERMCAP_ue "[0m"
 set -x LESS_TERMCAP_us "[01;32m"
 # set default browser
-if which w3m1>  /dev/null
+if which w3m 1>  /dev/null
   set -x BROWSER w3m
 end
 #}}}
@@ -128,8 +128,8 @@ function original_cd --description "Change directory" #{{{
   # Avoid set completions
   set -l previous $PWD
 
-  if test $argv[1] = -2>  /dev/null
-    if test "$__fish_cd_direction" = next2>  /dev/null
+  if test $argv[1] = - 2>  /dev/null
+    if test "$__fish_cd_direction" = next 2> /dev/null
       nextd
     else
       prevd
@@ -150,7 +150,7 @@ function original_cd --description "Change directory" #{{{
 end
 #}}}
 
-if which gosh1>  /dev/null
+if which gosh 1> /dev/null
   if test -n $GAUCHE_LOAD_PATH
     function cd
       original_cd $argv
@@ -201,7 +201,7 @@ end
 # aliases {{{
 
 # gauche alias {{{
-if which gosh1>&  -
+if which gosh 1>&-
   function yotsuba
     command gosh yotsuba-get.scm $argv
   end
@@ -217,7 +217,6 @@ if which gosh1>&  -
   function unpack
     command gosh unpack.scm $argv
   end
-  if test -n $GAUCHE_LOAD_PATH
     function ls
       command gosh ls.scm -d
     end
@@ -232,7 +231,6 @@ if which gosh1>&  -
     end
     function l
       command gosh ls.scm -d
-    end
   end
 end
 #}}}
@@ -244,7 +242,7 @@ function nd
   nextd
 end
 
-if which cdf1>&  -
+if which cdf 1>&-
   function df
     cdf -h
   end

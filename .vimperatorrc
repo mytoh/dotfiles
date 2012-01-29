@@ -6,6 +6,8 @@ inoremap <c-i> <tab>
 inoremap <c-n> <down>
 inoremap <c-p> <up>
 inoremap <c-h> <BS>
+inoremap <c-b> <left>
+inoremap <c-f> <right>
 cnoremap <c-i> <tab>
 cnoremap <c-n> <down>
 cnoremap <c-p> <up>

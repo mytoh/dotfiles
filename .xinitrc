@@ -1,21 +1,21 @@
 #!/bin/sh
 
 # ibus {{{
-#export XIM="ibus"
-#export GTK_IM_MODULE="ibus"
-#export QT_IM_MODULE="ibus"
-#export XMODIFIERS=@im=ibus
-#export XIM_PROGRAM="ibus-daemon"
-#export XIM_ARGS="-r --daemonize --xim"
-#ibus-daemon -d -x &
+export XIM="ibus"
+export GTK_IM_MODULE="ibus"
+export QT_IM_MODULE="ibus"
+export XMODIFIERS=@im=ibus
+export XIM_PROGRAM="ibus-daemon"
+export XIM_ARGS="-r --daemonize --xim"
+ibus-daemon -d -x &
 # }}}
 
 # uim {{{
-uim-xim &
-export GTK_IM_MODULE="uim"
-export QT_IM_MODULE="uim"
-export XMODIFIERS=@im=uim
-export UIM_CANDWIN_PROG=uim-candwin-gtk
+# uim-xim &
+# export GTK_IM_MODULE="uim"
+# export QT_IM_MODULE="uim"
+# export XMODIFIERS=@im=uim
+# export UIM_CANDWIN_PROG=uim-candwin-gtk
 #}}}
 
 export PATH="$HOME/local/bin:$PATH"
