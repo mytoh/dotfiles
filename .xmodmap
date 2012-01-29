@@ -16,5 +16,7 @@ add Control = Control_L
 pointer = 3 2 1
 ! }}}
 
-
+! tilde {{{
+keycode 211 = grave asciitilde
+! }}}
 

@@ -66,6 +66,7 @@
     (joelagnel     stumpwm-goodies)
     (dss-project   dswm)
     (aredridel      es-shell)
+    (ThomasAdam     tmux)
     )
   )
 

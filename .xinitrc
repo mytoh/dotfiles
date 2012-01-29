@@ -22,6 +22,8 @@ export PATH="$HOME/local/bin:$PATH"
 xrdb -merge $HOME/.Xresources
 setxkbmap dvorak
 xmodmap $HOME/.xmodmap
+xset b off # turn off beep
+xset r rate 200 30
 xsetroot -cursor_name right_ptr &
 xset fp+ /usr/local/lib/X11/fonts/local
 xset fp+ /usr/local/lib/X11/fonts/TrueType
@@ -50,11 +52,6 @@ if [ "$1" = "twm" -o "$1" = "openbox" -o "$1" = "flwm" ]; then
     feh --bg-max ~/.wallpaper &
   fi
   fbpanel &
-fi
-
-if [ "$1" = "stumpwm"]; then
-  $HOME/.fehbg &
-  xcompmgr -c
 fi
 
 DEFAULT_SESSION="dwm"
