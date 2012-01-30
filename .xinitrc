@@ -3,8 +3,8 @@
 # ibus {{{
 export XIM="ibus"
 export GTK_IM_MODULE="ibus"
-export QT_IM_MODULE="ibus"
-export XMODIFIERS=@im=ibus
+export QT_IM_MODULE="xim"
+export XMODIFIERS=@im="ibus"
 export XIM_PROGRAM="ibus-daemon"
 export XIM_ARGS="-r --daemonize --xim"
 ibus-daemon -d -x &
@@ -41,6 +41,7 @@ xbindkeys &
 Thunar --daemon &
 spiffy &
 #parcellite &
+gosh makiki-server.scm &
 
 if [ "$1" = "twm" -o "$1" = "openbox" -o "$1" = "flwm" ]; then
   $HOME/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 16 -bg gray15 -fn '-*-terminus-medium-r-normal--12-*' -e 'onexit=ungrabmouse' &

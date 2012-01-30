@@ -37,6 +37,8 @@ if which w3m 1>  /dev/null
 end
 #}}}
 
+set -x GREP_OPTIONS="--colour=auto"
+
 # complete {{{
 
 # gauche {{{
@@ -360,6 +362,9 @@ switch (uname)
   end
   function pcreateall
     pkg_info -Ea |    xargs -n 1 sudo pkg_create -Jnvb
+  end
+  function pinfo
+  pkg_info -Ix $argv
   end
   function tm
     tmux -u2 a

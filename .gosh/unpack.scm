@@ -19,8 +19,12 @@
 (define (tar-unpacker file)
   (run-process `(tar xvf ,file) :wait #t))
 
+(define (sevenzip-unpacker file)
+  (run-process `(7z x ,file) :wait #t))
+
 (define-constant *unpacker-alist*
   `(("zip" ,zip-unpacker)
+    ("7z" ,sevenzip-unpacker)
     ("rar" ,rar-unpacker)
     ("lha" ,lha-unpacker)
     ("txz" ,tar-unpacker)

@@ -20,6 +20,8 @@
     "git://gitorious.org/~ridiculousfish/fish-shell/fishfish.git"
     "git://git.infradead.org/get_iplayer.git"
     "git://git.mplayer2.org/mplayer2.git"
+    ; repo with other name
+    ("git://git.sourceforge.jp/gitroot/ninix-aya/master.git"  "ninix-aya")
     ; minun github repo
     configs
     dotfiles
@@ -86,11 +88,11 @@
           (loop (cdr dirs)))))))
 
 (define (clone-gitdir)
-  (let ((clone (lambda (url) (run-process `(git clone ,url) :wait #t))))
+  (let ((clone (lambda (url dirname) (run-process `(git clone ,url ,dirname) :wait #t))))
     (for-each
       (lambda (l)
         (if (not (file-is-directory? (x->string (car l))))
-          (clone (cadr l))
+          (clone (cadr l) (car l))
           #t))
       (repo-url-directory-list))
     #t))
@@ -115,10 +117,14 @@
 (define (repo-url-directory-list)
   (map
     (lambda (e)
-      (cond ((string? e) (list (sys-basename (path-sans-extension e)) e))
-        ((list? e)  (list (cadr e) #`"git://github.com/,(car e)/,(cadr e)"))
+      (cond 
+        ((string? e) (list (sys-basename (path-sans-extension e)) e))
+        ((list? e)  
+         (if (string? (car e))
+           (list (cadr e) (car e))
+           (list (cadr e) #`"git://github.com/,(car e)/,(cadr e)")))
         ((symbol? e) (list e #`"git@github.com:mytoh/,|e|"))))
-    *repos*))
+    *repos* ))
 
 (define (main args)
   (let ((previous-directory (current-directory)))
