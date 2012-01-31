@@ -5,9 +5,9 @@ ulimit -c 0
 set -x EPREFIX $HOME/local/gentoo
 
 set -Uge PATH#remove PATH
-set PATH /usr/local/sbin /usr/local/bin /sbin /bin /usr/sbin /usr/bin /usr/games/
+set PATH /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/
 
-for p in /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/sbin $HOME/local/homebrew/bin $HOME/local/bin $HOME/local/sbin
+for p in /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin}
   if test -d $p
     if not contains $p $PATH
       set -x PATH $p $PATH
@@ -37,7 +37,7 @@ if which w3m 1>  /dev/null
 end
 #}}}
 
-set -x GREP_OPTIONS="--colour=auto"
+set -x GREP_OPTIONS "--colour=auto"
 
 # complete {{{
 
@@ -61,7 +61,25 @@ complete -c gosh -f -a "(__gosh_completion_current_directory)" -d "files in CWD"
 #}}}
 
 # fish variables {{{
-set fish_greeting ""
+set fish_greeting ""     
+# colors {{{
+# black, red, green, brown, yellow, blue, magenta, purple, cyan, white, normal
+set fish_color_normal normal
+set fish_color_command cyan
+set fish_color_comment -o white
+set fish_color_cwd blue
+set fish_color_end cyan
+set fish_color_error red
+set fish_color_match magenta
+set fish_color_param magenta
+set fish_color_redirection yellow
+set fish_color_search_match brown
+set fish_color_substitution green
+set fish_color_operator cyan
+set fish_color_escape purple
+set fish_color_quote purple
+set fish_color_valid_path brown
+#}}}
 #}}}
 set open_paren "[30m([0m"
 set close_paren "[30m)[0m"
@@ -318,6 +336,10 @@ function sumo3
   mplayer mms://a792.l12513450791.c125134.a.lm.akamaistream.net/D/792/125134/v0001/reflector:50791
 end
 #}}}
+#}}}
+
+#{{{
+bind \cd delete-char
 #}}}
 
 # misc {{{
