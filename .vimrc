@@ -155,6 +155,13 @@ if s:vimrc.isos('haiku')
   set rtp^=~/.vim/
 endif
 
+" remove trailing spaces
+function! s:vimrc.trimspace() dict
+  %s/\s*$//
+  ''
+endfunction
+command! TrimSpace :call s:vimrc.trimspace()
+
 "}}}
 
 " keymaps{{{
