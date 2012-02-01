@@ -7,7 +7,7 @@
 ; applications
 (defprogram-shortcut terminal :command "exec urxvtc" :key (kbd "c") :map *root-map*)
 (defprogram-shortcut browser :command "exec firefox" :key (kbd "f") :map *root-map*)
-(defprogram-shortcut filer   :command "exec thunar" :key (kbd "t") :map *root-map*)
+(defprogram-shortcut filer   :command "exec pcmanfm" :key (kbd "t") :map *root-map*)
 (defprogram-shortcut dmenu :command "exec dmenu_run -i -b -nb '#4d3e41' -nf '#947988' -sb '#947988' -sf '#4d3e41' "
                            :key (kbd "d") :map *root-map*)
 

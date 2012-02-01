@@ -160,7 +160,11 @@ function! s:vimrc.trimspace() dict
   %s/\s*$//
   ''
 endfunction
-command! TrimSpace :call s:vimrc.trimspace()
+command! -complete=command TrimSpace :call s:vimrc.trimspace()
+
+command! -nargs=1 Silent
+      \ | execute ':silen !'.<q-args>
+      \ | execute ':redraw!'
 
 "}}}
 
@@ -192,8 +196,8 @@ cnoremap <c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<
 " autocommands{{{
 function! s:vimrc.xrdb() dict
   if strlen(expand($DISPLAY))
-    silent !xrdb -remove
-    silent !xrdb -merge ~/.Xresources
+    Silent !xrdb -remove
+    Silent !xrdb -merge ~/.Xresources
   endif
 endfunction
 
@@ -224,8 +228,8 @@ aug myautocommands
   au bufread,bufnewfile *stumpwmrc*              set filetype=lisp
   au filetype           xdefaults                call s:vimrc.xrdb()
   au bufwritepost       .vimrc                   source ~/.vimrc
-  au bufwritepost       .zshrc                   silent !zcompile ~/.zshrc
-  au bufwritepost       .conkyrc                 silent !killall -SIGUSR1  conky
+  au bufwritepost       .zshrc                   Silent !zcompile ~/.zshrc
+  au bufwritepost       .conkyrc                 Silent !killall -SIGUSR1  conky
   au filetype           scheme                   call s:vimrc.gauche()
   au filetype           help                     nnoremap q :<c-u>q<cr>
   au filetype           nerdtree                 let g:loaded_golden_ratio=1
@@ -279,8 +283,8 @@ aug end
 
 " neocomplcache"{{{
 let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1 
-let g:neocomplcache_enable_ignore_case = 1 
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_ignore_case = 1
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_auto_select = 0
