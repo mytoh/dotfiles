@@ -256,10 +256,10 @@ end
 #}}}
 
 function pd
-  prevd
+  prevd $argv
 end
 function nd
-  nextd
+  nextd $argv
 end
 
 if which cdf 1>&-
