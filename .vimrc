@@ -3,6 +3,13 @@
 source $HOME/.bundles.vim
 "}}}
 
+" singleton.vim
+if has('clientserver')
+  if exists("g:singleton#opener")
+  call singleton#enable()
+  endif
+endif
+
 "  options{{{
 
 filetype plugin indent on " required
