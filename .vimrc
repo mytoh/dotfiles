@@ -5,9 +5,9 @@ source $HOME/.bundles.vim
 
 " singleton.vim
 if has('clientserver')
-  if exists("g:singleton#opener")
+  " if exists("g:singleton#opener")
   call singleton#enable()
-  endif
+"   endif
 endif
 
 "  options{{{
@@ -231,6 +231,7 @@ aug myautocommands
   au bufread,bufnewfile ~/.xcolours/*            set filetype=xdefaults
   au bufread,bufnewfile ~/.xcolours/*            ColorHighlight
   au bufread,bufnewfile *.scss                   set filetype=scheme
+  au bufread,bufnewfile *.stub                   set filetype=scheme
   au bufread,bufnewfile .mkshrc                  set filetype=sh
   au bufread,bufnewfile *stumpwmrc*              set filetype=lisp
   au filetype           xdefaults                call s:vimrc.xrdb()

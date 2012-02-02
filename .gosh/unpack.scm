@@ -29,6 +29,7 @@
     ("lha" ,lha-unpacker)
     ("txz" ,tar-unpacker)
     ("gz" ,tar-unpacker)
+    ("tgz" ,tar-unpacker)
     ("bz2" ,tar-unpacker)
     ("xz" ,tar-unpacker)
     ("tar" ,tar-unpacker)))
