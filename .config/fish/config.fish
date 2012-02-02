@@ -173,8 +173,13 @@ end
 if which gosh 1> /dev/null
   if test -n $GAUCHE_LOAD_PATH
     function cd
+    if test -d $argv[1]
       original_cd $argv
       command gosh ls.scm -d .
+      else
+        original_cd (dirname $argv[1])
+        command gosh ls.scm -d .
+        end
     end
   else
     function cd

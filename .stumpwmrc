@@ -93,7 +93,7 @@
 ;(setf (group-name (first (screen (current-screen)))) "main")
 ; create the other group
 ; gnewbg, gnewbg-float
-(run-commands  "gselect Default" "grename main" "gselect main" "gnewbg web" "gnewbg media" )
+(run-commands  "gselect Default" "grename main" "gselect main" "gnewbg web" "gnewbg-float media" )
 
 ;;;; window placement rules
 (clear-window-placement-rules) ; clear rules
@@ -107,6 +107,7 @@
       (0 t t :class "Audacious")
       (0 t t :class "MPlayer")
       (0 t t :class "feh")
+      (0 t t :class "jd-Main")
       )
 
 (loop for file in '("keymaps" "hooks" "commands")

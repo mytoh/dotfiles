@@ -4,13 +4,13 @@ body {
   background-color: #121212 !important;
 }
  body,tr,td,th{
-   font-size:10pt !important;
+  /* font-size:10pt !important; */
  }
  a.del{color:#222222;}
  a:hover { color:#888888; }
- small { font-size:10pt }
+/* small { font-size:10pt } */
  .delform {position:absolute;right:0;white-space:nowrap;text-align:center;}
- .chui {font-size:small;}
+/* .chui {font-size:small;} */
  .chui>ul {padding-left:30px;}
  ul {margin:0px;}
  .ftbl {table-layout:fixed;width:476px;margin:0 auto;}
@@ -21,10 +21,10 @@ body {
   }
  .ama {text-align:left;width:468px;border:2px ridge;}
  table.deleted{display:none;}
- #ddel{font-size:8pt}
+/* #ddel{font-size:8pt} */
  #ddbut{cursor:pointer;text-decoration:underline;}
  #contres{position:relative;left:1.5em;}
- #contdisp{font-size:10pt;}
+/* #contdisp{font-size:10pt;} */
  #reszb{cursor:pointer;text-decoration:underline;}
  blockquote{word-wrap:break-word;word-break:break-all;max-width:800px;}
  td{

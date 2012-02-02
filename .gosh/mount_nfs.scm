@@ -11,7 +11,7 @@
   
 
 (define (mount-directories user)
-  (run-process `(sudo mount_nfs quatrevingtdix:/Volumes/Deskstar 
+  (run-process `(sudo mount_nfs quatrevingtdix:/Volumes/Deskstar
                        ,(string-append (home-directory) "/local/mnt/deskstar")) :wait #t)
   (run-process `(sudo mount_nfs quatrevingtdix:/Volumes/MyPassport
                        ,(string-append (home-directory) "/local/mnt/mypassport")) :wait #t)
