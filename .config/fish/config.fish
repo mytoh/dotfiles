@@ -32,7 +32,7 @@ set -x LESS_TERMCAP_so "[01;44;33m"
 set -x LESS_TERMCAP_ue "[0m"
 set -x LESS_TERMCAP_us "[01;32m"
 # set default browser
-if which w3m 1>  /dev/null
+if which w3m1>  /dev/null
   set -x BROWSER w3m
 end
 #}}}
@@ -61,7 +61,7 @@ complete -c gosh -f -a "(__gosh_completion_current_directory)" -d "files in CWD"
 #}}}
 
 # fish variables {{{
-set fish_greeting ""     
+set fish_greeting ""
 # colors {{{
 # black, red, green, brown, yellow, blue, magenta, purple, cyan, white, normal
 set fish_color_normal normal
@@ -148,8 +148,8 @@ function original_cd --description "Change directory" #{{{
   # Avoid set completions
   set -l previous $PWD
 
-  if test $argv[1] = - 2>  /dev/null
-    if test "$__fish_cd_direction" = next 2> /dev/null
+  if test $argv[1] = -2>  /dev/null
+    if test "$__fish_cd_direction" = next2>  /dev/null
       nextd
     else
       prevd
@@ -170,16 +170,16 @@ function original_cd --description "Change directory" #{{{
 end
 #}}}
 
-if which gosh 1> /dev/null
+if which gosh1>  /dev/null
   if test -n $GAUCHE_LOAD_PATH
     function cd
-    if test -d $argv[1]
-      original_cd $argv
-      command gosh ls.scm -d .
+      if test -d $argv[1]
+        original_cd $argv
+        command gosh ls.scm -d .
       else
         original_cd (dirname $argv[1])
         command gosh ls.scm -d .
-        end
+      end
     end
   else
     function cd
@@ -242,26 +242,26 @@ if which gosh 1>&-
   function unpack
     command gosh unpack.scm $argv
   end
-    function ls
-      command gosh ls.scm -d
-    end
-    function la
-      command gosh ls.scm -d -a
-    end
-    function ll
-      command gosh ls.scm -d -psf
-    end
-    function lla
-      command gosh ls.scm -d -psf -a
-    end
-    function l
-      command gosh ls.scm -d
+  function ls
+    command gosh ls.scm -d
+  end
+  function la
+    command gosh ls.scm -d -a
+  end
+  function ll
+    command gosh ls.scm -d -psf
+  end
+  function lla
+    command gosh ls.scm -d -psf -a
+  end
+  function l
+    command gosh ls.scm -d
   end
 end
 #}}}
 
 function pd
-  prevd $argv
+  prevd
 end
 function nd
   nextd $argv
@@ -391,7 +391,7 @@ switch (uname)
     pkg_info -Ea |    xargs -n 1 sudo pkg_create -Jnvb
   end
   function pinfo
-  pkg_info -Ix $argv
+    pkg_info -Ix $argv
   end
   function tm
     tmux -u2 a

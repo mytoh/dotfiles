@@ -3,12 +3,13 @@
 source $HOME/.bundles.vim
 "}}}
 
-" singleton.vim
+" singleton.vim {{{
 if has('clientserver')
   " if exists("g:singleton#opener")
   call singleton#enable()
 "   endif
 endif
+"}}}
 
 "  options{{{
 
@@ -42,6 +43,7 @@ set showcmd
 set showmatch
 set diffopt+=vertical
 set ambiwidth=single
+set display+=lastline
 " key sequence timeout length (default: 1000(ms))
 set timeoutlen=10000
 
@@ -142,7 +144,7 @@ let &t_EI .= "[2 q"
 hi clear cursorline
 hi cursorline     ctermbg=237  gui=underline guibg=black
 hi StatusLine     ctermfg=gray ctermbg=235 cterm=none
-hi ActiveBuffer   ctermfg=blue ctermbg=235 cterm=none
+hi ActiveBuffer   ctermfg=blue ctermbg=233 cterm=none
 hi InactiveBuffer ctermfg=gray ctermbg=235 cterm=none
 hi Comment        ctermfg=244 ctermbg=234 cterm=bold
 
@@ -234,6 +236,8 @@ aug myautocommands
   au bufread,bufnewfile *.stub                   set filetype=scheme
   au bufread,bufnewfile .mkshrc                  set filetype=sh
   au bufread,bufnewfile *stumpwmrc*              set filetype=lisp
+  au bufread,bufnewfile *.fish                   set filetype=fish
+  au bufread,bufnewfile loader.conf.local        set filetype=conf
   au filetype           xdefaults                call s:vimrc.xrdb()
   au bufwritepost       .vimrc                   source ~/.vimrc
   au bufwritepost       .zshrc                   Silent !zcompile ~/.zshrc
@@ -243,6 +247,7 @@ aug myautocommands
   au filetype           nerdtree                 let g:loaded_golden_ratio=1
   au filetype           css                      ColorHighlight
   au filetype           less                      ColorHighlight
+  au filetype           fish                      set equalprg=fish_indent
   " for chalice buffers
   au filetype           2ch*                     setl fencs=cp932,iso-2022-jp-3,euc-jp
   au filetype           2ch*                     let g:loaded_golden_ratio=1
@@ -378,7 +383,7 @@ let g:vimfiler_safe_mode_by_default = 0
 nnoremap gn :<c-u>bnext<cr>
 nnoremap gp :<c-u>bNext<cr>
 let g:bufstat_debug = 1
-let g:bufstat_surround_buffers = ':'
+let g:bufstat_surround_buffers = '(:)'
 let g:bufstat_number_before_bufname = 0
 
 let g:bufstat_active_hl_group = "ActiveBuffer"
