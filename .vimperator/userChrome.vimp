@@ -1,4 +1,4 @@
-  style -name toolbar chrome://* <<EOM
+style -name toolbar chrome://* <<EOM
 
 #aios-toolbar toolbarbutton {
   -moz-appearance: none !important;
@@ -38,6 +38,7 @@ background-color: #212121 !important;
   -moz-appearance: none !important;
   background-color: #121212 !important;
 }
+
 EOM
 
 
