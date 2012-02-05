@@ -109,8 +109,20 @@ function git_prompt
 end
 #}}}
 
+function prompt_pwd_mod -d 'prompt_pwd modification for /usr/home/${USER} on FreeBSD'
+  switch "$PWD"
+  case "/usr$HOME"
+    echo '~'
+  case "/usr$HOME/*"
+    printf "%s" (echo $PWD|sed -e "s|^/usr$HOME|~|" -e 's-/\(\.\{0,1\}[^/]\)\([^/]*\)-/\1-g')
+    echo $PWD | sed -n -e 's-.*/\.\{0,1\}.\([^/]*\)-\1-p'
+  case '*'
+    prompt_pwd
+  end
+end
+
 function current-directory
-  printf '%s%s%s%s%s' $open_paren (set_color $fish_color_cwd) (prompt_pwd) (set_color $fish_color_normal) $close_paren
+  printf '%s%s%s%s%s' $open_paren (set_color $fish_color_cwd) (prompt_pwd_mod) (set_color $fish_color_normal) $close_paren
 end
 
 function prompt-up-right
@@ -148,7 +160,7 @@ function original_cd --description "Change directory" #{{{
   # Avoid set completions
   set -l previous $PWD
 
-  if test $argv[1] = -2>  /dev/null
+  if test $argv[1] = - 2>  /dev/null
     if test "$__fish_cd_direction" = next2>  /dev/null
       nextd
     else
@@ -170,7 +182,7 @@ function original_cd --description "Change directory" #{{{
 end
 #}}}
 
-if which gosh1>  /dev/null
+if which gosh 1>  /dev/null
   if test -n $GAUCHE_LOAD_PATH
     function cd
       if test -d $argv[1]
