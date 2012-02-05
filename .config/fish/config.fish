@@ -318,6 +318,9 @@ end
 function stow
   stow --verbose=3 $argv
 end
+function tm
+	tmux -u2 a
+end
 #net {{{
 function starwars
   telnet towel.blinkenlights.nl
@@ -405,9 +408,6 @@ switch (uname)
   function pinfo
     pkg_info -Ix $argv
   end
-  function tm
-    tmux -u2 a
-  end
 
   #if test $TERM = "cons25"
   #if test -e (which jfbterm)
@@ -478,3 +478,9 @@ switch (uname)
   set -x JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
 end
 #}}}
+
+# memo
+# redirect
+#  func 2> /dev/null
+#  func ^/dev/null
+#  func ^&-
