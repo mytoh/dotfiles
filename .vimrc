@@ -133,8 +133,8 @@ silent !echo -ne "\033]12;red\007"
 autocmd VimLeave * silent !echo -ne "\033]112\007"
 
 " change cursor when insert mode
-let &t_SI .= "[4 q"
-let &t_EI .= "[2 q"
+" let &t_SI .= "[4 q"
+" let &t_EI .= "[2 q"
 
 "}}}
 
