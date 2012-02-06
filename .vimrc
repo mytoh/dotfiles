@@ -414,6 +414,7 @@ nnoremap <silent> [unite]f  :<C-u>UniteWithBufferDir -buffer-name=files -prompt=
 nnoremap <silent> [unite]c  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file<CR>
 nnoremap <silent> [unite]b :<c-u>Unite bookmark<cr>
 nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
+nnoremap <silent> [unite]l :<c-u>Unite launcher<cr>
 
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()"{{{

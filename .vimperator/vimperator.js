@@ -40,5 +40,5 @@ options.setPref("browser.fullscreen.animateUp", 0);
 options.setPref("network.http.spdy.enabled", true);
 options.setPref("config.trim_on_minimize", true);
 options.setPref("dom.popup_allowed_events", "");
-options.setPref("ui.key.menuAccessKey", "0");
+options.setPref("ui.key.menuAccessKey", 0);
 

@@ -27,13 +27,14 @@ body {
 /* #contdisp{font-size:10pt;} */
  #reszb{cursor:pointer;text-decoration:underline;}
  blockquote{word-wrap:break-word;word-break:break-all;max-width:800px;}
- td{
+ td {
   color: #aaaacc !important;
   background-color: #222222 !important;
   border-radius: 10px;
   -moz-border-radius: 10px;
   max-width:800px;
   }
+
 EOM
 
 

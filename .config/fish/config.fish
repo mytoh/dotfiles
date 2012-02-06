@@ -149,47 +149,14 @@ function xsource
   end
 end
 
-function original_cd --description "Change directory" #{{{
-
-  # Skip history in subshells
-  if status --is-command-substitution
-    builtin cd $argv
-    return $status
-  end
-
-  # Avoid set completions
-  set -l previous $PWD
-
-  if test $argv[1] = - 2>  /dev/null
-    if test "$__fish_cd_direction" = next2>  /dev/null
-      nextd
-    else
-      prevd
-    end
-    return $status
-  end
-
-  builtin cd $argv[1]
-  set -l cd_status $status
-
-  if test $cd_status = 0 -a "$PWD" != "$previous"
-    set -g dirprev $dirprev $previous
-    set -e dirnext
-    set -g __fish_cd_direction prev
-  end
-
-  return $cd_status
-end
-#}}}
-
 if which gosh 1>  /dev/null
   if test -n $GAUCHE_LOAD_PATH
     function cd
       if test -d $argv[1]
-        original_cd $argv
+        builtin cd $argv
         command gosh ls.scm -d .
       else
-        original_cd (dirname $argv[1])
+        builtin cd (dirname $argv[1])
         command gosh ls.scm -d .
       end
     end
@@ -244,6 +211,9 @@ if which gosh 1>&-
   end
   function futaba
     command gosh futaba-get.scm $argv
+  end
+  function danbooru
+    command gosh danbooru $argv
   end
   function spc2ubar
     command gosh space2underbar.scm $argv
