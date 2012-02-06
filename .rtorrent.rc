@@ -1,0 +1,83 @@
+directory = ~/.torrent/tmp
+session = ~/.torrent/session
+schedule = watch_directory,5,5,load_start=~/.torrent/torrents/*.torrent
+schedule = untied_directory,5,5,stop_untied=
+
+use_udp_trackers = yes
+dht = auto
+dht_port = 6881
+peer_exchange = yes
+
+system.method.set_key = event.download.finished,move_complete,"execute=mv,-n,$d.get_base_path=,~/.torrent/in/;d.set_directory=~/.torrent/in/"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

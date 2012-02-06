@@ -34,8 +34,12 @@ body {
   -moz-border-radius: 10px;
   max-width:800px;
   }
+ .threadId {
+  font-size: 7pt;
+}
 
 EOM
+
 
 
 style -name google google.com,google.co.jp <<EOM
