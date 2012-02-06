@@ -10,7 +10,7 @@
 (use srfi-13)
 
 ;; Cpu settings
-(define CPU-CORES (list 0))
+(define CPU-CORES (list 0 1))
  
 ;; Main loop interval in seconds
 (define SLEEP-INTERVAL 1)
@@ -82,7 +82,7 @@
                  (rx (string->number (cadr tokens)))
                  (tx (string->number (car (drop tokens 9))))
                  )
-                (set! *NET-RECEIVE*  (/. (/. rx 1024) 1024))
+                (set! *NET-RECEIVE*  (/. rx (* 1024 1024)))
                 ;(print *NET-RECEIVE*)
                 )))))
 
@@ -91,7 +91,7 @@
 (define (display-status-line )
   (let ((information-line (format
                            #f
-                           "^9*Cpu:~3@a% ^8*|^n ^6*Mem:~3@a% "
+                           "^9*Cpu:~3@a% ^8*|^n ^6*Mem:~3@a%"
                            (inexact->exact (round (vector-ref *CPU-LOADS* 0)))
                            *MEM-USED*
                            )))
@@ -102,6 +102,7 @@
         (sys-sleep SLEEP-INTERVAL)
         (update-cpu-loads)
         (update-mem-loads)
+        (update-net-loads)
         (display-status-line )
         )
 

@@ -5,6 +5,9 @@
 
 (in-package :stumpwm)
 
+(load-module "mpd")
+(load-module "notifications")
+
 (defparameter terminal "urxvtcd")
 
 ;; message window

@@ -34,9 +34,11 @@ body {
   -moz-border-radius: 10px;
   max-width:800px;
   }
- .threadId {
+ .threadid {
   font-size: 7pt;
+  color: #fb8def;
 }
+
 
 EOM
 
