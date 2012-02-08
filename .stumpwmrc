@@ -53,9 +53,9 @@
   *mode-line-border-width*          0
   *mode-line-pad-x*                 1
   *mode-line-pad-y*                 1
-  *mode-line-timeout*               5
+  *mode-line-timeout*               3
   ; formats
-  *window-format*                   "^9*(%n%m%15t)^n" ;;^5 magenta
+  *window-format*                   "^0*(^9*%n%m%15t^0*)^n" ;;^5 magenta
   *group-format*                    "^7*%t%s^n" ;;^7 white
   )
 
@@ -85,18 +85,19 @@
             ))
 
 ;; startup programmes
-;(run-shell-command "exec trayer --expand true --alpha 100  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype request --width 100 " )
+; (run-shell-command "exec trayer --expand true --alpha 100  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype request --width 100 " )
 ;(run-shell-command "stalonetray" )
 (run-shell-command "exec feh --bg-scale ~/.wallpaper" )
 ; (run-shell-command "exec compton -i 0.9 -e 0.9" )
 (run-shell-command "exec ~/.stumpwm.d/dzen.sh" )
+(run-shell-command "exec unclutter -idle 1 -jitter 2 -root")
 
 ;; groups
 ; rename the first group to main
 ;(setf (group-name (first (screen (current-screen)))) "main")
 ; create the other group
 ; gnewbg, gnewbg-float
-(run-commands  "gselect Default" "grename main" "gselect main" "gnewbg web" "gnewbg-float media" )
+(run-commands  "gselect Default" "grename main" "gselect main" "gnewbg web" "gnewbg-float media" "gselect main")
 
 ;;;; window placement rules
 (clear-window-placement-rules) ; clear rules

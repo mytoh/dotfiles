@@ -11,25 +11,53 @@
 (defprogram-shortcut dmenu :command "exec dmenu_run -i -b -nb '#4d3e41' -nf '#947988' -sb '#947988' -sf '#4d3e41' "
                            :key (kbd "d") :map *root-map*)
 
-(define-key *root-map* (kbd "C-.")   "mymenu")
+;; github.com/Juev/stumpwm-config
+(defmacro defkey-top (key cmd)
+  `(define-key *top-map* (kbd ,key) ,cmd))
+(defmacro defkeys-top (&rest keys)
+  (let ((ks (mapcar #'(lambda (k) (cons 'defkey-top k)) keys)))
+    `(progn ,@ks)))
 
-;; window operation
-(define-key *root-map* (kbd "C-f")   "fullscreen")
-(define-key *top-map*  (kbd "s-RET") "fullscreen")
-(define-key *root-map* (kbd "C-o")   "fnext") ; default key "C-t o"
-(define-key *top-map*  (kbd "M-TAB") "next")
-(define-key *root-map*  (kbd "C-r")   "restart-hard")
+(defmacro defkey-root (key cmd)
+  `(define-key *root-map* (kbd ,key) ,cmd))
+(defmacro defkeys-root (&rest keys)
+  (let ((ks (mapcar #'(lambda (k) (cons 'defkey-root k)) keys)))
+    `(progn ,@ks)))
+
+(defmacro defkey-input (key cmd)
+  `(define-key *input-map* (kbd ,key) ,cmd))
+(defmacro defkeys-input (&rest keys)
+  (let ((ks (mapcar #'(lambda (k) (cons 'defkey-input k)) keys)))
+    `(progn ,@ks)))
+
+(defkeys-root 
+  ("C-."  "mymenu")
+  ;; window operation
+  ("C-f"   "fullscreen")
+  ("C-o"   "fnext") ; default key "C-t o"
+  ("C-r"   "restart-hard")
+  ("C-s"   "swap-windows")
+  ("~"     "rotate-windows")
+  ("|"     "toggle-split")
+  )
+
+(defkeys-top
+  ;; window operation
+  ("s-RET" "fullscreen")
+  ("M-TAB" "next")
+  ;; group key map
+  ("M-1" "gselect main")
+  ("M-2" "gselect web") 
+  ("M-3" "gselect media"))
  
 ;;input window keymap
-(define-key *input-map* (kbd "C-i") 'input-complete-forward)
-(define-key *input-map* (kbd "C-m") 'input-submit)
-(define-key *input-map* (kbd "C-h") 'input-delete-backward-char)
+(defkeys-input
+  ("C-i" 'input-complete-forward)
+  ("C-m" 'input-submit)
+  ("C-h" 'input-delete-backward-char))
 
 ;; group key map
 (define-key *groups-map* (kbd "f") "gmove media")
-(define-key *top-map*   (kbd "M-1") "gselect main")
-(define-key *top-map*   (kbd "M-2") "gselect web") 
-(define-key *top-map*   (kbd "M-3") "gselect media") 
 
 ;;; }}}
 

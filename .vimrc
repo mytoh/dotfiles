@@ -76,31 +76,6 @@ set t_Co=256
 colorscheme jellybeans
 set background=dark
 
-" statusline {{{
-set laststatus=2
-" highlight for statusline
-" set colorscheme above these settings
-" User1-9 => %{1-9}*
-hi User1 ctermfg=white ctermbg=233 cterm=none
-hi User2 ctermfg=60   ctermbg=233
-hi User9 ctermfg=4 ctermbg=235 cterm=none
-" statusline for buftabs plugin
-set stl=     " clear statusline when reloaded
-set stl=%1*\    " left side
-set stl+=%=  " separator
-set stl+=%2*(%1*%<%{fnamemodify(getcwd(),':~')}%2*)%1*\   "get filepath
-set stl+=%{fugitive#statusline()}\  "git repo info
-set stl+=%y\  "filetype
-set stl+=%{&dictionary}
-set stl+=%{&fenc}\  "fileencoding
-set stl+=%{&ff}\    "fileformat
-set stl+=%2*(%1*%3.3b,%2.2B%2*)%1*\  " ascii, hex under cursor
-set stl+=%2*(%1*%l,  "current line number
-set stl+=%c   "columns
-set stl+=/%L%2*)%1*\   "total line number
-set stl+=%3p%%\  "percentage of current line
-set stl+=%*    "reset color
-"}}}
 
 " set mouse
 set mouse=a
@@ -138,6 +113,65 @@ autocmd VimLeave * silent !echo -ne "\033]112\007"
 " let &t_SI .= "[4 q"
 " let &t_EI .= "[2 q"
 
+"}}}
+
+" statusline {{{
+set laststatus=2
+" highlight for statusline
+" set colorscheme above these settings
+" User1-9 => %{1-9}*
+hi User1 ctermfg=white ctermbg=233 cterm=none
+hi User2 ctermfg=60   ctermbg=233
+hi User9 ctermfg=4 ctermbg=235 cterm=none
+" statusline for buftabs plugin
+set stl=     " clear statusline when reloaded
+set stl=%1*\    " left side
+set stl+=%=  " separator
+set stl+=%2*(%1*%<%{fnamemodify(getcwd(),':~')}%2*)%1*\   "get filepath
+set stl+=%{fugitive#statusline()}\  "git repo info
+set stl+=%y\  "filetype
+set stl+=%{&dictionary}
+set stl+=%{&fenc}\  "fileencoding
+set stl+=%{&ff}\    "fileformat
+set stl+=%2*(%1*%3.3b,%2.2B%2*)%1*\  " ascii, hex under cursor
+set stl+=%2*(%1*%l,  "current line number
+set stl+=%c   "columns
+set stl+=/%L%2*)%1*\   "total line number
+set stl+=%3p%%\  "percentage of current line
+set stl+=%*    "reset color
+
+" change StatusLine color when insert mode {{{
+" http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-color#color-theme-mod
+let g:hi_insert = 'highlight StatusLine ctermfg=blue ctermbg=yellow cterm=none guifg=darkblue guibg=darkyellow gui=none'
+if has('sytax')
+  augroup InsertHook
+    autocmd!
+    autocmd InsertEnter * call s:StatusLine('Enter')
+    autocmd InsertLeave * call s:StatusLine('Leave')
+  augroup END
+endif
+
+let s:slhlcmd = ''
+function! s:StatusLine(mode)
+  if a:mode == 'Enter'
+    silent! let s:slhlcmd = 'highlight' . s:GetHighlight('StatusLine')
+    silent exec g:hi_insert
+  else
+    highlight clear StatusLine
+    silent exec s:slhlcmd
+  endif
+endfunction
+
+function! s:GetHighlight(hi)
+  redir => hl
+  exec 'highlight' . a:hi
+  redir END
+  let hl = substitute(hl, '[\r\n]', '', 'g')
+  let hl = substitute(hl, 'xxx', '', '')
+  return hl
+endfunction
+"}}}
+  
 "}}}
 
 " highlights {{{

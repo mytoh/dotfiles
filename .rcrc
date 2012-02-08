@@ -1,0 +1,54 @@
+
+path=(/usr/local/bin /bin /sbin /usr/bin /usr/sbin)
+path_list=( /usr/games
+            /sbin /bin
+            /usr/^(sbin bin)
+            /usr/local/^(sbin bin)
+            /usr/X11/bin
+            /opt/X11/bin
+            $home/local/apps/v2c
+            $home/local/homebrew/^(sbin bin)
+            $home/local/^(bin sbin)
+            )
+
+for (p in $path_list) {
+  if (test -d $p){
+    if (! ~ $p $path){
+      path=($p $path )
+      }
+    }
+  }
+
+cdpath=( '' $home/local $home/local/mnt /usr/^(ports src))
+
+open_paren='[30m([0m'
+close_paren='[30m)[0m'
+
+fn prompt_pwd {
+  cwd=`pwd
+  switch ($cwd) {
+  case /usr^$home $home
+    echo '~'
+    case /usr^$home/*
+    echo $cwd|sed -e 's|^/usr'$home'|~|'
+    case $home/*
+    echo $cwd|sed -e 's|^'$home'|~|'
+  case *
+  pwd
+    }
+  }
+
+fn current_directory {
+  printf '%s%s%s' $open_paren `prompt_pwd $close_paren
+  }
+
+fn prompt_up_right{
+  printf '%s' '[30m┌─[0m'
+  }
+
+fn rc_prompt {
+  printf '%s%s%s%s' `prompt_up_right `current_directory `{tput nw} '[30m;[0m'
+  }
+  
+prompt=(`rc_prompt^' '
+        '')

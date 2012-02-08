@@ -8,6 +8,7 @@
 (use file.util)
 (use srfi-1)
 (use srfi-13)
+(load "sysctl.scm")
 
 ;; Cpu settings
 (define CPU-CORES (list 0 1))
@@ -93,7 +94,7 @@
                            #f
                            "^9*Cpu:~3@a% ^8*|^n ^6*Mem:~3@a%"
                            (inexact->exact (round (vector-ref *CPU-LOADS* 0)))
-                           *MEM-USED*
+                           (percentage (mem-used) (mem-total))
                            )))
     (display information-line )))
  
