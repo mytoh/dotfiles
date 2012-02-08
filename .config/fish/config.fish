@@ -40,6 +40,13 @@ end
 set -x GREP_OPTIONS "--colour=auto"
 
 # complete {{{
+if test -d ~/.config/fish/completions
+  for p in ~/.config/fish/completions/*
+    if test -d $p
+      set fish_complete_path $p/completions $fish_complete_path
+    end
+  end
+end
 
 # gauche {{{
 function __gosh_completion_load_path
@@ -224,9 +231,6 @@ if which gosh 1>&-
   function unpack
     command gosh unpack.scm $argv
   end
-  function ls
-    command gosh ls.scm -d
-  end
   function la
     command gosh ls.scm -d -a
   end
@@ -289,7 +293,7 @@ function stow
   stow --verbose=3 $argv
 end
 function tm
-	tmux -u2 a
+  tmux -u2 a
 end
 #net {{{
 function starwars

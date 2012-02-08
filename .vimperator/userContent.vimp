@@ -4,7 +4,7 @@ body {
   background-color: #121212 !important;
 }
  body,tr,td,th{
-  /* font-size:10pt !important; */
+   font-size:10pt !important; */
  }
  a.del{color:#222222;}
  a:hover { color:#888888; }
@@ -48,4 +48,19 @@ style -name google google.com,google.co.jp <<EOM
 .vspib, #vspb {
   display: nonee !important;
 }
+EOM
+
+style -name freebsd forums.freebsd.org <<EOM
+body, table, tbody, thead, tr, td, thead, div, a {
+  background-image: none !important;
+  background-color: #333333 !important;
+  color: #777777 !important;
+  }
+
+  .tborder {
+    background-color: #606060 !important;
+    }
+  strong {
+    color: #a8b888 !important;
+    }
 EOM

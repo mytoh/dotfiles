@@ -69,9 +69,12 @@
 
 (define (get-posts-all tag)
   (let ((last (x->number (parse-last-page-number (get-posts 1 tag)))))
+    (print (string-append (make-colour 82 last)
+                          " pages found"))
     (dotimes (num last)
       (print (string-append (make-colour 99 "getting page ") (make-colour 33 (+ num 1))))
-       (get-image (parse-post-number-url (get-posts (+ num 1) tag))))))
+       (get-image (parse-post-number-url (get-posts (+ num 1) tag))))
+    ))
 
   (define (main args)
     (let-args (cdr args)

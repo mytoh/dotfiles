@@ -108,7 +108,7 @@
              (cd thread)
              (get-img html board)
              (cd ".."))
-             (print (make-colour 0 (string-append thread "'s gone")))
+             (print (make-colour 237 (string-append thread "'s gone")))
            )
        ) ;let*
  )

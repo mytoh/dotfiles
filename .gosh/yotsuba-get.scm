@@ -67,7 +67,7 @@
         (get-img html board)
         (cd ".."))
       (begin
-        (print (make-colour 0 (string-append thread "'s gone")))
+        (print (make-colour 237 (string-append thread "'s gone")))
         ))))
 
 
