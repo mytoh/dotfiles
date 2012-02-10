@@ -70,6 +70,7 @@
     (dss-project   dswm)
     (aredridel      es-shell)
     (ThomasAdam     tmux)
+    (midgetspy      Sick-Beard)
     )
   )
 
