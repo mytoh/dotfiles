@@ -55,7 +55,7 @@
   *mode-line-pad-y*                 1
   *mode-line-timeout*               3
   ; formats
-  *window-format*                   "^0*(^9*%n%m%15t^0*)^n" ;;^5 magenta
+  *window-format*                   "^7*(^9*%n%m%15t^7*)^n" ;;^5 magenta
   *group-format*                    "^7*%t%s^n" ;;^7 white
   )
 
@@ -97,7 +97,11 @@
 ;(setf (group-name (first (screen (current-screen)))) "main")
 ; create the other group
 ; gnewbg, gnewbg-float
-(run-commands  "gselect Default" "grename main" "gselect main" "gnewbg web" "gnewbg-float media" "gselect main")
+(run-commands  "grename main" 
+               "gselect main"
+               "gnewbg web"
+               "gnewbg-float media"
+               "gselect main")
 
 ;;;; window placement rules
 (clear-window-placement-rules) ; clear rules

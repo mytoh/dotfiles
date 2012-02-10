@@ -53,6 +53,7 @@
     (rkitover      vimpager)
     (GGLucas       vimperator-buftabs)
     (vimpr         vimperator-plugins)
+    (caisui        vimperator)
     (rupa           z)
     (clvv           f)
     (sjl            z-fish)

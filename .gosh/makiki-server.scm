@@ -27,8 +27,10 @@
            (link (@ (rel "stylesheet") (href "http://fonts.googleapis.com/css?family=Convergence") (type "text.css")))
            )
      (body
-       ; (img (@ (class "bg") (src "image/sicp-mod.png") (alt "")))
-       (img (@ (class "bg") (src "image/sicp-mod.webp") (alt "")))
+       ,(let* ((browser (request-header-ref req "user-agent" )))
+             (if (string=? browser "Opera") ; browser supporting webp
+               '(img (@ (class "bg") (src "image/sicp-mod.webp") (alt "")))
+               '(img (@ (class "bg") (src "image/sicp-mod.png") (alt "")))))
        (div (@ (id "bookmark"))
             (p (@ (class "delicious"))
              "(" (a (@ (href "http://d.me") (target "_blank")) "delicious") (br)

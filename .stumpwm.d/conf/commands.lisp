@@ -72,14 +72,16 @@
             (let* ((group (current-group))
                    (cur-frame (tile-group-current-frame group))
                    (frames (group-frames group)))
-              (if (or (neighbour :left cur-frame frames)
-                      (neighbour :right cur-frame frames))
-                (progn
-                  (only)
-                  (vsplit))
-                (progn
-                  (only)
-                  (hsplit)))))
+              (if (eq (length frames) 2)
+                (progn (if (or (neighbour :left cur-frame frames)
+                               (neighbour :right cur-frame frames))
+                         (progn
+                           (only)
+                           (vsplit))
+                         (progn
+                           (only)
+                           (hsplit))))
+                (message "Works only with 2 frames"))))
 
 ;;}}}
 
