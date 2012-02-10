@@ -32,7 +32,7 @@ set -x LESS_TERMCAP_so "[01;44;33m"
 set -x LESS_TERMCAP_ue "[0m"
 set -x LESS_TERMCAP_us "[01;32m"
 # set default browser
-if which w3m1>  /dev/null
+if which w3m 1>  /dev/null
   set -x BROWSER w3m
 end
 #}}}
@@ -40,13 +40,13 @@ end
 set -x GREP_OPTIONS "--colour=auto"
 
 # complete {{{
-if test -d ~/.config/fish/completions
-  for p in ~/.config/fish/completions/*
-    if test -d $p
-      set fish_complete_path $p/completions $fish_complete_path
-    end
-  end
-end
+#if test -d ~/.config/fish/completions
+#  for p in ~/.config/fish/completions/*
+#    if test -d $p
+#      set fish_complete_path $p/completions $fish_complete_path
+#    end
+#  end
+#end
 
 # gauche {{{
 function __gosh_completion_load_path
@@ -160,16 +160,16 @@ if which gosh 1>  /dev/null
   if test -n $GAUCHE_LOAD_PATH
     function cd
       if test -d $argv[1]
-        builtin cd $argv
-        command gosh ls.scm -d .
+        builtin cd $argv 
+        and command gosh ls.scm -d .
       else
-        builtin cd (dirname $argv[1])
-        command gosh ls.scm -d .
+        builtin cd (dirname $argv[1]) 
+        and command gosh ls.scm -d .
       end
     end
   else
     function cd
-      original_cd $argv
+      builtin cd $argv
     end
   end
 end
@@ -299,19 +299,19 @@ end
 function starwars
   telnet towel.blinkenlights.nl
 end
-function radio1
+function radio1 -d "BBC Radio 1"
   mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r1.asx
 end
-function radio2
+function radio2  -d "BBC Radio 2"
   mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r2.asx
 end
-function radio3
+function radio3 -d "BBC Radio 3"
   mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r3.asx
 end
-function radio4
+function radio4 -d "BBC Radio 4"
   mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r4.asx
 end
-function radio6
+function radio6 -d "BBC Radio 6 Music"
   mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r6.asx
 end
 function jblive
