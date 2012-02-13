@@ -573,6 +573,7 @@ switch (uname)
   end
 
   case Darwin
+  set PYTHONPATH "~/local/homebrew/lib/python:$PYTHONPATH"
   alias mp2 "/Applications/mplayer2.app/Contents/MacOS/mplayer-bin"
   alias bsearch "brew search "
   alias binst "brew install -v"
