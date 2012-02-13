@@ -1,0 +1,21 @@
+(require 'sawfish-defaults)
+(require 'sawfish.wm.ext.pager)
+
+; pager
+(setq pager-executable "pager")
+(add-hook 'after-initialization-hook pager t)
+
+(setq *workspace-count* 4)
+
+;; Application Keymacros
+(define apps-keymap ( make-keymap ))
+(bind-keys global-keymap "C-t" apps-keymap)
+
+(bind-keys apps-keymap 
+  "d" `(jump-or-exec "dmenu" "dmenu_run" t)) 
+
+
+(custom-set-typed-variable (quote browser-program) (quote "firefox") (quote string))
+(custom-set-typed-variable (quote default-font) (quote ("Pango" . "Terminusmodmod 9")) (quote font))
+(custom-set-typed-variable (quote default-frame-style) (quote mono) (quote frame-style))
+(custom-set-typed-variable (quote reload-themes-when-changed) (quote ()) (quote boolean))
