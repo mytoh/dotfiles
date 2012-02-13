@@ -289,14 +289,18 @@ function colors-invader #{{{
 end
 #}}}
 
-function colors-dump #{{{
- set xdef $HOME/.xcolours/(grep "xcolours" $HOME/.Xresources | sed -re '/^!/d; /^$/d; s/^#include//; s/.*\/([a-z]+)\"$/\1/g;')
- set colors (sed -re '/^!/d; /^$/d; /^#/d; s/(\*color)([0-9]):/\10\2:/g;' $xdef | grep 'color[01][0-9]:' | sort |sed 's/^.*: *//g' )
- 
+function colors-dump  #{{{
+  set xdef $HOME/.xcolours/(grep "xcolours" $HOME/.Xresources | sed -re '/^!/d; /^$/d; s/^#include//; s/.*\/([a-z]+)\"$/\1/g;')
+  set colors (sed -re '/^!/d; /^$/d; /^#/d; s/(\*color)([0-9]):/\10\2:/g;' $xdef | grep 'color[01][0-9]:' | sort |sed 's/^.*: *//g' )
+
   echo "[37m
   Black   Red      Green   Yellow    Blue    Magenta   Cyan    White
   -------------------------------------------------------------------[0m"
-  
+
+  for i in (seq 0 7)
+    set n (math 30+$i)
+  end
+
 end
 #}}}
 

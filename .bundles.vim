@@ -91,7 +91,8 @@ NeoBundle 'kergoth/fish.vim'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kana/vim-textobj-line'
 NeoBundle 'Raimondi/delimitMate'
-"colorscheme
+" colorscheme
+NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'jelera/vim-gummybears-colorscheme'
 " }}}
 
