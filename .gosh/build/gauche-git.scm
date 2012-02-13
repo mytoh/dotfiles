@@ -10,6 +10,9 @@
 (define *stow-directory* (build-path (home-directory) "local/stow"))
 (define *prefix-directory* (build-path *stow-directory* *package*))
 
+(define (update)
+  (run-process '(git pull) :wait #t))
+
 (define (build)
   (run-process `(./configure ,(string-append "--prefix=" *prefix-directory*)) :wait #t)
   (run-process '(make clean) :wait #t)
@@ -22,5 +25,6 @@
 
 (define (main args)
   (cd *srcdir*)
+  (update)
   (build)
   (stow-install))
