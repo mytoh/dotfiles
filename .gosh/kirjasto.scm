@@ -50,7 +50,7 @@
 
 
 (define get-os-type
-  ;;returns symbol
+  ; returns symbol
   (lambda ()
     (string->symbol (string->lowercase
                       (car (sys-uname))))))

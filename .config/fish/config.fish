@@ -160,10 +160,10 @@ if which gosh 1>  /dev/null
   if test -n $GAUCHE_LOAD_PATH
     function cd
       if test -d $argv[1]
-        builtin cd $argv 
+        builtin cd $argv
         and command gosh ls.scm -d .
       else
-        builtin cd (dirname $argv[1]) 
+        builtin cd (dirname $argv[1])
         and command gosh ls.scm -d .
       end
     end
@@ -206,6 +206,136 @@ function scm
     end
   end
 end
+
+# color functions {{{
+# functions from
+# http://crunchbanglinux.org/forums/post/126921/#p126921
+
+function colors-pacman #{{{
+ set blackf  "[30m"; set redf    "[31m"; set greenf  "[32m"
+ set yellowf "[33m"; set bluef   "[34m"; set purplef "[35m"
+ set cyanf   "[36m"; set whitef  "[37m"
+
+ set blackb  "[40m"; set redb    "[41m"; set greenb  "[42m"
+ set yellowb "[43m"; set blueb   "[44m"; set purpleb "[45m"
+ set cyanb   "[46m"; set whiteb  "[47m"
+
+ set boldon "[1m"; set boldoff "[22m"
+ set italicson "[3m"; set italicsoff "[23m"
+ set ulon "[4m";     set uloff "[24m"
+ set invon "[7m";   set invoff "[27m"
+
+ set reset "[0m"
+
+ echo "
+ $yellowf  ▄███████▄$reset   $redf  ▄██████▄$reset    $greenf  ▄██████▄$reset    $bluef  ▄██████▄$reset    $purplef  ▄██████▄$reset    $cyanf  ▄██████▄$reset
+ $yellowf▄█████████▀▀$reset  $redf▄$whitef█▀█$redf██$whitef█▀█$redf██▄$reset  $greenf▄$whitef█▀█$greenf██$whitef█▀█$greenf██▄$reset  $bluef▄$whitef█▀█$bluef██$whitef█▀█$bluef██▄$reset  $purplef▄$whitef█▀█$purplef██$whitef█▀█$purplef██▄$reset  $cyanf▄$whitef█▀█$cyanf██$whitef█▀█$cyanf██▄$reset
+ $yellowf███████▀$reset      $redf█$whitef▄▄█$redf██$whitef▄▄█$redf███$reset  $greenf█$whitef▄▄█$greenf██$whitef▄▄█$greenf███$reset  $bluef█$whitef▄▄█$bluef██$whitef▄▄█$bluef███$reset  $purplef█$whitef▄▄█$purplef██$whitef▄▄█$purplef███$reset  $cyanf█$whitef▄▄█$cyanf██$whitef▄▄█$cyanf███$reset
+ $yellowf███████▄$reset      $redf████████████$reset  $greenf████████████$reset  $bluef████████████$reset  $purplef████████████$reset  $cyanf████████████$reset
+ $yellowf▀█████████▄▄$reset  $redf██▀██▀▀██▀██$reset  $greenf██▀██▀▀██▀██$reset  $bluef██▀██▀▀██▀██$reset  $purplef██▀██▀▀██▀██$reset  $cyanf██▀██▀▀██▀██$reset
+ $yellowf  ▀███████▀$reset   $redf▀   ▀  ▀   ▀$reset  $greenf▀   ▀  ▀   ▀$reset  $bluef▀   ▀  ▀   ▀$reset  $purplef▀   ▀  ▀   ▀$reset  $cyanf▀   ▀  ▀   ▀$reset
+
+ $boldon$yellowf  ▄███████▄   $redf  ▄██████▄    $greenf  ▄██████▄    $bluef  ▄██████▄    $purplef  ▄██████▄    $cyanf  ▄██████▄$reset
+ $boldon$yellowf▄█████████▀▀  $redf▄$whitef█▀█$redf██$whitef█▀█$redf██▄  $greenf▄$whitef█▀█$greenf██$whitef█▀█$greenf██▄  $bluef▄$whitef█▀█$bluef██$whitef█▀█$bluef██▄  $purplef▄$whitef█▀█$purplef██$whitef█▀█$purplef██▄  $cyanf▄$whitef█▀█$cyanf██$whitef█▀█$cyanf██▄$reset
+ $boldon$yellowf███████▀      $redf█$whitef▄▄█$redf██$whitef▄▄█$redf███  $greenf█$whitef▄▄█$greenf██$whitef▄▄█$greenf███  $bluef█$whitef▄▄█$bluef██$whitef▄▄█$bluef███  $purplef█$whitef▄▄█$purplef██$whitef▄▄█$purplef███  $cyanf█$whitef▄▄█$cyanf██$whitef▄▄█$cyanf███$reset
+ $boldon$yellowf███████▄      $redf████████████  $greenf████████████  $bluef████████████  $purplef████████████  $cyanf████████████$reset
+ $boldon$yellowf▀█████████▄▄  $redf██▀██▀▀██▀██  $greenf██▀██▀▀██▀██  $bluef██▀██▀▀██▀██  $purplef██▀██▀▀██▀██  $cyanf██▀██▀▀██▀██$reset
+ $boldon$yellowf  ▀███████▀   $redf▀   ▀  ▀   ▀  $greenf▀   ▀  ▀   ▀  $bluef▀   ▀  ▀   ▀  $purplef▀   ▀  ▀   ▀  $cyanf▀   ▀  ▀   ▀$reset
+ "
+
+end
+# }}}
+
+function colors-invader #{{{
+ set blackf  "[30m"; set redf    "[31m"; set greenf  "[32m"
+ set yellowf "[33m"; set bluef   "[34m"; set purplef "[35m"
+ set cyanf   "[36m"; set whitef  "[37m"
+
+ set blackb  "[40m"; set redb    "[41m"; set greenb  "[42m"
+ set yellowb "[43m"; set blueb   "[44m"; set purpleb "[45m"
+ set cyanb   "[46m"; set whiteb  "[47m"
+
+ set boldon "[1m"; set boldoff "[22m"
+ set italicson "[3m"; set italicsoff "[23m"
+ set ulon "[4m";     set uloff "[24m"
+ set invon "[7m";   set invoff "[27m"
+
+ set reset "[0m"
+
+ echo "
+
+   $boldon$redf▀▄   ▄▀  $reset    $boldon$greenf▄▄▄████▄▄▄ $reset   $boldon$yellowf  ▄██▄  $reset     $boldon$bluef▀▄   ▄▀  $reset    $boldon$purplef▄▄▄████▄▄▄ $reset   $boldon$cyanf  ▄██▄  $reset
+  $boldon$redf▄█▀███▀█▄ $reset   $boldon$greenf███▀▀██▀▀███$reset   $boldon$yellowf▄█▀██▀█▄$reset    $boldon$bluef▄█▀███▀█▄ $reset   $boldon$purplef███▀▀██▀▀███$reset   $boldon$cyanf▄█▀██▀█▄$reset
+ $boldon$redf█▀███████▀█$reset   $boldon$greenf▀▀▀██▀▀██▀▀▀$reset   $boldon$yellowf▀▀█▀▀█▀▀$reset   $boldon$bluef█▀███████▀█$reset   $boldon$purplef▀▀▀██▀▀██▀▀▀$reset   $boldon$cyanf▀▀█▀▀█▀▀$reset
+ $boldon$redf▀ ▀▄▄ ▄▄▀ ▀$reset   $boldon$greenf▄▄▀▀ ▀▀ ▀▀▄▄$reset   $boldon$yellowf▄▀▄▀▀▄▀▄$reset   $boldon$bluef▀ ▀▄▄ ▄▄▀ ▀$reset   $boldon$purplef▄▄▀▀ ▀▀ ▀▀▄▄$reset   $boldon$cyanf▄▀▄▀▀▄▀▄$reset
+
+   $redf▀▄   ▄▀  $reset    $greenf▄▄▄████▄▄▄ $reset   $yellowf  ▄██▄  $reset     $bluef▀▄   ▄▀  $reset    $purplef▄▄▄████▄▄▄ $reset   $cyanf  ▄██▄  $reset
+  $redf▄█▀███▀█▄ $reset   $greenf███▀▀██▀▀███$reset   $yellowf▄█▀██▀█▄$reset    $bluef▄█▀███▀█▄ $reset   $purplef███▀▀██▀▀███$reset   $cyanf▄█▀██▀█▄$reset
+ $redf█▀███████▀█$reset   $greenf▀▀▀██▀▀██▀▀▀$reset   $yellowf▀▀█▀▀█▀▀$reset   $bluef█▀███████▀█$reset   $purplef▀▀▀██▀▀██▀▀▀$reset   $cyanf▀▀█▀▀█▀▀$reset
+ $redf▀ ▀▄▄ ▄▄▀ ▀$reset   $greenf▄▄▀▀ ▀▀ ▀▀▄▄$reset   $yellowf▄▀▄▀▀▄▀▄$reset   $bluef▀ ▀▄▄ ▄▄▀ ▀$reset   $purplef▄▄▀▀ ▀▀ ▀▀▄▄$reset   $cyanf▄▀▄▀▀▄▀▄$reset
+
+
+                                     $whitef▌$reset
+
+                                   $whitef▌$reset
+                                   $whitef$reset
+                                  $whitef▄█▄$reset
+                              $whitef▄█████████▄$reset
+                              $whitef▀▀▀▀▀▀▀▀▀▀▀$reset
+
+"
+
+
+end
+#}}}
+
+function colors-dump #{{{
+ set xdef $HOME/.xcolours/(grep "xcolours" $HOME/.Xresources | sed -re '/^!/d; /^$/d; s/^#include//; s/.*\/([a-z]+)\"$/\1/g;')
+ set colors (sed -re '/^!/d; /^$/d; /^#/d; s/(\*color)([0-9]):/\10\2:/g;' $xdef | grep 'color[01][0-9]:' | sort |sed 's/^.*: *//g' )
+ 
+  echo "[37m
+  Black   Red      Green   Yellow    Blue    Magenta   Cyan    White
+  -------------------------------------------------------------------[0m"
+  
+end
+#}}}
+
+function colorguns  #{{{
+#
+# ANSI color scheme script by pfh
+#
+# Initializing mod by lolilolicon from Archlinux
+#
+# this is modified version
+set f1 "[31m"
+set f2 "[32m"
+set f3 "[33m"
+set f4 "[34m"
+set f5 "[35m"
+set f6 "[36m"
+set f7 "[37m"
+
+set bld "[1m"
+set rst "[0m"
+set inv "[7m"
+
+echo "
+
+$f1 ▀▄▄█████████     $f2 ▀▄▄███████████  $f3 ▀▄▄███████████  $f4 ▀▄▄███████████  $f5 ▀▄▄███████████  $f6 ▀▄▄███████████
+$f1 ▄███▀█▀▀▀        $f2 ▄███▀█▀▀▀       $f3 ▄███▀█▀▀▀       $f4 ▄███▀█▀▀▀       $f5 ▄███▀█▀▀▀       $f6 ▄███▀█▀▀▀
+$f1▐███▄▀            $f2▐███▄▀           $f3▐███▄▀           $f4▐███▄▀           $f5▐███▄▀           $f6▐███▄▀
+$f1▐███              $f2▐███             $f3▐███             $f4▐███             $f5▐███             $f6▐███
+$f1 ▀▀▀              $f2 ▀▀▀             $f3 ▀▀▀             $f4 ▀▀▀             $f5 ▀▀▀             $f6 ▀▀▀
+$bld
+$f1  ▀▄▄███████████  $f2 ▀▄▄███████████  $f3 ▀▄▄███████████  $f4 ▀▄▄███████████  $f5 ▀▄▄███████████  $f6 ▀▄▄███████████
+$f1 ▄███▀█▀▀▀        $f2 ▄███▀█▀▀▀       $f3 ▄███▀█▀▀▀       $f4 ▄███▀█▀▀▀       $f5 ▄███▀█▀▀▀       $f6 ▄███▀█▀▀▀
+$f1▐███▄▀            $f2▐███▄▀           $f3▐███▄▀           $f4▐███▄▀           $f5▐███▄▀           $f6▐███▄▀
+$f1▐███              $f2▐███             $f3▐███             $f4▐███             $f5▐███             $f6▐███
+$f1 ▀▀▀              $f2 ▀▀▀             $f3 ▀▀▀             $f4 ▀▀▀             $f5 ▀▀▀             $f6 ▀▀▀
+$rst
+"
+end #}}}
+
 
 # }}}
 
@@ -329,6 +459,13 @@ end
 function sumo3
   mplayer mms://a792.l12513450791.c125134.a.lm.akamaistream.net/D/792/125134/v0001/reflector:50791
 end
+
+# command line fu
+# torrent search
+function tpb
+wget -U Mozilla -qO - (echo "http://thepiratebay.org/search/$argv/0/7/0" | sed 's/ /\%20/g') | grep -o 'http\:\/\/torrents\.thepiratebay\.se\/.*\.torrent' # | tac
+end
+
 #}}}
 #}}}
 

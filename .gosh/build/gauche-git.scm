@@ -18,7 +18,7 @@
 
 (define (stow-install)
   (cd *stow-directory*)
-  (run-process `(stow -v ,*package*)))
+  (run-process `(stow -v ,*package*)) :wait #t)
 
 (define (main args)
   (cd *srcdir*)

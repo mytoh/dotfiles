@@ -91,14 +91,17 @@ NeoBundle 'kergoth/fish.vim'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kana/vim-textobj-line'
 NeoBundle 'Raimondi/delimitMate'
+"colorscheme
+NeoBundle 'jelera/vim-gummybears-colorscheme'
 " }}}
 
 " official vim-scripts repo {{{
 NeoBundle 'info.vim'
 NeoBundle 'eregex.vim'
-NeoBundle 'SudoEdit.vim'
+NeoBundle 'sudo.vim'
 NeoBundle 'fluxbox.vim'
 NeoBundle 'matchit.zip'
+NeoBundle 'daemon_saver.vim'
 "Bundle 'buftabs'
 " colorschemes
 NeoBundle 'jellybeans.vim'

@@ -11,8 +11,8 @@
 (define *prefix-directory* (build-path *stow-directory* *package*))
 
 (define (update)
-  (run-process '(hg pull))
-  (run-process '(hg update)))
+  (run-process '(hg pull) :wait #t)
+  (run-process '(hg update)) :wait #t)
 
 (define (build)
   (run-process `(./configure   ,(string-append "--prefix=" *prefix-directory*) "--enable-multibyte" "--enable-perlinterp=yes" "--enable-xim" "--enable-fontset" "--disable-darwin" "--disable-selinux" "--with-x" "--with-features=huge") :wait #t)
@@ -22,7 +22,7 @@
 
 (define (stow-install)
   (cd *stow-directory*)
-  (run-process `(stow -v ,*package*)))
+  (run-process `(stow -v ,*package*)) :wait #t)
 
 (define (main args)
   (print *prefix-directory*)

@@ -72,6 +72,7 @@
     (aredridel      es-shell)
     (ThomasAdam     tmux)
     (midgetspy      Sick-Beard)
+    (mooz           percol)
     )
   )
 

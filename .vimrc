@@ -74,7 +74,7 @@ set showfulltag
 " colors
 set t_Co=256
 colorscheme jellybeans
-set background=dark
+" set background=dark
 
 
 " set mouse
