@@ -14,14 +14,20 @@
 (define (update)
   (run-process '(git pull) :wait #t))
 
+(cond 
+  ((eq? (get-os-type) 'freebsd)
    (define (build)
      (sys-putenv (string-append "PREFIX=" *prefix-directory*))
-
-     ; (sys-putenv "CPPFLAGS=-I/usr/local/include")
-     ; (sys-putenv "LDFLAGS=-L/usr/local/lib")
+     (run-process '(gmake clean) :wait #t)
+     (run-process '(gmake) :wait #t)
+     (run-process '(gmake install) :wait #t)))
+   
+  (else 
+   (define (build)
+     (sys-putenv (string-append "PREFIX=" *prefix-directory*))
      (run-process '(make clean) :wait #t)
      (run-process '(make) :wait #t)
-     (run-process '(make install) :wait #t))
+     (run-process '(make install) :wait #t))))
 
 (define (stow-install)
   (cd *stow-directory*)
