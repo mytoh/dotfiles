@@ -270,6 +270,7 @@ aug myautocommands
   au bufread,bufnewfile *.stub                   set filetype=scheme
   au bufread,bufnewfile .mkshrc                  set filetype=sh
   au bufread,bufnewfile *stumpwmrc*              set filetype=lisp
+  au bufread,bufnewfile *sawfish/rc               set filetype=lisp
   au bufread,bufnewfile *.fish                   set filetype=fish
   au bufread,bufnewfile loader.conf.local        set filetype=conf
   au filetype           xdefaults                call s:vimrc.xrdb()

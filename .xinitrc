@@ -42,6 +42,7 @@ Thunar --daemon &
 spiffy &
 #parcellite &
 gosh makiki-server.scm &
+tracker-applet &
 
 if [ "$1" = "twm" -o "$1" = "openbox" -o "$1" = "flwm" ]; then
   $HOME/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 16 -bg gray15 -fn '-*-terminus-medium-r-normal--12-*' -e 'onexit=ungrabmouse' &
@@ -58,10 +59,10 @@ fi
 DEFAULT_SESSION="dwm"
 case $1 in
   stumpwm) exec stumpwm ;;
-  sawfish) exec sawfish ;;
+  sawfish) exec ck-launch-session sawfish ;;
   xmonad) exec xmonad ;;
   twm) exec twm -v ;;
-  xfce) exec startxfce4 ;;
+  xfce) exec ck-launch-session startxfce4 ;;
   fluxbox) exec startfluxbox ;;
   flwm) exec flwm ;;
   qvwm) exec qvwm ;;

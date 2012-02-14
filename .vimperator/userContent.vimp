@@ -52,6 +52,7 @@ EOM
 
 style -name freebsd forums.freebsd.org <<EOM
 body, table, tbody, thead, tr, td, thead, div, a {
+  font-family: "Verdana";
   background-image: none !important;
   background-color: #333333 !important;
   color: #777777 !important;
