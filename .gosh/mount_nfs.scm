@@ -5,16 +5,12 @@
 
 (define (main args)
   (let ((user (cadr args)))
-  (mount-directories user)
-  )
-  )
-  
+  (mount-directories user)))
 
 (define (mount-directories user)
-  (run-process `(sudo mount_nfs quatrevingtdix:/Volumes/Deskstar
-                       ,(string-append (home-directory) "/local/mnt/deskstar")) :wait #t)
-  (run-process `(sudo mount_nfs quatrevingtdix:/Volumes/MyPassport
+  ; (run-process `(sudo mount -t nfs 192.168.1.3:/Volumes/Deskstar
+  ;                      ,(string-append (home-directory) "/local/mnt/deskstar")) :wait #t)
+  (run-process `(sudo mount -t nfs 192.168.1.3:/Volumes/MyPassport
                        ,(string-append (home-directory) "/local/mnt/mypassport")) :wait #t)
-  (run-process `(sudo mount_nfs ,(string-append "quatrevingtdix:/Users/" user)
-                       ,(string-append (home-directory) "/local/mnt/quatre")) :wait #t)
-  )
+  (run-process `(sudo mount -t nfs ,(string-append "192.168.1.3:/Users/" user)
+                       ,(string-append (home-directory) "/local/mnt/quatre")) :wait #t))

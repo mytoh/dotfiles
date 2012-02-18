@@ -260,19 +260,19 @@ endfunction
 
 aug myautocommands
   au!
-  au bufread,bufnewfile .tmux.conf               set filetype=tmux
-  au bufread,bufnewfile *.changelog              set filetype=changelog
-  au bufread,bufnewfile *.twmrc                  set filetype=conf
-  au bufread,bufnewfile .vimshrc,.vim-bundles    set filetype=vim
-  au bufread,bufnewfile ~/.xcolours/*            set filetype=xdefaults
+  au bufread,bufnewfile .tmux.conf               setl filetype=tmux
+  au bufread,bufnewfile *.changelog              setl filetype=changelog
+  au bufread,bufnewfile *.twmrc                  setl filetype=conf
+  au bufread,bufnewfile .vimshrc,.vim-bundles    setl filetype=vim
+  au bufread,bufnewfile ~/.xcolours/*            setl filetype=xdefaults
   au bufread,bufnewfile ~/.xcolours/*            ColorHighlight
-  au bufread,bufnewfile *.scss                   set filetype=scheme
-  au bufread,bufnewfile *.stub                   set filetype=scheme
-  au bufread,bufnewfile .mkshrc                  set filetype=sh
-  au bufread,bufnewfile *stumpwmrc*              set filetype=lisp
-  au bufread,bufnewfile *sawfish/rc               set filetype=lisp
-  au bufread,bufnewfile *.fish                   set filetype=fish
-  au bufread,bufnewfile loader.conf.local        set filetype=conf
+  au bufread,bufnewfile *.scss                   setl filetype=scheme
+  au bufread,bufnewfile *.stub                   setl filetype=scheme
+  au bufread,bufnewfile .mkshrc                  setl filetype=sh
+  au bufread,bufnewfile *stumpwmrc*              setl filetype=lisp
+  au bufread,bufnewfile *sawfish/rc              setl filetype=lisp
+  au bufread,bufnewfile *.fish                   setl filetype=fish
+  au bufread,bufnewfile loader.conf.local        setl filetype=conf
   au filetype           xdefaults                call s:vimrc.xrdb()
   au bufwritepost       .vimrc                   source ~/.vimrc
   au bufwritepost       .zshrc                   Silent !zcompile ~/.zshrc
@@ -282,7 +282,7 @@ aug myautocommands
   au filetype           nerdtree                 let g:loaded_golden_ratio=1
   au filetype           css                      ColorHighlight
   au filetype           less                      ColorHighlight
-  au filetype           fish                      set equalprg=fish_indent
+  au filetype           fish                      setl equalprg=fish_indent
   " for chalice buffers
   au filetype           2ch*                     setl fencs=cp932,iso-2022-jp-3,euc-jp
   au filetype           2ch*                     let g:loaded_golden_ratio=1
@@ -441,6 +441,11 @@ let g:unite_source_file_mru_filename_format = ':p:~:.'
 let g:unite_source_file_mru_time_format = ''
 let g:unite_cursor_line_highlight = 'TabLineSel'
 " let g:unite_abbr_highlight = 'TabLine'
+
+" auto session loading
+" let g:unite_source_session_enable_auto_save = 1
+" autocmd VimEnter * UniteSessionLoad
+
 
 " keymaps
 nnoremap [unite] <Nop>

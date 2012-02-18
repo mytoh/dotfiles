@@ -7,7 +7,7 @@ set -x EPREFIX $HOME/local/gentoo
 set -Uge PATH#remove PATH
 set PATH /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/
 
-for p in /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin}
+for p in /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin}
   if test -d $p
     if not contains $p $PATH
       set -x PATH $p $PATH
@@ -176,7 +176,7 @@ end
 
 function ggr
   # Search Google
-  w3m "http://www.google.com/search?&num=100&q=$argv"
+  w3m "http://www.google.co.jp/search?&num=100&q=$argv"
 end
 
 function 4ch
@@ -503,6 +503,7 @@ switch (uname)
     sudo make fetch-recursive
   end
   function pinst
+    sudo make clean
     sudo make install distclean
   end
   function pconf
