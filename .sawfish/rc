@@ -1,3 +1,4 @@
+(require 'sawfish.defaults)
 (require 'sawfish.wm.commands)
 (require 'sawfish.wm.ext.pager)
 (require 'Run-application-ng)
@@ -10,6 +11,9 @@
 ;(add-hook 'after-initialization-hook pager t)
 
 (setq *workspace-count* 4)
+
+;; custom variables
+(define-special-variable default-frame-style        (quote simple) (quote frame-style))
 
 ;; Application Keymacros
 (define apps-keymap ( make-keymap ))
@@ -24,5 +28,6 @@
   global-keymap
   "W-s" 'cabinet-switch)
 
-(system "feh --bg-scale ~/.wallpaper &")
-(system "compton  -i 0.9 -e 0.9 &")
+(system "exec feh --bg-scale ~/.wallpaper &")
+(system "exec compton  -i 0.9 -e 0.9 &")
+(system "exec tint2 &")

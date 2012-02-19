@@ -72,6 +72,7 @@ if [ -n $1 ]; then
   gnome) exec gnome-session ;;
   mate) exec ck-launch-session mate-session ;;
   rox) exec rox -S ;;
+sawfish) exec sawfish ;;
   *) exec ck-launch-session $1 ;;
  esac
 else

@@ -12,6 +12,8 @@ cnoremap <c-i> <tab>
 cnoremap <c-n> <down>
 cnoremap <c-p> <up>
 cnoremap <c-h> <BS>
+inoremap <c-b> <left>
+inoremap <c-f> <right>
 
 colorscheme sweets
 

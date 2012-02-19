@@ -43,4 +43,4 @@ options.setPref("dom.popup_allowed_events", "");
 options.setPref("ui.key.menuAccessKey", 0);
 options.setPref("accessibility.typeaheadfind.enablesound", false);
 options.setPref("accessibility.typeaheadfind.soundURL", "");
-
+options.setPref("dom.max_script_run_time", 9999999999999)

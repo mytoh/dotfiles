@@ -36,7 +36,6 @@
 ))
 
 (define (parse-page-number str)
-  ; ok
   ; html -> string-list
   (let ((parse-number
           (lambda (e m)
@@ -56,7 +55,6 @@
     ))
 
 (define (gen-id-url-list str)
-  ;; ok
   (let ((num-list (parse-page-number str)))
     (zip
       num-list
@@ -77,7 +75,6 @@
                            :sink (open-output-file file) :flusher (lambda (s h) (print file) #t)))))))
 
 (define (get-image id-num-list)
-  ;; ok
   (let loop ((lst  id-num-list))
     (if (not (null?  lst))
       (let ((id (car (car lst)))
@@ -87,14 +84,12 @@
         (loop (cdr lst))))))
 
 (define (get-posts page-number tag)
-  ; ok
   (receive (status head body)
            (http-get *danbooru-host* (string-append "/post?page=" (number->string page-number) "&tags=" tag))
            body
            ))
 
 (define (parse-last-page-number str)
-  ; ok
   (if-let1 pagination  (rxmatch->string #/<div class\=\"paginator\">.*?<\/div>/
                                         str)
            (let ((page (call-with-input-string  pagination  (lambda (in)
