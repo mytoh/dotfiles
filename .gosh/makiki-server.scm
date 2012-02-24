@@ -18,7 +18,7 @@
   )
 
 (define-http-handler #/^\/$/
-  (^[req app]
+  (^(req app)
     (respond/ok req
   `(sxml
     (html
@@ -77,6 +77,7 @@
                   (a (@ (href "http://www.reddit.com/r/freebsd")    (target "_blank")) "freebsd")
                   (a (@ (href "http://www.reddit.com/r/screenshots")    (target "_blank")) "screenshots")
                   (a (@ (href "http://www.reddit.com/r/commandline")    (target "_blank")) "commandline")
+                  (a (@ (href "http://www.reddit.com/r/xmonad")    (target "_blank")) "xmonad")
                   "))")
 
             (p (@ (class "fourchan"))

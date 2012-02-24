@@ -411,23 +411,33 @@ function reboot
   sync
   sudo shutdown -r now
 end
+
 function sudo
   sudo -E $argv
 end
+
 function xfont
   xlsatoms |  grep '-'
 end
+
 function rr
   command rm -rfv $argv
 end
+
 function mkd
   command mkdir -p $argv
 end
+
 function stow
   stow --verbose=3 $argv
 end
+
 function tm
   tmux -u2 a
+end
+
+function sc
+ screen -U -D -RR  -s /bin/tcsh -m
 end
 #net {{{
 function starwars
@@ -473,8 +483,8 @@ end
 #}}}
 #}}}
 
-#{{{
-bind \cd delete-char
+# keybindings {{{
+bind \cd 'delete-char'
 #}}}
 
 # misc {{{

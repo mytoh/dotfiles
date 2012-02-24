@@ -29,13 +29,13 @@ while (1)
    #set baticon = "$icons/sm4tik/bat_empty_01.xbm"
   #endif
 
-  set batstate = `sysctl -n hw.acpi.battery.state`
-  set batcolour = "#ffffff"
-  if ( "$batstate" == 1 ) then
-      set batcolour = "#ff4500"
-  else if ( "$batstate" == 2 ) then
-      set batcolour = "#00ff00"
-  endif
+  # set batstate = `sysctl -n hw.acpi.battery.state` 
+  # set batcolour = "#ffffff"                        
+  # if ( "$batstate" == 1 ) then                     
+  #     set batcolour = "#ff4500"                    
+  # else if ( "$batstate" == 2 ) then                
+  #     set batcolour = "#00ff00"                    
+  # endif                                            
 
   set diskused = `df -ch | grep total | awk '{print $3}' | cut -c 1-3`
   set disktotal = `df -ch | grep total | awk '{print $2}'`

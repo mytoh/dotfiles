@@ -31,7 +31,7 @@ urxvt.inputMethod: ibus
 urxvt.preeditType: OnTheSpot,None
 !urxvt.backgroundPixmap: /Users/kazuki/.wallpapers/background
 
-urxvt.perl-ext-common: default,matcher,clipboard-osc, tabbbed
+urxvt.perl-ext-common: default,matcher,clipboard-osc,tabbbed
 urxvt.urlLauncher: firefox
 urxvt.matcher.button: 1
 urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
@@ -39,21 +39,24 @@ urxvt.tabbed.tabbar-fg: 2
 urxvt.tabbed.tabbar-bg: 0
 urxvt.tabbed.tab-fg:    3
 urxvt.tabbed.tab-bg:    0
- 
 
-urxvt.font: -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
-           -misc-fixed-medium-r-normal--10-90-75-75-c-50-*, \
-           -misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0, \
-           -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*, \
-    k10, k10rk, k10b,\
-    -aaron-*-*-*-*--10-*-*-*-*-*-iso8859-1
+#define FONT -nil-profont-medium-r-normal--10-100-72-72-c-50-iso8859-1, \
+ -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
+              -misc-fixed-medium-r-normal--10-90-75-75-c-50-*, \
+              -misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0, \
+              -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*, \
+              k10, k10rk, k10b,\
+              -aaron-*-*-*-*--10-*-*-*-*-*-iso8859-1
 
-urxvt.boldFont: -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
-           -misc-fixed-medium-r-normal--10-90-75-75-c-50-*, \
-           -misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0, \
-           -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*, \
-    k10, k10rk, k10b, \
-    -aaron-*-*-*-*-*-10-*-*-*-*-*-iso8859-1
+#define FONT_BOLD -artwiz-glispbold-bold-r-bold--11-110-75-75-p-100-iso8859-1, \
+                  -misc-fixed-medium-r-normal--10-90-75-75-c-50-*, \
+                  -misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0, \
+                  -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*, \
+                   k10, k10rk, k10b, \
+                  -aaron-*-*-*-*-*-10-*-*-*-*-*-iso8859-1
+
+urxvt.font: FONT
+urxvt.boldFont: FONT_BOLD
 
 
 
@@ -85,7 +88,7 @@ urxvt.boldFont: -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
 ! ------------
 xterm*scrollBar: false
 
-     
+
 !-------------
 ! xfontsel
 ! -----------

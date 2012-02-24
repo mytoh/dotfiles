@@ -13,7 +13,7 @@
     "git://gitorious.org/cmus/cmus.git"
     "git://derf.homelinux.org/feh"
     "git://a-chinaman.com/nuscsh"
-    "git://git.savannah.gnu.org/screen.git"
+    "git://git.sv.gnu.org/screen.git"
     "git://git.savannah.gnu.org/stow.git"
     "git://git.savannah.nongnu.org/stumpwm"
     "git://gitorious.org/fish-shell/fish-shell.git"
@@ -73,6 +73,9 @@
     (ThomasAdam     tmux)
     (midgetspy      Sick-Beard)
     (mooz           percol)
+    (trizen         gtk-youtube-viewer)
+    (xorg62         wmfs)
+    (shawncplus     ghub)
     )
   )
 

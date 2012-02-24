@@ -9,13 +9,14 @@ import Data.Monoid
 import Data.Ratio
 import qualified Data.Map        as M
 import Graphics.X11.Xlib
+import Control.Monad (liftM2)      -- viewShift
 
 import XMonad.Actions.CycleWS
 import XMonad.Actions.WindowGo (runOrRaise)
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers 
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook hiding (Never)
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.InsertPosition
@@ -61,36 +62,38 @@ myBorderWidth   = 2
 myModMask       = mod1Mask
 myIcons         = "/home/mytoh/.dzen/icons/"
 
-myWorkspaces    =  
+myWorkspaces    =
     [
-      wrapBitmap "sm4tik/bug_01.xbm",
-      wrapBitmap "sm4tik/fox.xbm",
-      wrapBitmap "sm4tik/dish.xbm",
-      wrapBitmap "sm4tik/cat.xbm",
-      wrapBitmap "sm4tik/empty.xbm",
-      wrapBitmap "sm4tik/bug_02.xbm",
-      wrapBitmap "sm4tik/shroom.xbm",
-      wrapBitmap "sm4tik/scorpio.xbm",
-      wrapBitmap "sm4tik/ac.xbm"
-     ] 
+     "term",
+     "web",
+     "media"
+      -- wrapBitmap "sm4tik/bug_01.xbm",
+      -- wrapBitmap "sm4tik/fox.xbm",
+      -- wrapBitmap "sm4tik/dish.xbm",
+      -- wrapBitmap "sm4tik/cat.xbm",
+      -- wrapBitmap "sm4tik/empty.xbm",
+      -- wrapBitmap "sm4tik/bug_02.xbm",
+      -- wrapBitmap "sm4tik/shroom.xbm",
+      -- wrapBitmap "sm4tik/scorpio.xbm",
+      -- wrapBitmap "sm4tik/ac.xbm"
+     ]
      where
         wrapBitmap bitmap = "^i(" ++ myIcons ++ bitmap ++ ")"
 
 -- Colors ------------------------------------------
 myNormalBorderColor  = "#111111"
 --myFocusedBorderColor = "#ad9dc5"
-myFocusedBorderColor = "#ff89c5"
+myFocusedBorderColor = "#cfa9a5"
 
 -- Fonts -------------------------------------------
 myTabFont = "-*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*"
-myXPFont = "-*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*"
---myDzenFont = "-mplus-fxd-medium-r-semicondensed--12-*"
-myDzenFont = "-*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*"
+myXPFont = "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1"
+myDzenFont = "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1"
 
 -- Layouts ------------------------------------------
-myLayoutHook =  avoidStruts                $ 
+myLayoutHook =  avoidStruts                $
                 windowNavigation           $
-                mkToggle (single NBFULL)   $ 
+                mkToggle (single NBFULL)   $
                 mkToggle (single REFLECTX) $
                 mkToggle (single REFLECTY) $
                 (collectiveLayouts)
@@ -121,13 +124,11 @@ myTheme = defaultTheme {
 
 -- keybindings --------------------------------------------
 myKeys = [ -- M4 for Super key
-         ("M-s", shellPrompt myXPConfig),
+         ("M-p", shellPrompt myXPConfig),
          ("M-f", sendMessage $ Toggle NBFULL),
          ("M-x", sendMessage $ Toggle REFLECTX),
          ("M-y", sendMessage $ Toggle REFLECTY),
-         ("M-n", moveTo Next (WSIs notSP)),
-         ("M-p", moveTo Prev (WSIs notSP)),
-         ("M-t", scratchFiler),
+         -- ("M-n", moveTo Next (WSIs notSP)),
          ("M-b", withFocused $ windows . W.sink),
          ("M-q", spawn myRestart),
          ("M-S-p", unsafeSpawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/local/tmp/'")
@@ -137,18 +138,18 @@ myKeys = [ -- M4 for Super key
 
              scratchFiler = namedScratchpadAction myScratchPads "thunar"
 
-             myRestart = "for pid in `pgrep trayer`; do kill -9 $pid; done &&" ++ 
-                         "for pid in `pgrep dzen2`; do kill -9 $pid; done &&" ++
-                         "for pid in `pgrep gmail-notifier`; do kill -9 $pid; done &&" ++
-                         "for pid in `pgrep xcompmgr`; do kill -9 $pid; done &&" ++
+             myRestart = "for pid in `pgrep trayer`; do kill -9 $pid; done ;" ++
+                         "for pid in `pgrep dzen2`; do kill -9 $pid; done ;" ++
+                         "for pid in `pgrep gmail-notifier`; do kill -9 $pid; done ;" ++
+                         "for pid in `pgrep compton`; do kill -9 $pid; done ;" ++
                          "xmonad --recompile && xmonad --restart"
-                         
+
 
 -- shell prompt config ---------------------------------------------
 myXPConfig = defaultXPConfig {
               position          = Bottom,
               promptBorderWidth = 0,
-              height            = 27,
+              height            = 20,
               font              = myXPFont,
               bgColor           = "#2a2733",
               fgColor           = "#909090",
@@ -158,22 +159,24 @@ myXPConfig = defaultXPConfig {
 
 
 
--- manage hooks -------------------------------------------------------    
+-- manage hooks -------------------------------------------------------
 myManageHook = -- insertPosition End Newer <+> composeAll
-              composeAll
-    [ isFullscreen                                        --> (doF W.focusDown <+> doFullFloat),
-      isDialog                                            --> doFloat,
-      className  =? "MPlayer"                             --> doFullFloat,
-      className  =? "Main.py"                             --> doFloat,
-      className  =? "Gimp"                                --> doFloat,
-      className  =? "DTA"                                 --> doFloat,
-      className  =? "Gcolor2"                             --> doFloat,
-      className  =? "Switch2"                             --> doFloat,
-      (className =? "Firefox" <&&> resource =? "Dialog")  --> doFloat
-      ] 
-        <+> namedScratchpadManageHook myScratchPads
-        <+> manageDocks 
-        <+> manageHook defaultConfig 
+       (composeAll . concat $
+        [ [isFullscreen                                        --> (doF W.focusDown <+> doFullFloat) ]
+        , [isDialog                                            --> doFloat]
+        , [className  =? "feh"                                 --> doCenterFloat]
+        , [className  =? c                                     --> doFloat | c <- myFloats ]
+        , [className  =? "MPlayer"                             --> (doFullFloat <+> viewShift "media")]
+        , [className =? "Firefox"                             -->  viewShift "web"]
+        , [(className =? "Firefox" <&&> resource =? "Dialog")  --> (doFloat <+> viewShift "web")]
+        ])
+         <+> namedScratchpadManageHook myScratchPads
+         <+> manageDocks
+         <+> manageHook defaultConfig
+        
+       where 
+         viewShift = doF . liftM2 (.) W.greedyView W.shift
+         myFloats = ["Main.py","Gimp","DTA","Gcolor2","Switch2"]
 
 myScratchPads = [ NS "thunar" spawnFiler findFiler manageFiler
                 ]
@@ -187,12 +190,12 @@ myScratchPads = [ NS "thunar" spawnFiler findFiler manageFiler
                            t = (1 - h)/2
                            l = (1 - w)/2
 
--- log hooks --------------------------------------------------------------      
-myLogHook h =  dynamicLogWithPP $ dzenPP { 
-                ppCurrent         = dzenColor "#ffffff" myFocusedBorderColor . pad,
+-- log hooks --------------------------------------------------------------
+myLogHook h =  dynamicLogWithPP $ dzenPP {
+                ppCurrent         = dzenColor "#8fae9f" "" . pad,
                 ppHidden          = dzenColor "#909090" "" .pad,
                 ppHiddenNoWindows = dzenColor "#606060" "" . pad,
-                ppLayout          = dzenColor "#77a8bf" "" .
+                ppLayout          =    dzenColor "#77a8bf" "" .
                                     (\x -> case x of
                                         "Full" -> wrapBitmap "sm4tik/full.xbm"
                                         "*"          -> wrapBitmap "rob/full.xbm"
@@ -205,14 +208,14 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
                                         "ReflectX @" -> "@"
                                         "ReflectX #" -> "#"
                                         "ReflectY *" -> wrapBitmap "rob/full.xbm"
-                                        "ReflectY +" -> wrapBitmap "rob/tall.xbm" 
+                                        "ReflectY +" -> wrapBitmap "rob/tall.xbm"
                                         "ReflectY =" -> "="
                                         "ReflectY -" -> "-"
                                         "ReflectY %" -> "%"
                                         "ReflectY @" -> "@"
                                         "ReflectY #" -> "#"
                                         "ReflectX ReflectY *" -> wrapBitmap "rob/full.xbm"
-                                        "ReflectX ReflectY +" -> wrapBitmap "rob/tall.xbm" 
+                                        "ReflectX ReflectY +" -> wrapBitmap "rob/tall.xbm"
                                         "ReflectX ReflectY =" -> "="
                                         "ReflectX ReflectY -" -> "-"
                                         "ReflectX ReflectY %" -> "%"
@@ -223,10 +226,10 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
 
                 ppUrgent          = wrap (dzenColor "#ff0000" "" "{") (dzenColor "#ff0000" "" "}") . pad,
             --  ppTitle           = wrap "^fg(#909090)[ " " ]^fg()" . shorten 100,
-                ppTitle           = wrap "^fg(#909090)[ " " ]^fg()" ,
+                ppTitle           = wrap "^fg(#909090)( " " )^fg()" ,
                 ppVisible         = wrap "{" "}",
                 ppWsSep           = "",
-                ppSep             = "  |  ",
+                ppSep             = " | ",
                 ppSort            = fmap (namedScratchpadFilterOutWorkspace.) (ppSort dzenPP),
                 ppOutput          = hPutStrLn h
                 }
@@ -237,21 +240,25 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
 myEventHook = ewmhDesktopsEventHook
 
 -- dzen bars ----------------------------------------------------------------------
-myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 450 -h 16 -fn " ++ myDzenFont  
-myRightBar  = "~/.dzen/bin/status | exec dzen2 -p -ta r -x 450 -y 0 -w 700 -h 16 -fn " ++ myDzenFont
+myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 450 -h 13 -fn " ++ myDzenFont
+myRightBar  = "~/.dzen/bin/status | exec dzen2 -p -ta r -x 450 -y 0 -w 700 -h 13 -fn " ++ myDzenFont
 trayer      = "exec trayer --expand true --alpha 100  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype request --width 100 "
 mail        = "gmail-notifier"
-compmgr     = "xcompmgr -n"
-bgmgr       = "feh --bg-center ~/.wallpaper"
+compmgr     = "compton -i 0.9 -e 0.8"
+bgmgr       = "feh --bg-scale ~/.wallpapers/purple-nagato.jpg"
+clipmgr     = "parcellite"
+volumemgr   = "gnome-volume-control-applet"
 -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 
-myStartupHook :: X () 
+myStartupHook :: X ()
 myStartupHook = do
                 spawn myRightBar
                 spawn trayer
                 spawn mail
                 spawn compmgr
                 spawn bgmgr
+                spawn clipmgr
+                spawn volumemgr
 
 -- main config ---------------------------------------------------------------------
 main = myConfig
@@ -269,6 +276,6 @@ myConfig = do
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook d,
-        startupHook        = myStartupHook
+        startupHook        = myStartupHook >> setWMName "LG3D"
     } `additionalKeysP` myKeys
 

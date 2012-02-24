@@ -4,4 +4,4 @@ noremap h gT
 noremap ; :
 noremap : ;
 
-set hintkeys=aoeuhtns
+set hintkeys=aoeuidhtns

@@ -73,7 +73,7 @@ set showfulltag
 
 " colors
 set t_Co=256
-colorscheme jellybeans
+colorscheme xoria256
 " set background=dark
 
 
@@ -99,6 +99,7 @@ set splitright
 set splitbelow
 set fileformats=unix,mac,dos
 set virtualedit=all
+set nomore
 if executable('ack')
   set grepprg=ack\ -a
 endif
@@ -280,8 +281,8 @@ aug myautocommands
   au filetype           scheme                   call s:vimrc.gauche()
   au filetype           help                     nnoremap q :<c-u>q<cr>
   au filetype           nerdtree                 let g:loaded_golden_ratio=1
-  au filetype           css                      ColorHighlight
-  au filetype           less                      ColorHighlight
+  au filetype           css,less                      ColorHighlight
+  au filetype           haskell                      ColorHighlight
   au filetype           fish                      setl equalprg=fish_indent
   " for chalice buffers
   au filetype           2ch*                     setl fencs=cp932,iso-2022-jp-3,euc-jp
@@ -661,6 +662,8 @@ autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=233
 let is_gauche=1
 " }}}
 
+" slimv
+let g:slimv_keybindings = 3
 " }}}
 
 set secure

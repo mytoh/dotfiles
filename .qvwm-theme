@@ -8,116 +8,116 @@
 ;
 
 [Variables]
-DefaultIcon		= "def16.ani"	; default titlebar/taskbar-button icon
-DefaultLargeIcon	= "def32.ani"	; default task switcher icon
-DefaultShortcutIcon	= "icon32.ani"	; default shortcut icon
-DefaultFont		= "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
+DefaultIcon   = "def16.ani" ; default titlebar/taskbar-button icon
+DefaultLargeIcon  = "def32.ani" ; default task switcher icon
+DefaultShortcutIcon = "icon32.ani"  ; default shortcut icon
+DefaultFont   = "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
 
 ; desktop
-WallPaper		= ~/local/var/pic/wallpaper.jpg	; image tiled in the desktop
-DesktopColor		= qvroyalblue	; desktop background color
-DesktopActiveColor	= qvblue	; desktop active color
-CursorColor		= white		; cursor color
+WallPaper   = ~/.wallpapers/purple-nagato.jpg ; image tiled in the desktop
+DesktopColor    = qvroyalblue ; desktop background color
+DesktopActiveColor  = qvblue  ; desktop active color
+CursorColor   = white   ; cursor color
 
 ; titlebar
-FrameTitleHeight	= 16
-;TitlebarImage		= ""		; titlebar background image
-;TitlebarActiveImage	= ""		; titlebar active background image
-GradTitlebar		= True		; titlebar gradation
-GradTitlebarColors	= 40		; titlebar gradation colors
-TitlebarColor		= qvdarkgray	; titlebar color (inactive)
-TitlebarColor2		= qvgrey	; titlebar right-side color (inactive)
-TitlebarActiveColor	= qvblue	; titlebar color (active)
-TitlebarActiveColor2	= qvlightblue	; titlebar right-side color (active)
-TitleStringColor	= qvgray	; title string color (inactive)
-TitleStringActiveColor	= white		; title string color (active)
-TitleFont		=  "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
+FrameTitleHeight  = 16
+;TitlebarImage    = ""    ; titlebar background image
+;TitlebarActiveImage  = ""    ; titlebar active background image
+GradTitlebar    = True    ; titlebar gradation
+GradTitlebarColors  = 40    ; titlebar gradation colors
+TitlebarColor   = qvdarkgray  ; titlebar color (inactive)
+TitlebarColor2    = qvgrey  ; titlebar right-side color (inactive)
+TitlebarActiveColor = qvblue  ; titlebar color (active)
+TitlebarActiveColor2  = qvlightblue ; titlebar right-side color (active)
+TitleStringColor  = qvgray  ; title string color (inactive)
+TitleStringActiveColor  = white   ; title string color (active)
+TitleFont   =  "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
 
 ; frame
-FrameBorderWidth	= 1
-;FrameImage		= ""		; frame background image
-;FrameActiveImage	= ""		; frame active background image
-FrameColor		= qvgray	; window frame color
-FrameActiveColor	= qvgray	; window frame color
+FrameBorderWidth  = 1
+;FrameImage   = ""    ; frame background image
+;FrameActiveImage = ""    ; frame active background image
+FrameColor    = qvgray  ; window frame color
+FrameActiveColor  = qvgray  ; window frame color
 
 ; pager
-;PagerImage		= ""		; pager background image
-PagerColor		= qvgray	; pager color
-PagerActiveColor	= qvdarkgray	; selected page color
-MiniatureColor		= yellow	; non-active mini window color in pager
-MiniatureActiveColor	= red		; active mini window color in pager
+;PagerImage   = ""    ; pager background image
+PagerColor    = qvgray  ; pager color
+PagerActiveColor  = qvdarkgray  ; selected page color
+MiniatureColor    = yellow  ; non-active mini window color in pager
+MiniatureActiveColor  = red   ; active mini window color in pager
 
 ; taskbar
-TaskbarButtonHeight	= 18 
-;TaskbarImage		= ""		; taskbar background image
-TaskbarColor		= qvgray	; taskbar color
-ClockStringColor	= black		; clock string color
-UseBoldFont		= False		; use bold font for emphasis
-TaskbarFont		=   "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
+TaskbarButtonHeight = 17
+;TaskbarImage   = ""    ; taskbar background image
+TaskbarColor    = qvdarkgray  ; taskbar color
+ClockStringColor  = black   ; clock string color
+UseBoldFont   = False   ; use bold font for emphasis
+TaskbarFont   =   "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
 TaskbarBoldFont = "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
 
 ; indicator
-IndicatorSize		= 16
+IndicatorSize   = 16
 
 ; shortcut icon
-IconSize		= 32		; icon size
-IconHorizontalSpacing	= 40		; horizontal space between icons
-IconVerticalSpacing	= 30		; vertical space between icons
-IconStringColor		= white
-IconStringActiveColor	= white
-IconForeColor		= black		; icon foreground color
-IconBackColor		= white		; icon background color
-IconFont		=  "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
+IconSize    = 32    ; icon size
+IconHorizontalSpacing = 40    ; horizontal space between icons
+IconVerticalSpacing = 30    ; vertical space between icons
+IconStringColor   = white
+IconStringActiveColor = white
+IconForeColor   = black   ; icon foreground color
+IconBackColor   = white   ; icon background color
+IconFont    =  "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
 
 ; menu
-;MenuImage		= ""		; menu background image
-;MenuActiveImage	= ""		; menu background image
-MenuColor		= qvgray	; menu color
-MenuActiveColor		= qvblue	; selected menu item color
-MenuStringColor		= black		; menu string color (unselected)
-MenuStringActiveColor	= white		; menu string color (selected)
-CtrlMenuFont		=  "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
+;MenuImage    = ""    ; menu background image
+;MenuActiveImage  = ""    ; menu background image
+MenuColor   = qvgray  ; menu color
+MenuActiveColor   = qvblue  ; selected menu item color
+MenuStringColor   = black   ; menu string color (unselected)
+MenuStringActiveColor = white   ; menu string color (selected)
+CtrlMenuFont    =  "-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*"
 
 ; startmenu
-;StartMenuLogoImage	= ""
-StartMenuLogoColor	= qvblue
-StartMenuFont		= "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*"
-CascadeMenuFont		= "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*"
+;StartMenuLogoImage = ""
+StartMenuLogoColor  = qvblue
+StartMenuFont   = "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*"
+CascadeMenuFont   = "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*"
 
 ; dialog
-;DialogImage		= ""		; dialog background image
-DialogColor		= qvgray	; dialog color
-DialogFont		= "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*"
+;DialogImage    = ""    ; dialog background image
+DialogColor   = qvgray  ; dialog color
+DialogFont    = "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*"
 
 ; switcher
-;SwitcherImage		= ""		; switcher background image
-SwitcherColor		= qvgray	; task switcher color
-SwitcherActiveColor	= qvblue	; icon selected color
-SwitcherStringColor	= black		; switcher string color
+;SwitcherImage    = ""    ; switcher background image
+SwitcherColor   = qvgray  ; task switcher color
+SwitcherActiveColor = qvblue  ; icon selected color
+SwitcherStringColor = black   ; switcher string color
 
 ; button
-ButtonColor		= qvgray	; button color
-ButtonActiveColor	= qvgray	; button active color
-ButtonStringColor	= black		; button string color
-ButtonStringActiveColor	= black		; button string active color
+ButtonColor   = qvgray  ; button color
+ButtonActiveColor = qvgray  ; button active color
+ButtonStringColor = black   ; button string color
+ButtonStringActiveColor = black   ; button string active color
 
 ; tooltip
-TooltipColor		= qvlightyellow
-TooltipStringColor	= black
+TooltipColor    = qvlightyellow
+TooltipStringColor  = black
 
 ; sounds
-SystemStartSound	= "chimes.wav"
-SystemExitSound		= "chimes.wav"
-SystemRestartSound	= "chimes.wav"
-;MaximizeSound		= ""
-;MinimizeSound		= ""
-;RestoreUpSound		= ""
-;RestoreDownSound	= ""
-;ExpandSound		= ""
-;OpenSound		= ""
-;CloseSound		= ""
-;MenuPopupSound		= ""
-;MenuCommandSound	= ""
+SystemStartSound  = "chimes.wav"
+SystemExitSound   = "chimes.wav"
+SystemRestartSound  = "chimes.wav"
+;MaximizeSound    = ""
+;MinimizeSound    = ""
+;RestoreUpSound   = ""
+;RestoreDownSound = ""
+;ExpandSound    = ""
+;OpenSound    = ""
+;CloseSound   = ""
+;MenuPopupSound   = ""
+;MenuCommandSound = ""
 
 
 ;**********************************************************************
@@ -131,7 +131,7 @@ SystemRestartSound	= "chimes.wav"
 ;**********************************************************************
 
 [Accessories]
-;"qvwmdesk.ani"		TopRight	Background
+;"qvwmdesk.ani"   TopRight  Background
 ;"nagato.ani"      +1000+600  Background
 ;"asakura.ani"     +1100+600 Background
 ;"kimidori.ani"    +900+600 Background

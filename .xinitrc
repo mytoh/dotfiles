@@ -7,7 +7,6 @@ export QT_IM_MODULE=xim
 export XMODIFIERS=@im=ibus
 export XIM_PROGRAM="ibus-daemon"
 export XIM_ARGS="-r --daemonize --xim"
-ibus-daemon
 sleep 1
 # }}}
 
@@ -63,7 +62,7 @@ fi
 DEFAULT_SESSION="dwm"
 if [ -n $1 ]; then
  case $1 in
-  xfce) exec ck-launch-session startxfce4 ;;
+  xfce) exec dbus-launch ck-launch-session startxfce4 ;;
   fluxbox) exec startfluxbox ;;
   fvwm|fvwm2) exec fvwm2 ;;
   fvwm-themes*) exec fvwm-themes-start -s sa ;;
@@ -72,8 +71,7 @@ if [ -n $1 ]; then
   gnome) exec gnome-session ;;
   mate) exec ck-launch-session mate-session ;;
   rox) exec rox -S ;;
-sawfish) exec sawfish ;;
-  *) exec ck-launch-session $1 ;;
+  *) exec dbus-launch --exit-with-session ck-launch-session $1 ;;
  esac
 else
   exec $DEFAULT_SESSION

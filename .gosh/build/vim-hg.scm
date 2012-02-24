@@ -15,7 +15,7 @@
   (run-process '(hg update)) :wait #t)
 
 (define (build)
-  (run-process `(./configure   ,(string-append "--prefix=" *prefix-directory*) "--enable-multibyte" "--enable-perlinterp=yes" "--enable-xim" "--enable-fontset" "--disable-darwin" "--disable-selinux" "--with-x" "--with-features=huge") :wait #t)
+  (run-process `(./configure   ,(string-append "--prefix=" *prefix-directory*) "--enable-multibyte" "--enable-perlinterp=yes" "--enable-pythoninterp=yes" "--enable-xim" "--enable-fontset" "--disable-darwin" "--disable-selinux" "--with-x" "--with-features=huge") :wait #t)
   (run-process '(make clean) :wait #t)
   (run-process '(make) :wait #t)
   (run-process '(make install) :wait #t))

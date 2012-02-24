@@ -91,9 +91,14 @@ NeoBundle 'kergoth/fish.vim'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kana/vim-textobj-line'
 NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'hobbestigrou/Vim-wmfs'
 " colorscheme
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'jelera/vim-gummybears-colorscheme'
+NeoBundle 'shawncplus/skittles_berry'
+NeoBundle 'jnurmine/Zenburn'
+" bitbucket
+" NeoBundle 'https://bitbucket.org/kovisoft/slimv'
 " }}}
 
 " official vim-scripts repo {{{
