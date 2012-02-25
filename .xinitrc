@@ -48,7 +48,7 @@ gosh makiki-server.scm &
 tracker-applet &
 
 if [ "$1" = "twm" -o "$1" = "openbox" -o "$1" = "flwm" ]; then
-  $HOME/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 16 -bg gray15 -fn '-*-terminus-medium-r-normal--12-*' -e 'onexit=ungrabmouse' &
+  $HOME/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 13 -bg gray15 -fn '-*-terminus-medium-r-normal--12-*' -e 'onexit=ungrabmouse' &
   trayer --expand false --alpha 20  --tint 0x606060 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 7 --widthtype pixel --width 120 &
   #sleep 20 && wbar -above-desk -bpress -isize 45 -balfa 20 -nanim 9 &
   if [ -f $HOME/.fehbg ]; then
