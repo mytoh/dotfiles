@@ -4,7 +4,7 @@ ulimit -c 0
 # gentoo prefix
 set -x EPREFIX $HOME/local/gentoo
 
-set -Uge PATH#remove PATH
+set -Uge PATH #remove PATH
 set PATH /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/
 
 for p in /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin}
@@ -21,6 +21,7 @@ set -x DYLD_FALLBACK_LIBRARY_PATH $DYLD_FALLBACK_LIBRARY_PATH "$HOME/local/lib:$
 if test -d $HOME/local/stow
   set -x STOW $HOME/local/stow
 end
+set -x LANG fi_FI.UTF-8
 
 # pager
 set -x LESS "-i  -w -z-4 -g -M -X -F -R -P%t?f%f :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-..."
@@ -365,6 +366,9 @@ if which gosh 1>&-
   function unpack
     command gosh unpack.scm $argv
   end
+  function fb
+  	gosh fehbrowse.scm $argv
+  end
   function la
     command gosh ls.scm -d -a
   end
@@ -439,6 +443,8 @@ end
 function sc
  screen -U -D -RR  -s /bin/tcsh -m
 end
+
+
 #net {{{
 function starwars
   telnet towel.blinkenlights.nl

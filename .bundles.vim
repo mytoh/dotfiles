@@ -92,11 +92,13 @@ NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kana/vim-textobj-line'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'hobbestigrou/Vim-wmfs'
-" colorscheme
+NeoBundle 'banyan/recognize_charcode.vim'
+" colorscheme {{{
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'jelera/vim-gummybears-colorscheme'
 NeoBundle 'shawncplus/skittles_berry'
 NeoBundle 'jnurmine/Zenburn'
+"}}}
 " bitbucket
 " NeoBundle 'https://bitbucket.org/kovisoft/slimv'
 " }}}
@@ -108,6 +110,7 @@ NeoBundle 'sudo.vim'
 NeoBundle 'fluxbox.vim'
 NeoBundle 'matchit.zip'
 NeoBundle 'daemon_saver.vim'
+NeoBundle 'smartword'
 "Bundle 'buftabs'
 " colorschemes
 NeoBundle 'jellybeans.vim'
