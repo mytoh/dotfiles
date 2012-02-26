@@ -59,6 +59,11 @@ if [ "$1" = "twm" -o "$1" = "openbox" -o "$1" = "flwm" ]; then
   fbpanel &
 fi
 
+if [ "$1" = "xfce" ]; then
+  compton -i 0.9 -e 0.8 &
+  gkrellm &
+fi
+
 DEFAULT_SESSION="dwm"
 if [ -n $1 ]; then
  case $1 in

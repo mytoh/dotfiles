@@ -369,6 +369,9 @@ if which gosh 1>&-
   function fb
   	gosh fehbrowse.scm $argv
   end
+  function panna
+  gosh panna.scm $argv
+  end
   function la
     command gosh ls.scm -d -a
   end
