@@ -21,6 +21,7 @@
     "git://gitorious.org/~ridiculousfish/fish-shell/fishfish.git"
     "git://git.infradead.org/get_iplayer.git"
     "git://git.mplayer2.org/mplayer2.git"
+    "git://repo.or.cz/ncmpcpp.git"
     ; repo with other name
     ("git://git.sourceforge.jp/gitroot/ninix-aya/master.git"  "ninix-aya")
     ; minun github repo

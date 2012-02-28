@@ -98,6 +98,7 @@ NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'jelera/vim-gummybears-colorscheme'
 NeoBundle 'shawncplus/skittles_berry'
 NeoBundle 'jnurmine/Zenburn'
+NeoBundle 'jpo/vim-railscasts-theme'
 "}}}
 " bitbucket
 " NeoBundle 'https://bitbucket.org/kovisoft/slimv'

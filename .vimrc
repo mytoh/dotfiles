@@ -73,7 +73,7 @@ set showfulltag
 
 " colors
 set t_Co=256
-colorscheme gummybears
+colorscheme railscasts
 " set background=dark
 
 
@@ -219,6 +219,7 @@ nmap     N Nzz
 
 nnoremap ; :
 nnoremap : ;
+nnoremap Y y$
 nnoremap <space> i<space><esc>
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 
@@ -666,6 +667,10 @@ let is_gauche=1
 let g:slimv_keybindings = 3
 " }}}
 
+" nerdtree {{{
+let NERDSpaceDelims = 1
+" }}}
+
 set secure
 
 " hg clone https://vim.googlecode.com/hg/ vim
@@ -674,4 +679,5 @@ set secure
 " make install clean distclean
 
 " vim:set foldmethod=marker:
+
 

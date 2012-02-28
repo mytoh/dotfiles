@@ -3,7 +3,7 @@
 (use gauche.process)
 (use file.util)
 
-(define-constant *apps-directory* 
+(define-constant *apps-directory*
                  (build-path (home-directory) ".gosh/build"))
 
 

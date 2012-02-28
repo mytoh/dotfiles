@@ -6,7 +6,7 @@ export GTK_IM_MODULE=ibus
 export QT_IM_MODULE=xim
 export XMODIFIERS=@im=ibus
 export XIM_PROGRAM="ibus-daemon"
-export XIM_ARGS="-r --daemonize --xim"
+export XIM_ARGS=" --daemonize --xim"
 sleep 1
 # }}}
 
@@ -76,7 +76,8 @@ if [ -n $1 ]; then
   gnome) exec gnome-session ;;
   mate) exec ck-launch-session mate-session ;;
   rox) exec rox -S ;;
-  *) exec dbus-launch --exit-with-session ck-launch-session $1 ;;
+  *) exec kdeinit4 &
+    exec dbus-launch --exit-with-session ck-launch-session $1 ;;
  esac
 else
   exec $DEFAULT_SESSION
