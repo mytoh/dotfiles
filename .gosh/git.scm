@@ -77,6 +77,7 @@
     (trizen         gtk-youtube-viewer)
     (xorg62         wmfs)
     (shawncplus     ghub)
+    (86me           pentadactyl-scripts)
     )
   )
 

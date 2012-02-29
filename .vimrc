@@ -73,7 +73,7 @@ set showfulltag
 
 " colors
 set t_Co=256
-colorscheme railscasts
+colorscheme bubblegum
 " set background=dark
 
 
@@ -100,6 +100,10 @@ set splitbelow
 set fileformats=unix,mac,dos
 set virtualedit=all
 set nomore
+
+"show replace end
+set cpoptions+=$
+
 if executable('ack')
   set grepprg=ack\ -a
 endif

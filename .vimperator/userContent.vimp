@@ -1,5 +1,5 @@
 
-style -name futaba 2chan.net <<EOM
+@-moz-document domain("2chan.net"){
 body {
   background-color: #121212 !important;
 }
@@ -38,19 +38,18 @@ body {
   font-size: 7pt;
   color: #fb8def;
 }
+}
 
 
-EOM
 
 
-
-style -name google google.com,google.co.jp <<EOM
+@-moz-document domain("google.com"),domain("google.co.jp") {
 .vspib, #vspb {
   display: nonee !important;
 }
-EOM
+}
 
-style -name freebsd forums.freebsd.org <<EOM
+@-moz-document domain("forums.freebsd.org") {
 body, table, tbody, thead, tr, td, thead, div, a {
   font-family: "Verdana";
   background-image: none !important;
@@ -64,4 +63,4 @@ body, table, tbody, thead, tr, td, thead, div, a {
   strong {
     color: #a8b888 !important;
     }
-EOM
+    }
