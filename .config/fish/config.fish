@@ -17,6 +17,7 @@ end
 
 set -x MANWIDTH 80
 set -x GAUCHE_LOAD_PATH "$HOME/.gosh:$HOME/.gosh/share/gauche/site/lib"
+set -x PANNA_PATH "$HOME/.gosh/build"
 set -x DYLD_FALLBACK_LIBRARY_PATH $DYLD_FALLBACK_LIBRARY_PATH "$HOME/local/lib:$HOME/local/homebrew/lib"
 if test -d $HOME/local/stow
   set -x STOW $HOME/local/stow
@@ -65,6 +66,17 @@ end
 
 complete -c gosh -f -a "(__gosh_completion_load_path)" -d "files in GAUCHE_LOAD_PATH"
 complete -c gosh -f -a "(__gosh_completion_current_directory)" -d "files in CWD"
+
+function __panna_completion_panna_path
+  set -l path (echo $PANNA_PATH | tr ':' '\n')
+  for i in $path
+    for j in $i/*.scm
+      echo (basename -s .scm $j)
+    end
+  end
+end
+
+complete -c panna -f -a "(__panna_completion_panna_path)" -d ""
 #}}}
 #}}}
 
@@ -367,7 +379,7 @@ if which gosh 1>&-
     command gosh unpack.scm $argv
   end
   function fb
-  	gosh fehbrowse.scm $argv
+    gosh fehbrowse.scm $argv
   end
   function panna
   gosh panna.scm $argv

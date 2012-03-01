@@ -275,7 +275,7 @@ myConfig = do
         layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-        logHook            = myLogHook d,
-        startupHook        = myStartupHook >> setWMName "LG3D"
+        logHook            = myLogHook d >> setWMName "LG3D",
+        startupHook        = myStartupHook
     } `additionalKeysP` myKeys
 

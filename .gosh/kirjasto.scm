@@ -12,7 +12,7 @@
     whitespace->dash
     whitespace->underbar
     swget
-    doto)
+    )
 
   (use text.tr)
   (use gauche.net)
@@ -107,20 +107,5 @@
           (http-get host path
                     :sink (open-output-file file) :flusher (lambda (s h) (print file) #t)))))))
 
-
-;; <www.reddit.com/r/scheme/comments/q8fzf/clojures_doto_macro_in_scheme>
-(define-syntax doto*
-  (syntax-rules ()
-    ((_ t (f A ...))
-     (f t A ...))
-    ((_ t f)
-     (f t))))
-
-(define-syntax doto
-  (syntax-rules ()
-    ((doto target form ...)
-     (begin
-       (doto* target form) ...
-       target))))
 
 (provide "kirjasto")
