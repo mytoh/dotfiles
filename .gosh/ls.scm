@@ -100,7 +100,13 @@
     (tex  . 2)
     (doc  . 2)
 
+    ; scheme
     (scm  . 72)
+    (ss  . 72)
+    (sls  . 72)
+    (rkt  . 72)
+
+    
     (pl  . 72)
     (html . 38)
     (xml . 38)

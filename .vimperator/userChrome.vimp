@@ -30,7 +30,7 @@
 
 
 #panoTabGroupTree {
-background-color: #212121 !important;
+  background-color: #212121 !important;
 }
 
 #ybbookmarks-tree-tags *  {
@@ -50,9 +50,42 @@ statusbarpanel > * { margin: 0 !important; padding: 0 !important; }
   padding: 0 !important;
 }
 
-.tabbrowser-tab {
-  height: 14px !important;
-  }
 .scrollbutton-up {
   display: none;
-  }
+}
+
+
+/* flat tab {{{ */
+.tabbrowser-tab{
+  height: 13px;
+  -moz-transform: skew(0deg);
+  border: none !important;
+  border-bottom: none !important;
+  margin-left: 0.5px !important;
+  margin-right: 0.5px !important;
+  padding: 0 1px !important;
+  padding-left: 1px !important;
+  border-radius: 0 !important;
+}
+
+.tabbrowser-tab[selected]{border-bottom-color: transparent !important;}
+
+.tab-label, .tabbrowser-tab image, .tabs-newtab-button image{
+  -moz-transform: skew(0deg);
+}
+
+.tabs-newtab-button{
+  -moz-transform: skew(0deg);
+  border: none !important;
+  margin-left: -2px !important;
+  border-radius: 0 !important;
+}
+
+.tabbrowser-arrowscrollbox scrollbox{overflow: visible !important;}
+
+#TabsToolbar{
+  padding: 0 !important;
+  margin:  0 !important;
+}
+
+/* }}} */

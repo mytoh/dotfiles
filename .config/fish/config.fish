@@ -19,6 +19,7 @@ set -x MANWIDTH 80
 set -x GAUCHE_LOAD_PATH "$HOME/.gosh:$HOME/.gosh/share/gauche/site/lib"
 set -x PANNA_PATH "$HOME/.gosh/build"
 set -x DYLD_FALLBACK_LIBRARY_PATH $DYLD_FALLBACK_LIBRARY_PATH "$HOME/local/lib:$HOME/local/homebrew/lib"
+set -x LD_LIBRARY_PATH /usr/local/linux-sun-jdk1.6.0/jre/lib/i386
 if test -d $HOME/local/stow
   set -x STOW $HOME/local/stow
 end
