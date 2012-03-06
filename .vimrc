@@ -73,7 +73,7 @@ set showfulltag
 
 " colors
 set t_Co=256
-colorscheme bubblegum
+colorscheme jellybeans
 " set background=dark
 
 
@@ -673,6 +673,12 @@ let g:slimv_keybindings = 3
 
 " nerdtree {{{
 let NERDSpaceDelims = 1
+" }}}
+
+" synastic {{{
+let g:syntastic_mode_map = { 'mode': 'active',
+      \ 'active_filetypes': ['ruby', 'javascript'],
+      \ 'passive_filetypes': ['puppet'] }
 " }}}
 
 set secure

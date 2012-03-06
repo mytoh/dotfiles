@@ -22,6 +22,7 @@
     "git://git.infradead.org/get_iplayer.git"
     "git://git.mplayer2.org/mplayer2.git"
     "git://repo.or.cz/ncmpcpp.git"
+    "git://git.informatik.uni-erlangen.de/re06huxa/herbstluftwm"
     ; repo with other name
     ("git://git.sourceforge.jp/gitroot/ninix-aya/master.git"  "ninix-aya")
     ; minun github repo

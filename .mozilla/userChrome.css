@@ -52,7 +52,7 @@ statusbarpanel>* {
 }
 
 .tabbrowser-tab {
-  height : 13px;
+  height : 12px;
   -moz-transform : skew(0deg);
   border : none !important;
   border-bottom : none !important;

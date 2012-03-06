@@ -64,7 +64,7 @@ urxvt.boldFont: FONT_BOLD
 ! colors
 !----------------------------------
 !
-#include "/home/mytoh/.xcolours/muted_tree"
+#include "/home/mytoh/.xcolours/fall"
 !*color0: black
 !*color1: red3
 !*color2: green3

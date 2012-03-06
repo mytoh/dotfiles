@@ -75,10 +75,12 @@
   (let ((bd (car restargs))
         (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
     (if (not (null? dirs))
-      (for-each
+      (begin
+        (for-each
         (lambda (d)
           (yotsuba-get (list bd d)))
         dirs)
+        (run-process '(notify-send "fetch finished")))
       (print "no directories")
       )))
 

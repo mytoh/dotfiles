@@ -118,11 +118,13 @@
         (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0))
         )
        (if (not (null? dirs))
+         (begin
            (for-each 
              (lambda (d)
                (futaba-get (list board d))
                )
              dirs)
+           (run-process `(notify-send ,(string-append "futaba " board  " fetch finished")))
            (print "no directories")
            )
        ) ;let

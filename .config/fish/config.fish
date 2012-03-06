@@ -401,10 +401,7 @@ end
 #}}}
 
 function pd
-  prevd
-end
-function nd
-  nextd $argv
+  popd
 end
 
 if which cdf 1>&-

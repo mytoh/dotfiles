@@ -97,7 +97,7 @@
 
 
 (define (swget url)
-  (let ((parse-url 
+  (let ((parse-url
           (lambda (u) (rxmatch-let (rxmatch #/^http:\/\/([-A-Za-z\d.]+)(:(\d+))?(\/.*)?/ u)
                         (#f h #f pt ph)
                         (values h pt (uri-decode-string ph))))))

@@ -79,6 +79,7 @@
                   (a (@ (href "http://www.reddit.com/r/screenshots")    (target "_blank")) "screenshots")
                   (a (@ (href "http://www.reddit.com/r/commandline")    (target "_blank")) "commandline")
                   (a (@ (href "http://www.reddit.com/r/xmonad")    (target "_blank")) "xmonad")
+                  (a (@ (href "http://www.reddit.com/r/unixporn")    (target "_blank")) "unixporn")
                   "))")
 
             (p (@ (class "fourchan"))
