@@ -1,5 +1,5 @@
 (use gauche.process)
-(use kirjasto)
+(use file.util)
 
 (define (colour-process command)
   (with-input-from-process command
@@ -23,7 +23,7 @@
   )
 
 (define (main args)
-  (cd "/usr/src")
+(current-directory "/usr/src")
   (colour-process "sudo make cleandir")
   (colour-process "sudo make cleandir")
   (colour-process "sudo make -j3 buildworld")

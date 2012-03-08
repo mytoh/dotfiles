@@ -1,7 +1,7 @@
 
-noremap l gt
-noremap h gT
-noremap ; :
-noremap : ;
+nmap -b l gt
+nmap -b h gT
+nmap -b ; :
+nmap -b : ;
 
 set hintkeys=aoeuidhtns
