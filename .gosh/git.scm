@@ -79,6 +79,7 @@
     (xorg62         wmfs)
     (shawncplus     ghub)
     (86me           pentadactyl-scripts)
+    (lf94           dwm-lee)
     )
   )
 

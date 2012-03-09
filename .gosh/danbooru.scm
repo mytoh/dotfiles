@@ -1,6 +1,6 @@
 #!/usr/bin/env gosh
 
-(use kirjasto) ;swget,mkdir,cd,make-colour
+(use kirjasto) ; swget mkdir cd make-colour
 (use gauche.parseopt)
 (use gauche.collection)
 (use sxml.ssax)

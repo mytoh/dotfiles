@@ -16,9 +16,10 @@ for p in /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbi
 end
 
 set -x MANWIDTH 80
-set -x GAUCHE_LOAD_PATH "$HOME/.gosh:$HOME/.gosh/share/gauche/site/lib"
+set    GAUCHE_ARCH (gauche-config --arch)
+set -x GAUCHE_LOAD_PATH "$HOME/.gosh:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
 set -x PANNA_PATH "$HOME/.gosh/build"
-set -x DYLD_FALLBACK_LIBRARY_PATH $DYLD_FALLBACK_LIBRARY_PATH "$HOME/local/lib:$HOME/local/homebrew/lib"
+set -x DYLD_FALLBACK_LIBRARY_PATH "$HOME/local/lib:$HOME/local/homebrew/lib"
 set -x LD_LIBRARY_PATH /usr/local/linux-sun-jdk1.6.0/jre/lib/i386
 if test -d $HOME/local/stow
   set -x STOW $HOME/local/stow
