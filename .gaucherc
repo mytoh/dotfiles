@@ -2,10 +2,10 @@
 (use gauche.process)
 (use file.util)
 (use srfi-1)
-(load "util")
+(use kirjasto)
 
 (read-eval-print-loop #f #f 
                       (lambda results
-                        (map (cut print "=>" <>) results)) 
+                        (map (cut print "=> " <>) results)) 
                       (lambda () 
                         (display "[38;5;33m>>[0m ") (flush)))

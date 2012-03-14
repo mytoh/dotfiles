@@ -21,6 +21,20 @@
   background-color : transparent !important
 }
 
+
+/* change firefox button icon */
+#appmenu-toolbar-button > .toolbarbutton-icon {
+/* #appmenu-toolbar-button { */
+ /* background: transparent url("/usr/local/share/icons/horofox32.png") no-repeat !important; */
+  list-style-image: url("/usr/local/share/icons/horofox32.png") !important;
+  -moz-image-region: rect(1px, 88px, 17px, 72px);
+}
+/* remove text, dropmarker on firefox button */
+#appmenu-toolbar-button > .toolbarbutton-text,
+#appmenu-toolbar-button > .toolbarbutton-menu-dropmarker {
+  display: none !important;
+}
+
 #panoTabGroupTree {
   background-color : #212121 !important
 }
@@ -86,3 +100,5 @@ statusbarpanel>* {
   padding : 0 !important;
   margin : 0 !important
 }
+
+

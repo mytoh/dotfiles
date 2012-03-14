@@ -6,9 +6,9 @@
 (use sxml.ssax)
 (use sxml.sxpath)
 (use file.util)
-(use srfi-1)
 (use rfc.http)
 (use rfc.uri)
+(require-extension (srfi 1))
 
 
 

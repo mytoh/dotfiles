@@ -1,0 +1,25 @@
+
+snippet use
+abbr (use module)
+     (use ${1})
+
+snippet def
+abbr    (define ())
+        (define (${1})
+          ${2}
+          )
+
+snippet gauche
+abbr    gauche script templete
+        #!/usr/bin/env gosh
+
+        (use ${1})
+        
+        (define (main args)
+          )
+
+snippet let
+abbr    (let (()))
+        (let ((${1}))
+          (${2})
+          )

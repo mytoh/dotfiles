@@ -19,8 +19,7 @@
                              #/(\w*\.So)/  "[38;5;248m\\1[0m"
                              #/(\w*\.so)/  "[38;5;248m\\1[0m"
                              )))
-        read-line)))
-  )
+        read-line))))
 
 (define (main args)
 (current-directory "/usr/src")

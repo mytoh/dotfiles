@@ -18,6 +18,9 @@ screenw=1280
 framedrop=yes
 #vm=yes
 #zoom=yes 
+msgcolor=yes
+msgmodule=yes
+nolirc=yes
 
 [gnome-mplayer]
 vo=xv

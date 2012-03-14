@@ -4,4 +4,6 @@ nmap -b h gT
 nmap -b ; :
 nmap -b : ;
 
+cmap -b <C-c> <Esc>
+
 set hintkeys=aoeuidhtns

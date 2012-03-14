@@ -83,7 +83,7 @@
                   (a (@ (href "http://www.reddit.com/r/unixporn")    (target "_blank")) "unixporn")
                   "))")
 
-            (p (@ (class "fourchan"))
+            (p (@ (class "yotsuba"))
              "(" (a (@ (href "http://www.4chan.org") (target "_blank")) "4chan") (br)
              (span "(" )
                   (a (@ (href "http://boards.4chan.org/g") (target "_blank")) "g" (span (@ (class popup)) "technology"))
@@ -96,6 +96,13 @@
                   (a (@ (href "http://boards.4chan.org/s") (target "_blank")) "s" (span (@ (class popup)) "sexy bautiful woman"))
                   (a (@ (href "http://boards.4chan.org/u") (target "_blank")) "u" (span (@ (class popup)) "yuri"))
                   "))")
+
+            (p (@ (class "gauche"))
+             "(" (a (@ (href "http://practical-scheme.net/gauche/man/gauche-refj.html") (target "_blank")) "gauche-manual") (br)
+             (span "(" )
+                  (a (@ (href "http://practical-scheme.net/gauche/man/?l=jp&p=file.util") (target "_blank")) "file.util" (span (@ (class popup)) "file-util"))
+                  "))")
+
             ) ;div
        (footer
          (p (@ (id "ddg"))
@@ -114,5 +121,5 @@
 
 (define-http-handler #/.*\/image\/.*/
             (file-handler))
-    
-                
+
+

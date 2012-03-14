@@ -1,0 +1,4 @@
+# auxargs=-Dswing.defaultlaf=com.sun.java.swing.plaf.motif.MotifLookAndFeel
+auxargs=-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel
+#auxargs=-Dswing.boldMetal=false
+auxargs=-Dawt.useSystemAAFontSettings=on

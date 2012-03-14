@@ -39,9 +39,17 @@ set -x LESS_TERMCAP_us "[01;32m"
 if which w3m 1>  /dev/null
   set -x BROWSER w3m
 end
-#}}}
 
 set -x GREP_OPTIONS "--colour=auto"
+
+# java
+set -x _JAVA_OPTIONS -Dawt.useSystemAAFontSettings=on
+
+# rlwrap
+set -x RLWRAP_HOME ~/.rlwrap
+
+#}}}
+
 
 # complete {{{
 #if test -d ~/.config/fish/completions
@@ -85,22 +93,28 @@ complete -c panna -f -a "(__panna_completion_panna_path)" -d ""
 # fish variables {{{
 set fish_greeting ""
 # colors {{{
-# black, red, green, brown, yellow, blue, magenta, purple, cyan, white, normal
-set fish_color_normal normal
-set fish_color_command cyan
-set fish_color_comment -o white
-set fish_color_cwd blue
-set fish_color_end cyan
-set fish_color_error red
-set fish_color_match magenta
-set fish_color_param magenta
-set fish_color_redirection yellow
-set fish_color_search_match brown
-set fish_color_substitution green
-set fish_color_operator cyan
-set fish_color_escape purple
-set fish_color_quote purple
-set fish_color_valid_path brown
+# black, red, green, brown, yellow, 
+# blue, magenta, purple, cyan, white, normal
+set fish_color_normal         normal
+set fish_color_command        cyan
+set fish_color_comment     -o white
+set fish_color_cwd            blue
+set fish_color_end            cyan
+set fish_color_error          red
+set fish_color_match          magenta
+set fish_color_param          magenta
+set fish_color_redirection    yellow
+set fish_color_search_match   brown
+set fish_color_substitution   green
+set fish_color_operator       cyan
+set fish_color_escape         purple
+set fish_color_quote          purple
+set fish_color_valid_path     brown
+
+set fish_pager_color_completion  brown
+set fish_pager_color_description yellow
+set fish_pager_color_prefix      magenta
+set fish_pager_color_progress    green
 #}}}
 #}}}
 set open_paren "[30m([0m"
@@ -222,25 +236,29 @@ function scm
   end
 end
 
+function gi
+  rlwrap -pBlue -b '(){}[].q#@;| ' gosh
+end
+
 # color functions {{{
 # functions from
 # http://crunchbanglinux.org/forums/post/126921/#p126921
 
 function colors-pacman #{{{
- set blackf  "[30m"; set redf    "[31m"; set greenf  "[32m"
- set yellowf "[33m"; set bluef   "[34m"; set purplef "[35m"
- set cyanf   "[36m"; set whitef  "[37m"
+ set blackf  (tput setaf 0); set redf    (tput setaf 1); set greenf  (tput setaf 2)
+ set yellowf (tput setaf 3); set bluef   (tput setaf 4); set purplef (tput setaf 5)
+ set cyanf   (tput setaf 6); set whitef  (tput setaf 7)
 
- set blackb  "[40m"; set redb    "[41m"; set greenb  "[42m"
- set yellowb "[43m"; set blueb   "[44m"; set purpleb "[45m"
- set cyanb   "[46m"; set whiteb  "[47m"
+ set blackb  (tput setab 0); set redb    (tput setab 1); set greenb  (tput setab 2)
+ set yellowb (tput setab 3); set blueb   (tput setab 4); set purpleb (tput setab 5)
+ set cyanb   (tput setab 6); set whiteb  (tput setab 7)
 
- set boldon "[1m"; set boldoff "[22m"
- set italicson "[3m"; set italicsoff "[23m"
- set ulon "[4m";     set uloff "[24m"
- set invon "[7m";   set invoff "[27m"
+ set boldon (tput bold); set boldoff "[22m"
+ set italicson (tput sitm); set italicsoff (tput ritm)
+ set ulon (tput smul);     set uloff (tput rmul)
+ set invon (tput rev);   set invoff (tput rum)
 
- set reset "[0m"
+ set reset (tput sgr0)
 
  echo "
  $yellowf  ▄███████▄$reset   $redf  ▄██████▄$reset    $greenf  ▄██████▄$reset    $bluef  ▄██████▄$reset    $purplef  ▄██████▄$reset    $cyanf  ▄██████▄$reset
@@ -262,20 +280,21 @@ end
 # }}}
 
 function colors-invader #{{{
- set blackf  "[30m"; set redf    "[31m"; set greenf  "[32m"
- set yellowf "[33m"; set bluef   "[34m"; set purplef "[35m"
- set cyanf   "[36m"; set whitef  "[37m"
+ set blackf  (tput setaf 0); set redf    (tput setaf 1); set greenf  (tput setaf 2)
+ set yellowf (tput setaf 3); set bluef   (tput setaf 4); set purplef (tput setaf 5)
+ set cyanf   (tput setaf 6); set whitef  (tput setaf 7)
 
- set blackb  "[40m"; set redb    "[41m"; set greenb  "[42m"
- set yellowb "[43m"; set blueb   "[44m"; set purpleb "[45m"
- set cyanb   "[46m"; set whiteb  "[47m"
+ set blackb  (tput setab 0); set redb    (tput setab 1); set greenb  (tput setab 2)
+ set yellowb (tput setab 3); set blueb   (tput setab 4); set purpleb (tput setab 5)
+ set cyanb   (tput setab 6); set whiteb  (tput setab 7)
 
- set boldon "[1m"; set boldoff "[22m"
- set italicson "[3m"; set italicsoff "[23m"
- set ulon "[4m";     set uloff "[24m"
- set invon "[7m";   set invoff "[27m"
+ set boldon (tput bold); set boldoff "[22m"
+ set italicson (tput sitm); set italicsoff (tput ritm)
+ set ulon (tput smul);     set uloff (tput rmul)
+ set invon (tput rev);   set invoff (tput rum)
 
- set reset "[0m"
+ set reset (tput sgr0)
+
 
  echo "
 
@@ -326,13 +345,13 @@ function colorguns  #{{{
 # Initializing mod by lolilolicon from Archlinux
 #
 # this is modified version
-set f1 "[31m"
-set f2 "[32m"
-set f3 "[33m"
-set f4 "[34m"
-set f5 "[35m"
-set f6 "[36m"
-set f7 "[37m"
+set f1 (tput setaf 1)
+set f2 (tput setaf 2)
+set f3 (tput setaf 3)
+set f4 (tput setaf 4)
+set f5 (tput setaf 5)
+set f6 (tput setaf 6)
+set f7 (tput setaf 7)
 
 set bld "[1m"
 set rst "[0m"
@@ -401,6 +420,7 @@ if which gosh 1>&-
 end
 #}}}
 
+
 function pd
   popd
 end
@@ -436,6 +456,11 @@ end
 
 function xfont
   xlsatoms |  grep '-'
+end
+
+function xp
+  echo         "                    name     class "
+  xprop | grep "WM_WINDOW_RULE\|WM_CLASS"
 end
 
 function rr
@@ -1132,9 +1157,17 @@ switch (uname)
     squid -f ~/.squid/etc/squid.conf
   end
   set -x HOMEBREW_VERBOSE
-  set -x JAVA_HOME=~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
+  set -x JAVA_HOME ~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
 end
 #}}}
+
+#{{{
+#if test -e $HOME/.gosh/terminal-title.scm
+#  if which gosh 1>  /dev/null
+#     gosh $HOME/.gosh/terminal-title.scm &
+#  end
+#end
+#  }}}
 
 # memo
 # redirect

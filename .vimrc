@@ -125,25 +125,85 @@ set laststatus=2
 " highlight for statusline
 " set colorscheme above these settings
 " User1-9 => %{1-9}*
-hi User1 ctermfg=white ctermbg=233 cterm=none
-hi User2 ctermfg=60   ctermbg=233
-hi User9 ctermfg=4 ctermbg=235 cterm=none
+hi User1 ctermfg=white ctermbg=244 cterm=none
+hi User2 ctermfg=61    ctermbg=233
+hi User3 ctermfg=243    ctermbg=234
+hi User4 ctermfg=59   ctermbg=235
+hi User5 ctermfg=38   ctermbg=239
+hi User6 ctermfg=24   ctermbg=243
+hi User7 ctermfg=17   ctermbg=247
+hi User8 ctermfg=95   ctermbg=251
+hi User9 ctermfg=233   ctermbg=255 
+
+function! GetCharCode() " {{{ from powerline
+" Get the output of :ascii
+redir => ascii
+silent! ascii
+redir END
+
+if match(ascii, 'NUL') != -1
+return 'NUL'
+endif
+
+" Zero pad hex values
+let nrformat = '0x%02x'
+
+let encoding = (&fenc == '' ? &enc : &fenc)
+
+if encoding == 'utf-8'
+" Zero pad with 4 zeroes in unicode files
+let nrformat = '0x%04x'
+endif
+
+" Get the character and the numeric value from the return value of :ascii
+" This matches the two first pieces of the return value, e.g.
+" "<F> 70" => char: 'F', nr: '70'
+let [str, char, nr; rest] = matchlist(ascii, '\v\<(.{-1,})\>\s*([0-9]+)')
+
+" Format the numeric value
+let nr = printf(nrformat, nr)
+
+return "'". char ."' ". nr
+endfunction "}}}
+
 " statusline for buftabs plugin
 set stl=     " clear statusline when reloaded
-set stl=%1*\    " left side
+
+set stl=%2*\    " left side
 set stl+=%=  " separator
-set stl+=%2*(%1*%<%{fnamemodify(getcwd(),':~')}%2*)%1*\   "get filepath
-set stl+=%{fugitive#statusline()}\  "git repo info
-set stl+=%y\  "filetype
+
+set stl+=%3*
+set stl+=\ 
+set stl+=%<%{fnamemodify(getcwd(),':~')}   "get filepath
+set stl+=\ 
+
+set stl+=%4*
+set stl+=%{fugitive#statusline()}  "git repo info
+
+set stl+=%5*
+set stl+=\ 
 set stl+=%{&dictionary}
-set stl+=%{&fenc}\  "fileencoding
-set stl+=%{&ff}\    "fileformat
-set stl+=%2*(%1*%3.3b,%2.2B%2*)%1*\  " ascii, hex under cursor
-set stl+=%2*(%1*%l,  "current line number
-set stl+=%c   "columns
-set stl+=/%L%2*)%1*\   "total line number
+set stl+=%{&fileformat}\ 
+set stl+=<\ 
+set stl+=%{&fenc}\ 
+set stl+=<\ 
+set stl+=%{&filetype}\ 
+
+set stl+=%6*
+set stl+=\ 
+set stl+=%{GetCharCode()}\  " hex under cursor
+
+set stl+=%7*
 set stl+=%3p%%\  "percentage of current line
 set stl+=%*    "reset color
+
+set stl+=%8*
+set stl+=\ 
+set stl+=%l,  "current line number
+set stl+=%c   "columns
+set stl+=/%L   "total line number
+set stl+=\ 
+
 
 " change StatusLine color when insert mode {{{
 " http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-color#color-theme-mod
@@ -251,9 +311,6 @@ function! s:vimrc.xrdb() dict
 endfunction
 
 function! s:vimrc.gauche() dict
-  if filereadable('~/.gosh_completions')
-    setlocal dictionary=~/.gosh_completions
-  endif
   if executable('scmindent.scm')
     if executable('racket')
       setlocal equalprg=scmindent.scm
@@ -274,15 +331,17 @@ aug myautocommands
   au bufread,bufnewfile ~/.xcolours/*            ColorHighlight
   au bufread,bufnewfile *.scss                   setl filetype=scheme
   au bufread,bufnewfile *.stub                   setl filetype=scheme
+  au bufread,bufnewfile .gaucherc                setl filetype=scheme
   au bufread,bufnewfile .mkshrc                  setl filetype=sh
   au bufread,bufnewfile *stumpwmrc*              setl filetype=lisp
   au bufread,bufnewfile *sawfish/rc              setl filetype=lisp
   au bufread,bufnewfile *.fish                   setl filetype=fish
   au bufread,bufnewfile loader.conf.local        setl filetype=conf
-  au filetype           xdefaults                call s:vimrc.xrdb()
   au bufwritepost       .vimrc                   source ~/.vimrc
   au bufwritepost       .zshrc                   Silent !zcompile ~/.zshrc
   au bufwritepost       .conkyrc                 Silent !killall -SIGUSR1  conky
+  au bufwritepost       xmonad.hs                Silent !xmonad --recompile
+  au filetype           xdefaults                call s:vimrc.xrdb()
   au filetype           scheme                   call s:vimrc.gauche()
   au filetype           help                     nnoremap q :<c-u>q<cr>
   au filetype           nerdtree                 let g:loaded_golden_ratio=1
@@ -344,7 +403,7 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_auto_select = 0
 let g:neocomplcache_dictionary_filetype_lists = {
       \ 'default'  : '',
-      \ 'scheme'   : $HOME . '/.gosh_completions',
+      \ 'scheme'   : $RLWRAP_HOME . '/gosh_completions',
       \ 'vimshell' : $HOME . '/.vimshell/command-history' }
 " Define keyword.
 if !exists('g:neocomplcache_keyword_patterns')
@@ -372,20 +431,13 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
-
 " For snippet_complete marker.
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
+" snippet directory
+let g:neocomplcache_snippets_dir='~/.vim/snippets'
 "}}}
 
 " vimfiler"{{{
@@ -589,7 +641,7 @@ nmap     <silent> [vimshell]c <Plug>(vimshell_create)
 nnoremap <silent> [vimshell]p :<c-u>VimShellPop<cr>
 "}}}
 
-" vimproc{{{
+" vimproc {{{
 let g:vimproc_dll_path = $HOME . '/.bundle/vimproc/autoload/proc.so'
 "}}}
 

@@ -1,25 +1,27 @@
 #!/bin/sh
 
 # ibus {{{
-export XIM=ibus
-export GTK_IM_MODULE=ibus
-export QT_IM_MODULE=xim
-export XMODIFIERS=@im=ibus
-export XIM_PROGRAM="ibus-daemon"
-export XIM_ARGS=" --daemonize --xim"
-sleep 1
+# export XIM=ibus
+# export GTK_IM_MODULE=ibus
+# export QT_IM_MODULE=xim
+# export XMODIFIERS=@im=ibus
+# export XIM_PROGRAM="ibus-daemon"
+# export XIM_ARGS=" --daemonize --xim"
+# sleep 1
 # }}}
 
 # uim {{{
-# uim-xim &
-# export GTK_IM_MODULE="uim"
-# export QT_IM_MODULE="uim"
-# export XMODIFIERS=@im=uim
+export GTK_IM_MODULE="uim"
+export QT_IM_MODULE="uim"
+export XMODIFIERS=@im=uim
 # export UIM_CANDWIN_PROG=uim-candwin-gtk
+uim-xim &
+uim-toolbar-gtk-systray &
 #}}}
 
 # kde
-export XDG_DATA_DIRS="/usr/local/kde4/share:$XDG_DATA_DIRS"
+# export XDG_DATA_DIRS="/usr/local/kde4/share:/usr/local/share/:$XDG_DATA_DIRS"
+export QT_PLUGIN_PATH="/usr/local/kde4/lib/kde4/plugins"
 
 export PATH="$HOME/local/bin:$PATH"
 xrdb -merge $HOME/.Xresources
@@ -45,7 +47,6 @@ Thunar --daemon &
 spiffy &
 #parcellite &
 gosh makiki-server.scm &
-tracker-applet &
 
 if [ "$1" = "twm"  -o "$1" = "flwm" ]; then
   $HOME/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 13 -bg gray15 -fn '-*-terminus-medium-r-normal--12-*' -e 'onexit=ungrabmouse' &

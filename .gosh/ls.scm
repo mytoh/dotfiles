@@ -6,9 +6,9 @@
 (use gauche.parseopt)
 (use file.util)
 (use gauche.process) ;process-output->string
-(use srfi-1) ;count
 (use util.list) ;take*
 (use gauche.sequence) ;remove
+(require-extension (srfi 1)) ;count
 
 (define-constant *extension-colours*
   '((cmd  . 2)
@@ -102,8 +102,10 @@
 
     ; scheme
     (scm  . 72)
-    (ss  . 72)
+    (sch  . 72)
+    (ss   . 72)
     (sls  . 72)
+    (sps  . 72)
     (rkt  . 72)
 
     

@@ -22,6 +22,7 @@ NeoBundle 'Shougo/neobundle.vim'
 "
 " github repo {{{
 NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplcache-snippets-complete'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimproc'
@@ -95,6 +96,8 @@ NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'hobbestigrou/Vim-wmfs'
 NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'aharisu/Gauche-Complete'
+NeoBundle 'bronson/vim-trailing-whitespace'
+
 " colorscheme {{{
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'jelera/vim-gummybears-colorscheme'

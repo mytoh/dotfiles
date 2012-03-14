@@ -8,7 +8,7 @@ Xcursor.theme: whiteglass
 !---------------
 !urxvt.termName: xterm-256color
 urxvt.depth: 24
-urxvt.background: rgba:0900/0900/1000/cccc
+urxvt.background: rgba:0900/0990/1000/cccc
 urxvt.foreground: #899ca1
 urxvt.geometry: 100x40+100+100
 urxvt.scrollBar: false
@@ -27,11 +27,12 @@ urxvt.savelines: 2000
 urxvt.mousewheelscrollpage: false
 urxvt.urgentOnBell: true
 urxvt.modifier: alt
-urxvt.inputMethod: ibus
-urxvt.preeditType: OnTheSpot,None
+urxvt.inputMethod: uim
+! urxvt.preeditType: OnTheSpot
+urxvt.preeditType: OverTheSpot
 !urxvt.backgroundPixmap: /Users/kazuki/.wallpapers/background
 
-urxvt.perl-ext-common: default,matcher,clipboard-osc,tabbbed
+urxvt.perl-ext-common: default,matcher,clipboard-osc,tabbbed,xim-onthespot
 urxvt.urlLauncher: firefox
 urxvt.matcher.button: 1
 urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]

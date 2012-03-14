@@ -23,6 +23,7 @@
     "git://git.mplayer2.org/mplayer2.git"
     "git://repo.or.cz/ncmpcpp.git"
     "git://git.informatik.uni-erlangen.de/re06huxa/herbstluftwm"
+    "git://opensource.conformal.com/xxxterm.git"
     ; repo with other name
     ("git://git.sourceforge.jp/gitroot/ninix-aya/master.git"  "ninix-aya")
     ; minun github repo
@@ -80,6 +81,8 @@
     (shawncplus     ghub)
     (86me           pentadactyl-scripts)
     (lf94           dwm-lee)
+    (Cloudef        monsterwm-xcb)
+    (chjj           compton)
     )
   )
 
