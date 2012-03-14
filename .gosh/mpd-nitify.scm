@@ -5,11 +5,11 @@
 
 (define (mpd-notify)
   (let ((artist (process-output->string "mpc -f '%artist%' current"))
-        (albun  (process-output->string "mpc -f '%album%'  current"))
+        (album  (process-output->string "mpc -f '%album%'  current"))
         (title  (process-output->string "mpc -f '%title%'  current")))
     (print artist)
-    )
-  )
+    (print album)
+    (print title)))
 
 (define (main args)
   (mpd-notify)
