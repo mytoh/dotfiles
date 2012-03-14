@@ -4,9 +4,9 @@
 (use file.util)
 
 (define (mpd-notify)
-  (let ((artist (process-output->string "mpc -f '%artist%' current") :wait #t)
-        (albun  (process-output->string "mpc -f '%album%'  current") :wait #t)
-        (title  (process-output->string "mpc -f '%title%'  current") :wait #t))
+  (let ((artist (process-output->string "mpc -f '%artist%' current"))
+        (albun  (process-output->string "mpc -f '%album%'  current"))
+        (title  (process-output->string "mpc -f '%title%'  current")))
     (print artist)
     )
   )
