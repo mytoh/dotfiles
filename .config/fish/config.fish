@@ -86,14 +86,18 @@ function __panna_completion_panna_path
   end
 end
 
-complete -c panna -f -a "(__panna_completion_panna_path)" -d ""
+complete -c panna -n '__fish_use_subcommand' -xa install --description "install package"
+complete -c panna -n '__fish_use_subcommand' -xa 'update up' --description "update repo"
+complete -c panna -n '__fish_use_subcommand' -xa build --description "build"
+
+complete -c panna -f -a "(__panna_completion_panna_path)" -d " package"
 #}}}
 #}}}
 
 # fish variables {{{
 set fish_greeting ""
 # colors {{{
-# black, red, green, brown, yellow, 
+# black, red, green, brown, yellow,
 # blue, magenta, purple, cyan, white, normal
 set fish_color_normal         normal
 set fish_color_command        cyan
@@ -122,11 +126,11 @@ set close_paren "[30m)[0m"
 
 # prompt {{{
 #  arch wiki git status prompt {{{
-set fish_git_dirty_color red
+set fish_git_dirty_colour red
 function parse_git_dirty
   git diff --quiet HEAD 2>&-
   if test $status = 1
-    echo (set_color $fish_git_dirty_color)"÷"(set_color normal)
+    echo (set_color $fish_git_dirty_colour)"÷"(set_color normal)
   end
 end
 
@@ -244,7 +248,7 @@ end
 # functions from
 # http://crunchbanglinux.org/forums/post/126921/#p126921
 
-function colors-pacman #{{{
+function colour-pacman #{{{
  set blackf  (tput setaf 0); set redf    (tput setaf 1); set greenf  (tput setaf 2)
  set yellowf (tput setaf 3); set bluef   (tput setaf 4); set purplef (tput setaf 5)
  set cyanf   (tput setaf 6); set whitef  (tput setaf 7)
@@ -279,7 +283,7 @@ function colors-pacman #{{{
 end
 # }}}
 
-function colors-invader #{{{
+function colour-invader #{{{
  set blackf  (tput setaf 0); set redf    (tput setaf 1); set greenf  (tput setaf 2)
  set yellowf (tput setaf 3); set bluef   (tput setaf 4); set purplef (tput setaf 5)
  set cyanf   (tput setaf 6); set whitef  (tput setaf 7)
@@ -323,9 +327,9 @@ function colors-invader #{{{
 end
 #}}}
 
-function colors-dump  #{{{
+function colour-dump  #{{{
   set xdef $HOME/.xcolours/(grep "xcolours" $HOME/.Xresources | sed -re '/^!/d; /^$/d; s/^#include//; s/.*\/([a-z]+)\"$/\1/g;')
-  set colors (sed -re '/^!/d; /^$/d; /^#/d; s/(\*color)([0-9]):/\10\2:/g;' $xdef | grep 'color[01][0-9]:' | sort |sed 's/^.*: *//g' )
+  set colours (sed -re '/^!/d; /^$/d; /^#/d; s/(\*colour)([0-9]):/\10\2:/g;' $xdef | grep 'colour[01][0-9]:' | sort |sed 's/^.*: *//g' )
 
   echo "[37m
   Black   Red      Green   Yellow    Blue    Magenta   Cyan    White
@@ -338,9 +342,9 @@ function colors-dump  #{{{
 end
 #}}}
 
-function colorguns  #{{{
+function colour-guns  #{{{
 #
-# ANSI color scheme script by pfh
+# ANSI colour scheme script by pfh
 #
 # Initializing mod by lolilolicon from Archlinux
 #
@@ -387,24 +391,39 @@ if which gosh 1>&-
   function futaba
     command gosh futaba-get.scm $argv
   end
+
   function danbooru
     command gosh danbooru $argv
   end
+
   function spc2ubar
     command gosh space2underbar.scm $argv
   end
+
   function ea
     command gosh extattr.scm $argv
   end
+
   function unpack
     command gosh unpack.scm $argv
   end
+
   function fb
     gosh fehbrowse.scm $argv
   end
+
   function panna
   gosh panna.scm $argv
   end
+
+  function talikko
+  gosh talikko.scm $argv
+  end
+
+  function colour-numbers
+  gosh colour-numbers.scm
+  end
+
   function la
     command gosh ls.scm -d -a
   end
@@ -574,7 +593,7 @@ end
 function sb-jaga -d "FM-JAGA  (北海道帯広市) "
 mplayer mms://simul.freebit.net/fmjaga
 end
-function sb-obihiroj -d "FM-JAGA  (北海道帯広市) " 
+function sb-obihiroj -d "FM-JAGA  (北海道帯広市) "
 sb-jaga
 end
 
@@ -618,7 +637,7 @@ end
 function sb-izumi -d "fmいずみ               (宮城県仙台市)"
 mplayer -playlist http://www.simulradio.jp/asx/fmIzumi.asx
 end
-function sb-sendaii -d "fmいずみ               (宮城県仙台市)" 
+function sb-sendaii -d "fmいずみ               (宮城県仙台市)"
 sb-izumi
 end
 
@@ -626,7 +645,7 @@ end
 function sb-radio3 -d "RADIO3 (宮城県仙台市)"
 mplayer mms://simul.freebit.net/radio3
 end
-function sb-sendai3  -d "RADIO3 (宮城県仙台市)" 
+function sb-sendai3  -d "RADIO3 (宮城県仙台市)"
 sb-radio3
 end
 
@@ -634,7 +653,7 @@ end
 function sb-motcom -d "FM Mot.com (福島県本宮市)"
 mplayer mms://simul.freebit.net/fmmotcom
 end
-function sb-motomiya -d "FM Mot.com (福島県本宮市)" 
+function sb-motomiya -d "FM Mot.com (福島県本宮市)"
 sb-motcom
 end
 # エフエム会津           (福島県会津若松市)
@@ -657,7 +676,7 @@ end
 function sb-palulun -d "FMぱるるん (茨城県水戸市)"
 mplayer -playlist http://www.simulradio.jp/asx/FmPalulun.asx
 end
-function sb-mito -d "FMぱるるん (茨城県水戸市)" 
+function sb-mito -d "FMぱるるん (茨城県水戸市)"
 sb-palulun
 end
 # ラヂオつくば  24時間   (茨城県つくば市)
@@ -682,7 +701,7 @@ end
 function sb-kazusa -d "かずさエフエム (千葉県木更津市)"
 mplayer -playlist http://www.simulradio.jp/asx/KazusaFM.asx
 end
-function sb-kisarazu -d "かずさエフエム (千葉県木更津市)" 
+function sb-kisarazu -d "かずさエフエム (千葉県木更津市)"
 sb-kazusa
 end
 

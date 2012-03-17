@@ -100,6 +100,7 @@ set splitbelow
 set fileformats=unix,mac,dos
 set virtualedit=all
 set nomore
+set imdisable
 
 "show replace end
 set cpoptions+=$
@@ -300,6 +301,61 @@ cnoremap <c-f>      <right>
 cnoremap <c-b>      <left>
 " vim.g.hatena.ne.jp/tyru/20100116
 cnoremap <c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>
+
+" window resize {{{
+function! s:resizeWindow()
+	call submode#enter_with('winsize', 'n', '', 'mws', '<Nop>')
+	call submode#leave_with('winsize', 'n', '', '<Esc>')
+
+	let curwin = winnr()
+	wincmd j | let target1 = winnr() | exe curwin "wincmd w"
+	wincmd l | let target2 = winnr() | exe curwin "wincmd w"
+
+
+	execute printf("call submode#map ('winsize', 'n', 'r', 'j', '<C-w>%s')", curwin == target1 ? "-" : "+")
+	execute printf("call submode#map ('winsize', 'n', 'r', 'k', '<C-w>%s')", curwin == target1 ? "+" : "-")
+	execute printf("call submode#map ('winsize', 'n', 'r', 'h', '<C-w>%s')", curwin == target2 ? ">" : "<")
+	execute printf("call submode#map ('winsize', 'n', 'r', 'l', '<C-w>%s')", curwin == target2 ? "<" : ">")
+
+endfunction
+
+nmap <C-w>r	:<C-u>call <SID>resizeWindow()<CR>mws
+" }}}
+
+" better C-a C-e  {{{
+" http://vim.g.hatena.ne.jp/tyru/20100305
+" goto head, or tail 
+inoremap <expr> <C-a> <SID>goto_head()
+func! s:goto_head() "{{{
+  let col = col('.')
+  let lnum = line('.')
+  let tilde_col = match(getline(lnum),'\S')+1
+
+  if col > tilde_col
+    " go to ^ pos.
+    return "\<C-o>^"
+  else
+    " go to head.
+    return "\<Home>"
+  endif
+endfunc "}}}
+
+inoremap <expr> <C-e> <SID>goto_tail()
+func! s:goto_tail() "{{{
+  let col = col('.')
+  let lnum = line('.')
+  let tilde_col = match(getline(lnum), '\S')+1
+  
+  if col < tilde_col
+    "go to ^ pos
+    return "\<C-o>"
+  else
+    "go to tail
+    return "\<End>"
+  endif
+endfunc "}}}
+  "}}}
+
 "}}}
 
 " autocommands{{{
@@ -421,7 +477,6 @@ inoremap <expr><CR>  neocomplcache#close_popup() . "\<CR>"
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType less setlocal omnifunc=csscomplete#CompleteCSS

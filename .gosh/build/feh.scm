@@ -14,15 +14,15 @@
 (define (update)
   (run-process '(git pull) :wait #t))
 
-(cond 
+(cond
   ((eq? (get-os-type) 'freebsd)
    (define (build)
      (sys-putenv (string-append "PREFIX=" *prefix-directory*))
      (run-process '(gmake clean) :wait #t)
      (run-process '(gmake) :wait #t)
      (run-process '(gmake install) :wait #t)))
-   
-  (else 
+
+  (else
    (define (build)
      (sys-putenv (string-append "PREFIX=" *prefix-directory*))
      (run-process '(make clean) :wait #t)

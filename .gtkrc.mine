@@ -6,12 +6,20 @@ tk-cursor-theme-name = "whiteglass"
 
 gtk-color-scheme = "bg_color: #383838\nfg_color: #fff\nbase_color: #575757\ntext_color: #C2C2C2\nselected_bg_color: #DDFF95\nselected_fg_color: #000\ntooltip_bg_color: #DDFF95\ntooltip_fg_color: #000"
 
-style "font"
-{
-  fontset = "M+ 2m 10"
+# font {{{
+style "mplus_10" {
+fontset = "-mplus-hlv-medium-r-normal--10-*-*-*-p-*-iso8859-1,\
+-mplus-gothic-medium-r-normal--10-*-jisx0208.1990-0,\
+-mplus-gothic-medium-r-normal--10-*-jisx0201.1976-0"
 }
-widget_class "*" style "font"
-gtk-font-name = "M+ 2m 10"
+style "mplus_12" {
+fontset = "-mplus-hlv-medium-r-normal--12-*-*-*-p-*-iso8859-1,\
+-mplus-gothic-medium-r-normal--12-*-jisx0208.1990-0,\
+-mplus-gothic-medium-r-normal--12-*-jisx0201.1976-0"
+}
+class "GtkWidget" style "mplus_12"
+gtk-font-name = "M+gothic 12"
+# }}}
 
 style "thunar-icon-view-reduced-style"
 {

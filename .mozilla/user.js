@@ -10,8 +10,11 @@
 
 // pref.js
 user_pref("browser.cache.memory.enable", true);
-user_pref("browser.cache.memory.capacity", 65536);
-user_pref("browser.sessionhistory.max_total_viewers", 0);
+user_pref("browser.cache.memory.capacity", 32768);
+user_pref("browser.sessionhistory.max_total_viewers", 2);
+user_pref("browser.sessionstore.max_tabs_undo", 4);
+user_pref("browser.sessionstore.max_concurrent_tabs", 0);
+user_pref("browser.tabs.animate", false);
 user_pref("content.interrupt.parsing", true);
 user_pref("content.max.tokenizing.time", 2250000);
 user_pref("content.notify.backoffcount", 5);
@@ -48,3 +51,6 @@ user_pref("dom.event.contextmenu.enabled", false);
 user_pref("view_source.wrap_long_lines", true);
 user_pref("middlemouse.scrollbarPosition", true);
 user_pref("xpinstall.whitelist.required", false);
+
+// apptabinitializer
+// user_pref("extensions.apptabinitializer.urllist", "http://jun.2chan.net/b/futaba.php?mode=cat&sort=1,http://zip.2chan.net/3/futaba.htm,http://boards.4chan.org/g/,http://117.74.59.102:9910/,http://cloudef.dy.fi/,http://blog.livedoor.jp/himasoku123/,http://www.asiancinematic.com/Japanese-Dramas/");

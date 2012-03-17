@@ -2,7 +2,6 @@
   (export string->lowercase
     make-colour
     forever
-    while
     get-os-type
     tap
     p
@@ -28,9 +27,9 @@
     (lambda (str)
       (with-string-io str ptr))))
 
-(define (make-colour colour str)
+(define (make-colour colour-number str)
   ;; take any -> return string
-  (string-append "[38;5;" (x->string colour) "m" (x->string str) "[0m"))
+  (string-append "[38;5;" (x->string colour-number) "m" (x->string str) "[0m"))
 
 
 (define-syntax forever
@@ -40,15 +39,6 @@
      (let loop () e1 e2 ... 
        (sys-nanosleep (* (expt 10 8) 3000)) ; sleep 5 minutes
        (loop)))))
-
-(define-syntax while
-  (syntax-rules ()
-    ((_ cond? body ...)
-     (let loop ()
-       (when cond?
-         body ...
-         (loop))))))
-
 
 (define get-os-type
   ; returns symbol

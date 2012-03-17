@@ -1,3 +1,9 @@
+*{
+  font-size: 12px !important;
+  font-family:M+gothic !important;
+}
+
+
 #aios-toolbar toolbarbutton {
   -moz-appearance : none !important;
   background-color : #121212 !important;

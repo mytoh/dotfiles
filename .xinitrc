@@ -41,7 +41,7 @@ xset fp+ /usr/local/lib/X11/fonts/Droid
 xset fp+ /usr/local/lib/X11/fonts/artwiz-aleczapka-en
 xset fp+ $HOME/.fonts
 xset fp rehash
-urxvtcd &
+# urxvtcd &
 xbindkeys &
 Thunar --daemon &
 spiffy &
@@ -72,8 +72,8 @@ if [ -n $1 ]; then
   gnome) exec gnome-session ;;
   mate) exec ck-launch-session mate-session ;;
   rox) exec rox -S ;;
-  *) exec kdeinit4 &
-    exec dbus-launch --exit-with-session ck-launch-session $1 ;;
+lainwm) exec lainwm ;;
+  *) exec dbus-launch --exit-with-session ck-launch-session $1 ;;
  esac
 else
   exec $DEFAULT_SESSION

@@ -1,9 +1,34 @@
+colorscheme molokai
 
 nmap -b l gt
 nmap -b h gT
 nmap -b ; :
 nmap -b : ;
+nmap -b <C-c> <Esc>
+
+imap -b <C-b> <Left>
+imap -b <C-f> <Right>
+imap -b <C-m> <CR>
+imap -b <C-c> <Esc>
+imap -b <C-h> <BS>
 
 cmap -b <C-c> <Esc>
+cmap -b <C-b> <Left>
+cmap -b <C-f> <Right>
+cmap -b <C-i> <Tab>
+
+" disable ime on command mode
+style -name commanndline-ime chrome://* #dactyl-commandline-command input {ime-mode:; inactive}
 
 set hintkeys=aoeuidhtns
+
+
+" color {{{
+" statusline {{{
+hi StatusLine           font-size: 8pt  !important; font-weight: bold !important;
+"}}}
+" hinted elements {{{
+hi -a HintElem color: #abbbcb !important;
+hi -a HintElem background-color: rgba(35, 37, 48, .8) !important;
+"}}}
+"}}}

@@ -1,9 +1,9 @@
 #!/usr/bin/env gosh
 
 ; http://d.hatena.ne.jp/rui314/20070604/p1
-; 
+;
 ; - added modules in 0.9.2
-; - 
+; -
 (require "binary/ftype")
 (require "binary/io")
 (require "binary/pack")
@@ -182,6 +182,9 @@
 (require "www/cgi")
 (require "www/cgi/test")
 
+; personal library
+(require "kirjasto")
+
 
 (use srfi-1)
 (use file.util)
@@ -200,19 +203,20 @@
             (module-precedence-list (current-module)))
   (register module-exports
             (all-modules))
-  
+
  ; (for-each print
     ; (sort (map symbol->string (hash-table-keys ht)))))
-  
 
-  
-;; -- added 
+
+
+;; -- added
   (let ((completion-file (open-output-file (build-path (home-directory) ".rlwrap/gosh_completions"))))
   (for-each (lambda (s)
               (display s completion-file)
               (newline  completion-file))
     (sort (map symbol->string (hash-table-keys ht))))
   )
+;; --
 
   0)
 

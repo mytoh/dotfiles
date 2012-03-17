@@ -82,6 +82,8 @@
     (86me           pentadactyl-scripts)
     (lf94           dwm-lee)
     (Cloudef        monsterwm-xcb)
+    (Cloudef        dotFiles   cloudef-dotFiles)
+    (Cloudef        milkyhelper)
     (chjj           compton)
     )
   )
@@ -131,12 +133,20 @@
 (define (repo-url-directory-list)
   (map
     (lambda (e)
-      (cond 
+      (cond
+        ; normal repo
         ((string? e) (list (sys-basename (path-sans-extension e)) e))
-        ((list? e)  
+        ((list? e)
          (if (string? (car e))
            (list (cadr e) (car e))
-           (list (cadr e) #`"git://github.com/,(car e)/,(cadr e)")))
+             ; github
+             (if (null? (cddr e))
+             (list (cadr e) #`"git://github.com/,(car e)/,(cadr e)")
+             ; github with renaming
+             (list (caddr e) #`"git://github.com/,(car e)/,(cadr e)")
+              )
+             ))
+        ; my github
         ((symbol? e) (list e #`"git@github.com:mytoh/,|e|"))))
     *repos* ))
 

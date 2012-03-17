@@ -119,6 +119,7 @@ NeoBundle 'matchit.zip'
 NeoBundle 'daemon_saver.vim'
 NeoBundle 'smartword'
 NeoBundle 'gtk-vim-syntax'
+NeoBundle 'submode'
 "Bundle 'buftabs'
 " colorschemes
 NeoBundle 'jellybeans.vim'
