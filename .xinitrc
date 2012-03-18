@@ -41,7 +41,7 @@ xset fp+ /usr/local/lib/X11/fonts/Droid
 xset fp+ /usr/local/lib/X11/fonts/artwiz-aleczapka-en
 xset fp+ $HOME/.fonts
 xset fp rehash
-# urxvtcd &
+urxvtcd &
 xbindkeys &
 Thunar --daemon &
 spiffy &

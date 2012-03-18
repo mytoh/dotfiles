@@ -98,6 +98,7 @@ NeoBundle 'hobbestigrou/Vim-wmfs'
 NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'aharisu/Gauche-Complete'
 NeoBundle 'bronson/vim-trailing-whitespace'
+NeoBundle 'taka84u9/unite-git'
 
 " colorscheme {{{
 NeoBundle 'altercation/vim-colors-solarized'

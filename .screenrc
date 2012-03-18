@@ -7,35 +7,32 @@ defencoding utf-8
 defkanji utf-8
 vbell on
 bell_msg "bell: %n (%t) [%w:%s]"
-shelltitle '> |zsh'
+shell      $SHELL
+shelltitle '> |fish'
 startup_message off
 autodetach on
 defmonitor off
 defscrollback 10000
 altscreen on
 defflow off
+nethack on
 
 bind q quit
-bind k kill
+bind x kill
 bind -c REGION 0 remove
 bind -c REGION 1 only
 bind -c REGION 2 split
-#bind -c REGION 3 split -v
 bind -c REGION o focus
 bind -c REGION \^ resize
 bind ^x command -c REGION
-bindkey ^t focus
 
 attrcolor b ".I"
-termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
-termcapinfo jfbterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo xterm*|jfbterm*|screen*|rxvt*   'Co#256:pa#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm:'
 defbce on
 defhstatus "^Et"
 
-caption always "%{= wk}%?%F%{b kw}%? %t %?[%h] %?%{-} (screen #%n) "
+caption always "%{= wk}%?%F%{b kw}%? %t %?[%h] %?%{-}%{= dd} (screen #%n) "
 backtick 0 0 0 whoami
-hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= ck} %n %t %{-}%+Lw%-055=%{= gk} %`@%H %{= Mk} %l %{= ck} %Y/%m/%d %C:%s %A %="
+hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= ck} %n %t %{-}%+Lw%-055=%{= dg} %`@%H %{= dM} %l %{= dc} %Y/%m/%d %C:%s %A %="
 sorendition "= dd"
-
-
 

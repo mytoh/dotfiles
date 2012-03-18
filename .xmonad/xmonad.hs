@@ -315,6 +315,7 @@ myStartupHook = do
                 spawn bgmgr
                 spawn clipmgr
                 spawn volumemgr
+                setWMName "LG3D"
                 {- spawn uimPanel -}
 
 -- main config ---------------------------------------------------------------------
@@ -332,7 +333,7 @@ myConfig = do
         , layoutHook         = myLayoutHook
         , manageHook         = myManageHook
         , handleEventHook    = myEventHook
-        , logHook            = myLogHook d >> setWMName "LG3D"
+        , logHook            = myLogHook d
         , startupHook        = myStartupHook
     } `additionalKeysP` myKeys
 

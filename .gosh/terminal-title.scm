@@ -11,7 +11,7 @@
   (run-process '(tput cup 0 2) :wait #t)
   (display
     (make-colour 160
-                 (call-with-input-process "uname -o" port->string )))
+                 (car (sys-uname))))
   (newline)
   (run-process '(tput rc) :wait #t)
   )

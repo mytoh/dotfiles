@@ -696,9 +696,6 @@ nmap     <silent> [vimshell]c <Plug>(vimshell_create)
 nnoremap <silent> [vimshell]p :<c-u>VimShellPop<cr>
 "}}}
 
-" vimproc {{{
-let g:vimproc_dll_path = $HOME . '/.bundle/vimproc/autoload/proc.so'
-"}}}
 
 " gauref{{{
 let g:gauref_file = $HOME . '/.bundle/gauref.vim/doc/gauche-refj.txt'

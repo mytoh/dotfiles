@@ -37,7 +37,7 @@
   (syntax-rules ()
     ((_ e1 e2 ...)
      (let loop () e1 e2 ... 
-       (sys-nanosleep (* (expt 10 8) 3000)) ; sleep 5 minutes
+       (sys-sleep 300) ; sleep 5 minutes
        (loop)))))
 
 (define get-os-type

@@ -18,7 +18,7 @@ end
 set -x MANWIDTH 80
 set    GAUCHE_ARCH (gauche-config --arch)
 set -x GAUCHE_LOAD_PATH "$HOME/.gosh:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
-set -x PANNA_PATH "$HOME/.gosh/build"
+set -x PANNA_PATH "\$HOME/.gosh/panna"
 set -x DYLD_FALLBACK_LIBRARY_PATH "$HOME/local/lib:$HOME/local/homebrew/lib"
 set -x LD_LIBRARY_PATH /usr/local/linux-sun-jdk1.6.0/jre/lib/i386
 if test -d $HOME/local/stow
@@ -89,9 +89,16 @@ end
 complete -c panna -n '__fish_use_subcommand' -xa install --description "install package"
 complete -c panna -n '__fish_use_subcommand' -xa 'update up' --description "update repo"
 complete -c panna -n '__fish_use_subcommand' -xa build --description "build"
-
 complete -c panna -f -a "(__panna_completion_panna_path)" -d " package"
 #}}}
+
+
+# h function {{{
+complete -x -c h -a "(__fish_complete_cd)"
+complete -x -c h -a "(__fish_complete_directories $HOME)"
+complete -c h -s h -l help --description 'Display help and exit'
+# }}}
+
 #}}}
 
 # fish variables {{{
@@ -205,6 +212,10 @@ if which gosh 1>  /dev/null
       builtin cd $argv
     end
   end
+end
+
+function h -d 'cd to directory under home'
+  cd $HOME/$argv[1]
 end
 
 function ggr
