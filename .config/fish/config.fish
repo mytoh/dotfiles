@@ -5,23 +5,21 @@ ulimit -c 0
 set -Uge PATH #remove PATH
 set PATH /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/
 
-for p in /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin} 
-  if test -d $p
-    if not contains $p $PATH
-      set -x PATH $p $PATH
-    end
-  end
-end
-
-# gentoo prefix {{{
-set -x EPREFIX $HOME/local/gentoo
-for p in $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin
-	if test -d $p
-		if not contains $p $PATH
- 		set -x PATH $p $PATH
+function add-to-path
+	for p in $argv
+		if test -d $p
+			if not contains $p $PATH
+				set -x PATH $p $PATH
+			end
 		end
 	end
 end
+
+add-to-path /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin} 
+
+# gentoo prefix {{{
+set -x EPREFIX $HOME/local/gentoo
+add-to-path $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin
 # }}}
 
 set -x MANWIDTH 80
