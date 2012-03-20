@@ -8,6 +8,9 @@
     daemonize
     mkdir
     cd
+    run-command
+    run-command-sudo
+    colour-process
     whitespace->dash
     whitespace->underbar
     swget
@@ -84,6 +87,24 @@
 
 (define (whitespace->dash str)
   (regexp-replace-all #/\s+/ str "-"))
+
+(define (run-command command)
+  (run-process command :wait #t)
+  )
+
+(define (run-command-sudo command)
+  (run-process (append '(sudo) command) :wait #t)
+  )
+
+(define (colour-process command regexp-proc)
+  (with-input-from-process command
+    (lambda ()
+      (port-for-each
+        (lambda (in)
+          (print
+            (regexp-proc in)))
+        read-line))))
+
 
 
 (define (swget url)

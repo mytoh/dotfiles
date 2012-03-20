@@ -19,8 +19,8 @@
   (exit status "usage: ~a <command> <package-name>\n" *program-name*))
 
 (define (main args)
-  (let-args (cdr args) 
-    ((#f "h|help" (usage 0)) 
+  (let-args (cdr args)
+    ((#f "h|help" (usage 0))
      . rest)
     (load-build-file (cadr rest))
     (cd *srcdir*)

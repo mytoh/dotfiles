@@ -86,11 +86,12 @@ end
 complete -c gosh -f -a "(__gosh_completion_load_path)" -d "files in GAUCHE_LOAD_PATH"
 complete -c gosh -f -a "(__gosh_completion_current_directory)" -d "files in CWD"
 
+# panna {{{
 function __panna_completion_panna_path
   set -l path (echo $PANNA_PATH | tr ':' '\n')
   for i in $path
     for j in $i/*.scm
-      echo (basename -s .scm $j)
+      echo (basename $j .scm)
     end
   end
 end
@@ -99,6 +100,24 @@ complete -c panna -n '__fish_use_subcommand' -xa install --description "install 
 complete -c panna -n '__fish_use_subcommand' -xa 'update up' --description "update repo"
 complete -c panna -n '__fish_use_subcommand' -xa build --description "build"
 complete -c panna -f -a "(__panna_completion_panna_path)" -d " package"
+# }}}
+
+# talikko {{{
+function __talikko_completion_ports_tree
+  set -l path (echo $talikko_PATH | tr ':' '\n')
+  for i in $path
+    for j in $i/*.scm
+      echo (basename $j .scm)
+    end
+  end
+end
+
+complete -c talikko -n '__fish_use_subcommand' -xa install --description "install package"
+complete -c talikko -n '__fish_use_subcommand' -xa 'update up' --description "update port tree"
+complete -c talikko -n '__fish_use_subcommand' -xa search --description "search package"
+complete -c talikko -f -a "(__talikko_completion_ports_tree)" -d " package"
+#}}}
+
 #}}}
 
 
