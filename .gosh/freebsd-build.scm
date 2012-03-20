@@ -26,4 +26,6 @@
   (colour-process "sudo make cleandir")
   (colour-process "sudo make cleandir")
   (colour-process "sudo make -j3 buildworld")
-  (colour-process "sudo make -j3 buildkernel"))
+  (colour-process "sudo make -j3 buildkernel")
+  (colour-process "sudo make -j3 installkernel")
+  )

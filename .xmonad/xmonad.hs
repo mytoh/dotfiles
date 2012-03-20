@@ -311,7 +311,6 @@ myStartupHook = do
                 spawn myRightBar
                 spawn trayer
                 spawn mail
-                spawn compmgr
                 spawn bgmgr
                 spawn clipmgr
                 spawn volumemgr

@@ -6,7 +6,7 @@
 (use file.util)
 
 (define-constant *apps-directory*
-  (build-path (home-directory) ".gosh/build"))
+  (build-path (home-directory) ".gosh/panna"))
 
 
 (define (load-build-file app)

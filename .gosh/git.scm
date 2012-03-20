@@ -85,6 +85,7 @@
     (Cloudef        dotFiles   cloudef-dotFiles)
     (Cloudef        milkyhelper)
     (chjj           compton)
+    (samirahmed           fu)
     )
   )
 

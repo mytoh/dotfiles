@@ -1,13 +1,11 @@
 ulimit -c 0
 # environment {{{
 
-# gentoo prefix
-set -x EPREFIX $HOME/local/gentoo
 
 set -Uge PATH #remove PATH
 set PATH /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/
 
-for p in /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin}
+for p in /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin} 
   if test -d $p
     if not contains $p $PATH
       set -x PATH $p $PATH
@@ -15,10 +13,21 @@ for p in /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbi
   end
 end
 
+# gentoo prefix {{{
+set -x EPREFIX $HOME/local/gentoo
+for p in $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin
+	if test -d $p
+		if not contains $p $PATH
+			set -x PATH $p $PATH
+		end
+	end
+end
+# }}}
+
 set -x MANWIDTH 80
 set    GAUCHE_ARCH (gauche-config --arch)
 set -x GAUCHE_LOAD_PATH "$HOME/.gosh:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
-set -x PANNA_PATH "\$HOME/.gosh/panna"
+set -x PANNA_PATH "$HOME/.gosh/panna"
 set -x DYLD_FALLBACK_LIBRARY_PATH "$HOME/local/lib:$HOME/local/homebrew/lib"
 set -x LD_LIBRARY_PATH /usr/local/linux-sun-jdk1.6.0/jre/lib/i386
 if test -d $HOME/local/stow
