@@ -18,7 +18,7 @@ set -x EPREFIX $HOME/local/gentoo
 for p in $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin
 	if test -d $p
 		if not contains $p $PATH
-			set -x PATH $p $PATH
+ 		set -x PATH $p $PATH
 		end
 	end
 end
