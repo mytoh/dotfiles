@@ -5,18 +5,25 @@
 (use gauche.collection)
 (use file.util)
 (use util.match)
+(use util.list) ; slices
+(use text.csv)
 (require-extension (srfi 1))
 (use kirjasto) ; run-command, run-command-sudo, make-colour
 
 (define-constant package-directory "/var/db/pkg")
 (define-constant ports-directory   "/usr/ports")
 
+(define-constant colour-package  83)
+
+
+
+;; info {{{
+
 (define (package-list)
   (map simplify-path
     (directory-list package-directory :children? #t)))
 
-
-(define (find-packages name)
+(define (info-find-packages name)
 (let1 list-packages (lambda (n)
                       (filter
                         (lambda (s)
@@ -41,7 +48,7 @@
          (print
            (string-append
              " "
-           (make-colour 83 (car x))
+           (make-colour colour-package (car x))
            " "
            "["(make-colour 172 (cadr x)) "]"
            ))
@@ -49,7 +56,8 @@
          (display (caddr x))
          (newline)
            )
-  (find-packages name)))
+  (info-find-packages name)))
+;; }}}
 
 (define (update-ports-tree)
   (run-command-sudo '(portsnap fetch update))
@@ -61,23 +69,27 @@
   (run-command-sudo '(make install))
   )
 
+;; search {{{
+
 (define (search-package-by-name package)
-  (current-directory ports-directory)
+  ; (current-directory ports-directory)
   ; (run-command `(make search ,(string-append "name=" package)) )
-  (colour-process (string-append "make search name=" package)
-                  (^x (regexp-replace* x
-                             #/^Port:\s?(.*$)/   "Port:\t[38;5;99m\\1[0m"
-                             #/^Info:\s?(.*$)/   "Info:\t[38;5;39m\\1[0m"
-                             #/^-*/    "[38;5;233m\\0[0m"
-                             #/c\+\+\s/ "[38;5;44m\\0[0m"
-                             #/(cc)\s/  "[38;5;128m\\0[0m"
-                             #/\/(\w*\.cpp)/  "/[38;5;178m\\1[0m"
-                             #/\/(\w*\.c)/  "/[38;5;68m\\1[0m"
-                             #/(\w*\.o)/  "[38;5;148m\\1[0m"
-                             #/(\w*\.So)/  "[38;5;248m\\1[0m"
-                             #/(\w*\.so)/  "[38;5;248m\\1[0m"
-                             )))
+
+     (let1 found-list (filter (^x (string-scan (car x) package))
+                               (call-with-input-file
+                                 (build-path ports-directory "INDEX-10")
+                                 (cut port->list
+                                   (make-csv-reader #\|) <>)))
+       (for-each
+         (lambda (x) 
+           (print (string-append " " (make-colour colour-package (car x))))
+           (print (string-append "    " (make-colour 244  (cadddr x)))))
+         found-list)
+       )
+
   )
+
+;; }}}
 
 (define (usage status)
   (exit status "usage: ~a <command> <package-name>\n" *program-name*))
