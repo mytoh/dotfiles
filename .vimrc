@@ -86,7 +86,7 @@ scriptencoding=utf-8
 set termencoding=utf-8
 set enc=utf-8
 
-set helplang=ja,en
+set helplang=en,ja
 set wrapscan
 set autoread
 set hidden
@@ -101,6 +101,12 @@ set fileformats=unix,mac,dos
 set virtualedit=all
 set nomore
 set imdisable
+
+" columns {{{
+set textwidth=80
+set colorcolumn=+1
+
+" }}}
 
 "show replace end
 set cpoptions+=$
@@ -167,10 +173,11 @@ let nr = printf(nrformat, nr)
 return "'". char ."' ". nr
 endfunction "}}}
 
-" statusline for buftabs plugin
+" statusline
 set stl=     " clear statusline when reloaded
 
 set stl=%2*\    " left side
+
 set stl+=%=  " separator
 
 set stl+=%3*
@@ -208,7 +215,8 @@ set stl+=\
 
 " change StatusLine color when insert mode {{{
 " http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-color#color-theme-mod
-let g:hi_insert = 'highlight StatusLine ctermfg=blue ctermbg=yellow cterm=none guifg=darkblue guibg=darkyellow gui=none'
+let g:hi_insert = 'highlight StatusLine ctermfg=blue ctermbg=yellow 
+                   \cterm=none guifg=darkblue guibg=darkyellow gui=none'
 if has('sytax')
   augroup InsertHook
     autocmd!
@@ -247,6 +255,7 @@ hi StatusLine     ctermfg=gray ctermbg=235 cterm=none
 hi ActiveBuffer   ctermfg=blue ctermbg=233 cterm=none
 hi InactiveBuffer ctermfg=gray ctermbg=235 cterm=none
 hi Comment        ctermfg=244 ctermbg=234 cterm=bold
+hi ColorColumn ctermbg=234
 
 " }}}
 
@@ -301,6 +310,12 @@ cnoremap <c-f>      <right>
 cnoremap <c-b>      <left>
 " vim.g.hatena.ne.jp/tyru/20100116
 cnoremap <c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>
+
+ " copy and paste {{{
+vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR><CR>
+nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+imap <C-v> <Esc><C-v>a
+" }}}
 
 " window resize {{{
 function! s:resizeWindow()
@@ -426,6 +441,32 @@ if s:vimrc.isos('darwin')
   endfunction
 endif
 
+" Restore cursor position to where it was before
+augroup JumpCursorOnEdit
+   au!
+   autocmd BufReadPost *
+            \ if expand("<afile>:p:h") !=? $TEMP |
+            \ if line("'\"") > 1 && line("'\"") <= line("$") |
+            \ let JumpCursorOnEdit_foo = line("'\"") |
+            \ let b:doopenfold = 1 |
+            \ if (foldlevel(JumpCursorOnEdit_foo) > foldlevel(JumpCursorOnEdit_foo - 1)) |
+            \ let JumpCursorOnEdit_foo = JumpCursorOnEdit_foo - 1 |
+            \ let b:doopenfold = 2 |
+            \ endif |
+            \ exe JumpCursorOnEdit_foo |
+            \ endif |
+            \ endif
+" Need to postpone using "zv" until after reading the modelines.
+   autocmd BufWinEnter *
+            \ if exists("b:doopenfold") |
+            \ exe "normal zv" |
+            \ if(b:doopenfold > 1) |
+            \ exe "+".1 |
+            \ endif |
+            \ unlet b:doopenfold |
+            \ endif
+augroup END
+
 " }}}
 
 " plugins{{{
@@ -454,8 +495,9 @@ aug end
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_ignore_case = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
+" let g:neocomplcache_enable_camel_case_completion = 1
+" let g:neocomplcache_enable_underbar_completi on = 1
+let g:neocomplcache_enable_fuzzy_completion = 1
 let g:neocomplcache_enable_auto_select = 0
 let g:neocomplcache_dictionary_filetype_lists = {
       \ 'default'  : '',
@@ -534,8 +576,8 @@ let g:bufstat_debug = 1
 let g:bufstat_surround_buffers = '(:)'
 let g:bufstat_number_before_bufname = 0
 
-let g:bufstat_active_hl_group = "ActiveBuffer"
-let g:bufstat_inactive_hl_group = "InactiveBuffer"
+let g:bufstat_active_hl_group = "StatusLine"
+let g:bufstat_inactive_hl_group = "StatusLine"
 
 "}}}
 

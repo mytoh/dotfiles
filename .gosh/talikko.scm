@@ -7,15 +7,13 @@
 (use util.match)
 (use util.list) ; slices
 (use text.csv)
-(require-extension (srfi 1))
+(require-extension (srfi 1 13))
 (use kirjasto) ; run-command, run-command-sudo, make-colour
 
 (define-constant package-directory "/var/db/pkg")
 (define-constant ports-directory   "/usr/ports")
 
-(define-constant colour-package  83)
-
-
+(define-constant colour-package  65)
 
 ;; info {{{
 
@@ -59,30 +57,50 @@
   (info-find-packages name)))
 ;; }}}
 
+;; update {{{
 (define (update-ports-tree)
   (run-command-sudo '(portsnap fetch update))
   )
+;; }}}
 
+;; install {{{
 (define (install-package package)
   (current-directory (build-path ports-directory package))
   (print (string-append ">>> Installing " (make-colour 44 package)))
-  (run-command-sudo '(make install))
+  (run-command '(sudo make clean))
+  (colour-process "sudo make install"
+                  (^x
+                    (regexp-replace* x
+                                     #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
+                                     #/^===>/   "[38;5;39m>>>[0m"
+                                     #/\*\*\*.*$/    "[38;5;3m\\0[0m"
+                                     )))
   )
+;; }}}
 
 ;; search {{{
 
-(define (search-package-by-name package)
-  ; (current-directory ports-directory)
-  ; (run-command `(make search ,(string-append "name=" package)) )
+(define (search-find-package package)
+  (let ((index-list
+          (call-with-input-file
+            (build-path ports-directory
+                        (string-append
+                          "INDEX-"
+                          (car (string-split
+                                 (caddr (sys-uname))
+                                 "."))))
+            (cut port->list
+              (make-csv-reader #\|) <>))))
+    (filter (^x (or ;(string-scan (car x) package)
+                  (string-scan (cadr x) package)
+                  (string-scan (cadddr x) package)))
+            index-list)))
 
-     (let1 found-list (filter (^x (string-scan (car x) package))
-                               (call-with-input-file
-                                 (build-path ports-directory "INDEX-10")
-                                 (cut port->list
-                                   (make-csv-reader #\|) <>)))
+(define (search-package-by-name package)
+     (let1 found-list (search-find-package package)
        (for-each
-         (lambda (x) 
-           (print (string-append " " (make-colour colour-package (car x))))
+         (lambda (x)
+           (print (string-append " " (make-colour colour-package (string-drop (cadr x) 10))))
            (print (string-append "    " (make-colour 244  (cadddr x)))))
          found-list)
        )

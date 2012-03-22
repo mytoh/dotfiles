@@ -215,7 +215,8 @@ myWaitSP = myXPConfig { autoComplete   = Just 1000000 }
 -- manage hooks -------------------------------------------------------
 myManageHook = -- insertPosition End Newer <+> composeAll
        (composeAll . concat $
-        [ [isFullscreen                                        --> (doF W.focusDown <+> doFullFloat) ]
+        -- [ [isFullscreen                                        --> (doF W.focusDown <+> doFullFloat) ]
+        [ [isFullscreen                                        --> doFullFloat ]
         , [isDialog                                            --> doFloat]
         , [className  =? "feh"                                 --> viewShift "kolme"]
         , [className  =? c                                     --> doFloat | c <- myFloats ]
@@ -314,7 +315,6 @@ myStartupHook = do
                 spawn bgmgr
                 spawn clipmgr
                 spawn volumemgr
-                setWMName "LG3D"
                 {- spawn uimPanel -}
 
 -- main config ---------------------------------------------------------------------
@@ -332,7 +332,7 @@ myConfig = do
         , layoutHook         = myLayoutHook
         , manageHook         = myManageHook
         , handleEventHook    = myEventHook
-        , logHook            = myLogHook d
+        , logHook            = myLogHook d >> setWMName "LG3D"
         , startupHook        = myStartupHook
     } `additionalKeysP` myKeys
 

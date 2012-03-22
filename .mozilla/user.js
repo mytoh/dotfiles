@@ -51,6 +51,8 @@ user_pref("dom.event.contextmenu.enabled", false);
 user_pref("view_source.wrap_long_lines", true);
 user_pref("middlemouse.scrollbarPosition", true);
 user_pref("xpinstall.whitelist.required", false);
+// move scrollbar right(2) to left(3)
+user_pref("layout.scrollbar.side", 2)
 
 // apptabinitializer
 // user_pref("extensions.apptabinitializer.urllist", "http://jun.2chan.net/b/futaba.php?mode=cat&sort=1,http://zip.2chan.net/3/futaba.htm,http://boards.4chan.org/g/,http://117.74.59.102:9910/,http://cloudef.dy.fi/,http://blog.livedoor.jp/himasoku123/,http://www.asiancinematic.com/Japanese-Dramas/");
