@@ -80,7 +80,7 @@
         (lambda (d)
           (yotsuba-get (list bd d)))
         dirs)
-        (run-process '(notify-send "fetch finished")))
+        (run-process `(notify-send ,(string-append bd " fetch finished"))))
       (print "no directories")
       )))
 

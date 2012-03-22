@@ -21,33 +21,37 @@ while (1)
   set freemem = `vmstat -h |grep -n 2| awk '{print $6}'`
 
   #set battery = `sysctl -n hw.acpi.battery.life`
-  #if ( "$battery" <= 100  && "$battery" > 50 ) then 
+  #if ( "$battery" <= 100  && "$battery" > 50 ) then
    #set baticon = "$icons/sm4tik/bat_full_01.xbm"
-  #else if ( "$battery" >= 10 && "$battery" <= 50 ) then 
+  #else if ( "$battery" >= 10 && "$battery" <= 50 ) then
    #set baticon = "$icons/sm4tik/bat_low_01.xbm"
-  #else 
+  #else
    #set baticon = "$icons/sm4tik/bat_empty_01.xbm"
   #endif
 
-  # set batstate = `sysctl -n hw.acpi.battery.state` 
-  # set batcolour = "#ffffff"                        
-  # if ( "$batstate" == 1 ) then                     
-  #     set batcolour = "#ff4500"                    
-  # else if ( "$batstate" == 2 ) then                
-  #     set batcolour = "#00ff00"                    
-  # endif                                            
+  # set batstate = `sysctl -n hw.acpi.battery.state`
+  # set batcolour = "#ffffff"
+  # if ( "$batstate" == 1 ) then
+  #     set batcolour = "#ff4500"
+  # else if ( "$batstate" == 2 ) then
+  #     set batcolour = "#00ff00"
+  # endif
 
   set diskused = `df -ch | grep total | awk '{print $3}' | cut -c 1-3`
   set disktotal = `df -ch | grep total | awk '{print $2}'`
+  
+  set ip = `ifconfig em0 | grep inet\  | awk '{print $2}'`
 
   set iconcolour = "#808080"
   set strcolour = "#ffffff"
+  set openparen  = "^fg(#656565)("
+  set closeparen = "^fg(#656565))"
 
-  echo "  ^fg($iconcolour)^i($icons/sm4tik/cpu.xbm)^fg($strcolour) $cpu ^fg($iconcolour)^i($icons/mem.xpm)^fg($strcolour) $freemem  ^fg($iconcolour)^i($icons/sm4tik/net_up_02.xbm)^fg($strcolour) $tx ^fg($iconcolour)^i($icons/sm4tik/net_down_02.xbm)^fg($strcolour) $rx  ^fg($iconcolour)^i($icons/floppy.xpm)^fg($strcolour) ${diskused}/${disktotal}B  ^fg($iconcolour)^i($icons/sm4tik/clock.xbm)^fg($strcolour) $date "
+  echo "  ^fg($iconcolour)^i($icons/sm4tik/cpu.xbm)^fg($strcolour) $cpu ^fg($iconcolour)^i($icons/sm4tik/mem.xpm)^fg($strcolour) $freemem $openparen ^fg($iconcolour)^i($icons/sm4tik/net_up_02.xbm)^fg($strcolour) $tx ^fg($iconcolour)^i($icons/sm4tik/net_down_02.xbm)^fg($strcolour) $rx ^fg($iconcolour)@ $ip $closeparen ^fg($iconcolour)^i($icons/floppy.xpm)^fg($strcolour) ${diskused}/${disktotal}B  ^fg($iconcolour)^i($icons/sm4tik/clock.xbm)^fg($strcolour) $date "
 
 #  sleep $interval
 
-end 
+end
 
 ##dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'
 

@@ -460,6 +460,18 @@ if which gosh 1>&-
   function colour-numbers
   gosh colour-numbers.scm
   end
+  
+  function fi-en
+  gosh kääntää.scm fi en $argv[1]
+  end
+  
+  function en-fi
+  gosh kääntää.scm en fi $argv[1]
+  end
+  
+  function sanoa
+  gosh sanoa.scm $argv
+end
 
   function la
     command gosh ls.scm -d -a
@@ -1113,7 +1125,7 @@ switch (uname)
   case FreeBSD
   # PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages/Latest/"
   function pup
-    sudo portsnap fetch update
+    gosh talikko.scm update
   end
   function pcheck
     sudo portmaster -PBidav
