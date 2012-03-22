@@ -15,12 +15,13 @@ function add-to-path
 	end
 end
 
-add-to-path /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin} 
-
 # gentoo prefix {{{
 set -x EPREFIX $HOME/local/gentoo
 add-to-path $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin
 # }}}
+
+add-to-path /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin} 
+
 
 set -x MANWIDTH 80
 set    GAUCHE_ARCH (gauche-config --arch)
@@ -1200,6 +1201,7 @@ switch (uname)
 
   case Darwin
   set PYTHONPATH "~/local/homebrew/lib/python:$PYTHONPATH"
+  set -x TERM xterm-256color
   alias mp2 "/Applications/mplayer2.app/Contents/MacOS/mplayer-bin"
   alias bsearch "brew search "
   alias binst "brew install -v"
