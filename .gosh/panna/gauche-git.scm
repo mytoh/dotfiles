@@ -14,7 +14,8 @@
   (run-process '(git pull) :wait #t))
 
 (define (build)
-  (run-process `(./configure ,(string-append "--prefix=" *prefix-directory*) --enable-threads=none) :wait #t)
+  (run-process '(./DIST gen) :wait #t)
+  (run-process `(./configure ,(string-append "--prefix=" *prefix-directory*) --enable-threads=no) :wait #t)
   (run-process '(make clean) :wait #t)
   (run-process '(make) :wait #t)
   (run-process '(make install) :wait #t))

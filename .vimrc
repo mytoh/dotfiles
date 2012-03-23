@@ -73,7 +73,7 @@ set showfulltag
 
 " colors
 set t_Co=256
-colorscheme jellybeans
+colorscheme molokai
 " set background=dark
 
 

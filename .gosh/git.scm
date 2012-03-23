@@ -24,6 +24,7 @@
     "git://repo.or.cz/ncmpcpp.git"
     "git://git.informatik.uni-erlangen.de/re06huxa/herbstluftwm"
     "git://opensource.conformal.com/xxxterm.git"
+    "git://tron.homeunix.org/cvscvt"
     ; repo with other name
     ("git://git.sourceforge.jp/gitroot/ninix-aya/master.git"  "ninix-aya")
     ; minun github repo
@@ -86,6 +87,8 @@
     (Cloudef        milkyhelper)
     (chjj           compton)
     (samirahmed           fu)
+    (defunkt        hub)
+    (huyz           less.vim)
     )
   )
 

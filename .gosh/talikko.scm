@@ -100,7 +100,9 @@
      (let1 found-list (search-find-package package)
        (for-each
          (lambda (x)
-           (print (string-append " " (make-colour colour-package (string-drop (cadr x) 10))))
+           (print (string-append " " (make-colour colour-package 
+                                                  ; remove "/usr/ports/" from string
+                                                  (string-drop (cadr x) 11))))
            (print (string-append "    " (make-colour 244  (cadddr x)))))
          found-list)
        )

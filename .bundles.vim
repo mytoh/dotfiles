@@ -100,6 +100,9 @@ NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'aharisu/Gauche-Complete'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'taka84u9/unite-git'
+NeoBundle 'chrisbra/SudoEdit.vim'
+NeoBundle 'yuratomo/w3m.vim'
+NeoBundle 'xolox/vim-reload'
 
 " colorscheme {{{
 NeoBundle 'altercation/vim-colors-solarized'
@@ -126,6 +129,8 @@ NeoBundle 'submode'
 " colorschemes
 NeoBundle 'jellybeans.vim'
 NeoBundle 'xoria256.vim'
+NeoBundle 'molokai'
+NeoBundle 'robokai'
 " }}}
 " other git repo
 
