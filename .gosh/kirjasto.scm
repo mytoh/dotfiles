@@ -14,6 +14,7 @@
     whitespace->dash
     whitespace->underbar
     swget
+    port->incomplete-string
     )
 
   (use text.tr)
@@ -118,5 +119,14 @@
           (http-get host path
                     :sink (open-output-file file) :flusher (lambda (s h) (print file) #t)))))))
 
+(define (port->incomplete-string port)
+  (let ((strport (open-output-string))
+        (u8buf (make-u8vector 4096)))
+    (let loop ((len (read-block! u8buf port)))
+      (cond ((eof-object? len)
+            (get-output-string strport)
+            (else
+              (write-block u8buf strport 0 len)
+              (loop (read-block! u8buf port))))))))
 
 (provide "kirjasto")

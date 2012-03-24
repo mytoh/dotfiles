@@ -73,8 +73,8 @@ set showfulltag
 
 " colors
 set t_Co=256
+set background=dark
 colorscheme molokai
-" set background=dark
 
 
 " set mouse
@@ -252,7 +252,7 @@ endfunction
 hi clear cursorline
 hi cursorline     ctermbg=237  gui=underline guibg=black
 hi StatusLine     ctermfg=gray ctermbg=235 cterm=none
-hi ActiveBuffer   ctermfg=blue ctermbg=233 cterm=none
+hi ActiveBuffer   ctermfg=blue ctermbg=230 cterm=none
 hi InactiveBuffer ctermfg=gray ctermbg=235 cterm=none
 hi Comment        ctermfg=244 ctermbg=234 cterm=bold
 hi ColorColumn ctermbg=234
@@ -296,6 +296,8 @@ nnoremap : ;
 nnoremap Y y$
 nnoremap <space> i<space><esc>
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
+nnoremap <tab> :<c-u>bnext<cr>
+nnoremap <c-c> <esc>
 
 nmap [vim-keymap] <nop>
 nmap     <leader>v [vim-keymap]
@@ -310,12 +312,6 @@ cnoremap <c-f>      <right>
 cnoremap <c-b>      <left>
 " vim.g.hatena.ne.jp/tyru/20100116
 cnoremap <c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>
-
- " copy and paste {{{
-vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR><CR>
-nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
-imap <C-v> <Esc><C-v>a
-" }}}
 
 " window resize {{{
 function! s:resizeWindow()
@@ -535,6 +531,21 @@ endif
 
 " snippet directory
 let g:neocomplcache_snippets_dir='~/.vim/snippets'
+
+
+" force cache dict when insert
+autocmd InsertEnter * call s:neco_pre_cache()
+function! s:neco_pre_cache()
+  if exists('b:neco_pre_cache')
+    return
+  endif
+  let b:neco_pre_cache = 1
+  if bufname('%') =~ g:neocomplcache_lock_buffer_name_pattern
+    return
+  endif
+  :NeoComplCacheCachingBuffer
+  :NeoComplCacheCachingDictionary
+endfunction
 "}}}
 
 " vimfiler"{{{
@@ -738,7 +749,6 @@ nmap     <silent> [vimshell]c <Plug>(vimshell_create)
 nnoremap <silent> [vimshell]p :<c-u>VimShellPop<cr>
 "}}}
 
-
 " gauref{{{
 let g:gauref_file = $HOME . '/.bundle/gauref.vim/doc/gauche-refj.txt'
 "}}}
@@ -813,18 +823,20 @@ autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=233
 let is_gauche=1
 " }}}
 
-" slimv
-let g:slimv_keybindings = 3
-" }}}
-
 " nerdtree {{{
 let NERDSpaceDelims = 1
 " }}}
 
-" synastic {{{
+" syntastic {{{
 let g:syntastic_mode_map = { 'mode': 'active',
       \ 'active_filetypes': ['ruby', 'javascript'],
       \ 'passive_filetypes': ['puppet'] }
+" }}}
+
+" slimv {{{
+let g:slimv_keybindings = 3
+" }}}
+
 " }}}
 
 set secure

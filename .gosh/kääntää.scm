@@ -12,8 +12,9 @@
           (target-lang   (caddr args))
          (text      (cadddr args))
          (translated
-           (rxmatch->string #/\"[^"]*\"/
+           (rxmatch->string #/\"([^"]*)\"/
            (string-delete
+             (ces-convert
                  (values-ref (http-get "translate.google.com"
                                        (http-compose-query
                                          "/translate_a/t"
@@ -23,9 +24,9 @@
                                            (tl ,target-lang)
                                            (text ,text))))
                    2)
+                 "iso-8859-1" "utf-8")
                  #[\[\],])
-           )
-           ))
+           1)))
     (print
       (string-append
              text

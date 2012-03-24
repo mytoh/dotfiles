@@ -9,7 +9,7 @@ Xcursor.theme: whiteglass
 !urxvt.termName: xterm-256color
 urxvt.depth: 24
 urxvt.background: rgba:0900/0990/1000/cccc
-urxvt.foreground: #899ca1
+urxvt.foreground: #99a6bd
 urxvt.geometry: 100x40+100+100
 urxvt.scrollBar: false
 urxvt.buffered: true
@@ -42,7 +42,7 @@ urxvt.tabbed.tab-fg:    3
 urxvt.tabbed.tab-bg:    0
 
 #define FONT -nil-profont-medium-r-normal--10-100-72-72-c-50-iso8859-1, \
- -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
+              -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1, \
               -misc-fixed-medium-r-normal--10-90-75-75-c-50-*, \
               -misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0, \
               -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*, \
@@ -65,7 +65,7 @@ urxvt.boldFont: FONT_BOLD
 ! colors
 !----------------------------------
 !
-#include "/home/mytoh/.xcolours/fall"
+#include "/home/mytoh/.xcolours/raven-dark"
 !*color0: black
 !*color1: red3
 !*color2: green3

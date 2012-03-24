@@ -4,10 +4,11 @@
 ;; colour codes are hardcoded so edit this file
 
 (use gauche.parseopt)
-(use file.util)
 (use gauche.process) ;process-output->string
-(use util.list) ;take*
 (use gauche.sequence) ;remove
+(use gauche.charconv)
+(use util.list) ;take*
+(use file.util)
 (require-extension (srfi 1)) ;count
 
 (define-constant *extension-colours*
@@ -140,6 +141,9 @@
     ))
 
 
+(define (list-files directory)
+  (map (^s (ces-convert s (ces-guess-from-string s "*jp")))
+       (directory-list directory :children? #t :add-path? #t)))
 
 (define (ls-make-colour colour str)
   (if (<= colour (count car *colours*))
@@ -253,14 +257,14 @@
 
 (define (normal-files directory)
   (let ((dotfile (lambda (f) (rxmatch->string #/.*\/(\.)[^\/]*$/ f)))
-        (files (directory-list directory :children? #t :add-path? #t)))
+        (files (list-files directory)))
     (remove dotfile files)))
 
 (define (ls-perm-size-file directories allfiles dfirst)
   (let ((ls (lambda (dir)
               (let ((fullpath-list (cond ((and allfiles dfirst)
-                                          (directory-first  (directory-list dir :children? #t :add-path? #t)))
-                                         (allfiles (directory-list dir :children? #t :add-path? #t))
+                                          (directory-first  (list-files dir)))
+                                         (allfiles (list-files dir))
                                          (dfirst   (directory-first (normal-files dir)))
                                          (else (normal-files dir)))))
                 (for-each
@@ -296,7 +300,7 @@
                               (print-delim 2)
                               (print-filename f stat))))
                     (if allfiles
-                        (directory-list dir :children? #t :add-path? #t)
+                        (list-files dir)
                       (normal-files dir)))))))
     (if (null? directories)
         (ls (current-directory))
@@ -325,7 +329,7 @@
            (append dirs files)))
 
 (define (printcol directory allfiles dfirst)
-  (let ((currentlist (directory-list directory :children? #t :add-path? #t)))
+  (let ((currentlist (list-files directory)))
     (if (null? currentlist)
         #t
       (let* ((tabwidth 2)
@@ -384,4 +388,5 @@
             (cond (pf (ls-perm-file directories all))
                   (psf (ls-perm-size-file directories all dfirst))
                   (dfirst (ls-file directories all dfirst))
-                  (else (ls-file directories all dfirst)))))
+                  (else (ls-file directories all dfirst))))
+  0)

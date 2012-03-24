@@ -1,18 +1,19 @@
-ulimit -c 0
+
 # environment {{{
 
+ulimit -c 0
 
 set -Uge PATH #remove PATH
 set PATH /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/
 
 function add-to-path
-	for p in $argv
-		if test -d $p
-			if not contains $p $PATH
-				set -x PATH $p $PATH
-			end
-		end
-	end
+  for p in $argv
+    if test -d $p
+      if not contains $p $PATH
+        set -x PATH $p $PATH
+      end
+    end
+  end
 end
 
 # gentoo prefix {{{
@@ -33,6 +34,7 @@ if test -d $HOME/local/stow
   set -x STOW $HOME/local/stow
 end
 set -x LANG fi_FI.UTF-8
+set -x LC_ALL fi_FI.UTF-8
 
 # pager
 set -x LESS "-i  -w -z-4 -g -M -X -F -R -P%t?f%f :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-..."
@@ -58,15 +60,18 @@ set -x RLWRAP_HOME ~/.rlwrap
 
 #}}}
 
-
 # complete {{{
-#if test -d ~/.config/fish/completions
-#  for p in ~/.config/fish/completions/*
-#    if test -d $p
-#      set fish_complete_path $p/completions $fish_complete_path
-#    end
-#  end
-#end
+function add-to-comp-path
+set -l git-directory ~/local/git
+  for p in $argv
+    if test -d $git-directory/$p
+      if not contains $git-directory/$p $fish_complete_path
+        set -x fish_complete_path $git-directory/$p $fish_complete_path
+      end
+    end
+  end
+end
+add-to-comp-path fish-nuggets/completions fish_completions/ fishystuff/completions
 
 # gauche {{{
 function __gosh_completion_load_path
@@ -155,10 +160,11 @@ set fish_pager_color_prefix      magenta
 set fish_pager_color_progress    green
 #}}}
 #}}}
+
+# prompt {{{
 set open_paren "[30m([0m"
 set close_paren "[30m)[0m"
 
-# prompt {{{
 #  arch wiki git status prompt {{{
 set fish_git_dirty_colour red
 function parse_git_dirty
@@ -170,13 +176,13 @@ end
 
 function parse_git_branch
   # git branch outputs lines, the current branch is prefixed with a *
-  set -l branch (git branch --color ^&- | awk '/*/ {print $2}')
+  set -l branch (git branch --color | awk '{print $2}')
   echo $branch (parse_git_dirty)
 end
 
 function git_prompt
   if test -z (git branch --quiet 2>| awk '/fatal:/ {print "no git"}')
-    printf '%s%s%s%s%s' "[30m─" $open_paren (parse_git_branch) (set_color $fish_color_normal) $close_paren
+    printf '%s%s' (parse_git_branch) (set_color $fish_color_normal) 
   else
     echo ""
   end
@@ -196,7 +202,16 @@ function prompt_pwd_mod -d 'prompt_pwd modification for /usr/home/${USER} on Fre
 end
 
 function current-directory
-  printf '%s%s%s%s%s' $open_paren (set_color $fish_color_cwd) (prompt_pwd_mod) (set_color $fish_color_normal) $close_paren
+  switch "$PWD"
+  case "/usr$HOME"
+    printf '%s%s%s' (set_color $fish_color_cwd) (echo '~') (set_color $fish_color_normal)
+  case "/usr$HOME/*"
+    printf '%s%s%s' (set_color $fish_color_cwd) (echo $PWD|sed -e "s|^/usr$HOME|~|") (set_color $fish_color_normal)
+  case '*'
+    printf '%s%s%s' (set_color $fish_color_cwd) (echo $PWD) (set_color $fish_color_normal)
+  end
+
+  #printf '%s%s%s' (set_color $fish_color_cwd) (prompt_pwd_mod) (set_color $fish_color_normal)
 end
 
 function prompt-up-right
@@ -207,9 +222,26 @@ function prompt-down-right
   printf '%s%s' "[30m└┈╸[0m"
 end
 
-function fish_prompt -d "fish prompt function"
-  printf '%s%s%s%s\n%s ' (prompt-up-right) (current-directory) (set_color normal) (git_prompt) (prompt-down-right)
+function prompt-host
+  printf '%s%s%s' "[38;5;118m" (hostname -s) (set_color $fish_color_normal)
+end
 
+function prompt-face
+if test $status = 1
+  printf '%s%s%s' "[38;5;196m" "(・X・)" (set_color $fish_color_normal)
+else
+  printf '%s%s%s' "[38;5;172m" "X / _ / X" (set_color $fish_color_normal)
+end
+end
+
+function prompt-arrow
+printf '%s%s%s' "[38;5;235m>"  "[38;5;67m>"   "[38;5;117m>"
+end
+
+
+function fish_prompt -d "fish prompt function"
+  #printf '%s%s%s%s\n%s ' (prompt-up-right) (current-directory) (set_color normal) (git_prompt) (prompt-down-right)
+  printf '%s//%s :: %s:%s\n%s ' (prompt-face) (prompt-host) (current-directory) (git_prompt)  (prompt-arrow)
 end
 
 #}}}
@@ -242,7 +274,7 @@ if which gosh 1>  /dev/null
 end
 
 function h -d 'cd to directory under home'
-  cd $HOME/$argv[1]
+  builtin cd $HOME/$argv[1]
 end
 
 function ggr
@@ -874,15 +906,16 @@ sb-harbor779
 end
 
 # エフエム熱海湯河原     (静岡県熱海市)
-function sb-ciao
+function sb-ciao -d "エフエム熱海湯河原     (静岡県熱海市)"
 mplayer http://simul.freebit.net:8310/ciao
 end
+
 function sb-atami
 sb-ciao
 end
 
 # FMおかざき             (愛知県岡崎市)
-function sb-okazaki
+function sb-okazaki -d "FMおかざき             (愛知県岡崎市)"
 mplayer -playlist http://www.simulradio.jp/asx/FmOkazaki.asx
 end
 # MID-FM                 (愛知県名古屋市)
@@ -1239,8 +1272,12 @@ end
 #end
 #  }}}
 
+# }}}
+
 # memo
 # redirect
 #  func 2> /dev/null
 #  func ^/dev/null
 #  func ^&-
+
+# vim: foldmethod=marker

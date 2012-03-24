@@ -1,6 +1,8 @@
 #!/usr/bin/env gosh
 
 (use gauche.process) ; run-process
+(use gauche.parseopt)
+(use util.match)
 (use file.util) ; directory-list, current-directory
 (use kirjasto) #; 'make-colour
 
@@ -89,9 +91,12 @@
     (samirahmed           fu)
     (defunkt        hub)
     (huyz           less.vim)
+    (ivmai          bdwgc)
+    (ivmai          libatomic_ops)
     )
   )
 
+;; update git repository
 (define (update-gitdir)
   (let ((dirs (list (directory-list (expand-path *gitdir*) :children? #t :add-path? #t))))
     (let loop ((dirs (car dirs)))
@@ -107,6 +112,7 @@
           (newline)
           (loop (cdr dirs)))))))
 
+;; clone git repository
 (define (clone-gitdir)
   (let ((clone (lambda (url dirname) (run-process `(git clone ,url ,dirname) :wait #t))))
     (for-each
@@ -117,6 +123,8 @@
       (repo-url-directory-list))
     #t))
 
+
+;; clean git repository with "git gc"
 (define (clean-gitdir)
   (let ((dirs (list (directory-list (expand-path *gitdir*) :children? #t :add-path? #t))))
     (let loop ((dirs (car dirs)))
@@ -154,16 +162,36 @@
         ((symbol? e) (list e #`"git@github.com:mytoh/,|e|"))))
     *repos* ))
 
+(define (usage status)
+  (exit status "usage: ~a <command> <package-name>\n" *program-name*))
+
+
 (define (main args)
-  (let ((previous-directory (current-directory)))
-    (current-directory *gitdir*)
-    (print (string-append (make-colour 3 "cloning ") "repositories"))
-    (clone-gitdir)
-    (newline)
-    (print (string-append (make-colour 8 "updating ") "repositories"))
-    (update-gitdir)
-    (clean-gitdir)
-    (current-directory previous-directory))
-  )
+    (let-args (cdr args)
+      ((#f "h|help" (usage 0))
+       . rest)
+      (let ((previous-directory (current-directory)))
+        (current-directory *gitdir*)
+        (match (car rest)
+          ;; commands
+          ((or "update" "up")
+           (begin
+             (print (string-append (make-colour 8 "updating ") "repositories"))
+             (update-gitdir)))
+          ("clean"
+           (clean-gitdir))
+          ("clone"
+           (begin
+             (print (string-append (make-colour 3 "cloning ") "repositories"))
+             (clone-gitdir)))
+          (_ (usage 1)))
+        (current-directory previous-directory)
+        ))
+  0)
 
-
+    ; (print (string-append (make-colour 3 "cloning ") "repositories"))
+    ; (clone-gitdir)
+    ; (newline)
+    ; (print (string-append (make-colour 8 "updating ") "repositories"))
+    ; (update-gitdir)
+    ; (clean-gitdir)
