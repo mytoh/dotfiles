@@ -55,4 +55,4 @@ user_pref("xpinstall.whitelist.required", false);
 user_pref("layout.scrollbar.side", 2)
 
 // apptabinitializer
-// user_pref("extensions.apptabinitializer.urllist", "http://jun.2chan.net/b/futaba.php?mode=cat&sort=1,http://zip.2chan.net/3/futaba.htm,http://boards.4chan.org/g/,http://117.74.59.102:9910/,http://cloudef.dy.fi/,http://blog.livedoor.jp/himasoku123/,http://www.asiancinematic.com/Japanese-Dramas/");
+// user_pref("extensions.apptabinitializer.urilist", "http://jun.2chan.net/b/futaba.php?mode=cat&sort=1,http://zip.2chan.net/3/futaba.htm,http://boards.4chan.org/g/,http://117.74.59.102:9910/,http://cloudef.eu/armpit,http://blog.livedoor.jp/himasoku123/,http://www.asiancinematic.com/Japanese-Dramas/");

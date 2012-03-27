@@ -5,15 +5,14 @@
 (use util.match)
 (use file.util)
 
-(define-constant *apps-directory*
-  (build-path (home-directory) ".gosh/panna"))
+(define-constant kaava-directory
+  (build-path (sys-getenv "PANNA_PATH") "kaava"))
 
 
 (define (load-build-file app)
   (load (find-file-in-paths (string-append app ".scm")
-                            :paths `(,*apps-directory*)
-                            :pred file-is-readable?))
-  )
+                            :paths `(,kaava-directory)
+                            :pred file-is-readable?)))
 
 (define (usage status)
   (exit status "usage: ~a <command> <package-name>\n" *program-name*))
@@ -23,7 +22,7 @@
     ((#f "h|help" (usage 0))
      . rest)
     (load-build-file (cadr rest))
-    (cd *srcdir*)
+    (cd (srcdir))
     (match (car rest)
       ((or "update" "up")
        (update))

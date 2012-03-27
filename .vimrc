@@ -5,9 +5,9 @@ source $HOME/.bundles.vim
 
 " singleton.vim {{{
 if has('clientserver')
-  " if exists("g:singleton#opener")
+   if exists('g:singleton#disable')
   call singleton#enable()
-"   endif
+   endif
 endif
 "}}}
 
@@ -16,21 +16,25 @@ endif
 filetype plugin indent on " required
 syntax enable
 
-language messages C
-language time C
-
 " fix problem when vim on fish shell
 if $SHELL =~ '/fish$'
   set shell=bash
 endif
 
-set nobackup
+" backup, swap, undo {{{
 set history=10000
 if has('persistent_undo')
   set undodir=~/.vim/undo
   set undofile
 endif
+set nobackup
+set nowritebackup
+set noswapfile
 set directory^=~/.vim/swap
+" }}}
+
+let g:is_posix = 1             " vim's default is archaic bourne shell, bring it up to the 90s
+
 set clipboard=autoselect
 set scrolloff=1
 set title
@@ -47,23 +51,44 @@ set display+=lastline
 " key sequence timeout length (default: 1000(ms))
 set timeoutlen=10000
 
-" indent
+" indent {{{
+
 set autoindent
 set smartindent
 set shiftround
+
+set tabstop=2                  " tab size eql 2 spaces
+set softtabstop=2
+set shiftwidth=2               " default shift width for indents
+set expandtab                  " replace tabs with ${tabstop} spaces
 set smarttab
+" }}}
 
-" tab
-set expandtab
-set tabstop=2
-set softtabstop&
-set shiftwidth=2
 
-" search
+set backspace=indent
+set backspace+=eol
+set backspace+=start
+
+" search {{{
 set ignorecase
 set smartcase
 set hlsearch
 set incsearch
+set wrapscan
+" }}}
+
+" fold {{{
+set foldenable                " Turn on folding
+set foldmethod=marker         " Fold on the marker
+set foldlevel=100             " Don't autofold anything (but I can still fold manually)
+
+set foldopen=block,hor,tag    " what movements open folds
+set foldopen+=percent,mark
+set foldopen+=quickfix
+" }}}
+
+set splitbelow
+set splitright
 
 set list
 set listchars=tab:^\ ,trail:_
@@ -74,8 +99,7 @@ set showfulltag
 " colors
 set t_Co=256
 set background=dark
-colorscheme molokai
-
+colorscheme neverland
 
 " set mouse
 set mouse=a
@@ -85,18 +109,16 @@ set ttymouse=xterm2
 scriptencoding=utf-8
 set termencoding=utf-8
 set enc=utf-8
+set fenc=utf-8
+" set fencs=iso-2022-jp,utf-8,ucs-21e,euc-jp
 
 set helplang=en,ja
-set wrapscan
 set autoread
 set hidden
 set wildmenu
 set wildmode=list:full
 set wildignore+=*/.neocon/*
 set shortmess=atIToO
-set backspace=indent,eol,start
-set splitright
-set splitbelow
 set fileformats=unix,mac,dos
 set virtualedit=all
 set nomore
@@ -104,6 +126,7 @@ set imdisable
 
 " columns {{{
 set textwidth=80
+" vertical line on column 81
 set colorcolumn=+1
 
 " }}}
@@ -140,43 +163,43 @@ hi User5 ctermfg=38   ctermbg=239
 hi User6 ctermfg=24   ctermbg=243
 hi User7 ctermfg=17   ctermbg=247
 hi User8 ctermfg=95   ctermbg=251
-hi User9 ctermfg=233   ctermbg=255 
+hi User9 ctermfg=233   ctermbg=255
 
 function! GetCharCode() " {{{ from powerline
-" Get the output of :ascii
-redir => ascii
-silent! ascii
-redir END
+  " Get the output of :ascii
+  redir => ascii
+  silent! ascii
+  redir END
 
-if match(ascii, 'NUL') != -1
-return 'NUL'
-endif
+  if match(ascii, 'NUL') != -1
+    return 'NUL'
+  endif
 
-" Zero pad hex values
-let nrformat = '0x%02x'
+  " Zero pad hex values
+  let nrformat = '0x%02x'
 
-let encoding = (&fenc == '' ? &enc : &fenc)
+  let encoding = (&fenc == '' ? &enc : &fenc)
 
-if encoding == 'utf-8'
-" Zero pad with 4 zeroes in unicode files
-let nrformat = '0x%04x'
-endif
+  if encoding == 'utf-8'
+    " Zero pad with 4 zeroes in unicode files
+    let nrformat = '0x%04x'
+  endif
 
-" Get the character and the numeric value from the return value of :ascii
-" This matches the two first pieces of the return value, e.g.
-" "<F> 70" => char: 'F', nr: '70'
-let [str, char, nr; rest] = matchlist(ascii, '\v\<(.{-1,})\>\s*([0-9]+)')
+  " Get the character and the numeric value from the return value of :ascii
+  " This matches the two first pieces of the return value, e.g.
+  " "<F> 70" => char: 'F', nr: '70'
+  let [str, char, nr; rest] = matchlist(ascii, '\v\<(.{-1,})\>\s*([0-9]+)')
 
-" Format the numeric value
-let nr = printf(nrformat, nr)
+  " Format the numeric value
+  let nr = printf(nrformat, nr)
 
-return "'". char ."' ". nr
+  return "'". char ."' ". nr
 endfunction "}}}
 
 " statusline
 set stl=     " clear statusline when reloaded
 
-set stl=%2*\    " left side
+set stl=%2*\   " left side
 
 set stl+=%=  " separator
 
@@ -186,7 +209,9 @@ set stl+=%<%{fnamemodify(getcwd(),':~')}   "get filepath
 set stl+=\ 
 
 set stl+=%4*
+if exists('*fugitive#statusline')
 set stl+=%{fugitive#statusline()}  "git repo info
+endif
 
 set stl+=%5*
 set stl+=\ 
@@ -215,7 +240,7 @@ set stl+=\
 
 " change StatusLine color when insert mode {{{
 " http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-color#color-theme-mod
-let g:hi_insert = 'highlight StatusLine ctermfg=blue ctermbg=yellow 
+let g:hi_insert = 'highlight StatusLine ctermfg=blue ctermbg=yellow
                    \cterm=none guifg=darkblue guibg=darkyellow gui=none'
 if has('sytax')
   augroup InsertHook
@@ -245,7 +270,7 @@ function! s:GetHighlight(hi)
   return hl
 endfunction
 "}}}
-  
+
 "}}}
 
 " highlights {{{
@@ -273,45 +298,57 @@ if s:vimrc.isos('haiku')
   set rtp^=~/.vim/
 endif
 
-" remove trailing spaces
+" remove trailing spaces {{{
 function! s:vimrc.trimspace() dict
   %s/\s*$//
   ''
 endfunction
-command! -complete=command TrimSpace :call s:vimrc.trimspace()
+" }}}
 
+command! -complete=command TrimSpace :call s:vimrc.trimspace()
 command! -nargs=1 Silent
       \ | execute ':silen !'.<q-args>
       \ | execute ':redraw!'
+command! -complete=command EditUtf8 :e ++enc=utf-8
 
 "}}}
 
-" keymaps{{{
-let mapleader = ","
+" general keymaps{{{
+let maplocalleader = ","
 nmap     n nzz
 nmap     N Nzz
 
 nnoremap ; :
 nnoremap : ;
+nnoremap j gj
+nnoremap k gk
 nnoremap Y y$
 nnoremap <space> i<space><esc>
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <tab> :<c-u>bnext<cr>
 nnoremap <c-c> <esc>
+nnoremap / /\v
 
 nmap [vim-keymap] <nop>
-nmap     <leader>v [vim-keymap]
+nmap     <localleader>v [vim-keymap]
 nnoremap <silent> [vim-keymap]w :<c-u>up<cr>
 nnoremap <silent> [vim-keymap]q :<c-u>qa<cr>
 nnoremap <silent> [vim-keymap]bd :<c-u>bp<bar>sp<bar>bn<bar>bd<cr>
 
 
-nnoremap <leader>ff :<c-u>VimFilerTab<cr>
 cnoremap <c-a>      <home>
 cnoremap <c-f>      <right>
 cnoremap <c-b>      <left>
 " vim.g.hatena.ne.jp/tyru/20100116
 cnoremap <c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>
+
+" clipboard copy and paste {{{
+ " Linux環境でのクリップボードコピー
+if has('unix')
+  vnoremap y "+y
+  imap <C-I> <ESC>"*pa
+endif
+"}}}
 
 " window resize {{{
 function! s:resizeWindow()
@@ -335,7 +372,7 @@ nmap <C-w>r	:<C-u>call <SID>resizeWindow()<CR>mws
 
 " better C-a C-e  {{{
 " http://vim.g.hatena.ne.jp/tyru/20100305
-" goto head, or tail 
+" goto head, or tail
 inoremap <expr> <C-a> <SID>goto_head()
 func! s:goto_head() "{{{
   let col = col('.')
@@ -356,7 +393,7 @@ func! s:goto_tail() "{{{
   let col = col('.')
   let lnum = line('.')
   let tilde_col = match(getline(lnum), '\S')+1
-  
+
   if col < tilde_col
     "go to ^ pos
     return "\<C-o>"
@@ -383,41 +420,42 @@ function! s:vimrc.gauche() dict
       setlocal equalprg=scmindent.scm
     endif
   endif
-  call rainbow_parenthsis#LoadSquare ()
-  call rainbow_parenthsis#LoadRound ()
-  call rainbow_parenthsis#Activate ()
+  if isdirectory(expand('$HOME/.bundle/Rainbow_Parenthsis_Bundle'))
+  call rainbow_parenthsis#LoadSquare()
+  call rainbow_parenthsis#LoadRound()
+  call rainbow_parenthsis#Activate()
+  endif
 endfunction
 
 aug myautocommands
   au!
-  au bufread,bufnewfile .tmux.conf               setl filetype=tmux
-  au bufread,bufnewfile *.changelog              setl filetype=changelog
-  au bufread,bufnewfile *.twmrc                  setl filetype=conf
-  au bufread,bufnewfile .vimshrc,.vim-bundles    setl filetype=vim
-  au bufread,bufnewfile ~/.xcolours/*            setl filetype=xdefaults
-  au bufread,bufnewfile ~/.xcolours/*            ColorHighlight
-  au bufread,bufnewfile *.scss                   setl filetype=scheme
-  au bufread,bufnewfile *.stub                   setl filetype=scheme
-  au bufread,bufnewfile .gaucherc                setl filetype=scheme
-  au bufread,bufnewfile .mkshrc                  setl filetype=sh
-  au bufread,bufnewfile *stumpwmrc*              setl filetype=lisp
-  au bufread,bufnewfile *sawfish/rc              setl filetype=lisp
-  au bufread,bufnewfile *.fish                   setl filetype=fish
-  au bufread,bufnewfile loader.conf.local        setl filetype=conf
-  au bufwritepost       .vimrc                   source ~/.vimrc
-  au bufwritepost       .zshrc                   Silent !zcompile ~/.zshrc
-  au bufwritepost       .conkyrc                 Silent !killall -SIGUSR1  conky
-  au bufwritepost       xmonad.hs                Silent !xmonad --recompile
-  au filetype           xdefaults                call s:vimrc.xrdb()
-  au filetype           scheme                   call s:vimrc.gauche()
-  au filetype           help                     nnoremap q :<c-u>q<cr>
-  au filetype           nerdtree                 let g:loaded_golden_ratio=1
-  au filetype           css,less                      ColorHighlight
-  au filetype           haskell                      ColorHighlight
-  au filetype           fish                      setl equalprg=fish_indent
+  au bufread,bufnewfile .tmux.conf                setl filetype=tmux
+  au bufread,bufnewfile *.changelog               setl filetype=changelog
+  au bufread,bufnewfile *.twmrc                   setl filetype=conf
+  au bufread,bufnewfile .vimshrc,.vim-bundles     setl filetype=vim
+  au bufread,bufnewfile ~/.xcolours/*             setl filetype=xdefaults
+  au bufread,bufnewfile ~/.xcolours/*             ColorHighlight
+  au bufread,bufnewfile {*.scss,*.stub,.gaucherc} setl filetype=scheme
+  au bufread,bufnewfile .mkshrc                   setl filetype=sh
+  au bufread,bufnewfile {*stumpwmrc*,*sawfish/rc} setl filetype=lisp
+  au bufread,bufnewfile *.fish                    setl filetype=fish
+  au bufread,bufnewfile loader.conf.local         setl filetype=conf
+  au bufread,bufnewfile {*.md,*.mkd,*.markdown}   set filetype=markdown
+  au bufwritepost       .vimrc                    source ~/.vimrc
+  au bufwritepost       .zshrc                    Silent !zcompile ~/.zshrc
+  au bufwritepost       .conkyrc                  Silent !killall -SIGUSR1  conky
+  au bufwritepost       xmonad.hs                 Silent !xmonad --recompile
+  au bufwritepost       scheme                    TrimSpace
+  au filetype           xdefaults                 call s:vimrc.xrdb()
+  au filetype           scheme                    call s:vimrc.gauche()
+  au filetype           help                      nnoremap q :<c-u>q<cr>
+  au filetype           nerdtree                  let g:loaded_golden_ratio=1
+  au filetype           css,less                       ColorHighlight
+  au filetype           haskell                       ColorHighlight
+  au filetype           fish                       setl equalprg=fish_indent
   " for chalice buffers
-  au filetype           2ch*                     setl fencs=cp932,iso-2022-jp-3,euc-jp
-  au filetype           2ch*                     let g:loaded_golden_ratio=1
+  au filetype           2ch*                      setl fencs=cp932,iso-2022-jp-3,euc-jp
+  au filetype           2ch*                      let g:loaded_golden_ratio=1
 aug end
 
 aug cch
@@ -465,7 +503,7 @@ augroup END
 
 " }}}
 
-" plugins{{{
+" plugins {{{
 "
 " Chalice {{{
 "set runtimepath+=$HOME/.vim/chalice
@@ -559,12 +597,15 @@ let g:vimfiler_execute_file_list = {
       \ 'cbz' : 'comix',
       \ 'cbr' : 'comix',
       \}
+if exists('g:vimfiler#set_extensions')
 call vimfiler#set_extensions(
       \ 'archive', 'xz,txz,cbz,cbr,lzh,zip,gz,bz2,cab,rar,7z,tgz,tar'
       \)
+endif
 
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
+nnoremap <localleader>ff :<c-u>VimFilerTab<cr>
 " }}}
 
 " {{{ fholgado's minibufexpl
@@ -615,15 +656,16 @@ let g:unite_cursor_line_highlight = 'TabLineSel'
 
 " keymaps
 nnoremap [unite] <Nop>
-nmap     <Leader>u [unite]
+nmap     <localleader>u [unite]
 nnoremap <silent> [unite]f  :<C-u>UniteWithBufferDir -buffer-name=files -prompt=%\  buffer file<CR>
 nnoremap <silent> [unite]c  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file<CR>
 nnoremap <silent> [unite]b :<c-u>Unite bookmark<cr>
 nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
 nnoremap <silent> [unite]l :<c-u>Unite launcher<cr>
+nnoremap <silent> [unite]p :<c-u>Unite get_function<cr>
 
 autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings()"{{{
+function! s:unite_my_settings() "{{{
   " Overwrite settings.
   imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
   " <C-l>: manual neocomplcache completion.
@@ -631,7 +673,6 @@ function! s:unite_my_settings()"{{{
   "call unite#custom_default_action('file', 'tabopen')
   "call unite#custom_default_action('bookmark', 'tabopen')
 endfunction "}}}
-"}}}
 
 " unite-launch {{{
     let g:unite_launch_apps = [
@@ -640,6 +681,7 @@ endfunction "}}}
     \ 'scss2css',
 	  \ 'git pull',
 	  \ 'git push' ]
+"}}}
 "}}}
 
 " eskk{{{
@@ -743,7 +785,7 @@ aug vimshell
 aug end
 
 nnoremap [vimshell] <nop>
-nmap     <leader>s [vimshell]
+nmap     <localleader>s [vimshell]
 nmap     <silent> [vimshell]s <Plug>(vimshell_split_create)
 nmap     <silent> [vimshell]c <Plug>(vimshell_create)
 nnoremap <silent> [vimshell]p :<c-u>VimShellPop<cr>
@@ -767,9 +809,10 @@ let g:openbrowser_open_rules = { 'w3m': '{browser} {shellescape(uri)} ', }
 " }}}
 
 " ambicmd {{{
+if isdirectory(expand('$HOME/.bundle/vim-ambicmd'))
 cnoremap <expr> <Space> ambicmd#expand("\<Space>")
 cnoremap <expr> <CR>    ambicmd#expand("\<CR>")
-
+endif
 " }}}
 
 " mpc.vim {{{
@@ -835,6 +878,11 @@ let g:syntastic_mode_map = { 'mode': 'active',
 
 " slimv {{{
 let g:slimv_keybindings = 3
+" }}}
+
+" poslist {{{
+map <C-o> <Plug>(poslist_prev)
+map <C-i> <Plug>(poslist_next)
 " }}}
 
 " }}}

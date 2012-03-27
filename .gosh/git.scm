@@ -27,6 +27,7 @@
     "git://git.informatik.uni-erlangen.de/re06huxa/herbstluftwm"
     "git://opensource.conformal.com/xxxterm.git"
     "git://tron.homeunix.org/cvscvt"
+    "git://liferea.git.sourceforge.net/gitroot/liferea/liferea"
     ; repo with other name
     ("git://git.sourceforge.jp/gitroot/ninix-aya/master.git"  "ninix-aya")
     ; minun github repo
@@ -60,8 +61,9 @@
     (GGLucas       vimperator-buftabs)
     (vimpr         vimperator-plugins)
     (caisui        vimperator)
+    (clvv           fasd)
     (rupa           z)
-    (clvv           f)
+    (rupa           v)
     (sjl            z-fish)
     (zsh-users     zsh-completions)
     (zsh-users     zsh-syntax-highlighting)
@@ -93,6 +95,7 @@
     (huyz           less.vim)
     (ivmai          bdwgc)
     (ivmai          libatomic_ops)
+    (gmarik         vimfiles gmarik-vimfiles)
     )
   )
 

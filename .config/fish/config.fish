@@ -6,7 +6,7 @@ ulimit -c 0
 set -Uge PATH #remove PATH
 set PATH /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/
 
-function add-to-path
+function push-to-path
   for p in $argv
     if test -d $p
       if not contains $p $PATH
@@ -18,23 +18,21 @@ end
 
 # gentoo prefix {{{
 set -x EPREFIX $HOME/local/gentoo
-add-to-path $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin
+push-to-path $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin
 # }}}
 
-add-to-path /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin} 
+push-to-path /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin}
 
 
 set -x MANWIDTH 80
-set    GAUCHE_ARCH (gauche-config --arch)
-set -x GAUCHE_LOAD_PATH "$HOME/.gosh:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
-set -x PANNA_PATH "$HOME/.gosh/panna"
 set -x DYLD_FALLBACK_LIBRARY_PATH "$HOME/local/lib:$HOME/local/homebrew/lib"
 set -x LD_LIBRARY_PATH /usr/local/linux-sun-jdk1.6.0/jre/lib/i386
 if test -d $HOME/local/stow
   set -x STOW $HOME/local/stow
 end
 set -x LANG fi_FI.UTF-8
-set -x LC_ALL fi_FI.UTF-8
+set -x LC_CTYPE fi_FI.UTF-8
+set -x LC_MESSAGES fi_FI.UTF-8
 
 # pager
 set -x LESS "-i  -w -z-4 -g -M -X -F -R -P%t?f%f :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-..."
@@ -61,19 +59,35 @@ set -x RLWRAP_HOME ~/.rlwrap
 #}}}
 
 # complete {{{
-function add-to-comp-path
-set -l git-directory ~/local/git
+function push-to-comp-path
+set -l comp-directory ~/local/git
   for p in $argv
-    if test -d $git-directory/$p
-      if not contains $git-directory/$p $fish_complete_path
-        set -x fish_complete_path $git-directory/$p $fish_complete_path
+    if test -d $comp-directory/$p
+      if not contains $comp-directory/$p $fish_complete_path
+        set -x fish_complete_path $comp-directory/$p $fish_complete_path
       end
     end
   end
 end
-add-to-comp-path fish-nuggets/completions fish_completions/ fishystuff/completions
+push-to-comp-path fish-nuggets/completions fish_completions/ fishystuff/completions
+
+
+# h function {{{
+complete -x -c h -a "(__fish_complete_cd)"
+complete -x -c h -a "(__fish_complete_directories $HOME)"
+complete -c h -s h -l help --description 'Display help and exit'
+# }}}
+
+#}}}
 
 # gauche {{{
+
+set    GAUCHE_ARCH (gauche-config --arch)
+set -x GAUCHE_LOAD_PATH "$HOME/.gosh:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
+
+# gauche completions {{{
+
+# gosh {{{
 function __gosh_completion_load_path
   set -l load_path (echo $GAUCHE_LOAD_PATH | tr ':' '\n')
   for i in $load_path
@@ -89,11 +103,16 @@ end
 
 complete -c gosh -f -a "(__gosh_completion_load_path)" -d "files in GAUCHE_LOAD_PATH"
 complete -c gosh -f -a "(__gosh_completion_current_directory)" -d "files in CWD"
+#}}}
 
 # panna {{{
+# add panna to PATH
+set -x PANNA_PATH "$HOME/.panna"
+push-to-path $PANNA_PATH/bin
+
 function __panna_completion_panna_path
   set -l path (echo $PANNA_PATH | tr ':' '\n')
-  for i in $path
+  for i in $path/kaava
     for j in $i/*.scm
       echo (basename $j .scm)
     end
@@ -124,12 +143,98 @@ complete -c talikko -f -a "(__talikko_completion_ports_tree)" -d " package"
 
 #}}}
 
+# gauche functions {{{
+if which gosh 1>&-
 
-# h function {{{
-complete -x -c h -a "(__fish_complete_cd)"
-complete -x -c h -a "(__fish_complete_directories $HOME)"
-complete -c h -s h -l help --description 'Display help and exit'
-# }}}
+  if test -n $GAUCHE_LOAD_PATH
+    function cd
+      if test -d $argv[1]
+        builtin cd $argv
+        and command gosh ls.scm -d .
+      else
+        builtin cd (dirname $argv[1])
+        and command gosh ls.scm -d .
+      end
+    end
+  else
+    function cd
+      builtin cd $argv
+    end
+  end
+
+  function gi
+    rlwrap -pBlue -b '(){}[].q#@;| ' gosh
+  end
+
+  function yotsuba
+    command gosh yotsuba-get.scm $argv
+  end
+  function futaba
+    command gosh futaba-get.scm $argv
+  end
+
+  function danbooru
+    command gosh danbooru $argv
+  end
+
+  function spc2ubar
+    command gosh space2underbar.scm $argv
+  end
+
+  function ea
+    command gosh extattr.scm $argv
+  end
+
+  function unpack
+    command gosh unpack.scm $argv
+  end
+
+  function fb
+    gosh fehbrowse.scm $argv
+  end
+
+  function panna
+  gosh panna.scm $argv
+  end
+
+  function talikko
+  gosh talikko.scm $argv
+  end
+
+  function colour-numbers
+  gosh colour-numbers.scm
+  end
+
+  function fi-en
+  gosh kääntää.scm fi en $argv[1]
+  end
+
+  function en-fi
+  gosh kääntää.scm en fi $argv[1]
+  end
+
+  function sanoa
+    gosh sanoa.scm $argv
+  end
+
+  function v
+  gosh v.scm $argv
+  end
+
+  function la
+    command gosh ls.scm -d -a
+  end
+  function ll
+    command gosh ls.scm -d -psf
+  end
+  function lla
+    command gosh ls.scm -d -psf -a
+  end
+  function l
+    command gosh ls.scm -d
+  end
+end
+#}}}
 
 #}}}
 
@@ -159,6 +264,7 @@ set fish_pager_color_description yellow
 set fish_pager_color_prefix      magenta
 set fish_pager_color_progress    green
 #}}}
+
 #}}}
 
 # prompt {{{
@@ -182,7 +288,7 @@ end
 
 function git_prompt
   if test -z (git branch --quiet 2>| awk '/fatal:/ {print "no git"}')
-    printf '%s%s' (parse_git_branch) (set_color $fish_color_normal) 
+    printf '%s%s' (parse_git_branch) (set_color $fish_color_normal)
   else
     echo ""
   end
@@ -227,11 +333,11 @@ function prompt-host
 end
 
 function prompt-face
-if test $status = 1
-  printf '%s%s%s' "[38;5;196m" "(・X・)" (set_color $fish_color_normal)
-else
+#if test $status = 1
+#  printf '%s%s%s' "[38;5;196m" "(・X・)" (set_color $fish_color_normal)
+#else
   printf '%s%s%s' "[38;5;172m" "X / _ / X" (set_color $fish_color_normal)
-end
+#end
 end
 
 function prompt-arrow
@@ -241,7 +347,11 @@ end
 
 function fish_prompt -d "fish prompt function"
   #printf '%s%s%s%s\n%s ' (prompt-up-right) (current-directory) (set_color normal) (git_prompt) (prompt-down-right)
-  printf '%s//%s :: %s:%s\n%s ' (prompt-face) (prompt-host) (current-directory) (git_prompt)  (prompt-arrow)
+  if test -d $PWD/.git
+  printf '%s.%s :: %s:%s\n%s ' (prompt-face) (prompt-host) (current-directory) (git_prompt)  (prompt-arrow)
+  else
+  printf '%s.%s :: %s\n%s ' (prompt-face) (prompt-host) (current-directory) (prompt-arrow)
+  end
 end
 
 #}}}
@@ -255,22 +365,9 @@ function xsource
   end
 end
 
-if which gosh 1>  /dev/null
-  if test -n $GAUCHE_LOAD_PATH
-    function cd
-      if test -d $argv[1]
-        builtin cd $argv
-        and command gosh ls.scm -d .
-      else
-        builtin cd (dirname $argv[1])
-        and command gosh ls.scm -d .
-      end
-    end
-  else
-    function cd
-      builtin cd $argv
-    end
-  end
+
+function cdl -d 'cd to the last path'
+  cd $last_cwd
 end
 
 function h -d 'cd to directory under home'
@@ -290,29 +387,6 @@ function recent-file
   command ls -c -t -1 |   head -n $argv[1] |  tail -n 1
 end
 
-function scm
-  switch $argv[1]
-    case g gauche gosh
-    rlwrap -pBlue -b '(){}[].,#@;| ' gosh
-    case sc scsh
-    rlwrap -pBlue -b '(){}[],#;| ' scsh
-    case s4 scheme48
-    rlwrap -pBlue -b '(){}[],#;| ' scheme48
-    case e elk
-    rlwrap -pBlue -b '(){}[],#;| ' elk
-    case '*'
-    begin
-      echo g gauche
-      echo sc scsh
-      echo s4 scheme48
-      echo e elk
-    end
-  end
-end
-
-function gi
-  rlwrap -pBlue -b '(){}[].q#@;| ' gosh
-end
 
 # color functions {{{
 # functions from
@@ -453,73 +527,6 @@ end #}}}
 
 # aliases {{{
 
-# gauche alias {{{
-if which gosh 1>&-
-  function yotsuba
-    command gosh yotsuba-get.scm $argv
-  end
-  function futaba
-    command gosh futaba-get.scm $argv
-  end
-
-  function danbooru
-    command gosh danbooru $argv
-  end
-
-  function spc2ubar
-    command gosh space2underbar.scm $argv
-  end
-
-  function ea
-    command gosh extattr.scm $argv
-  end
-
-  function unpack
-    command gosh unpack.scm $argv
-  end
-
-  function fb
-    gosh fehbrowse.scm $argv
-  end
-
-  function panna
-  gosh panna.scm $argv
-  end
-
-  function talikko
-  gosh talikko.scm $argv
-  end
-
-  function colour-numbers
-  gosh colour-numbers.scm
-  end
-  
-  function fi-en
-  gosh kääntää.scm fi en $argv[1]
-  end
-  
-  function en-fi
-  gosh kääntää.scm en fi $argv[1]
-  end
-  
-  function sanoa
-  gosh sanoa.scm $argv
-end
-
-  function la
-    command gosh ls.scm -d -a
-  end
-  function ll
-    command gosh ls.scm -d -psf
-  end
-  function lla
-    command gosh ls.scm -d -psf -a
-  end
-  function l
-    command gosh ls.scm -d
-  end
-end
-#}}}
 
 
 function pd

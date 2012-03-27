@@ -26,7 +26,7 @@ export QT_PLUGIN_PATH="/usr/local/kde4/lib/kde4/plugins"
 export PATH="$HOME/local/bin:$PATH"
 xrdb -merge $HOME/.Xresources
 setxkbmap dvorak
-xmodmap $HOME/.xmodmap
+xmodmap $HOME/.xmodmaprc
 xset b off # turn off beep
 xset r rate 200 30
 xsetroot -cursor_name right_ptr &

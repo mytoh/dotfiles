@@ -1,15 +1,6 @@
 set shell=sh
-if !isdirectory(expand("~/.bundle"))
-  call mkdir(expand("~/.bundle"), "p")
- if !isdirectory(expand("~.bundle/neobundle.vim"))
-  call system("git clone " . "git://github.com/Shougo/neobundle.vim " . expand("~/.bundle/neobundle.vim"))
- endif
- if !isdirectory(expand("~/.bundle/vim-ambicmd"))
-  call system("git clone " . "git://github.com/thinca/vim-ambicmd " . expand("~/.bundle/vim-ambicmd"))
- endif
-endif
 
-
+if isdirectory(expand('$HOME/.bundle/neobundle.vim'))
 if has('vim_starting')
   set runtimepath^=$HOME/.bundle/neobundle.vim
   filetype off
@@ -50,13 +41,15 @@ NeoBundle 'thinca/vim-ref'
 NeoBundle 'thinca/vim-ambicmd'
 NeoBundle 'thinca/vim-openbuf'
 NeoBundle 'thinca/vim-singleton'
+NeoBundle 'thinca/vim-poslist'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-afterimage'
 NeoBundle 'tpope/vim-markdown'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-repeat'
 "dont map <cr> if install vim-endwise
 " NeoBundle 'tpope/vim-endwise'
-NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tyru/eskk.vim'
 NeoBundle 'tyru/skkdict.vim'
 NeoBundle 'tyru/open-browser.vim'
@@ -96,20 +89,21 @@ NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kana/vim-textobj-line'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'hobbestigrou/Vim-wmfs'
-NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'aharisu/Gauche-Complete'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'taka84u9/unite-git'
 NeoBundle 'chrisbra/SudoEdit.vim'
 NeoBundle 'yuratomo/w3m.vim'
 NeoBundle 'xolox/vim-reload'
-
+NeoBundle 'gmarik/github-search.vim'
+NeoBundle 'gregsexton/gitv'
 " colorscheme {{{
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'jelera/vim-gummybears-colorscheme'
 NeoBundle 'shawncplus/skittles_berry'
 NeoBundle 'jnurmine/Zenburn'
 NeoBundle 'jpo/vim-railscasts-theme'
+NeoBundle 'trapd00r/neverland-vim-theme'
 "}}}
 " bitbucket
 " NeoBundle 'https://bitbucket.org/kovisoft/slimv'
@@ -125,16 +119,18 @@ NeoBundle 'daemon_saver.vim'
 NeoBundle 'smartword'
 NeoBundle 'gtk-vim-syntax'
 NeoBundle 'submode'
+NeoBundle 'IndentHL'
 "Bundle 'buftabs'
 " colorschemes
 NeoBundle 'jellybeans.vim'
 NeoBundle 'xoria256.vim'
 NeoBundle 'molokai'
 NeoBundle 'robokai'
+NeoBundle 'lilypink'
 " }}}
-" other git repo
+" }}}
 
-" }}}
+endif
 
 filetype plugin on
 filetype indent on

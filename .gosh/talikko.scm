@@ -22,7 +22,7 @@
 
 (define (package-list)
   (map simplify-path
-    (directory-list package-directory :children? #t)))
+       (directory-list package-directory :children? #t)))
 
 (define (info-find-packages name)
   #| display installed package information|#
@@ -50,13 +50,13 @@
          (print
            (string-append
              " "
-           (make-colour colour-package (car x))
-           " "
-           "["(make-colour 172 (cadr x)) "]"))
+             (make-colour colour-package (car x))
+             " "
+             "["(make-colour 172 (cadr x)) "]"))
          (display "    ")
          (display (caddr x))
          (newline))
-  (info-find-packages name)))
+       (info-find-packages name)))
 ; }}}
 
 ; update {{{
@@ -70,6 +70,7 @@
   (current-directory (build-path ports-directory package))
   (print (string-append ">>> Installing " (make-colour 44 package)))
   (run-command '(sudo make clean))
+  (run-command '(sudo make config))
   (colour-process "sudo make install clean"
                   (^x
                     (regexp-replace* x
@@ -96,40 +97,44 @@
     (filter (^x (let ((x (map (^s (string-downcase s))
                               x)))
                   (or (string-scan (car x) package)
-                  (string-scan (cadr x) package)
-                  (string-scan (cadddr x) package))))
+                    (string-scan (cadr x) package)
+                    (string-scan (cadddr x) package))))
             index-list)))
 
 (define (search-package-by-name package)
-     (let1 found-list (search-find-package package)
-       (for-each
-         (lambda (x)
-           (let ((package-name 
-                   ; remove "/usr/ports/" from string
-                   (string-split (string-drop (cadr x) 11)
-                                 #\/))
-                 (version 
-                   (last (string-split 
-                            (car x)
-                            #\-))))
-             (let-values (((category name) (values
-                                             (car package-name)
-                                             (cadr package-name))))
-           (display
-             (string-append " " 
-                            (make-colour colour-category
-                                         category)
-                            "/"
-                            (make-colour colour-package
-                                                  name)))
-           (display (string-append " ["
-                                 (make-colour colour-version version)
-                                 "]"))
-           (newline)
-           (print
-             (string-append "    " (make-colour 244  (cadddr x))))
-           )))
-         found-list)))
+  (let1 found-list (search-find-package package)
+    (for-each
+      (lambda (x)
+        (let ((package-name
+                ; remove "/usr/ports/" from string
+                (string-split 
+                  (string-drop (cadr x) 11)
+                  #\/))
+              (version
+                (last (string-split
+                        (car x)
+                        #\-))))
+          (let-values (((category name) 
+                        (values
+                          (car package-name)
+                          (cadr package-name))))
+            (display
+              (string-append 
+                " "
+                (make-colour colour-category
+                             category)
+                "/"
+                (make-colour colour-package
+                             name)))
+            (display 
+              (string-append " ["
+                             (make-colour colour-version version)
+                             "]"))
+            (newline)
+            (print
+              (string-append "    " (make-colour 244  (cadddr x))))
+            )))
+      found-list)))
 
 ; }}}
 
@@ -152,3 +157,5 @@
        (search-package-by-name (cadr rest)))
       (_ (usage 1))))
   0)
+
+; vim: foldmethod=marker

@@ -9,10 +9,13 @@ abbr    (define ())
           ${2}
           )
 
-snippet gauche
+snippet script
 abbr    gauche script templete
         #!/usr/bin/env gosh
 
+        (use gauche.process)
+        (use gauche.parseopt)
+        (use util.match)
         (use ${1})
         
         (define (main args)
@@ -23,3 +26,21 @@ abbr    (let (()))
         (let ((${1}))
           (${2})
           )
+
+snippet disp
+        (display 
+          ${1}
+          )
+
+snippet let-args
+  (let-args (cdr args)
+    ((#f "h|help" (usage 0))
+     . rest)
+    (match (car rest)
+      ("${1}"
+       (${2}))
+      (_ (usage 1))))
+
+snippet usage
+(define (usage status)
+  (exit status "usage: ~a <command> <package-name>\n" *program-name*))

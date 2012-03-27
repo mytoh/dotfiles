@@ -81,6 +81,7 @@
                   (a (@ (href "http://www.reddit.com/r/commandline")    (target "_blank")) "commandline")
                   (a (@ (href "http://www.reddit.com/r/xmonad")    (target "_blank")) "xmonad")
                   (a (@ (href "http://www.reddit.com/r/unixporn")    (target "_blank")) "unixporn")
+                  (a (@ (href "http://www.reddit.com/r/desktops")    (target "_blank")) "desktops")
                   "))")
 
             (p (@ (class "yotsuba"))
