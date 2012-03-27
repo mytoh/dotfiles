@@ -1266,8 +1266,8 @@ switch (uname)
     squid -f ~/.squid/etc/squid.conf -z
     squid -f ~/.squid/etc/squid.conf
   end
-  set -x HOMEBREW_VERBOSE
-  set -x HOMEBREW_USE_CLANG
+  set -x HOMEBREW_VERBOSE 1
+  set -x HOMEBREW_USE_CLANG 1
   set -x JAVA_HOME ~/Library/JAVA/JavaVirtualMachines/1.7.0.jdk/Contents/Home
 end
 #}}}
