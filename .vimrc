@@ -311,6 +311,13 @@ command! -nargs=1 Silent
       \ | execute ':redraw!'
 command! -complete=command EditUtf8 :e ++enc=utf-8
 
+" rename current buffer
+" :Rename newfilename
+command! -nargs=+ -bang -complete=file Rename let pbnr=fnamemodify(bufname('%')), ':p')
+      \| exec 'f'.escape(<q-args>, '')
+      \| w<bang>
+      \| call delet(pbnc)
+
 "}}}
 
 " general keymaps{{{
@@ -328,6 +335,11 @@ nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <tab> :<c-u>bnext<cr>
 nnoremap <c-c> <esc>
 nnoremap / /\v
+
+" change word under cursor with yanked text
+nnoremap <silent> ciy ciw<c-r>0<esc>:let@/=@1<cr>:noh<cr>
+nnoremap <silent> cy  ce<c-r>0<esc>:let@/=@1<cr>:noh<cr>
+vnoremap <silent> cy  c<c-r>0<esc>:let@/=@1<cr>:noh<cr>
 
 nmap [vim-keymap] <nop>
 nmap     <localleader>v [vim-keymap]
@@ -369,6 +381,10 @@ endfunction
 
 nmap <C-w>r	:<C-u>call <SID>resizeWindow()<CR>mws
 " }}}
+
+" forward/backward word
+inoremap <silent> <c-f> <s-left>
+inoremap <silent> <c-b> <s-right>
 
 " better C-a C-e  {{{
 " http://vim.g.hatena.ne.jp/tyru/20100305
