@@ -4,7 +4,7 @@
 (use gauche.parameter)
 (use file.util)
 (use kirjasto)
-(load (build-path (sys-getenv "PANNA_PATH") "ympäristö"))
+(load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
 
 (define kaava  (make-parameter "mplayer"))
 (define srcdir (make-parameter (build-path (svndir) (kaava))))
@@ -16,9 +16,11 @@
   (run-command '(svn update)))
 
 (define (build)
+     (sys-putenv "CC=clang")
+     (sys-putenv "CXX=clang++")
+     (sys-putenv "CPP=clang-cpp")
   (run-process '(gmake clean) :wait #t)
   (run-process '(gmake distclean) :wait #t)
-  (sys-putenv "CC=clang")
   (run-process `(./configure   ,(string-append "--prefix=" (tynnyri-directory))) :wait #t)
   (run-process '(gmake) :wait #t)
   (run-process '(gmake install) :wait #t))

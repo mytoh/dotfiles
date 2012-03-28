@@ -6,7 +6,7 @@
 (use file.util)
 
 (define-constant kaava-directory
-  (build-path (sys-getenv "PANNA_PATH") "kaava"))
+  (build-path (sys-getenv "PANNA_PATH") "kirjasto" "kaava"))
 
 
 (define (load-build-file app)

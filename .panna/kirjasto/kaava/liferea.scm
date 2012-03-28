@@ -4,7 +4,7 @@
 (use gauche.parameter)
 (use file.util)
 (use kirjasto)
-(load (build-path (sys-getenv "PANNA_PATH") "ympäristö"))
+(load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
 
 (define kaava  (make-parameter "liferea"))
 (define srcdir (make-parameter  (build-path (gitdir) (kaava))))
@@ -16,10 +16,10 @@
   (run-command '(git pull)))
 
 (define (build)
+  (use-clang)
   (run-process '(./autogen.sh) :wait #t)
   (run-process '(gmake clean) :wait #t)
   (run-process '(gmake distclean) :wait #t)
-  (sys-putenv "CC=clang")
   (run-process `(./configure   ,(string-append "--prefix=" (tynnyri-directory))) :wait #t)
   (run-process '(gmake) :wait #t)
   (run-process '(gmake install) :wait #t))

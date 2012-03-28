@@ -19,7 +19,6 @@
 (define-constant colour-version  172)
 
 ; info {{{
-
 (define (package-list)
   (map simplify-path
        (directory-list package-directory :children? #t)))
@@ -78,6 +77,28 @@
                                      #/^===>/   "[38;5;39m>>>[0m"
                                      #/\*\*\*.*$/    "[38;5;3m\\0[0m"
                                      )))
+  )
+; }}}
+
+; deinstall {{{
+(define (deinstall-package package)
+  (current-directory (build-path ports-directory package))
+  (print (string-append ">>> Deinstalling " (make-colour 44 package)))
+  (colour-process "sudo make deinstall"
+                  (^x
+                    (regexp-replace* x
+                                     #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
+                                     #/^===>/   "[38;5;39m>>>[0m"
+                                     #/\*\*\*.*$/    "[38;5;3m\\0[0m"
+                                     )))
+  )
+
+; }}}
+
+; reinstall {{{
+(define (reinstall package)
+  (deinstall-package package)
+  (install-package package)
   )
 ; }}}
 
@@ -153,6 +174,10 @@
        (update-ports-tree ))
       ("install"
        (install-package (cadr rest)))
+      ("deinstall"
+       (deinstall-package (cadr rest)))
+      ("reinstall"
+       (reinstall-package (cadr rest)))
       ("search"
        (search-package-by-name (cadr rest)))
       (_ (usage 1))))

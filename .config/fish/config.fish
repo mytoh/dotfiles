@@ -25,8 +25,6 @@ push-to-path /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/
 
 
 set -x MANWIDTH 80
-set -x DYLD_FALLBACK_LIBRARY_PATH "$HOME/local/lib:$HOME/local/homebrew/lib"
-set -x LD_LIBRARY_PATH /usr/local/linux-sun-jdk1.6.0/jre/lib/i386
 if test -d $HOME/local/stow
   set -x STOW $HOME/local/stow
 end
@@ -112,7 +110,7 @@ push-to-path $PANNA_PATH/bin
 
 function __panna_completion_panna_path
   set -l path (echo $PANNA_PATH | tr ':' '\n')
-  for i in $path/kaava
+  for i in $path/kirjasto/kaava
     for j in $i/*.scm
       echo (basename $j .scm)
     end
@@ -1148,7 +1146,8 @@ end
 #}}}
 
 # keybindings {{{
-bind \cd 'delete-char'
+bind --erase \cd
+bind \cd delete-char
 #}}}
 
 # misc {{{
@@ -1164,6 +1163,9 @@ end
 # os {{{
 switch (uname)
   case FreeBSD
+  set -x DYLD_FALLBACK_LIBRARY_PATH "$HOME/local/lib:$HOME/local/homebrew/lib"
+  set -x LD_LIBRARY_PATH /usr/local/linux-sun-jdk1.6.0/jre/lib/i386
+  set -x SDL_VIDEODRIVER vgl
   # PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages/Latest/"
   function pup
     gosh talikko.scm update
@@ -1252,6 +1254,9 @@ switch (uname)
   end
 
   case Darwin
+  set -x DYLD_FALLBACK_LIBRARY_PATH
+  "$HOME/local/lib:$HOME/local/homebrew/lib:/usr/lib:/usr/local/lib:/Library/Frameworks/Mono.frameworks/Libraries"
+  #set -x LD_LIBRARY_PATH /usr/local/linux-sun-jdk1.6.0/jre/lib/i386
   set PYTHONPATH "~/local/homebrew/lib/python:$PYTHONPATH"
   set -x TERM xterm-256color
   alias mp2 "/Applications/mplayer2.app/Contents/MacOS/mplayer-bin"

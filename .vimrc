@@ -451,7 +451,8 @@ aug myautocommands
   au bufread,bufnewfile .vimshrc,.vim-bundles     setl filetype=vim
   au bufread,bufnewfile ~/.xcolours/*             setl filetype=xdefaults
   au bufread,bufnewfile ~/.xcolours/*             ColorHighlight
-  au bufread,bufnewfile {*.scss,*.stub,.gaucherc} setl filetype=scheme
+  au bufread,bufnewfile {*.scss,.gaucherc} setl filetype=scheme
+  au bufread,bufnewfile *.stub                    setl filetype=scheme.c
   au bufread,bufnewfile .mkshrc                   setl filetype=sh
   au bufread,bufnewfile {*stumpwmrc*,*sawfish/rc} setl filetype=lisp
   au bufread,bufnewfile *.fish                    setl filetype=fish
@@ -644,8 +645,8 @@ let g:bufstat_debug = 1
 let g:bufstat_surround_buffers = '(:)'
 let g:bufstat_number_before_bufname = 0
 
-let g:bufstat_active_hl_group = "StatusLine"
-let g:bufstat_inactive_hl_group = "StatusLine"
+let g:bufstat_active_hl_group = "ActiveBuffer"
+let g:bufstat_inactive_hl_group = "InactiveBuffer"
 
 "}}}
 
@@ -899,6 +900,16 @@ let g:slimv_keybindings = 3
 " poslist {{{
 map <C-o> <Plug>(poslist_prev)
 map <C-i> <Plug>(poslist_next)
+" }}}
+
+" delimitMate {{{
+let delimitMate_matchpairs = "(:),[:],{:},<:>"
+let delimitMate_excluded_regions = "Comment,String"
+        
+aug delimitMateSettings
+au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
+au FileType scheme let b:delimitMate_quotes = "\" ' *"
+aug end
 " }}}
 
 " }}}

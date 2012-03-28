@@ -4,7 +4,7 @@
 (use file.util)
 (use gauche.parameter)
 (use kirjasto)
-(load (build-path (sys-getenv "PANNA_PATH") "ympäristö"))
+(load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
 
 (define kaava  (make-parameter "vim"))
 (define srcdir (make-parameter (build-path (hgdir) (kaava))))
@@ -19,7 +19,7 @@
 (define (build)
   (run-process '(make clean) :wait #t)
   (run-process '(make distclean) :wait #t)
-  (sys-putenv "CC=clang")
+  (use-clang)
   (run-process `(./configure   ,(string-append "--prefix=" (tynnyri-directory)) "--enable-multibyte" "--enable-perlinterp=yes" "--enable-pythoninterp=yes" "--enable-xim" "--enable-fontset" "--disable-darwin" "--disable-selinux" "--with-x" "--with-features=huge") :wait #t)
   (run-process '(make) :wait #t)
   (run-process '(make install) :wait #t))

@@ -31,8 +31,8 @@ termcapinfo xterm*|jfbterm*|screen*|rxvt*   'Co#256:pa#256:AB=\E[48;5;%dm:AF=\E[
 defbce on
 defhstatus "^Et"
 
-caption always "%{= wk}%?%F%{b kw}%? %t %?[%h] %?%{-}%{= dd} (screen #%n) "
+caption always "%{= wk}%?%F%{b kw}%? %t %?(%h) %?%{-}%{= dd} (screen #%n) "
 backtick 0 0 0 whoami
-hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= ck} %n %t %{-}%+Lw%-055=%{= dg} %`%{= dd}.%{= dg}%H %{= dM} %l %{= dc} %Y/%m/%d %C:%s %A %="
+hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= ck} %t %{-}%+Lw%-055=%{= dg} %`%{= dd}.%{= dg}%H %{= dM} %l %{= dc} %Y/%m/%d %C:%s %A %="
 sorendition "= dd"
 

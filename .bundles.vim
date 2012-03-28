@@ -97,6 +97,7 @@ NeoBundle 'yuratomo/w3m.vim'
 NeoBundle 'xolox/vim-reload'
 NeoBundle 'gmarik/github-search.vim'
 NeoBundle 'gregsexton/gitv'
+NeoBundle 'jpalardy/vim-slime'
 " colorscheme {{{
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'jelera/vim-gummybears-colorscheme'

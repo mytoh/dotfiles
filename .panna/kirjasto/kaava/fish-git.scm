@@ -4,7 +4,7 @@
 (use gauche.parameter)
 (use file.util)
 (use kirjasto)
-(load (build-path (sys-getenv "PANNA_PATH") "ympäristö"))
+(load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
 
 (define kaava (make-parameter "fishfish"))
 (define srcdir (make-parameter (build-path (gitdir) (kaava))))
@@ -18,7 +18,7 @@
 (cond
   ((eq? (get-os-type) 'freebsd)
    (define (build)
-     (sys-putenv "CC=clang")
+     (use-clang)
      (sys-putenv "CPPFLAGS=-I/usr/local/include")
      (sys-putenv "LDFLAGS=-L/usr/local/lib")
      (run-process `(./configure ,(string-append "--prefix=" (tynnyri-directory)) --without-xsel) :wait #t)
