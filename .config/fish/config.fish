@@ -1254,8 +1254,7 @@ switch (uname)
   end
 
   case Darwin
-  set -x DYLD_FALLBACK_LIBRARY_PATH
-  "$HOME/local/lib:$HOME/local/homebrew/lib:/usr/lib:/usr/local/lib:/Library/Frameworks/Mono.frameworks/Libraries"
+  set -x DYLD_FALLBACK_LIBRARY_PATH "$HOME/local/lib:$HOME/local/homebrew/lib:/usr/lib:/usr/local/lib:/Library/Frameworks/Mono.frameworks/Libraries"
   #set -x LD_LIBRARY_PATH /usr/local/linux-sun-jdk1.6.0/jre/lib/i386
   set PYTHONPATH "~/local/homebrew/lib/python:$PYTHONPATH"
   set -x TERM xterm-256color
