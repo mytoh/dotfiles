@@ -39,6 +39,7 @@
     (shirok        Gauche-gtk2)
     (podhmo        gauche-imlib2)
     (naoyat        gauche-naoyat-lib)
+    (aharisu       Gauche-SDL)
     (okuoku        mosh)
     (tmbinc        bgrep)
     (ninjaaron     bitocra)
@@ -96,6 +97,8 @@
     (ivmai          bdwgc)
     (ivmai          libatomic_ops)
     (gmarik         vimfiles gmarik-vimfiles)
+    (valvallow      lifegame)
+    (gitster        git)
     )
   )
 

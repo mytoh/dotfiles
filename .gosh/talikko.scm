@@ -75,6 +75,7 @@
                     (regexp-replace* x
                                      #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                                      #/^===>/   "[38;5;39m>>>[0m"
+                                     #/^=>/   "[38;5;99m>>>[0m"
                                      #/\*\*\*.*$/    "[38;5;3m\\0[0m"
                                      )))
   )
@@ -96,9 +97,28 @@
 ; }}}
 
 ; reinstall {{{
-(define (reinstall package)
+(define (reinstall-package package)
+  (current-directory (build-path ports-directory package))
+  (print (string-append ">>> Installing " (make-colour 44 package)))
+  (run-command '(sudo make clean))
+  (run-command '(sudo make config))
+  (colour-process "sudo make"
+                  (^x
+                    (regexp-replace* x
+                                     #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
+                                     #/^===>/   "[38;5;39m>>>[0m"
+                                     #/^=>/   "[38;5;99m>>>[0m"
+                                     #/\*\*\*.*$/    "[38;5;3m\\0[0m"
+                                     )))
   (deinstall-package package)
-  (install-package package)
+  (colour-process "sudo make install clean"
+                  (^x
+                    (regexp-replace* x
+                                     #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
+                                     #/^===>/   "[38;5;39m>>>[0m"
+                                     #/^=>/   "[38;5;99m>>>[0m"
+                                     #/\*\*\*.*$/    "[38;5;3m\\0[0m"
+                                     )))
   )
 ; }}}
 
@@ -174,7 +194,7 @@
        (update-ports-tree ))
       ("install"
        (install-package (cadr rest)))
-      ("deinstall"
+      ((or "deinstall" "remove")
        (deinstall-package (cadr rest)))
       ("reinstall"
        (reinstall-package (cadr rest)))

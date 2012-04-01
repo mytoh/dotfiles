@@ -25,9 +25,14 @@
   (exit 2))
 
 
-(define (parse-img line)
-  (rxmatch->string #/http\:\/\/images\.4chan\.org\/[^"]+/ line )
-  ) 
+(define (parse-img line board)
+    (rxmatch->string
+      (string->regexp
+        (string-append "\\/\\/images\\.4chan\\.org\\/"
+                       board
+                       "\\/src\\/[^\"]+"))
+      line)
+    )
 ;; "
 
 
@@ -36,13 +41,16 @@
     (swget match)))
 
 (define (get-img str board)
-  (call-with-input-string str
-                          (lambda (in)
-                            (port-for-each
-                              (lambda (line)
-                                (let ((match (parse-img line)))
-                                  (fetch match)))
-                              (cut read-line in #t)))))
+  (call-with-input-string 
+    str
+    (lambda (in)
+      (port-for-each
+        (lambda (line)
+          (let ((m (parse-img line board)))
+            (if m 
+              (fetch (string-append "http:" m)))
+        ))
+    (cut read-line in #t)))))
 
 
 (define (get-html bd td)

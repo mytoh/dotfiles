@@ -125,10 +125,10 @@ complete -c panna -f -a "(__panna_completion_panna_path)" -d " package"
 
 # talikko {{{
 function __talikko_completion_ports_tree
-  set -l path (echo $talikko_PATH | tr ':' '\n')
+  set -l path /usr/ports/*
   for i in $path
-    for j in $i/*.scm
-      echo (basename $j .scm)
+    for j in $i
+      echo (basename $j .scm)/
     end
   end
 end
@@ -136,7 +136,10 @@ end
 complete -c talikko -n '__fish_use_subcommand' -xa install --description "install package"
 complete -c talikko -n '__fish_use_subcommand' -xa 'update up' --description "update port tree"
 complete -c talikko -n '__fish_use_subcommand' -xa search --description "search package"
-complete -c talikko -f -a "(__talikko_completion_ports_tree)" -d " package"
+complete -c talikko -n '__fish_use_subcommand' -xa reinstall --description "search package"
+complete -c talikko -n '__fish_use_subcommand' -xa deinstall --description "search package"
+complete -c talikko -n '__fish_use_subcommand' -xa info --description "search package"
+complete -c talikko -f -a "(__talikko_completion_ports_tree)"
 #}}}
 
 #}}}
@@ -585,9 +588,12 @@ function tm
   tmux -u2 a
 end
 
+# screen {{{
+set -x SCREENDIR $HOME/.screen.d/tmp
 function sc
- screen -U -D -RR  -s /bin/tcsh -m
+ screen -U -D -RR  -m
 end
+#}}}
 
 
 #net {{{
@@ -1167,9 +1173,6 @@ switch (uname)
   set -x LD_LIBRARY_PATH /usr/local/linux-sun-jdk1.6.0/jre/lib/i386
   set -x SDL_VIDEODRIVER vgl
   # PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages/Latest/"
-  function pup
-    gosh talikko.scm update
-  end
   function pcheck
     sudo portmaster -PBidav
     and sudo portaudit -Fdav
@@ -1196,9 +1199,6 @@ switch (uname)
   end
   function pcreateall
     pkg_info -Ea |    xargs -n 1 sudo pkg_create -Jnvb
-  end
-  function pinfo
-    pkg_info -Ix $argv
   end
 
   #if test $TERM = "cons25"

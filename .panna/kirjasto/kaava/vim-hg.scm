@@ -17,12 +17,22 @@
   (run-command '(hg update)))
 
 (define (build)
-  (run-process '(make clean) :wait #t)
-  (run-process '(make distclean) :wait #t)
-  (use-clang)
-  (run-process `(./configure   ,(string-append "--prefix=" (tynnyri-directory)) "--enable-multibyte" "--enable-perlinterp=yes" "--enable-pythoninterp=yes" "--enable-xim" "--enable-fontset" "--disable-darwin" "--disable-selinux" "--with-x" "--with-features=huge") :wait #t)
-  (run-process '(make) :wait #t)
-  (run-process '(make install) :wait #t))
+  (run-process '(gmake clean) :wait #t)
+  (run-process '(gmake distclean) :wait #t)
+  (run-process `(./configure   ,(string-append 
+                                  "--prefix=" (tynnyri-directory))
+                               "--enable-multibyte"
+                               "--enable-perlinterp=yes"
+                               "--enable-pythoninterp=yes"
+                               "--enable-xim"
+                               "--enable-fontset"
+                               "--disable-darwin"
+                               "--disable-selinux"
+                               "--with-x"
+                               "--with-features=huge")
+               :wait #t)
+  (run-process '(gmake) :wait #t)
+  (run-process '(gmake install) :wait #t))
 
 (define (stow-install)
   (run-process `(stow -v ,(kaava) -d ,(kellari-directory) -t ,(panna-directory))) :wait #t)

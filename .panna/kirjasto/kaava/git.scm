@@ -6,7 +6,7 @@
 (use kirjasto)
 (load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
 
-(define kaava (make-parameter "feh"))
+(define kaava (make-parameter "git"))
 (define srcdir (make-parameter (build-path (gitdir) (kaava))))
 (define panna-directory   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
 (define kellari-directory (make-parameter (build-path (panna-directory) "kellari")))
@@ -19,12 +19,10 @@
 (cond
   ((eq? (get-os-type) 'freebsd)
    (define (build)
-     (sys-putenv (string-append "PREFIX=" (tynnyri-directory)))
      (use-clang)
      (run-process '(gmake clean) :wait #t)
-     (run-process '(gmake) :wait #t)
-     (run-process '(gmake install) :wait #t)))
-
+     (run-process `(gmake ,(string-append "prefix=" (tynnyri-directory))) :wait #t)
+     (run-process `(gmake ,(string-append "prefix=" (tynnyri-directory)) install)) :wait #t))
   (else
     (define (build)
       (sys-putenv (string-append "PREFIX=" (tynnyri-directory)))
@@ -32,7 +30,3 @@
       (run-process '(make clean) :wait #t)
       (run-process '(make) :wait #t)
       (run-process '(make install) :wait #t))))
-
-(define (stow-install)
-  (run-process `(stow -v ,(kaava) -d ,(kellari-directory) -t ,(panna-directory))) :wait #t)
-

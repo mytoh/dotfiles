@@ -16,6 +16,7 @@ defscrollback 10000
 altscreen on
 defflow off
 nethack on
+multiuser on
 
 bind q quit
 bind x kill
@@ -31,8 +32,18 @@ termcapinfo xterm*|jfbterm*|screen*|rxvt*   'Co#256:pa#256:AB=\E[48;5;%dm:AF=\E[
 defbce on
 defhstatus "^Et"
 
-caption always "%{= wk}%?%F%{b kw}%? %t %?(%h) %?%{-}%{= dd} (screen #%n) "
+# changes the windowlist format to suit caption/hardstatus
+windowlist title  '%{u .g}Num Flags Title%=[0-9] select the number [movement] j,C-n:Down k,C-p:Up (C-)f:PageDown (C-)b:PageUp'
+windowlist string '%{.g}%3n %{.y}%f%09=%{dg} %t %='
+
+caption always "%{b bk}%?%F%{b kw}%? %t %?(%h) %?%{-}%{= dd} (screen #%n) "
 backtick 0 0 0 whoami
 hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= ck} %t %{-}%+Lw%-055=%{= dg} %`%{= dd}.%{= dg}%H %{= dM} %l %{= dc} %Y/%m/%d %C:%s %A %="
 sorendition "= dd"
+
+# launch windows
+screen 1 vim
+screen 2 w3m http://google.com
+screen 0
+
 

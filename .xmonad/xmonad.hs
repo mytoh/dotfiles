@@ -117,8 +117,7 @@ myWorkspaces    =
 
 -- colors {{{
 myNormalBorderColor  = "#111111"
---myFocusedBorderColor = "#ad9dc5"
-myFocusedBorderColor = "#cfa9a5"
+myFocusedBorderColor = "#ad9dc5"
 -- }}}
 
 -- Fonts -------------------------------------------

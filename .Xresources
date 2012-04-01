@@ -47,6 +47,8 @@ urxvt.tabbed.tab-bg:    0
               -misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0, \
               -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*, \
               k10, k10rk, k10b,\
+              9x12\
+              xft:Dejavu Sans Mono:pixelsize=9,\
               -aaron-*-*-*-*--10-*-*-*-*-*-iso8859-1
 
 #define FONT_BOLD -artwiz-glispbold-bold-r-bold--11-110-75-75-p-100-iso8859-1, \

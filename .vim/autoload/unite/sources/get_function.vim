@@ -30,13 +30,19 @@ function! s:get_function.gather_candidates(args, context)
     if line =~ 'function ' && s:ext == "php"
       call add(s:func_list, [s:line_number, line])
 
+    " vim
     elseif line =~ 'function! ' || line =~ 'func! ' && (s:ext == "vim" || s:ftype == "vim")
       call add(s:func_list, [s:line_number, line])
 
     elseif line =~ 'def ' && s:ext == "py"
       call add(s:func_list, [s:line_number, line])
 
+    " scheme
     elseif line =~ '(define ' || line =~ '(define-syntax ' && (s:ext == "scm" || s:ftype == "scheme")
+      call add(s:func_list, [s:line_number, line])
+      
+    " shell
+    elseif line =~ ' ()' && (s:ext == "sh" || s:ftype == "sh")
       call add(s:func_list, [s:line_number, line])
 
     endif

@@ -30,7 +30,7 @@
        (build))
       ("install"
        (build)
-       (stow-install))
+       (install))
       (_ (usage 1))))
   0)
 

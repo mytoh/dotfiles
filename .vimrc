@@ -46,7 +46,7 @@ set showmode
 set showcmd
 set showmatch
 set diffopt+=vertical
-set ambiwidth=single
+set ambiwidth=double
 set display+=lastline
 " key sequence timeout length (default: 1000(ms))
 set timeoutlen=10000
@@ -91,7 +91,7 @@ set splitbelow
 set splitright
 
 set list
-set listchars=tab:^\ ,trail:_
+set listchars=tab:»\ ,trail:_,eol:¬,extends:>,precedes:<
 
 " tags
 set showfulltag
@@ -104,6 +104,8 @@ colorscheme neverland
 " set mouse
 set mouse=a
 set ttymouse=xterm2
+
+set ttyfast
 
 " encodings
 scriptencoding=utf-8
@@ -119,6 +121,7 @@ set wildmenu
 set wildmode=list:full
 set wildignore+=*/.neocon/*
 set shortmess=atIToO
+set cmdheight=1
 set fileformats=unix,mac,dos
 set virtualedit=all
 set nomore
@@ -277,7 +280,7 @@ endfunction
 hi clear cursorline
 hi cursorline     ctermbg=237  gui=underline guibg=black
 hi StatusLine     ctermfg=gray ctermbg=235 cterm=none
-hi ActiveBuffer   ctermfg=blue ctermbg=230 cterm=none
+hi ActiveBuffer   ctermfg=68 ctermbg=230 cterm=none
 hi InactiveBuffer ctermfg=gray ctermbg=235 cterm=none
 hi Comment        ctermfg=244 ctermbg=234 cterm=bold
 hi ColorColumn ctermbg=234
@@ -360,6 +363,22 @@ if has('unix')
   vnoremap y "+y
   imap <C-I> <ESC>"*pa
 endif
+
+" bubbling text
+" vimcasts.org/episodes/bubbling-text
+if isdirectory(expand('$HOME/.bundle/vim-unimpaired'))
+  " bubbse single line
+  nmap <s-up> [e
+  nmap <s-down> ]e
+  " bubble multiple lines
+  vmap <s-up> [egv
+  vmap <s-down> ]egv
+else
+  nmap <s-up> ddkP
+  nmap <s-down> ddp
+  vmap <s-up> xkP`[V`]
+  vmap <s-down> xp`[V`]
+endif
 "}}}
 
 " window resize {{{
@@ -370,7 +389,6 @@ function! s:resizeWindow()
 	let curwin = winnr()
 	wincmd j | let target1 = winnr() | exe curwin "wincmd w"
 	wincmd l | let target2 = winnr() | exe curwin "wincmd w"
-
 
 	execute printf("call submode#map ('winsize', 'n', 'r', 'j', '<C-w>%s')", curwin == target1 ? "-" : "+")
 	execute printf("call submode#map ('winsize', 'n', 'r', 'k', '<C-w>%s')", curwin == target1 ? "+" : "-")
@@ -391,8 +409,8 @@ inoremap <silent> <c-b> <s-right>
 " goto head, or tail
 inoremap <expr> <C-a> <SID>goto_head()
 func! s:goto_head() "{{{
-  let col = col('.')
-  let lnum = line('.')
+  let col       = col('.')
+  let lnum      = line('.')
   let tilde_col = match(getline(lnum),'\S')+1
 
   if col > tilde_col
@@ -406,8 +424,8 @@ endfunc "}}}
 
 inoremap <expr> <C-e> <SID>goto_tail()
 func! s:goto_tail() "{{{
-  let col = col('.')
-  let lnum = line('.')
+  let col       = col('.')
+  let lnum      = line('.')
   let tilde_col = match(getline(lnum), '\S')+1
 
   if col < tilde_col
@@ -543,14 +561,14 @@ aug end
 "}}}
 
 " neocomplcache"{{{
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_ignore_case = 1
+let g:neocomplcache_enable_at_startup              = 1
+let g:neocomplcache_enable_smart_case              = 1
+let g:neocomplcache_enable_ignore_case             = 1
 " let g:neocomplcache_enable_camel_case_completion = 1
-" let g:neocomplcache_enable_underbar_completi on = 1
-let g:neocomplcache_enable_fuzzy_completion = 1
-let g:neocomplcache_enable_auto_select = 0
-let g:neocomplcache_dictionary_filetype_lists = {
+" let g:neocomplcache_enable_underbar_completi on  = 1
+let g:neocomplcache_enable_fuzzy_completion        = 1
+let g:neocomplcache_enable_auto_select             = 1
+let g:neocomplcache_dictionary_filetype_lists      = {
       \ 'default'  : '',
       \ 'scheme'   : $RLWRAP_HOME . '/gosh_completions',
       \ 'vimshell' : $HOME . '/.vimshell/command-history' }
@@ -608,9 +626,10 @@ let g:vimfiler_execute_file_list = {
       \ 'mkv' : 'mplayer',
       \ 'mpg' : 'mplayer',
       \ 'mp4' : 'mplayer',
-      \ 'jpg' : 'feh',
-      \ 'JPG' : 'feh',
-      \ 'png' : 'feh',
+      \ 'jpg' : 'fehbrowse',
+      \ 'JPG' : 'fehbrowse',
+      \ 'png' : 'fehbrowse',
+      \ 'gif' : 'fehbrowse',
       \ 'cbz' : 'comix',
       \ 'cbr' : 'comix',
       \}
@@ -620,7 +639,7 @@ call vimfiler#set_extensions(
       \)
 endif
 
-let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_as_default_explorer  = 1
 let g:vimfiler_safe_mode_by_default = 0
 nnoremap <localleader>ff :<c-u>VimFilerTab<cr>
 " }}}
@@ -641,8 +660,8 @@ nnoremap <localleader>ff :<c-u>VimFilerTab<cr>
 "{{{ rson's bufstat
 nnoremap gn :<c-u>bnext<cr>
 nnoremap gp :<c-u>bNext<cr>
-let g:bufstat_debug = 1
-let g:bufstat_surround_buffers = '(:)'
+let g:bufstat_debug                 = 1
+let g:bufstat_surround_buffers      = '(:)'
 let g:bufstat_number_before_bufname = 0
 
 let g:bufstat_active_hl_group = "ActiveBuffer"
@@ -674,8 +693,8 @@ let g:unite_cursor_line_highlight = 'TabLineSel'
 " keymaps
 nnoremap [unite] <Nop>
 nmap     <localleader>u [unite]
-nnoremap <silent> [unite]f  :<C-u>UniteWithBufferDir -buffer-name=files -prompt=%\  buffer file<CR>
-nnoremap <silent> [unite]c  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file<CR>
+nnoremap <silent> [unite]f  :<C-u>UniteWithBufferDir -buffer-name=files -prompt=%\  buffer file file/new<CR>
+nnoremap <silent> [unite]c  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file file/new<CR>
 nnoremap <silent> [unite]b :<c-u>Unite bookmark<cr>
 nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
 nnoremap <silent> [unite]l :<c-u>Unite launcher<cr>
@@ -704,21 +723,21 @@ endfunction "}}}
 " eskk{{{
 if has('vim_starting')
   let g:eskk#dictionary = {
-        \ 'path': "~/.skk-jisyo",
-        \ 'sorted': 0,
-        \ 'encoding': 'utf-8',
+        \ 'path'     : "~/.skk-jisyo",
+        \ 'sorted'   : 0,
+        \ 'encoding' : 'utf-8',
         \}
   if s:vimrc.isos("darwin")
     let g:eskk#large_dictionary = {
-          \ 'path': "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L",
-          \ 'sorted': 1,
-          \ 'encoding': 'euc-jp',
+          \ 'path'     : "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L",
+          \ 'sorted'   : 1,
+          \ 'encoding' : 'euc-jp',
           \}
   elseif s:vimrc.isos('freebsd')
     let g:eskk#large_dictionary = {
-          \ 'path': "/usr/local/share/skk/SKK-JISYO.L",
-          \ 'sorted': 1,
-          \ 'encoding': 'euc-jp',
+          \ 'path'     : "/usr/local/share/skk/SKK-JISYO.L",
+          \ 'sorted'   : 1,
+          \ 'encoding' : 'euc-jp',
           \}
   endif
 endif
@@ -862,20 +881,20 @@ let g:ctrlp_working_path_mode = 2
 " }}}
 
 " syntastic {{{
-let g:syntastic_enable_balloons = 1
+let g:syntastic_enable_balloons     = 1
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_auto_loc_list = 2
+let g:syntastic_enable_signs        = 1
+let g:syntastic_auto_loc_list       = 2
 " }}}
 
 " indent-guides {{{
-let g:indent_guides_enable_on_vim_startup = 0
-let g:indent_guides_guide_size = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_space_guides = 1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg=236
-autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=233
+let g:indent_guides_enable_on_vim_startup                   = 0
+let g:indent_guides_guide_size                              = 1
+let g:indent_guides_start_level                             = 2
+let g:indent_guides_space_guides                            = 1
+let g:indent_guides_auto_colors                             = 0
+autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg  = 236
+autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg = 233
 " }}}
 
 " scheme.vim {{{
