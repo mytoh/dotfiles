@@ -588,6 +588,10 @@ function tm
   tmux -u2 a
 end
 
+function q
+exit
+end
+
 # screen {{{
 set -x SCREENDIR $HOME/.screen.d/tmp
 function sc

@@ -7,7 +7,7 @@
 (load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
 
 (define kaava  (make-parameter "vim"))
-(define srcdir (make-parameter (build-path (hgdir) (kaava))))
+(define riisi-directory (make-parameter (build-path (hgdir) (kaava))))
 (define panna-directory   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
 (define kellari-directory (make-parameter (build-path (panna-directory) "kellari")))
 (define tynnyri-directory (make-parameter (build-path (kellari-directory) (kaava))))
@@ -17,6 +17,7 @@
   (run-command '(hg update)))
 
 (define (build)
+  (use-clang)
   (run-process '(gmake clean) :wait #t)
   (run-process '(gmake distclean) :wait #t)
   (run-process `(./configure   ,(string-append 
@@ -31,8 +32,6 @@
                                "--with-x"
                                "--with-features=huge")
                :wait #t)
-  (run-process '(gmake) :wait #t)
+  (run-process '(gmake)         :wait #t)
   (run-process '(gmake install) :wait #t))
 
-(define (stow-install)
-  (run-process `(stow -v ,(kaava) -d ,(kellari-directory) -t ,(panna-directory))) :wait #t)

@@ -83,6 +83,7 @@
     (midgetspy      Sick-Beard)
     (mooz           percol)
     (trizen         gtk-youtube-viewer)
+    (trizen         youtube-viewer)
     (xorg62         wmfs)
     (shawncplus     ghub)
     (86me           pentadactyl-scripts)

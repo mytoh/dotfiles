@@ -22,7 +22,7 @@
     ((#f "h|help" (usage 0))
      . rest)
     (load-build-file (cadr rest))
-    (cd (srcdir))
+    (cd (riisi-directory))
     (match (car rest)
       ((or "update" "up")
        (update))

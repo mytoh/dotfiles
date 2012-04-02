@@ -7,7 +7,7 @@
 (load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
 
 (define kaava (make-parameter "feh"))
-(define srcdir (make-parameter (build-path (gitdir) (kaava))))
+(define riisi-directory (make-parameter (build-path (gitdir) (kaava))))
 (define panna-directory   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
 (define kellari-directory (make-parameter (build-path (panna-directory) "kellari")))
 (define tynnyri-directory (make-parameter (build-path (kellari-directory) (kaava))))

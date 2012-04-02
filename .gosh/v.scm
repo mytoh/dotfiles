@@ -7,6 +7,7 @@
 (use gauche.parseopt)
 (use util.match)
 (use file.util)
+(require-extension (srfi 13))
 (use gauche.collection)
 
 (define (viminfo->list)
@@ -31,11 +32,16 @@
 
 (define (v word)
   (if (null? word)
+    ; just lauche vim
     (launch-vim '())
+
+    ; launch vim with existing file
     (if (file-exists? word)
     (launch-vim `(,word))
+
+    ; search from viminfo file
   (let ((found (filter
-                (^s (string-scan s word))
+                (^s (string-scan (string-downcase s) word))
                 (viminfo->list))))
      (launch-vim (list (car found)))
     ))))

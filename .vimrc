@@ -630,8 +630,8 @@ let g:vimfiler_execute_file_list = {
       \ 'JPG' : 'fehbrowse',
       \ 'png' : 'fehbrowse',
       \ 'gif' : 'fehbrowse',
-      \ 'cbz' : 'comix',
-      \ 'cbr' : 'comix',
+      \ 'cbz' : 'fehbrowse',
+      \ 'cbr' : 'fehbrowse',
       \}
 if exists('g:vimfiler#set_extensions')
 call vimfiler#set_extensions(

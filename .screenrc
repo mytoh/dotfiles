@@ -44,6 +44,7 @@ sorendition "= dd"
 # launch windows
 screen 1 vim
 screen 2 w3m http://google.com
+screen 3 rtorrent
 screen 0
 
 
