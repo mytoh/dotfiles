@@ -28,6 +28,7 @@
     "git://opensource.conformal.com/xxxterm.git"
     "git://tron.homeunix.org/cvscvt"
     "git://liferea.git.sourceforge.net/gitroot/liferea/liferea"
+    "git://sox.git.sourceforge.net/gitroot/sox/sox"
     ; repo with other name
     ("git://git.sourceforge.jp/gitroot/ninix-aya/master.git"  "ninix-aya")
     ; minun github repo

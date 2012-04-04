@@ -36,7 +36,7 @@
         (if (not (file-exists? (cadr p)))
           (begin
           (print (string-append
-                   "linking file"
+                   "linking file "
                    (make-colour 53
                                 (string-scan (cadr p)
                                              (panna-directory) 'after)) ))

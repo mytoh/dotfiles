@@ -23,6 +23,10 @@ push-to-path $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin
 
 push-to-path /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin}
 
+# haskell package {{{
+push-to-path $HOME/.cabal/bin
+# }}}
+
 
 set -x MANWIDTH 80
 if test -d $HOME/local/stow

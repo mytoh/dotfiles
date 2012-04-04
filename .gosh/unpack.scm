@@ -61,5 +61,7 @@
       (error "unknown file type" file))))
 
 (define (main args)
-  (unpack (cadr args) (caddr args))
-  )
+  (if (null-list? (cddr args))
+  (unpack (cadr args))
+  (unpack (cadr args) (caddr args)))
+)

@@ -333,9 +333,9 @@ nnoremap : ;
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
-nnoremap <space> i<space><esc>
+nnoremap <space>  i<space><esc>
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
-nnoremap <tab> :<c-u>bnext<cr>
+nnoremap <silent> <tab> :<c-u>bnext<cr>
 nnoremap <c-c> <esc>
 nnoremap / /\v
 
@@ -355,7 +355,7 @@ cnoremap <c-a>      <home>
 cnoremap <c-f>      <right>
 cnoremap <c-b>      <left>
 " vim.g.hatena.ne.jp/tyru/20100116
-cnoremap <c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>
+cnoremap <silent><c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>
 
 " clipboard copy and paste {{{
  " Linux環境でのクリップボードコピー
@@ -622,14 +622,14 @@ endfunction
 
 " vimfiler"{{{
 " from http://d.hatena.ne.jp/hrsh7th/20120229/1330525683
-nnoremap <localleader>ff :<c-u>VimFilerTab<cr>
+nnoremap <localleader><silent>ff :<c-u>VimFilerTab<cr>
 nnoremap <silent> <c-e> :VimFiler -buffer-name=explorer -split -winwidth=35 -toggle -no-quit<cr>
 
 autocmd! filetype vimfiler call g:my_vimfiler_settings()
 function! g:my_vimfiler_settings() "{{{
   nmap     <buffer><expr><cr>        vimfiler#smart_cursor_map("\<plug>(vimfiler_expand_tree)", "\<plug>(vimfiler_edit_file)")
-  nnoremap <buffer><localleader>s    :call vimfiler#mappings#do_action('my_split')<cr>
-  nnoremap <buffer><localleader>S    :call vimfiler#mappings#do_action('my_vsplit')<cr>
+  nnoremap <buffer><localleader><silent>s    :call vimfiler#mappings#do_action('my_split')<cr>
+  nnoremap <buffer><localleader><silent>S    :call vimfiler#mappings#do_action('my_vsplit')<cr>
   let g:vimfiler_execute_file_list = {
         \ 'mkv' : 'mplayer',
         \ 'mpg' : 'mplayer',
@@ -687,8 +687,8 @@ unlet my_vimfiler_vsplit_action
 "}}}
 
 "{{{ rson's bufstat
-nnoremap gn :<c-u>bnext<cr>
-nnoremap gp :<c-u>bNext<cr>
+nnoremap <silent>gn :<c-u>bnext<cr>
+nnoremap <silent>gp :<c-u>bNext<cr>
 let g:bufstat_debug                 = 1
 let g:bufstat_surround_buffers      = '(:)'
 let g:bufstat_number_before_bufname = 0

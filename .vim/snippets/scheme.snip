@@ -17,7 +17,7 @@ abbr    gauche script templete
         (use gauche.parseopt)
         (use util.match)
         (use ${1})
-        
+
         (define (main args)
           )
 
@@ -28,7 +28,7 @@ abbr    (let (()))
           )
 
 snippet disp
-        (display 
+        (display
           ${1}
           )
 
@@ -44,3 +44,33 @@ snippet let-args
 snippet usage
 (define (usage status)
   (exit status "usage: ~a <command> <package-name>\n" *program-name*))
+
+snippet panna
+abbr    panna kaava script
+        #!/usr/bin/env gosh
+
+        (use gauche.process)
+        (use gauche.parameter)
+        (use file.util)
+        (use kirjasto)
+        (load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
+
+        (define kaava (make-parameter "${1}"))
+        (define riisi-directory (make-parameter (build-path (gitdir) (kaava))))
+        (define panna-directory   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
+        (define kellari-directory (make-parameter (build-path (panna-directory) "kellari")))
+        (define tynnyri-directory (make-parameter (build-path (kellari-directory) (kaava))))
+
+
+        (define (update)
+          (run-process '(${2}) :wait #t))
+
+        (define (build)
+          (run-process '(make clean) :wait #t)
+          (run-process '(make distclean) :wait #t)
+          (run-process '(make) :wait #t)
+          (run-process '(make install) :wait #t))
+
+snippet run
+abbr    run-process with :wait
+        (run-process '(${1}) :wait #t)
