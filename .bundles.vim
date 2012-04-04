@@ -100,6 +100,8 @@ NeoBundle 'gmarik/github-search.vim'
 NeoBundle 'gregsexton/gitv'
 NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'godlygeek/tabular'
+" css
+NeoBundle 'hail2u/vim-css3-syntax'
 " colorscheme {{{
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'jelera/vim-gummybears-colorscheme'

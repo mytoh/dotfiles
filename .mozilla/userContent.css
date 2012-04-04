@@ -1,4 +1,5 @@
 
+/* futaba forumn */
 @-moz-document domain("2chan.net"){
 body {
   background-color: #121212 !important;
@@ -40,15 +41,13 @@ body {
 }
 }
 
-
-
-
 @-moz-document domain("google.com"),domain("google.co.jp") {
 .vspib, #vspb {
-  display: nonee !important;
+  display: none !important;
 }
 }
 
+/* freebsd forum */
 @-moz-document domain("forums.freebsd.org") {
 body, table, tbody, thead, tr, td, thead, div, a {
   font-family: "Verdana";
@@ -64,3 +63,25 @@ body, table, tbody, thead, tr, td, thead, div, a {
     color: #a8b888 !important;
     }
     }
+
+/* gauche manual */
+@-moz-document url-prefix("http://practical-scheme.net/gauche/man/") {
+  body {
+    color: #aaaaaa !important;
+    background-color: #121212 !important;
+  }
+
+  /*Function:, funcname, arg1 arg2 */
+  /* Function: */
+  dl dt u {
+    color: #333358 !important;
+  }
+  /* funcname */
+  dl dt b {
+    color: #aaaafa !important;
+  }
+  /* arg1 arg2 */
+  dl dt i {
+    color: #555577 !important;
+  }
+}
