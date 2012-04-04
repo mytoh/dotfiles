@@ -107,6 +107,8 @@ NeoBundle 'shawncplus/skittles_berry'
 NeoBundle 'jnurmine/Zenburn'
 NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'trapd00r/neverland-vim-theme'
+NeoBundle 'lorry-lee/vim-ayumi'
+NeoBundle 'chriskempson/vim-tomorrow-theme'
 "}}}
 " bitbucket
 " NeoBundle 'https://bitbucket.org/kovisoft/slimv'
@@ -128,6 +130,8 @@ NeoBundle 'autoproto.vim'
 " colorschemes
 NeoBundle 'jellybeans.vim'
 NeoBundle 'xoria256.vim'
+NeoBundle 'wombat256.vim'
+NeoBundle 'void'
 NeoBundle 'molokai'
 NeoBundle 'robokai'
 NeoBundle 'lilypink'
