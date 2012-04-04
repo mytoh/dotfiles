@@ -32,7 +32,3 @@
       (run-process '(make) :wait #t)
       (run-process '(make install) :wait #t))))
 
-(define (stow-install)
-  (run-process `(stow -v ,(kaava) -d ,(kellari-directory) -t ,(panna-directory))) :wait #t)
-
-; vim fenc=utf-8

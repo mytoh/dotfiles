@@ -91,7 +91,7 @@ set splitbelow
 set splitright
 
 set list
-set listchars=tab:»\ ,trail:_,eol:¬,extends:>,precedes:<
+set listchars=tab:^\ ,trail:_,eol:¬,extends:>,precedes:<
 
 " tags
 set showfulltag
@@ -484,7 +484,6 @@ aug myautocommands
   au filetype           xdefaults                 call s:vimrc.xrdb()
   au filetype           scheme                    call s:vimrc.gauche()
   au filetype           help                      nnoremap q :<c-u>q<cr>
-  au filetype           nerdtree                  let g:loaded_golden_ratio=1
   au filetype           css,less                       ColorHighlight
   au filetype           haskell                       ColorHighlight
   au filetype           fish                       setl equalprg=fish_indent
@@ -622,26 +621,56 @@ endfunction
 "}}}
 
 " vimfiler"{{{
-let g:vimfiler_execute_file_list = {
-      \ 'mkv' : 'mplayer',
-      \ 'mpg' : 'mplayer',
-      \ 'mp4' : 'mplayer',
-      \ 'jpg' : 'fehbrowse',
-      \ 'JPG' : 'fehbrowse',
-      \ 'png' : 'fehbrowse',
-      \ 'gif' : 'fehbrowse',
-      \ 'cbz' : 'fehbrowse',
-      \ 'cbr' : 'fehbrowse',
-      \}
-if exists('g:vimfiler#set_extensions')
-call vimfiler#set_extensions(
-      \ 'archive', 'xz,txz,cbz,cbr,lzh,zip,gz,bz2,cab,rar,7z,tgz,tar'
-      \)
-endif
-
-let g:vimfiler_as_default_explorer  = 1
-let g:vimfiler_safe_mode_by_default = 0
+" from http://d.hatena.ne.jp/hrsh7th/20120229/1330525683
 nnoremap <localleader>ff :<c-u>VimFilerTab<cr>
+nnoremap <silent> <c-e> :VimFiler -buffer-name=explorer -split -winwidth=35 -toggle -no-quit<cr>
+
+autocmd! filetype vimfiler call g:my_vimfiler_settings()
+function! g:my_vimfiler_settings() "{{{
+  nmap     <buffer><expr><cr>        vimfiler#smart_cursor_map("\<plug>(vimfiler_expand_tree)", "\<plug>(vimfiler_edit_file)")
+  nnoremap <buffer><localleader>s    :call vimfiler#mappings#do_action('my_split')<cr>
+  nnoremap <buffer><localleader>S    :call vimfiler#mappings#do_action('my_vsplit')<cr>
+  let g:vimfiler_execute_file_list = {
+        \ 'mkv' : 'mplayer',
+        \ 'mpg' : 'mplayer',
+        \ 'mp4' : 'mplayer',
+        \ 'jpg' : 'fehbrowse',
+        \ 'JPG' : 'fehbrowse',
+        \ 'png' : 'fehbrowse',
+        \ 'gif' : 'fehbrowse',
+        \ 'cbz' : 'fehbrowse',
+        \ 'cbr' : 'fehbrowse',
+        \}
+  if exists('*vimfiler#set_extensions')
+    call vimfiler#set_extensions(
+          \ 'archive', 'xz,txz,cbz,cbr,lzh,zip,gz,bz2,cab,rar,7z,tgz,tar'
+          \)
+  endif
+  let g:vimfiler_as_default_explorer  = 1
+  let g:vimfiler_safe_mode_by_default = 0
+endfunction "}}}
+
+let my_vimfiler_split_action = { 'is_selectable' : 1, }
+function! my_vimfiler_split_action.func(candidates)
+  wincmd p
+  exec 'split '. a:candidates[0].action__path
+endfunction
+if exists('*unite#custom_action')
+call unite#custom_action('file', 'my_split', my_vimfiler_split_action)
+endif
+unlet my_vimfiler_split_action
+
+let my_vimfiler_vsplit_action = { 'is_selectable' : 1, }
+function! my_vimfiler_vsplit_action.func(candidates)
+  wincmd p
+  exec 'vsplit '. a:candidates[0].action__path
+endfunction
+if exists('*unite#custom_action')
+call unite#custom_action('file', 'my_vsplit', my_vimfiler_vsplit_action)
+endif
+unlet my_vimfiler_vsplit_action
+
+
 " }}}
 
 " {{{ fholgado's minibufexpl
@@ -900,10 +929,6 @@ autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg = 233
 " scheme.vim {{{
 " not work on autocmd
 let is_gauche=1
-" }}}
-
-" nerdtree {{{
-let NERDSpaceDelims = 1
 " }}}
 
 " syntastic {{{

@@ -7,7 +7,7 @@
 (load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
 
 (define kaava  (make-parameter "mplayer"))
-(define srcdir (make-parameter (build-path (svndir) (kaava))))
+(define riisi-directory (make-parameter (build-path (svndir) (kaava))))
 (define panna-directory   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
 (define kellari-directory (make-parameter (build-path (panna-directory) "kellari")))
 (define tynnyri-directory (make-parameter (build-path (kellari-directory) (kaava))))
@@ -16,14 +16,8 @@
   (run-command '(svn update)))
 
 (define (build)
-     (sys-putenv "CC=clang")
-     (sys-putenv "CXX=clang++")
-     (sys-putenv "CPP=clang-cpp")
   (run-process '(gmake clean) :wait #t)
   (run-process '(gmake distclean) :wait #t)
   (run-process `(./configure   ,(string-append "--prefix=" (tynnyri-directory))) :wait #t)
   (run-process '(gmake) :wait #t)
   (run-process '(gmake install) :wait #t))
-
-(define (stow-install)
-  (run-process `(stow -v ,(kaava) -d ,(kellari-directory) -t ,(panna-directory))) :wait #t)

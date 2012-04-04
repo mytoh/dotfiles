@@ -7,7 +7,7 @@
 (load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
 
 (define kaava             (make-parameter "Gauche"))
-(define srcdir            (make-parameter (build-path (gitdir) (kaava))))
+(define riisi-directory            (make-parameter (build-path (gitdir) (kaava))))
 (define panna-directory   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
 (define kellari-directory (make-parameter (build-path (panna-directory) "kellari")))
 (define tynnyri-directory (make-parameter (build-path (kellari-directory) (kaava))))
@@ -16,13 +16,14 @@
   (run-process '(git pull) :wait #t))
 
 (define (build)
+  (use-clang)
   (run-process '(./DIST gen) :wait #t)
-  (run-process `(./configure ,(string-append "--prefix=" (tynnyri-directory)) --enable-threads=no) :wait #t)
+  (run-process `(./configure ,(string-append "--prefix=" (tynnyri-directory))
+                             --with-iconv=/usr/local
+                             )
+               :wait #t)
   (run-process '(make clean) :wait #t)
   (run-process '(make) :wait #t)
   (run-process '(make install) :wait #t))
 
-
-(define (stow-install)
-  (run-process `(stow -v ,(kaava) -d ,(kellari-directory) -t ,(panna-directory))) :wait #t)
 

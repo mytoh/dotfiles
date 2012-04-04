@@ -195,15 +195,6 @@
                          (colour-filename file type))
               (colour-filename file type))))))
 
-(define (print-filename-col filename stat)
-  (let*  ((file (sys-basename filename))
-          (type (ref stat 'type))
-          (extension  (path-extension file)))
-    (if extension
-        (if-let1 e (assoc (string->symbol extension) *extension-colours*)
-                 (colour-filename file type e)
-                 (colour-filename file type))
-      (colour-filename file type))))
 
 (define (print-permission f stat)
   (let* ((perm (format #f "~3O" (ref stat 'perm)))
@@ -328,6 +319,16 @@
             dirlist)
            (append dirs files)))
 
+(define (print-filename-col filename stat)
+  (let*  ((file (sys-basename filename))
+          (type (ref stat 'type))
+          (extension  (path-extension file)))
+    (if extension
+        (if-let1 e (assoc (string->symbol extension) *extension-colours*)
+                 (colour-filename file type e)
+                 (colour-filename file type))
+      (colour-filename file type))))
+
 (define (printcol directory allfiles dfirst)
   (let ((currentlist (list-files directory)))
     (if (null? currentlist)
@@ -369,7 +370,8 @@
                  (for-each
                   (lambda (f)
                     (let1 stat (sys-stat f)
-                    (display (format "~a\t"  (print-filename-col f stat)))))
+                    (display (format "~a\t"  (print-filename-col f stat)))
+                    ))
                   l)
                  (newline)
                  (loop (take* lst numcols ) (drop* lst numcols)))))))))))
