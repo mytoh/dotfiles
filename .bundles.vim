@@ -102,6 +102,9 @@ NeoBundle 'gmarik/github-search.vim'
 NeoBundle 'gregsexton/gitv'
 NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'godlygeek/tabular'
+"haskell
+NeoBundle 'Twinside/vim-haskellConceal'
+NeoBundle 'zenzike/vim-haskell-unicode'
 "javascript
 NeoBundle 'jelera/vim-javascript-syntax'
 " css
@@ -132,6 +135,7 @@ NeoBundle 'gtk-vim-syntax'
 NeoBundle 'submode'
 NeoBundle 'IndentHL'
 NeoBundle 'autoproto.vim'
+NeoBundle 'haskell.vim'
 "Bundle 'buftabs'
 " colorschemes
 NeoBundle 'jellybeans.vim'

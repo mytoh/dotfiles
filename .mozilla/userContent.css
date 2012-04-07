@@ -71,6 +71,10 @@ body, table, tbody, thead, tr, td, thead, div, a {
     background-color: #121212 !important;
   }
 
+  a {
+    color: #484878 !important;
+  }
+
   /*Function:, funcname, arg1 arg2 */
   /* Function: */
   dl dt u {

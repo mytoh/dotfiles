@@ -7,7 +7,7 @@
 (load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
 
 (define kaava  (make-parameter "vim"))
-(define riisi-directory (make-parameter (build-path (hgdir) (kaava))))
+(define riisi-directory (make-parameter (build-path (hg-kansio) (kaava))))
 (define panna-directory   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
 (define kellari-directory (make-parameter (build-path (panna-directory) "kellari")))
 (define tynnyri-directory (make-parameter (build-path (kellari-directory) (kaava))))
@@ -18,20 +18,21 @@
 
 (define (build)
   (use-clang)
-  (run-process '(gmake clean) :wait #t)
-  (run-process '(gmake distclean) :wait #t)
-  (run-process `(./configure   ,(string-append 
-                                  "--prefix=" (tynnyri-directory))
-                               "--enable-multibyte"
-                               "--enable-perlinterp=yes"
-                               "--enable-pythoninterp=yes"
-                               "--enable-xim"
-                               "--enable-fontset"
-                               "--disable-darwin"
-                               "--disable-selinux"
-                               "--with-x"
-                               "--with-features=huge")
-               :wait #t)
-  (run-process '(gmake)         :wait #t)
-  (run-process '(gmake install) :wait #t))
+  (commands
+  '(gmake clean)
+  '(gmake distclean)
+  `(./configure   ,(string-append 
+                     "--prefix=" (tynnyri-directory))
+                  "--enable-multibyte"
+                  "--enable-perlinterp=yes"
+                  "--enable-pythoninterp=yes"
+                  "--enable-xim"
+                  "--enable-fontset"
+                  "--disable-darwin"
+                  "--disable-selinux"
+                  "--with-x"
+                  "--with-features=huge")
+  '(gmake)
+  '(gmake install)
+  ))
 

@@ -45,9 +45,15 @@ set -x LESS_TERMCAP_se "[0m"
 set -x LESS_TERMCAP_so "[01;44;33m"
 set -x LESS_TERMCAP_ue "[0m"
 set -x LESS_TERMCAP_us "[01;32m"
+
 # set default browser
 if which w3m 1>  /dev/null
   set -x BROWSER w3m
+end
+
+# editor
+if which vim 1> /dev/null
+set -x EDITOR vim
 end
 
 set -x GREP_OPTIONS "--colour=auto"

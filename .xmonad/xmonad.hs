@@ -18,7 +18,6 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.WindowGo (runOrRaise)
 import XMonad.Actions.Search
 import XMonad.Actions.Promote
-import qualified XMonad.Actions.Submap            as SM
 import qualified XMonad.Actions.ConstrainedResize as SQR
 import qualified XMonad.Actions.FlexibleResize    as FlexR
 import XMonad.Actions.CopyWindow
@@ -38,6 +37,7 @@ import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.XPropManage
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.Script
 
 -- <layout>
 import XMonad.Layout hiding ( (|||) )
@@ -167,7 +167,7 @@ myKeys = [ -- M4 for Super key
     -- , ("M-p r", shellPrompt myXPConfig) -- shell prompt
        , ("M-p t", prompt (myTerminal ++ " -e") myXPConfig) -- run in term
        , ("M-p g", windowPromptGoto myWaitSP ) -- window go prompt
-       ,  ("M-p b", windowPromptBring myWaitSP ) -- window bring prompt
+       , ("M-p b", windowPromptBring myWaitSP ) -- window bring prompt
        , ("M-p d", AL.launchApp myXPConfig { defaultText = "~" } "dolphin" ) -- filer prompt
        , ("M-p f", scratchFiler)
 
@@ -315,6 +315,7 @@ myStartupHook = do
                 spawn clipmgr
                 spawn volumemgr
                 {- spawn uimPanel -}
+                execScriptHook "startup"
 
 -- main config ---------------------------------------------------------------------
 main = myConfig

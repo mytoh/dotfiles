@@ -38,7 +38,8 @@
                   (a (@ (href "http://d.me/tag/recent/zsh")      (target "_blank")) "zsh")
                   (a (@ (href "http://d.me/tag/recent/vim")      (target "_blank")) "vim")
                   (a (@ (href "http://d.me/tag/recent/scheme")   (target "_blank")) "scheme")
-                  (a (@ (href="http://d.me/tag/recent/musiikki") (target "_blank")) "musiikki")
+                  (a (@ (href "http://d.me/tag/recent/musiikki") (target "_blank")) "musiikki")
+                  (a (@ (href "http://d.me/tag/recent/xmonad") (target "_blank")) "xmonad")
                   "))")
 
             (p (@ (class "hatena"))

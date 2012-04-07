@@ -67,7 +67,7 @@ urxvt.boldFont: FONT_BOLD
 ! colors
 !----------------------------------
 !
-#include "/home/mytoh/.xcolours/fall"
+#include "/home/mytoh/.xcolours/Colorshot"
 !*color0: black
 !*color1: red3
 !*color2: green3

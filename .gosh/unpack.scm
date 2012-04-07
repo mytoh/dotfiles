@@ -48,7 +48,8 @@
     ("tgz" ,tar-unpacker)
     ("bz2" ,tar-unpacker)
     ("xz" ,tar-unpacker)
-    ("tar" ,tar-unpacker)))
+    ("tar" ,tar-unpacker)
+    ))
 
 (define (unpack file . directory)
   (let ((unpacker (assoc (path-extension file)

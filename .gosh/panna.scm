@@ -4,15 +4,10 @@
 (use gauche.parseopt)
 (use util.match)
 (use file.util)
+(require-extension
+  (srfi 98))
+(load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "komento"))
 
-(define-constant kaava-directory
-  (build-path (sys-getenv "PANNA_PATH") "kirjasto" "kaava"))
-
-
-(define (load-build-file app)
-  (load (find-file-in-paths (string-append app ".scm")
-                            :paths `(,kaava-directory)
-                            :pred file-is-readable?)))
 
 (define (usage status)
   (exit status "usage: ~a <command> <package-name>\n" *program-name*))
@@ -31,6 +26,8 @@
       ("install"
        (build)
        (install))
+      ("edit"
+       (edit (cadr rest)))
       (_ (usage 1))))
   0)
 

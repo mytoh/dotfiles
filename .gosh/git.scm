@@ -101,8 +101,8 @@
     (gmarik         vimfiles gmarik-vimfiles)
     (valvallow      lifegame)
     (gitster        git)
-    )
-  )
+    (saironiq       shellscripts)
+    ))
 
 ;; update git repository
 (define (update-gitdir)

@@ -7,7 +7,7 @@
 (load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
 
 (define kaava  (make-parameter "mplayer"))
-(define riisi-directory (make-parameter (build-path (svndir) (kaava))))
+(define riisi-directory (make-parameter (build-path (svn-kansio) (kaava))))
 (define panna-directory   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
 (define kellari-directory (make-parameter (build-path (panna-directory) "kellari")))
 (define tynnyri-directory (make-parameter (build-path (kellari-directory) (kaava))))
