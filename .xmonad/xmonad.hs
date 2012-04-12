@@ -101,7 +101,7 @@ myWorkspaces    =
      "yksi"
     , "kaksi"
     , "kolme"
-    , "nelj辰"
+    , "neljä"
  -- , wrapBitmap "sm4tik/bug_01.xbm"
  -- , wrapBitmap "sm4tik/fox.xbm"
  -- , wrapBitmap "sm4tik/dish.xbm"
@@ -297,7 +297,7 @@ myEventHook = ewmhDesktopsEventHook
 myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 420 -h 16 -bg \"#212122\" -fn " ++ myDzenFont
 myRightBar  = "~/.dzen/bin/status | exec dzen2 -p -ta r -x 420 -y 0 -w 710 -h 16 -bg \"#212122\" -fn " ++ myDzenFont 
 -- }}}
-trayer      = "exec trayer --expand false --alpha 40  --tint 0x232324 --transparent true --padding 0 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 16 --widthtype request --width 120 "
+trayer      = "exec trayer --expand false --alpha 40  --tint 0x232324 --transparent true --padding 0 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 16 --widthtype request --width 121 "
 mail        = "gmail-notifier"
 compmgr     = "compton -i 0.9 -e 0.8"
 bgmgr       = "feh --bg-scale ~/.wallpapers/purple-nagato.jpg"

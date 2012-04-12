@@ -4,16 +4,13 @@
 (use gauche.parameter)
 (use file.util)
 (use kirjasto)
-(load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
+(use panna)
 
 (define kaava (make-parameter "fishfish"))
-(define riisi-directory (make-parameter (build-path (git-kansio) (kaava))))
-(define panna-directory  (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
-(define kellari-directory (make-parameter (build-path (panna-directory) "kellari")))
-(define tynnyri-directory (make-parameter (build-path (kellari-directory) (kaava))))
-
-(define (update)
-  (run-process '(git pull) :wait #t))
+(define riisi-kansio (make-parameter (build-path (git-kansio) (kaava))))
+(define panna-kansio  (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
+(define kellari-kansio (make-parameter (build-path (panna-kansio) "kellari")))
+(define tynnyri-kansio (make-parameter (build-path (kellari-kansio) (kaava))))
 
 (cond
   ((eq? (get-os-type) 'freebsd)
@@ -22,14 +19,16 @@
      (sys-putenv "CPPFLAGS=-I/usr/local/include")
      (sys-putenv "LDFLAGS=-L/usr/local/lib")
      (commands
-     `(./configure ,(string-append "--prefix=" (tynnyri-directory)) --without-xsel)
+     `(./configure ,(string-append "--prefix=" (tynnyri-kansio)) --without-xsel)
      '(gmake clean)
      '(gmake)
      '(gmake install))))
   (else
     (define (build)
-      (run-process `(./configure ,(string-append "--prefix=" (tynnyri-directory))) :wait #t)
-      (run-process '(make distclean clean) :wait #t)
-      (run-process '(make) :wait #t)
-      (run-process '(make install) :wait #t))))
+      (commands
+      `(./configure ,(string-append "--prefix=" (tynnyri-kansio)))
+      '(make distclean clean)
+      '(make)
+      '(make install)
+      ))))
 

@@ -90,8 +90,10 @@ complete -c h -s h -l help --description 'Display help and exit'
 
 # gauche {{{
 
+
 set    GAUCHE_ARCH (gauche-config --arch)
 set -x GAUCHE_LOAD_PATH "$HOME/.gosh:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
+
 
 # gauche completions {{{
 
@@ -116,6 +118,7 @@ complete -c gosh -f -a "(__gosh_completion_current_directory)" -d "files in CWD"
 # panna {{{
 # add panna to PATH
 set -x PANNA_PATH "$HOME/.panna"
+set -x GAUCHE_LOAD_PATH $PANNA_PATH/kirjasto:$GAUCHE_LOAD_PATH
 push-to-path $PANNA_PATH/bin
 
 function __panna_completion_panna_path
@@ -174,7 +177,7 @@ if which gosh 1>&-
   end
 
   function gi
-    rlwrap -pBlue -b '(){}[].q#@;| ' gosh
+    rlwrap -pBlue -c -q '"' -b '(){}[].,#@;|`"' -m gosh
   end
 
   function yotsuba
@@ -205,7 +208,7 @@ if which gosh 1>&-
   end
 
   function panna
-  gosh panna.scm $argv
+  gosh run-panna.scm $argv
   end
 
   function talikko
@@ -396,6 +399,18 @@ end
 
 function recent-file
   command ls -c -t -1 |   head -n $argv[1] |  tail -n 1
+end
+
+function :w
+echo sorry, but this isnt vim
+end
+
+function :wq
+:w
+end
+
+function :q
+exit
 end
 
 

@@ -62,6 +62,7 @@ fi
 
 DEFAULT_SESSION="dwm"
 if [ -n $1 ]; then
+  export USERWM=$1
  case $1 in
   xfce) exec dbus-launch ck-launch-session startxfce4 ;;
   fluxbox) exec startfluxbox ;;

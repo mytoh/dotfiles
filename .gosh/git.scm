@@ -100,7 +100,7 @@
     (ivmai          libatomic_ops)
     (gmarik         vimfiles gmarik-vimfiles)
     (valvallow      lifegame)
-    (gitster        git)
+    (git            git)
     (saironiq       shellscripts)
     ))
 

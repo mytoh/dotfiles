@@ -1,14 +1,15 @@
 (define-module kirjasto
-  (export string->lowercase
+  (extend kirjasto.komento)
+  (export 
+    string->lowercase
     make-colour
     forever
     get-os-type
     tap
     p
     daemonize
-    mkdir
-    cd
     run-command
+    run-commands
     run-command-sudo
     colour-process
     whitespace->dash
@@ -75,13 +76,6 @@
                            (port-fd-dup! (standard-error-port) out))))
 
 
-(define (mkdir dir)
-  (if (not (file-exists? dir))
-    (make-directory* dir)))
-
-(define (cd dir)
-  (if (file-is-directory? dir)
-    (current-directory dir)))
 
 (define (whitespace->underbar str)
   (regexp-replace-all #/\s+/ str "_"))
@@ -92,6 +86,18 @@
 (define (run-command command)
   (run-process command :wait #t)
   )
+
+(define-syntax run-commands
+  ; run processes
+  (syntax-rules ()
+    ((_ c1 )
+     (run-process c1 :wait #t)
+     )
+    ((_ c1 c2 ...)
+     (begin
+       (run-process c1 :wait #t)
+       (commands c2 ...)))))
+
 
 (define (run-command-sudo command)
   (run-process (append '(sudo) command) :wait #t)

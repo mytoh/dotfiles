@@ -4,21 +4,18 @@
 (use gauche.parameter)
 (use file.util)
 (use kirjasto)
-(load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
+(use panna)
 
 (define kaava (make-parameter "git"))
-(define riisi-directory (make-parameter (build-path (git-kansio) (kaava))))
-(define panna-directory   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
-(define kellari-directory (make-parameter (build-path (panna-directory) "kellari")))
-(define tynnyri-directory (make-parameter (build-path (kellari-directory) (kaava))))
-
-(define (update)
-  (run-process '(git pull) :wait #t))
+(define riisi-kansio (make-parameter (build-path (git-kansio) (kaava))))
+(define panna-kansio   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
+(define kellari-kansio (make-parameter (build-path (panna-kansio) "kellari")))
+(define tynnyri-kansio (make-parameter (build-path (kellari-kansio) (kaava))))
 
 (define (build)
   (use-clang)
   (commands
     '(gmake clean)
-    `(gmake ,(string-append "prefix=" (tynnyri-directory)))
-    `(gmake ,(string-append "prefix=" (tynnyri-directory)) install)
+    `(gmake ,(string-append "prefix=" (tynnyri-kansio)))
+    `(gmake ,(string-append "prefix=" (tynnyri-kansio)) install)
     ))

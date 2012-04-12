@@ -210,7 +210,7 @@
 
 
 ;; -- added
-  (let ((completion-file (open-output-file (build-path (home-directory) ".rlwrap/gosh_completions"))))
+  (let ((completion-file (open-output-file (build-path (home-directory) (sys-getenv "RLWRAP_HOME") "gosh_completions"))))
   (for-each (lambda (s)
               (display s completion-file)
               (newline  completion-file))

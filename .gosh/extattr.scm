@@ -2,7 +2,7 @@
 ; works on only freebsd
 (use gauche.process)
 (use gauche.parseopt)
-(use kirjasto) ; make-colour string->lowercase
+(use kirjasto) ; make-colour
 
 (cond
  ((eq? (get-os-type) 'freebsd)
@@ -16,7 +16,7 @@
       (print (string-append (make-colour 89 attr-name-space) "." (make-colour 30 attr-name)
                             " -> "
                             (make-colour 60 attr-value)))))
-  
+
   (define (print-attr args)
     (let* ((attr-name-space (car args))
            (attr-name       (cadr args))
@@ -28,7 +28,7 @@
       (print (string-append (make-colour 89 attr-name-space) "." (make-colour 30 attr-name)
                             " -> "
                             (make-colour 60 (cadr out))))))
-  
+
   (define (delete-attr args)
     (let ((attr-name-space (car args))
           (attr-name       (cadr args))
@@ -37,7 +37,7 @@
       (print file-name)
       (display "removed ")
       (print (string-append (make-colour 38 attr-name-space) "." (make-colour 30 attr-name )))))
-  
+
   (define (list-attr args)
     (let* ((attr-name-space (car args))
            (file-name       (cadr args))
@@ -64,7 +64,7 @@
       (print (string-append (make-colour 30 attr-name)
                             " -> "
                             (make-colour 60 str  )))))
-  
+
   (define (write-attr args)
     (let ((attr-name  (car args))
           (attr-value (cadr args))
@@ -74,7 +74,7 @@
       (print (string-append (make-colour 30 attr-name)
                             " -> "
                             (make-colour 60 attr-value)))))
-  
+
   (define (delete-attr args)
     (let ((attr-name (car args))
           (file-name (cadr args)))
@@ -105,7 +105,7 @@
              (p "p|print")
              (d "d|delete")
              . restargs)
-            (cond 
+            (cond
               (w (write-attr restargs))
               (p (print-attr restargs))
               (d (delete-attr restargs))

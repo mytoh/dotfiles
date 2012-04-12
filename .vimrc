@@ -1,3 +1,12 @@
+"
+"          __
+"  __  __ /\_\    ___ ___   _ __   ___
+" /\ \/\ \\/\ \ /' __` __`\/\`'__\/'___\
+" \ \ \_/ |\ \ \/\ \/\ \/\ \ \ \//\ \__/
+"  \ \___/  \ \_\ \_\ \_\ \_\ \_\\ \____\
+"   \/__/    \/_/\/_/\/_/\/_/\/_/ \/____/
+"
+"
 
 " NeoBundle and bundles configuration {{{
 source $HOME/.bundles.vim
@@ -5,9 +14,9 @@ source $HOME/.bundles.vim
 
 " singleton.vim {{{
 if has('clientserver')
-   if exists('g:singleton#disable')
-  call singleton#enable()
-   endif
+  if exists('g:singleton#disable')
+    call singleton#enable()
+  endif
 endif
 "}}}
 
@@ -207,13 +216,13 @@ set stl=%2*\   " left side
 set stl+=%=  " separator
 
 set stl+=%3*
-set stl+=\ 
+let &stl= &stl . "\ "
 set stl+=%<%{fnamemodify(getcwd(),':~')}   "get filepath
 set stl+=\ 
 
 set stl+=%4*
 if exists('*fugitive#statusline')
-set stl+=%{fugitive#statusline()}  "git repo info
+  set stl+=%{fugitive#statusline()}  "git repo info
 endif
 
 set stl+=%5*
@@ -244,7 +253,7 @@ set stl+=\
 " change StatusLine color when insert mode {{{
 " http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-color#color-theme-mod
 let g:hi_insert = 'highlight StatusLine ctermfg=blue ctermbg=yellow
-                   \cterm=none guifg=darkblue guibg=darkyellow gui=none'
+                 \ cterm=none guifg=darkblue guibg=darkyellow gui=none'
 if has('sytax')
   augroup InsertHook
     autocmd!
@@ -358,7 +367,7 @@ cnoremap <c-b>      <left>
 cnoremap <silent><c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>
 
 " clipboard copy and paste {{{
- " Linux環境でのクリップボードコピー
+" Linux環境でのクリップボードコピー
 if has('unix')
   vnoremap y "+y
   imap <C-I> <ESC>"*pa
@@ -383,17 +392,17 @@ endif
 
 " window resize {{{
 function! s:resizeWindow()
-	call submode#enter_with('winsize', 'n', '', 'mws', '<Nop>')
-	call submode#leave_with('winsize', 'n', '', '<Esc>')
+  call submode#enter_with('winsize', 'n', '', 'mws', '<Nop>')
+  call submode#leave_with('winsize', 'n', '', '<Esc>')
 
-	let curwin = winnr()
-	wincmd j | let target1 = winnr() | exe curwin "wincmd w"
-	wincmd l | let target2 = winnr() | exe curwin "wincmd w"
+  let curwin = winnr()
+  wincmd j | let target1 = winnr() | exe curwin "wincmd w"
+  wincmd l | let target2 = winnr() | exe curwin "wincmd w"
 
-	execute printf("call submode#map ('winsize', 'n', 'r', 'j', '<C-w>%s')", curwin == target1 ? "-" : "+")
-	execute printf("call submode#map ('winsize', 'n', 'r', 'k', '<C-w>%s')", curwin == target1 ? "+" : "-")
-	execute printf("call submode#map ('winsize', 'n', 'r', 'h', '<C-w>%s')", curwin == target2 ? ">" : "<")
-	execute printf("call submode#map ('winsize', 'n', 'r', 'l', '<C-w>%s')", curwin == target2 ? "<" : ">")
+  execute printf("call submode#map ('winsize', 'n', 'r', 'j', '<C-w>%s')", curwin == target1 ? "-" : "+")
+  execute printf("call submode#map ('winsize', 'n', 'r', 'k', '<C-w>%s')", curwin == target1 ? "+" : "-")
+  execute printf("call submode#map ('winsize', 'n', 'r', 'h', '<C-w>%s')", curwin == target2 ? ">" : "<")
+  execute printf("call submode#map ('winsize', 'n', 'r', 'l', '<C-w>%s')", curwin == target2 ? "<" : ">")
 
 endfunction
 
@@ -436,7 +445,7 @@ func! s:goto_tail() "{{{
     return "\<End>"
   endif
 endfunc "}}}
-  "}}}
+"}}}
 
 "}}}
 
@@ -448,17 +457,24 @@ function! s:vimrc.xrdb() dict
   endif
 endfunction
 
-function! s:vimrc.gauche() dict
+function! s:vimrc.scheme() dict
+  let g:lisp_rainbow=1
+  setl lisp
+  setl iskeyword=@,33,35-38,42-43,45-58,60-64,94,_,126
   if executable('scmindent.scm')
     if executable('racket')
       setlocal equalprg=scmindent.scm
     endif
   endif
   if isdirectory(expand('$HOME/.bundle/Rainbow_Parenthsis_Bundle'))
-  call rainbow_parenthsis#LoadSquare()
-  call rainbow_parenthsis#LoadRound()
-  call rainbow_parenthsis#Activate()
+    call rainbow_parenthsis#LoadSquare()
+    call rainbow_parenthsis#LoadRound()
+    call rainbow_parenthsis#Activate()
   endif
+  let g:vimshell_split_command = 'vsplit'
+  nnoremap <silent><LocalLeader>gi  :VimShellInteractive gosh<cr>
+  nnoremap <silent><LocalLeader>gs <S-v>:VimShellSendString<cr>
+  vmap     <silent><LocalLeader>gs :VimShellSendString<cr>
 endfunction
 
 aug myautocommands
@@ -469,20 +485,22 @@ aug myautocommands
   au bufread,bufnewfile .vimshrc,.vim-bundles     setl filetype=vim
   au bufread,bufnewfile ~/.xcolours/*             setl filetype=xdefaults
   au bufread,bufnewfile ~/.xcolours/*             ColorHighlight
-  au bufread,bufnewfile {*.scss,.gaucherc} setl filetype=scheme
+  au bufread,bufnewfile {*.scss,.gaucherc}        setl filetype=scheme
   au bufread,bufnewfile *.stub                    setl filetype=scheme.c
   au bufread,bufnewfile .mkshrc                   setl filetype=sh
   au bufread,bufnewfile {*stumpwmrc*,*sawfish/rc} setl filetype=lisp
   au bufread,bufnewfile *.fish                    setl filetype=fish
   au bufread,bufnewfile loader.conf.local         setl filetype=conf
   au bufread,bufnewfile {*.md,*.mkd,*.markdown}   set filetype=markdown
+  au bufread,bufnewfile scheme.snip               setl filetype=snippet.scheme
   au bufwritepost       .vimrc                    source ~/.vimrc
+  au bufwritepost       .bundles.vim              source ~/.bundles.vim
   au bufwritepost       .zshrc                    Silent !zcompile ~/.zshrc
   au bufwritepost       .conkyrc                  Silent !killall -SIGUSR1  conky
   au bufwritepost       xmonad.hs                 Silent !xmonad --recompile
   au bufwritepost       scheme                    TrimSpace
   au filetype           xdefaults                 call s:vimrc.xrdb()
-  au filetype           scheme                    call s:vimrc.gauche()
+  au filetype           scheme                    call s:vimrc.scheme()
   au filetype           help                      nnoremap q :<c-u>q<cr>
   au filetype           css,less                       ColorHighlight
   au filetype           haskell                       ColorHighlight
@@ -490,6 +508,8 @@ aug myautocommands
   " for chalice buffers
   au filetype           2ch*                      setl fencs=cp932,iso-2022-jp-3,euc-jp
   au filetype           2ch*                      let g:loaded_golden_ratio=1
+
+  au filetype           *                         setl formatoptions-=ro
 aug end
 
 aug cch
@@ -511,28 +531,28 @@ endif
 
 " Restore cursor position to where it was before
 augroup JumpCursorOnEdit
-   au!
-   autocmd BufReadPost *
-            \ if expand("<afile>:p:h") !=? $TEMP |
-            \ if line("'\"") > 1 && line("'\"") <= line("$") |
-            \ let JumpCursorOnEdit_foo = line("'\"") |
-            \ let b:doopenfold = 1 |
-            \ if (foldlevel(JumpCursorOnEdit_foo) > foldlevel(JumpCursorOnEdit_foo - 1)) |
-            \ let JumpCursorOnEdit_foo = JumpCursorOnEdit_foo - 1 |
-            \ let b:doopenfold = 2 |
-            \ endif |
-            \ exe JumpCursorOnEdit_foo |
-            \ endif |
-            \ endif
-" Need to postpone using "zv" until after reading the modelines.
-   autocmd BufWinEnter *
-            \ if exists("b:doopenfold") |
-            \ exe "normal zv" |
-            \ if(b:doopenfold > 1) |
-            \ exe "+".1 |
-            \ endif |
-            \ unlet b:doopenfold |
-            \ endif
+  au!
+  autocmd BufReadPost *
+        \ if expand("<afile>:p:h") !=? $TEMP |
+        \ if line("'\"") > 1 && line("'\"") <= line("$") |
+        \ let JumpCursorOnEdit_foo = line("'\"") |
+        \ let b:doopenfold = 1 |
+        \ if (foldlevel(JumpCursorOnEdit_foo) > foldlevel(JumpCursorOnEdit_foo - 1)) |
+        \ let JumpCursorOnEdit_foo = JumpCursorOnEdit_foo - 1 |
+        \ let b:doopenfold = 2 |
+        \ endif |
+        \ exe JumpCursorOnEdit_foo |
+        \ endif |
+        \ endif
+  " Need to postpone using "zv" until after reading the modelines.
+  autocmd BufWinEnter *
+        \ if exists("b:doopenfold") |
+        \ exe "normal zv" |
+        \ if(b:doopenfold > 1) |
+        \ exe "+".1 |
+        \ endif |
+        \ unlet b:doopenfold |
+        \ endif
 augroup END
 
 " }}}
@@ -656,7 +676,7 @@ function! my_vimfiler_split_action.func(candidates)
   exec 'split '. a:candidates[0].action__path
 endfunction
 if exists('*unite#custom_action')
-call unite#custom_action('file', 'my_split', my_vimfiler_split_action)
+  call unite#custom_action('file', 'my_split', my_vimfiler_split_action)
 endif
 unlet my_vimfiler_split_action
 
@@ -666,7 +686,7 @@ function! my_vimfiler_vsplit_action.func(candidates)
   exec 'vsplit '. a:candidates[0].action__path
 endfunction
 if exists('*unite#custom_action')
-call unite#custom_action('file', 'my_vsplit', my_vimfiler_vsplit_action)
+  call unite#custom_action('file', 'my_vsplit', my_vimfiler_vsplit_action)
 endif
 unlet my_vimfiler_vsplit_action
 
@@ -709,7 +729,7 @@ let g:unite_enable_start_insert=1
 let g:unite_split_rule = "belowright"
 " fnamemodify() format
 " :help filename-modifiers
-let g:unite_source_file_mru_filename_format = ':p:~:.'
+let g:unite_source_file_mru_filename_format = ''
 let g:unite_source_file_mru_time_format = ''
 let g:unite_cursor_line_highlight = 'TabLineSel'
 " let g:unite_abbr_highlight = 'TabLine'
@@ -724,7 +744,7 @@ nnoremap [unite] <Nop>
 nmap     <localleader>u [unite]
 nnoremap <silent> [unite]f  :<C-u>UniteWithBufferDir -buffer-name=files -prompt=%\  buffer file file/new<CR>
 nnoremap <silent> [unite]c  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file file/new<CR>
-nnoremap <silent> [unite]b :<c-u>Unite bookmark<cr>
+nnoremap <silent> [unite]b :<c-u>Unite buffer<cr>
 nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
 nnoremap <silent> [unite]l :<c-u>Unite launcher<cr>
 nnoremap <silent> [unite]p :<c-u>Unite get_function<cr>
@@ -740,12 +760,12 @@ function! s:unite_my_settings() "{{{
 endfunction "}}}
 
 " unite-launch {{{
-    let g:unite_launch_apps = [
-	  \ 'rake',
-	  \ 'make',
-    \ 'scss2css',
-	  \ 'git pull',
-	  \ 'git push' ]
+let g:unite_launch_apps = [
+      \ 'rake',
+      \ 'make',
+      \ 'scss2css',
+      \ 'git pull',
+      \ 'git push' ]
 "}}}
 "}}}
 
@@ -843,10 +863,10 @@ aug vimshell
     call vimshell#execute('ls')
   endfunction
   "inoremap <buffer> <expr><silent> <C-l>  unite#sources#vimshell_history#start_complete()
-		inoremap <buffer><expr> <C-l> unite#start_complete(
-		\ ['vimshell/history'], {
-		\ 'start_insert' : 0,
-		\ 'input' : vimshell#get_cur_text()})
+  inoremap <buffer><expr> <C-l> unite#start_complete(
+        \ ['vimshell/history'], {
+        \ 'start_insert' : 0,
+        \ 'input' : vimshell#get_cur_text()})
 aug end
 
 nnoremap [vimshell] <nop>
@@ -875,8 +895,8 @@ let g:openbrowser_open_rules = { 'w3m': '{browser} {shellescape(uri)} ', }
 
 " ambicmd {{{
 if isdirectory(expand('$HOME/.bundle/vim-ambicmd'))
-cnoremap <expr> <Space> ambicmd#expand("\<Space>")
-cnoremap <expr> <CR>    ambicmd#expand("\<CR>")
+  cnoremap <expr> <Space> ambicmd#expand("\<Space>")
+  cnoremap <expr> <CR>    ambicmd#expand("\<CR>")
 endif
 " }}}
 
@@ -887,9 +907,9 @@ let g:mpd_port = "6600"
 
 " gist.vim {{{
 if s:vimrc.isos('darwin')
-    let g:gist_clip_command = 'pbcopy'
-  elseif s:vimrc.isos('freebsd')
-    let g:gist_clip_command = 'xclip -selection clipboard'
+  let g:gist_clip_command = 'pbcopy'
+elseif s:vimrc.isos('freebsd')
+  let g:gist_clip_command = 'xclip -selection clipboard'
 endif
 
 let g:gist_detect_filetype = 1
@@ -922,8 +942,8 @@ let g:indent_guides_guide_size                              = 1
 let g:indent_guides_start_level                             = 2
 let g:indent_guides_space_guides                            = 1
 let g:indent_guides_auto_colors                             = 0
-autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg  = 236
-autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg = 233
+autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg=236
+autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=233
 " }}}
 
 " scheme.vim {{{
@@ -949,11 +969,19 @@ map <C-i> <Plug>(poslist_next)
 " delimitMate {{{
 let delimitMate_matchpairs = "(:),[:],{:},<:>"
 let delimitMate_excluded_regions = "Comment,String"
-        
+
 aug delimitMateSettings
-au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
-au FileType scheme let b:delimitMate_quotes = "\" ' *"
+  au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
+  au FileType scheme let b:delimitMate_quotes = "\" ' *"
 aug end
+" }}}
+
+" scratch {{{
+" open scratch buffer
+" if no filename given
+if !argc()
+autocmd VimEnter * ScratchOpen
+endif
 " }}}
 
 " }}}
@@ -966,5 +994,3 @@ set secure
 " make install clean distclean
 
 " vim:set foldmethod=marker:
-
-

@@ -47,16 +47,15 @@ snippet usage
 
 snippet panna
 abbr    panna kaava script
-        #!/usr/bin/env gosh
 
         (use gauche.process)
         (use gauche.parameter)
         (use file.util)
         (use kirjasto)
-        (load (build-path (sys-getenv "PANNA_PATH") "kirjasto" "ympäristö"))
+        (use panna)
 
         (define kaava (make-parameter "${1}"))
-        (define riisi-directory (make-parameter (build-path (gitdir) (kaava))))
+        (define riisi-directory (make-parameter (build-path (git-kansio) (kaava))))
         (define panna-directory   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
         (define kellari-directory (make-parameter (build-path (panna-directory) "kellari")))
         (define tynnyri-directory (make-parameter (build-path (kellari-directory) (kaava))))
@@ -66,10 +65,14 @@ abbr    panna kaava script
           (run-process '(${2}) :wait #t))
 
         (define (build)
-          (run-process '(make clean) :wait #t)
-          (run-process '(make distclean) :wait #t)
-          (run-process '(make) :wait #t)
-          (run-process '(make install) :wait #t))
+          (use-clang)
+          (commands
+          '(make clean)
+          '(make distclean)
+          `(./configure ,(string-append "--prefix=" (tynnyri-directory)))
+          '(make)
+          '(make install)
+          ))
 
 snippet run
 abbr    run-process with :wait
