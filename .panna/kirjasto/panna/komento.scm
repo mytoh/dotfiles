@@ -1,6 +1,6 @@
 (define-module panna.komento
   (export
-    install
+    link
     edit
     update
     )
@@ -18,12 +18,12 @@
               "kirjasto"
               "kaava"))
 
-(define (install app)
+(define (link app)
   (let* ((kaava  (make-parameter app))
-        (panna-kansio   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
-        (kellari-kansio (make-parameter (build-path (panna-kansio) "kellari")))
-        (tynnyri-kansio (make-parameter (build-path (kellari-kansio) (kaava))))
-        )
+         (panna-kansio   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
+         (kellari-kansio (make-parameter (build-path (panna-kansio) "kellari")))
+         (tynnyri-kansio (make-parameter (build-path (kellari-kansio) (kaava))))
+         )
     (newline)
     (display (string-append "[38;5;38m" ">>> " "[0m"))
     (print "installing files")
@@ -64,11 +64,21 @@
 
 
 (define (update)
-  (cond
-    ((file-exists? (build-path(current-directory) ".hg"))
-         (run-process '(hg pull) :wait #t)
-         (run-process '(hg update) :wait #t))
-    ((file-exists? (build-path(current-directory) ".git"))
-         (run-process '(git pull) :wait #t))
-    ((file-exists? (build-path(current-directory) ".svn"))
-         (run-process '(svn update) :wait #t))))
+  (let ((vcs-directory
+          (lambda ()
+            (cond
+              ((file-exists? (build-path (current-directory) ".hg"))
+               'hg)
+              ((file-exists? (build-path (current-directory) ".git"))
+               'git)
+              ((file-exists? (build-path (current-directory) ".svn"))
+               'svn)))))
+    (ecase (vcs-directory)
+           ; error if directory is not vcs directory
+           ((hg)
+            (run-process '(hg pull) :wait #t)
+            (run-process '(hg update) :wait #t))
+           ((git)
+            (run-process '(git pull) :wait #t))
+           ((svn)
+            (run-process '(svn update) :wait #t)))))

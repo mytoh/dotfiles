@@ -1,24 +1,18 @@
-#!/usr/bin/env gosh
-
-(use gauche.process)
-(use file.util)
-(use gauche.parameter)
-(use kirjasto)
 (use panna)
 
 (define kaava  (make-parameter "vim"))
-(define riisi-kansio (make-parameter (build-path (hg-kansio) (kaava))))
-(define panna-kansio   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
-(define kellari-kansio (make-parameter (build-path (panna-kansio) "kellari")))
-(define tynnyri-kansio (make-parameter (build-path (kellari-kansio) (kaava))))
+(define riisi (make-parameter (build-path (hg-kansio) (kaava))))
+(define panna   (make-parameter (resolve-path (sys-getenv "PANNA_PREFIX"))))
+(define kellari (make-parameter (build-path (panna) "kellari")))
+(define tynnyri (make-parameter (build-path (kellari) (kaava))))
 
-(define (build)
+(define (install)
   (use-clang)
   (commands
   '(gmake clean)
   '(gmake distclean)
   `(./configure   ,(string-append
-                     "--prefix=" (tynnyri-kansio))
+                     "--prefix=" (tynnyri))
                   "--enable-multibyte"
                   "--enable-perlinterp=yes"
                   "--enable-pythoninterp=yes"

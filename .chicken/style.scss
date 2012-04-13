@@ -3,14 +3,14 @@
 ;
 
 (let ((font "\"Convergence\"")
-      (font-size "8pt")
-          )
+      (font-size "8pt"))
 
 `(css+
    ; ((& .mix-font)
    ;     (font-family ,font)
    ;     (font-size "8pt"))
    (|*| (! (target-new tab)))
+
    (body (font-family ,font)
          (font-style san-serif)
          (font-size ,font-size)

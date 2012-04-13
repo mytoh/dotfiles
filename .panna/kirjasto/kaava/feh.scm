@@ -1,20 +1,18 @@
 
-(use gauche.process)
-(use gauche.parameter)
-(use file.util)
 (use kirjasto)
 (use panna)
 
 (define kaava  (make-parameter "feh"))
-(define riisi-kansio (make-parameter (build-path (git-kansio) (kaava))))
-(define panna-kansio   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
-(define kellari-kansio (make-parameter (build-path (panna-kansio) "kellari")))
-(define tynnyri-kansio (make-parameter (build-path (kellari-kansio) (kaava))))
+(define riisi (make-parameter (build-path (git-kansio) (kaava))))
+(define panna   (make-parameter (resolve-path (sys-getenv "PANNA_PREFIX"))))
+(define kellari (make-parameter (build-path (panna) "kellari")))
+(define tynnyri (make-parameter (build-path (kellari) (kaava))))
 
 (cond
+  ; freebsd
   ((eq? (get-os-type) 'freebsd)
-   (define (build)
-     (sys-putenv (string-append "PREFIX=" (tynnyri-kansio)))
+   (define (install)
+     (sys-putenv (string-append "PREFIX=" (tynnyri)))
      (use-clang)
      (commands
      '(gmake clean)
@@ -22,13 +20,9 @@
      '(gmake install)
      )))
 
-     ; (run-process '(gmake clean) :wait #t)
-     ; (run-process '(gmake) :wait #t)
-     ; (run-process '(gmake install) :wait #t)))
-
   (else
-    (define (build)
-      (sys-putenv (string-append "PREFIX=" (tynnyri-kansio)))
+    (define (install)
+      (sys-putenv (string-append "PREFIX=" (tynnyri)))
       (use-clang)
       (commands
       '(make clean)

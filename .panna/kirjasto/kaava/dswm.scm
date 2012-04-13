@@ -1,5 +1,4 @@
 
-
 (use gauche.process)
 (use gauche.parameter)
 (use file.util)
@@ -7,18 +6,18 @@
 (use panna)
 
 (define kaava (make-parameter "dswm"))
-(define riisi-kansio (make-parameter (build-path (git-kansio) (kaava))))
-(define panna-kansio   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
-(define kellari-kansio (make-parameter (build-path (panna-kansio) "kellari")))
-(define tynnyri-kansio (make-parameter (build-path (kellari-kansio) (kaava))))
+(define riisi (make-parameter (build-path (git-kansio) (kaava))))
+(define panna   (make-parameter (resolve-path (sys-getenv "PANNA_PREFIX"))))
+(define kellari (make-parameter (build-path (panna) "kellari")))
+(define tynnyri (make-parameter (build-path (kellari) (kaava))))
 
-(define (build)
+(define (install)
   (use-clang)
   (commands
     '(make clean)
     '(make distclean)
     '(autoconf)
-    `(./configure ,(string-append "--prefix=" (tynnyri-kansio)))
+    `(./configure ,(string-append "--prefix=" (tynnyri)))
     '(make)
     '(make install)
     ))

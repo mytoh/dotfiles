@@ -117,12 +117,15 @@ complete -c gosh -f -a "(__gosh_completion_current_directory)" -d "files in CWD"
 
 # panna {{{
 # add panna to PATH
-set -x PANNA_PATH "$HOME/.panna"
-set -x GAUCHE_LOAD_PATH $PANNA_PATH/kirjasto:$GAUCHE_LOAD_PATH
-push-to-path $PANNA_PATH/bin
+set -x PANNA_PREFIX "$HOME/.panna"
+set -x GAUCHE_LOAD_PATH $PANNA_PREFIX/kirjasto:$GAUCHE_LOAD_PATH
+push-to-path $PANNA_PREFIX/bin
+if test ! -L $PANNA_PREFIX/bin/PANNA_PREFIX
+       ln -sf $PANNA_PREFIX/kirjasto/run-panna.scm $PANNA_PREFIX/bin/panna
+end
 
 function __panna_completion_panna_path
-  set -l path (echo $PANNA_PATH | tr ':' '\n')
+  set -l path (echo $PANNA_PREFIX | tr ':' '\n')
   for i in $path/kirjasto/kaava
     for j in $i/*.scm
       echo (basename $j .scm)
@@ -205,10 +208,6 @@ if which gosh 1>&-
 
   function fb
     gosh fehbrowse.scm $argv
-  end
-
-  function panna
-  gosh run-panna.scm $argv
   end
 
   function talikko
@@ -1287,6 +1286,7 @@ switch (uname)
   #set -x LD_LIBRARY_PATH /usr/local/linux-sun-jdk1.6.0/jre/lib/i386
   set PYTHONPATH "~/local/homebrew/lib/python:$PYTHONPATH"
   set -x TERM xterm-256color
+  xsource (brew --prefix)/Library/Contributions/brew_fish_completion.fish
   alias mp2 "/Applications/mplayer2.app/Contents/MacOS/mplayer-bin"
   alias bsearch "brew search "
   alias binst "brew install -v"

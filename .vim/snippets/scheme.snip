@@ -77,3 +77,9 @@ abbr    panna kaava script
 snippet run
 abbr    run-process with :wait
         (run-process '(${1}) :wait #t)
+
+snippent module
+         (define-module ${1}
+           (export)
+           (use ${2}))
+         (select-module ${1})

@@ -3,6 +3,7 @@
   (export 
     string->lowercase
     make-colour
+    colour-process
     forever
     get-os-type
     tap
@@ -11,7 +12,6 @@
     run-command
     run-commands
     run-command-sudo
-    colour-process
     whitespace->dash
     whitespace->underbar
     swget
@@ -105,12 +105,12 @@
 
 (define (colour-process command regexp-proc)
   (with-input-from-process command
-    (lambda ()
-      (port-for-each
-        (lambda (in)
-          (print
-            (regexp-proc in)))
-        read-line))))
+                           (lambda ()
+                             (port-for-each
+                               (lambda (in)
+                                 (print
+                                   (regexp-proc in)))
+                               read-line))))
 
 
 
@@ -130,9 +130,9 @@
         (u8buf (make-u8vector 4096)))
     (let loop ((len (read-block! u8buf port)))
       (cond ((eof-object? len)
-            (get-output-string strport)
-            (else
-              (write-block u8buf strport 0 len)
-              (loop (read-block! u8buf port))))))))
+             (get-output-string strport)
+             (else
+               (write-block u8buf strport 0 len)
+               (loop (read-block! u8buf port))))))))
 
 (provide "kirjasto")
