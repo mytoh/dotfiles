@@ -5,3 +5,4 @@
     panna.ympäristö)
   )
 
+(provide "panna")

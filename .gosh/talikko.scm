@@ -8,7 +8,7 @@
 (use util.list) ; slices
 (use text.csv)
 (require-extension (srfi 1 11 13))
-(use kirjasto) ; run-command, run-command-sudo, make-colour
+(use kirjasto) ; run-command, run-command-sudo, make-colour, colour-command
 
 (define-constant package-directory "/var/db/pkg")
 (define-constant ports-directory   "/usr/ports")
@@ -70,29 +70,23 @@
   (print (string-append ">>> Installing " (make-colour 44 package)))
   (run-command '(sudo make clean))
   (run-command '(sudo make config))
-  (colour-process "sudo make install clean"
-                  (^x
-                    (regexp-replace* x
+  (colour-command "sudo make install clean"
                                      #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                                      #/^===>/   "[38;5;39m>>>[0m"
                                      #/^=>/   "[38;5;99m>>>[0m"
                                      #/\*\*\*.*$/    "[38;5;3m\\0[0m"
-                                     )))
-  )
+                                     ))
 ; }}}
 
 ; deinstall {{{
 (define (deinstall-package package)
   (current-directory (build-path ports-directory package))
   (print (string-append ">>> Deinstalling " (make-colour 44 package)))
-  (colour-process "sudo make deinstall"
-                  (^x
-                    (regexp-replace* x
+  (colour-command "sudo make deinstall"
                                      #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                                      #/^===>/   "[38;5;39m>>>[0m"
                                      #/\*\*\*.*$/    "[38;5;3m\\0[0m"
-                                     )))
-  )
+  ))
 
 ; }}}
 
@@ -102,23 +96,19 @@
   (print (string-append ">>> Installing " (make-colour 44 package)))
   (run-command '(sudo make clean))
   (run-command '(sudo make config))
-  (colour-process "sudo make"
-                  (^x
-                    (regexp-replace* x
+  (colour-command "sudo make"
                                      #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                                      #/^===>/   "[38;5;39m>>>[0m"
                                      #/^=>/   "[38;5;99m>>>[0m"
                                      #/\*\*\*.*$/    "[38;5;3m\\0[0m"
-                                     )))
+                                     )
   (deinstall-package package)
-  (colour-process "sudo make install clean"
-                  (^x
-                    (regexp-replace* x
+  (colour-command "sudo make install clean"
                                      #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                                      #/^===>/   "[38;5;39m>>>[0m"
                                      #/^=>/   "[38;5;99m>>>[0m"
                                      #/\*\*\*.*$/    "[38;5;3m\\0[0m"
-                                     )))
+                                     )
   )
 ; }}}
 

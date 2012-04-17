@@ -1,17 +1,14 @@
 (use panna)
 
-(define kaava  (make-parameter "ncmpcpp"))
-(define riisi (make-parameter (build-path (git-kansio) (kaava))))
-(define panna   (make-parameter (resolve-path (sys-getenv "PANNA_PREFIX"))))
-(define kellari (make-parameter (build-path (panna) "kellari")))
-(define tynnyri (make-parameter (build-path (kellari) (kaava))))
+(define kaava  "ncmpcpp")
+(define riisi (build-path (git-kansio) kaava))
 
 
-(define (install)
+(define (install tynnyri)
   (use-clang)
   (commands
     '(./autogen.sh)
-    `(./configure ,(string-append "--prefix=" (tynnyri))
+    `(./configure ,(string-append "--prefix=" tynnyri)
                   --enable-outputs
                   --enable-visualizer
                   --enable-clock

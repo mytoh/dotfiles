@@ -299,7 +299,7 @@ myRightBar  = "~/.dzen/bin/status | exec dzen2 -p -ta r -x 420 -y 0 -w 710 -h 16
 -- }}}
 trayer      = "exec trayer --expand false --alpha 40  --tint 0x232324 --transparent true --padding 0 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 16 --widthtype request --width 121 "
 mail        = "gmail-notifier"
-compmgr     = "compton -i 0.9 -e 0.8"
+compmgr     = "xcompmgr -n"
 bgmgr       = "feh --bg-scale ~/.wallpapers/purple-nagato.jpg"
 clipmgr     = "parcellite"
 volumemgr   = "gnome-volume-control-applet"
@@ -314,6 +314,7 @@ myStartupHook = do
                 spawn bgmgr
                 spawn clipmgr
                 spawn volumemgr
+                spawn compmgr
                 {- spawn uimPanel -}
                 execScriptHook "startup"
 

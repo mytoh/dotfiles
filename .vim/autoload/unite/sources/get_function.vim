@@ -1,4 +1,4 @@
-"http://kokukuma.blogspot.jp/2012/01/vim-unite-source.html
+"original source http://kokukuma.blogspot.jp/2012/01/vim-unite-source.html
 "----------------------------------------------------------+
 " get function                                             |
 "----------------------------------------------------------+
@@ -31,7 +31,10 @@ function! s:get_function.gather_candidates(args, context)
       call add(s:func_list, [s:line_number, line])
 
     " vim
-    elseif line =~ 'function! ' || line =~ 'func! ' && (s:ext == "vim" || s:ftype == "vim")
+    elseif line =~ 'function! ' 
+      \ || line =~ 'function('
+      \ || line =~ 'func('
+      \ || line =~ 'func! ' && (s:ext == "vim" || s:ftype == "vim")
       call add(s:func_list, [s:line_number, line])
 
     elseif line =~ 'def ' && s:ext == "py"
@@ -40,9 +43,11 @@ function! s:get_function.gather_candidates(args, context)
     " scheme
     elseif line =~ '(define ' || line =~ '(define-syntax ' && (s:ext == "scm" || s:ftype == "scheme")
       call add(s:func_list, [s:line_number, line])
-      
+
     " shell
-    elseif line =~ ' ()' && (s:ext == "sh" || s:ftype == "sh")
+    elseif line =~ ' ()' 
+    \   || line =~ '() {'
+    \   && (s:ext == "sh" || s:ftype == "sh")
       call add(s:func_list, [s:line_number, line])
 
     endif

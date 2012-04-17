@@ -39,6 +39,7 @@ xset fp+ /usr/local/lib/X11/fonts/bitstream-vera
 xset fp+ /usr/local/lib/X11/fonts/dejavu
 xset fp+ /usr/local/lib/X11/fonts/Droid
 xset fp+ /usr/local/lib/X11/fonts/artwiz-aleczapka-en
+xset fp+ /usr/local/lib/X11/fonts/code2001
 xset fp+ $HOME/.fonts
 xset fp rehash
 urxvtcd &

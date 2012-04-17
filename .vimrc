@@ -44,7 +44,7 @@ set directory^=~/.vim/swap
 
 let g:is_posix = 1             " vim's default is archaic bourne shell, bring it up to the 90s
 
-set clipboard=autoselect
+set clipboard=unnamed
 set scrolloff=1
 set title
 set ruler
@@ -59,6 +59,7 @@ set ambiwidth=double
 set display+=lastline
 " key sequence timeout length (default: 1000(ms))
 set timeoutlen=10000
+set wildignorecase
 
 " indent {{{
 
@@ -100,7 +101,7 @@ set splitbelow
 set splitright
 
 set list
-set listchars=tab:^\ ,trail:_,eol:¬,extends:>,precedes:<
+set listchars=tab:^\ ,trail:-,eol:¬,extends:»,precedes:«,nbsp:%
 
 " tags
 set showfulltag
@@ -108,7 +109,8 @@ set showfulltag
 " colors
 set t_Co=256
 set background=dark
-colorscheme neverland
+" colorscheme neverland
+colorscheme mycolor
 
 " set mouse
 set mouse=a
@@ -135,6 +137,7 @@ set fileformats=unix,mac,dos
 set virtualedit=all
 set nomore
 set imdisable
+set formatoptions=q
 
 " columns {{{
 set textwidth=80
@@ -175,6 +178,7 @@ hi User5 ctermfg=38   ctermbg=239
 hi User6 ctermfg=24   ctermbg=243
 hi User7 ctermfg=17   ctermbg=247
 hi User8 ctermfg=95   ctermbg=251
+" mode
 hi User9 ctermfg=233   ctermbg=255
 
 function! GetCharCode() " {{{ from powerline
@@ -208,12 +212,35 @@ function! GetCharCode() " {{{ from powerline
   return "'". char ."' ". nr
 endfunction "}}}
 
+" display mode {{{
+augroup InsertHook
+  autocmd!
+  autocmd InsertEnter * call Statusmode('enter')
+  autocmd InsertLeave * call Statusmode('Leave')
+augroup END
+
+function! Statusmode(mode)
+  if a:mode == 'enter'
+    hi clear User9
+    silent exec 'highlight User9 ctermfg=blue ctermbg=222 cterm=none'
+  else
+    hi clear User9
+    silent exec 'highlight User9 ctermfg=222 ctermbg=230 cterm=none'
+  endif
+endfunction
+" }}}
+
 " statusline
+" left , buffer list
 set stl=     " clear statusline when reloaded
 
-set stl=%2*\   " left side
+set stl+=%2*\   " left side
 
 set stl+=%=  " separator
+
+" right
+set stl+=%9*
+let &stl= &stl . "\ " . "mode"
 
 set stl+=%3*
 let &stl= &stl . "\ "
@@ -250,37 +277,39 @@ set stl+=/%L   "total line number
 set stl+=\ 
 
 
+
+
 " change StatusLine color when insert mode {{{
 " http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-color#color-theme-mod
-let g:hi_insert = 'highlight StatusLine ctermfg=blue ctermbg=yellow
-                 \ cterm=none guifg=darkblue guibg=darkyellow gui=none'
-if has('sytax')
-  augroup InsertHook
-    autocmd!
-    autocmd InsertEnter * call s:StatusLine('Enter')
-    autocmd InsertLeave * call s:StatusLine('Leave')
-  augroup END
-endif
+" let g:hi_insert = 'highlight StatusLine ctermfg=blue ctermbg=yellow
+"                  \ cterm=none guifg=darkblue guibg=darkyellow gui=none'
+" if has('sytax')
+"   augroup InsertHook
+"     autocmd!
+"     autocmd InsertEnter * call s:StatusLine('Enter')
+"     autocmd InsertLeave * call s:StatusLine('Leave')
+"   augroup END
+" endif
 
-let s:slhlcmd = ''
-function! s:StatusLine(mode)
-  if a:mode == 'Enter'
-    silent! let s:slhlcmd = 'highlight' . s:GetHighlight('StatusLine')
-    silent exec g:hi_insert
-  else
-    highlight clear StatusLine
-    silent exec s:slhlcmd
-  endif
-endfunction
-
-function! s:GetHighlight(hi)
-  redir => hl
-  exec 'highlight' . a:hi
-  redir END
-  let hl = substitute(hl, '[\r\n]', '', 'g')
-  let hl = substitute(hl, 'xxx', '', '')
-  return hl
-endfunction
+" let s:slhlcmd = ''
+" function! s:StatusLine(mode)
+"   if a:mode == 'Enter'
+"     silent! let s:slhlcmd = 'highlight' . s:GetHighlight('StatusLine')
+"     silent exec g:hi_insert
+"   else
+"     highlight clear StatusLine
+"     silent exec s:slhlcmd
+"   endif
+" endfunction
+" 
+" function! s:GetHighlight(hl)
+"   redir => hl
+"   exec 'highlight' . a:hl
+"   redir END
+"   let hl = substitute(hl, '[\r\n]', '', 'g')
+"   let hl = substitute(hl, 'xxx', '', '')
+"   return hl
+" endfunction
 "}}}
 
 "}}}
@@ -293,6 +322,7 @@ hi ActiveBuffer   ctermfg=68 ctermbg=230 cterm=none
 hi InactiveBuffer ctermfg=gray ctermbg=235 cterm=none
 hi Comment        ctermfg=244 ctermbg=234 cterm=bold
 hi ColorColumn ctermbg=234
+hi MatchParen     cterm=bold,reverse
 
 " }}}
 
@@ -313,15 +343,20 @@ endif
 " remove trailing spaces {{{
 function! s:vimrc.trimspace() dict
   %s/\s*$//
+  " trim space for lisp file
+  %s/(\s*/(/
+  %s/)\s\+)/))/
   ''
 endfunction
 " }}}
 
-command! -complete=command TrimSpace :call s:vimrc.trimspace()
 command! -nargs=1 Silent
       \ | execute ':silen !'.<q-args>
       \ | execute ':redraw!'
+
 command! -complete=command EditUtf8 :e ++enc=utf-8
+
+command! -complete=command TrimSpace :call s:vimrc.trimspace()
 
 " rename current buffer
 " :Rename newfilename
@@ -586,7 +621,7 @@ let g:neocomplcache_enable_ignore_case             = 1
 " let g:neocomplcache_enable_camel_case_completion = 1
 " let g:neocomplcache_enable_underbar_completi on  = 1
 let g:neocomplcache_enable_fuzzy_completion        = 1
-let g:neocomplcache_enable_auto_select             = 0
+let g:neocomplcache_enable_auto_select             = 1
 let g:neocomplcache_dictionary_filetype_lists      = {
       \ 'default'  : '',
       \ 'scheme'   : $RLWRAP_HOME . '/gosh_completions',
@@ -748,6 +783,7 @@ nnoremap <silent> [unite]b :<c-u>Unite buffer<cr>
 nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
 nnoremap <silent> [unite]l :<c-u>Unite launcher<cr>
 nnoremap <silent> [unite]p :<c-u>Unite get_function<cr>
+nnoremap <silent> [unite]k :<c-u>Unite bookmark<cr>
 
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings() "{{{
@@ -934,6 +970,9 @@ let g:syntastic_enable_balloons     = 1
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_enable_signs        = 1
 let g:syntastic_auto_loc_list       = 2
+let g:syntastic_mode_map = { 'mode': 'active',
+      \ 'active_filetypes': ['ruby', 'javascript'],
+      \ 'passive_filetypes': ['puppet'] }
 " }}}
 
 " indent-guides {{{
@@ -949,12 +988,6 @@ autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=233
 " scheme.vim {{{
 " not work on autocmd
 let is_gauche=1
-" }}}
-
-" syntastic {{{
-let g:syntastic_mode_map = { 'mode': 'active',
-      \ 'active_filetypes': ['ruby', 'javascript'],
-      \ 'passive_filetypes': ['puppet'] }
 " }}}
 
 " slimv {{{
@@ -982,6 +1015,10 @@ aug end
 if !argc()
 autocmd VimEnter * ScratchOpen
 endif
+" }}}
+
+" paredit {{{
+let g:paredit_leader = '\'
 " }}}
 
 " }}}

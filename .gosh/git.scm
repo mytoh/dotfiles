@@ -10,25 +10,19 @@
 
 (define-constant *repos*
   '(; normal repo
-    "git://gauche.git.sourceforge.net/gitroot/gauche/Gauche"
     "git://code.call-cc.org/chicken-core"
     "git://gitorious.org/cmus/cmus.git"
-    "git://derf.homelinux.org/feh"
     "git://a-chinaman.com/nuscsh"
     "git://git.sv.gnu.org/screen.git"
     "git://git.savannah.gnu.org/stow.git"
     "git://git.savannah.nongnu.org/stumpwm"
     "git://gitorious.org/fish-shell/fish-shell.git"
     "git://gitorious.org/~otherchirps/fish-shell/otherchirps-fish-shell.git"
-    "git://gitorious.org/~ridiculousfish/fish-shell/fishfish.git"
     "git://git.infradead.org/get_iplayer.git"
     "git://git.mplayer2.org/mplayer2.git"
-    "git://repo.or.cz/ncmpcpp.git"
     "git://git.informatik.uni-erlangen.de/re06huxa/herbstluftwm"
     "git://opensource.conformal.com/xxxterm.git"
     "git://tron.homeunix.org/cvscvt"
-    "git://liferea.git.sourceforge.net/gitroot/liferea/liferea"
-    "git://sox.git.sourceforge.net/gitroot/sox/sox"
     ; repo with other name
     ("git://git.sourceforge.jp/gitroot/ninix-aya/master.git"  "ninix-aya")
     ; minun github repo
@@ -78,7 +72,6 @@
     (Nandaka       DanbooruDownloader)
     (frytvm        XS)
     (joelagnel     stumpwm-goodies)
-    (dss-project   dswm)
     (aredridel      es-shell)
     (ThomasAdam     tmux)
     (midgetspy      Sick-Beard)
@@ -100,8 +93,16 @@
     (ivmai          libatomic_ops)
     (gmarik         vimfiles gmarik-vimfiles)
     (valvallow      lifegame)
-    (git            git)
     (saironiq       shellscripts)
+    (mason-larobina luakit)
+    ; (git            git)
+    ; (dss-project   dswm)
+    ; "git://gauche.git.sourceforge.net/gitroot/gauche/Gauche"
+    ; "git://derf.homelinux.org/feh"
+    ; "git://gitorious.org/~ridiculousfish/fish-shell/fishfish.git"
+    ; "git://liferea.git.sourceforge.net/gitroot/liferea/liferea"
+    ; "git://repo.or.cz/ncmpcpp.git"
+    ; "git://sox.git.sourceforge.net/gitroot/sox/sox"
     ))
 
 ;; update git repository

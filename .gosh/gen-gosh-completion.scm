@@ -184,6 +184,7 @@
 
 ; personal library
 (require "kirjasto")
+(require "panna")
 
 
 (use srfi-1)
@@ -210,7 +211,7 @@
 
 
 ;; -- added
-  (let ((completion-file (open-output-file (build-path (home-directory) (sys-getenv "RLWRAP_HOME") "gosh_completions"))))
+  (let ((completion-file (open-output-file (build-path (sys-getenv "RLWRAP_HOME") "gosh_completions"))))
   (for-each (lambda (s)
               (display s completion-file)
               (newline  completion-file))

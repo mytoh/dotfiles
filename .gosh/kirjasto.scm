@@ -1,9 +1,15 @@
 (define-module kirjasto
+  (use text.tr)
+  (use gauche.net)
+  (use gauche.process)
+  (use file.util)
+  (use rfc.http)
+  (use rfc.uri)
   (extend kirjasto.komento)
+
   (export 
     string->lowercase
     make-colour
-    colour-process
     forever
     get-os-type
     tap
@@ -12,18 +18,14 @@
     run-command
     run-commands
     run-command-sudo
+    colour-command
     whitespace->dash
     whitespace->underbar
     swget
     port->incomplete-string
     )
 
-  (use text.tr)
-  (use gauche.net)
-  (use gauche.process)
-  (use file.util)
-  (use rfc.http)
-  (use rfc.uri))
+  )
 
 (select-module kirjasto)
 
@@ -96,22 +98,31 @@
     ((_ c1 c2 ...)
      (begin
        (run-process c1 :wait #t)
-       (commands c2 ...)))))
+       (run-commands c2 ...)))))
 
 
 (define (run-command-sudo command)
   (run-process (append '(sudo) command) :wait #t)
   )
 
-(define (colour-process command regexp-proc)
-  (with-input-from-process command
-                           (lambda ()
-                             (port-for-each
-                               (lambda (in)
-                                 (print
-                                   (regexp-proc in)))
-                               read-line))))
-
+(define-syntax colour-command
+  (syntax-rules ()
+    ((_ command r1 s1 ...)
+     (with-input-from-process 
+       command
+       (lambda ()
+         (port-for-each
+           (lambda (in)
+             (print
+               (regexp-replace* in
+                                r1 s1
+                                ...
+                                ; example:
+                                ; #/^>>>/   "[38;5;99m\\0[0m"
+                                ; #/^=*>/   "[38;5;39m\\0[0m"
+                                )))
+                                read-line))))
+    ))
 
 
 (define (swget url)

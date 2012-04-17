@@ -64,6 +64,8 @@ set -x _JAVA_OPTIONS -Dawt.useSystemAAFontSettings=on
 # rlwrap
 set -x RLWRAP_HOME ~/.rlwrap
 
+set -x IGNOREEOF 1
+
 #}}}
 
 # complete {{{
@@ -72,7 +74,7 @@ set -l comp-directory ~/local/git
   for p in $argv
     if test -d $comp-directory/$p
       if not contains $comp-directory/$p $fish_complete_path
-        set -x fish_complete_path $comp-directory/$p $fish_complete_path
+        set fish_complete_path $comp-directory/$p $fish_complete_path
       end
     end
   end
@@ -121,22 +123,30 @@ set -x PANNA_PREFIX "$HOME/.panna"
 set -x GAUCHE_LOAD_PATH $PANNA_PREFIX/kirjasto:$GAUCHE_LOAD_PATH
 push-to-path $PANNA_PREFIX/bin
 if test ! -L $PANNA_PREFIX/bin/PANNA_PREFIX
-       ln -sf $PANNA_PREFIX/kirjasto/run-panna.scm $PANNA_PREFIX/bin/panna
+  ln -sf $PANNA_PREFIX/kirjasto/run-panna.scm $PANNA_PREFIX/bin/panna
 end
 
-function __panna_completion_panna_path
-  set -l path (echo $PANNA_PREFIX | tr ':' '\n')
-  for i in $path/kirjasto/kaava
-    for j in $i/*.scm
-      echo (basename $j .scm)
+function __fish_complete_panna_kaava
+  set arguments (commandline -opc)
+  set path (echo $PANNA_PREFIX | tr ':' '\n')
+
+  for cmd in $arguments
+
+    if contains -- $cmd edit install homepage home up update
+      ls $PANNA_PREFIX/kirjasto/kaava | sed s/\.scm//
+      return 0
+    end
+
+    if contains -- $cmd abv info list ls rm remove uninstall
+      ls $PANNA_PREFIX/kellari
+      return 0
     end
   end
 end
 
-complete -c panna -n '__fish_use_subcommand' -xa install --description "install package"
-complete -c panna -n '__fish_use_subcommand' -xa 'update up' --description "update repo"
-complete -c panna -n '__fish_use_subcommand' -xa build --description "build"
-complete -c panna -f -a "(__panna_completion_panna_path)" -d " package"
+complete -c panna -n '__fish_use_subcommand' -xa 'build install up edit info
+uninstall  rm remove ls list homepage home up update'
+complete -c panna -f -a "(__fish_complete_panna_kaava)"
 # }}}
 
 # talikko {{{
@@ -161,91 +171,101 @@ complete -c talikko -f -a "(__talikko_completion_ports_tree)"
 #}}}
 
 # gauche functions {{{
-if which gosh 1>&-
+if which gosh >&-
 
-  if test -n $GAUCHE_LOAD_PATH
-    function cd
-      if test -d $argv[1]
-        builtin cd $argv
-        and command gosh ls.scm -d .
-      else
-        builtin cd (dirname $argv[1])
-        and command gosh ls.scm -d .
-      end
-    end
-  else
-    function cd
-      builtin cd $argv
-    end
-  end
+        if test -n $GAUCHE_LOAD_PATH
+                function cd
+                        if test -d $argv[1]
+                                builtin cd $argv
+                                and command gosh ls.scm -d .
+                        else
+                                builtin cd (dirname $argv[1])
+                                and command gosh ls.scm -d .
+                        end
+                end
+        else
+                function cd
+                        builtin cd $argv
+                end
+        end
 
-  function gi
-    rlwrap -pBlue -c -q '"' -b '(){}[].,#@;|`"' -m gosh
-  end
+        function gi
+                rlwrap -pBlue -c -q '"' -b '(){}[].,#@;|`"' gosh
+        end
 
-  function yotsuba
-    command gosh yotsuba-get.scm $argv
-  end
-  function futaba
-    command gosh futaba-get.scm $argv
-  end
+        function yotsuba
+                command gosh yotsuba-get.scm $argv
+        end
+        function futaba
+                command gosh futaba-get.scm $argv
+        end
 
-  function danbooru
-    command gosh danbooru $argv
-  end
+        function danbooru
+                command gosh danbooru $argv
+        end
 
-  function spc2ubar
-    command gosh space2underbar.scm $argv
-  end
+        function spc2ubar
+                command gosh space2underbar.scm $argv
+        end
 
-  function ea
-    command gosh extattr.scm $argv
-  end
+        function ea
+                command gosh extattr.scm $argv
+        end
 
-  function unpack
-    command gosh unpack.scm $argv
-  end
+        function unpack
+                command gosh unpack.scm $argv
+        end
 
-  function fb
-    gosh fehbrowse.scm $argv
-  end
+        function fb
+                command gosh fehbrowse.scm $argv
+        end
 
-  function talikko
-  gosh talikko.scm $argv
-  end
+        function talikko
+                command gosh talikko.scm $argv
+        end
 
-  function colour-numbers
-  gosh colour-numbers.scm
-  end
+        function colour-numbers
+                command gosh colour-numbers.scm
+        end
 
-  function fi-en
-  gosh kääntää.scm fi en $argv[1]
-  end
+        function fi-en
+                command gosh kääntää.scm fi en $argv[1]
+        end
 
-  function en-fi
-  gosh kääntää.scm en fi $argv[1]
-  end
+        function en-fi
+                command gosh kääntää.scm en fi $argv[1]
+        end
 
-  function sanoa
-    gosh sanoa.scm $argv
-  end
+        function sanoa
+                command gosh sanoa.scm $argv
+        end
 
-  function v
-  gosh v.scm $argv
-  end
+        function v
+                command gosh v.scm $argv
+        end
 
-  function la
-    command gosh ls.scm -d -a
-  end
-  function ll
-    command gosh ls.scm -d -psf
-  end
-  function lla
-    command gosh ls.scm -d -psf -a
-  end
-  function l
-    command gosh ls.scm -d
-  end
+        function a
+                command gosh launch-app.scm $argv
+        end
+        complete -c a -a "(complete -C(commandline -ct))" -x
+
+        function hub
+              command gosh hub.scm $argv
+        end
+
+
+        function la
+                command gosh ls.scm -d -a
+        end
+        function ll
+                command gosh ls.scm -d -psf
+        end
+        function lla
+                command gosh ls.scm -d -psf -a
+        end
+        function l
+                command gosh ls.scm -d
+        end
 end
 #}}}
 
@@ -358,13 +378,17 @@ printf '%s%s%s' "[38;5;235m>"  "[38;5;67m>"   "[38;5;117m>"
 end
 
 
-function fish_prompt -d "fish prompt function"
-  #printf '%s%s%s%s\n%s ' (prompt-up-right) (current-directory) (set_color normal) (git_prompt) (prompt-down-right)
-  if test -d $PWD/.git
-  printf '%s.%s :: %s:%s\n%s ' (prompt-face) (prompt-host) (current-directory) (git_prompt)  (prompt-arrow)
-  else
-  printf '%s.%s :: %s\n%s ' (prompt-face) (prompt-host) (current-directory) (prompt-arrow)
-  end
+#function fish_prompt -d "fish prompt function"
+#  #printf '%s%s%s%s\n%s ' (prompt-up-right) (current-directory) (set_color normal) (git_prompt) (prompt-down-right)
+#  if test -d $PWD/.git
+#  printf '%s.%s :: %s:%s\n%s ' (prompt-face) (prompt-host) (current-directory) (git_prompt)  (prompt-arrow)
+#  else
+#  printf '%s.%s :: %s\n%s ' (prompt-face) (prompt-host) (current-directory) (prompt-arrow)
+#  end
+#end
+
+function fish_prompt -d "fish prompt with gauche script"
+ ~/.gosh/prompt.scm
 end
 
 #}}}
@@ -619,7 +643,7 @@ end
 # screen {{{
 set -x SCREENDIR $HOME/.screen.d/tmp
 function sc
- screen -U -D -RR  -m
+ screen -U -D -RR -a -A -m
 end
 #}}}
 

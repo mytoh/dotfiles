@@ -1,11 +1,11 @@
 (define-module kirjasto.komento
+  (use gauche.process)
+  (use file.util)
+
   (export
     cd
     mkdir)
-
-  (use gauche.process)
-  (use file.util)
-  )
+)
 
 (select-module kirjasto.komento)
 

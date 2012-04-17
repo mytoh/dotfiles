@@ -5,10 +5,10 @@
 
 (use gauche.process)
 (use gauche.parseopt)
+(use gauche.sequence)
 (use util.match)
 (use file.util)
 (require-extension (srfi 13))
-(use gauche.collection)
 
 (define (viminfo->list)
   (with-input-from-file
