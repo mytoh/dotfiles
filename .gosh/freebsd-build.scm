@@ -4,7 +4,7 @@
 (define-syntax colour-command
   (syntax-rules ()
     ((_ command r1 s1 ...)
-     (with-input-from-process 
+     (with-input-from-process
        command
        (lambda ()
          (port-for-each
@@ -13,14 +13,12 @@
                (regexp-replace* in
                                 r1 s1
                                 ...
-                                ; example:
-                                ; #/^>>>/   "[38;5;99m\\0[0m"
-                                ; #/^=*>/   "[38;5;39m\\0[0m"
                                 )))
                                 read-line))))
     ))
 
 (define (process command)
+  (print  (string-append "[38;5;80m" "==> " "[0m" commad))
   (colour-command command
                   #/^>>>/   "[38;5;99m\\0[0m"
                   #/^=*>/   "[38;5;39m\\0[0m"
@@ -32,7 +30,9 @@
                   #/(\w*\.o)/  "[38;5;148m\\1[0m"
                   #/(\w*\.So)/  "[38;5;248m\\1[0m"
                   #/(\w*\.so)/  "[38;5;248m\\1[0m"
-                  ))
+                  )
+  (prit (string-append "[38;5;218m" "-------------" "[0m"))
+  )
 
 (define (main args)
   (current-directory "/usr/src")

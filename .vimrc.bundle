@@ -1,3 +1,12 @@
+"                      __                          __   ___
+"                     /\ \                        /\ \ /\_ \
+"   ___      __    ___\ \ \____  __  __    ___    \_\ \\//\ \      __
+" /' _ `\  /'__`\ / __`\ \ '__`\/\ \/\ \ /' _ `\  /'_` \ \ \ \   /'__`\
+" /\ \/\ \/\  __//\ \L\ \ \ \L\ \ \ \_\ \/\ \/\ \/\ \L\ \ \_\ \_/\  __/
+" \ \_\ \_\ \____\ \____/\ \_,__/\ \____/\ \_\ \_\ \___,_\/\____\ \____\
+"  \/_/\/_/\/____/\/___/  \/___/  \/___/  \/_/\/_/\/__,_ /\/____/\/____/
+"
+
 set shell=sh
 
 let $VIMBUNDLE_DIR=$HOME."/.bundle"
@@ -18,21 +27,17 @@ else
   " github repo {{{
   NeoBundle 'Shougo/neocomplcache'
   NeoBundle 'Shougo/neocomplcache-snippets-complete'
-  NeoBundle 'Shougo/unite.vim'
   NeoBundle 'Shougo/vimfiler'
   NeoBundle 'Shougo/vimproc'
   NeoBundle 'Shougo/vimshell'
   NeoBundle 'Shougo/vinarise'
   NeoBundle 'Shougo/echodoc'
-  NeoBundle 'hakobe/unite-script'
   NeoBundle 'koron/chalice'
   NeoBundle 'koron/nyancat-vim'
   " NeoBundle 'koron/u-nya-vim'
-  NeoBundle 'choplin/unite-vim_hacks'
   NeoBundle 'lilydjwg/colorizer'
   NeoBundle 'mattn/googlereader-vim'
   NeoBundle 'mattn/lisper-vim'
-  NeoBundle 'mattn/unite-remotefile'
   NeoBundle 'mattn/webapi-vim'
   NeoBundle 'mattn/wwwrenderer-vim'
   NeoBundle 'mattn/learn-vimscript'
@@ -60,15 +65,11 @@ else
   NeoBundle 'tyru/skkdict.vim'
   NeoBundle 'tyru/open-browser.vim'
   NeoBundle 'tyru/savemap.vim'
-  NeoBundle 'tyru/unite-cmdwin'
   NeoBundle 'tyru/vice.vim'
   NeoBundle 'tyru/current-func-info.vim'
   NeoBundle 'tyru/caw.vim'
   NeoBundle 'ujihisa/neco-look'
-  NeoBundle 'ujihisa/unite-colorscheme'
-  NeoBundle 'ujihisa/unite-launch'
   NeoBundle 'ujihisa/vimshell-ssh'
-  NeoBundle 'mfumi/unite-mpc'
   NeoBundle 'mfumi/mpc.vim'
   NeoBundle 'mileszs/ack.vim'
   NeoBundle 'trapd00r/vim-extendedcolors'
@@ -78,7 +79,6 @@ else
   NeoBundle 'djjcast/mirodark'
   NeoBundle 'houtsnip/vim-emacscommandline'
   NeoBundle 'acustodioo/vim-cmdline-completion'
-  NeoBundle 'h1mesuke/unite-outline'
   NeoBundle 'h1mesuke/vim-alignta'
   NeoBundle 'baskerville/bubblegum'
   NeoBundle 'basyura/twibill.vim'
@@ -99,7 +99,6 @@ else
   NeoBundle 'hobbestigrou/Vim-wmfs'
   NeoBundle 'aharisu/Gauche-Complete'
   NeoBundle 'bronson/vim-trailing-whitespace'
-  NeoBundle 'taka84u9/unite-git'
   NeoBundle 'chrisbra/SudoEdit.vim'
   NeoBundle 'yuratomo/w3m.vim'
   NeoBundle 'xolox/vim-reload'
@@ -108,7 +107,21 @@ else
   NeoBundle 'jpalardy/vim-slime'
   NeoBundle 'godlygeek/tabular'
   NeoBundle 'benmills/vimux'
+  "unite
+  NeoBundle 'hakobe/unite-script'
+  NeoBundle 'choplin/unite-vim_hacks'
+  NeoBundle 'mattn/unite-remotefile'
+  NeoBundle 'tyru/unite-cmdwin'
+  NeoBundle 'ujihisa/unite-colorscheme'
+  NeoBundle 'ujihisa/unite-launch'
+  NeoBundle 'mfumi/unite-mpc'
+  NeoBundle 'Shougo/unite.vim'
+  NeoBundle 'h1mesuke/unite-outline'
+  NeoBundle 'taka84u9/unite-git'
   NeoBundle 'shiracha/unite-related_files'
+  NeoBundle 'osyo-manga/unite-homo'
+  NeoBundle 'osyo-manga/unite-homo-statusline'
+  NeoBundle 'osyo-manga/unite-u-nya-'
   "lisp
   NeoBundle 'emezeske/paredit.vim'
   "haskell
@@ -167,3 +180,4 @@ filetype plugin on
 filetype indent on
 
 " vim:set foldmethod=marker:
+

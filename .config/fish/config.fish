@@ -378,14 +378,6 @@ printf '%s%s%s' "[38;5;235m>"  "[38;5;67m>"   "[38;5;117m>"
 end
 
 
-#function fish_prompt -d "fish prompt function"
-#  #printf '%s%s%s%s\n%s ' (prompt-up-right) (current-directory) (set_color normal) (git_prompt) (prompt-down-right)
-#  if test -d $PWD/.git
-#  printf '%s.%s :: %s:%s\n%s ' (prompt-face) (prompt-host) (current-directory) (git_prompt)  (prompt-arrow)
-#  else
-#  printf '%s.%s :: %s\n%s ' (prompt-face) (prompt-host) (current-directory) (prompt-arrow)
-#  end
-#end
 
 function fish_prompt -d "fish prompt with gauche script"
  ~/.gosh/prompt.scm
@@ -1251,6 +1243,15 @@ switch (uname)
   end
   function pcreateall
     pkg_info -Ea |    xargs -n 1 sudo pkg_create -Jnvb
+  end
+
+  function fish_prompt -d "fish prompt function"
+    #printf '%s%s%s%s\n%s ' (prompt-up-right) (current-directory) (set_color normal) (git_prompt) (prompt-down-right)
+    if test -d $PWD/.git
+    printf '%s.%s :: %s:%s\n%s ' (prompt-face) (prompt-host) (current-directory) (git_prompt)  (prompt-arrow)
+    else
+    printf '%s.%s :: %s\n%s ' (prompt-face) (prompt-host) (current-directory) (prompt-arrow)
+    end
   end
 
   #if test $TERM = "cons25"

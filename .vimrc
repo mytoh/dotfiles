@@ -245,7 +245,7 @@ let &stl= &stl . "\ " . "mode"
 set stl+=%3*
 let &stl= &stl . "\ "
 set stl+=%<%{fnamemodify(getcwd(),':~')}   "get filepath
-set stl+=\ 
+set stl+=\
 
 set stl+=%4*
 if exists('*fugitive#statusline')
@@ -253,16 +253,16 @@ if exists('*fugitive#statusline')
 endif
 
 set stl+=%5*
-set stl+=\ 
+set stl+=\
 set stl+=%{&dictionary}
-set stl+=%{&fileformat}\ 
-set stl+=<\ 
-set stl+=%{&fenc}\ 
-set stl+=<\ 
-set stl+=%{&filetype}\ 
+set stl+=%{&fileformat}\
+set stl+=<\
+set stl+=%{&fenc}\
+set stl+=<\
+set stl+=%{&filetype}\
 
 set stl+=%6*
-set stl+=\ 
+set stl+=\
 set stl+=%{GetCharCode()}\  " hex under cursor
 
 set stl+=%7*
@@ -270,11 +270,11 @@ set stl+=%3p%%\  "percentage of current line
 set stl+=%*    "reset color
 
 set stl+=%8*
-set stl+=\ 
+set stl+=\
 set stl+=%l,  "current line number
 set stl+=%c   "columns
 set stl+=/%L   "total line number
-set stl+=\ 
+set stl+=\
 
 
 
@@ -301,7 +301,7 @@ set stl+=\
 "     silent exec s:slhlcmd
 "   endif
 " endfunction
-" 
+"
 " function! s:GetHighlight(hl)
 "   redir => hl
 "   exec 'highlight' . a:hl
@@ -441,7 +441,7 @@ function! s:resizeWindow()
 
 endfunction
 
-nmap <C-w>r	:<C-u>call <SID>resizeWindow()<CR>mws
+nmap <C-w>r :<C-u>call <SID>resizeWindow()<CR>mws
 " }}}
 
 " forward/backward word
@@ -782,8 +782,15 @@ nnoremap <silent> [unite]c  :<C-u>UniteWithCurrentDir -buffer-name=files buffer 
 nnoremap <silent> [unite]b :<c-u>Unite buffer<cr>
 nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
 nnoremap <silent> [unite]l :<c-u>Unite launcher<cr>
-nnoremap <silent> [unite]p :<c-u>Unite get_function<cr>
+nnoremap <silent> [unite]g :<c-u>Unite get_function<cr>
 nnoremap <silent> [unite]k :<c-u>Unite bookmark<cr>
+nnoremap <silent> [unite]p :<c-u>call <SID>unite_project('-start-insert')<cr>
+
+function! s:unite_project(...)
+  let opts = (a:0 ? join(a:000, ' ') : '')
+  let dir  = unite#util#path2project_directory(expand('%'))
+  execute 'Unite' opts 'file_rec:' . dir
+endfunction
 
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings() "{{{
@@ -793,6 +800,13 @@ function! s:unite_my_settings() "{{{
   inoremap <buffer> <C-l>  <C-x><C-u><C-p><Down>
   "call unite#custom_default_action('file', 'tabopen')
   "call unite#custom_default_action('bookmark', 'tabopen')
+  call unite#set_substitute_pattern('files', '^\~',
+        \ substitute(unite#util#substitute_path_separator($HOME), ' ', '\\\\ ', 'g'), -100)
+  call unite#set_substitute_pattern('files', '[^~.*]\ze/', '\0*', 100)
+  call unite#set_substitute_pattern('files', '/\ze[^~.*]', '/*', 100)
+  call unite#set_substitute_pattern('files', '\.', '*.', 1000)
+  call unite#set_substitute_pattern('files', '^\.v/',
+        \ [expand('~/.vim/'), unite#util#substitute_path_separator($HOME) . '/.bundle/*/'], 1000)
 endfunction "}}}
 
 " unite-launch {{{
@@ -1013,7 +1027,7 @@ aug end
 " open scratch buffer
 " if no filename given
 if !argc()
-autocmd VimEnter * ScratchOpen
+  autocmd VimEnter * ScratchOpen
 endif
 " }}}
 
