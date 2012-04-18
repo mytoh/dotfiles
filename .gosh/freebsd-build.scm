@@ -1,9 +1,27 @@
 (use gauche.process)
 (use file.util)
-(use kirjasto)
+
+(define-syntax colour-command
+  (syntax-rules ()
+    ((_ command r1 s1 ...)
+     (with-input-from-process 
+       command
+       (lambda ()
+         (port-for-each
+           (lambda (in)
+             (print
+               (regexp-replace* in
+                                r1 s1
+                                ...
+                                ; example:
+                                ; #/^>>>/   "[38;5;99m\\0[0m"
+                                ; #/^=*>/   "[38;5;39m\\0[0m"
+                                )))
+                                read-line))))
+    ))
 
 (define (process command)
-  (colour-process command
+  (colour-command command
                   #/^>>>/   "[38;5;99m\\0[0m"
                   #/^=*>/   "[38;5;39m\\0[0m"
                   #/^-*/    "[38;5;233m\\0[0m"

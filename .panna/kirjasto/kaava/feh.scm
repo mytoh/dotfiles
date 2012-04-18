@@ -3,7 +3,6 @@
 (use panna)
 
 (define kaava   "feh")
-(define riisi   (build-path (git-kansio) kaava))
 
 (define homepage "dummy")
 

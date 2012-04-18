@@ -1,7 +1,6 @@
 (use panna)
 
 (define kaava   "sox")
-(define riisi   (build-path (git-kansio) kaava))
 
 
 (define (install tynnyri)

@@ -1,8 +1,7 @@
 (use kirjasto)
 (use panna)
 
-(define kaava  "fishfish")
-(define riisi  (build-path (git-kansio) kaava))
+(define kaava  "fish")
 
 (cond
   ((eq? (get-os-type) 'freebsd)

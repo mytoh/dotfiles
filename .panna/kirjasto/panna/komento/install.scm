@@ -39,11 +39,12 @@
                            (cadr p)))))
         file-list))))
 
-(define (initialize pullo)
+(define (install-package pullo)
   (let* (
         (panna   (resolve-path (sys-getenv "PANNA_PREFIX")))
         (kellari (build-path panna "kellari"))
         (tynnyri (build-path kellari pullo)) 
+        (riisi   (build-path panna "riisi" pullo))
         )
   (load (find-file-in-paths (string-append pullo ".scm")
                             :paths `(,kaava-kansio) 
@@ -54,5 +55,7 @@
   (link pullo)
     ))
 
-(initialize (car *argv*))
 
+(define (main args)
+  (install-package (cadr args))
+  )

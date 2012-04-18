@@ -1,7 +1,6 @@
 (use panna)
 
 (define kaava   "mplayer")
-(define riisi  (build-path (svn-kansio) kaava))
 
 
 (define (install tynnyri)

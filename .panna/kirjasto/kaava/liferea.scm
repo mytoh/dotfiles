@@ -2,7 +2,6 @@
 (use panna)
 
 (define kaava   "liferea")
-(define riisi   (build-path (git-kansio) kaava))
 
 (define (install tynnyri)
   (use-clang)

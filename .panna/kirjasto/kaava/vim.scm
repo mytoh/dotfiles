@@ -1,7 +1,6 @@
 (use panna)
 
 (define kaava  "vim")
-(define riisi (build-path (hg-kansio) kaava))
 
 (define (install tynnyri)
   (use-clang)

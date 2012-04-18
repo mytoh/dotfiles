@@ -6,8 +6,8 @@
 (use kirjasto)
 
 (define (clone url)
-  (if (rxmatch->string #/^http:.*|^git:.*/ url)
-  (run-process `(git clone url) :wait #t)
+  (if (rxmatch->string #/^http:\/\/.*|^git:\/\/.*/ url)
+  (run-process `(git clone ,url) :wait #t)
   ; clone github repository
   (run-process `(git clone ,(string-append "git://github.com/" url)) :wait #t)
     )

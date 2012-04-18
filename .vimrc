@@ -9,7 +9,7 @@
 "
 
 " NeoBundle and bundles configuration {{{
-source $HOME/.bundles.vim
+source $HOME/.vimrc.bundle
 "}}}
 
 " singleton.vim {{{
@@ -517,7 +517,7 @@ aug myautocommands
   au bufread,bufnewfile .tmux.conf                setl filetype=tmux
   au bufread,bufnewfile *.changelog               setl filetype=changelog
   au bufread,bufnewfile *.twmrc                   setl filetype=conf
-  au bufread,bufnewfile .vimshrc,.vim-bundles     setl filetype=vim
+  au bufread,bufnewfile .vimshrc,.vimrc.*         setl filetype=vim
   au bufread,bufnewfile ~/.xcolours/*             setl filetype=xdefaults
   au bufread,bufnewfile ~/.xcolours/*             ColorHighlight
   au bufread,bufnewfile {*.scss,.gaucherc}        setl filetype=scheme
@@ -529,7 +529,7 @@ aug myautocommands
   au bufread,bufnewfile {*.md,*.mkd,*.markdown}   set filetype=markdown
   au bufread,bufnewfile scheme.snip               setl filetype=snippet.scheme
   au bufwritepost       .vimrc                    source ~/.vimrc
-  au bufwritepost       .bundles.vim              source ~/.bundles.vim
+  au bufwritepost       .vimrc.bundle              source ~/.vimrc.bundle
   au bufwritepost       .zshrc                    Silent !zcompile ~/.zshrc
   au bufwritepost       .conkyrc                  Silent !killall -SIGUSR1  conky
   au bufwritepost       xmonad.hs                 Silent !xmonad --recompile
