@@ -15,7 +15,6 @@
   )
 
 (define  (git args)
-  (print args)
   (match (car args)
     ("clone"
      (git-clone (cadr args)))
@@ -30,7 +29,7 @@
     ("st"
      (run-process '(svn status) :wait #t))
     (_
-      (run-process `(svn ,(car args)) :wait #t))
+      (run-process `(svn ,@args) :wait #t))
     )
   )
 
@@ -39,7 +38,7 @@
       ("st"
        (run-process '(hg status) :wait #t))
       (_
-        (run-process `(hg ,(car args)) :wait #t))
+        (run-process `(hg ,@args) :wait #t))
       )
     )
 

@@ -1,16 +1,15 @@
 
 (use file.util)
 (use kirjasto)
-(use panna)
+(use panna.kaava)
 
 (define kaava  "dswm")
-(define riisi (build-path (git-kansio) kaava))
 
 (define homepage "http://dss-project.org")
 
 (define (install tynnyri)
   (use-clang)
-  (commands
+  (system
     '(make clean)
     '(make distclean)
     '(autoconf)

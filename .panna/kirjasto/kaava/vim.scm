@@ -1,10 +1,10 @@
-(use panna)
+(use panna.kaava)
 
 (define kaava  "vim")
 
 (define (install tynnyri)
   (use-clang)
-  (commands
+  (system
   '(gmake clean)
   '(gmake distclean)
   `(./configure   ,(string-append

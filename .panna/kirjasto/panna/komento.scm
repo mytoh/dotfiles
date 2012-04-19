@@ -7,10 +7,6 @@
   (use panna.työkalu)
 
   (export
-    link
-    edit
-    update
-    list-package
     print-homepage
     uninstall
     environment
@@ -28,24 +24,7 @@
               "kaava"))
 
 
-(define (edit pullo)
-  (let ((kaava-tiedosto (find-file-in-paths (string-append pullo ".scm")
-                                            :paths `(,kaava-kansio)
-                                            :pred file-is-readable?))
-        (editor (sys-getenv "EDITOR")))
 
-    (if editor
-      (run-process `(,editor ,kaava-tiedosto) :wait #t)
-      (run-process `(vim     ,kaava-tiedosto) :wait #t))))
-
-
-
-
-(define (list-package)
-  (let* ((panna   (make-parameter (resolve-path (sys-getenv "PANNA_PREFIX"))))
-         (kellari (make-parameter (build-path (panna) "kellari"))))
-    (map print
-         (directory-list (kellari) :children? #t))))
 
 (define (print-homepage pullo)
   )

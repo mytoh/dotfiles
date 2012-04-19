@@ -1,11 +1,11 @@
-(use panna)
+(use panna.kaava)
 
 (define kaava  "ncmpcpp")
 
 
 (define (install tynnyri)
   (use-clang)
-  (commands
+  (system
     '(./autogen.sh)
     `(./configure ,(string-append "--prefix=" tynnyri)
                   --enable-outputs

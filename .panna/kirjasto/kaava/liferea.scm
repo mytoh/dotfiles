@@ -1,11 +1,11 @@
 
-(use panna)
+(use panna.kaava)
 
 (define kaava   "liferea")
 
 (define (install tynnyri)
   (use-clang)
-  (commands
+  (system
   '(./autogen.sh)
   '(gmake clean)
   '(gmake distclean)

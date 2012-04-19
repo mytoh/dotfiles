@@ -1,5 +1,5 @@
 (use kirjasto)
-(use panna)
+(use panna.kaava)
 
 (define kaava  "fish")
 
@@ -9,16 +9,16 @@
      (use-clang)
      (sys-putenv "CPPFLAGS=-I/usr/local/include")
      (sys-putenv "LDFLAGS=-L/usr/local/lib")
-     (commands
-     `(./configure ,(string-append "--prefix=" tynnyri) --without-xsel)
+     (system
      '(gmake clean)
+     `(./configure ,(string-append "--prefix=" tynnyri) --without-xsel)
      '(gmake)
      '(gmake install))))
   (else
     (define (install tynnyri) 
-      (commands
-      `(./configure ,(string-append "--prefix=" tynnyri))
+      (system
       '(make distclean clean)
+      `(./configure ,(string-append "--prefix=" tynnyri))
       '(make)
       '(make install)
       ))))

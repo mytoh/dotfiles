@@ -1,11 +1,11 @@
 (use kirjasto)
-(use panna)
+(use panna.kaava)
 
 (define kaava          (make-parameter "gauche"))
 
 (define (install)
   (use-clang)
-  (commands
+  (system
     '(make clean)
     '(make distclean)
 

@@ -22,6 +22,8 @@
 
 
 (define (main args)
+  (if (< (length args) 2)
+    (run-process `(feh) :wait #t)
   (let-args (cdr args) ((#f "h|help" (usage 0)) . args)
     (match (car args)
       ((? file-is-directory? dir)
@@ -40,5 +42,5 @@
          ))
       ((? file-is-regular? file)
        (run-process `(feh -Z -F  -q --start-at ,(sys-realpath file) ,(sys-dirname (sys-realpath file))) :wait #t))
-      (_ (usage 1))))
+      (_ (usage 1))))) 
   0)

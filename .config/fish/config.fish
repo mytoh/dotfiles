@@ -380,7 +380,7 @@ end
 
 
 function fish_prompt -d "fish prompt with gauche script"
- ~/.gosh/prompt.scm
+ gosh ~/.gosh/prompt.scm
 end
 
 #}}}
@@ -1245,14 +1245,6 @@ switch (uname)
     pkg_info -Ea |    xargs -n 1 sudo pkg_create -Jnvb
   end
 
-  function fish_prompt -d "fish prompt function"
-    #printf '%s%s%s%s\n%s ' (prompt-up-right) (current-directory) (set_color normal) (git_prompt) (prompt-down-right)
-    if test -d $PWD/.git
-    printf '%s.%s :: %s:%s\n%s ' (prompt-face) (prompt-host) (current-directory) (git_prompt)  (prompt-arrow)
-    else
-    printf '%s.%s :: %s\n%s ' (prompt-face) (prompt-host) (current-directory) (prompt-arrow)
-    end
-  end
 
   #if test $TERM = "cons25"
   #if test -e (which jfbterm)
@@ -1311,6 +1303,16 @@ switch (uname)
   #set -x LD_LIBRARY_PATH /usr/local/linux-sun-jdk1.6.0/jre/lib/i386
   set PYTHONPATH "~/local/homebrew/lib/python:$PYTHONPATH"
   set -x TERM xterm-256color
+
+  function fish_prompt -d "fish prompt function"
+    #printf '%s%s%s%s\n%s ' (prompt-up-right) (current-directory) (set_color normal) (git_prompt) (prompt-down-right)
+    if test -d $PWD/.git
+    printf '%s.%s :: %s:%s\n%s ' (prompt-face) (prompt-host) (current-directory) (git_prompt)  (prompt-arrow)
+    else
+    printf '%s.%s :: %s\n%s ' (prompt-face) (prompt-host) (current-directory) (prompt-arrow)
+    end
+  end
+
   xsource (brew --prefix)/Library/Contributions/brew_fish_completion.fish
   alias mp2 "/Applications/mplayer2.app/Contents/MacOS/mplayer-bin"
   alias bsearch "brew search "

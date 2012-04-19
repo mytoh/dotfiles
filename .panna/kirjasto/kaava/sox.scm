@@ -1,11 +1,11 @@
-(use panna)
+(use panna.kaava)
 
 (define kaava   "sox")
 
 
 (define (install tynnyri)
   (use-clang)
-  (commands
+  (system
     '(make clean)
     '(make distclean)
     '(autoreconf -i)

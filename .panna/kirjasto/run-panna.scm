@@ -22,6 +22,7 @@
 ;
 ; commands:
 ; install    - function you have to define normally
+; update,up  - update one package or all
 ; edit       - edit kaava with $EDITOR or vim
 ; list,ls    - list installed package
 ;
@@ -42,56 +43,41 @@
   (let-args (cdr args)
     ((#f "h|help" (usage 0))
      . rest)
-    (let* ((pullo (if (>= (length rest) 2)
+    (if (null-list? rest)
+      (usage 0)
+      )
+    (let* ((kaava (if (>= (length rest) 2)
                  (cadr rest)
                  #f))
-           (kaava pullo))
-      ; (if kaava
-      ;   ()
-        ; (begin
-          ; (load-build-file kaava)
-          ; (initialize kaava)
-          ; (current-directory riisi)))
-      (match-let  ((command (car rest)))
-        (if kaava
-          (run-process `(gosh ,(build-path (sys-getenv "PANNA_PREFIX")
-                                          (string-append "kirjasto/panna/komento/" command ".scm"))
-                             ,kaava)
-                      :wait #t)
-         (run-process `(gosh ,(build-path (sys-getenv "PANNA_PREFIX")
-                                          (string-append "kirjasto/panna/komento/" command ".scm")))
-                      :wait #t)
-         ))
-      ; )
-    ))
+          (panna (lambda (c)
+                   (if kaava
+                     (run-process `(gosh ,(build-path (sys-getenv "PANNA_PREFIX")
+                                                      (string-append "kirjasto/panna/komento/" c ".scm"))
+                                         ,kaava)
+                                  :wait #t)
+                     (run-process `(gosh ,(build-path (sys-getenv "PANNA_PREFIX")
+                                                      (string-append "kirjasto/panna/komento/" c ".scm")))
+                                  :wait #t)
+                     )))
+          )
+          (match (car rest)
+            ; command aliases
+            ("up"
+             (panna "update"))
+            ("ln"
+             (pannaa "link"))
+            ("ls"
+             (panna "list"))
+            ("home"
+             (panna "homepage"))
+            ((or "rm" "remove")
+             (panna "install"))
+            ("abv"
+             (panna "info"))
+            ("env"
+             (panna "environment"))
 
-        ; ((or "update" "up")
-        ;  (update kaava)
-        ;  )
-        ; ("install"
-        ;  ; (install)
-        ;  ; (link kaava)
-        ;  (run-process `(gosh ,(build-path (sys-getenv "PANNA_PREFIX")
-        ;                                   "kirjasto/komento/install.scm")
-        ;                      ,kaava)
-        ;               :wait #t)
-        ;  )
-        ; ((or "ln" "link")
-        ;  (link kaava))
-        ; ("edit"
-        ;  (edit kaava))
-        ; ((or "ls" "list")
-        ;  (list-package))
-        ; ((or "home" "homepage")
-        ;  (print-homepage kaava))
-        ; ((or "rm" "uninstall" "remove")
-        ;  (uninstall kaava))
-        ; ((or "abv" "info")
-        ;  (info kaava))
-        ; ((or "env" "environment")
-        ;  (environment))
-        ; ("test"
-        ;  (test))
-        ; (_ (usage 1)))))
+            (_ (panna (car rest)))
+            )))
   0)
 

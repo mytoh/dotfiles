@@ -1,10 +1,10 @@
-(use panna)
+(use panna.kaava)
 
 (define kaava   "mplayer")
 
 
 (define (install tynnyri)
-  (commands
+  (system
   '(gmake clean)
   '(gmake distclean)
   `(./configure   ,(string-append "--prefix=" tynnyri))
