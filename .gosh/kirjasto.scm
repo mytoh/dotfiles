@@ -7,7 +7,7 @@
   (use rfc.uri)
   (extend kirjasto.komento)
 
-  (export 
+  (export
     string->lowercase
     make-colour
     forever
@@ -43,7 +43,7 @@
   ;;macro for endless loop
   (syntax-rules ()
     ((_ e1 e2 ...)
-     (let loop () e1 e2 ... 
+     (let loop () e1 e2 ...
        (sys-sleep 300) ; sleep 5 minutes
        (loop)))))
 
@@ -58,7 +58,7 @@
   (f x) x)
 
 (define (p x)
-  (display x) 
+  (display x)
   (newline)
   x)
 
@@ -108,7 +108,7 @@
 (define-syntax colour-command
   (syntax-rules ()
     ((_ command r1 s1 ...)
-     (with-input-from-process 
+     (with-input-from-process
        command
        (lambda ()
          (port-for-each

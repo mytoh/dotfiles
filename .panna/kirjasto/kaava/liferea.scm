@@ -6,9 +6,9 @@
 (define (install tynnyri)
   (use-clang)
   (system
-  '(./autogen.sh)
   '(gmake clean)
   '(gmake distclean)
+  '(./autogen.sh)
   `(./configure   ,(string-append "--prefix=" tynnyri))
   '(gmake)
   '(gmake install)

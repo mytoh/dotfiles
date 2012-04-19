@@ -3,14 +3,14 @@
 
 (define kaava          (make-parameter "gauche"))
 
-(define (install)
+(define (install tynnyri)
   (use-clang)
   (system
     '(make clean)
     '(make distclean)
 
     '(./DIST gen)
-    `(./configure ,(string-append "--prefix=" (tynnyri))
+    `(./configure ,(string-append "--prefix=" tynnyri)
                   --with-iconv=/usr/local
                   )
     '(make)

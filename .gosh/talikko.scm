@@ -69,7 +69,7 @@
   (current-directory (build-path ports-directory package))
   (print (string-append ">>> Installing " (make-colour 44 package)))
   (run-command '(sudo make clean))
-  (run-command '(sudo make config))
+  (run-command '(sudo make config-recursive))
   (colour-command "sudo make install clean"
                                      #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                                      #/^===>/   "[38;5;39m>>>[0m"

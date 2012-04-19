@@ -48,28 +48,20 @@ snippet usage
 snippet panna
 abbr    panna kaava script
 
-        (use gauche.process)
-        (use gauche.parameter)
-        (use file.util)
-        (use kirjasto)
-        (use panna)
+        (use panna.kaava)
 
-        (define kaava (make-parameter "${1}"))
-        (define riisi-directory (make-parameter (build-path (git-kansio) (kaava))))
-        (define panna-directory   (make-parameter (resolve-path (sys-getenv "PANNA_PATH"))))
-        (define kellari-directory (make-parameter (build-path (panna-directory) "kellari")))
-        (define tynnyri-directory (make-parameter (build-path (kellari-directory) (kaava))))
+        (define kaava "${1}")
 
 
         (define (update)
           (run-process '(${2}) :wait #t))
 
-        (define (build)
+        (define (install tynnyri)
           (use-clang)
-          (commands
+          (system
           '(make clean)
           '(make distclean)
-          `(./configure ,(string-append "--prefix=" (tynnyri-directory)))
+          `(./configure ,(string-append "--prefix=" tynnyri))
           '(make)
           '(make install)
           ))

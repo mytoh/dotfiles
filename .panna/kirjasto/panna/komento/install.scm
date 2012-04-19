@@ -1,5 +1,5 @@
 (use file.util)
-(use panna.ympäristö)
+(use panna)
 (use gauche.parameter)
 
 

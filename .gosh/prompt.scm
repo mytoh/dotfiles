@@ -35,7 +35,7 @@
       (string-append
         (make-colour 33 "  ♠ ")
         (make-colour 82 (git-branch))
-        (make-colour 1 (git-darty))))
+        (make-colour 1  (git-darty))))
     ""))
 
 (define (prompt)

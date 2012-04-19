@@ -15,17 +15,17 @@
      (sys-putenv (string-append "CFLAGS=" "-w -I/usr/local/include -L/usr/local/lib" ))
      (print  (sys-getenv "CFLAGS"))
      (system
-     '(gmake)
-     '(gmake install)
-     )))
+       '(gmake)
+       '(gmake install)
+       )))
 
   (else
     (define (install)
       (sys-putenv (string-append "PREFIX=" tynnyri))
       (use-clang)
       (system
-      '(make clean)
-      '(make)
-      '(make install)))
+        '(make clean)
+        '(make)
+        '(make install)))
     ))
 

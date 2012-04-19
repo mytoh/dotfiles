@@ -40,6 +40,7 @@
                   (a (@ (href "http://d.me/tag/recent/scheme")   (target "_blank")) "scheme")
                   (a (@ (href "http://d.me/tag/recent/musiikki") (target "_blank")) "musiikki")
                   (a (@ (href "http://d.me/tag/recent/xmonad") (target "_blank")) "xmonad")
+                  (a (@ (href "http://d.me/tag/recent/tmux") (target "_blank")) "tmux")
                   "))")
 
             (p (@ (class "hatena"))
@@ -50,6 +51,7 @@
                   (a (@ (href "http://b.hatena.ne.jp/t/scheme?sort=eid") (target "_blank")) "scheme")
                   (a (@ (href "http://b.hatena.ne.jp/t/bash?sort=eid") (target "_blank")) "bash")
                   (a (@ (href "http://b.hatena.ne.jp/t/freebsd?sort=eid") (target "_blank")) "freebsd")
+                  (a (@ (href "http://b.hatena.ne.jp/t/tmux?sort=eid") (target "_blank")) "tmux")
                   "))")
 
             (p (@ (class "arch"))

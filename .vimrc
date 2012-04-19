@@ -234,7 +234,7 @@ endfunction
 " left , buffer list
 set stl=     " clear statusline when reloaded
 
-set stl+=%2*\   " left side
+set stl+=%2*\    " left side
 
 set stl+=%=  " separator
 
@@ -245,7 +245,7 @@ let &stl= &stl . "\ " . "mode"
 set stl+=%3*
 let &stl= &stl . "\ "
 set stl+=%<%{fnamemodify(getcwd(),':~')}   "get filepath
-set stl+=\
+set stl+=\ 
 
 set stl+=%4*
 if exists('*fugitive#statusline')
@@ -253,16 +253,16 @@ if exists('*fugitive#statusline')
 endif
 
 set stl+=%5*
-set stl+=\
+set stl+=\  "
 set stl+=%{&dictionary}
-set stl+=%{&fileformat}\
-set stl+=<\
-set stl+=%{&fenc}\
-set stl+=<\
-set stl+=%{&filetype}\
+set stl+=%{&fileformat}\ 
+set stl+=<\ 
+set stl+=%{&fenc}\ 
+set stl+=<\ 
+set stl+=%{&filetype}\ 
 
 set stl+=%6*
-set stl+=\
+set stl+=\ 
 set stl+=%{GetCharCode()}\  " hex under cursor
 
 set stl+=%7*
@@ -270,11 +270,11 @@ set stl+=%3p%%\  "percentage of current line
 set stl+=%*    "reset color
 
 set stl+=%8*
-set stl+=\
+set stl+=\ 
 set stl+=%l,  "current line number
 set stl+=%c   "columns
 set stl+=/%L   "total line number
-set stl+=\
+set stl+=\ 
 
 
 
@@ -342,10 +342,10 @@ endif
 
 " remove trailing spaces {{{
 function! s:vimrc.trimspace() dict
-  %s/\s*$//
+  silent! %s/\s*$//
   " trim space for lisp file
-  %s/(\s*/(/
-  %s/)\s\+)/))/
+  silent! %s/(\s*/(/
+  silent! %s/)\s\+)/))/
   ''
 endfunction
 " }}}
