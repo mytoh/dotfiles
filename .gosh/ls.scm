@@ -9,6 +9,7 @@
 (use gauche.charconv)
 (use util.list) ;take*
 (use file.util)
+(use text.tree)
 (require-extension (srfi 1)) ;count
 
 (define-constant *extension-colours*
@@ -109,7 +110,7 @@
     (sps  . 72)
     (rkt  . 72)
 
-    
+
     (pl  . 72)
     (html . 38)
     (xml . 38)
@@ -149,10 +150,10 @@
   (if (<= colour (count car *colours*))
     (let1 c  (assoc-ref *colours* colour)
           ((lambda (colour s)
-             (string-append "[38;5;" (x->string colour) "m"  (x->string s) "[0m"))
+             (tree->string `("[38;5;" ,(x->string colour) "m"  ,(x->string s) "[0m")))
                    c str))
           ((lambda (colour s)
-             (string-append "[38;5;" (x->string colour) "m"  (x->string s) "[0m"))
+             (tree->string `("[38;5;" ,(x->string colour) "m"  ,(x->string s) "[0m")))
                    colour str)))
 
 (define (colour-filename name type . ecolour)
@@ -160,7 +161,7 @@
       (let1 e  (cdar ecolour)
             (case type
               ((regular) (if (file-is-executable? name)
-                             #`",(ls-make-colour e name),(ls-make-colour 2 \"*\")"
+                             (tree->string  `( ,(ls-make-colour e name) ,(ls-make-colour 2 "*") ))  
                            (ls-make-colour e name)))
               ((directory) #`",(ls-make-colour e name),(ls-make-colour 2 \"/\")")
               ((symlink)   #`",(ls-make-colour e name),(ls-make-colour 2 \"@\")")
@@ -186,9 +187,9 @@
     (case type
       ((symlink)  (if extension
                       (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
-                               #`",(colour-filename file type ext) -> ,(ls-make-colour 10 realname)"
-                               #`",(colour-filename file type) -> ,(ls-make-colour 10 realname)")
-                               #`",(colour-filename file type) -> ,(ls-make-colour 10 realname)"))
+                               (tree->string `( ,(colour-filename file type ext) " -> " ,(ls-make-colour 10 realname)))
+                               (tree->string `( ,(colour-filename file type) " -> " ,(ls-make-colour 10 realname))))
+                               (tree->string `( ,(colour-filename file type) " -> " ,(ls-make-colour 10 realname)))))
       (else (if extension
                 (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
                          (colour-filename file type ext)
@@ -221,21 +222,21 @@
                                  lst))
                          "")))
     (case type
-      ((directory) #`",(ls-make-colour 1 \"d\"),p")
-      ((block)     #`",(ls-make-colour 2 \"b\"),p")
-      ((character) #`",(ls-make-colour 3 \"c\"),p")
-      ((symlink)   #`",(ls-make-colour 4 \"l\"),p")
-      ((fifo)      #`",(ls-make-colour 6 \"p\"),p")
-      ((socket)    #`",(ls-make-colour 7 \"s\"),p")
-      (else        #`",(ls-make-colour 0 \"-\"),p"))))
+      ((directory) (tree->string `( ,(ls-make-colour 1 "d") ,p)))
+      ((block)     (tree->string `( ,(ls-make-colour 2 "b") ,p)))
+      ((character) (tree->string `( ,(ls-make-colour 3 "c") ,p)))
+      ((symlink)   (tree->string `( ,(ls-make-colour 4 "l") ,p)))
+      ((fifo)      (tree->string `( ,(ls-make-colour 6 "p") ,p)))
+      ((socket)    (tree->string `( ,(ls-make-colour 7 "s") ,p)))
+      (else        (tree->string `( ,(ls-make-colour 0 "-") ,p))))))
 
 (define (print-size file stat)
   (let* ((filesize (ref stat 'size))
          (size (cond
-                ((> filesize 1073741824) #`",(ls-make-colour 7 (truncate (/ (/ (/ filesize 1024) 1024) 1024))),(ls-make-colour 3 \"G\")")
-                ((> filesize 1048576) #`",(ls-make-colour 7  (truncate (/ (/ filesize 1024) 1024))),(ls-make-colour 7 \"M\")")
-                ((> filesize 1024)    #`",(ls-make-colour 7  (truncate (/ filesize 1024))),(ls-make-colour 2 \"K\")")
-                ((< filesize 1024)    #`",(ls-make-colour 7  filesize),(ls-make-colour 14 \"B\")"))))
+                ((> filesize 1073741824) (tree->string `( ,(ls-make-colour 7 (truncate (/ (/ (/ filesize 1024) 1024) 1024))) ,(ls-make-colour 3 "G"))))
+                ((> filesize 1048576)    (tree->string `( ,(ls-make-colour 7  (truncate (/ (/ filesize 1024) 1024))) ,(ls-make-colour 7 "M"))))
+                ((> filesize 1024)       (tree->string `( ,(ls-make-colour 7  (truncate (/ filesize 1024))) ,(ls-make-colour 2 "K"))))
+                ((< filesize 1024)       (tree->string `( ,(ls-make-colour 7  filesize) ,(ls-make-colour 14 "B")))))))
     (format "~35@a"
             size)))
 
@@ -392,3 +393,5 @@
                   (dfirst (ls-file directories all dfirst))
                   (else (ls-file directories all dfirst))))
   0)
+
+

@@ -1,5 +1,6 @@
 (use gauche.process)
 (use file.util)
+(use text.tree)
 
 (define-syntax colour-command
   (syntax-rules ()
@@ -18,7 +19,7 @@
     ))
 
 (define (process command)
-  (print  (string-append "[38;5;80m" "==> " "[0m" commad))
+  (print  (tree->string `("[38;5;80m" "==> " "[0m" ,commad)))  
   (colour-command command
                   #/^>>>/   "[38;5;99m\\0[0m"
                   #/^=*>/   "[38;5;39m\\0[0m"

@@ -8,6 +8,7 @@
 (use gauche.collection) ;find
 (use gauche.parseopt)
 (use srfi-11)
+(use text.tree)
 (use kirjasto) ; forever cd  mkdir
 
 
@@ -28,9 +29,9 @@
 (define (parse-img line board)
     (rxmatch->string
       (string->regexp
-        (string-append "\\/\\/images\\.4chan\\.org\\/"
-                       board
-                       "\\/src\\/[^\"]+"))
+        (tree->string `("\\/\\/images\\.4chan\\.org\\/"
+                       ,board
+                       "\\/src\\/[^\"]+")))
       line)
     )
 ;; "
@@ -54,7 +55,7 @@
 
 
 (define (get-html bd td)
-  (let-values (((status headers body ) (http-get  "boards.4chan.org"  (string-append "/" bd "/res/"  td)) ))
+  (let-values (((status headers body ) (http-get  "boards.4chan.org"  (tree->string `("/" ,bd "/res/"  ,td)))))
               (if  (string=? status "404")
                 #f
                 (if (string-incomplete? body)

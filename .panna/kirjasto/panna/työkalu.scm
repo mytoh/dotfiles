@@ -3,6 +3,7 @@
   (use gauche.process)
   (use gauche.parameter)
   (use file.util)
+  (use text.tree)
   (require-extension (srfi 98))
   (export
     load-build-file
@@ -20,7 +21,7 @@
               "kaava"))
 
 (define (load-build-file pullo)
-  ; find, load kaava file 
+  ; find, load kaava file
   (load (find-file-in-paths (string-append pullo ".scm")
                             :paths `(,kaava-kansio)
                             :pred file-is-readable?)
@@ -38,6 +39,5 @@
 
 (define (colour-string colour-number str)
   ;; take any -> return string
-  (string-append "[38;5;" (x->string colour-number) "m" (x->string str) "[0m"))
-
+  (tree->string `("[38;5;" ,(x->string colour-number) "m" ,(x->string str) "[0m")))
 (provide "panna.työkalu")

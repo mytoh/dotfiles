@@ -495,6 +495,7 @@ endfunction
 function! s:vimrc.scheme() dict
   let g:lisp_rainbow=1
   setl lisp
+  setl cindent&
   setl iskeyword=@,33,35-38,42-43,45-58,60-64,94,_,126
   if executable('scmindent.scm')
     if executable('racket')

@@ -57,6 +57,7 @@ urxvt.tabbed.tab-bg:    0
               xft:Monaco:size=10:antialias=false,\
               xft:Osaka:size=10:antialias=false,\
               xft:Monospace:size=10:antialias=false,\
+              xft:Symbola:size=10:antialias=false,\
               -aaron-*-*-*-*--10-*-*-*-*-*-iso8859-1,\
               xft:Code2001:size=10:antialias=false
 

@@ -21,7 +21,7 @@ set -x EPREFIX $HOME/local/gentoo
 push-to-path $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin
 # }}}
 
-push-to-path /usr/local/kde4/bin /usr/X11/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin}
+push-to-path /usr/local/kde4/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin}
 
 # haskell package {{{
 push-to-path $HOME/.cabal/bin
@@ -150,22 +150,25 @@ complete -c panna -f -a "(__fish_complete_panna_kaava)"
 # }}}
 
 # talikko {{{
-function __talikko_completion_ports_tree
-  set -l path /usr/ports/*
-  for i in $path
-    for j in $i
-      echo (basename $j .scm)/
+function __fish_complete_talikko_ports_tree
+  set arguments (commandline -opc)
+  set path (echo $PANNA_PREFIX | tr ':' '\n')
+
+  for cmd in $arguments
+    if contains -- $cmd install
+      set -l path /usr/ports/*
+      for i in $path
+        if test -d $i
+        echo (basename $i)
+        end
+      end
+      return 0
     end
   end
 end
 
-complete -c talikko -n '__fish_use_subcommand' -xa install --description "install package"
-complete -c talikko -n '__fish_use_subcommand' -xa 'update up' --description "update port tree"
-complete -c talikko -n '__fish_use_subcommand' -xa search --description "search package"
-complete -c talikko -n '__fish_use_subcommand' -xa reinstall --description "search package"
-complete -c talikko -n '__fish_use_subcommand' -xa deinstall --description "search package"
-complete -c talikko -n '__fish_use_subcommand' -xa info --description "search package"
-complete -c talikko -f -a "(__talikko_completion_ports_tree)"
+complete -c talikko -n '__fish_use_subcommand' -xa 'install reinstall update up search'
+complete -c talikko -f -a "(__fish_complete_talikko_ports_tree)"
 #}}}
 
 #}}}

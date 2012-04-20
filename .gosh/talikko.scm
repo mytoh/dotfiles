@@ -7,6 +7,7 @@
 (use util.match)
 (use util.list) ; slices
 (use text.csv)
+(use text.tree)
 (require-extension (srfi 1 11 13))
 (use kirjasto) ; run-command, run-command-sudo, make-colour, colour-command
 
@@ -47,11 +48,13 @@
 (define (info-print-packages name)
   (map (lambda (x)
          (print
-           (string-append
-             " "
-             (make-colour colour-package (car x))
-             " "
-             "["(make-colour 172 (cadr x)) "]"))
+           (tree->string
+             `(" "  
+             ,(make-colour colour-package (car x))  
+             " "  
+             "[" 
+             ,(make-colour 172 (cadr x)) "]"))
+           )
          (display "    ")
          (display (caddr x))
          (newline))
@@ -118,11 +121,11 @@
   (let ((index-list
           (call-with-input-file
             (build-path ports-directory
-                        (string-append
-                          "INDEX-"
-                          (car (string-split
+                        (tree->string
+                          `("INDEX-"
+                          ,(car (string-split
                                  (caddr (sys-uname))
-                                 "."))))
+                                 ".")))))
             (cut port->list
               (make-csv-reader #\|) <>))))
     (filter (^x (let ((x (map (^s (string-downcase s))
@@ -150,20 +153,20 @@
                           (car package-name)
                           (cadr package-name))))
             (display
-              (string-append 
-                " "
-                (make-colour colour-category
+              (tree->string 
+                `(" "
+                ,(make-colour colour-category
                              category)
                 "/"
-                (make-colour colour-package
-                             name)))
+                ,(make-colour colour-package
+                             name))))
             (display 
-              (string-append " ["
-                             (make-colour colour-version version)
-                             "]"))
+              (tree->string `(" ["
+                             ,(make-colour colour-version version)
+                             "]")))
             (newline)
             (print
-              (string-append "    " (make-colour 244  (cadddr x))))
+              (tree->string `("    " ,(make-colour 244  (cadddr x)))))
             )))
       found-list)))
 

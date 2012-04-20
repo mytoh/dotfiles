@@ -100,6 +100,7 @@
                   (a (@ (href "http://boards.4chan.org/t") (target "_blank")) "t" (span (@ (class popup)) "torrent"))
                   (a (@ (href "http://boards.4chan.org/r") (target "_blank")) "r" (span (@ (class popup)) "request"))
                   (a (@ (href "http://boards.4chan.org/s") (target "_blank")) "s" (span (@ (class popup)) "sexy bautiful woman"))
+                  (a (@ (href "http://boards.4chan.org/hr") (target "_blank")) "hr" (span (@ (class popup)) "high resolution"))
                   (a (@ (href "http://boards.4chan.org/u") (target "_blank")) "u" (span (@ (class popup)) "yuri"))
                   "))")
 

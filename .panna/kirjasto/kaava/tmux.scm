@@ -1,11 +1,12 @@
 
-
 (use panna.kaava)
+(use file.util)
 
 (define kaava "tmux")
 
 (define (install tynnyri)
-  (use-clang)
+  ; (use-clang)
+  (make-directory* "etc" )
   (system
     '(make clean)
     '(make distclean)

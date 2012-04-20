@@ -5,6 +5,7 @@
   (use file.util)
   (use rfc.http)
   (use rfc.uri)
+  (use text.tree)
   (extend kirjasto.komento)
 
   (export
@@ -36,7 +37,8 @@
 
 (define (make-colour colour-number str)
   ;; take any -> return string
-  (string-append "[38;5;" (x->string colour-number) "m" (x->string str) "[0m"))
+  (tree->string `("[38;5;" ,(x->string colour-number) "m" ,(x->string str) "[0m"))
+  )
 
 
 (define-syntax forever
