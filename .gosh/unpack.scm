@@ -9,9 +9,11 @@
 
 (define (zip-unpacker file . directory)
   (if (null-list? directory)
+    (run-process `(unzip -q ,file) :wait #t)
     (run-process `(unzip -q ,file -d ,(car directory)) :wait #t)
-    (run-process `(unzip -q ,file) :wait #t))
-  )
+    )
+    )
+
 
 (define (rar-unpacker file . diretory)
   (run-process `(unrar x -ad ,file) :wait #t))
@@ -21,14 +23,16 @@
 
 (define (tar-unpacker file . directory)
   (if (null-list? directory)
-    (run-process `(tar xf ,file ,(car directory)) :wait #t)
     (run-process `(tar xf ,file) :wait #t)
+    (begin
+      (make-directory* (caar directory))
+    (run-process `(tar xf ,file -C ,(caar directory)) :wait #t))
     ))
 
 (define (sevenzip-unpacker file . directory)
   (if (null-list? directory )
-    (run-process `(7z x ,file -o ,(car directory)) :wait #t)
     (run-process `(7z x ,file) :wait #t)
+    (run-process `(7z x ,file -o ,(car directory)) :wait #t)
     ))
 
 (define-constant *unpacker-alist*
@@ -43,11 +47,12 @@
 
     ("lha" ,lha-unpacker)
 
-    ("txz" ,tar-unpacker)
-    ("gz" ,tar-unpacker)
+    ("gz"  ,tar-unpacker)
     ("tgz" ,tar-unpacker)
     ("bz2" ,tar-unpacker)
-    ("xz" ,tar-unpacker)
+    ("xz"  ,tar-unpacker)
+    ("txz" ,tar-unpacker)
+    ("cbx" ,tar-unpacker)
     ("tar" ,tar-unpacker)
     ))
 
@@ -64,8 +69,8 @@
       (error "unknown file type" file))))
 
 (define (main args)
-  (if (< 2 (length args)) 
+  (if (< 2 (length args))
     (unpack (cadr args) (caddr args))
     (unpack (cadr args))
-    ) 
+    )
   )

@@ -107,7 +107,7 @@ else
   NeoBundle 'gregsexton/gitv'
   NeoBundle 'jpalardy/vim-slime'
   NeoBundle 'godlygeek/tabular'
-  NeoBundle 'benmills/vimux'
+  " NeoBundle 'anekos/runes-vim'
   "unite
   NeoBundle 'hakobe/unite-script'
   NeoBundle 'choplin/unite-vim_hacks'
@@ -121,7 +121,6 @@ else
   NeoBundle 'taka84u9/unite-git'
   NeoBundle 'shiracha/unite-related_files'
   NeoBundle 'osyo-manga/unite-homo'
-  NeoBundle 'osyo-manga/unite-homo-statusline'
   NeoBundle 'osyo-manga/unite-u-nya-'
   "lisp
   NeoBundle 'emezeske/paredit.vim'

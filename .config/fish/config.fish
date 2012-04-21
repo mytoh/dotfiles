@@ -21,7 +21,7 @@ set -x EPREFIX $HOME/local/gentoo
 push-to-path $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin
 # }}}
 
-push-to-path /usr/local/kde4/bin /opt/X11/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin}
+push-to-path /usr/local/kde4/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin}
 
 # haskell package {{{
 push-to-path $HOME/.cabal/bin
@@ -231,6 +231,10 @@ if which gosh >&-
                 command gosh colour-numbers.scm
         end
 
+        function colour-pacman
+                command gosh colour-pacman.scm
+        end
+
         function fi-en
                 command gosh kääntää.scm fi en $argv[1]
         end
@@ -436,39 +440,39 @@ end
 # functions from
 # http://crunchbanglinux.org/forums/post/126921/#p126921
 
-function colour-pacman #{{{
- set blackf  (tput setaf 0); set redf    (tput setaf 1); set greenf  (tput setaf 2)
- set yellowf (tput setaf 3); set bluef   (tput setaf 4); set purplef (tput setaf 5)
- set cyanf   (tput setaf 6); set whitef  (tput setaf 7)
-
- set blackb  (tput setab 0); set redb    (tput setab 1); set greenb  (tput setab 2)
- set yellowb (tput setab 3); set blueb   (tput setab 4); set purpleb (tput setab 5)
- set cyanb   (tput setab 6); set whiteb  (tput setab 7)
-
- set boldon (tput bold); set boldoff "[22m"
- set italicson (tput sitm); set italicsoff (tput ritm)
- set ulon (tput smul);     set uloff (tput rmul)
- set invon (tput rev);   set invoff (tput rum)
-
- set reset (tput sgr0)
-
- echo "
- $yellowf  ▄███████▄$reset   $redf  ▄██████▄$reset    $greenf  ▄██████▄$reset    $bluef  ▄██████▄$reset    $purplef  ▄██████▄$reset    $cyanf  ▄██████▄$reset
- $yellowf▄█████████▀▀$reset  $redf▄$whitef█▀█$redf██$whitef█▀█$redf██▄$reset  $greenf▄$whitef█▀█$greenf██$whitef█▀█$greenf██▄$reset  $bluef▄$whitef█▀█$bluef██$whitef█▀█$bluef██▄$reset  $purplef▄$whitef█▀█$purplef██$whitef█▀█$purplef██▄$reset  $cyanf▄$whitef█▀█$cyanf██$whitef█▀█$cyanf██▄$reset
- $yellowf███████▀$reset      $redf█$whitef▄▄█$redf██$whitef▄▄█$redf███$reset  $greenf█$whitef▄▄█$greenf██$whitef▄▄█$greenf███$reset  $bluef█$whitef▄▄█$bluef██$whitef▄▄█$bluef███$reset  $purplef█$whitef▄▄█$purplef██$whitef▄▄█$purplef███$reset  $cyanf█$whitef▄▄█$cyanf██$whitef▄▄█$cyanf███$reset
- $yellowf███████▄$reset      $redf████████████$reset  $greenf████████████$reset  $bluef████████████$reset  $purplef████████████$reset  $cyanf████████████$reset
- $yellowf▀█████████▄▄$reset  $redf██▀██▀▀██▀██$reset  $greenf██▀██▀▀██▀██$reset  $bluef██▀██▀▀██▀██$reset  $purplef██▀██▀▀██▀██$reset  $cyanf██▀██▀▀██▀██$reset
- $yellowf  ▀███████▀$reset   $redf▀   ▀  ▀   ▀$reset  $greenf▀   ▀  ▀   ▀$reset  $bluef▀   ▀  ▀   ▀$reset  $purplef▀   ▀  ▀   ▀$reset  $cyanf▀   ▀  ▀   ▀$reset
-
- $boldon$yellowf  ▄███████▄   $redf  ▄██████▄    $greenf  ▄██████▄    $bluef  ▄██████▄    $purplef  ▄██████▄    $cyanf  ▄██████▄$reset
- $boldon$yellowf▄█████████▀▀  $redf▄$whitef█▀█$redf██$whitef█▀█$redf██▄  $greenf▄$whitef█▀█$greenf██$whitef█▀█$greenf██▄  $bluef▄$whitef█▀█$bluef██$whitef█▀█$bluef██▄  $purplef▄$whitef█▀█$purplef██$whitef█▀█$purplef██▄  $cyanf▄$whitef█▀█$cyanf██$whitef█▀█$cyanf██▄$reset
- $boldon$yellowf███████▀      $redf█$whitef▄▄█$redf██$whitef▄▄█$redf███  $greenf█$whitef▄▄█$greenf██$whitef▄▄█$greenf███  $bluef█$whitef▄▄█$bluef██$whitef▄▄█$bluef███  $purplef█$whitef▄▄█$purplef██$whitef▄▄█$purplef███  $cyanf█$whitef▄▄█$cyanf██$whitef▄▄█$cyanf███$reset
- $boldon$yellowf███████▄      $redf████████████  $greenf████████████  $bluef████████████  $purplef████████████  $cyanf████████████$reset
- $boldon$yellowf▀█████████▄▄  $redf██▀██▀▀██▀██  $greenf██▀██▀▀██▀██  $bluef██▀██▀▀██▀██  $purplef██▀██▀▀██▀██  $cyanf██▀██▀▀██▀██$reset
- $boldon$yellowf  ▀███████▀   $redf▀   ▀  ▀   ▀  $greenf▀   ▀  ▀   ▀  $bluef▀   ▀  ▀   ▀  $purplef▀   ▀  ▀   ▀  $cyanf▀   ▀  ▀   ▀$reset
- "
-
-end
+#function colour-pacman #{{{
+# set blackf  (tput setaf 0); set redf    (tput setaf 1); set greenf  (tput setaf 2)
+# set yellowf (tput setaf 3); set bluef   (tput setaf 4); set purplef (tput setaf 5)
+# set cyanf   (tput setaf 6); set whitef  (tput setaf 7)
+#
+# set blackb  (tput setab 0); set redb    (tput setab 1); set greenb  (tput setab 2)
+# set yellowb (tput setab 3); set blueb   (tput setab 4); set purpleb (tput setab 5)
+# set cyanb   (tput setab 6); set whiteb  (tput setab 7)
+#
+# set boldon (tput bold); set boldoff "[22m"
+# set italicson (tput sitm); set italicsoff (tput ritm)
+# set ulon (tput smul);     set uloff (tput rmul)
+# set invon (tput rev);   set invoff (tput rum)
+#
+# set reset (tput sgr0)
+#
+# echo "
+# $yellowf  ▄███████▄$reset   $redf  ▄██████▄$reset    $greenf  ▄██████▄$reset    $bluef  ▄██████▄$reset    $purplef  ▄██████▄$reset    $cyanf  ▄██████▄$reset
+# $yellowf▄█████████▀▀$reset  $redf▄$whitef█▀█$redf██$whitef█▀█$redf██▄$reset  $greenf▄$whitef█▀█$greenf██$whitef█▀█$greenf██▄$reset  $bluef▄$whitef█▀█$bluef██$whitef█▀█$bluef██▄$reset  $purplef▄$whitef█▀█$purplef██$whitef█▀█$purplef██▄$reset  $cyanf▄$whitef█▀█$cyanf██$whitef█▀█$cyanf██▄$reset
+# $yellowf███████▀$reset      $redf█$whitef▄▄█$redf██$whitef▄▄█$redf███$reset  $greenf█$whitef▄▄█$greenf██$whitef▄▄█$greenf███$reset  $bluef█$whitef▄▄█$bluef██$whitef▄▄█$bluef███$reset  $purplef█$whitef▄▄█$purplef██$whitef▄▄█$purplef███$reset  $cyanf█$whitef▄▄█$cyanf██$whitef▄▄█$cyanf███$reset
+# $yellowf███████▄$reset      $redf████████████$reset  $greenf████████████$reset  $bluef████████████$reset  $purplef████████████$reset  $cyanf████████████$reset
+# $yellowf▀█████████▄▄$reset  $redf██▀██▀▀██▀██$reset  $greenf██▀██▀▀██▀██$reset  $bluef██▀██▀▀██▀██$reset  $purplef██▀██▀▀██▀██$reset  $cyanf██▀██▀▀██▀██$reset
+# $yellowf  ▀███████▀$reset   $redf▀   ▀  ▀   ▀$reset  $greenf▀   ▀  ▀   ▀$reset  $bluef▀   ▀  ▀   ▀$reset  $purplef▀   ▀  ▀   ▀$reset  $cyanf▀   ▀  ▀   ▀$reset
+#
+# $boldon$yellowf  ▄███████▄   $redf  ▄██████▄    $greenf  ▄██████▄    $bluef  ▄██████▄    $purplef  ▄██████▄    $cyanf  ▄██████▄$reset
+# $boldon$yellowf▄█████████▀▀  $redf▄$whitef█▀█$redf██$whitef█▀█$redf██▄  $greenf▄$whitef█▀█$greenf██$whitef█▀█$greenf██▄  $bluef▄$whitef█▀█$bluef██$whitef█▀█$bluef██▄  $purplef▄$whitef█▀█$purplef██$whitef█▀█$purplef██▄  $cyanf▄$whitef█▀█$cyanf██$whitef█▀█$cyanf██▄$reset
+# $boldon$yellowf███████▀      $redf█$whitef▄▄█$redf██$whitef▄▄█$redf███  $greenf█$whitef▄▄█$greenf██$whitef▄▄█$greenf███  $bluef█$whitef▄▄█$bluef██$whitef▄▄█$bluef███  $purplef█$whitef▄▄█$purplef██$whitef▄▄█$purplef███  $cyanf█$whitef▄▄█$cyanf██$whitef▄▄█$cyanf███$reset
+# $boldon$yellowf███████▄      $redf████████████  $greenf████████████  $bluef████████████  $purplef████████████  $cyanf████████████$reset
+# $boldon$yellowf▀█████████▄▄  $redf██▀██▀▀██▀██  $greenf██▀██▀▀██▀██  $bluef██▀██▀▀██▀██  $purplef██▀██▀▀██▀██  $cyanf██▀██▀▀██▀██$reset
+# $boldon$yellowf  ▀███████▀   $redf▀   ▀  ▀   ▀  $greenf▀   ▀  ▀   ▀  $bluef▀   ▀  ▀   ▀  $purplef▀   ▀  ▀   ▀  $cyanf▀   ▀  ▀   ▀$reset
+# "
+#
+#end
 # }}}
 
 function colour-invader #{{{
@@ -1301,7 +1305,9 @@ switch (uname)
 
   end
 
+# mac settings
   case Darwin
+  push-to-path /opt/X11/bin /usr/x11/bin 
   set -x DYLD_FALLBACK_LIBRARY_PATH "$HOME/local/lib:$HOME/local/homebrew/lib:/usr/lib:/usr/local/lib:/Library/Frameworks/Mono.frameworks/Libraries"
   #set -x LD_LIBRARY_PATH /usr/local/linux-sun-jdk1.6.0/jre/lib/i386
   set PYTHONPATH "~/local/homebrew/lib/python:$PYTHONPATH"
