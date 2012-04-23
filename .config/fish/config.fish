@@ -32,9 +32,10 @@ set -x MANWIDTH 80
 if test -d $HOME/local/stow
   set -x STOW $HOME/local/stow
 end
-set -x LANG fi_FI.UTF-8
-set -x LC_CTYPE fi_FI.UTF-8
-set -x LC_MESSAGES fi_FI.UTF-8
+set -x LANG       fi_FI.UTF-8
+set -x LC_ALL     fi_FI.UTF-8
+set -x LC_CTYPE   fi_FI.UTF-8
+set -x MM_CHARSET fi_FI.UTF-8
 
 # pager
 set -x LESS "-i  -w -z-4 -g -M -X -F -R -P%t?f%f :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-..."
@@ -258,6 +259,14 @@ if which gosh >&-
 
         function hub
               command gosh hub.scm $argv
+        end
+
+        function tm
+                command gosh tmux-start.scm
+        end
+
+        function urxvtcd
+                command gosh urxvtcd.scm
         end
 
 
@@ -631,9 +640,6 @@ function stow
   stow --verbose=3 $argv
 end
 
-function tm
-  tmux -u2 a
-end
 
 function q
 exit

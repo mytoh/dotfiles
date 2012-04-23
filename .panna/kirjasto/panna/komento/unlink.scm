@@ -26,8 +26,13 @@
                       seed))
               '())))
       (for-each
-      remove-files
-      (append-map cdr file-list ))
+        remove-files
+        (receive (a lst) (unzip2 file-list) lst)
+          )
+
+      ; (for-each
+      ; remove-files
+      ; (append-map cdr file-list ))
       )))
 
 (define (main args)

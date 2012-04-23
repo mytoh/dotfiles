@@ -5,7 +5,6 @@
 (define kaava "tmux")
 
 (define (install tynnyri)
-  ; (use-clang)
   (make-directory* "etc" )
   (system
     '(make clean)

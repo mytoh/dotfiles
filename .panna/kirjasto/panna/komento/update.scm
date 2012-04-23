@@ -13,9 +13,12 @@
                 ((file-exists? (build-path dir ".git"))
                  'git)
                 ((file-exists? (build-path dir ".svn"))
-                 'svn)))))
-    ; update one repository
+                 'svn)
+                ((file-exists? (build-path dir "CVS"))
+                 'cvs)
+                ))))
     (if (not (null-list? pullo))
+      ; update one repository
       (let  ((riisi (build-path (sys-getenv "PANNA_PREFIX")
                                 "riisi" (car pullo ))))
         (current-directory riisi)
@@ -33,7 +36,11 @@
                   '(git pull --rebase)))
                ((svn)
                 (commands
-                  '(svn update)))))
+                  '(svn update)))
+               ((cvs)
+                (commands
+                  '(cvs update)))
+               ))
 
       ; update all repositories
       (let* ((riisi-kansio (build-path (sys-getenv "PANNA_PREFIX")
@@ -56,7 +63,11 @@
                               '(git pull --rebase)))
                            ((svn)
                             (commands
-                              '(svn update)))))
+                              '(svn update)))
+                           ((cvs)
+                            (commands
+                              '(cvs update)))
+                           ))
                   repos)))))
 
 

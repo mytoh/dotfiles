@@ -21,8 +21,7 @@
     ("st"
      (run-process `(git status) :wait #t))
     (_  ( run-process `(git ,@args) :wait #t))
-    )
-  )
+    ))
 
 (define (svn args)
   (match  (car args)
@@ -30,34 +29,42 @@
      (run-process '(svn status) :wait #t))
     (_
       (run-process `(svn ,@args) :wait #t))
+    ))
+
+(define (hg args)
+  (match (car args)
+    ("st"
+     (run-process '(hg status) :wait #t))
+    (_
+      (run-process `(hg ,@args) :wait #t))
+    ))
+
+(define (cvs args)
+  (match (car args)
+    ("up"
+     (run-process '(cvs update) :wait #t))
+    (_
+      (run-process `(cvs ,@args) :wait #t))
+    ))
+
+
+(define (hub args)
+  (cond
+    ((file-exists? (build-path (current-directory) ".hg"))
+     (hg args))
+    ((file-exists? (build-path (current-directory) ".git"))
+     (git args))
+    ((file-exists? (build-path (current-directory) ".svn"))
+     (svn args))
+    ((file-exists? (build-path (current-directory) "CVS"))
+     (cvs args))
+    (else
+      (git args))
     )
   )
 
-  (define (hg args)
-    (match (car args)
-      ("st"
-       (run-process '(hg status) :wait #t))
-      (_
-        (run-process `(hg ,@args) :wait #t))
-      )
-    )
 
 
-  (define (hub args)
-    (cond
-      ((file-exists? (build-path (current-directory) ".hg"))
-       (hg args))
-      ((file-exists? (build-path (current-directory) ".git"))
-       (git args))
-      ((file-exists? (build-path (current-directory) ".svn"))
-       (svn args))
-      (else
-        (git args))
-      )
-    )
-
-
-
-  (define (main args)
-    (hub (cdr args))
-    )
+(define (main args)
+  (hub (cdr args))
+  )

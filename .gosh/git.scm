@@ -97,6 +97,7 @@
     (valvallow      lifegame)
     (saironiq       shellscripts)
     (mason-larobina luakit)
+    ; (jhawthorn     meh)
     ; (git            git)
     ; (dss-project   dswm)
     ; "git://gauche.git.sourceforge.net/gitroot/gauche/Gauche"

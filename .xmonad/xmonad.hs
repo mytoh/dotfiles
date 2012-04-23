@@ -294,12 +294,12 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
 myEventHook = ewmhDesktopsEventHook
 
 -- dzen bars {{{
-myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 420 -h 16 -bg \"#212122\" -fn " ++ myDzenFont
-myRightBar  = "~/.dzen/bin/status | exec dzen2 -p -ta r -x 420 -y 0 -w 710 -h 16 -bg \"#212122\" -fn " ++ myDzenFont 
+myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 420 -h 15 -bg \"#212122\" -fn " ++ myDzenFont
+myRightBar  = "~/.dzen/bin/status | exec dzen2 -p -ta r -x 420 -y 0 -w 710 -h 15 -bg \"#212122\" -fn " ++ myDzenFont 
 -- }}}
-trayer      = "exec trayer --expand false --alpha 40  --tint 0x232324 --transparent true --padding 0 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 16 --widthtype request --width 121 "
+trayer      = "exec trayer --expand true --alpha 40  --tint 0x232324 --transparent true --padding 0 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 15 --widthtype pixel --width 150 "
 mail        = "gmail-notifier"
-compmgr     = "xcompmgr -n"
+compmgr     = "xcompmgr -I1 -O1 -Ff"
 bgmgr       = "feh --bg-scale ~/.wallpapers/purple-nagato.jpg"
 clipmgr     = "parcellite"
 volumemgr   = "gnome-volume-control-applet"

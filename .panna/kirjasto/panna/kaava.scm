@@ -13,9 +13,9 @@
 
 (define (use-clang)
      (sys-putenv "CC=clang")
-     (sys-putenv "CC=clang")
-     (sys-putenv "CXX=clang++")
      (sys-putenv "CPP=clang-cpp")
+     (sys-putenv "CXX=clang++")
+     (sys-putenv "CXXCPP=clang-cpp")
      (sys-putenv "OBJC=clang")
 
      (sys-putenv "NO_WERROR=")

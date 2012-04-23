@@ -85,6 +85,7 @@ set smartcase
 set hlsearch
 set incsearch
 set wrapscan
+set gdefault                  " %s/foo/bar  ->  %s/foo/bar/g
 " }}}
 
 " fold {{{
@@ -376,7 +377,6 @@ nnoremap ; :
 nnoremap : ;
 nnoremap j gj
 nnoremap k gk
-nnoremap Y y$
 nnoremap <space>  i<space><esc>
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <silent> <tab> :<c-u>bnext<cr>
@@ -403,10 +403,10 @@ cnoremap <silent><c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdp
 
 " clipboard copy and paste {{{
 " Linux環境でのクリップボードコピー
-if has('unix')
-  vnoremap y "+y
-  imap <C-I> <ESC>"*pa
-endif
+" if has('unix')
+"   vnoremap y "+y
+"   imap <C-I> <ESC>"*pa
+" endif
 
 " bubbling text
 " vimcasts.org/episodes/bubbling-text
@@ -529,6 +529,7 @@ aug myautocommands
   au bufread,bufnewfile loader.conf.local         setl filetype=conf
   au bufread,bufnewfile {*.md,*.mkd,*.markdown}   set filetype=markdown
   au bufread,bufnewfile scheme.snip               setl filetype=snippet.scheme
+  au bufread,bufnewfile /usr/ports/UPDATING       setl filetype=changelog
   au bufwritepost       .vimrc                    source ~/.vimrc
   au bufwritepost       .vimrc.bundle              source ~/.vimrc.bundle
   au bufwritepost       .zshrc                    Silent !zcompile ~/.zshrc

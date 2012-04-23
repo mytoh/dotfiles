@@ -19,7 +19,7 @@
     ))
 
 (define (process command)
-  (print  (tree->string `("[38;5;80m" "==> " "[0m" ,commad)))  
+  (print  (tree->string `("[38;5;80m" "==> " "[0m" ,command)))  
   (colour-command command
                   #/^>>>/   "[38;5;99m\\0[0m"
                   #/^=*>/   "[38;5;39m\\0[0m"
@@ -32,7 +32,7 @@
                   #/(\w*\.So)/  "[38;5;248m\\1[0m"
                   #/(\w*\.so)/  "[38;5;248m\\1[0m"
                   )
-  (prit (string-append "[38;5;218m" "-------------" "[0m"))
+  (print (string-append "[38;5;218m" "-------------" "[0m"))
   )
 
 (define (main args)

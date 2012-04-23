@@ -49,15 +49,16 @@ urxvt.tabbed.tab-bg:    0
               -artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1,\
               -misc-fixed-medium-r-normal--10-90-75-75-c-50-*,\
               -misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0,\
-              -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*,\
+              -mplus-*-medium-r-normal--12-*-*-*-*-*-*-*,\
               k10,k10rk,k10b,\
               9x12,\
-              xft:Dejavu Sans Mono:size=10:antialias=false,\
-              xft:terminus:size=10:antialias=false,\
-              xft:Monaco:size=10:antialias=false,\
-              xft:Osaka:size=10:antialias=false,\
-              xft:Monospace:size=10:antialias=false,\
-              xft:Symbola:size=10:antialias=false,\
+              xft:Dejavu Sans Mono:size=12:antialias=false,\
+              xft:terminus:size=12:antialias=false,\
+              xft:Monaco:size=12:antialias=false,\
+              xft:Osaka:size=12:antialias=false,\
+              xft:Monospace:size=12:antialias=false,\
+              xft:Symbola:size=12:antialias=false,\
+              xft:Quivira:size=12:antialias=false,\
               -aaron-*-*-*-*--10-*-*-*-*-*-iso8859-1,\
               xft:Code2001:size=10:antialias=false
 
