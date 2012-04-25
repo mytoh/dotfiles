@@ -48,6 +48,7 @@ Thunar --daemon &
 spiffy &
 #parcellite &
 gosh makiki-server.scm &
+synergys --name $(hostname -s)
 
 if [ "$1" = "twm"  -o "$1" = "flwm" ]; then
   $HOME/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 13 -bg gray15 -fn '-*-terminus-medium-r-normal--12-*' -e 'onexit=ungrabmouse' &

@@ -49,6 +49,7 @@
                   (a (@ (href "http://b.hatena.ne.jp/t/vim?sort=eid") (target "_blank")) "vim")
                   (a (@ (href "http://b.hatena.ne.jp/t/zsh?sort=eid") (target "_blank")) "zsh")
                   (a (@ (href "http://b.hatena.ne.jp/t/scheme?sort=eid") (target "_blank")) "scheme")
+                  (a (@ (href "http://b.hatena.ne.jp/t/lisp?sort=eid") (target "_blank")) "lisp")
                   (a (@ (href "http://b.hatena.ne.jp/t/bash?sort=eid") (target "_blank")) "bash")
                   (a (@ (href "http://b.hatena.ne.jp/t/freebsd?sort=eid") (target "_blank")) "freebsd")
                   (a (@ (href "http://b.hatena.ne.jp/t/tmux?sort=eid") (target "_blank")) "tmux")

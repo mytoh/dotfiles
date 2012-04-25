@@ -129,6 +129,7 @@ else
   NeoBundle 'zenzike/vim-haskell-unicode'
   "javascript
   NeoBundle 'jelera/vim-javascript-syntax'
+  NeoBundle 'teramako/jscomplete-vim'
   " css
   NeoBundle 'hail2u/vim-css3-syntax'
   " colorscheme {{{
