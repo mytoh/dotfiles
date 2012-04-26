@@ -48,7 +48,8 @@
 (define (prompt)
     (write-tree
       `(
-        ,(make-colour 172 "X / _ / X")
+        ; ,(make-colour 172 "X / _ / X")
+        ,(make-colour 172 "(・x・)")
         ,(make-colour 0 ".")
         ,(make-colour 118 (car (string-split (sys-gethostname) "." )))
         " :: "

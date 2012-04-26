@@ -244,6 +244,10 @@ if which gosh >&-
                 command gosh kääntää.scm en fi $argv[1]
         end
 
+        function fi-ja
+                command gosh kääntää.scm fi ja $argv[1]
+        end
+
         function sanoa
                 command gosh sanoa.scm $argv
         end

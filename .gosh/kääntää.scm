@@ -24,7 +24,7 @@
                                            (tl ,target-lang)
                                            (text ,text))))
                    2)
-                 "iso-8859-1" "utf-8")
+                  "iso-8859-1")
                  #[\[\],])
            1)))
     (print

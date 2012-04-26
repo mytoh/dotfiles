@@ -9,7 +9,7 @@
   (run-process `(tmux new-session -d -s ,session ,@options) :wait #t))
 
 (define (new-window session window-name . command)
-  (run-process `(tmux new-window -d -t ,session -n ,window-name ,@command) :wait #t))
+  (run-process `(tmux new-window -t ,session -n ,window-name ,@command) :wait #t))
 
 (define (attach-session session)
   (run-process `(tmux -u2 attach-session -t ,session) :wait #t))
@@ -28,10 +28,12 @@
           (attach-session main-session)
           ; session not exists
           (begin
+
             ;; create main session
             (new-session main-session)
             (new-window main-session "vim" "vim")
             (new-window main-session "w3m" "w3m google.com")
+
             ;; create second session
             (new-session second-session)
             (new-window  second-session "futaba" "fish")

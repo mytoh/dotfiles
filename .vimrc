@@ -645,6 +645,7 @@ inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 
+augroup myautocommands
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType less setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType scss setlocal omnifunc=csscomplete#CompleteCSS
@@ -652,6 +653,7 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup end
 
 " For snippet_complete marker.
 if has('conceal')
@@ -663,7 +665,7 @@ let g:neocomplcache_snippets_dir='~/.vim/snippets'
 
 
 " force cache dict when insert
-autocmd InsertEnter * call s:neco_pre_cache()
+autocmd myautocommands InsertEnter * call s:neco_pre_cache()
 function! s:neco_pre_cache()
   if exists('b:neco_pre_cache')
     return
@@ -682,7 +684,7 @@ endfunction
 nnoremap <localleader><silent>ff :<c-u>VimFilerTab<cr>
 nnoremap <silent> <c-e> :VimFiler -buffer-name=explorer -split -winwidth=35 -toggle -no-quit<cr>
 
-autocmd! filetype vimfiler call g:my_vimfiler_settings()
+autocmd! myautocommands filetype vimfiler call g:my_vimfiler_settings()
 function! g:my_vimfiler_settings() "{{{
   nmap     <buffer><expr><cr>        vimfiler#smart_cursor_map("\<plug>(vimfiler_expand_tree)", "\<plug>(vimfiler_edit_file)")
   nnoremap <buffer><localleader><silent>s    :call vimfiler#mappings#do_action('my_split')<cr>
@@ -779,8 +781,8 @@ let g:unite_cursor_line_highlight = 'TabLineSel'
 " keymaps
 nnoremap [unite] <Nop>
 nmap     <localleader>u [unite]
-nnoremap <silent> [unite]f  :<C-u>UniteWithBufferDir -buffer-name=files -prompt=%\  buffer file file/new<CR>
-nnoremap <silent> [unite]c  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file file/new<CR>
+nnoremap <silent> [unite]f :<c-u>UniteWithBufferDir -buffer-name=files -prompt=%\  file file/new<CR>
+nnoremap <silent> [unite]c :<c-u>UniteWithCurrentDir -buffer-name=files buffer file file/new<CR>
 nnoremap <silent> [unite]b :<c-u>Unite buffer<cr>
 nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
 nnoremap <silent> [unite]l :<c-u>Unite launcher<cr>
@@ -794,7 +796,7 @@ function! s:unite_project(...)
   execute 'Unite' opts 'file_rec:' . dir
 endfunction
 
-autocmd FileType unite call s:unite_my_settings()
+autocmd myautocommands FileType unite call s:unite_my_settings()
 function! s:unite_my_settings() "{{{
   " Overwrite settings.
   imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)

@@ -122,6 +122,8 @@ else
   NeoBundle 'shiracha/unite-related_files'
   NeoBundle 'osyo-manga/unite-homo'
   NeoBundle 'osyo-manga/unite-u-nya-'
+  NeoBundle 'tsukkee/unite-tag'
+  NeoBundle 'nefo-mi/nyan-modoki.vim'
   "lisp
   NeoBundle 'emezeske/paredit.vim'
   "haskell
@@ -162,6 +164,8 @@ else
   NeoBundle 'matchparenpp'
   NeoBundle 'AnsiEsc.vim'
   NeoBundle 'vim-jsbeautify'
+  NeoBundle 'taglist.vim'
+  NeoBundle 'Source-Explorer-srcexpl.vim'
   "Bundle 'buftabs'
   " colorschemes
   NeoBundle 'jellybeans.vim'
