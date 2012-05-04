@@ -17,7 +17,6 @@
     p
     daemonize
     run-command
-    run-commands
     run-command-sudo
     colour-command
     whitespace->dash
@@ -87,11 +86,8 @@
 (define (whitespace->dash str)
   (regexp-replace-all #/\s+/ str "-"))
 
-(define (run-command command)
-  (run-process command :wait #t)
-  )
 
-(define-syntax run-commands
+(define-syntax run-command
   ; run processes
   (syntax-rules ()
     ((_ c1 )
