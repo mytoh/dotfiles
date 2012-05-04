@@ -5,7 +5,7 @@
 
 (define (unlink pullo)
   (let* ((kaava  (make-parameter pullo))
-         (panna-kansio   (make-parameter (resolve-path (sys-getenv "PANNA_PREFIX"))))
+         (panna-kansio   (make-parameter (resolve-path (sys-getenv "OLUTPANIMO"))))
          (kellari-kansio (make-parameter (build-path (panna-kansio) "kellari")))
          (tynnyri-kansio (make-parameter (build-path (kellari-kansio) (kaava)))))
 

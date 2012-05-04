@@ -67,6 +67,12 @@
   )
 ; }}}
 
+;; srcup {{{
+;; update kernel source
+(define (update-source-tree)
+  (run-command-sudo '(svn up /usr/src)))
+;; }}}
+
 ; install {{{
 (define (install-package package)
   (current-directory (build-path ports-directory package))
@@ -193,6 +199,8 @@
        (reinstall-package (cadr rest)))
       ("search"
        (search-package-by-name (cadr rest)))
+      ("srcup"
+       (update-source-tree))
       (_ (usage 1))))
   0)
 

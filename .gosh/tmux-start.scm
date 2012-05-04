@@ -37,7 +37,9 @@
             ;; create second session
             (new-session second-session)
             (new-window  second-session "futaba" "fish")
-            (new-window  second-session "rtorrent" "rtorrent")
+            (new-window  second-session "4ch" "fish")
+            (new-window  second-session "danbooru" "fish")
+            ; (new-window  second-session "rtorrent" "rtorrent")
 
             ; attach main session
             (attach-session main-session)

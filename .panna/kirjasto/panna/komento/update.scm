@@ -19,7 +19,7 @@
                 ))))
     (if (not (null-list? pullo))
       ; update one repository
-      (let  ((riisi (build-path (sys-getenv "PANNA_PREFIX")
+      (let  ((riisi (build-path (sys-getenv "OLUTPANIMO")
                                 "riisi" (car pullo ))))
         (current-directory riisi)
         (display (colour-string 155 ">>> "))
@@ -43,7 +43,7 @@
                ))
 
       ; update all repositories
-      (let* ((riisi-kansio (build-path (sys-getenv "PANNA_PREFIX")
+      (let* ((riisi-kansio (build-path (sys-getenv "OLUTPANIMO")
                                        "riisi"))
              (repos  (directory-list riisi-kansio :children? #t :add-path? #t))
              )

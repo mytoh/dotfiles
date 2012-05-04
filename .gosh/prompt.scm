@@ -46,34 +46,28 @@
   (make-colour 33 " ǂ "))
 
 (define (prompt)
-    (write-tree
-      `(
-        ; ,(make-colour 172 "X / _ / X")
-        ,(make-colour 172 "(・x・)")
-        ,(make-colour 0 ".")
-        ,(make-colour 118 (car (string-split (sys-gethostname) "." )))
-        " :: "
-        ,(make-colour 4 (directory))
-
-        ,(cond
-           ((file-exists? "./.hg")
-            (hg))
-           ((file-exists? "./.git")
-            (git))
-           ((file-exists? "./.svn")
-            (svn))
-           (else ""))
-        ))
-  (newline)
   (write-tree
     `(
+      ; ,(make-colour 172 "X / _ / X")
+      ,(make-colour 172 "(・x・)")
+      ,(make-colour 0 ".")
+      ,(make-colour 118 (car (string-split (sys-gethostname) "." )))
+      " :: "
+      ,(make-colour 4 (directory))
+
+      ,(cond
+         ((file-exists? "./.hg")
+          (hg))
+         ((file-exists? "./.git")
+          (git))
+         ((file-exists? "./.svn")
+          (svn))
+         (else ""))
+      "\n"
       ,(make-colour 235 ">")
       ,(make-colour 238 ">")
       ,(make-colour 60  ">")
-      " "
-      ))
-  (newline)
-  )
+    " ")))
 
 (define (main args)
   (prompt))

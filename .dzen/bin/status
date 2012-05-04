@@ -47,7 +47,7 @@ while (1)
   set openparen  = "^fg(#656565)("
   set closeparen = "^fg(#656565))"
 
-  echo "  ^fg($iconcolour)^i($icons/sm4tik/cpu.xbm)^fg($strcolour) $cpu ^fg($iconcolour)^i($icons/sm4tik/mem.xpm)^fg($strcolour) $freemem $openparen ^fg($iconcolour)^i($icons/sm4tik/net_up_02.xbm)^fg($strcolour) $tx ^fg($iconcolour)^i($icons/sm4tik/net_down_02.xbm)^fg($strcolour) $rx ^fg($iconcolour)@ $ip $closeparen ^fg($iconcolour)^i($icons/floppy.xpm)^fg($strcolour) ${diskused}/${disktotal}B  ^fg($iconcolour)^i($icons/sm4tik/clock.xbm)^fg($strcolour) $date "
+  echo "^fg($iconcolour)^bg(#333333)^i($icons/right_arrow.xbm) ^fg($iconcolour)^i($icons/sm4tik/cpu.xbm)^fg($strcolour) $cpu ^fg($iconcolour)^i($icons/sm4tik/mem.xbm)^fg($strcolour) $freemem $openparen ^fg($iconcolour)^i($icons/sm4tik/net_up_02.xbm)^fg($strcolour) $tx ^fg($iconcolour)^i($icons/sm4tik/net_down_02.xbm)^fg($strcolour) $rx ^fg($iconcolour)@ $ip $closeparen ^fg($iconcolour)^i($icons/sm4tik/diskette.xpm)^fg($strcolour) ${diskused}/${disktotal}B  ^fg($iconcolour)^i($icons/sm4tik/clock.xbm)^fg($strcolour) $date "
 
 #  sleep $interval
 

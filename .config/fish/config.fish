@@ -120,40 +120,40 @@ complete -c gosh -f -a "(__gosh_completion_current_directory)" -d "files in CWD"
 
 # panna {{{
 # add panna to PATH
-set -x PANNA_PREFIX "$HOME/.panna"
-set -x GAUCHE_LOAD_PATH $PANNA_PREFIX/kirjasto:$GAUCHE_LOAD_PATH
-push-to-path $PANNA_PREFIX/bin
-if test ! -L $PANNA_PREFIX/bin/PANNA_PREFIX
-  ln -sf $PANNA_PREFIX/kirjasto/run-panna.scm $PANNA_PREFIX/bin/panna
+set -x OLUTPANIMO "$HOME/.panna"
+set -x GAUCHE_LOAD_PATH $OLUTPANIMO/kirjasto:$GAUCHE_LOAD_PATH
+push-to-path $OLUTPANIMO/bin
+if test ! -L $OLUTPANIMO/bin/panna
+  ln -sf $OLUTPANIMO/kirjasto/run-panna.scm $OLUTPANIMO/bin/panna
 end
 
 function __fish_complete_panna_kaava
   set arguments (commandline -opc)
-  set path (echo $PANNA_PREFIX | tr ':' '\n')
+  set path (echo $OLUTPANIMO | tr ':' '\n')
 
   for cmd in $arguments
 
     if contains -- $cmd edit install homepage home up update
-      ls $PANNA_PREFIX/kirjasto/kaava | sed s/\.scm//
+      ls $OLUTPANIMO/kirjasto/kaava | sed s/\.scm//
       return 0
     end
 
-    if contains -- $cmd abv info list ls rm remove uninstall
-      ls $PANNA_PREFIX/kellari
+    if contains -- $cmd abv info list ls rm remove unlink uninstall
+      ls $OLUTPANIMO/kellari
       return 0
     end
   end
 end
 
 complete -c panna -n '__fish_use_subcommand' -xa 'build install up edit info
-uninstall  rm remove ls list homepage home up update'
+uninstall  unlink rm remove ls list homepage home up update'
 complete -c panna -f -a "(__fish_complete_panna_kaava)"
 # }}}
 
 # talikko {{{
 function __fish_complete_talikko_ports_tree
   set arguments (commandline -opc)
-  set path (echo $PANNA_PREFIX | tr ':' '\n')
+  set path (echo $OLUTPANIMO | tr ':' '\n')
 
   for cmd in $arguments
     if contains -- $cmd install

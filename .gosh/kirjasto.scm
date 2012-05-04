@@ -37,7 +37,7 @@
 
 (define (make-colour colour-number str)
   ;; take any -> return string
-  (tree->string `("[38;5;" ,(x->string colour-number) "m" ,(x->string str) "[0m"))
+  (tree->string `("[38;5;" ,(number->string colour-number) "m" ,str "[0m"))
   )
 
 

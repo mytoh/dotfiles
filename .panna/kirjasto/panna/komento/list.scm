@@ -6,7 +6,7 @@
 (use panna.työkalu)
 
 (define (list-packages)
-  (let* ((panna   (make-parameter (resolve-path (sys-getenv "PANNA_PREFIX"))))
+  (let* ((panna   (make-parameter (resolve-path (sys-getenv "OLUTPANIMO"))))
          (kellari (make-parameter (build-path (panna) "kellari"))))
     (display (colour-string 99 ">>> "))
     (display "installed packages")
@@ -15,7 +15,7 @@
          (directory-list (kellari) :children? #t))))
 
 (define (list-package-contents kaava)
-  (let* ((panna   (make-parameter (resolve-path (sys-getenv "PANNA_PREFIX"))))
+  (let* ((panna   (make-parameter (resolve-path (sys-getenv "OLUTPANIMO"))))
          (kellari (make-parameter (build-path (panna) "kellari")))
          (tynnyri (make-parameter (build-path (kellari) kaava))))
     (print (string-append (colour-string 99 ">>> ")

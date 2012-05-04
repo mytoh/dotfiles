@@ -1,14 +1,13 @@
 (use panna.kaava)
 
+
 (define kaava   "sox")
 
 
 (define (install tynnyri)
   (use-clang)
   (system
-    '(make clean)
-    '(make distclean)
-    '(autoreconf -i)
+    '(autoreconf -vfi)
     `(./configure ,(string-append "--prefix=" tynnyri)
                   )
     '(make -s)

@@ -47,8 +47,16 @@
       (run-process `(cvs ,@args) :wait #t))
     ))
 
+(define (darcs args)
+  (match (car args)
+    ("up"
+     (run-process '(darcs pull) :wait #t))
+    (_
+      (run-process `(darcs ,@args) :wait #t))
+    ))
 
 (define (hub args)
+  (print (current-directory))
   (cond
     ((file-exists? (build-path (current-directory) ".hg"))
      (hg args))
@@ -58,7 +66,10 @@
      (svn args))
     ((file-exists? (build-path (current-directory) "CVS"))
      (cvs args))
+    ((file-exists? (build-path (current-directory) "_darcs"))
+     (darcs args))
     (else
+      (print "not vcs directory invoking GIT.")
       (git args))
     )
   )

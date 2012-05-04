@@ -12,11 +12,10 @@
 
 
 
-(define (get-posts page-number tag)
+(define (get-post-page page-number tag)
   (receive (status head body)
            (http-get "danbooru.donmai.us" (string-append "/post?page=" (number->string page-number) "&tags=" tag))
-           body
-           ))
+           body))
 
 (define (parse-post-number-url body)
   (let ((parse-image-url (lambda (line) (rxmatch #/\"file_url\"\:\"(http\:\/\/[[:alpha:]]+\.donmai\.us\/data\/[^\"]+)/ line)))
@@ -64,17 +63,16 @@
              (caddr (find-max
                      ((node-closure (ntype-names?? '(a))) page)
                      :key (lambda (e) (x->number (caddr e))))))
-           1
-           ))
+           1))
 
 (define (get-posts-all tag)
-  (let ((last (x->number (parse-last-page-number (get-posts 1 tag)))))
+  (print tag)
+  (let ((last (x->number (parse-last-page-number (get-post-page 1 tag)))))
     (print (string-append (make-colour 82 last)
                           " pages found"))
     (dotimes (num last)
       (print (string-append (make-colour 99 "getting page ") (make-colour 33 (+ num 1))))
-       (get-image (parse-post-number-url (get-posts (+ num 1) tag))))
-    ))
+       (get-image (parse-post-number-url (get-post-page (+ num 1) tag))))))
 
   (define (main args)
     (let-args (cdr args)
@@ -83,6 +81,5 @@
               (mkdir tag)
               (cd tag)
               (get-posts-all tag)
-              (cd "..")
-              ))
+              (cd "..")))
 

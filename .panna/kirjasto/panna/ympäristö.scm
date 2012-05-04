@@ -8,10 +8,8 @@
 (select-module panna.ympäristö)
 
 
-
-
 (define-constant kaava-kansio
-  (build-path (sys-getenv "PANNA_PREFIX")
+  (build-path (sys-getenv "OLUTPANIMO")
               "kirjasto"
               "kaava"))
 

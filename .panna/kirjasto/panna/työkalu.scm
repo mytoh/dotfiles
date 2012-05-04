@@ -16,7 +16,7 @@
 
 (define-constant kaava-kansio
   ; directory contains panna build file
-  (build-path (sys-getenv "PANNA_PREFIX")
+  (build-path (sys-getenv "OLUTPANIMO")
               "kirjasto"
               "kaava"))
 

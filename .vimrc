@@ -223,10 +223,10 @@ augroup END
 function! Statusmode(mode)
   if a:mode == 'enter'
     hi clear User9
-    silent exec 'highlight User9 ctermfg=blue ctermbg=222 cterm=none'
+    silent exec 'highlight User9 ctermfg=39 ctermbg=222 cterm=none'
   else
     hi clear User9
-    silent exec 'highlight User9 ctermfg=222 ctermbg=230 cterm=none'
+    silent exec 'highlight User9 ctermfg=91 ctermbg=230 cterm=none'
   endif
 endfunction
 " }}}
@@ -252,6 +252,8 @@ set stl+=%4*
 if exists('*fugitive#statusline')
   set stl+=%{fugitive#statusline()}  "git repo info
 endif
+
+set stl+=%{SyntasticStatuslineFlag()}
 
 set stl+=%5*
 set stl+=\  "
@@ -786,7 +788,7 @@ nnoremap <silent> [unite]c :<c-u>UniteWithCurrentDir -buffer-name=files buffer f
 nnoremap <silent> [unite]b :<c-u>Unite buffer<cr>
 nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
 nnoremap <silent> [unite]l :<c-u>Unite launcher<cr>
-nnoremap <silent> [unite]g :<c-u>Unite get_function<cr>
+nnoremap <silent> [unite]o :<c-u>Unite outline<cr>
 nnoremap <silent> [unite]k :<c-u>Unite bookmark<cr>
 nnoremap <silent> [unite]p :<c-u>call <SID>unite_project('-start-insert')<cr>
 
@@ -989,7 +991,7 @@ let g:syntastic_enable_highlighting = 1
 let g:syntastic_enable_signs        = 1
 let g:syntastic_auto_loc_list       = 2
 let g:syntastic_mode_map = { 'mode': 'active',
-      \ 'active_filetypes': ['ruby', 'javascript'],
+      \ 'active_filetypes': ['ruby', 'javascript', 'sh', 'html', 'css', 'haskell'],
       \ 'passive_filetypes': ['puppet'] }
 " }}}
 

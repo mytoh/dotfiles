@@ -27,7 +27,8 @@
           read-line)))))
 
 (define (launch-vim argv)
-  (run-process (append '(vim -X) argv) :wait #t)
+  (run-process (append '(vim -X) argv) 
+               :wait #t)
   )
 
 (define (v word)
