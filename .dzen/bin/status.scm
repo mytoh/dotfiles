@@ -15,8 +15,7 @@
        (loop)))))
 
 (define (date)
-  (date->string (current-date))
-  )
+  (date->string (current-date)))
 
 (define (memory)
   (fifth
@@ -33,27 +32,76 @@
                                    l
                                    #f))
                      fs-lst))
+         (quatre (find (lambda (l) (if (string= (sixth l) "/mnt/quatre")
+                                     l #f))
+                       fs-lst))
          (mypassport (find (lambda (l) (if (string= (sixth l) "/mnt/mypassport")
                                          l #f))
                            fs-lst))
+         (deskstar (find (lambda (l) (if (string= (sixth l) "/mnt/deskstar")
+                                       l #f))
+                         fs-lst))
          )
     (string-append
-      "/ " (third root) "/" (second  root)
-      "  "
-      "mypassport " (third mypassport) "/" (second mypassport)
-      ))) 
+      (if (list? root)
+        (begin
+          (string-append
+          (fg "#294232")
+          "/ "
+          (fg "#acacac" )
+          (third root) "/" (second  root)))
+        "")
+      (if (list? quatre)
+        (begin
+          (string-append
+          " "
+          (fg "#f2a2a2")
+          "q "
+          (fg "#acacac" )
+          (third quatre) "/" (second quatre)))
+        "")
+      (if (list? mypassport)
+        (begin
+          (string-append
+          " "
+          (colour "#f282a2" "#181818")
+          "m "
+          (colour "#ffffff" "#181818" )
+          (third mypassport) "/" (second mypassport))
+          )
+        "")
+      (if (list? deskstar)
+        (begin
+          (string-append
+          " "
+          (colour "#223254" "#181818")
+            "d "
+          (colour "#ffffff" "#181818" )
+          (third deskstar) "/" (second deskstar)))
+        "")
+      )))
 
 (define (volume)
   (let ((vol (string-split (process-output->string "mixer -S vol") ":"))
         (pcm (string-split (process-output->string "mixer -S pcm") ":")))
     (string-append
-      (car  vol)  
+      (car  vol)
       " "
       (cadr vol)
       " "
       (car  pcm)
       " "
       (cadr pcm))))
+
+(define fg
+  (lambda (colour)
+    (tree->string
+      `("^fg(" ,colour ")"))))
+
+(define bg
+  (lambda (colour)
+    (tree->string
+      `("^bg(" ,colour ")"))))
 
 (define (colour fg bg)
   (tree->string
@@ -68,11 +116,9 @@
       " " ,(volume) " "
       ,(colour "#ffffff" "#111111")
       " " ,(memory) " "
-      ,(colour "#ffffff" "#222222")
       " " ,(fs) " "
       ,(colour "#ffffff" "#444444")
-      " " ,(date) " "
-      )))
+      " " ,(date) " ")))
 
 (define (main args)
   (let loop ()

@@ -23,7 +23,6 @@
     "git://git.informatik.uni-erlangen.de/re06huxa/herbstluftwm"
     "git://opensource.conformal.com/xxxterm.git"
     "git://tron.homeunix.org/cvscvt"
-    "https://bitbucket.org/anekos/xmonad-conf.git"
     ; repo with other name
     ("git://git.sourceforge.jp/gitroot/ninix-aya/master.git"  "ninix-aya")
     ; minun github repo
@@ -97,6 +96,7 @@
     (valvallow      lifegame)
     (saironiq       shellscripts)
     (mason-larobina luakit)
+    (jwiegley        eshell)
     ; (jhawthorn     meh)
     ; (git            git)
     ; (dss-project   dswm)

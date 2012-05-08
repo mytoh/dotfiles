@@ -194,8 +194,8 @@ if which gosh >&-
         end
 
         function gi
-                rlwrap -pBlue -c -q '"' -b '(){}[].,#@;|`"' gosh
-        end
+                rlwrap -c -q '"' -b '(){}[].,#@;|`"' gosh kuori.scm
+       end
 
         function yotsuba
                 command gosh yotsuba-get.scm $argv
@@ -1235,9 +1235,9 @@ switch (uname)
   set -x SDL_VIDEODRIVER vgl
   # PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages/Latest/"
   function pcheck
-    sudo portmaster -PBidav
-    and sudo portaudit -Fdav
-    and sudo portmaster -y --clean-packages --clean-distfiles --check-depends $argv
+    sudo portmaster -PBidav $argv
+    sudo portaudit -Fdav
+    sudo portmaster -y --clean-packages --clean-distfiles --check-depends
   end
   function pfetch
     sudo make fetch-recursive

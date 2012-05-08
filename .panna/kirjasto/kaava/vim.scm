@@ -10,8 +10,9 @@
   `(./configure   ,(string-append
                      "--prefix=" tynnyri)
                   "--enable-multibyte"
-                  "--enable-perlinterp=yes"
-                  "--enable-pythoninterp=yes"
+                  "--enable-perlinterp"
+                  "--enable-pythoninterp"
+                  ; "--enable-mzschemeinterp"
                   "--enable-xim"
                   "--enable-fontset"
                   "--disable-darwin"

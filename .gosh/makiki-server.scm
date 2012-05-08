@@ -41,6 +41,8 @@
                   (a (@ (href "http://d.me/tag/recent/musiikki") (target "_blank")) "musiikki")
                   (a (@ (href "http://d.me/tag/recent/xmonad") (target "_blank")) "xmonad")
                   (a (@ (href "http://d.me/tag/recent/tmux") (target "_blank")) "tmux")
+                  (a (@ (href "http://d.me/tag/recent/ruby") (target "_blank")) "ruby")
+                  (a (@ (href "http://d.me/tag/recent/python") (target "_blank")) "python")
                   "))")
 
             (p (@ (class "hatena"))
@@ -53,6 +55,9 @@
                   (a (@ (href "http://b.hatena.ne.jp/t/bash?sort=eid") (target "_blank")) "bash")
                   (a (@ (href "http://b.hatena.ne.jp/t/freebsd?sort=eid") (target "_blank")) "freebsd")
                   (a (@ (href "http://b.hatena.ne.jp/t/tmux?sort=eid") (target "_blank")) "tmux")
+                  (a (@ (href "http://b.hatena.ne.jp/t/perl?sort=eid") (target "_blank")) "perl")
+                  (a (@ (href "http://b.hatena.ne.jp/t/ruby?sort=eid") (target "_blank")) "ruby")
+                  (a (@ (href "http://b.hatena.ne.jp/t/python?sort=eid") (target "_blank")) "python")
                   "))")
 
             (p (@ (class "arch"))

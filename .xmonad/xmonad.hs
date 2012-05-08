@@ -163,7 +163,8 @@ myTheme = defaultTheme {
 myKeys = [ -- M4 for Super key
          ("Tab",   windows W.focusDown)
 
-       , ("M-p r", spawn ("dmenu_run -b -fn " ++ myDzenFont)) -- dzen prompt
+       , ("M-p r", spawn ("dmenu_run -b -p \">\" -fn " ++ myDzenFont)) -- dzen prompt
+       -- , ("M-p r", spawn ("yeganesh -x -- -b -p \">\" -fn " ++ myDzenFont)) -- dzen prompt
     -- , ("M-p r", shellPrompt myXPConfig) -- shell prompt
        , ("M-p t", prompt (myTerminal ++ " -e") myXPConfig) -- run in term
        , ("M-p g", windowPromptGoto myWaitSP ) -- window go prompt

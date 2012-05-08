@@ -246,7 +246,7 @@ let &stl= &stl . "\ " . "mode"
 set stl+=%3*
 let &stl= &stl . "\ "
 set stl+=%<%{fnamemodify(getcwd(),':~')}   "get filepath
-set stl+=\ 
+set stl+=\
 
 set stl+=%4*
 if exists('*fugitive#statusline')
@@ -258,14 +258,14 @@ set stl+=%{SyntasticStatuslineFlag()}
 set stl+=%5*
 set stl+=\  "
 set stl+=%{&dictionary}
-set stl+=%{&fileformat}\ 
-set stl+=<\ 
-set stl+=%{&fenc}\ 
-set stl+=<\ 
-set stl+=%{&filetype}\ 
+set stl+=%{&fileformat}\
+set stl+=<\
+set stl+=%{&fenc}\
+set stl+=<\
+set stl+=%{&filetype}\
 
 set stl+=%6*
-set stl+=\ 
+set stl+=\
 set stl+=%{GetCharCode()}\  " hex under cursor
 
 set stl+=%7*
@@ -273,11 +273,11 @@ set stl+=%3p%%\  "percentage of current line
 set stl+=%*    "reset color
 
 set stl+=%8*
-set stl+=\ 
+set stl+=\
 set stl+=%l,  "current line number
 set stl+=%c   "columns
 set stl+=/%L   "total line number
-set stl+=\ 
+set stl+=\
 
 
 
@@ -345,9 +345,13 @@ endif
 
 " remove trailing spaces {{{
 function! s:vimrc.trimspace() dict
-  silent! %s/\s*$//
+  silent! %s/\s\+$//
+  ''
+endfunction
+
+function! s:vimrc.trimspacelisp() dict
   " trim space for lisp file
-  silent! %s/(\s*/(/
+  silent! %s/(\s\+/(/
   silent! %s/)\s\+)/))/
   ''
 endfunction
@@ -515,6 +519,11 @@ function! s:vimrc.scheme() dict
   vmap     <silent><LocalLeader>gs :VimShellSendString<cr>
 endfunction
 
+function! s:vimrc.scheme_bufwritepost() dict
+  call s:vimrc.trimspacelisp()
+  call s:vimrc.trimspace()
+endfunction
+
 aug myautocommands
   au!
   au bufread,bufnewfile .tmux.conf                setl filetype=tmux
@@ -537,7 +546,7 @@ aug myautocommands
   au bufwritepost       .zshrc                    Silent !zcompile ~/.zshrc
   au bufwritepost       .conkyrc                  Silent !killall -SIGUSR1  conky
   au bufwritepost       xmonad.hs                 Silent !xmonad --recompile
-  au bufwritepost       scheme                    TrimSpace
+  au bufwritepost       *.scm                     call s:vimrc.scheme_bufwritepost()
   au filetype           xdefaults                 call s:vimrc.xrdb()
   au filetype           scheme                    call s:vimrc.scheme()
   au filetype           help                      nnoremap q :<c-u>q<cr>
@@ -635,6 +644,14 @@ if !exists('g:neocomplcache_keyword_patterns')
   let g:neocomplcache_keyword_patterns = {}
 endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+if !exists('g:neocomplcache_context_filetype_lists')
+  let g:neocomplcache_context_filetype_lists = {}
+endif
+let g:neocomplcache_context_filetype_lists.perl6 =
+      \ [{'filetype' : 'pir', 'start' : 'Q:PIR\s*{', 'end' : '}'}]
+let g:neocomplcache_context_filetype_lists.vim =
+      \ [{'filetype' : 'python', 'start' : '^\s*python <<\s*\(\h\w*\)', 'end' : '^\1'}]
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neocomplcache_snippets_expand)
 smap <C-k>     <Plug>(neocomplcache_snippets_expand)

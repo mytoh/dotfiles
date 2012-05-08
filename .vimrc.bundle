@@ -108,6 +108,8 @@ else
   NeoBundle 'gregsexton/gitv'
   NeoBundle 'jpalardy/vim-slime'
   NeoBundle 'godlygeek/tabular'
+  NeoBundle 'Bogdanp/quicksilver.vim'
+  NeoBundle 'jceb/vim-ipi'
   " NeoBundle 'anekos/runes-vim'
   "unite
   NeoBundle 'hakobe/unite-script'
@@ -126,6 +128,8 @@ else
   NeoBundle 'tsukkee/unite-tag'
   NeoBundle 'majutsushi/tagbar'
   NeoBundle 'nefo-mi/nyan-modoki.vim'
+  NeoBundle 'pasela/unite-webcolorname'
+  NeoBundle 'ujihisa/neco-ghc'
   "lisp
   NeoBundle 'emezeske/paredit.vim'
   NeoBundle 'aharisu/vim_goshrepl'
@@ -170,6 +174,7 @@ else
   NeoBundle 'vim-jsbeautify'
   NeoBundle 'Source-Explorer-srcexpl.vim'
   NeoBundle 'Vimchant'
+  NeoBundle 'copypath.vim'
   "Bundle 'buftabs'
   " colorschemes
   NeoBundle 'jellybeans.vim'

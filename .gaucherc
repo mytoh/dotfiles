@@ -4,10 +4,12 @@
 (use srfi-1)
 (use kirjasto)
 
+
 (add-load-path "/usr/local/")
 
 (read-eval-print-loop #f #f 
                       (lambda results
                         (map (cut print "=> " <>) results)) 
                       (lambda () 
-                        (display ">> ") (flush)))
+                            (display (make-colour 33 ">> ")) 
+                        (flush)))

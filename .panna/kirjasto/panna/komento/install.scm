@@ -1,6 +1,6 @@
+(use gauche.parameter)
 (use file.util)
 (use panna)
-(use gauche.parameter)
 
 
 (define (link pullo)
@@ -13,7 +13,7 @@
     (newline)
     (display (string-append "[38;5;38m" ">>> " "[0m"))
     (print "symlinking files")
-    (letrec ((relative-path 
+    (letrec ((relative-path
                (lambda (p)
                  (fold
                    (lambda (e str)
@@ -49,7 +49,9 @@
                          seed))
                  '())))
       (for-each
-        (^p (make-directory* (sys-dirname (cadr p)))
+        (^p
+          (if  (not (file-exists? (sys-dirname (cadr p))))
+          (make-directory* (sys-dirname (cadr p))))
           (if (not (file-exists? (cadr p)))
             (begin
               (print (string-append
@@ -73,10 +75,8 @@
     (print  (current-directory))
     (print tynnyri)
     (install tynnyri)
-    (link pullo)
-    ))
+    (link pullo)))
 
 
 (define (main args)
-  (install-package (cadr args))
-  )
+  (install-package (cadr args)))

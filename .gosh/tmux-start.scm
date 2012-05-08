@@ -23,8 +23,7 @@
          (status (process-exit-status p)))
     (if (zero? status)
       #t
-      #f)
-    ))
+      #f)))
 
 (define (tmux)
   (if (get-environment-variable "TMUX")
@@ -51,9 +50,7 @@
             ; (new-window  second-session "rtorrent" "rtorrent")
 
             ; attach main session
-            (attach-session main-session)
-
-            )))))
+            (attach-session main-session))))))
 
 (define (main args)
   (tmux))

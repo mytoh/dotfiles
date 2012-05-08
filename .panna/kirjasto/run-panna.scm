@@ -50,11 +50,11 @@
                     #f))
            (panna (lambda (c)
                     (if kaava
-                      (run-process `(gosh ,(build-path (sys-getenv "OLUTPANIMO")
+                      (run-process `(nice -n 5 gosh ,(build-path (sys-getenv "OLUTPANIMO")
                                                        (string-append "kirjasto/panna/komento/" c ".scm"))
                                           ,kaava)
                                    :wait #t)
-                      (run-process `(gosh ,(build-path (sys-getenv "OLUTPANIMO")
+                      (run-process `(nice -n 5 gosh ,(build-path (sys-getenv "OLUTPANIMO")
                                                        (string-append "kirjasto/panna/komento/" c ".scm")))
                                    :wait #t)))))
       (match (car rest)
