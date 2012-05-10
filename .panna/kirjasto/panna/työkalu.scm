@@ -30,12 +30,10 @@
 (define-syntax commands
   ; run processes
   (syntax-rules ()
-    ((_ c1 )
-     (run-process c1 :wait #t))
-    ((_ c1 c2 ...)
+    ((_ c1 ...)
      (begin
        (run-process c1 :wait #t)
-       (commands c2 ...)))))
+       ...))))
 
 (define (colour-string colour-number str)
   ;; take any -> return string

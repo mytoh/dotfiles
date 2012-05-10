@@ -7,7 +7,6 @@
 (use util.match)
 (use util.list) ; slices
 (use text.csv)
-(use text.tree)
 (require-extension (srfi 1 11 13))
 (use kirjasto) ; run-command, run-command-sudo, make-colour, colour-command
 
@@ -48,11 +47,11 @@
 (define (info-print-packages name)
   (map (lambda (x)
          (print
-           (tree->string
-             `(" "  
-             ,(make-colour colour-package (car x))  
-             " "  
-             "[" 
+           (string-concatenate
+             `(" "
+             ,(make-colour colour-package (car x))
+             " "
+             "["
              ,(make-colour 172 (cadr x)) "]"))
            )
          (display "    ")
@@ -109,15 +108,13 @@
                                      #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                                      #/^===>/   "[38;5;39m>>>[0m"
                                      #/^=>/   "[38;5;99m>>>[0m"
-                                     #/\*\*\*.*$/    "[38;5;3m\\0[0m"
-                                     )
+                                     #/\*\*\*.*$/    "[38;5;3m\\0[0m")
   (deinstall-package package)
   (colour-command "sudo make install clean"
                                      #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                                      #/^===>/   "[38;5;39m>>>[0m"
                                      #/^=>/   "[38;5;99m>>>[0m"
-                                     #/\*\*\*.*$/    "[38;5;3m\\0[0m"
-                                     )
+                                     #/\*\*\*.*$/    "[38;5;3m\\0[0m")
   )
 ; }}}
 
@@ -127,7 +124,7 @@
   (let ((index-list
           (call-with-input-file
             (build-path ports-directory
-                        (tree->string
+                        (string-concatenate
                           `("INDEX-"
                           ,(car (string-split
                                  (caddr (sys-uname))
@@ -147,32 +144,32 @@
       (lambda (x)
         (let ((package-name
                 ; remove "/usr/ports/" from string
-                (string-split 
+                (string-split
                   (string-drop (cadr x) 11)
                   #\/))
               (version
                 (last (string-split
                         (car x)
                         #\-))))
-          (let-values (((category name) 
+          (let-values (((category name)
                         (values
                           (car package-name)
                           (cadr package-name))))
             (display
-              (tree->string 
+              (string-concatenate
                 `(" "
                 ,(make-colour colour-category
                              category)
                 "/"
                 ,(make-colour colour-package
                              name))))
-            (display 
-              (tree->string `(" ["
+            (display
+              (string-concatenate `(" ["
                              ,(make-colour colour-version version)
                              "]")))
             (newline)
             (print
-              (tree->string `("    " ,(make-colour 244  (cadddr x)))))
+              (string-concatenate `("    " ,(make-colour 244  (cadddr x)))))
             )))
       found-list)))
 

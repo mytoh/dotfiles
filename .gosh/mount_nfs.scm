@@ -18,6 +18,10 @@
        (mount-deskstar))
       ("quatre"
        (mount-quatre (cadr rest)))
+      ("all"
+       (mount-mypassport)
+       (mount-deskstar)
+       (mount-quatre (cadr rest)))
       (_ (usage 1))))
   )
 

@@ -97,6 +97,8 @@ else
   NeoBundle 'kana/vim-smartchr'
   NeoBundle 'kana/vim-scratch'
   NeoBundle 'kana/vim-tabpagecd'
+  NeoBundle 'kana/vim-operator-user'
+  NeoBundle 'kana/vim-operator-replace'
   " NeoBundle 'Raimondi/delimitMate'
   NeoBundle 'hobbestigrou/Vim-wmfs'
   NeoBundle 'aharisu/Gauche-Complete'

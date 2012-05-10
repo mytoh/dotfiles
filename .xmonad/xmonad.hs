@@ -117,7 +117,7 @@ myWorkspaces    =
 
 -- colors {{{
 myNormalBorderColor  = "#111111"
-myFocusedBorderColor = "#ad9dc5"
+myFocusedBorderColor = "#3d7df5"
 -- }}}
 
 -- Fonts -------------------------------------------
@@ -149,7 +149,7 @@ myLayoutHook =  avoidStruts                $
                    onebig  = named "#" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
 
                    gratio      = toRational goldenratio
-                   goldenratio = 2/(1+sqrt(5)::Double);
+                   goldenratio = 2 / (1 + sqrt(5)::Double);
 
 -- tabbar theme config ----------------------------------------
 myTheme = defaultTheme {

@@ -1,6 +1,6 @@
 (use gauche.process)
 (use file.util)
-(use text.tree)
+(require-extension (srfi 13))
 
 (define-syntax colour-command
   (syntax-rules ()
@@ -19,7 +19,7 @@
     ))
 
 (define (process command)
-  (print  (tree->string `("[38;5;80m" "==> " "[0m" ,command)))  
+  (print  (string-concatenate `("[38;5;80m" "==> " "[0m" ,command)))
   (colour-command command
                   #/^>>>/   "[38;5;99m\\0[0m"
                   #/^=*>/   "[38;5;39m\\0[0m"
@@ -36,7 +36,7 @@
   (print (string-append "[38;5;218m" "-------------" "[0m"))
   (newline)
   (print command)
-  (print  (tree->string '("[38;5;80m" "------------" "[0m" )))  
+  (print  (string-concatenate '("[38;5;80m" "------------" "[0m" )))
   )
 
 (define (main args)
