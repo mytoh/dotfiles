@@ -1,5 +1,6 @@
 
 (use gauche.process)
+(use gauche.reload)
 (use file.util)
 (use srfi-1)
 (use kirjasto)

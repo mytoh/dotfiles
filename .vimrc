@@ -402,8 +402,6 @@ nnoremap <silent> [vim-keymap]bd :<c-u>bp<bar>sp<bar>bn<bar>bd<cr>
 
 
 cnoremap <c-a>      <home>
-cnoremap <c-f>      <right>
-cnoremap <c-b>      <left>
 " vim.g.hatena.ne.jp/tyru/20100116
 cnoremap <silent><c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>
 
@@ -451,8 +449,8 @@ nmap <C-w>r :<C-u>call <SID>resizeWindow()<CR>mws
 " }}}
 
 " forward/backward word
-inoremap <silent> <c-f> <s-left>
-inoremap <silent> <c-b> <s-right>
+inoremap <silent> <c-b> <s-left>
+inoremap <silent> <c-f> <s-right>
 
 " better C-a C-e  {{{
 " http://vim.g.hatena.ne.jp/tyru/20100305
@@ -520,8 +518,8 @@ function! s:vimrc.scheme() dict
 endfunction
 
 function! s:vimrc.scheme_bufwritepost() dict
-  call s:vimrc.trimspacelisp()
-  call s:vimrc.trimspace()
+  silent! call s:vimrc.trimspacelisp()
+  silent! call s:vimrc.trimspace()
 endfunction
 
 aug myautocommands
@@ -1066,5 +1064,10 @@ set secure
 " cd vim/src
 " ./configure --prefix=/home/mytoh/local --enable-multibyte --enable-perlinterp=yes --with-x --enable-xim --disable-darwin --disable-selinux --enable-fontset
 " make install clean distclean
+
+"" umlaut characters
+" ^v228 ä
+" ^v246 ö
+" ^v235 ë
 
 " vim:set foldmethod=marker:

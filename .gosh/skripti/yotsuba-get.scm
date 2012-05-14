@@ -7,8 +7,8 @@
 (use file.util)
 (use gauche.collection) ;find
 (use gauche.parseopt)
-(use srfi-11)
-(use text.tree)
+(require-extension
+  (srfi 1 11 13))
 (use kirjasto) ; forever cd  mkdir
 
 
@@ -27,42 +27,61 @@
 
 
 (define (parse-img line board)
-    (rxmatch->string
-      (string->regexp
-        (tree->string `("\\/\\/images\\.4chan\\.org\\/"
-                       ,board
-                       "\\/src\\/[^\"]+")))
-      line)
-    )
+  (rxmatch->string
+    (string->regexp
+      (string-concatenate `("\\/\\/images\\.4chan\\.org\\/"
+                            ,(x->string  board)
+                            "\\/src\\/[^\"]+")))
+    line)
+  )
 ;; "
 
 
-(define (fetch match)
-  (if (string? match)
-    (swget match)))
+(define (fetch url)
+  ;; downloda file from url
+  (if (string? url)
+    (swget url)))
 
-(define (get-img str board)
-  (call-with-input-string 
-    str
-    (lambda (in)
-      (port-for-each
-        (lambda (line)
-          (let ((m (parse-img line board)))
-            (if m 
-              (fetch (string-append "http:" m)))
-        ))
-    (cut read-line in #t)))))
+; (define (get-img str board)
+;   (call-with-input-string
+;     str
+;     (lambda (in)
+;       (port-for-each
+;         (lambda (line)
+;           (let ((m (parse-img line board)))
+;             (if m
+;               (fetch (string-append "http:" m)))
+;         ))
+;     (cut read-line in #t)))))
 
+(define (get-img body board)
+  (map
+    (lambda (u)
+      ;; download indivisual image
+      (fetch
+      (string-append
+        "http:"
+        u)))
+  (delete-duplicates
+    (remove not
+            (map
+              (lambda (x)
+                (parse-img x board))
+              (string-split
+                body
+                (string->regexp
+                  "<\/?(?:img)[^>]*>"))))))
+  )
 
 (define (get-html bd td)
-  (let-values (((status headers body ) (http-get  "boards.4chan.org"  (tree->string `("/" ,bd "/res/"  ,td)))))
-              (if  (string=? status "404")
-                #f
-                (if (string-incomplete? body)
-                  (if-let1 html (string-incomplete->complete body :omit)
-                           html
-                           (ces-convert body "*jp" "utf-8"))
-                  (ces-convert body "*jp" "utf-8")))))
+  (let-values (((status headers body ) (http-get  "boards.4chan.org"  (string-concatenate `("/" ,(x->string bd) "/res/"  ,(x->string td))))))
+    (if  (string=? status "404")
+      #f
+      (if (string-incomplete? body)
+        (if-let1 html (string-incomplete->complete body :omit)
+          html
+          (ces-convert body "*jp" "utf-8"))
+        (ces-convert body "*jp" "utf-8")))))
 
 (define (yotsuba-get restargs )
   (let* ((board (car restargs))
@@ -86,9 +105,9 @@
     (if (not (null? dirs))
       (begin
         (for-each
-        (lambda (d)
-          (yotsuba-get (list bd d)))
-        dirs)
+          (lambda (d)
+            (yotsuba-get (list bd d)))
+          dirs)
         (run-process `(notify-send ,(string-append bd " fetch finished"))))
       (print "no directories")
       )))
@@ -123,13 +142,13 @@
 
 (define (main args)
   (let-args (cdr args)
-            ((all "a|all")
-             (repeat "r|repeat")
-             (else (opt . _) (print "Unknown option: " opt) (usage))
-             . restargs)
-            (cond ((null? restargs) (usage))
-              ((and all repeat) (forever (yotsuba-get-repeat-all restargs)))
-              (repeat (forever (yotsuba-get-repeat restargs)
-                               (print (make-colour 237 "----------"))))
-              (all (yotsuba-get-all restargs))
-              (else (yotsuba-get restargs)))))
+    ((all "a|all")
+     (repeat "r|repeat")
+     (else (opt . _) (print "Unknown option: " opt) (usage))
+     . restargs)
+    (cond ((null? restargs) (usage))
+      ((and all repeat) (forever (yotsuba-get-repeat-all restargs)))
+      (repeat (forever (yotsuba-get-repeat restargs)
+                       (print (make-colour 237 "----------"))))
+      (all (yotsuba-get-all restargs))
+      (else (yotsuba-get restargs)))))

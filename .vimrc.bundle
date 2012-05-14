@@ -111,7 +111,6 @@ else
   NeoBundle 'jpalardy/vim-slime'
   NeoBundle 'godlygeek/tabular'
   NeoBundle 'Bogdanp/quicksilver.vim'
-  NeoBundle 'jceb/vim-ipi'
   " NeoBundle 'anekos/runes-vim'
   "unite
   NeoBundle 'hakobe/unite-script'

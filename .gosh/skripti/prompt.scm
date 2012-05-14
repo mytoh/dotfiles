@@ -5,7 +5,6 @@
 (use gauche.parseopt)
 (use util.match)
 (use file.util)
-(use text.tree)
 (require-extension (srfi 13))
 (use kirjasto)
 

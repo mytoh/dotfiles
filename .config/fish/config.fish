@@ -95,7 +95,7 @@ complete -c h -s h -l help --description 'Display help and exit'
 
 
 set    GAUCHE_ARCH (gauche-config --arch)
-set -x GAUCHE_LOAD_PATH "$HOME/.gosh:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
+set -x GAUCHE_LOAD_PATH "$HOME/.gosh:$HOME/.gosh/skripti:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
 
 
 # gauche completions {{{
@@ -196,7 +196,7 @@ if which gosh >&-
         end
 
         function gi
-                rlwrap -c -q '"' -b '(){}[].,#@;|`"' gosh kuori.scm
+                rlwrap -c -q '"' -b '(){}[].,#@;|`"' gosh $argv
        end
 
        function tl
@@ -406,7 +406,7 @@ end
 
 
 function fish_prompt -d "fish prompt with gauche script"
- gosh ~/.gosh/prompt.scm
+ gosh prompt.scm
 end
 
 #}}}
@@ -452,6 +452,11 @@ end
 
 function :q
 exit
+end
+
+function mps
+ #play hd h.264 on slow computer
+   mplayer -vfm ffmpeg -lavdopts lowres=2:fast:skiploopfilter=all:threads=2 $argv
 end
 
 
@@ -639,7 +644,7 @@ function xp
 end
 
 function rr
-  command rm -rfv $argv
+  command rm -rf $argv
 end
 
 function mkd
@@ -1243,7 +1248,7 @@ switch (uname)
   function pcheck
     sudo portmaster -PBidav $argv
     sudo portaudit -Fdav
-    sudo portmaster -y --clean-packages --clean-distfiles --check-depends
+    sudo portmaster -y --clean-packages --clean-distfiles
   end
   function pfetch
     sudo make fetch-recursive

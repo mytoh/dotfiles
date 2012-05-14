@@ -97,6 +97,7 @@
     (saironiq       shellscripts)
     (mason-larobina luakit)
     (jwiegley        eshell)
+    (robm           dzen)
     ; (jhawthorn     meh)
     ; (git            git)
     ; (dss-project   dswm)

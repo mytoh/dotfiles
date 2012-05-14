@@ -3,7 +3,8 @@
 (use gauche.process)
 (use gauche.parseopt)
 (use util.match)
-(use text.tree)
+(require-extension
+  (srfi 13))
 
  ; set blackf  (tput setaf 0); set redf    (tput setaf 1); set greenf  (tput setaf 2)
  ; set yellowf (tput setaf 3); set bluef   (tput setaf 4); set purplef (tput setaf 5)

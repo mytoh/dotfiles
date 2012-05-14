@@ -43,6 +43,7 @@
   (current-directory "/usr/src")
   (process "sudo make cleandir")
   (process "sudo make cleandir")
+  (remove-directory* "/usr/obj")
   (process "sudo make -j3 buildworld")
   (process "sudo make -j3 buildkernel")
   (process "sudo make -j3 installkernel")

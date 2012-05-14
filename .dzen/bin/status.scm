@@ -2,6 +2,7 @@
 
 (use gauche.process)
 (use gauche.parseopt)
+(use gauche.sequence)
 (use util.match)
 (use text.tree)
 (require-extension (srfi 1 13 19))
@@ -14,8 +15,25 @@
        (sys-sleep 3) ; sleep 5 minutes
        (loop)))))
 
+(define fg
+  (lambda (c)
+    (tree->string
+      `("^fg(" ,c ")"))))
+
+(define bg
+  (lambda (c)
+    (tree->string
+      `("^bg(" ,c ")"))))
+
+
+(define fn
+  (lambda (f)
+    (tree->string
+      `("^fn(" ,f ")"))))
+
 (define (date)
-  (date->string (current-date)))
+    (date->string (current-date))
+  )
 
 (define (memory)
   (fifth
@@ -41,45 +59,47 @@
          (deskstar (find (lambda (l) (if (string= (sixth l) "/mnt/deskstar")
                                        l #f))
                          fs-lst))
+         (fs-remain (lambda (n)
+                      (- (string->number (subseq (second n) 0 3))
+                         (string->number (subseq (third n) 0 3)))))
          )
-    (string-append
-      (if (list? root)
-        (begin
-          (string-append
-          (fg "#294232")
-          "/ "
-          (fg "#acacac" )
-          (third root) "/" (second  root)))
-        "")
-      (if (list? quatre)
-        (begin
-          (string-append
-          " "
-          (fg "#f2a2a2")
-          "q "
-          (fg "#acacac" )
-          (third quatre) "/" (second quatre)))
-        "")
-      (if (list? mypassport)
-        (begin
-          (string-append
-          " "
-          (colour "#f282a2" "#181818")
-          "m "
-          (colour "#ffffff" "#181818" )
-          (third mypassport) "/" (second mypassport))
-          )
-        "")
-      (if (list? deskstar)
-        (begin
-          (string-append
-          " "
-          (colour "#223254" "#181818")
-            "d "
-          (colour "#ffffff" "#181818" )
-          (third deskstar) "/" (second deskstar)))
-        "")
-      )))
+    (list
+        (if (list? root)
+          (list
+            (string-append
+              (fg "#294282")
+              "/ "
+              (fg "#acacac" )
+              (subseq  (third root) 0 3) "/" (second  root)))
+          "")
+        (if (list? quatre)
+            (list
+              " "
+              (fg "#f2a2a2")
+              "q "
+              (fg "#acacac" )
+              (fs-remain quatre)
+              "/" (second quatre))
+          "")
+        (if (list? mypassport)
+            (list
+              " " (fg "#f282a2")
+              "m "
+              (fg "#ffffff" )
+              (fs-remain mypassport)
+              "/" (second mypassport))
+          "")
+        (if (list? deskstar)
+            (list
+              " "
+              (fg "#f282a2")
+              "d "
+              (fg "#ffffff" )
+              (fs-remain deskstar)
+              "/"
+              (second deskstar))
+          ""))
+))
 
 (define (volume)
   (let ((vol (string-split (process-output->string "mixer -S vol") ":"))
@@ -93,36 +113,18 @@
       " "
       (cadr pcm))))
 
-(define fg
-  (lambda (colour)
-    (tree->string
-      `("^fg(" ,colour ")"))))
-
-(define bg
-  (lambda (colour)
-    (tree->string
-      `("^bg(" ,colour ")"))))
-
-(define (colour fg bg)
-  (tree->string
-    `(
-      "^fg(" ,fg ")"
-      "^bg(" ,bg ")")))
 
 (define (dzen)
   (tree->string
     `(
-      ,(colour "#ffffff" "#000000")
       " " ,(volume) " "
-      ,(colour "#ffffff" "#111111")
       " " ,(memory) " "
       " " ,(fs) " "
-      ,(colour "#ffffff" "#444444")
       " " ,(date) " ")))
 
 (define (main args)
   (let loop ()
     (print
       (dzen))
-    (sys-nanosleep 100000000)
+    (sys-nanosleep 1000000000)
     (loop )))
