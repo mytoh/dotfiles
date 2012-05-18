@@ -56,12 +56,12 @@
 
 (define (get-img body board)
   (map
-    (lambda (u)
+    (lambda (url)
       ;; download indivisual image
       (fetch
       (string-append
         "http:"
-        u)))
+        url)))
   (delete-duplicates
     (remove not
             (map

@@ -20,7 +20,7 @@
        )))
 
   (else
-    (define (install)
+    (define (install tynnyri)
       (sys-putenv (string-append "PREFIX=" tynnyri))
       (use-clang)
       (system

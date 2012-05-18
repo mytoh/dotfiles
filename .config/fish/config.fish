@@ -659,6 +659,47 @@ end
 function q
 exit
 end
+function load_lol_aliases
+        # taken from oh-my-zsh
+        # Source: http://aur.archlinux.org/packages/lolbash/lolbash/lolbash.sh
+
+        alias wtf 'dmesg'
+        alias onoz 'cat /var/log/errors.log'
+        alias rtfm 'man'
+
+        alias visible 'echo'
+        alias invisible 'cat'
+        alias moar 'more'
+        alias tldr 'less'
+        alias alwayz 'tail -f'
+
+        alias icanhas 'mkdir'
+        alias gimmeh 'touch'
+        alias donotwant 'rm'
+        alias dowant 'cp'
+        alias gtfo 'mv'
+        alias nowai 'chmod'
+
+        alias hai 'cd'
+        alias iz 'ls'
+        alias plz 'pwd'
+        alias ihasbucket 'df -h'
+
+        alias inur 'locate'
+        alias iminurbase 'finger'
+
+        alias btw 'nice'
+        alias obtw 'nohup'
+
+        alias nomz 'ps -aux'
+        alias nomnom 'killall'
+
+        alias byes 'exit'
+        alias cya 'reboot'
+        alias kthxbai 'halt'
+end
+load_lol_aliases
+
 
 # screen {{{
 set -x SCREENDIR $HOME/.screen.d/tmp
@@ -671,21 +712,6 @@ end
 #net {{{
 function starwars
   telnet towel.blinkenlights.nl
-end
-function radio1 -d "BBC Radio 1"
-  mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r1.asx
-end
-function radio2  -d "BBC Radio 2"
-  mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r2.asx
-end
-function radio3 -d "BBC Radio 3"
-  mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r3.asx
-end
-function radio4 -d "BBC Radio 4"
-  mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r4.asx
-end
-function radio6 -d "BBC Radio 6 Music"
-  mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r6.asx
 end
 function jblive
   mplayer rtsp://videocdn-us.geocdn.scaleengine.net/jblive/jblive.stream
@@ -703,6 +729,24 @@ function sumo3
   mplayer mms://a792.l12513450791.c125134.a.lm.akamaistream.net/D/792/125134/v0001/reflector:50791
 end
 
+function load-radio-functions 
+# bbc radio {{{
+function radio1 -d "BBC Radio 1"
+  mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r1.asx
+end
+function radio2  -d "BBC Radio 2"
+  mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r2.asx
+end
+function radio3 -d "BBC Radio 3"
+  mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r3.asx
+end
+function radio4 -d "BBC Radio 4"
+  mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r4.asx
+end
+function radio6 -d "BBC Radio 6 Music"
+  mplayer -playlist http://www.bbc.co.uk/radio/listen/live/r6.asx
+end
+#}}}
 # japani radio {{{
 #
 # taken from
@@ -1210,9 +1254,9 @@ end
 function sb-tomigusuku
 sb-toyomi
 end
-
-
 #}}}
+end
+load-radio-functions
 
 # command line fu
 # torrent search

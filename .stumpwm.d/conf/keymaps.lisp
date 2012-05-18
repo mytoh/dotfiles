@@ -1,8 +1,8 @@
 
 ;;; keymap {{{
 ;;;
-;;;  modifier keys are defined in 
-;;;  keytrans.lisp 
+;;;  modifier keys are defined in
+;;;  keytrans.lisp
 ;;;
 ; applications
 (defprogram-shortcut terminal :command "exec urxvtc" :key (kbd "c") :map *root-map*)
@@ -30,7 +30,7 @@
   (let ((ks (mapcar #'(lambda (k) (cons 'defkey-input k)) keys)))
     `(progn ,@ks)))
 
-(defkeys-root 
+(defkeys-root
   ("C-."  "mymenu")
   ;; window operation
   ("C-f"   "fullscreen")
@@ -47,9 +47,9 @@
   ("M-TAB" "next")
   ;; group key map
   ("M-1" "gselect main")
-  ("M-2" "gselect web") 
+  ("M-2" "gselect web")
   ("M-3" "gselect media"))
- 
+
 ;;input window keymap
 (defkeys-input
   ("C-i" 'input-complete-forward)

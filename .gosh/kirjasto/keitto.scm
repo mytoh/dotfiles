@@ -25,13 +25,12 @@
                      (string-append
                        "<\/?(?:"
                        tag
-                       ")[^>]*>"
-                       ))))
-    ))
+                       ")[^>]*>"))))))
 
 (define (get-html url)
   (let ((parse-url
-          (lambda (u) (rxmatch-let (rxmatch #/^http:\/\/([-A-Za-z\d.]+)(:(\d+))?(\/.*)?/ u)
+          (lambda (u)
+            (rxmatch-let (rxmatch #/^http:\/\/([-A-Za-z\d.]+)(:(\d+))?(\/.*)?/ u)
                                    (#f h #f #f ph)
                                    (values h (uri-decode-string ph))))))
     (receive (host path) (parse-url url)

@@ -15,7 +15,6 @@
     "git://a-chinaman.com/nuscsh"
     "git://git.sv.gnu.org/screen.git"
     "git://git.savannah.gnu.org/stow.git"
-    "git://git.savannah.nongnu.org/stumpwm"
     "git://gitorious.org/fish-shell/fish-shell.git"
     "git://gitorious.org/~otherchirps/fish-shell/otherchirps-fish-shell.git"
     "git://git.infradead.org/get_iplayer.git"
@@ -73,6 +72,7 @@
     (Nandaka       DanbooruDownloader)
     (frytvm        XS)
     (joelagnel     stumpwm-goodies)
+    (sabetts       stumpwm)
     (aredridel      es-shell)
     (ThomasAdam     tmux)
     (midgetspy      Sick-Beard)

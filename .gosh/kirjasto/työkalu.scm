@@ -34,7 +34,7 @@
       (with-string-io str ptr))))
 
 (define (make-colour colour-number str)
-  ;; take any -> return string
+  ;; take number, string -> return string
   (string-concatenate `("[38;5;" ,(number->string colour-number) "m" ,str "[0m"))
   )
 

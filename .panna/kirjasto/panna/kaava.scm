@@ -39,13 +39,11 @@
        (let* ((p (run-process c :wait #t))
               (status (process-exit-status p)))
          (if (not  (zero? status) )
-           (error #`"command fail with status ,status" c)))
-       ))
+           (error #`"command fail with status ,status" c)))))
     ((_ c1 c2 ...)
      (begin
        (system c1)
-       (system c2 ...)))
-  ))
+       (system c2 ...)))))
 
 
 

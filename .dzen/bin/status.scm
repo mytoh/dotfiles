@@ -113,10 +113,20 @@
       " "
       (cadr pcm))))
 
+(define (mpd)
+ (let ((current-song (process-output->string "mpc current")))
+   (if (null? current-song)
+     (list "Not playng")
+     (list
+       (fg "#ababab")
+     current-song)
+     )))
+
 
 (define (dzen)
   (tree->string
     `(
+      " " ,(mpd) " "
       " " ,(volume) " "
       " " ,(memory) " "
       " " ,(fs) " "

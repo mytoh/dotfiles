@@ -54,6 +54,7 @@ else
   NeoBundle 'thinca/vim-openbuf'
   NeoBundle 'thinca/vim-singleton'
   NeoBundle 'thinca/vim-poslist'
+  NeoBundle 'thinca/vim-qfreplace'
   NeoBundle 'tpope/vim-fugitive'
   NeoBundle 'tpope/vim-surround'
   NeoBundle 'tpope/vim-afterimage'
@@ -111,6 +112,7 @@ else
   NeoBundle 'jpalardy/vim-slime'
   NeoBundle 'godlygeek/tabular'
   NeoBundle 'Bogdanp/quicksilver.vim'
+  NeoBundle 'sjl/gundo.vim'
   " NeoBundle 'anekos/runes-vim'
   "unite
   NeoBundle 'hakobe/unite-script'
@@ -127,6 +129,7 @@ else
   NeoBundle 'osyo-manga/unite-homo'
   NeoBundle 'osyo-manga/unite-u-nya-'
   NeoBundle 'tsukkee/unite-tag'
+  NeoBundle 'Sixeight/unite-grep'
   NeoBundle 'majutsushi/tagbar'
   NeoBundle 'nefo-mi/nyan-modoki.vim'
   NeoBundle 'pasela/unite-webcolorname'
@@ -136,12 +139,16 @@ else
   NeoBundle 'aharisu/vim_goshrepl'
   "haskell
   NeoBundle 'Twinside/vim-haskellConceal'
+  NeoBundle 'Twinside/vim-syntax-haskell-cabal'
   NeoBundle 'zenzike/vim-haskell-unicode'
+  NeoBundle 'haskell.vim'
+  NeoBundle 'lukerandall/haskellmode-vim'
   "javascript
   NeoBundle 'jelera/vim-javascript-syntax'
   NeoBundle 'teramako/jscomplete-vim'
   " css
   NeoBundle 'hail2u/vim-css3-syntax'
+  NeoBundle 'skammer/vim-css-color'
   " colorscheme {{{
   NeoBundle 'altercation/vim-colors-solarized'
   NeoBundle 'jelera/vim-gummybears-colorscheme'
@@ -151,6 +158,16 @@ else
   NeoBundle 'trapd00r/neverland-vim-theme'
   NeoBundle 'lorry-lee/vim-ayumi'
   NeoBundle 'chriskempson/vim-tomorrow-theme'
+  NeoBundle 'sjl/badwolf'
+  NeoBundle 'jellybeans.vim'
+  NeoBundle 'xoria256.vim'
+  NeoBundle 'wombat256.vim'
+  NeoBundle 'void'
+  NeoBundle 'molokai'
+  NeoBundle 'robokai'
+  NeoBundle 'lilypink'
+  NeoBundle 'Sorcerer'
+  NeoBundle 'highlights_for_radiologist.vim'
   "}}}
   NeoBundle 'http://voikko.svn.sourceforge.net/svnroot/voikko/', {'type' : 'svn', 'rtp' : 'trunk/tools/vim'}
   " bitbucket
@@ -165,27 +182,19 @@ else
   NeoBundle 'matchit.zip'
   NeoBundle 'daemon_saver.vim'
   NeoBundle 'smartword'
+  NeoBundle 'camelcasemotion'
   NeoBundle 'gtk-vim-syntax'
   NeoBundle 'submode'
   NeoBundle 'IndentHL'
   NeoBundle 'autoproto.vim'
-  NeoBundle 'haskell.vim'
   NeoBundle 'matchparenpp'
   NeoBundle 'AnsiEsc.vim'
   NeoBundle 'vim-jsbeautify'
   NeoBundle 'Source-Explorer-srcexpl.vim'
   NeoBundle 'Vimchant'
   NeoBundle 'copypath.vim'
+  NeoBundle 'MPD-syntax-highlighting'
   "Bundle 'buftabs'
-  " colorschemes
-  NeoBundle 'jellybeans.vim'
-  NeoBundle 'xoria256.vim'
-  NeoBundle 'wombat256.vim'
-  NeoBundle 'void'
-  NeoBundle 'molokai'
-  NeoBundle 'robokai'
-  NeoBundle 'lilypink'
-  NeoBundle 'Sorcerer'
   " }}}
   " }}}
 

@@ -9,15 +9,38 @@
 (use kirjasto)
 
 (define (directory)
-  (let ((cwd (current-directory)))
+  (let* ((cwd (current-directory))
+        (colour-fs (lambda (fs m)
+                     (regexp-replace (string->regexp m)
+                                     cwd
+                                     (string-append
+                                       "~"
+                                       (make-colour 83 fs))))))
     (rxmatch-cond
+      ;; /usr/home => ~
       ((rxmatch (string->regexp (string-concatenate `("/usr" ,(home-directory))))
                 cwd)
        (home)
        (regexp-replace (string->regexp home) cwd "~"))
+      ;; $HOME => ~`
       ((rxmatch (home-directory) cwd)
        (home)
        (regexp-replace (string->regexp home) cwd "~"))
+      ;; /mnt/mypassport => ~mypass
+      ((rxmatch (string->regexp "/mnt/mypassport")
+                cwd)
+       (m)
+       (colour-fs "mypass" m))
+      ;; /mnt/deskstar => ~deskstar
+      ((rxmatch (string->regexp "/mnt/deskstar")
+                cwd)
+       (m)
+       (colour-fs "deskstar" m))
+      ;; /mnt/quatre => ~quatre
+      ((rxmatch (string->regexp "/mnt/quatre")
+                cwd)
+       (m)
+       (colour-fs "quatre" m))
       (else cwd))))
 
 (define (git)
@@ -45,6 +68,10 @@
 (define (svn)
   (make-colour 33 " ǂ "))
 
+(define darcs
+  (lambda ()
+    (make-colour 33 " darcs ")))
+
 (define (prompt)
   (display
     (string-concatenate
@@ -63,6 +90,8 @@
             (git))
            ((file-exists? "./.svn")
             (svn))
+           ((file-exists? "./_darcs")
+            (darcs))
            (else ""))
         "\n"
         ,(make-colour 235 ">")

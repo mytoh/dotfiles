@@ -45,18 +45,17 @@ snippet usage
 (define (usage status)
   (exit status "usage: ~a <command> <package-name>\n" *program-name*))
 
-snippet panna
+snippet kaava
 abbr    panna kaava script
-
         (use panna.kaava)
 
         (define kaava "${1}")
-
-
-        (define (update)
-          (run-process '(${2}) :wait #t))
+        (define homepage "")
+        (define repository "")
 
         (define (install tynnyri)
+          (sys-putenv "CPPFLAGS=-I/usr/local/include")
+          (sys-putenv "LDFLAGS=-L/usr/local/lib")
           (use-clang)
           (system
           '(make clean)
@@ -65,6 +64,7 @@ abbr    panna kaava script
           '(make)
           '(make install)
           ))
+
 
 snippet run
 abbr    run-process with :wait

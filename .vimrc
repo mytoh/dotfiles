@@ -111,7 +111,7 @@ set showfulltag
 set t_Co=256
 set background=dark
 " colorscheme neverland
-colorscheme mycolor
+colorscheme badwolf
 
 " set mouse
 set mouse=a
@@ -548,7 +548,6 @@ aug myautocommands
   au filetype           xdefaults                 call s:vimrc.xrdb()
   au filetype           scheme                    call s:vimrc.scheme()
   au filetype           help                      nnoremap q :<c-u>q<cr>
-  au filetype           css,less                       ColorHighlight
   au filetype           haskell                       ColorHighlight
   au filetype           fish                       setl equalprg=fish_indent
   " for chalice buffers
@@ -789,6 +788,7 @@ let g:unite_source_file_mru_filename_format = ''
 let g:unite_source_file_mru_time_format = ''
 let g:unite_cursor_line_highlight = 'TabLineSel'
 " let g:unite_abbr_highlight = 'TabLine'
+hi TabLineSel cterm=bold   ctermbg=235
 
 " auto session loading
 " let g:unite_source_session_enable_auto_save = 1
@@ -1054,6 +1054,10 @@ endif
 
 " paredit {{{
 let g:paredit_leader = '\'
+" }}}
+
+" haskell-mode {{{
+:let g:haddock_browser="/usr/bin/firefox"
 " }}}
 
 " }}}

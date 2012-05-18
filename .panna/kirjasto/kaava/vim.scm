@@ -9,6 +9,7 @@
   '(gmake distclean)
   `(./configure   ,(string-append
                      "--prefix=" tynnyri)
+                  "--with-features=huge"
                   "--enable-multibyte"
                   "--enable-perlinterp"
                   "--enable-pythoninterp"

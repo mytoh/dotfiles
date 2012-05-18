@@ -4,7 +4,7 @@
 
 
 (define (install tynnyri)
-  (use-clang)
+  ; (use-clang)
   (system
     '(./autogen.sh)
     `(./configure ,(string-append "--prefix=" tynnyri)
@@ -12,7 +12,7 @@
                   --enable-visualizer
                   --enable-clock
                   --enable-unicode)
-    '(make clean)
     '(make)
     '(make install)
+    '(make clean)
     ))

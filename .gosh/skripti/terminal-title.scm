@@ -12,13 +12,14 @@
   (display
     (make-colour 160
                  (car (sys-uname))))
+ (display "pidän kainalosta")
   (newline)
   (run-process '(tput rc) :wait #t)
   )
 
 (define (main args)
-  ; (while #t
+   (while #t
   (title)
   (run-process '(sleep 1))
-       ; )
+        )
   )

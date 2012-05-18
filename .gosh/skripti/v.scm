@@ -14,7 +14,7 @@
   (with-input-from-file
     (build-path (home-directory) ".viminfo")
     (lambda ()
-      (remove
+      (delete 
         (^x (or
               ; remove name with space or unite buffer
               (not (string? x))
