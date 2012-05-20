@@ -4,6 +4,8 @@
     kirjasto.työkalu
     kirjasto.komento
     kirjasto.keitto
+    kirjasto.väri
+    kirjasto.merkkijono
     ))
 
 (provide "kirjasto")

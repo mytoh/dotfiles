@@ -5,6 +5,7 @@
 
 (define (install tynnyri)
   ; (use-clang)
+  (use-panna-library)
   (system
     '(./autogen.sh)
     `(./configure ,(string-append "--prefix=" tynnyri)

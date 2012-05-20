@@ -12,5 +12,5 @@
                       (lambda results
                         (map (cut print "=> " <>) results)) 
                       (lambda () 
-                            (display (make-colour 33 ">> ")) 
+                            (display (colour-string 33 ">> ")) 
                         (flush)))

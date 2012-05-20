@@ -43,7 +43,7 @@
   (current-directory "/usr/src")
   (process "sudo make cleandir")
   (process "sudo make cleandir")
-  (if (file-exists? "/usr/obj")
+  (when (file-exists? "/usr/obj")
   (remove-directory* "/usr/obj")
     )
   (process "sudo make -j3 buildworld")

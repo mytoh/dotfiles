@@ -22,9 +22,9 @@
   (run-process `(lha xq ,file) :wait #t))
 
 (define (tar-unpacker file . directory)
-  (if (null-list? directory)
-    (run-process `(tar xf ,file) :wait #t)
-    (begin
+  (cond ((null-list? directory)
+    (run-process `(tar xf ,file) :wait #t))
+    (else
       (make-directory* (caar directory))
     (run-process `(tar xf ,file -C ,(caar directory)) :wait #t))
     ))
@@ -64,8 +64,7 @@
     (if unpacker
       (if directory
         ((cadr unpacker) file directory)
-        ((cadr unpacker) file)
-        )
+        ((cadr unpacker) file))
       (error "unknown file type" file))))
 
 (define (main args)

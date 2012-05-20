@@ -4,7 +4,7 @@
 (use gauche.parseopt)
 (use util.match)
 (use file.util) ; directory-list, current-directory
-(use kirjasto) #; 'make-colour
+(use kirjasto) #; 'colour-string
 
 (define-constant *gitdir*  (expand-path "~/local/git/"))
 
@@ -113,11 +113,12 @@
 (define (update-gitdir)
   (let ((dirs (list (directory-list (expand-path *gitdir*) :children? #t :add-path? #t))))
     (let loop ((dirs (car dirs)))
-      (if (null? dirs)
-        (display "update finished!\n")
-        (begin
-          (display (make-colour 4 "=> "))
-          (display (make-colour 3 (sys-basename (car dirs))))
+      (cond
+        ((null? dirs)
+         (display "update finished!\n"))
+        (else
+          (display (colour-string 4 "=> "))
+          (display (colour-string 3 (sys-basename (car dirs))))
           (newline)
           (if (file-is-directory? (car dirs))
             (run-process '(git pull) :wait #t :directory (car dirs))
@@ -141,17 +142,18 @@
 (define (clean-gitdir)
   (let ((dirs (list (directory-list (expand-path *gitdir*) :children? #t :add-path? #t))))
     (let loop ((dirs (car dirs)))
-      (if (null? dirs)
-        (display "cleaning finished!\n")
-        (begin
-          (if (file-is-directory? (car dirs))
-            (begin
-              (display (make-colour 4 "=> "))
-              (display (make-colour 3 (sys-basename (car dirs))))
-              (newline)
-              (run-process '(git gc) :wait #t :directory (car dirs))
-              (newline))
-            #t)
+      (cond
+        ((null? dirs)
+         (display "cleaning finished!\n"))
+        (else
+          (cond
+            ((file-is-directory? (car dirs))
+             (display (colour-string 4 "=> "))
+             (display (colour-string 3 (sys-basename (car dirs))))
+             (newline)
+             (run-process '(git gc) :wait #t :directory (car dirs))
+             (newline))
+            (else  #t))
           (loop (cdr dirs)))))))
 
 
@@ -162,15 +164,14 @@
         ; normal repo
         ((string? e) (list (sys-basename (path-sans-extension e)) e))
         ((list? e)
-         (if (string? (car e))
-           (list (cadr e) (car e))
-             ; github
-             (if (null? (cddr e))
+         (cond
+           ((string? (car e))
+            (list (cadr e) (car e)))
+           ; github
+            ((null? (cddr e))
              (list (cadr e) #`"git://github.com/,(car e)/,(cadr e)")
              ; github with renaming
-             (list (caddr e) #`"git://github.com/,(car e)/,(cadr e)")
-              )
-             ))
+             (list (caddr e) #`"git://github.com/,(car e)/,(cadr e)"))))
         ; my github
         ((symbol? e) (list e #`"git@github.com:mytoh/,|e|"))))
     *repos* ))
@@ -180,31 +181,31 @@
 
 
 (define (main args)
-    (let-args (cdr args)
-      ((#f "h|help" (usage 0))
-       . rest)
-      (let ((previous-directory (current-directory)))
-        (current-directory *gitdir*)
-        (match (car rest)
-          ;; commands
-          ((or "update" "up")
-           (begin
-             (print (string-append (make-colour 8 "updating ") "repositories"))
-             (update-gitdir)))
-          ("clean"
-           (clean-gitdir))
-          ("clone"
-           (begin
-             (print (string-append (make-colour 3 "cloning ") "repositories"))
-             (clone-gitdir)))
-          (_ (usage 1)))
-        (current-directory previous-directory)
-        ))
+  (let-args (cdr args)
+    ((#f "h|help" (usage 0))
+     . rest)
+    (let ((previous-directory (current-directory)))
+      (current-directory *gitdir*)
+      (match (car rest)
+        ;; commands
+        ((or "update" "up")
+         (begin
+           (print (string-append (colour-string 8 "updating ") "repositories"))
+           (update-gitdir)))
+        ("clean"
+         (clean-gitdir))
+        ("clone"
+         (begin
+           (print (string-append (colour-string 3 "cloning ") "repositories"))
+           (clone-gitdir)))
+        (_ (usage 1)))
+      (current-directory previous-directory)
+      ))
   0)
 
-    ; (print (string-append (make-colour 3 "cloning ") "repositories"))
-    ; (clone-gitdir)
-    ; (newline)
-    ; (print (string-append (make-colour 8 "updating ") "repositories"))
-    ; (update-gitdir)
-    ; (clean-gitdir)
+; (print (string-append (colour-string 3 "cloning ") "repositories"))
+; (clone-gitdir)
+; (newline)
+; (print (string-append (colour-string 8 "updating ") "repositories"))
+; (update-gitdir)
+; (clean-gitdir)

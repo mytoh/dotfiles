@@ -6,8 +6,8 @@
 (require-extension (srfi 98))
 
 (define (new-session session window-name . options)
-   (if (not (has-sessin? session))  
-  (run-process `(tmux new-session -d -s ,session -n ,window-name ,@options) :wait #t)))
+  (when (not (has-sessin? session))
+    (run-process `(tmux new-session -d -s ,session -n ,window-name ,@options) :wait #t)))
 
 (define (new-window session window-number window-name . command)
   (run-process `(tmux new-window
@@ -26,18 +26,20 @@
       #f)))
 
 (define (tmux)
-  (if (get-environment-variable "TMUX")
+  (cond
     ; inside tmux
-    (print "[38;5;1myou're inside of tmux[0m")
-    (let ((main-session   "main")
-          (second-session "daemon")
-          )
-      (if (has-sessin? main-session)
+    ((get-environment-variable "TMUX")
+     (print "[38;5;1myou're inside of tmux[0m"))
+    (else
+      (let ((main-session   "main")
+            (second-session "daemon")
+            )
+        (cond
           ; session exists
-          (attach-session main-session)
+          ((has-sessin? main-session)
+           (attach-session main-session))
           ; session not exists
-          (begin
-
+          (else
             ;; create main session
             (new-session main-session "main")
             (new-window main-session 1 "vim" "vim")
@@ -47,10 +49,11 @@
             (new-session second-session "futaba")
             (new-window  second-session 1 "4ch" "fish")
             (new-window  second-session 2 "danbooru" "fish")
+            (new-window  second-session 3 "rtorrent" "fish")
             ; (new-window  second-session "rtorrent" "rtorrent")
 
             ; attach main session
-            (attach-session main-session))))))
+            (attach-session main-session)))))))
 
 (define (main args)
   (tmux))

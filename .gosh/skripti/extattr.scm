@@ -2,7 +2,7 @@
 ; works on only freebsd
 (use gauche.process)
 (use gauche.parseopt)
-(use kirjasto) ; make-colour
+(use kirjasto) ; colour-string
 
 (cond
  ((eq? (get-os-type) 'freebsd)
@@ -13,9 +13,9 @@
           (file-name        (cadddr args)))
       (run-process `(setextattr ,attr-name-space ,attr-name ,attr-value ,file-name) :wait #t)
       (print file-name)
-      (print (string-append (make-colour 89 attr-name-space) "." (make-colour 30 attr-name)
+      (print (string-append (colour-string 89 attr-name-space) "." (colour-string 30 attr-name)
                             " -> "
-                            (make-colour 60 attr-value)))))
+                            (colour-string 60 attr-value)))))
 
   (define (print-attr args)
     (let* ((attr-name-space (car args))
@@ -25,9 +25,9 @@
            (out (string-split str #\space))
            )
       (print (car out))
-      (print (string-append (make-colour 89 attr-name-space) "." (make-colour 30 attr-name)
+      (print (string-append (colour-string 89 attr-name-space) "." (colour-string 30 attr-name)
                             " -> "
-                            (make-colour 60 (cadr out))))))
+                            (colour-string 60 (cadr out))))))
 
   (define (delete-attr args)
     (let ((attr-name-space (car args))
@@ -36,7 +36,7 @@
       (run-process `(rmextattr ,attr-name-space ,attr-name ,file-name) :wait #t)
       (print file-name)
       (display "removed ")
-      (print (string-append (make-colour 38 attr-name-space) "." (make-colour 30 attr-name )))))
+      (print (string-append (colour-string 38 attr-name-space) "." (colour-string 30 attr-name )))))
 
   (define (list-attr args)
     (let* ((attr-name-space (car args))
@@ -49,7 +49,7 @@
       (print file)
       (for-each
        (lambda (a)
-         (display (string-append (make-colour 30 a)))
+         (display (string-append (colour-string 30 a)))
          (display " "))
        attributes)
       (newline)))
@@ -61,9 +61,9 @@
            (file-name (cadr args))
            (str (process-output->string `(xattr -p ,attr-name ,file-name))))
       (print file-name)
-      (print (string-append (make-colour 30 attr-name)
+      (print (string-append (colour-string 30 attr-name)
                             " -> "
-                            (make-colour 60 str  )))))
+                            (colour-string 60 str  )))))
 
   (define (write-attr args)
     (let ((attr-name  (car args))
@@ -71,9 +71,9 @@
           (file-name  (caddr args)))
       (run-process `(xattr -w ,attr-name ,attr-value ,file-name) :wait #t)
       (print file-name)
-      (print (string-append (make-colour 30 attr-name)
+      (print (string-append (colour-string 30 attr-name)
                             " -> "
-                            (make-colour 60 attr-value)))))
+                            (colour-string 60 attr-value)))))
 
   (define (delete-attr args)
     (let ((attr-name (car args))
@@ -81,7 +81,7 @@
       (run-process `(xattr -d  ,attr-name ,file-name) :wait #t)
       (print file-name)
       (display "removed ")
-      (print (make-colour 30 attr-name))))
+      (print (colour-string 30 attr-name))))
 
   (define (list-attr args)
     (let* ((file-name (car args))
@@ -92,7 +92,7 @@
           (print resource)
       (for-each
        (lambda (a)
-         (display (string-append (make-colour 30 a)))
+         (display (string-append (colour-string 30 a)))
          (display " "))
        attributes)
       (newline)))

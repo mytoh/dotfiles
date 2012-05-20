@@ -10,7 +10,7 @@
   (run-process '(tput dl1) :wait #t)
   (run-process '(tput cup 0 2) :wait #t)
   (display
-    (make-colour 160
+    (colour-string 160
                  (car (sys-uname))))
  (display "pidän kainalosta")
   (newline)

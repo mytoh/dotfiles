@@ -1,6 +1,6 @@
 #!/usr/bin/env gosh
 
-(use kirjasto) ;swget,mkdir,cd,make-colour
+(use kirjasto) ;swget,mkdir,cd,colour-string
 (use gauche.parseopt)
 (use gauche.collection)
 (use sxml.ssax)
@@ -102,12 +102,12 @@
 
 (define (get-posts-all tag)
   (let ((last-number (x->number (parse-last-page-number (get-posts 1 tag)))))
-    (print (string-append (make-colour 82 last-number)
+    (print (string-append (colour-string 82 last-number)
                           " pages found"))
     (dotimes (num last-number)
       (print (string-append
-               (make-colour 99 "getting page ")
-               (make-colour 33  (+ num 1))))
+               (colour-string 99 "getting page ")
+               (colour-string 33  (+ num 1))))
       (get-image (gen-id-url-list (get-posts (+ num 1)  tag))))))
 
 (define (main args)

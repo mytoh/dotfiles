@@ -15,7 +15,7 @@
   (lambda (tag html)
     (map
       (lambda (e)
-        (if (not (string-null? e))
+        (when (not (string-null? e))
           (string-append
             "<" tag ">"
             e

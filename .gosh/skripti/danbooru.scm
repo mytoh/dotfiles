@@ -1,6 +1,6 @@
 #!/usr/bin/env gosh
 
-(use kirjasto) ; swget mkdir cd make-colour
+(use kirjasto) ; swget mkdir cd colour-string
 (use gauche.parseopt)
 (use gauche.collection)
 (use sxml.ssax)
@@ -20,7 +20,7 @@
 (define (parse-post-number-url body)
   (let ((parse-image-url (lambda (line) (rxmatch #/\"file_url\"\:\"(http\:\/\/[[:alpha:]]+\.donmai\.us\/data\/[^\"]+)/ line)))
         (parse-image-id  (lambda (line) (rxmatch #/\"id\"\:(\d+)/ line)))
-        (parse-element (lambda (proc str) 
+        (parse-element (lambda (proc str)
                          (remove not
                                  (delete-duplicates
                                    (call-with-input-string str
@@ -28,27 +28,28 @@
                                                              (port-map
                                                                (lambda (line)
                                                                  (let ((match (proc line)))
-                                                                   (if match
-                                                                     (match 1) #f)))
+                                                                   (cond
+                                                                     (match (match 1))
+                                                                     (else #f))))
                                                                (cut read-line in #t )))))))))
     (zip
       (parse-element parse-image-id body)
       (parse-element parse-image-url body))))
 
 (define (swget url filename)
-  (let ((parse-url 
+  (let ((parse-url
           (lambda (u) (rxmatch-let (rxmatch #/^http:\/\/([-A-Za-z\d.]+)(:(\d+))?(\/.*)?/ u)
                                    (#f h #f pt ph)
                                    (values h pt (uri-decode-string ph))))))
     (receive (host port path) (parse-url url)
              (let ((file (receive (a f ext) (decompose-path path) #`",|filename|.,|ext|")))
-               (if (not (file-is-readable? file))
+               (when (not (file-is-readable? file))
                  (http-get host path
                            :sink (open-output-file file) :flusher (lambda (s h) (print file) #t)))))))
 
 (define (get-image id-num-list)
   (let loop ((lst  id-num-list))
-    (if (not (null?  lst))
+    (when (not (null?  lst))
       (let ((id (car (car lst)))
             (url (cadr   (car lst)))
             )
@@ -68,10 +69,10 @@
 (define (get-posts-all tag)
   (print tag)
   (let ((last (x->number (parse-last-page-number (get-post-page 1 tag)))))
-    (print (string-append (make-colour 82 last)
+    (print (string-append (colour-string 82 (number->string last))
                           " pages found"))
     (dotimes (num last)
-      (print (string-append (make-colour 99 "getting page ") (make-colour 33 (+ num 1))))
+      (print (string-append (colour-string 99 "getting page ") (colour-string 33 (number->string (+ num 1)))))
        (get-image (parse-post-number-url (get-post-page (+ num 1) tag))))))
 
   (define (main args)

@@ -20,6 +20,5 @@
       '(make distclean clean)
       `(./configure ,(string-append "--prefix=" tynnyri))
       '(make)
-      '(make install)
-      ))))
+      '(make install)))))
 

@@ -15,7 +15,7 @@
                                      cwd
                                      (string-append
                                        "~"
-                                       (make-colour 83 fs))))))
+                                       (colour-string 83 fs))))))
     (rxmatch-cond
       ;; /usr/home => ~
       ((rxmatch (string->regexp (string-concatenate `("/usr" ,(home-directory))))
@@ -56,32 +56,32 @@
                          " ÷"
                          "")))))
     (string-concatenate
-      `(,(make-colour 33 "  ♠ ")
-         ,(make-colour 82 (git-branch))
-         ,(make-colour 1  (git-darty)))))
+      `(,(colour-string 33 "  ♠ ")
+         ,(colour-string 82 (git-branch))
+         ,(colour-string 1  (git-darty)))))
   )
 
 (define (hg)
-  (make-colour 33 " ⮘ ")
+  (colour-string 33 " ⮘ ")
   )
 
 (define (svn)
-  (make-colour 33 " ǂ "))
+  (colour-string 33 " ǂ "))
 
 (define darcs
   (lambda ()
-    (make-colour 33 " darcs ")))
+    (colour-string 33 " darcs ")))
 
 (define (prompt)
   (display
     (string-concatenate
       `(
-        ; ,(make-colour 172 "X / _ / X")
-        ,(make-colour 172 "(・x・)")
-        ,(make-colour 0 ".")
-        ,(make-colour 118 (car (string-split (sys-gethostname) "." )))
+        ; ,(colour-string 172 "X / _ / X")
+        ,(colour-string 172 "(・x・)")
+        ,(colour-string 0 ".")
+        ,(colour-string 118 (car (string-split (sys-gethostname) "." )))
         " :: "
-        ,(make-colour 4 (directory))
+        ,(colour-string 4 (directory))
 
         ,(cond
            ((file-exists? "./.hg")
@@ -94,9 +94,9 @@
             (darcs))
            (else ""))
         "\n"
-        ,(make-colour 235 ">")
-        ,(make-colour 238 ">")
-        ,(make-colour 60  ">")
+        ,(colour-string 235 ">")
+        ,(colour-string 238 ">")
+        ,(colour-string 60  ">")
         " "))))
 
 (define (main args)

@@ -235,7 +235,7 @@ endfunction
 " left , buffer list
 set stl=     " clear statusline when reloaded
 
-set stl+=%2*\    " left side
+set stl+=%2*\     " left side
 
 set stl+=%=  " separator
 
@@ -258,14 +258,14 @@ set stl+=%{SyntasticStatuslineFlag()}
 set stl+=%5*
 set stl+=\  "
 set stl+=%{&dictionary}
-set stl+=%{&fileformat}\
-set stl+=<\
-set stl+=%{&fenc}\
-set stl+=<\
-set stl+=%{&filetype}\
+set stl+=%{&fileformat}\ 
+set stl+=<\ 
+set stl+=%{&fenc}\ 
+set stl+=<\ 
+set stl+=%{&filetype}\ 
 
 set stl+=%6*
-set stl+=\
+set stl+=\ 
 set stl+=%{GetCharCode()}\  " hex under cursor
 
 set stl+=%7*
@@ -273,11 +273,11 @@ set stl+=%3p%%\  "percentage of current line
 set stl+=%*    "reset color
 
 set stl+=%8*
-set stl+=\
+set stl+=\ 
 set stl+=%l,  "current line number
 set stl+=%c   "columns
 set stl+=/%L   "total line number
-set stl+=\
+set stl+=\ 
 
 
 
@@ -841,12 +841,14 @@ let g:unite_launch_apps = [
 "}}}
 
 " eskk{{{
+
+
 if has('vim_starting')
-  let g:eskk#dictionary = {
-        \ 'path'     : "~/.skk-jisyo",
-        \ 'sorted'   : 0,
-        \ 'encoding' : 'utf-8',
-        \}
+  " let g:eskk#dictionary = {
+  "       \ 'path'     : "~/.skk-jisyo",
+  "       \ 'sorted'   : 0,
+  "       \ 'encoding' : 'utf-8',
+  "       \}
   if s:vimrc.isos("darwin")
     let g:eskk#large_dictionary = {
           \ 'path'     : "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L",
@@ -862,7 +864,6 @@ if has('vim_starting')
   endif
 endif
 
-"---
 " http://kstn.fc2web.com/seikana_zisyo.html
 au myautocommands User eskk-initialize-pre call s:eskk_initial_pre()
 function! s:eskk_initial_pre()
@@ -898,7 +899,6 @@ function! s:eskk_initial_pre()
   call t.add_map('}','』')
   call eskk#register_mode_table('hira', t)
 endfunction
-"---
 
 let g:eskk#egg_like_newline = 1
 let g:eskk#enable_completion = 1

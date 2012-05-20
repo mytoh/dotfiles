@@ -32,8 +32,8 @@ else
   NeoBundle 'Shougo/vimshell'
   NeoBundle 'Shougo/vinarise'
   NeoBundle 'Shougo/echodoc'
-  NeoBundle 'koron/chalice'
   NeoBundle 'koron/nyancat-vim'
+  NeoBundle 'koron/chalice'
   " NeoBundle 'koron/homoo-vim'
   " NeoBundle 'koron/u-nya-vim'
   NeoBundle 'lilydjwg/colorizer'
@@ -50,7 +50,7 @@ else
   NeoBundle 'scrooloose/nerdcommenter'
   NeoBundle 'thinca/vim-quickrun'
   NeoBundle 'thinca/vim-ref'
-  NeoBundle 'thinca/vim-ambicmd'
+  NeoBundle     'thinca/vim-ambicmd'
   NeoBundle 'thinca/vim-openbuf'
   NeoBundle 'thinca/vim-singleton'
   NeoBundle 'thinca/vim-poslist'
@@ -115,6 +115,7 @@ else
   NeoBundle 'sjl/gundo.vim'
   " NeoBundle 'anekos/runes-vim'
   "unite
+  NeoBundle     'Shougo/unite.vim'
   NeoBundle 'hakobe/unite-script'
   NeoBundle 'choplin/unite-vim_hacks'
   NeoBundle 'mattn/unite-remotefile'
@@ -122,7 +123,6 @@ else
   NeoBundle 'ujihisa/unite-colorscheme'
   NeoBundle 'ujihisa/unite-launch'
   NeoBundle 'mfumi/unite-mpc'
-  NeoBundle 'Shougo/unite.vim'
   NeoBundle 'h1mesuke/unite-outline'
   NeoBundle 'taka84u9/unite-git'
   NeoBundle 'shiracha/unite-related_files'
@@ -198,6 +198,7 @@ else
   " }}}
   " }}}
 
+ 
 endif
 
 filetype plugin on

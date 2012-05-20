@@ -6,37 +6,20 @@
   (use file.util)
   (use rfc.http)
   (use rfc.uri)
+  (use kirjasto.merkkijono)
   (require-extension
     (srfi 13))
   (export
-    string->lowercase
-    make-colour
     forever
     get-os-type
     tap
     p
     daemonize
-    run-command
-    run-command-sudo
-    colour-command
-    whitespace->dash
-    whitespace->underbar
     swget
-    port->incomplete-string
-    )
-  )
+    port->incomplete-string))
 
 (select-module kirjasto.työkalu)
 
-(define string->lowercase
-  (let1 ptr (build-transliterator "A-Z" "a-z")
-    (lambda (str)
-      (with-string-io str ptr))))
-
-(define (make-colour colour-number str)
-  ;; take number, string -> return string
-  (string-concatenate `("[38;5;" ,(number->string colour-number) "m" ,str "[0m"))
-  )
 
 
 (define-syntax forever
@@ -79,47 +62,7 @@
 
 
 
-(define (whitespace->underbar str)
-  (regexp-replace-all #/\s+/ str "_"))
 
-(define (whitespace->dash str)
-  (regexp-replace-all #/\s+/ str "-"))
-
-
-(define-syntax run-command
-  ; run processes
-  (syntax-rules ()
-    ((_ c1 )
-     (run-process c1 :wait #t)
-     )
-    ((_ c1 c2 ...)
-     (begin
-       (run-process c1 :wait #t)
-       (run-commands c2 ...)))))
-
-
-(define (run-command-sudo command)
-  (run-process (append '(sudo) command) :wait #t)
-  )
-
-(define-syntax colour-command
-  (syntax-rules ()
-    ((_ command r1 s1 ...)
-     (with-input-from-process
-       command
-       (lambda ()
-         (port-for-each
-           (lambda (in)
-             (print
-               (regexp-replace* in
-                                r1 s1
-                                ...
-                                ; example:
-                                ; #/^>>>/   "[38;5;99m\\0[0m"
-                                ; #/^=*>/   "[38;5;39m\\0[0m"
-                                )))
-           read-line))))
-    ))
 
 
 (define (swget url)

@@ -13,25 +13,27 @@
     (newline)
     (display (string-append "[38;5;38m" ">>> " "[0m"))
     (print "symlinking files")
+    (newline)
     (letrec ((relative-path
                (lambda (p)
                  (fold
                    (lambda (e str)
-                     (string-append "../" str)
-                     )
+                     (string-append "../" str))
                    (simplify-path
                      (string-append
                        "."
                        (string-scan p
                                     (panna-kansio)
                                     'after)))
-                   (string-split  (sys-dirname  (simplify-path
-                                                  (string-append
-                                                    "."
-                                                    (string-scan p
-                                                                 (tynnyri-kansio)
-                                                                 'after))))
-                                  #/\//))))
+                   (string-split
+                     (sys-dirname
+                       (simplify-path
+                         (string-append
+                           "."
+                           (string-scan p
+                                        (tynnyri-kansio)
+                                        'after))))
+                     #/\//))))
              (file-list
                (directory-fold
                  (tynnyri-kansio)
@@ -43,16 +45,17 @@
                            ; (string-scan  path
                            ;               (panna-kansio)
                            ;               'after)
-                           (simplify-path (string-append "." (string-scan path
-                                                                          (tynnyri-kansio)
-                                                                          'after))))
+                           (simplify-path (string-append "."
+                                                         (string-scan path
+                                                                      (tynnyri-kansio)
+                                                                      'after))))
                          seed))
                  '())))
       (for-each
         (^p
-          (if  (not (file-exists? (sys-dirname (cadr p))))
-          (make-directory* (sys-dirname (cadr p))))
-          (if (not (file-exists? (cadr p)))
+          (unless (file-exists? (sys-dirname (cadr p)))
+            (make-directory* (sys-dirname (cadr p))))
+          (unless  (file-exists? (cadr p))
             (begin
               (print (string-append
                        "linking file "
@@ -72,11 +75,25 @@
                               :pred file-is-readable?))
 
     (current-directory riisi)
-    (print  (current-directory))
-    (print tynnyri)
+    (display (colour-string 38 ">>> "))
+    (display pullo)
+    (newline)
     (install tynnyri)
     (link pullo)))
 
 
 (define (main args)
-  (install-package (cadr args)))
+  (when (>=  (length (cdr  args)) 2)
+    (begin
+      (display (colour-string 163 ">>>"))
+      (display " installing these packages" )
+      (newline)
+      (for-each (lambda (x)  (display (string-append x " " ))) (cdr args))
+      (newline)))
+  (let loop ((pulloa (cdr args)))
+    (cond
+      ((null? pulloa)
+       '())
+      (else
+        (install-package (car pulloa))
+        (loop (cdr pulloa))))))

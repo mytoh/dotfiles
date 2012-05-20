@@ -14,7 +14,7 @@
   (with-input-from-file
     (build-path (home-directory) ".viminfo")
     (lambda ()
-      (delete 
+      (delete
         (^x (or
               ; remove name with space or unite buffer
               (not (string? x))
@@ -27,25 +27,26 @@
           read-line)))))
 
 (define (launch-vim argv)
-  (run-process (append '(vim ) argv) 
+  (run-process (append '(vim ) argv)
                :wait #t)
   )
 
 (define (v word)
-  (if (null? word)
+  (cond
     ; just lauche vim
-    (launch-vim '())
+    ((null? word)
+    (launch-vim '()))
 
     ; launch vim with existing file
+    (else
     (if (file-exists? word)
-    (launch-vim `(,word))
+      (launch-vim `(,word))
 
-    ; search from viminfo file
-  (let ((found (filter
-                (^s (string-scan (string-downcase s) word))
-                (viminfo->list))))
-     (launch-vim (list (car found)))
-    ))))
+      ; search from viminfo file
+      (let ((found (filter
+                     (^s (string-scan (string-downcase s) word))
+                     (viminfo->list))))
+        (launch-vim (list (car found))))))))
 
 (define (main args)
   (if (>= (length args) 2)

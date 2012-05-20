@@ -8,6 +8,7 @@
     homepage
 
     use-clang
+    use-panna-library
     ))
 (select-module panna.kaava)
 
@@ -25,6 +26,15 @@
   (sys-putenv "CFLAGS=-w")
   )
 
+(define (use-panna-library)
+  (let ((panna (resolve-path (sys-getenv "OLUTPANIMO"))))
+    (sys-putenv (string-append
+                  "CPPFLAGS=-I"
+                  (build-path panna "include")))
+    (sys-putenv (string-append
+                  "LDFLAGS=-L"
+                  (build-path panna "lib")))))
+
 (define homepage (make-parameter "unknown"))
 
 
@@ -38,7 +48,7 @@
        (newline)
        (let* ((p (run-process c :wait #t))
               (status (process-exit-status p)))
-         (if (not  (zero? status) )
+         (when (not  (zero? status))
            (error #`"command fail with status ,status" c)))))
     ((_ c1 c2 ...)
      (begin

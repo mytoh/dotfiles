@@ -95,6 +95,7 @@
     (pdf  . 2)
     (ps   . 2)
     (txt  . 2)
+    (ini  . 2)
     (patch . 2)
     (diff . 2)
     (log  . 2)
@@ -146,36 +147,40 @@
        (directory-list directory :children? #t :add-path? #t)))
 
 (define (ls-make-colour colour str)
-  (if (<= colour (count car *colours*))
-    (let1 c  (assoc-ref *colours* colour)
+  (cond
+    ((<= colour (count car *colours*))
+     (let1 c  (assoc-ref *colours* colour)
+       ((lambda (colour s)
+          (string-concatenate `("[38;5;" ,(number->string colour) "m"  ,s "[0m")))
+        c str)))
+    (else
       ((lambda (colour s)
          (string-concatenate `("[38;5;" ,(number->string colour) "m"  ,s "[0m")))
-       c str))
-    ((lambda (colour s)
-       (string-concatenate `("[38;5;" ,(number->string colour) "m"  ,s "[0m")))
-     colour str)))
+       colour str))))
 
 (define (colour-filename name type . ecolour)
-  (if  (not (null? ecolour))
-    (let1 e  (cdar ecolour)
+  (cond
+    ((not (null? ecolour))
+     (let1 e  (cdar ecolour)
+       (case type
+         ((regular) (if (file-is-executable? name)
+                      (string-concatenate  `(,(ls-make-colour e name) ,(ls-make-colour 2 "*")))
+                      (ls-make-colour e name)))
+         ((directory) #`",(ls-make-colour e name),(ls-make-colour 2 \"/\")")
+         ((symlink)   #`",(ls-make-colour e name),(ls-make-colour 2 \"@\")")
+         (else        (ls-make-colour e name)))))
+    (else
       (case type
-        ((regular) (if (file-is-executable? name)
-                     (string-concatenate  `(,(ls-make-colour e name) ,(ls-make-colour 2 "*")))
-                     (ls-make-colour e name)))
-        ((directory) #`",(ls-make-colour e name),(ls-make-colour 2 \"/\")")
-        ((symlink)   #`",(ls-make-colour e name),(ls-make-colour 2 \"@\")")
-        (else        (ls-make-colour e name))))
-    (case type
-      ((regular)   (if (file-is-executable? name)
-                     #`",(ls-make-colour 4 name),(ls-make-colour 2 \"*\")"
-                     (ls-make-colour 14 name )))
-      ((directory) #`",(ls-make-colour 1 name),(ls-make-colour 2 \"/\")")
-      ((character) (ls-make-colour 2 name))
-      ((block)     (ls-make-colour 3 name))
-      ((fifo)      (ls-make-colour 4 name))
-      ((symlink)   #`",(ls-make-colour 5 name),(ls-make-colour 2 \"@\")")
-      ((socket)    (ls-make-colour 6 name))
-      (else        (ls-make-colour 2 name)))))
+        ((regular)   (if (file-is-executable? name)
+                       #`",(ls-make-colour 4 name),(ls-make-colour 2 \"*\")"
+                       (ls-make-colour 14 name )))
+        ((directory) #`",(ls-make-colour 1 name),(ls-make-colour 2 \"/\")")
+        ((character) (ls-make-colour 2 name))
+        ((block)     (ls-make-colour 3 name))
+        ((fifo)      (ls-make-colour 4 name))
+        ((symlink)   #`",(ls-make-colour 5 name),(ls-make-colour 2 \"@\")")
+        ((socket)    (ls-make-colour 6 name))
+        (else        (ls-make-colour 2 name))))))
 
 
 (define (print-filename filename stat)
@@ -184,16 +189,20 @@
           (realname (sys-realpath filename))
           (extension  (path-extension file)))
     (case type
-      ((symlink)  (if extension
-                    (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
-                      (string-concatenate `(,(colour-filename file type ext) " -> " ,(ls-make-colour 10 realname)))
-                      (string-concatenate `(,(colour-filename file type) " -> " ,(ls-make-colour 10 realname))))
-                    (string-concatenate `(,(colour-filename file type) " -> " ,(ls-make-colour 10 realname)))))
-      (else (if extension
-              (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
-                (colour-filename file type ext)
-                (colour-filename file type))
-              (colour-filename file type))))))
+      ((symlink)  (cond
+                    (extension
+                      (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
+                        (string-concatenate `(,(colour-filename file type ext) " -> " ,(ls-make-colour 10 realname)))
+                        (string-concatenate `(,(colour-filename file type) " -> " ,(ls-make-colour 10 realname)))))
+                    (else
+                      (string-concatenate `(,(colour-filename file type) " -> " ,(ls-make-colour 10 realname))))))
+      (else (cond
+              (extension
+                (if-let1 ext (assoc (string->symbol extension) *extension-colours*)
+                  (colour-filename file type ext)
+                  (colour-filename file type)))
+              (else
+                (colour-filename file type)))))))
 
 
 (define (print-permission f stat)
@@ -253,7 +262,8 @@
 
 (define (ls-perm-size-file directories allfiles dfirst)
   (let ((ls (lambda (dir)
-              (let ((fullpath-list (cond ((and allfiles dfirst)
+              (let ((fullpath-list (cond
+                                     ((and allfiles dfirst)
                                           (directory-first  (list-files dir)))
                                      (allfiles (list-files dir))
                                      (dfirst   (directory-first (normal-files dir)))
@@ -270,14 +280,17 @@
                                    (print-delim 3)
                                    (print-filename f stat))))
                        fullpath-list))))))
-    (if (null? directories)
-      (ls (current-directory))
-      (let loop ((dirs  directories))
-        (if (null? dirs)
-          (read-from-string "") ;return EOF
-          (begin
-            (ls  (car dirs))
-            (loop (cdr dirs))))))))
+    (cond
+      ((null? directories)
+       (ls (current-directory)))
+      (else
+        (let loop ((dirs  directories))
+          (cond
+            ((null? dirs)
+             (read-from-string "")) ;return EOF
+            (else
+              (ls  (car dirs))
+              (loop (cdr dirs)))))))))
 
 (define (ls-perm-file directories allfiles)
   (let ((ls (lambda (dir)
@@ -293,24 +306,29 @@
                      (if allfiles
                        (list-files dir)
                        (normal-files dir)))))))
-    (if (null? directories)
-      (ls (current-directory))
+    (cond ((null? directories)
+      (ls (current-directory)))
+      (else
       (let loop ((dirs  directories))
-        (if (null? dirs)
-          (read-from-string "") ;return EOF
-          (begin
+        (cond
+          ((null? dirs)
+           (read-from-string "")) ;return EOF
+          (else
             (ls (car dirs))
-            (loop (cdr dirs))))))))
+            (loop (cdr dirs)))))))))
 
 (define (ls-file directories allfiles dfirst)
-  (if (null? directories)
-    (printcol (current-directory) allfiles dfirst)
-    (let loop ((dirs  directories))
-      (if (null? dirs)
-        (read-from-string "") ;return EOF
-        (begin
-          (printcol (car dirs) allfiles dfirst)
-          (loop (cdr dirs)))))))
+  (cond
+    ((null? directories)
+     (printcol (current-directory) allfiles dfirst))
+    (else
+      (let loop ((dirs  directories))
+        (cond
+          ((null? dirs)
+           (read-from-string "")) ;return EOF
+          (else
+            (printcol (car dirs) allfiles dfirst)
+            (loop (cdr dirs))))))))
 
 (define (directory-first dirlist)
   (receive (dirs files)
@@ -323,38 +341,48 @@
   (let*  ((file (sys-basename filename))
           (type (ref stat 'type))
           (extension  (path-extension file)))
-    (if extension
-      (if-let1 e (assoc (string->symbol extension) *extension-colours*)
-        (colour-filename file type e)
-        (colour-filename file type))
-      (colour-filename file type))))
+    (cond
+      (extension
+        (if-let1 e (assoc (string->symbol extension) *extension-colours*)
+          (colour-filename file type e)
+          (colour-filename file type)))
+      (else
+        (colour-filename file type)))))
 
 (define (printcol directory allfiles dfirst)
   (let ((currentlist (list-files directory)))
-    (if (null? currentlist)
-      #t
+    (cond
+      ((null? currentlist)
+      #t)
+      (else
       (let* ((tabwidth 2)
              (termwidth (string->number (process-output->string '(tput cols))))
-             (maxwidth (if allfiles
+             (maxwidth (cond
+                         (allfiles
                          (logand (+ (apply max (map string-length (map sys-basename currentlist)))
-                                    tabwidth) (lognot (- tabwidth 1)))
+                                    tabwidth) (lognot (- tabwidth 1))))
+                         (else
                          (logand (+ (apply max (map string-length (map sys-basename (normal-files directory))))
-                                    tabwidth) (lognot (- tabwidth 1)))))
-             (num (if allfiles
-                    (length currentlist)
-                    (length (normal-files directory))))
+                                    tabwidth) (lognot (- tabwidth 1))))))
+             (num (cond
+                    (allfiles
+                      (length currentlist))
+                    (else
+                      (length (normal-files directory)))))
              (fullpath-list (cond ((and allfiles dfirst)
                                    (directory-first  currentlist))
                               (allfiles currentlist)
                               (dfirst   (directory-first (normal-files directory)))
                               (else (normal-files directory)))))
-        (if (< termwidth (* 2 maxwidth))
+        (cond
+          ((< termwidth (* 2 maxwidth))
           (for-each
             (lambda (e) (display e) (newline))
             (map (lambda (f)
                    (let1 stat (sys-stat f)
                      (format "~a" (print-filename-col f stat))))
-                 fullpath-list))
+                 fullpath-list)))
+          (else
           (let*  ((numcols  (round->exact (/. termwidth maxwidth)))
                   (numrows  (round->exact (/. num numcols)))
                   (numrows-new (if  (< 0 (modulo num numcols))
@@ -364,17 +392,17 @@
                   (col (round->exact (/. termwidth numcols))))
             (let loop ((l (filter string? (take* lst numcols #t)))
                        (lst (filter string? (drop* lst numcols))))
-              (if (null? l)
-                #t
-                (begin
+              (cond
+                ((null? l)
+                 #t)
+                (else
                   (for-each
                     (lambda (f)
                       (let1 stat (sys-stat f)
-                        (display (format "~a\t"  (print-filename-col f stat)))
-                        ))
+                        (display (format "~a\t"  (print-filename-col f stat)))))
                     l)
                   (newline)
-                  (loop (take* lst numcols ) (drop* lst numcols)))))))))))
+                  (loop (take* lst numcols ) (drop* lst numcols)))))))))))))
 
 (define (usage)
   (print "help"))

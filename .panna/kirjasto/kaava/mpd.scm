@@ -7,8 +7,8 @@
 
 
 (define (install tynnyri)
-    (sys-putenv "CPPFLAGS=-I/usr/local/include")
-    (sys-putenv "LDFLAGS=-L/usr/local/lib")
+  (sys-putenv "CPPFLAGS=-I/usr/local/include")
+  (sys-putenv "LDFLAGS=-L/usr/local/lib")
   (system
     '(./autogen.sh)
     `(./configure ,(string-append "--prefix=" tynnyri)

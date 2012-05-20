@@ -8,7 +8,7 @@
 (use util.list) ; slices
 (use text.csv)
 (require-extension (srfi 1 11 13))
-(use kirjasto) ; run-command, run-command-sudo, make-colour, colour-command
+(use kirjasto) ; run-command, run-command-sudo, colour-string, colour-command
 
 (define-constant package-directory "/var/db/pkg")
 (define-constant ports-directory   "/usr/ports")
@@ -49,10 +49,10 @@
          (print
            (string-concatenate
              `(" "
-             ,(make-colour colour-package (car x))
+             ,(colour-string colour-package (car x))
              " "
              "["
-             ,(make-colour 172 (cadr x)) "]"))
+             ,(colour-string 172 (cadr x)) "]"))
            )
          (display "    ")
          (display (caddr x))
@@ -75,7 +75,7 @@
 ; install {{{
 (define (install-package package)
   (current-directory (build-path ports-directory package))
-  (print (string-append ">>> Installing " (make-colour 44 package)))
+  (print (string-append ">>> Installing " (colour-string 44 package)))
   (run-command '(sudo make clean))
   (run-command '(sudo make config-recursive))
   (colour-command "sudo make install clean"
@@ -89,7 +89,7 @@
 ; deinstall {{{
 (define (deinstall-package package)
   (current-directory (build-path ports-directory package))
-  (print (string-append ">>> Deinstalling " (make-colour 44 package)))
+  (print (string-append ">>> Deinstalling " (colour-string 44 package)))
   (colour-command "sudo make deinstall"
                                      #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                                      #/^===>/   "[38;5;39m>>>[0m"
@@ -101,7 +101,7 @@
 ; reinstall {{{
 (define (reinstall-package package)
   (current-directory (build-path ports-directory package))
-  (print (string-append ">>> Installing " (make-colour 44 package)))
+  (print (string-append ">>> Installing " (colour-string 44 package)))
   (run-command '(sudo make clean))
   (run-command '(sudo make config))
   (colour-command "sudo make"
@@ -158,18 +158,18 @@
             (display
               (string-concatenate
                 `(" "
-                ,(make-colour colour-category
+                ,(colour-string colour-category
                              category)
                 "/"
-                ,(make-colour colour-package
+                ,(colour-string colour-package
                              name))))
             (display
               (string-concatenate `(" ["
-                             ,(make-colour colour-version version)
+                             ,(colour-string colour-version version)
                              "]")))
             (newline)
             (print
-              (string-concatenate `("    " ,(make-colour 244  (cadddr x)))))
+              (string-concatenate `("    " ,(colour-string 244  (cadddr x)))))
             )))
       found-list)))
 

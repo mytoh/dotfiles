@@ -13,50 +13,60 @@
     (run-process `(git clone ,(string-append "git://github.com/" url)) :wait #t)))
 
 (define  (git args)
-  (if (null? args)
-    (run-process '(git) :wait #t )
-    (match (car args)
-      ("clone"
-       (git-clone (cadr args)))
-      ("st"
-       (run-process `(git status) :wait #t))
-      (_  (run-process `(git ,@args) :wait #t)))))
+  (cond
+    ((null? args)
+     (run-process '(git) :wait #t ))
+    (else
+      (match (car args)
+        ("clone"
+         (git-clone (cadr args)))
+        ("st"
+         (run-process `(git status) :wait #t))
+        (_  (run-process `(git ,@args) :wait #t))))))
 
 (define (svn args)
-  (if (null? args)
-    (run-process '(svn) :wait #t)
-    (match  (car args)
-      ("st"
-       (run-process '(svn status) :wait #t))
-      (_
-        (run-process `(svn ,@args) :wait #t)))))
+  (cond
+    ((null? args)
+     (run-process '(svn) :wait #t))
+    (else
+      (match  (car args)
+        ("st"
+         (run-process '(svn status) :wait #t))
+        (_
+          (run-process `(svn ,@args) :wait #t))))))
 
 (define (hg args)
-  (if (null? args)
-    (run-process '(hg) :wait #t)
-    (match (car args)
-      ("st"
-       (run-process '(hg status) :wait #t))
-      (_
-        (run-process `(hg ,@args) :wait #t)))))
+  (cond
+    ((null? args)
+     (run-process '(hg) :wait #t))
+    (else
+      (match (car args)
+        ("st"
+         (run-process '(hg status) :wait #t))
+        (_
+          (run-process `(hg ,@args) :wait #t))))))
 
 (define (cvs args)
-  (if (null? args)
-    (run-process '(cvs) :wait #t)
-    (match (car args)
+  (cond
+    ((null? args)
+    (run-process '(cvs) :wait #t))
+   (else
+     (match (car args)
       ("up"
        (run-process '(cvs update) :wait #t))
       (_
-        (run-process `(cvs ,@args) :wait #t)))))
+        (run-process `(cvs ,@args) :wait #t))))))
 
 (define (darcs args)
-  (if (null? args)
-    (run-process '(darcs) :wait #t)
-    (match (car args)
+  (cond  
+    ( (null? args)  
+    (run-process '(darcs) :wait #t))  
+    (else  
+      (match (car args)
       ("up"
        (run-process '(darcs pull) :wait #t))
       (_
-        (run-process `(darcs ,@args) :wait #t)))))
+        (run-process `(darcs ,@args) :wait #t))))))
 
 (define (hub args)
   (cond

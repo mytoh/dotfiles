@@ -10,31 +10,33 @@
 
 (define (file-is-archive? file)
   (let ((extension (path-extension file)))
-    (if (or (string=? extension "xz")
-          (string=? extension "gz")
-          (string=? extension "cbz")
-          (string=? extension "cbr")
-          (string=? extension "cbx")
-          (string=? extension "zip")
-          )
-      #t
-      #f
+    (cond
+      ((or (string=? extension "xz")
+         (string=? extension "gz")
+         (string=? extension "cbz")
+         (string=? extension "cbr")
+         (string=? extension "cbx")
+         (string=? extension "rar")
+         (string=? extension "zip"))
+       #t)
+      (else  #f)
       )))
 
 
 (define (main args)
-  (if (< (length args) 2)
-    (run-process `(feh) :wait #t)
+  (cond ( (< (length args) 2)  
+    (run-process `(feh) :wait #t))  
+    (else 
     (let-args (cdr args) ((#f "h|help" (usage 0)) . args)
       (match (car args)
         ((? file-is-directory? dir)
          (run-process `(feh "-F" ,dir)) :wait #t)
         ((? file-is-archive? file)
-         (let ((temp (build-path 
+         (let ((temp (build-path
                        (temporary-directory)
-                       "fehbrowse" 
-                       (string-incomplete->complete 
-                         (sys-basename 
+                       "fehbrowse"
+                       (string-incomplete->complete
+                         (sys-basename
                            (path-sans-extension file))))))
            (make-directory* temp)
            (unpack file temp)
@@ -43,5 +45,5 @@
            ))
         ((? file-is-regular? file)
          (run-process `(feh -Z -F  -q --start-at ,(sys-realpath file) ,(sys-dirname (sys-realpath file))) :wait #t))
-        (_ (usage 1))))) 
+        (_ (usage 1))))))
   0)

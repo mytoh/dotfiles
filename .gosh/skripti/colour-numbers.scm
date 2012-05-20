@@ -1,7 +1,7 @@
 #!/usr/bin/env gosh
 
 (use gauche.process)
-(use util.list) ; slices 
+(use util.list) ; slices
 (require-extension (srfi 1))    ; iota
 
 (define (colour-names)
@@ -17,12 +17,13 @@
               (car ls))
     (newline)
     (newline)
-    
+
     (print "other colours")
     (let loop ((l (cdr ls)))
-      (if (null? l)
-        '()
-        (begin
+      (cond 
+        ((null? l)  
+        '())  
+         (else
           (for-each colour-numbers
             (car l))
           (newline)

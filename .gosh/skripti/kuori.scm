@@ -33,16 +33,16 @@
 
 (define repl.printer
   (lambda results
-    (map (cut print (make-colour 133 "=> ") <>) results))
+    (map (cut print (colour-string 133 "=> ") <>) results))
   )
 
 (define repl.prompter
   (lambda ()
     (print (string-append
-             (make-colour 44 "(")
+             (colour-string 44 "(")
              (symbol->string (module-name (current-module)))
-             (make-colour 44 ")")))
-    (display (make-colour 33 ">> "))
+             (colour-string 44 ")")))
+    (display (colour-string 33 ">> "))
     (flush))
   )
 

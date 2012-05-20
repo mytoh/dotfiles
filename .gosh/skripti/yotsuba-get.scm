@@ -39,7 +39,7 @@
 
 (define (fetch url)
   ;; downloda file from url
-  (if (string? url)
+  (when (string? url)
     (swget url)))
 
 ; (define (get-img str board)
@@ -75,56 +75,62 @@
 
 (define (get-html bd td)
   (let-values (((status headers body ) (http-get  "boards.4chan.org"  (string-concatenate `("/" ,(x->string bd) "/res/"  ,(x->string td))))))
-    (if  (string=? status "404")
-      #f
-      (if (string-incomplete? body)
-        (if-let1 html (string-incomplete->complete body :omit)
-          html
-          (ces-convert body "*jp" "utf-8"))
-        (ces-convert body "*jp" "utf-8")))))
+    (cond
+      ((string=? status "404")
+       #f)
+      ((string-incomplete? body)
+       (if-let1 html (string-incomplete->complete body :omit)
+         html
+         (ces-convert body "*jp" "utf-8")))
+       (else
+         (ces-convert body "*jp" "utf-8")))))
 
 (define (yotsuba-get restargs )
   (let* ((board (car restargs))
          (thread (cadr restargs))
          (html (get-html board thread)))
-    (if (string? html)
-      (begin
-        (print (make-colour 4 thread))
-        (mkdir thread)
-        (cd thread)
-        (get-img html board)
-        (cd ".."))
-      (begin
-        (print (make-colour 237 (string-append thread "'s gone")))
-        ))))
+    (cond
+      ((string? html)
+       (print (colour-string 4 thread))
+       (mkdir thread)
+       (cd thread)
+       (get-img html board)
+       (cd ".."))
+      (else
+        (print (colour-string
+                 237
+                 (string-append
+                   thread
+                   "'s gone")))))))
 
 
 (define (yotsuba-get-all restargs )
   (let ((bd (car restargs))
         (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
-    (if (not (null? dirs))
-      (begin
+    (cond
+      ((not (null? dirs))
         (for-each
           (lambda (d)
             (yotsuba-get (list bd d)))
           dirs)
         (run-process `(notify-send ,(string-append bd " fetch finished"))))
-      (print "no directories")
+      (else
+      (print "no directories"))
       )))
 
 (define (yotsuba-get-repeat restargs )
   (let* ((board (car restargs))
          (thread (cadr restargs))
          (html (get-html board thread)))
-    (if (string? html)
-      (begin
-        (print (make-colour 4 thread))
-        (mkdir thread)
-        (cd thread)
-        (get-img html board)
-        (cd "..")
-        )
-      #t)))
+    (cond
+      ((string? html)
+       (print (colour-string 4 thread))
+       (mkdir thread)
+       (cd thread)
+       (get-img html board)
+       (cd ".."))
+      (else
+        #t))))
 
 (define (yotsuba-get-repeat-all restargs )
   (let ((bd (car restargs))
@@ -135,7 +141,7 @@
           (yotsuba-get-repeat (list bd d)))
         dirs)
       (print "no directories"))
-    (print (make-colour 237 "----------"))
+    (print (colour-string 237 "----------"))
     ))
 
 
@@ -149,6 +155,6 @@
     (cond ((null? restargs) (usage))
       ((and all repeat) (forever (yotsuba-get-repeat-all restargs)))
       (repeat (forever (yotsuba-get-repeat restargs)
-                       (print (make-colour 237 "----------"))))
+                       (print (colour-string 237 "----------"))))
       (all (yotsuba-get-all restargs))
       (else (yotsuba-get restargs)))))

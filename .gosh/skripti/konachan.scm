@@ -1,6 +1,6 @@
 #!/usr/bin/env gosh
 
-(use kirjasto) ;swget,mkdir,cd,make-colour
+(use kirjasto) ;swget,mkdir,cd,colour-string
 (use text.html-lite)
 (use sxml.ssax)
 (use sxml.sxpath)
@@ -40,7 +40,7 @@
 (define (get-tags-pages tag)
   (let ((last (x->number (parse-last-page-number (get-tags-page 1 tag)))))
     (dotimes (num last)
-      (print (string-append (make-colour 99 "getting page ") (make-colour 33 (+ num 1))))
+      (print (string-append (colour-string 99 "getting page ") (colour-string 33 (+ num 1))))
       (map
        (lambda (u)
          (swget u))
