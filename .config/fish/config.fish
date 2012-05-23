@@ -4,7 +4,7 @@
 ulimit -c 0
 
 set -e PATH #remove PATH
-set PATH /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/
+set -x PATH /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/
 
 function push-to-path
   for p in $argv
