@@ -3,17 +3,17 @@
 
 ulimit -c 0
 
-set -e PATH #remove PATH
-set -gx PATH /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/
+set -ge PATH
+set -gx PATH  /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/ $PATH
 
 function push-to-path
-  for p in $argv
-    if test -d $p
-      if not contains $p $PATH
-        set -x PATH $p $PATH
+    for p in $argv
+      if test -d $p
+        if not contains $p $PATH
+          set -gx PATH $p $PATH
+        end
       end
     end
-  end
 end
 
 # gentoo prefix {{{
