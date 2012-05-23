@@ -816,18 +816,13 @@ endfunction
 autocmd myautocommands FileType unite call s:unite_my_settings()
 function! s:unite_my_settings() "{{{
   " Overwrite settings.
-  imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
+  imap <buffer> <c-w>     <plug>(unite_delete_backward_path)
+  imap <buffer> <c-j>     <plug>(unite_exit)
+  imap <buffer> \\         <c-u>/
   " <C-l>: manual neocomplcache completion.
   inoremap <buffer> <C-l>  <C-x><C-u><C-p><Down>
   "call unite#custom_default_action('file', 'tabopen')
   "call unite#custom_default_action('bookmark', 'tabopen')
-  call unite#set_substitute_pattern('files', '^\~',
-        \ substitute(unite#util#substitute_path_separator($HOME), ' ', '\\\\ ', 'g'), -100)
-  call unite#set_substitute_pattern('files', '[^~.*]\ze/', '\0*', 100)
-  call unite#set_substitute_pattern('files', '/\ze[^~.*]', '/*', 100)
-  call unite#set_substitute_pattern('files', '\.', '*.', 1000)
-  call unite#set_substitute_pattern('files', '^\.v/',
-        \ [expand('~/.vim/'), unite#util#substitute_path_separator($HOME) . '/.bundle/*/'], 1000)
 endfunction "}}}
 
 " unite-launch {{{

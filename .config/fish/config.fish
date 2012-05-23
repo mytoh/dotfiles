@@ -3,7 +3,7 @@
 
 ulimit -c 0
 
-set -Uge PATH #remove PATH
+set -e PATH #remove PATH
 set PATH /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/
 
 function push-to-path
@@ -27,6 +27,8 @@ push-to-path /usr/local/kde4/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sb
 push-to-path $HOME/.cabal/bin
 # }}}
 
+# disable home directory completion
+set CDPATH .
 
 set -x MANWIDTH 80
 if test -d $HOME/local/stow
@@ -196,7 +198,7 @@ if which gosh >&-
         end
 
         function gi
-                rlwrap -c -q '"' -b '(){}[].,#@;|`"' gosh $argv
+                rlwrap -c -q '"' -b '(){}[].,#@;|`"' gosh repl.scm $argv
        end
 
        function tl
@@ -1268,8 +1270,9 @@ end
 #}}}
 
 # keybindings {{{
-bind --erase \cd
-bind \cd delete-char
+#bind --erase \cd
+bind \cd 'delete-char'
+
 #}}}
 
 # misc {{{

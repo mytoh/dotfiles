@@ -167,7 +167,7 @@ else
   NeoBundle 'robokai'
   NeoBundle 'lilypink'
   NeoBundle 'Sorcerer'
-  NeoBundle 'highlights_for_radiologist.vim'
+  NeoBundle 'highlights-for-radiologist'
   "}}}
   NeoBundle 'http://voikko.svn.sourceforge.net/svnroot/voikko/', {'type' : 'svn', 'rtp' : 'trunk/tools/vim'}
   " bitbucket

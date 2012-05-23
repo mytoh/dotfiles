@@ -6,9 +6,9 @@
   (use file.util)
   (use rfc.http)
   (use rfc.uri)
-  (use kirjasto.merkkijono)
   (require-extension
     (srfi 13))
+  (use kirjasto.merkkijono)
   (export
     forever
     get-os-type
@@ -33,7 +33,7 @@
 (define get-os-type
   ; returns symbol
   (lambda ()
-    (string->symbol (string->lowercase
+    (string->symbol (string-downcase
                       (car (sys-uname))))))
 
 

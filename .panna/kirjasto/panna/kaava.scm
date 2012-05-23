@@ -3,9 +3,14 @@
   (use gauche.parameter)
   (use gauche.process)
   (use file.util)
+  (require-extension
+    (srfi 13))
   (export
-    system
     homepage
+
+    system
+    get-os-type
+    add-environment-variable
 
     use-clang
     use-panna-library
@@ -13,27 +18,31 @@
 (select-module panna.kaava)
 
 (define (use-clang)
-  (sys-putenv "CC=clang")
-  (sys-putenv "CPP=clang-cpp")
-  (sys-putenv "CXX=clang++")
-  (sys-putenv "CXXCPP=clang-cpp")
-  (sys-putenv "OBJC=clang")
+  (sys-setenv "CC" "clang" #t)
+  (sys-setenv "CPP" "clang-cpp" #t)
+  (sys-setenv "CXX" "clang++" #t)
+  (sys-setenv "CXXCPP" "clang-cpp" #t)
+  (sys-setenv "OBJC" "clang" #t)
 
-  (sys-putenv "NO_WERROR=")
-  (sys-putenv "WERROR=")
+  (sys-unsetenv "NO_WERROR")
+  (sys-unsetenv "WERROR")
   ; disable all warnings
-  (sys-putenv "CPPFLAGS=-w")
-  (sys-putenv "CFLAGS=-w")
+  (add-environment-variable "CXXFLAGS" "-w")
+  (add-environment-variable "CFLAGS" "-w")
   )
 
 (define (use-panna-library)
   (let ((panna (resolve-path (sys-getenv "OLUTPANIMO"))))
-    (sys-putenv (string-append
-                  "CPPFLAGS=-I"
-                  (build-path panna "include")))
-    (sys-putenv (string-append
-                  "LDFLAGS=-L"
-                  (build-path panna "lib")))))
+    (add-environment-variable
+      "CPPFLAGS"
+      (string-append
+        "-I"
+        (build-path panna "include")))
+    (add-environment-variable
+      "LDFLAGS"
+      (string-append
+        "-L"
+        (build-path panna "lib")))))
 
 (define homepage (make-parameter "unknown"))
 
@@ -56,15 +65,22 @@
        (system c2 ...)))))
 
 
+(define add-environment-variable
+  (lambda (env value)
+    (cond
+      ((sys-getenv env)
+       (sys-setenv
+         env
+         (string-append
+           (sys-getenv env)
+           " " value)
+         #t)) ; overwrite
+      (else
+        (sys-setenv env value)))))
 
 
-
-
-
-
-
-
-
-
-
-(provide "panna/kaava")
+(define get-os-type
+  ; returns symbol
+  (lambda ()
+    (string->symbol (string-downcase
+                      (car (sys-uname))))))

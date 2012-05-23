@@ -5,9 +5,9 @@
 
 
 (define (install tynnyri)
-  (use-clang)
-    (sys-putenv "CFLAGS=-I/usr/local/include")
+    (sys-putenv "CPPFLAGS=-I/usr/local/include")
     (sys-putenv "LDFLAGS=-L/usr/local/lib")
+  (use-clang)
   (system
     '(autoreconf -vfi)
     `(./configure ,(string-append "--prefix=" tynnyri)

@@ -82,7 +82,6 @@
         ,(colour-string 118 (car (string-split (sys-gethostname) "." )))
         " :: "
         ,(colour-string 4 (directory))
-
         ,(cond
            ((file-exists? "./.hg")
             (hg))

@@ -219,11 +219,13 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         [ [isFullscreen                                        --> doFullFloat ]
         , [isDialog                                            --> doFloat]
         , [className  =? "feh"                                 --> viewShift "kolme"]
-        , [className  =? c                                     --> doFloat | c <- myFloats ]
+        , [(className  =? c <||> title =? c <||> appName =? c) --> doFloat | c <- myFloats ]
         , [className  =? "MPlayer"                             --> (doFullFloat <+> viewShift "kolme")]
         , [className =? "V2C"                                  -->  viewShift "kaksi"]
         , [className =? "Firefox"                              -->  viewShift "kaksi"]
         , [(className =? "Firefox" <&&> resource =? "Dialog")  --> (doFloat <+> viewShift "kaksi")]
+        , [title =? "Install user style"                      --> doFloat]
+        -- , [appName =? ""]
         ])
          <+> namedScratchpadManageHook myScratchPads
          <+> manageDocks

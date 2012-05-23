@@ -1,5 +1,4 @@
 
-(use kirjasto)
 (use panna.kaava)
 
 (define kaava   "feh")
@@ -9,11 +8,12 @@
   ; freebsd
   ((eq? (get-os-type) 'freebsd)
    (define (install tynnyri)
-     (system 
+     (system
        '(gmake clean))
-     (sys-putenv (string-append "PREFIX=" tynnyri))
-     (sys-putenv (string-append "CFLAGS=" "-w -I/usr/local/include -L/usr/local/lib" ))
-     (print  (sys-getenv "CFLAGS"))
+     (add-environment-variable "PREFIX" tynnyri)
+     (add-environment-variable "CPPFLAGS" "-I/usr/local/include")
+     (add-environment-variable "LDFLAGS"   "-L/usr/local/lib")
+     (use-clang)
      (system
        '(gmake)
        '(gmake install)

@@ -4,29 +4,16 @@
 (use gauche.parseopt)
 (use util.match)
 (use file.util)
+(use kirjasto.arkisto)
 (load "unpack.scm")
 
 (define (usage status) (exit status "usage: ~a <file>\n" *program-name*))
 
-(define (file-is-archive? file)
-  (let ((extension (path-extension file)))
-    (cond
-      ((or (string=? extension "xz")
-         (string=? extension "gz")
-         (string=? extension "cbz")
-         (string=? extension "cbr")
-         (string=? extension "cbx")
-         (string=? extension "rar")
-         (string=? extension "zip"))
-       #t)
-      (else  #f)
-      )))
-
 
 (define (main args)
-  (cond ( (< (length args) 2)  
-    (run-process `(feh) :wait #t))  
-    (else 
+  (cond ((< (length args) 2)
+    (run-process `(feh) :wait #t))
+    (else
     (let-args (cdr args) ((#f "h|help" (usage 0)) . args)
       (match (car args)
         ((? file-is-directory? dir)

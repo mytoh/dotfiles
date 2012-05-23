@@ -5,6 +5,7 @@
 (use gauche.sequence)
 (use util.match)
 (use text.tree)
+(use file.util)
 (require-extension (srfi 1 13 19))
 
 (define-syntax forever
@@ -15,25 +16,106 @@
        (sys-sleep 3) ; sleep 5 minutes
        (loop)))))
 
+;; dzen helper
 (define fg
-  (lambda (c)
+  (lambda (colour)
     (tree->string
-      `("^fg(" ,c ")"))))
+      `("^fg(" ,colour ")"))))
 
 (define bg
-  (lambda (c)
-    (tree->string
-      `("^bg(" ,c ")"))))
+  (lambda (colour)
+    (cond
+      (colour
+        (string-concatenate
+          `("^bg(" ,colour ")")))
+      (else
+        "^bg()")
+      )))
 
 
 (define fn
-  (lambda (f)
+  (lambda (font)
     (tree->string
-      `("^fn(" ,f ")"))))
+      `("^fn(" ,font ")"))))
 
-(define (date)
-    (date->string (current-date))
+;; xpm from powerline.el www.emacswiki.org/emacs/powerline.el
+(define make-temp-dir
+  (lambda ()
+    (make-directory*
+      (build-path (temporary-directory)
+                  "dzen"))
+    (build-path (temporary-directory)
+                "dzen")))
+
+(define arrow-left
+"/* XPM */
+
+static char * arrow_left[] = {
+\"12 16 2 1\",
+\". c ~a\",
+\"  c ~a\",
+\"           .\",
+\"          ..\",
+\"         ...\",
+\"        ....\",
+\"       .....\",
+\"      ......\",
+\"     .......\",
+\"    ........\",
+\"    ........\",
+\"     .......\",
+\"      ......\",
+\"       .....\",
+\"        ....\",
+\"         ...\",
+\"          ..\",
+\"           .\", };
+"
   )
+
+(define arrow-left-xpm
+  (lambda (c1 c2)
+  (make-xpm c1 c2 arrow-left)))
+
+(define make-xpm
+  (lambda (c1 c2 data)
+    (let ((icon-name
+            (build-path (make-temp-dir)
+                        (string-append
+                          "arrow_left"
+                          "_"
+                          (string-trim  c1 #\#) "_"
+                          (string-trim  c2 #\#)
+                          ".xpm"))))
+      (cond
+        ((file-is-readable? icon-name)
+         icon-name)
+        (else
+          (call-with-output-file
+            icon-name
+            (lambda (out)
+              (format
+                out
+                data
+                c1 c2))
+            :if-exists #f
+            :if-does-not-exist :create)
+          icon-name)))))
+
+(define icon
+  (lambda (name)
+    (string-concatenate
+      `("^i("
+        ,name
+        ")"
+        ))))
+
+
+;; printers
+(define (date)
+  (string-concatenate
+    `(,(fg "#ffffff")
+       ,(date->string (current-date)))))
 
 (define (memory)
   (fifth
@@ -46,60 +128,57 @@
 (define (fs)
   (let* ((fs-lst (map (lambda (s) (string-split s #/\s+/))
                       (cdr  (process-output->string-list "df -h"))))
-         (root (find (lambda (l) (if (string= (sixth l) "/")
-                                   l
-                                   #f))
-                     fs-lst))
-         (quatre (find (lambda (l) (if (string= (sixth l) "/mnt/quatre")
-                                     l #f))
-                       fs-lst))
-         (mypassport (find (lambda (l) (if (string= (sixth l) "/mnt/mypassport")
-                                         l #f))
-                           fs-lst))
-         (deskstar (find (lambda (l) (if (string= (sixth l) "/mnt/deskstar")
-                                       l #f))
-                         fs-lst))
+         (find-fs (lambda (lst fs-name)
+                    (find (lambda (l)
+                            (cond ((string=? (sixth l) fs-name)
+                                   l)
+                              (else
+                                #f)))
+                          lst)))
+         (root (find-fs fs-lst "/"))
+         (quatre (find-fs fs-lst "/mnt/quatre"))
+         (mypassport (find-fs fs-lst "/mnt/mypassport"))
+         (deskstar (find-fs fs-lst "/mnt/deskstar"))
          (fs-remain (lambda (n)
                       (- (string->number (subseq (second n) 0 3))
-                         (string->number (subseq (third n) 0 3)))))
-         )
+                         (string->number (subseq (third n) 0 3))))))
     (list
-        (if (list? root)
-          (list
-            (string-append
-              (fg "#294282")
-              "/ "
-              (fg "#acacac" )
-              (subseq  (third root) 0 3) "/" (second  root)))
-          "")
-        (if (list? quatre)
-            (list
-              " "
-              (fg "#f2a2a2")
-              "q "
-              (fg "#acacac" )
-              (fs-remain quatre)
-              "/" (second quatre))
-          "")
-        (if (list? mypassport)
-            (list
-              " " (fg "#f282a2")
-              "m "
-              (fg "#ffffff" )
-              (fs-remain mypassport)
-              "/" (second mypassport))
-          "")
-        (if (list? deskstar)
-            (list
-              " "
-              (fg "#f282a2")
-              "d "
-              (fg "#ffffff" )
-              (fs-remain deskstar)
-              "/"
-              (second deskstar))
+      (cond ((list? root)
+             (list
+               (string-append
+                 (fg "#b8b843")
+                 "/ "
+                 (fg "#acacac" )
+                 (subseq  (third root) 0 3) "/" (second  root))))
+        (else
           ""))
-))
+      (if (list? quatre)
+        (list
+          " "
+          (fg "#f2a2a2")
+          "q "
+          (fg "#acacac" )
+          (fs-remain quatre)
+          "/" (second quatre))
+        "")
+      (if (list? mypassport)
+        (list
+          " " (fg "#f282a2")
+          "m "
+          (fg "#ffffff" )
+          (fs-remain mypassport)
+          "/" (second mypassport))
+        "")
+      (if (list? deskstar)
+        (list
+          " "
+          (fg "#f282a2")
+          "d "
+          (fg "#ffffff" )
+          (fs-remain deskstar)
+          "/"
+          (second deskstar))
+        ""))))
 
 (define (volume)
   (let ((vol (string-split (process-output->string "mixer -S vol") ":"))
@@ -114,27 +193,34 @@
       (cadr pcm))))
 
 (define (mpd)
- (let ((current-song (process-output->string "mpc current")))
-   (if (null? current-song)
-     (list "Not playng")
-     (list
-       (fg "#ababab")
-     current-song)
-     )))
+  (let ((current-song (process-output->string "mpc current")))
+    (cond
+      (current-song
+        (list
+          (fg "#ababab")
+          current-song))
+      (else
+        (list
+          "Not playng")))))
 
 
 (define (dzen)
   (tree->string
     `(
       " " ,(mpd) " "
-      " " ,(volume) " "
       " " ,(memory) " "
+      ,(icon (arrow-left-xpm "#444444" "None"))
+      ,(bg "#444444")
       " " ,(fs) " "
+      ,(icon (arrow-left-xpm "#666666" "#444444"))
+      ,(bg "#666666")
+      " " ,(volume) " "
+      ,(icon (arrow-left-xpm "#888888" "#666666"))
+      ,(bg "#888888")
       " " ,(date) " ")))
 
 (define (main args)
   (let loop ()
     (print
       (dzen))
-    (sys-nanosleep 1000000000)
     (loop )))

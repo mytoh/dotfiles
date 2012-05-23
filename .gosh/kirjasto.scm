@@ -6,6 +6,7 @@
     kirjasto.keitto
     kirjasto.väri
     kirjasto.merkkijono
+    kirjasto.arkisto
     ))
 
 (provide "kirjasto")

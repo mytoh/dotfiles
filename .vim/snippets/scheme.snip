@@ -50,12 +50,10 @@ abbr    panna kaava script
         (use panna.kaava)
 
         (define kaava "${1}")
-        (define homepage "")
-        (define repository "")
+        (define homepage "${2}")
+        (define repository "${3}")
 
         (define (install tynnyri)
-          (sys-putenv "CPPFLAGS=-I/usr/local/include")
-          (sys-putenv "LDFLAGS=-L/usr/local/lib")
           (use-clang)
           (system
           '(make clean)
@@ -70,8 +68,8 @@ snippet run
 abbr    run-process with :wait
         (run-process '(${1}) :wait #t)
 
-snippent module
+snippet module
          (define-module ${1}
            (export)
            (use ${2}))
-         (select-module ${1})
+         (select-module $1)

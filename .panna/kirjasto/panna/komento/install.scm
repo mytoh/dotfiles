@@ -42,9 +42,6 @@
                            (relative-path
                              path
                              )
-                           ; (string-scan  path
-                           ;               (panna-kansio)
-                           ;               'after)
                            (simplify-path (string-append "."
                                                          (string-scan path
                                                                       (tynnyri-kansio)

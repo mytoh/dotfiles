@@ -10,9 +10,7 @@
 (define (zip-unpacker file . directory)
   (if (null-list? directory)
     (run-process `(unzip -q ,file) :wait #t)
-    (run-process `(unzip -q ,file -d ,(car directory)) :wait #t)
-    )
-    )
+    (run-process `(unzip -q ,file -d ,(caar directory)) :wait #t)))
 
 
 (define (rar-unpacker file . diretory)

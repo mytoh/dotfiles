@@ -15,7 +15,7 @@
                                 r1 s1
                                 ...
                                 )))
-                                read-line))))
+           read-line))))
     ))
 
 (define (process command)
@@ -44,9 +44,8 @@
   (process "sudo make cleandir")
   (process "sudo make cleandir")
   (when (file-exists? "/usr/obj")
-  (remove-directory* "/usr/obj")
-    )
-  (process "sudo make -j3 buildworld")
-  (process "sudo make -j3 buildkernel")
-  (process "sudo make -j3 installkernel")
+    (remove-directory* "/usr/obj"))
+  (process "sudo make buildworld")
+  (process "sudo make buildkernel")
+  (process "sudo make installkernel")
   )

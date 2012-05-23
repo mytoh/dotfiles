@@ -65,7 +65,7 @@
 (setq-default scroll-down-aggressively 0.4
               scroll-up-aggressively   0.4)
 
-;; no backup file 
+;; no backup file
 (setq backup-inhibited t)
 ;; delete autosave file when quit
 (setq delete-auto-save-files t)
@@ -90,7 +90,7 @@
 ;; highlight
 (global-font-lock-mode t)
 (setq font-lock-maximus-decoration t)
-;; 
+;;
 (auto-compression-mode t)
 ;; iswitch mode in C-x b
 (iswitchb-mode t)
@@ -156,7 +156,7 @@
 
 ;; scheme program
 (setq scheme-program-name "gosh")
-; set encoding to utf-8 
+; set encoding to utf-8
 (setq process-coding-system-alist
       (cons '("gauche" utf-8 . utf-8) process-coding-system-alist))
 ; load cmuscheme.el for scheme program
@@ -170,11 +170,11 @@
   (switch-to-buffer-other-window
    (get-buffer-create "*scheme*"))
   (run-scheme scheme-program-name))
-;; call func by Ctrl-c 
+;; call func by Ctrl-c
 (define-key global-map
   "\C-cS" 'scheme-other-window)
 
-;; changelog 
+;; changelog
 (defun cl-memo ()
   (interactive)
     (add-change-log-entry
@@ -201,7 +201,7 @@
 (require 'auto-complete)
 (global-auto-complete-mode t)
 
-;; w3m 
+;; w3m
 (require 'w3m-load)
 (global-set-key (kbd "C-c C-w") 'w3m)
 (add-hook 'w3m-mode-hook
@@ -221,7 +221,7 @@
 ;for anything window
 (setq anything-display-function 'display-buffer-function--split-root)
 
-;; magit 
+;; magit
 (require 'magit)
 
 ;; emms
@@ -243,11 +243,11 @@
 ;; for emms-print-metadata in emms-info-libtag
 ;; install taglib
 ;; $git clone git://git.sv.gnu.org/emms.git
-;; move src directory 
+;; move src directory
 ;; $gcc -I/path/to/include/taglib -L/path/to/lib -ltag_c file -o newfile
 (setq emms-info-functions '(emms-info-libtag))
 
-;; load history file on startup 
+;; load history file on startup
 ;; default ~/.emacs.d/emms-history
 (emms-history-load)
 
@@ -281,10 +281,10 @@
 ;(emms-mode-line-disable)
 ;(emms-mode-line-enable)
 ;(load "emms")
-;; show time 
+;; show time
 (emms-playing-time 1)
-;; keybindings 
-(global-set-key (kbd "C-c <SPC>") 'emms-pause) 
+;; keybindings
+(global-set-key (kbd "C-c <SPC>") 'emms-pause)
 (global-set-key (kbd "C-c p") 'emms-previous)
 (global-set-key (kbd "C-c n") 'emms-next)
 (global-set-key (kbd "C-c s") 'emms-stop)
@@ -329,7 +329,7 @@
 (setq skk-egg-like-newline t)
 (setq skk-dcomp-activate t)
 (setq skk-dcomp-multiple-activate t)
-;; azik 
+;; azik
 ;(setq skk-use-azik t)
 ;(setq skk-azik-keyboard-type 'en)
 ;; act
