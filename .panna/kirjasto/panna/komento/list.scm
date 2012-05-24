@@ -31,6 +31,4 @@
 (define (main args)
   (if (<= 2 (length args))
     (list-package-contents (cadr args))
-    (list-packages )
-    )
-  )
+    (list-packages )))

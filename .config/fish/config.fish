@@ -269,8 +269,8 @@ if which gosh >&-
         end
         complete -c a -a "(complete -C(commandline -ct))" -x
 
-        function hub
-              command gosh hub.scm $argv
+        function napa
+              command gosh napa.scm $argv
         end
 
         function tm

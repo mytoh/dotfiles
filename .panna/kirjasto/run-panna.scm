@@ -43,20 +43,21 @@
   (let-args (cdr args)
     ((#f "h|help" (usage 0))
      . rest)
-    (if (null-list? rest)
+    (when (null-list? rest)
       (usage 0))
     (let* ((kaava (if (>= (length rest) 2)
                     (cdr rest)
                     #f))
            (panna (lambda (c)
-                    (if kaava
+                    (cond ( kaava  
                       (run-process `(nice -n 5 gosh ,(build-path (sys-getenv "OLUTPANIMO")
                                                        (string-append "kirjasto/panna/komento/" c ".scm"))
                                           ,@kaava)
-                                   :wait #t)
+                                   :wait #t)) 
+                      (else
                       (run-process `(nice -n 5 gosh ,(build-path (sys-getenv "OLUTPANIMO")
                                                        (string-append "kirjasto/panna/komento/" c ".scm")))
-                                   :wait #t)))))
+                                   :wait #t))))))
       (match (car rest)
         ; command aliases
         ("up"

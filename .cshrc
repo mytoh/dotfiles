@@ -49,9 +49,9 @@ setenv NLSPATH ~/local/lib/tcsh/%N
 setenv RLWRAP_HOME ~/.rlwrap
 
 bindkey -e
-bindkey "" backward-delete-word
-bindkey "" history-search-backward
-bindkey "" history-search-forward
+bindkey '' backward-delete-word
+bindkey '' history-search-backward
+bindkey '' history-search-forward
 
 stty kill 
 stty stop undef # disable C-s key

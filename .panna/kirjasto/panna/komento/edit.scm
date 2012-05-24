@@ -11,9 +11,11 @@
                                             :pred file-is-readable?))
         (editor (sys-getenv "EDITOR")))
 
-    (if editor
-      (run-process `(,editor ,kaava-tiedosto) :wait #t)
-      (run-process `(vim     ,kaava-tiedosto) :wait #t))))
+    (cond 
+      (editor
+        (run-process `(,editor ,kaava-tiedosto) :wait #t))
+      (else
+        (run-process `(vim     ,kaava-tiedosto) :wait #t)))))
 
 
 
