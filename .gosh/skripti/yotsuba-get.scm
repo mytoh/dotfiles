@@ -63,7 +63,10 @@
   )
 
 (define (get-html bd td)
-  (let-values (((status headers body ) (http-get  "boards.4chan.org"  (string-concatenate `("/" ,(x->string bd) "/res/"  ,(x->string td))))))
+  (let-values (((status headers body )
+                (http-get  "boards.4chan.org"
+                           (string-concatenate 
+                             `("/" ,(x->string bd) "/res/"  ,(x->string td))))))
     (cond
       ((string=? status "404")
        #f)

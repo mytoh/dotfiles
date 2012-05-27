@@ -12,13 +12,11 @@
 source $HOME/.vimrc.bundle
 "}}}
 
-" singleton.vim {{{
-if has('clientserver')
-  if exists('g:singleton#disable')
-    call singleton#enable()
-  endif
-endif
-"}}}
+" vital {{{
+let s:V = vital#of('vital')
+let s:P = s:V.import('Prelude')
+" }}}
+
 
 "  options{{{
 
@@ -211,9 +209,11 @@ function! Statusmode(mode)
   if a:mode == 'enter'
     hi clear User9
     silent exec 'highlight User9 ctermfg=195 ctermbg=154 cterm=none'
+    return 'Insert'
   else
     hi clear User9
-    silent exec 'highlight User9 ctermfg=117 ctermbg=154 cterm=none'
+    silent exec 'highlight User9 ctermfg=18 ctermbg=154 cterm=none'
+    return 'N'
   endif
 endfunction
 " }}}
@@ -230,7 +230,7 @@ hi User6 ctermfg=24   ctermbg=243
 hi User7 ctermfg=17   ctermbg=247
 hi User8 ctermfg=95   ctermbg=251
 " mode
-hi User9 ctermfg=233   ctermbg=255
+hi User9 ctermfg=18   ctermbg=154
 
 " statusline
 " left , buffer list
@@ -257,7 +257,7 @@ endif
 set stl+=%{SyntasticStatuslineFlag()}
 
 set stl+=%5*
-set stl+=\  "
+let stl= &stl . "\ "
 set stl+=%{&dictionary}
 set stl+=%{&fileformat}\ 
 set stl+=<\ 
@@ -566,7 +566,7 @@ aug cch
 aug end
 
 
-if s:vimrc.isos('darwin')
+if s:P.is_mac()
   au bufwritepost * call SetUTF8Xattr(expand("<afile>"))
   function! SetUTF8Xattr(file)
     let isutf8 = &fileencoding == "utf-8" || (&fileencoding == "" && &encoding == "utf-8")
@@ -827,6 +827,10 @@ function! s:unite_my_settings() "{{{
   imap <buffer> \\         <c-u>/
   " <C-l>: manual neocomplcache completion.
   inoremap <buffer> <C-l>  <C-x><C-u><C-p><Down>
+  imap     <buffer> <c-w> <plug>(unite_delete_backward_path)
+  " vimfiler
+  nnoremap <silent><buffer><expr> f unite#smart_map('f', unite#do_action('vimfiler'))
+  inoremap <silent><buffer><expr> f unite#smart_map('f', unite#do_action('vimfiler'))
   "call unite#custom_default_action('file', 'tabopen')
   "call unite#custom_default_action('bookmark', 'tabopen')
 endfunction "}}}
@@ -842,15 +846,13 @@ let g:unite_launch_apps = [
 "}}}
 
 " eskk{{{
-
-
 if has('vim_starting')
   " let g:eskk#dictionary = {
   "       \ 'path'     : "~/.skk-jisyo",
   "       \ 'sorted'   : 0,
   "       \ 'encoding' : 'utf-8',
   "       \}
-  if s:vimrc.isos("darwin")
+  if s:P.is_mac()
     let g:eskk#large_dictionary = {
           \ 'path'     : "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L",
           \ 'sorted'   : 1,
@@ -978,7 +980,7 @@ let g:mpd_port = "6600"
 " }}}
 
 " gist.vim {{{
-if s:vimrc.isos('darwin')
+if s:P.is_mac()
   let g:gist_clip_command = 'pbcopy'
 elseif s:vimrc.isos('freebsd')
   let g:gist_clip_command = 'xclip -selection clipboard'
