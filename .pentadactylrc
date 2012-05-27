@@ -18,7 +18,7 @@ cmap -b <C-f> <Right>
 cmap -b <C-i> <Tab>
 
 " disable ime on command mode
-style -name commanndline-ime chrome://* #dactyl-commandline-command input {ime-mode:; inactive}
+""style -name commanndline-ime chrome://* #dactyl-commandline-command input {ime-mode:; inactive}
 
 set hintkeys=aoeuidhtns
 set guioptions=bCrs

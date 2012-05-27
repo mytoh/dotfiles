@@ -1,3 +1,5 @@
+;; -*- coding: utf-8 -*-
+
 (use panna.kaava)
 
 (define kaava "emacs")
@@ -9,8 +11,8 @@
   (system
     '(gmake clean)
     '(gmake distclean)
-    '(./autogen.sh)
-    `(./configure ,(string-append "--prefix=" tynnyri))
+    '("./autogen.sh")
+    `("./configure" ,(string-append "--prefix=" tynnyri))
     '(gmake)
     '(gmake install)
     ))
