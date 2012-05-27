@@ -1,4 +1,5 @@
 #!/usr/bin/env gosh
+;; -*- coding: utf-8 -*-
 
 (use gauche.process)
 (use gauche.parseopt)

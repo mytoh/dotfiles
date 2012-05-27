@@ -12,12 +12,13 @@
     get-os-type
     add-environment-variable
 
-    use-clang
-    use-panna-library
+    with-clang
+    with-panna-library
+    with-usr-local
     ))
 (select-module panna.kaava)
 
-(define (use-clang)
+(define (with-clang)
   (sys-setenv "CC" "clang" #t)
   (sys-setenv "CPP" "clang-cpp" #t)
   (sys-setenv "CXX" "clang++" #t)
@@ -31,7 +32,7 @@
   (add-environment-variable "CFLAGS" "-w")
   )
 
-(define (use-panna-library)
+(define (with-panna-library)
   (let ((panna (resolve-path (sys-getenv "OLUTPANIMO"))))
     (add-environment-variable
       "CPPFLAGS"
@@ -43,6 +44,10 @@
       (string-append
         "-L"
         (build-path panna "lib")))))
+
+(define (with-usr-local)
+  (add-environment-variable "CPPFLAGS" "-I/usr/local/include")
+  (add-environment-variable "LDFLAGS" "-L/usr/local/lib"))
 
 (define homepage (make-parameter "unknown"))
 

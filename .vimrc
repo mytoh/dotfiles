@@ -168,19 +168,6 @@ autocmd VimLeave * silent !echo -ne "\033]112\007"
 
 " statusline {{{
 set laststatus=2
-" highlight for statusline
-" set colorscheme above these settings
-" User1-9 => %{1-9}*
-hi User1 ctermfg=white ctermbg=244 cterm=none
-hi User2 ctermfg=61    ctermbg=233
-hi User3 ctermfg=243    ctermbg=234
-hi User4 ctermfg=59   ctermbg=235
-hi User5 ctermfg=38   ctermbg=239
-hi User6 ctermfg=24   ctermbg=243
-hi User7 ctermfg=17   ctermbg=247
-hi User8 ctermfg=95   ctermbg=251
-" mode
-hi User9 ctermfg=233   ctermbg=255
 
 function! GetCharCode() " {{{ from powerline
   " Get the output of :ascii
@@ -223,13 +210,27 @@ augroup END
 function! Statusmode(mode)
   if a:mode == 'enter'
     hi clear User9
-    silent exec 'highlight User9 ctermfg=39 ctermbg=222 cterm=none'
+    silent exec 'highlight User9 ctermfg=195 ctermbg=154 cterm=none'
   else
     hi clear User9
-    silent exec 'highlight User9 ctermfg=91 ctermbg=230 cterm=none'
+    silent exec 'highlight User9 ctermfg=117 ctermbg=154 cterm=none'
   endif
 endfunction
 " }}}
+
+" highlight for statusline
+" set colorscheme above these settings
+" User1-9 => %{1-9}*
+hi User1 ctermfg=white ctermbg=244 cterm=none
+hi User2 ctermfg=61    ctermbg=233
+hi User3 ctermfg=243    ctermbg=234
+hi User4 ctermfg=59   ctermbg=235
+hi User5 ctermfg=38   ctermbg=239
+hi User6 ctermfg=24   ctermbg=243
+hi User7 ctermfg=17   ctermbg=247
+hi User8 ctermfg=95   ctermbg=251
+" mode
+hi User9 ctermfg=233   ctermbg=255
 
 " statusline
 " left , buffer list
@@ -321,7 +322,7 @@ set stl+=\
 hi clear cursorline
 hi cursorline     ctermbg=237  gui=underline guibg=black
 hi StatusLine     ctermfg=gray ctermbg=235 cterm=none
-hi ActiveBuffer   ctermfg=68 ctermbg=230 cterm=none
+hi ActiveBuffer   ctermfg=232 ctermbg=244 cterm=none
 hi InactiveBuffer ctermfg=gray ctermbg=235 cterm=none
 hi Comment        ctermfg=244 ctermbg=234 cterm=bold
 hi ColorColumn ctermbg=234
@@ -539,6 +540,7 @@ aug myautocommands
   au bufread,bufnewfile {*.md,*.mkd,*.markdown}   set filetype=markdown
   au bufread,bufnewfile scheme.snip               setl filetype=snippet.scheme
   au bufread,bufnewfile /usr/ports/UPDATING       setl filetype=changelog
+  au bufread,bufnewfile *.kahua                   setl filetype=scheme.kahua
   au bufwritepost       .vimrc                    source ~/.vimrc
   au bufwritepost       .vimrc.bundle              source ~/.vimrc.bundle
   au bufwritepost       .zshrc                    Silent !zcompile ~/.zshrc
@@ -700,6 +702,9 @@ endfunction
 nnoremap <localleader><silent>ff :<c-u>VimFilerTab<cr>
 nnoremap <silent> <c-e> :VimFiler -buffer-name=explorer -split -winwidth=35 -toggle -no-quit<cr>
 
+let g:vimfiler_as_default_explorer  = 1
+let g:vimfiler_safe_mode_by_default = 0
+
 autocmd! myautocommands filetype vimfiler call g:my_vimfiler_settings()
 function! g:my_vimfiler_settings() "{{{
   nmap     <buffer><expr><cr>        vimfiler#smart_cursor_map("\<plug>(vimfiler_expand_tree)", "\<plug>(vimfiler_edit_file)")
@@ -709,20 +714,21 @@ function! g:my_vimfiler_settings() "{{{
         \ 'mkv' : 'mplayer',
         \ 'mpg' : 'mplayer',
         \ 'mp4' : 'mplayer',
-        \ 'jpg' : 'fehbrowse',
-        \ 'JPG' : 'fehbrowse',
-        \ 'png' : 'fehbrowse',
-        \ 'gif' : 'fehbrowse',
-        \ 'cbz' : 'fehbrowse',
-        \ 'cbr' : 'fehbrowse',
+        \ 'jpg' : 'kuva',
+        \ 'JPG' : 'kuva',
+        \ 'jpeg' : 'kuva',
+        \ 'png' : 'kuva',
+        \ 'gif' : 'kuva',
+        \ 'bmp' : 'kuva',
+        \ 'cbz' : 'kuva',
+        \ 'cbr' : 'kuva',
+        \ 'cbx' : 'kuva',
         \}
   if exists('*vimfiler#set_extensions')
     call vimfiler#set_extensions(
           \ 'archive', 'xz,txz,cbz,cbr,lzh,zip,gz,bz2,cab,rar,7z,tgz,tar'
           \)
   endif
-  let g:vimfiler_as_default_explorer  = 1
-  let g:vimfiler_safe_mode_by_default = 0
 endfunction "}}}
 
 let my_vimfiler_split_action = { 'is_selectable' : 1, }

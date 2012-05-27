@@ -1,4 +1,5 @@
 #!/usr/bin/env gosh
+;; -*- coding: utf-8 -*-
 
 (use gauche.process)
 (use gauche.parseopt)
@@ -75,14 +76,14 @@ static char * arrow_left[] = {
 
 (define arrow-left-xpm
   (lambda (c1 c2)
-  (make-xpm c1 c2 arrow-left)))
+  (make-xpm "arrow_left" c1 c2 arrow-left)))
 
 (define make-xpm
-  (lambda (c1 c2 data)
+  (lambda (name c1 c2 data)
     (let ((icon-name
             (build-path (make-temp-dir)
                         (string-append
-                          "arrow_left"
+                          name
                           "_"
                           (string-trim  c1 #\#) "_"
                           (string-trim  c2 #\#)
@@ -114,7 +115,7 @@ static char * arrow_left[] = {
 ;; printers
 (define (date)
   (string-concatenate
-    `(,(fg "#ffffff")
+    `(,(fg "#303633")
        ,(date->string (current-date)))))
 
 (define (memory)
@@ -208,15 +209,17 @@ static char * arrow_left[] = {
   (tree->string
     `(
       " " ,(mpd) " "
+      ,(icon (arrow-left-xpm "#303633" "None"))
+      ,(bg "#303633")
       " " ,(memory) " "
-      ,(icon (arrow-left-xpm "#444444" "None"))
+      ,(icon (arrow-left-xpm "#444444" "#303633"))
       ,(bg "#444444")
       " " ,(fs) " "
-      ,(icon (arrow-left-xpm "#666666" "#444444"))
-      ,(bg "#666666")
+      ,(icon (arrow-left-xpm "#555555" "#444444"))
+      ,(bg "#555555")
       " " ,(volume) " "
-      ,(icon (arrow-left-xpm "#888888" "#666666"))
-      ,(bg "#888888")
+      ,(icon (arrow-left-xpm "#c5d1c0" "#555555"))
+      ,(bg "#c5d1c0")
       " " ,(date) " ")))
 
 (define (main args)

@@ -5,9 +5,8 @@
 (define repository "git://github.com/sabatts/stumpwm")
 
 (define (install tynnyri)
-  (sys-putenv "CPPFLAGS=-I/usr/local/include")
-  (sys-putenv "LDFLAGS=-L/usr/local/lib")
-  (use-clang)
+  (with-usr-local)
+  (with-clang)
   (system
     '(make clean)
     '(./autogen.sh)

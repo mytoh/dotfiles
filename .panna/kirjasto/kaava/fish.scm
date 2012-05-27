@@ -5,7 +5,7 @@
 (cond
   ((eq? (get-os-type) 'freebsd)
    (define (install tynnyri)
-     (use-clang)
+     (with-clang)
      (sys-putenv "CPPFLAGS=-I/usr/local/include")
      (sys-putenv "LDFLAGS=-L/usr/local/lib")
      (system

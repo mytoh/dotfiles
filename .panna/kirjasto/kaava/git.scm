@@ -4,7 +4,7 @@
 (define kaava  "git")
 
 (define (install tynnyri)
-  (use-clang)
+  (with-clang)
   (system
     '(gmake clean)
     `(gmake ,(string-append "prefix=" tynnyri))

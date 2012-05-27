@@ -1,4 +1,5 @@
 #!/usr/bin/env gosh
+;; -*- coding: utf-8 -*-
 
 (add-load-path ".")
 (use gauche.threads)
@@ -54,7 +55,7 @@
                          (target "_blank"))
                       ,(car e)
                       (span (@ (class popup))
-                            (cdr e))))
+                            ,(cdr e))))
                 lst))))
       `(p (@ (class "yotsuba"))
           "(" (a (@ (href ,title-url) (target "_blank")) "4chan") (br)

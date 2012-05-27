@@ -215,16 +215,17 @@ myWaitSP = myXPConfig { autoComplete   = Just 1000000 }
 -- manage hooks -------------------------------------------------------
 myManageHook = -- insertPosition End Newer <+> composeAll
        (composeAll . concat $
-        -- [ [isFullscreen                                        --> (doF W.focusDown <+> doFullFloat) ]
+        -- [ [isFullscreen                                     --> (doF W.focusDown <+> doFullFloat) ]
         [ [isFullscreen                                        --> doFullFloat ]
         , [isDialog                                            --> doFloat]
         , [className  =? "feh"                                 --> viewShift "kolme"]
-        , [(className  =? c <||> title =? c <||> appName =? c) --> doFloat | c <- myFloats ]
+        , [(className =? c <||> title =? c <||> appName =? c)  --> doFloat | c <- myFloats ]
         , [className  =? "MPlayer"                             --> (doFullFloat <+> viewShift "kolme")]
-        , [className =? "V2C"                                  -->  viewShift "kaksi"]
-        , [className =? "Firefox"                              -->  viewShift "kaksi"]
+        , [className  =? "V2C"                                 -->  viewShift "kaksi"]
+        , [className  =? "Firefox"                             -->  viewShift "kaksi"]
         , [(className =? "Firefox" <&&> resource =? "Dialog")  --> (doFloat <+> viewShift "kaksi")]
-        , [title =? "Install user style"                      --> doFloat]
+        , [className  =? "Xfce4-notifyd"                       --> doIgnore]
+        , [title      =? "Install user style"                  --> doFloat]
         -- , [appName =? ""]
         ])
          <+> namedScratchpadManageHook myScratchPads
@@ -306,7 +307,7 @@ compmgr     = "xcompmgr -I1 -O1 -Ff"
 bgmgr       = "feh --bg-scale ~/.wallpapers/purple-nagato.jpg"
 clipmgr     = "parcellite"
 volumemgr   = "gnome-volume-control-applet"
-uimPanel         = "uim-toolbar-gtk-systray"
+uimPanel    = "uim-toolbar-gtk-systray"
 -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 
 myStartupHook :: X ()

@@ -22,6 +22,8 @@
     "git://git.informatik.uni-erlangen.de/re06huxa/herbstluftwm"
     "git://opensource.conformal.com/xxxterm.git"
     "git://tron.homeunix.org/cvscvt"
+    "git://pcmanfm.git.sourceforge.net/gitroot/pcmanfm/libfm"
+    "git://pcmanfm.git.sourceforge.net/gitroot/pcmanfm/pcmanfm"
     ; repo with other name
     ("git://git.sourceforge.jp/gitroot/ninix-aya/master.git"  "ninix-aya")
     ; minun github repo
@@ -98,7 +100,8 @@
     (mason-larobina luakit)
     (jwiegley        eshell)
     (robm           dzen)
-    ; (jhawthorn     meh)
+    (jhawthorn     meh)
+    (kahua         Kahua)
     ; (git            git)
     ; (dss-project   dswm)
     ; "git://gauche.git.sourceforge.net/gitroot/gauche/Gauche"
@@ -126,17 +129,6 @@
           (newline)
           (loop (cdr dirs)))))))
 
-;; clone git repository
-(define (clone-gitdir)
-  (let ((clone (lambda (url dirname) (run-process `(git clone ,url ,dirname) :wait #t))))
-    (for-each
-      (lambda (l)
-        (if (not (file-is-directory? (x->string (car l))))
-          (clone (cadr l) (car l))
-          #t))
-      (repo-url-directory-list))
-    #t))
-
 
 ;; clean git repository with "git gc"
 (define (clean-gitdir)
@@ -157,23 +149,40 @@
           (loop (cdr dirs)))))))
 
 
+;; clone git repository
+(define (clone-gitdir)
+  (let ((clone (lambda (url dirname) (run-process `(git clone ,url ,dirname) :wait #t))))
+    (for-each
+      (lambda (l)
+        (if (not (file-is-directory? (x->string (car l))))
+          (clone (cadr l) (car l))
+          #t))
+      (repo-url-directory-list))
+    #t))
+
 (define (repo-url-directory-list)
   (map
     (lambda (e)
       (cond
-        ; normal repo
-        ((string? e) (list (sys-basename (path-sans-extension e)) e))
+        ((string? e)
+         ; normal repo
+         (list (sys-basename (path-sans-extension e)) e))
         ((list? e)
          (cond
            ((string? (car e))
+            ; normal repo
             (list (cadr e) (car e)))
-           ; github
-            ((null? (cddr e))
-             (list (cadr e) #`"git://github.com/,(car e)/,(cadr e)")
-             ; github with renaming
+           ((= (length e) 2)
+            ; github
+            (list (cadr e) #`"git://github.com/,(car e)/,(cadr e)"))
+           ; github with renaming
+           (else
              (list (caddr e) #`"git://github.com/,(car e)/,(cadr e)"))))
-        ; my github
-        ((symbol? e) (list e #`"git@github.com:mytoh/,|e|"))))
+        ((symbol? e)
+         ; my github
+         (list e #`"git@github.com:mytoh/,|e|"))
+        (else
+          (list e))))
     *repos* ))
 
 (define (usage status)

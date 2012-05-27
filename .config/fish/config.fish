@@ -16,6 +16,8 @@ function push-to-path
     end
 end
 
+push-to-path $HOME/.config/fish/bin
+
 # gentoo prefix {{{
 set -x EPREFIX $HOME/local/gentoo
 push-to-path $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin
@@ -414,6 +416,14 @@ end
 #}}}
 
 # functions {{{
+
+# cmmand not found
+# http://bjeanes.com/2009/10/using-fish-shells-event-system-to-behave-like-method-missing
+function __fish_method_missing --on-event fish_command_not_found
+   method_missing $argv
+end
+
+
 function xsource
   for i in $argv
     if test -r $i

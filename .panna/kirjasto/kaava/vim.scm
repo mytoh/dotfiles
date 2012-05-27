@@ -3,7 +3,7 @@
 (define kaava  "vim")
 
 (define (install tynnyri)
-  (use-clang)
+  (with-clang)
   (system
   '(gmake clean)
   '(gmake distclean)

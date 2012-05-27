@@ -3,10 +3,10 @@
   (extend
     kirjasto.työkalu
     kirjasto.komento
-    kirjasto.keitto
     kirjasto.väri
     kirjasto.merkkijono
     kirjasto.arkisto
+    kirjasto.avata
     ))
 
 (provide "kirjasto")

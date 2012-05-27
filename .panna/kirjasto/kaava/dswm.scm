@@ -8,7 +8,7 @@
 (define homepage "http://dss-project.org")
 
 (define (install tynnyri)
-  (use-clang)
+  (with-clang)
   (system
     '(make clean)
     '(make distclean)

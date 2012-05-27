@@ -1,4 +1,5 @@
 #!/usr/bin/env gosh
+;; -*- coding: utf-8 -*-
 
 (use rfc.http)
 (use rfc.uri)
@@ -32,8 +33,7 @@
       (string-concatenate `("\\/\\/images\\.4chan\\.org\\/"
                             ,(x->string  board)
                             "\\/src\\/[^\"]+")))
-    line)
-  )
+    line))
 ;; "
 
 
@@ -42,17 +42,6 @@
   (when (string? url)
     (swget url)))
 
-; (define (get-img str board)
-;   (call-with-input-string
-;     str
-;     (lambda (in)
-;       (port-for-each
-;         (lambda (line)
-;           (let ((m (parse-img line board)))
-;             (if m
-;               (fetch (string-append "http:" m)))
-;         ))
-;     (cut read-line in #t)))))
 
 (define (get-img body board)
   (map

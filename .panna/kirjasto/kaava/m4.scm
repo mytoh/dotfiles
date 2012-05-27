@@ -7,11 +7,8 @@
 (define repository  "git://git.sv.gnu.org/m4.git"  )	
 
 
-(define (update)
-  (run-process '(git pull) :wait #t))
-
 (define (install tynnyri)
-  (use-clang)
+  (with-clang)
   (system
     '(gmake clean)
     '(./bootstrap)

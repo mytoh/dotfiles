@@ -4,7 +4,7 @@
 (define kaava          (make-parameter "gauche"))
 
 (define (install tynnyri)
-  (use-clang)
+  (with-clang)
   (system
     '(./DIST gen)
     `(./configure ,(string-append "--prefix=" tynnyri)
