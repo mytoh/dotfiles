@@ -1,3 +1,5 @@
+;; -*- coding: utf-8 -*-
+
 (define-module kirjasto.väri
   (use gauche.process)
   (require-extension

@@ -1,3 +1,4 @@
+;; -*- coding: utf-8 -*-
 
 (define-module kirjasto
   (extend
@@ -6,7 +7,7 @@
     kirjasto.väri
     kirjasto.merkkijono
     kirjasto.arkisto
-    kirjasto.avata
+    kirjasto.verkko
     ))
 
 (provide "kirjasto")

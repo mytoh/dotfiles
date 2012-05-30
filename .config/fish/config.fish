@@ -230,10 +230,6 @@ if which gosh >&-
                 command gosh unpack.scm $argv
         end
 
-        function fb
-                command gosh fehbrowse.scm $argv
-        end
-
         function talikko
                 command gosh talikko.scm $argv
         end

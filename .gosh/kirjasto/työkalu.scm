@@ -1,3 +1,4 @@
+;; -*- coding: utf-8 -*-
 
 (define-module kirjasto.työkalu
   (use text.tr)
@@ -7,7 +8,7 @@
   (use rfc.http)
   (use rfc.uri)
   (require-extension
-    (srfi 13))
+    (srfi 11 13))
   (use kirjasto.merkkijono)
   (export
     forever
@@ -15,8 +16,8 @@
     tap
     p
     daemonize
-    swget
-    port->incomplete-string))
+    nothing
+    ))
 
 (select-module kirjasto.työkalu)
 
@@ -61,27 +62,6 @@
                            (port-fd-dup! (standard-error-port) out))))
 
 
-
-
-
-
-(define (swget url)
-  (let ((parse-url
-          (lambda (u) (rxmatch-let (rxmatch #/^http:\/\/([-A-Za-z\d.]+)(:(\d+))?(\/.*)?/ u)
-                        (#f h #f pt ph)
-                        (values h pt (uri-decode-string ph))))))
-    (receive (host port path) (parse-url url)
-      (let ((file (receive (a fname ext) (decompose-path (whitespace->dash path)) #`",|fname|.,|ext|")))
-        (if (not (file-is-readable? file))
-          (http-get host path
-                    :sink (open-output-file file) :flusher (lambda (s h) (print file) #t)))))))
-
-(define (port->incomplete-string port)
-  (let ((strport (open-output-string))
-        (u8buf (make-u8vector 4096)))
-    (let loop ((len (read-block! u8buf port)))
-      (cond ((eof-object? len)
-             (get-output-string strport)
-             (else
-               (write-block u8buf strport 0 len)
-               (loop (read-block! u8buf port))))))))
+(define nothing
+  (lambda ()
+    (values)))

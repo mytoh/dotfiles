@@ -6,7 +6,7 @@
 (use util.match)
 (use file.util)
 (require-extension (srfi 13))
-(use kirjasto)
+(use kirjasto.väri)
 
 (define (directory)
   (let* ((cwd (current-directory))

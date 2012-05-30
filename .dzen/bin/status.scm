@@ -160,7 +160,7 @@ static char * arrow_left[] = {
           "q "
           (fg "#acacac" )
           (fs-remain quatre)
-          "/" (second quatre))
+          "G" )
         "")
       (if (list? mypassport)
         (list
@@ -168,7 +168,7 @@ static char * arrow_left[] = {
           "m "
           (fg "#ffffff" )
           (fs-remain mypassport)
-          "/" (second mypassport))
+          "G" )
         "")
       (if (list? deskstar)
         (list
@@ -176,9 +176,8 @@ static char * arrow_left[] = {
           (fg "#f282a2")
           "d "
           (fg "#ffffff" )
-          (fs-remain deskstar)
-          "/"
-          (second deskstar))
+         (fs-remain deskstar)
+          "G")
         ""))))
 
 (define (volume)

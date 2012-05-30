@@ -47,7 +47,7 @@ xbindkeys &
 Thunar --daemon &
 spiffy &
 #parcellite &
-gosh makiki-server.scm &
+gosh ~/.site/makiki-server.scm &
 synergys --name $(hostname -s)
 
 if [ "$1" = "twm"  -o "$1" = "flwm" ]; then

@@ -8,7 +8,8 @@
 (use file.util)
 (use rfc.http)
 (use rfc.uri)
-(require-extension (srfi 1))
+(require-extension
+  (srfi 1 11))
 
 
 
@@ -36,16 +37,14 @@
       (parse-element parse-image-id body)
       (parse-element parse-image-url body))))
 
-(define (swget url filename)
-  (let ((parse-url
-          (lambda (u) (rxmatch-let (rxmatch #/^http:\/\/([-A-Za-z\d.]+)(:(\d+))?(\/.*)?/ u)
-                                   (#f h #f pt ph)
-                                   (values h pt (uri-decode-string ph))))))
-    (receive (host port path) (parse-url url)
-             (let ((file (receive (a f ext) (decompose-path path) #`",|filename|.,|ext|")))
-               (when (not (file-is-readable? file))
-                 (http-get host path
-                           :sink (open-output-file file) :flusher (lambda (s h) (print file) #t)))))))
+
+(define (swget uri filename)
+  (let-values (((scheme user-info hostname port-number path query fragment)
+                (uri-parse uri)))
+    (let ((file (receive (a f ext) (decompose-path path) #`",|filename|.,|ext|")))
+      (when (not (file-is-readable? file))
+        (http-get hostname path
+                  :sink (open-output-file file) :flusher (lambda (s h) (print file) #t))))))
 
 (define (get-image id-num-list)
   (let loop ((lst  id-num-list))

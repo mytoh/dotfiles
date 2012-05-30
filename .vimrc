@@ -12,9 +12,40 @@
 source $HOME/.vimrc.bundle
 "}}}
 
+
+" funcs {{{
+let s:vimrc = {}
+
+function! s:vimrc.isos(name) dict
+  let os = tolower(substitute(system('uname'),"\n","",""))
+  return os == a:name ? 1 : 0
+  unlet os
+endfunction
+
+if s:vimrc.isos('haiku')
+  let g:loaded_vimproc = 1
+  set rtp^=~/.vim/
+endif
+
+" remove trailing spaces {{{
+function! s:vimrc.trimspace() dict
+  silent! %s/\s\+$//
+  ''
+endfunction
+
+function! s:vimrc.trimspacelisp() dict
+  " trim space for lisp file
+  silent! %s/(\s\+/(/
+  silent! %s/)\s\+)/))/
+  ''
+endfunction
+
 " vital {{{
 let s:V = vital#of('vital')
 let s:P = s:V.import('Prelude')
+let s:M = s:V.import('Mapping')
+" }}}
+
 " }}}
 
 
@@ -330,34 +361,6 @@ hi MatchParen     cterm=bold,reverse
 
 " }}}
 
-" funcs {{{
-let s:vimrc = {}
-
-function! s:vimrc.isos(name) dict
-  let os = tolower(substitute(system('uname'),"\n","",""))
-  return os == a:name ? 1 : 0
-  unlet os
-endfunction
-
-if s:vimrc.isos('haiku')
-  let g:loaded_vimproc = 1
-  set rtp^=~/.vim/
-endif
-
-" remove trailing spaces {{{
-function! s:vimrc.trimspace() dict
-  silent! %s/\s\+$//
-  ''
-endfunction
-
-function! s:vimrc.trimspacelisp() dict
-  " trim space for lisp file
-  silent! %s/(\s\+/(/
-  silent! %s/)\s\+)/))/
-  ''
-endfunction
-" }}}
-
 command! -nargs=1 Silent
       \ | execute ':silen !'.<q-args>
       \ | execute ':redraw!'
@@ -531,7 +534,8 @@ aug myautocommands
   au bufread,bufnewfile .vimshrc,.vimrc.*         setl filetype=vim
   au bufread,bufnewfile ~/.xcolours/*             setl filetype=xdefaults
   au bufread,bufnewfile ~/.xcolours/*             ColorHighlight
-  au bufread,bufnewfile {*.scss,.gaucherc}        setl filetype=scheme
+  au bufread,bufnewfile .gaucherc                 setl filetype=scheme
+  au bufread,bufnewfile *.scss                    setl filetype=scheme
   au bufread,bufnewfile *.stub                    setl filetype=scheme.c
   au bufread,bufnewfile .mkshrc                   setl filetype=sh
   au bufread,bufnewfile {*stumpwmrc*,*sawfish/rc} setl filetype=lisp
@@ -540,13 +544,14 @@ aug myautocommands
   au bufread,bufnewfile {*.md,*.mkd,*.markdown}   set filetype=markdown
   au bufread,bufnewfile scheme.snip               setl filetype=snippet.scheme
   au bufread,bufnewfile /usr/ports/UPDATING       setl filetype=changelog
-  au bufread,bufnewfile *.kahua                   setl filetype=scheme.kahua
+  au bufread,bufnewfile *.kahua                   setl filetype=kahua.scheme
+  au bufread,bufnewfile *.mik                   setl filetype=xml
   au bufwritepost       .vimrc                    source ~/.vimrc
   au bufwritepost       .vimrc.bundle              source ~/.vimrc.bundle
   au bufwritepost       .zshrc                    Silent !zcompile ~/.zshrc
   au bufwritepost       .conkyrc                  Silent !killall -SIGUSR1  conky
   au bufwritepost       xmonad.hs                 Silent !xmonad --recompile
-  au bufwritepost       *.scm                     call s:vimrc.scheme_bufwritepost()
+  au bufwritepost       {*.scm,*.scss}            call s:vimrc.scheme_bufwritepost()
   au filetype           xdefaults                 call s:vimrc.xrdb()
   au filetype           scheme                    call s:vimrc.scheme()
   au filetype           help                      nnoremap q :<c-u>q<cr>
@@ -1060,7 +1065,11 @@ let g:paredit_leader = '\'
 " }}}
 
 " haskell-mode {{{
-:let g:haddock_browser="/usr/bin/firefox"
+let g:haddock_browser="/usr/local/bin/firefox"
+" }}}
+
+" vinarise {{{
+let g:vinarise_enable_auto_detect = 1
 " }}}
 
 " }}}
