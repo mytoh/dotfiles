@@ -1,8 +1,9 @@
-fuck the code
-====
+Fuck the code
+=============
 
 Desktop with XMonad
----
-.. image:: https://github.com/mytoh/dotfiles/raw/master/screen.png 
+-------------------
+
+.. image:: screen.png
    :alt: Screenshot
 
