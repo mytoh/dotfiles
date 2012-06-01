@@ -92,6 +92,8 @@
            ((file-exists? "./_darcs")
             (darcs))
            (else ""))
+        " "
+         ,(colour-string 177 "✖╹◡╹✖")
         "\n"
         ,(colour-string 235 ">")
         ,(colour-string 238 ">")
