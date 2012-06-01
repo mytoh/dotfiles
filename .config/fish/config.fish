@@ -214,8 +214,8 @@ if which gosh >&-
                 command gosh futaba-get.scm $argv
         end
 
-        function danbooru
-                command gosh danbooru $argv
+        function pahvi
+                command gosh pahvi.scm $argv
         end
 
         function spc2ubar

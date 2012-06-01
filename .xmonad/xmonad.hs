@@ -223,7 +223,7 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         , [className  =? "MPlayer"                             --> (doFullFloat <+> viewShift "kolme")]
         , [className  =? "V2C"                                 -->  viewShift "kaksi"]
         , [className  =? "Firefox"                             -->  viewShift "kaksi"]
-        , [(className =? "Firefox" <&&> resource =? "Dialog")  --> (doFloat <+> viewShift "kaksi")]
+        , [(className =? "Firefox" <&&> appName =? "Dialog")  --> (doFloat <+> viewShift "kaksi")]
         , [className  =? "Xfce4-notifyd"                       --> doIgnore]
         , [title      =? "Install user style"                  --> doFloat]
         -- , [appName =? ""]

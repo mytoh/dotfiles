@@ -215,9 +215,6 @@
   (for-each (lambda (s)
               (display s completion-file)
               (newline  completion-file))
-    (sort (map symbol->string (hash-table-keys ht))))
-  )
-;; --
-
+    (sort (map symbol->string (hash-table-keys ht)))))
   0)
 
