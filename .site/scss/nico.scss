@@ -2,8 +2,8 @@
    ;; remove all default spaces
    (|*|
      (margin 0)
-     (padding 0)
-     )
+     (padding 0))
+
    (a:link    (color "#222")
               (text-decoration underline))
    (a:visited (color "#444")
@@ -17,14 +17,12 @@
      (background-color "#222222")
      (width            "1000px")
      (margin-left      "4%")
-     (margin-right     auto)
-     )
-   (|#header|
+     (margin-right     auto))
+   (header
      (background-color "#335555")
      (width            "1000px")
-     (height           "30px" )
-     )
-   (|#navigation|
+     (height           "30px" ))
+   (nav
      ; (background-color "#cceeee")
      (width            "100px")
      (float            left)
@@ -38,13 +36,11 @@
       (width "100px")
       (height "20px")
       (background-color "#bbdddd")
-      (display block)
-      ))))
-   (|#content|
+      (display block)))))
+   (article
      (background-color "#eeeeee")
      (width            "900px")
-     (float            right)
-     )
+     (float            right))
 
 
 

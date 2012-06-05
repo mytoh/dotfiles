@@ -12,6 +12,7 @@
     `("./configure" ,(string-append "--prefix=" tynnyri)
                   "--enable-256-color"
                   "--enable-xft"
+                  "--enable-unicode3"
                   "--enable-combining"
                   "--enable-font-styles"
                   "--enable-pixbuf"
@@ -21,7 +22,7 @@
                   "--enable-perl"
                   "--enable-xim"
                   "--enable-mousewheel"
-                  "--enable-smart-resize"
+                  "--enable-frills"
                   "--enable-utmp")
     '(make)
     '(make install)

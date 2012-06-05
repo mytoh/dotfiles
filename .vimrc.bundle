@@ -136,6 +136,7 @@ else
   NeoBundle 'nefo-mi/nyan-modoki.vim'
   NeoBundle 'pasela/unite-webcolorname'
   NeoBundle 'ujihisa/neco-ghc'
+  " syntax
   "lisp
   NeoBundle 'emezeske/paredit.vim'
   NeoBundle 'aharisu/vim_goshrepl'
@@ -151,6 +152,8 @@ else
   " css
   NeoBundle 'hail2u/vim-css3-syntax'
   NeoBundle 'skammer/vim-css-color'
+  " svg
+  NeoBundle 'svg.vim'
   " colorscheme {{{
   NeoBundle 'altercation/vim-colors-solarized'
   NeoBundle 'jelera/vim-gummybears-colorscheme'

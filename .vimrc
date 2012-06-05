@@ -535,16 +535,17 @@ aug myautocommands
   au bufread,bufnewfile ~/.xcolours/*             setl filetype=xdefaults
   au bufread,bufnewfile ~/.xcolours/*             ColorHighlight
   au bufread,bufnewfile .gaucherc                 setl filetype=scheme
-  au bufread,bufnewfile *.scss                    setl filetype=scheme
+  au bufread,bufnewfile *.scss                    setl filetype=scheme.scss
   au bufread,bufnewfile *.stub                    setl filetype=scheme.c
+  au bufread,bufnewfile *.aa                      setl filetype=scheme
+  au bufread,bufnewfile scheme.snip               setl filetype=snippet.scheme
+  au bufread,bufnewfile *.kahua                   setl filetype=kahua.scheme
   au bufread,bufnewfile .mkshrc                   setl filetype=sh
   au bufread,bufnewfile {*stumpwmrc*,*sawfish/rc} setl filetype=lisp
   au bufread,bufnewfile *.fish                    setl filetype=fish
   au bufread,bufnewfile loader.conf.local         setl filetype=conf
   au bufread,bufnewfile {*.md,*.mkd,*.markdown}   set filetype=markdown
-  au bufread,bufnewfile scheme.snip               setl filetype=snippet.scheme
   au bufread,bufnewfile /usr/ports/UPDATING       setl filetype=changelog
-  au bufread,bufnewfile *.kahua                   setl filetype=kahua.scheme
   au bufread,bufnewfile *.mik                   setl filetype=xml
   au bufwritepost       .vimrc                    source ~/.vimrc
   au bufwritepost       .vimrc.bundle              source ~/.vimrc.bundle
@@ -606,6 +607,7 @@ augroup JumpCursorOnEdit
         \ unlet b:doopenfold |
         \ endif
 augroup END
+
 
 " }}}
 
@@ -786,7 +788,14 @@ let g:bufstat_inactive_hl_group = "InactiveBuffer"
 
 " quickrun{{{
 let g:quickrun_config = {}
-let g:quickrun_config['*'] = { 'runmode': "async:remote:vimproc", 'split': 'below', 'scheme': { 'command': 'gosh'}}
+let g:quickrun_config['scheme.scss'] = {
+      \   'command':   '/usr/local/bin/scss2css',
+      \   'exec':      ['%c %s'],
+      \   'shebang':   0,
+      \   'outputter': 'file_scss',
+      \   'runner':    'vimproc',
+      \}
+
 "}}}
 
 " unite{{{
@@ -1038,8 +1047,8 @@ let g:slimv_keybindings = 3
 " }}}
 
 " poslist {{{
-map <C-o> <Plug>(poslist_prev)
-map <C-i> <Plug>(poslist_next)
+nmap <C-o> <Plug>(poslist_prev)
+nmap <C-i> <Plug>(poslist_next)
 " }}}
 
 " delimitMate {{{

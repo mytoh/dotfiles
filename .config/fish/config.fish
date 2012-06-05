@@ -1300,8 +1300,7 @@ switch (uname)
   # PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages/Latest/"
   function pcheck
     sudo portmaster -PBidav $argv
-    sudo portaudit -Fdav
-    sudo portmaster -y --clean-packages --clean-distfiles
+    and sudo portaudit -Fdav
   end
   function pfetch
     sudo make fetch-recursive

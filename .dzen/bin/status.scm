@@ -183,7 +183,7 @@ static char * arrow_left[] = {
 (define (volume)
   (let ((vol (string-split (process-output->string "mixer -S vol") ":"))
         (pcm (string-split (process-output->string "mixer -S pcm") ":")))
-    (string-append
+    (list
       (car  vol)
       " "
       (cadr vol)

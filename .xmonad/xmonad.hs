@@ -3,6 +3,7 @@
 import XMonad hiding ( (|||) )
 import System.Exit
 import System.IO
+import System.Directory
 import Data.Monoid
 import Data.Ratio ((%))
 import Data.List
@@ -26,6 +27,7 @@ import XMonad.Actions.RotSlaves
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.SinkAll
 import XMonad.Actions.FloatKeys
+import XMonad.Actions.WindowBringer
 
 -- <hooks>
 import XMonad.Hooks.DynamicLog
@@ -60,6 +62,7 @@ import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.LimitWindows
 import XMonad.Layout.Named
+import XMonad.Layout.Renamed
 import XMonad.Layout.WindowNavigation
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.LayoutHints
@@ -89,8 +92,11 @@ import XMonad.Util.NamedScratchpad
 
 -- }}}
 
+myTerminal       :: String
 myTerminal       = "urxvtcd "
+myBorderWidth    :: Int
 myBorderWidth    = 2
+myModMask        :: KeyMask
 myModMask        = mod1Mask
 myIconsDirectory = "/home/mytoh/.dzen/icons/"
 myFocusFollowsMouse :: Bool
@@ -140,13 +146,13 @@ myLayoutHook =  avoidStruts                $
 --                 collectiveLayouts = tabbed ||| twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex
                    collectiveLayouts = twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex
 
-                   full    = named "*" (smartBorders (noBorders (dwmStyle shrinkText myTheme Full)))
-                   tile    = named "+" (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
-                   tabbed  = named "=" (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedBottomAlways shrinkText myTheme)))
-                   twopane = named "-" (smartBorders (withBorder 1 (TwoPane 0.02 0.4)))
-                   mosaic  = named "%" (smartBorders (withBorder 1 (MosaicAlt M.empty)))
-                   sprl    = named "@" (smartBorders (withBorder 1 (limitWindows 5 (spiral gratio))))
-                   onebig  = named "#" (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
+                   full    = renamed [Replace "*"] (smartBorders (noBorders (dwmStyle shrinkText myTheme Full)))
+                   tile    = renamed [Replace "+"] (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
+                   tabbed  = renamed [Replace "="] (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedBottomAlways shrinkText myTheme)))
+                   twopane = renamed [Replace "-"] (smartBorders (withBorder 1 (TwoPane 0.02 0.4)))
+                   mosaic  = renamed [Replace "%"] (smartBorders (withBorder 1 (MosaicAlt M.empty)))
+                   sprl    = renamed [Replace "@"] (smartBorders (withBorder 1 (limitWindows 5 (spiral gratio))))
+                   onebig  = renamed [Replace "#"] (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
 
                    gratio      = toRational goldenratio
                    goldenratio = 2 / (1 + sqrt(5)::Double);
@@ -169,6 +175,8 @@ myKeys = [ -- M4 for Super key
        , ("M-p t", prompt (myTerminal ++ " -e") myXPConfig) -- run in term
        , ("M-p g", windowPromptGoto myWaitSP ) -- window go prompt
        , ("M-p b", windowPromptBring myWaitSP ) -- window bring prompt
+       -- , ("M-p b", bringMenu ) -- window bring prompt wth dmenu
+       -- , ("M-p g", gotoMenu ) -- window goto prompt wth dmenu
        , ("M-p d", AL.launchApp myXPConfig { defaultText = "~" } "dolphin" ) -- filer prompt
        , ("M-p f", scratchFiler)
 
@@ -187,6 +195,7 @@ myKeys = [ -- M4 for Super key
              scratchFiler = namedScratchpadAction myScratchPads "dolphin"
 
              myRestart = "for pid in `pgrep trayer`; do kill -9 $pid; done ;" ++
+                         "for pid in `pgrep stalonetray`; do kill -9 $pid; done ;" ++
                          "for pid in `pgrep dzen2`; do kill -9 $pid; done ;" ++
                          "for pid in `pgrep gmail-notifier`; do kill -9 $pid; done ;" ++
                          "for pid in `pgrep compton`; do kill -9 $pid; done ;" ++
@@ -225,6 +234,8 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         , [className  =? "Firefox"                             -->  viewShift "kaksi"]
         , [(className =? "Firefox" <&&> appName =? "Dialog")  --> (doFloat <+> viewShift "kaksi")]
         , [className  =? "Xfce4-notifyd"                       --> doIgnore]
+        , [className  =? "trayer"                       --> doIgnore]
+        , [className  =? "stalonetray"                       --> doIgnore]
         , [title      =? "Install user style"                  --> doFloat]
         -- , [appName =? ""]
         ])
@@ -301,7 +312,8 @@ myEventHook = ewmhDesktopsEventHook
 myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 420 -h 15 -bg \"#212122\" -fn " ++ myDzenFont
 myRightBar  = "~/.dzen/bin/status.scm | exec dzen2 -p -ta r -x 420 -y 0 -w 710 -h 15 -bg \"#212122\" -fn " ++ myDzenFont 
 -- }}}
-trayer      = "exec trayer --expand true --alpha 40  --tint 0x232324 --transparent true --padding 0 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 15 --widthtype pixel --width 150 "
+trayer      = "exec trayer --expand true --alpha 10  --tint 0x232324 --transparent true --padding 0 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 15 --widthtype pixel --width 150 "
+-- stalonetray = "exec stalonetray -i 1 --dockapp-mode simple --icon-gravity W --grow-gravity E --geometry 8x1-0+0 --max-geometry 40x13 -bg '#333333' --sticky --skip-taskbar"
 mail        = "gmail-notifier"
 compmgr     = "xcompmgr -I1 -O1 -Ff"
 bgmgr       = "feh --bg-scale ~/.wallpapers/purple-nagato.jpg"

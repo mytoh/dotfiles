@@ -41,10 +41,10 @@
    (a (text-decoration none))
 
 
-   (|div#bookmark|
+   (|div.bookmark|
       (position relative))
 
-   ((// |#bookmark|)
+   ((// |.bookmark|)
    ((// a) (padding-right "3px"))
    ((// span) (padding-left "4px"))
     ((// .delicious)  ((// a) (color "#47959e")))
@@ -67,7 +67,6 @@
    ((// a:hover)
     ((// .popup)
      (border-radius 5px)
-     (-moz-border-radius 5px)
      (display block)
      (color "#ffffff")
      (background-color "#395573")
@@ -80,7 +79,6 @@
    (|#searchbox|
      ((// input)
       (border-radius 5px)
-      (-moz-border-radius 5px)
       (color "#404040")
       (background-color "#151515")
       (border-width 1px)
@@ -90,6 +88,4 @@
       (padding 1px)
       (widths 160)))
    (table (border-collapse collapse))
-
-   )
-   )
+))

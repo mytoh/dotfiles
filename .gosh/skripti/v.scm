@@ -8,7 +8,8 @@
 (use gauche.sequence)
 (use util.match)
 (use file.util)
-(require-extension (srfi 13))
+(use util.list)
+(require-extension (srfi 1 13))
 
 (define (viminfo->list)
   (with-input-from-file

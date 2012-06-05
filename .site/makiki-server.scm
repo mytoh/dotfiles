@@ -10,14 +10,20 @@
 (use sxml.tools)
 (use sxml.sxpath)
 (use sxml.ssax)
+(use text.tree)
 (use file.util)
 (use rfc.uri)
+(require-extension
+  (srfi 13))
 (use kirjasto) ;daemonize
+
+(define document-root
+  (build-path (home-directory) ".site"))
 
 (define (main args)
   (daemonize
     (start-http-server :access-log #t :error-log #t
-                       :document-root #`",(home-directory)/.site"
+                       :document-root document-root
                        :port 8888)))
 
 
@@ -40,8 +46,7 @@
                  ,title) (br)
           (span "(")
           ,@(tag-link url seg lst)
-          "))"))
-    ))
+          "))"))))
 
 (define delicious
   (tag-pages "delicious" "/tag/recent/")
@@ -72,129 +77,159 @@
           "))"))))
 
 
+(define make-link
+  (lambda (lst)
+    (map
+      (lambda (e)
+        `(a (@ (href ,(car e)) (target "_blank"))
+            ,(cdr e)))
+      lst)))
+
+
+(define make-paren-link
+  (lambda (cname main-link main-title link-list)
+    `(p (@ (class ,cname))
+        "(" (a (@ (href ,main-link) (target "_blank")) ,main-title) (br)
+        (span "(" )
+        ,@(make-link link-list)
+        "))")
+    ))
+
 
 (define index-page
   (lambda (req)
-    `(sxml
-       (html
-         (head (title "start page")
-               (link (@ (rel "stylesheet") (href "css/style.css") (type "text/css")))
-               (link (@ (rel "stylesheet") (href "http://fonts.googleapis.com/css?family=Convergence") (type "text.css")))
-               )
-         (body
-           ,(let* ((browser (request-header-ref req "user-agent" )))
-              (if (string=? browser "Opera") ; browser supporting webp
-                '(img (@ (class "bg") (src "image/sicp-mod.webp") (alt "")))
-                '(img (@ (class "bg") (src "image/sicp-mod.png") (alt "")))))
-           (div (@ (id "bookmark"))
-                ,(delicious "http://d.me"
-                            '("zsh"
-                              "vim"
-                              "scheme"
-                              "musiikki"
-                              "xmonad"
-                              "tmux"
-                              "ruby"
-                              "pytohn"))
-                ,(hatena "http://b.hatena.ne.jp"
-                         '("vim"
-                           "zsh"
+    (html5
+      `(
+        (title "start page")
+        (link (@ (rel "stylesheet") (href "css/style.css")))
+        (link (@ (rel "stylesheet") (href "//fonts.googleapis.com/css?family=Convergence")))
+
+        ,(let* ((browser (request-header-ref req "user-agent" )))
+           (if (string=? browser "Opera") ; browser supporting webp
+             '(img (@ (class "bg") (src "image/sicp-mod.webp") (alt "")))
+             '(img (@ (class "bg") (src "image/sicp-mod.png") (alt "")))))
+        (div (@ (class "bookmark"))
+             ,(delicious "//d.me"
+                         '("zsh"
+                           "vim"
                            "scheme"
                            "lisp"
-                           "bash"
-                           "freebsd"
+                           "musiikki"
+                           "xmonad"
                            "tmux"
-                           "perl"
                            "ruby"
-                           "python"))
-                (p (@ (class "arch"))
-                   "(" (a (@ (href "http://archlinux.org") (target "_blank")) "archlinux") (br)
-                   (span "(" )
-                   (a (@ (href "http://bbs.archlinux.org") (target "_blank")) "forum")
-                   (a (@ (href "http://bbs.archlinux.org/viewforum.php?id=47")    (target "_blank")) "artwork_screenshots")
-                   "))")
-                (p (@ (class "crunchbang"))
-                   "(" (a (@ (href "http://crunchbanglinux.org") (target "_blank")) "#!") (br)
-                   (span "(" )
-                   (a (@ (href "http://crunchbanglinux.org/forums/forum/6/artwork-screenshots")    (target "_blank")) "artwork_screenshots")
-                   "))")
-                (p (@ (class "freebsd"))
-                   "(" (a (@ (href "http://forums.freebsd.org") (target "_blank")) "freebsd") (br)
-                   (span "(" )
-                   (a (@ (href "http://forums.freebsd.org/forumdisplay.php?f=38")    (target "_blank")) "X.Org")
-                   "))")
-                ,(reddit "http://reddit.com" '("linuxactionshow"
-                                               "scheme"
-                                               "lisp_ja"
-                                               "lisp"
-                                               "bsd"
-                                               "freebsd"
-                                               "screenshots"
-                                               "commandline"
-                                               "xmonad"
-                                               "unixporn"
-                                               "desktops"
-                                               "vim"))
-                ,(yotsuba "http://www.4chan.org"
-                          "http://boards.4chan.org"
-                          '(
-                            ("g" "technology")
-                            ("b" "random")
-                            ("e" "ecchi")
-                            ("h" "hentai")
-                            ("w" "anime wallpaper")
-                            ("t" "torrent")
-                            ("r" "request")
-                            ("s" "sexy beautiful women")
-                            ("hr" "high resolution")
-                            ("u" "yuri")))
-                (p (@ (class "gauche"))
-                   "(" (a (@ (href "http://practical-scheme.net/gauche/man/gauche-refj.html")
-                             (target "_blank"))
-                          "gauche-manual") (br)
-                   (span "(" )
-                   (a (@ (href "http://www.callcc.net/gauche/refj/")
-                         (target "_blank"))
-                      "refj"
-                      (span (@ (class popup)) "ref search"))
-                   (a (@ (href "http://practical-scheme.net/gauche/man/?l=jp&p=file.util")
-                         (target "_blank"))
-                      "file.util"
-                      (span (@ (class popup)) "file-util"))
-                   "))")
-                )
+                           "javascript"
+                           "css"
+                           "pytohn"
+                           ))
+             ,(hatena "//b.hatena.ne.jp"
+                      '("vim"
+                        "zsh"
+                        "scheme"
+                        "lisp"
+                        "bash"
+                        "freebsd"
+                        "tmux"
+                        "perl"
+                        "ruby"
+                        "javascript"
+                        "css"
+                        "xmonad"
+                        "python"
+                        ))
+             ,(make-paren-link "arch"
+                               "//archlinux.org"
+                               "archlinux"
+                               '(("//bbs.archlinux.org" "forum")
+                                 ("//bbs.archlinux.org/viewforum.php?id=47" "artwork_screenshots")))
+             ,(make-paren-link "crunchbang"
+                               "//crunchbanglinux.org"
+                               "#!"
+                               '(("//crunchbanglinux.org/forums/forum/6/artwork-screenshots"
+                                  "artwork_screenshots")))
+             ,(make-paren-link "freebsd"
+                               "//forums.freebsd.org"
+                               "freebsd"
+                               '(("//forums.freebsd.org/forumdisplay.php?f=38" "Xorg")))
+             ,(reddit "//reddit.com" '("linuxactionshow"
+                                       "scheme"
+                                       "lisp_ja"
+                                       "lisp"
+                                       "bsd"
+                                       "freebsd"
+                                       "screenshots"
+                                       "commandline"
+                                       "xmonad"
+                                       "unixporn"
+                                       "desktops"
+                                       "vim"))
 
-           (p (@ (id "nico"))
-              (a (@ (href "/niconico") (target "_blank"))
-                    "nico"))
+             ,(yotsuba "//www.4chan.org"
+                       "//boards.4chan.org"
+                       '(
+                         ("g" "technology")
+                         ("b" "random")
+                         ("e" "ecchi")
+                         ("h" "hentai")
+                         ("w" "anime wallpaper")
+                         ("t" "torrent")
+                         ("r" "request")
+                         ("s" "sexy beautiful women")
+                         ("hr" "high resolution")
+                         ("u" "yuri")))
 
-           (footer
-             (p (@ (id "ddg"))
-                (a (@ (href "http:/duckduckgo.com") (target "_blank")) "ddg")))
-           (form (@ (id "searchbox") (action "http://duckduckgo.com/?kl=jp-jp&kp=-1") (target "_blank"))
-                 (input (@ (type "text") (name "q") (value "")))
-                 (input (@ (type "submit") (value "Search")))
-                 (input (@ (type "hidden") (name "t") (value ""))))
-           )))))
+             (p (@ (class "gauche"))
+                "(" (a (@ (href "//practical-scheme.net/gauche/man/gauche-refj.html")
+                          (target "_blank"))
+                       "gauche-manual") (br)
+                (span "(" )
+                (a (@ (href "//www.callcc.net/gauche/refj/")
+                      (target "_blank"))
+                   "refj"
+                   (span (@ (class popup)) "ref search"))
+                (a (@ (href "//practical-scheme.net/gauche/man/?l=jp&p=file.util")
+                      (target "_blank"))
+                   "file.util"
+                   (span (@ (class popup)) "file-util"))
+                "))")
+             )
+
+        (p (@ (id "nico"))
+           (a (@ (href "/niconico") (target "_blank"))
+              "nico"))
+
+        (p (@ (id "test"))
+           (a (@ (href "/test") (target "_blank"))
+              "test")
+           (object (@ (type "image/svg+xml")
+                      (data "image/temp.svg")))
+           )
+
+        (footer
+          (p (@ (id "ddg"))
+             (a (@ (href "//duckduckgo.com") (target "_blank")) "ddg")))
+        (form (@ (id "searchbox") (action "//duckduckgo.com/?kl=jp-jp&kp=-1") (target "_blank"))
+              (input (@ (type "text") (name "q") (value "")))
+              (input (@ (type "submit") (value "Search")))
+              (input (@ (type "hidden") (name "t") (value ""))))
+        ))))
 
 ;; niconico
 (define nico-page
   (lambda (req)
-    `(sxml
-       (html
-         (head (title "nico")
-               (link (@ (rel "stylesheet") (href "css/nico.css") (type "text/css")))
-               )
-         (body
-           (div (@ (id "wrapper"))
-                (div (@ (id "header"))
-                     (h1 "niconico playlist") (br))
-                (div (@ (id "navigation"))
-                     ,(nico-page-navigation))
-                (div (@ (id "content"))
-                     ,(nico-page-content-videos))
-                ))
-         ))))
+    (html5
+      `(
+        (title "nico")
+        (link (@ (rel "stylesheet") (href "css/nico.css") (type "text/css")))
+
+        (div (@ (id "wrapper"))
+             (header
+               (h1 "niconico playlist") (br))
+             (nav ,(nico-page-navigation))
+
+             (article
+               ,(nico-page-content-videos))
+             )))))
 
 
 (define nico-get-video-info
@@ -208,7 +243,7 @@
 (define nico-page-navigation
   (lambda ()
     `((ul
-        (li (a (@ (href "#")) "video"))
+        (li (a (@ (href "#content")) "video"))
         (li (a (@ (href "#")) "playlist"))
         ))))
 
@@ -223,42 +258,51 @@
                (watch-url     (cadr ((car-sxpath "//watch_url") video-info)))
                )
           `((div (@ (class "video"))
-              (a (@ (href ,watch-url)
+                 (a (@ (href ,watch-url)
                        (target "_blank"))
                     (img (@  (class "video-img")
                              (alt "")
                              (src ,thumbnail-url)
                              (height "50px")
                              (width  "50px"))))
-             (a (@ (class "video-title")
+                 (a (@ (class "video-title")
                        (href ,watch-url)
                        (target "_blank"))
                     ,title)))
           ))
       (file->list
         read
-        (build-path (home-directory) "nico/movies"))
-      )))
+        (build-path document-root "nico/videos")))))
 
+
+
+;; test page
+
+
+(define test-page
+  (lambda (req)
+    (html5
+      '(
+        (title "test")
+        (p "test page")
+        ))))
 
 ;;
-;; http-handles
+;; http-handlers
 ;;
 
-(define-http-handler
+
+(define-page-handler
   #/^\/$/
-  (^(req app)
-    (respond/ok
-      req
-      (index-page req)
-      )))
+  index-page )
 
-(define-http-handler
+(define-page-handler
   #/^\/niconico/
-  (^(req app)
-    (respond/ok
-      req
-      (nico-page req))))
+  nico-page )
+
+(define-page-handler
+  #/^\/test/
+  test-page)
 
 
 (define-http-handler #/.*\.css$/
