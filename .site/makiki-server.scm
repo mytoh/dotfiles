@@ -228,8 +228,7 @@
              (nav ,(nico-page-navigation))
 
              (article
-               ,(nico-page-content-videos))
-             )))))
+               ,(nico-page-content-videos)))))))
 
 
 (define nico-get-video-info
@@ -244,8 +243,7 @@
   (lambda ()
     `((ul
         (li (a (@ (href "#content")) "video"))
-        (li (a (@ (href "#")) "playlist"))
-        ))))
+        (li (a (@ (href "#")) "playlist"))))))
 
 (define nico-page-content-videos
   (lambda ()

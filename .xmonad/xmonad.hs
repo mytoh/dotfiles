@@ -94,7 +94,6 @@ import XMonad.Util.NamedScratchpad
 
 myTerminal       :: String
 myTerminal       = "urxvtcd "
-myBorderWidth    :: Int
 myBorderWidth    = 2
 myModMask        :: KeyMask
 myModMask        = mod1Mask
@@ -304,6 +303,7 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
                 }
                 where
                   wrapBitmap bitmap = "^i(" ++ myIconsDirectory ++ bitmap ++ ")"
+                  iconPad    a      = "^i(" ++ myIconsDirectory ++ a ++ " "
 
 
 myEventHook = ewmhDesktopsEventHook

@@ -205,16 +205,20 @@
   (register module-exports
             (all-modules))
 
- ; (for-each print
-    ; (sort (map symbol->string (hash-table-keys ht)))))
+  ; (for-each print
+  ; (sort (map symbol->string (hash-table-keys ht)))))
 
 
 
-;; -- added
-  (let ((completion-file (open-output-file (build-path (sys-getenv "RLWRAP_HOME") "gosh_completions"))))
-  (for-each (lambda (s)
-              (display s completion-file)
-              (newline  completion-file))
-    (sort (map symbol->string (hash-table-keys ht)))))
+  ;; -- added
+  (let ((completion-file (open-output-file
+                           (build-path
+                             (or  (sys-getenv "RLWRAP_HOME")
+                               (home-directory)) 
+                             "gosh_completions"))))
+    (for-each (lambda (s)
+                (display s completion-file)
+                (newline  completion-file))
+              (sort (map symbol->string (hash-table-keys ht)))))
   0)
 
