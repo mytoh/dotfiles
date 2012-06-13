@@ -1,0 +1,11 @@
+
+(url  "git://github.com/podhmo/gauche-imlib2")
+(install
+  ( (run-process '(./DIST gen) :wait #t)
+   (run-process `(./configure ,(string-append "--prefix="
+                                              (build-path *lehti-dist-directory* "imlib2" ))) :wait #t)
+   (run-process `(gmake ) :wait #t)
+   (run-process `(gmake -s check) :wait #t)
+   (run-process `(gmake install) :wait #t)
+   )
+  )

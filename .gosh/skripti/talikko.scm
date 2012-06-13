@@ -49,10 +49,10 @@
          (print
            (string-concatenate
              `(" "
-             ,(colour-string colour-package (car x))
-             " "
-             "["
-             ,(colour-string 172 (cadr x)) "]"))
+               ,(colour-string colour-package (car x))
+               " "
+               "["
+               ,(colour-string 172 (cadr x)) "]"))
            )
          (display "    ")
          (display (caddr x))
@@ -79,11 +79,11 @@
   (run-command '(sudo make clean))
   (run-command '(sudo make config-recursive))
   (colour-command "sudo make install clean"
-                                     #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
-                                     #/^===>/   "[38;5;39m>>>[0m"
-                                     #/^=>/   "[38;5;99m>>>[0m"
-                                     #/\*\*\*.*$/    "[38;5;3m\\0[0m"
-                                     ))
+                  #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
+                  #/^===>/   "[38;5;39m>>>[0m"
+                  #/^=>/   "[38;5;99m>>>[0m"
+                  #/\*\*\*.*$/    "[38;5;3m\\0[0m"
+                  ))
 ; }}}
 
 ; deinstall {{{
@@ -91,10 +91,10 @@
   (current-directory (build-path ports-directory package))
   (print (string-append ">>> Deinstalling " (colour-string 44 package)))
   (colour-command "sudo make deinstall"
-                                     #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
-                                     #/^===>/   "[38;5;39m>>>[0m"
-                                     #/\*\*\*.*$/    "[38;5;3m\\0[0m"
-  ))
+                  #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
+                  #/^===>/   "[38;5;39m>>>[0m"
+                  #/\*\*\*.*$/    "[38;5;3m\\0[0m"
+                  ))
 
 ; }}}
 
@@ -105,16 +105,16 @@
   (run-command '(sudo make clean))
   (run-command '(sudo make config))
   (colour-command "sudo make"
-                                     #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
-                                     #/^===>/   "[38;5;39m>>>[0m"
-                                     #/^=>/   "[38;5;99m>>>[0m"
-                                     #/\*\*\*.*$/    "[38;5;3m\\0[0m")
+                  #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
+                  #/^===>/   "[38;5;39m>>>[0m"
+                  #/^=>/   "[38;5;99m>>>[0m"
+                  #/\*\*\*.*$/    "[38;5;3m\\0[0m")
   (deinstall-package package)
   (colour-command "sudo make install clean"
-                                     #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
-                                     #/^===>/   "[38;5;39m>>>[0m"
-                                     #/^=>/   "[38;5;99m>>>[0m"
-                                     #/\*\*\*.*$/    "[38;5;3m\\0[0m")
+                  #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
+                  #/^===>/   "[38;5;39m>>>[0m"
+                  #/^=>/   "[38;5;99m>>>[0m"
+                  #/\*\*\*.*$/    "[38;5;3m\\0[0m")
   )
 ; }}}
 
@@ -126,9 +126,9 @@
             (build-path ports-directory
                         (string-concatenate
                           `("INDEX-"
-                          ,(car (string-split
-                                 (caddr (sys-uname))
-                                 ".")))))
+                            ,(car (string-split
+                                    (caddr (sys-uname))
+                                    ".")))))
             (cut port->list
               (make-csv-reader #\|) <>))))
     (filter (^x (let ((x (map (^s (string-downcase s))
@@ -158,15 +158,15 @@
             (display
               (string-concatenate
                 `(" "
-                ,(colour-string colour-category
-                             category)
-                "/"
-                ,(colour-string colour-package
-                             name))))
+                  ,(colour-string colour-category
+                                  category)
+                  "/"
+                  ,(colour-string colour-package
+                                  name))))
             (display
               (string-concatenate `(" ["
-                             ,(colour-string colour-version version)
-                             "]")))
+                                    ,(colour-string colour-version version)
+                                    "]")))
             (newline)
             (print
               (string-concatenate `("    " ,(colour-string 244  (cadddr x)))))
@@ -180,25 +180,31 @@
 
 (define (main args)
   (let-args (cdr args)
-    ((#f "h|help" (usage 0))
+    ((search "S|search=s")
+     (#f "h|help" (usage 0))
      . rest)
-    (match (car rest)
-      ; commands
-      ("info"
-       (info-print-packages (cadr rest)))
-      ((or "update" "up")
-       (update-ports-tree ))
-      ("install"
-       (install-package (cadr rest)))
-      ((or "deinstall" "remove")
-       (deinstall-package (cadr rest)))
-      ("reinstall"
-       (reinstall-package (cadr rest)))
-      ("search"
-       (search-package-by-name (cadr rest)))
-      ("srcup"
-       (update-source-tree))
-      (_ (usage 1))))
+    (cond
+      (search
+        (search-package-by-name (caddr args)))
+      (else
+        (match (car rest)
+          ; commands
+          ("info"
+           (info-print-packages (cadr rest)))
+          ((or "update" "up")
+           (update-ports-tree ))
+          ("install"
+           (install-package (cadr rest)))
+          ((or "deinstall" "remove")
+           (deinstall-package (cadr rest)))
+          ("reinstall"
+           (reinstall-package (cadr rest)))
+          ("search"
+           (search-package-by-name (cadr rest)))
+          ("srcup"
+           (update-source-tree))
+          (_ (usage 1)))
+        )))
   0)
 
 ; vim: foldmethod=marker

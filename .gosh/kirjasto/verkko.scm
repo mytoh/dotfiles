@@ -7,4 +7,5 @@
     kirjasto.verkko.liemi
     kirjasto.verkko.merkintä
     kirjasto.verkko.palvelin
+    kirjasto.verkko.scm
     ))

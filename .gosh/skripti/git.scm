@@ -24,6 +24,7 @@
     "git://tron.homeunix.org/cvscvt"
     "git://pcmanfm.git.sourceforge.net/gitroot/pcmanfm/libfm"
     "git://pcmanfm.git.sourceforge.net/gitroot/pcmanfm/pcmanfm"
+    "git://git.torproject.org/tor.git"
     ; repo with other name
     ("git://git.sourceforge.jp/gitroot/ninix-aya/master.git"  "ninix-aya")
     ; minun github repo

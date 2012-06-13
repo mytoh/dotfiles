@@ -107,7 +107,7 @@ if which gosh >&-
                 rlwrap -c -q '"' -b '(){}[].,#@;|`"' gosh repl.scm $argv
        end
 
-       function tl
+       function tk
                 command gosh talikko.scm $argv
        end
 
@@ -134,9 +134,6 @@ if which gosh >&-
                 command gosh unpack.scm $argv
         end
 
-        function talikko
-                command gosh talikko.scm $argv
-        end
 
         function colour-numbers
                 command gosh colour-numbers.scm

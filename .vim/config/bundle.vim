@@ -137,6 +137,7 @@ else
   NeoBundle 'nefo-mi/nyan-modoki.vim'
   NeoBundle 'pasela/unite-webcolorname'
   NeoBundle 'ujihisa/neco-ghc'
+  NeoBundle 'raduwen/peca.vim'
   " syntax
   "lisp
   NeoBundle 'emezeske/paredit.vim'

@@ -1,0 +1,11 @@
+
+
+(url  "git://github.com/shirok/Gauche-makiki")
+(install
+  ( (run-process '(./DIST gen) :wait #t)
+   (run-process `(./configure ,(string-append "--prefix="
+                                              (build-path *lehti-dist-directory* "makiki" ))) :wait #t)
+   (run-process `(gmake -s check) :wait #t)
+   (run-process `(gmake install) :wait #t)
+   )
+  )

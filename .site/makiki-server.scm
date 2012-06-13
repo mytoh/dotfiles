@@ -21,11 +21,15 @@
   (build-path (home-directory) ".site"))
 
 (define (main args)
-  (daemonize
-    (start-http-server :access-log #t :error-log #t
-                       :document-root document-root
-                       :port 8888)))
+  (start-server)
+  )
 
+(define start-server
+  (lambda ()
+    (daemonize
+      (start-http-server :access-log #t :error-log #t
+                         :document-root document-root
+                         :port 8888))))
 
 
 (define tag-link
@@ -95,6 +99,17 @@
         "))")
     ))
 
+(define reject-ie
+  (lambda ()
+    `(script
+       ,(string-append
+       "var isMSIE = /*@cc_on!@*/false;\n"
+       "if (isMSIE) {"
+       "if (confirm('this site hates IE ')==true) {"
+       "location.href=\"http://www.google.co.jp/chrome/intl/ja/landing_ff.html\";"
+       "} else {"
+       "}"
+       ))))
 
 (define index-page
   (lambda (req)
@@ -103,6 +118,7 @@
         (title "start page")
         (link (@ (rel "stylesheet") (href "css/style.css")))
         (link (@ (rel "stylesheet") (href "//fonts.googleapis.com/css?family=Convergence")))
+        ,(reject-ie)
 
         ,(let* ((browser (request-header-ref req "user-agent" )))
            (if (string=? browser "Opera") ; browser supporting webp
@@ -194,15 +210,16 @@
                 "))")
              )
 
-        (p (@ (id "nico"))
-           (a (@ (href "/niconico") (target "_blank"))
-              "nico"))
+        ,(make-link '(( "/niconico" "nico")))
+
+        ; (p (@ (id "nico"))
+        ;    (a (@ (href "/niconico") (target "_blank"))
+        ;       "nico"))
 
         (p (@ (id "test"))
            (a (@ (href "/test") (target "_blank"))
               "test")
-           (object (@ (type "image/svg+xml")
-                      (data "image/temp.svg")))
+
            )
 
         (footer
@@ -283,6 +300,8 @@
       '(
         (title "test")
         (p "test page")
+        (object (@ (type "image/svg+xml")
+                   (data "image/temp.svg")))
         ))))
 
 ;;

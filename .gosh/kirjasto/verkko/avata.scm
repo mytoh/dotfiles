@@ -14,17 +14,21 @@
 (select-module kirjasto.verkko.avata)
 
 
-(define (open uri)
+(define (open uri . options)
+  (let-keywords options ((proxy :proxy #f)
+                         . rest)
   (let-values (((scheme user-info hostname port-number path query fragment)
                         (uri-parse uri)))
     ;; returns html body
     (cond
       (path
-        (values-ref (http-get hostname path)
+        (values-ref (http-get hostname path
+                              :proxy proxy)
           2))
       (else
-        (values-ref (http-get hostname "/")
-          2)))))
+        (values-ref (http-get hostname "/"
+                              :proxy proxy)
+          2))))))
 
 (define (swget uri)
   (let-values (((scheme user-info hostname port-number path query fragment)

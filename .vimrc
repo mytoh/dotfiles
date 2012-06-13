@@ -480,6 +480,7 @@ aug myautocommands
   au bufread,bufnewfile *.aa                      setl filetype=scheme
   au bufread,bufnewfile scheme.snip               setl filetype=snippet.scheme
   au bufread,bufnewfile *.kahua                   setl filetype=kahua.scheme
+  au bufread,bufnewfile *.leh                   setl filetype=scheme
   au bufread,bufnewfile .mkshrc                   setl filetype=sh
   au bufread,bufnewfile {*stumpwmrc*,*sawfish/rc} setl filetype=lisp
   au bufread,bufnewfile *.fish                    setl filetype=fish
@@ -487,12 +488,14 @@ aug myautocommands
   au bufread,bufnewfile {*.md,*.mkd,*.markdown}   set filetype=markdown
   au bufread,bufnewfile /usr/ports/UPDATING       setl filetype=changelog
   au bufread,bufnewfile *.mik                   setl filetype=xml
+  au bufread,bufnewfile rc.conf.local             setl filetype=sh
   au bufwritepost       .vimrc                    source ~/.vimrc
   au bufwritepost       ~/.vim/config/bundle.vim  source ~/.vim/config/bundle.vim
   au bufwritepost       .zshrc                    Silent !zcompile ~/.zshrc
   au bufwritepost       .conkyrc                  Silent !killall -SIGUSR1  conky
   au bufwritepost       xmonad.hs                 Silent !xmonad --recompile
   au bufwritepost       {*.scm,*.scss}            call vimrc.scheme_bufwritepost()
+  au bufwritepost       *.c                       call vimrc.trimspace()
   au filetype           xdefaults                 call vimrc.xrdb()
   au filetype           scheme                    call vimrc.scheme()
   au filetype           help                      nnoremap q :<c-u>q<cr>

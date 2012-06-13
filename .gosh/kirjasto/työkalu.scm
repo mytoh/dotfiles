@@ -28,7 +28,7 @@
   (syntax-rules ()
     ((_ e1 e2 ...)
      (let loop () e1 e2 ...
-       (sys-sleep 300) ; sleep 5 minutes
+       (sys-sleep 200) ; sleep 
        (loop)))))
 
 (define get-os-type
@@ -65,3 +65,5 @@
 (define nothing
   (lambda ()
     (values)))
+
+

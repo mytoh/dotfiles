@@ -1,0 +1,11 @@
+
+(url  "git://github.com/shirok/Gauche-gtk2")
+(install
+  ((run-process '(autoconf) :wait #t)
+   (run-process `(./configure ,(string-append "--prefix="
+                                              (build-path *lehti-dist-directory* "gtk2" ))) :wait #t)
+   (run-process `(gmake stubs) :wait #t)
+   (run-process `(gmake) :wait #t)
+   (run-process `(gmake install) :wait #t)
+   )
+  )

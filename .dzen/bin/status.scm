@@ -184,6 +184,7 @@ static char * arrow_left[] = {
   (let ((vol (string-split (process-output->string "mixer -S vol") ":"))
         (pcm (string-split (process-output->string "mixer -S pcm") ":")))
     (list
+      (fg "#43be93")
       (car  vol)
       " "
       (cadr vol)
@@ -203,12 +204,18 @@ static char * arrow_left[] = {
         (list
           "Not playng")))))
 
+(define ip 
+  (lambda ()
+    (process-output->string "curl -x http://127.0.0.1:8118 ifconfig.me/ip")))
+
 
 (define (dzen)
   (tree->string
     `(
-      " " ,(mpd) " "
-      ,(icon (arrow-left-xpm "#303633" "None"))
+      ,(icon (arrow-left-xpm "#292929" "None"))
+      ,(bg "#292929")
+      " " ,(ip) " "
+      ,(icon (arrow-left-xpm "#303633" "#292929"))
       ,(bg "#303633")
       " " ,(memory) " "
       ,(icon (arrow-left-xpm "#444444" "#303633"))

@@ -89,6 +89,10 @@ statusbarpanel>* {
   max-width: 120px !important;
 }
 
+.tabbrowser-tab[pending] {
+  opacity: .4;
+}
+
 .tabbrowser-tabs {
   max-height: 12px !important;
 }
