@@ -15,8 +15,8 @@ endif
 "}}}
 
 
-if filereadable(expand('~/.vim/config/global.vim'))
-  source ~/.vim/config/global.vim
+if isdirectory(expand('~/.vim/config'))
+  runtime! config/*.vim
 endif
 
 

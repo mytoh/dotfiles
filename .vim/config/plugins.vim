@@ -475,4 +475,14 @@ let g:haddock_browser="/usr/local/bin/firefox"
 let g:vinarise_enable_auto_detect = 0
 " }}}
 
+" kien/rainbow_parentheses {
+aug rainbow_parentheses
+  au!
+  au vimenter * RainbowParenthesesToggle
+  au syntax   * RainbowParenthesesLoadRound
+  au syntax   * RainbowParenthesesLoadSquare
+  au syntax   * RainbowParenthesesLoadBraces
+aug end
+" }
+
 " }}}

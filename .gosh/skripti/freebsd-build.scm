@@ -28,23 +28,22 @@
                   #/\/(\w*\.cpp)/  "/[38;5;178m\\1[0m"
                   #/\/(\w*\.c)/  "/[38;5;68m\\1[0m"
                   #/(\w*\.o)/  "[38;5;148m\\1[0m"
-                  #/(\w*\.S|so)/  "[38;5;28m\\1[0m"
+                  #/(\w*\.(S|s)o)/  "[38;5;28m\\1[0m"
                   #/(\w*\.S)/  "[38;5;28m\\1[0m"
                   )
   (print (string-append "[38;5;218m" "-------------" "[0m"))
   (newline)
   (print command)
-  (print  (string-concatenate '("[38;5;80m" "------------" "[0m" )))
-  )
+  (print
+    (string-concatenate
+      '("[38;5;80m" "------------" "[0m" ))))
 
 (define (main args)
   (current-directory "/usr/src")
   (when (file-exists? "/usr/obj")
-  (process "sudo make cleandir")
-  (process "sudo make cleandir")
-    (remove-directory* "/usr/obj")
-)
+    (process "sudo make cleandir")
+    (process "sudo make cleandir")
+    (process "sudo rm -rfv /usr/obj"))
   (process "sudo make buildworld")
   (process "sudo make buildkernel")
-  (process "sudo make installkernel")
-  )
+  (process "sudo make installkernel"))
