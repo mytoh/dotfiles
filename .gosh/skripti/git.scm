@@ -103,6 +103,7 @@
     (robm           dzen)
     (jhawthorn     meh)
     (kahua         Kahua)
+    (mozilla       mozilla-central)
     ; (git            git)
     ; (dss-project   dswm)
     ; "git://gauche.git.sourceforge.net/gitroot/gauche/Gauche"

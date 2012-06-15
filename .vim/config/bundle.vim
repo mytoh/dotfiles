@@ -116,6 +116,7 @@ else
   NeoBundle 'Bogdanp/quicksilver.vim'
   NeoBundle 'sjl/gundo.vim'
   NeoBundle 'vim-jp/vital.vim'
+  NeoBundle 'vim-jp/cpp-vim'
   NeoBundle 'Twinside/vim-codeoverview'
   " NeoBundle 'anekos/runes-vim'
   "unite
@@ -139,6 +140,7 @@ else
   NeoBundle 'pasela/unite-webcolorname'
   NeoBundle 'ujihisa/neco-ghc'
   NeoBundle 'raduwen/peca.vim'
+  NeoBundle 'vim2ansi'
   " syntax
   "lisp
   NeoBundle 'emezeske/paredit.vim'

@@ -58,8 +58,7 @@
     (string-concatenate
       `(,(colour-string 33 "  ♠ ")
          ,(colour-string 82 (git-branch))
-         ,(colour-string 1  (git-darty)))))
-  )
+         ,(colour-string 1  (git-darty))))))
 
 (define (hg)
   (colour-string 33 " ⮘ ")
@@ -77,7 +76,9 @@
     (string-concatenate
       `(
         ; ,(colour-string 172 "X / _ / X")
-        ,(colour-string 74 "(・x・)")
+        ,(colour-string 223 "(")
+        ,(colour-string 74 "・x・")
+        ,(colour-string 223 ")")
         ,(colour-string 0 ".")
         ,(colour-string 118 (car (string-split (sys-gethostname) "." )))
         " :: "
@@ -93,7 +94,9 @@
             (darcs))
            (else ""))
         " "
-         ,(colour-string 172 "✖╹◡╹✖")
+         ,(colour-string 95 "✖")
+         ,(colour-string 172 "╹◡╹")
+         ,(colour-string 95 "✖")
         "\n"
         ,(colour-string 235 ">")
         ,(colour-string 238 ">")

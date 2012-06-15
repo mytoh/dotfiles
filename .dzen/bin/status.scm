@@ -8,6 +8,7 @@
 (use text.tree)
 (use file.util)
 (require-extension (srfi 1 13 19))
+(use kirjasto.grafiikka)
 
 (define-syntax forever
   ;;macro for endless loop
@@ -49,67 +50,49 @@
                 "dzen")))
 
 (define arrow-left
-"/* XPM */
+  "/* XPM */
 
-static char * arrow_left[] = {
-\"12 16 2 1\",
-\". c ~a\",
-\"  c ~a\",
-\"           .\",
-\"          ..\",
-\"         ...\",
-\"        ....\",
-\"       .....\",
-\"      ......\",
-\"     .......\",
-\"    ........\",
-\"    ........\",
-\"     .......\",
-\"      ......\",
-\"       .....\",
-\"        ....\",
-\"         ...\",
-\"          ..\",
-\"           .\", };
-"
+  static char * arrow_left[] = {
+  \"12 16 2 1\",
+  \". c ~a\",
+  \"  c ~a\",
+  \"           .\",
+  \"          ..\",
+  \"         ...\",
+  \"        ....\",
+  \"       .....\",
+  \"      ......\",
+  \"     .......\",
+  \"    ........\",
+  \"    ........\",
+  \"     .......\",
+  \"      ......\",
+  \"       .....\",
+  \"        ....\",
+  \"         ...\",
+  \"          ..\",
+  \"           .\", };
+  "
   )
 
 (define arrow-left-xpm
   (lambda (c1 c2)
-  (make-xpm "arrow_left" c1 c2 arrow-left)))
-
-(define make-xpm
-  (lambda (name c1 c2 data)
     (let ((icon-name
             (build-path (make-temp-dir)
                         (string-append
-                          name
+                          "arrow-left"
                           "_"
                           (string-trim  c1 #\#) "_"
                           (string-trim  c2 #\#)
-                          ".xpm"))))
-      (cond
-        ((file-is-readable? icon-name)
-         icon-name)
-        (else
-          (call-with-output-file
-            icon-name
-            (lambda (out)
-              (format
-                out
-                data
-                c1 c2))
-            :if-exists #f
-            :if-does-not-exist :create)
-          icon-name)))))
+                          ".xpm")))) 
+      (make-xpm icon-name arrow-left c1 c2))))
 
 (define icon
   (lambda (name)
     (string-concatenate
       `("^i("
         ,name
-        ")"
-        ))))
+        ")"))))
 
 
 ;; printers
@@ -176,7 +159,7 @@ static char * arrow_left[] = {
           (fg "#f282a2")
           "d "
           (fg "#ffffff" )
-         (fs-remain deskstar)
+          (fs-remain deskstar)
           "G")
         ""))))
 
@@ -206,27 +189,27 @@ static char * arrow_left[] = {
 
 (define ip 
   (lambda ()
-    (process-output->string "curl -x http://127.0.0.1:8118 ifconfig.me/ip")))
+    (process-output->string "curl --silent --ssl -x http://127.0.0.1:8118 ifconfig.me/ip")))
 
 
 (define (dzen)
   (tree->string
-    `(
-      ,(icon (arrow-left-xpm "#292929" "None"))
-      ,(bg "#292929")
-      " " ,(ip) " "
-      ,(icon (arrow-left-xpm "#303633" "#292929"))
-      ,(bg "#303633")
-      " " ,(memory) " "
-      ,(icon (arrow-left-xpm "#444444" "#303633"))
-      ,(bg "#444444")
-      " " ,(fs) " "
-      ,(icon (arrow-left-xpm "#555555" "#444444"))
-      ,(bg "#555555")
-      " " ,(volume) " "
-      ,(icon (arrow-left-xpm "#c5d1c0" "#555555"))
-      ,(bg "#c5d1c0")
-      " " ,(date) " ")))
+    (list
+      (icon (arrow-left-xpm "#292929" "None"))
+      (bg "#292929")
+      (ip)
+      (icon (arrow-left-xpm "#303633" "#292929"))
+      (bg "#303633")
+      (memory)
+      (icon (arrow-left-xpm "#444444" "#303633"))
+      (bg "#444444")
+      (fs) 
+      (icon (arrow-left-xpm "#555555" "#444444"))
+      (bg "#555555")
+      (volume) 
+      (icon (arrow-left-xpm "#858180" "#555555"))
+      (bg "#858080")
+      (date) " ")))
 
 (define (main args)
   (let loop ()

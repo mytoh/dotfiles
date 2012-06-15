@@ -111,8 +111,7 @@ set showfulltag
 " colors
 set t_Co=256
 set background=dark
-" colorscheme neverland
-colorscheme badwolf
+colorscheme neverland-darker
 
 " set mouse
 set mouse=a
@@ -569,5 +568,10 @@ set secure
 " ^v228 ä
 " ^v246 ö
 " ^v235 ë
+
+"" ansicolor
+" vim2ansi.vim
+" :Toansi 
+" :AnsiEsc
 
 " vim:set foldmethod=marker:

@@ -58,6 +58,11 @@ uninstall  unlink rm remove ls list homepage home up update'
 complete -c panna -f -a "(__fish_complete_panna_kaava)"
 # }}}
 
+# lehti {{{
+
+
+# }}}
+
 # talikko {{{
 function __fish_complete_talikko_ports_tree
   set arguments (commandline -opc)

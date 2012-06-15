@@ -21,8 +21,7 @@
   (build-path (home-directory) ".site"))
 
 (define (main args)
-  (start-server)
-  )
+  (start-server))
 
 (define start-server
   (lambda ()
@@ -30,7 +29,6 @@
       (start-http-server :access-log #t :error-log #t
                          :document-root document-root
                          :port 8888))))
-
 
 (define tag-link
   (lambda (url seg lst)
@@ -103,13 +101,13 @@
   (lambda ()
     `(script
        ,(string-append
-       "var isMSIE = /*@cc_on!@*/false;\n"
-       "if (isMSIE) {"
-       "if (confirm('this site hates IE ')==true) {"
-       "location.href=\"http://www.google.co.jp/chrome/intl/ja/landing_ff.html\";"
-       "} else {"
-       "}"
-       ))))
+          "var isMSIE = /*@cc_on!@*/false;"
+          "if (isMSIE) {"
+          "if (confirm('this site hates IE ')==true) {"
+          "location.href=\"http://www.google.co.jp/chrome/intl/ja/landing_ff.html\";"
+          "} else {"
+          "}"
+          ))))
 
 (define index-page
   (lambda (req)
@@ -182,8 +180,7 @@
 
              ,(yotsuba "//www.4chan.org"
                        "//boards.4chan.org"
-                       '(
-                         ("g" "technology")
+                       '( ("g" "technology")
                          ("b" "random")
                          ("e" "ecchi")
                          ("h" "hentai")
@@ -207,20 +204,13 @@
                       (target "_blank"))
                    "file.util"
                    (span (@ (class popup)) "file-util"))
-                "))")
-             )
+                "))"))
 
         ,(make-link '(( "/niconico" "nico")))
 
-        ; (p (@ (id "nico"))
-        ;    (a (@ (href "/niconico") (target "_blank"))
-        ;       "nico"))
-
         (p (@ (id "test"))
            (a (@ (href "/test") (target "_blank"))
-              "test")
-
-           )
+              "test"))
 
         (footer
           (p (@ (id "ddg"))
@@ -228,8 +218,7 @@
         (form (@ (id "searchbox") (action "//duckduckgo.com/?kl=jp-jp&kp=-1") (target "_blank"))
               (input (@ (type "text") (name "q") (value "")))
               (input (@ (type "submit") (value "Search")))
-              (input (@ (type "hidden") (name "t") (value ""))))
-        ))))
+              (input (@ (type "hidden") (name "t") (value ""))))))))
 
 ;; niconico
 (define nico-page
@@ -283,8 +272,7 @@
                  (a (@ (class "video-title")
                        (href ,watch-url)
                        (target "_blank"))
-                    ,title)))
-          ))
+                    ,title)))))
       (file->list
         read
         (build-path document-root "nico/videos")))))
@@ -301,8 +289,7 @@
         (title "test")
         (p "test page")
         (object (@ (type "image/svg+xml")
-                   (data "image/temp.svg")))
-        ))))
+                   (data "image/temp.svg")))))))
 
 ;;
 ;; http-handlers

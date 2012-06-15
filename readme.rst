@@ -3,7 +3,8 @@ Desktop
 -------------------
 
 .. image:: https://github.com/mytoh/dotfiles/raw/master/screen.png
-   :scale: 50%
+   :height: 100px
+   :width: 100px
    :alt: Screenshot
 
 code laundering
