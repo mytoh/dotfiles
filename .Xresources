@@ -5,9 +5,8 @@ xft.hintstyle: hintslight
 
 Xcursor.theme: whiteglass
 
-!---------------
-! urxvt
-!---------------
+! urxvt {{{
+
 !urxvt.termName: xterm-256color
 urxvt.depth: 32
 urxvt.background: rgba:0940/0990/1100/cccc
@@ -21,7 +20,9 @@ urxvt.internalBorder: 0
 urxvt.cursorUnderline: false
 urxvt.iso14755: false
 urxvt.iso14755_52: false
-urxvt.cursorColor: #4779B3
+urxvt.colorBD:            #ffffff
+urxvt.cursorColor:        #ff8939
+urxvt.cursorColor2:       #151515
 !urxvt.transparent: false
 !urxvt.inheritPixmap: true
 urxvt.fading: 2%
@@ -79,6 +80,7 @@ k10, k10rk, k10b, \
 urxvt.font: FONT
 urxvt.boldFont: FONT_BOLD
 
+! }}}
 
 
 !-------------------------------------

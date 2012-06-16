@@ -57,7 +57,7 @@ abbr    panna kaava script
         (define repository "${3}")
 
         (define (install tynnyri)
-          (use-clang)
+          (with-clang)
           (system
           '(make clean)
           '(make distclean)

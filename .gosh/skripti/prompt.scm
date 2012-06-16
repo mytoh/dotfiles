@@ -76,9 +76,9 @@
     (string-concatenate
       `(
         ; ,(colour-string 172 "X / _ / X")
-        ,(colour-string 223 "(")
+        ,(colour-string 123 "(")
         ,(colour-string 74 "・x・")
-        ,(colour-string 223 ")")
+        ,(colour-string 123 ")")
         ,(colour-string 0 ".")
         ,(colour-string 118 (car (string-split (sys-gethostname) "." )))
         " :: "

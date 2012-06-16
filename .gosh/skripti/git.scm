@@ -104,6 +104,7 @@
     (jhawthorn     meh)
     (kahua         Kahua)
     (mozilla       mozilla-central)
+    (shadow        shadow)
     ; (git            git)
     ; (dss-project   dswm)
     ; "git://gauche.git.sourceforge.net/gitroot/gauche/Gauche"
@@ -214,9 +215,3 @@
       ))
   0)
 
-; (print (string-append (colour-string 3 "cloning ") "repositories"))
-; (clone-gitdir)
-; (newline)
-; (print (string-append (colour-string 8 "updating ") "repositories"))
-; (update-gitdir)
-; (clean-gitdir)

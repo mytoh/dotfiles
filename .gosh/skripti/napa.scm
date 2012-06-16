@@ -12,6 +12,15 @@
     ; clone github repository
     (run-process `(git clone ,(string-append "git://github.com/" url)) :wait #t)))
 
+(define git-create
+  (lambda (repo-name)
+    (let ((user (process-output->string
+                  "git config --get github.user"))
+          (token (process-output->string 
+                   "git config --get github.token")))
+      )
+    ))
+
 (define  (git args)
   (cond
     ((null? args)
@@ -22,6 +31,10 @@
          (git-clone (cadr args)))
         ("st"
          (run-process `(git status) :wait #t))
+        ("up"
+         (run-process '(git pull) :wait #t))
+        ("create"
+         (git-create args))
         (_  (run-process `(git ,@args) :wait #t))))))
 
 (define (svn args)

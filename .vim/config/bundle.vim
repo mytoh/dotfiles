@@ -169,7 +169,7 @@ else
   NeoBundle 'lorry-lee/vim-ayumi'
   NeoBundle 'chriskempson/vim-tomorrow-theme'
   NeoBundle 'sjl/badwolf'
-  NeoBundle 'jellybeans.vim'
+  NeoBundle 'nanotech/jellybeans.vim'
   NeoBundle 'xoria256.vim'
   NeoBundle 'wombat256.vim'
   NeoBundle 'void'
@@ -178,6 +178,9 @@ else
   NeoBundle 'lilypink'
   NeoBundle 'Sorcerer'
   NeoBundle 'highlights-for-radiologist'
+  NeoBundle 'Gentooish'
+  NeoBundle '256-jungle'
+  NeoBundle 'desert256.vim'
   "}}}
   NeoBundle 'http://voikko.svn.sourceforge.net/svnroot/voikko/', {'type' : 'svn', 'rtp' : 'trunk/tools/vim'}
   " bitbucket

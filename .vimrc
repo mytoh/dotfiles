@@ -111,7 +111,7 @@ set showfulltag
 " colors
 set t_Co=256
 set background=dark
-colorscheme neverland-darker
+colorscheme jellybeans
 
 " set mouse
 set mouse=a

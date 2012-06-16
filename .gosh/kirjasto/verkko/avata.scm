@@ -15,29 +15,37 @@
 
 
 (define (open uri . options)
-  (let-keywords options ((proxy :proxy #f)
+  (let-keywords options ((proxy  :proxy  #f)
+                         (secure :secure #f)
+                         (file   :file   #f)
                          . rest)
-  (let-values (((scheme user-info hostname port-number path query fragment)
-                        (uri-parse uri)))
-    ;; returns html body
-    (cond
-      (path
-        (values-ref (http-get hostname path
-                              :proxy proxy)
-          2))
-      (else
-        (values-ref (http-get hostname "/"
-                              :proxy proxy)
-          2))))))
+    (let-values (((scheme user-info hostname port-number path query fragment)
+                  (uri-parse uri)))
+      ;; returns html body
+      (cond (file
+              (call-with-output-file file
+                                     (lambda (out)
+                                       (http-get hostname (or  path "/")
+                                                 :proxy proxy
+                                                 :secure secure
+                                                 :sink out 
+                                                 :flusher (lambda _ #t)))))
+        (else
+          (values-ref (http-get hostname (or  path "/")
+                                :proxy proxy
+                                :secure secure)
+            2)
+          )
+        ))))
 
 (define (swget uri)
   (let-values (((scheme user-info hostname port-number path query fragment)
-                        (uri-parse uri)))
-      (let* ((file (receive (a fname ext)
-                    (decompose-path (whitespace->dash path))
-                    #`",|fname|.,|ext|"))
-            (flusher (lambda (s h) (print file) #t)))
-        (if (not (file-is-readable? file))
-          (http-get hostname path
-                    :sink (open-output-file file) :flusher flusher)))))
+                (uri-parse uri)))
+    (let* ((file (receive (a fname ext)
+                   (decompose-path (whitespace->dash path))
+                   #`",|fname|.,|ext|"))
+           (flusher (lambda (s h) (print file) #t)))
+      (if (not (file-is-readable? file))
+        (http-get hostname path
+                  :sink (open-output-file file) :flusher flusher)))))
 
