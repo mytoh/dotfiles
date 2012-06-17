@@ -61,8 +61,8 @@
 ;; line by line scrolling
 (setq scroll-step 1)
 ;; disable bars
-(menu-bar-mode nil)
-(tool-bar-mode nil)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
 ;; delete whole line with C-k once
 (setq kill-whole-line t)
 ;; enable rectangular mode
@@ -70,6 +70,7 @@
 (setq cua-enable-cua-keys nil) ; don't make fancy keymaps
 
 ;;; faces
+
 
 ;;(set-face-font 'default "Konatu-12")
 (set-face-foreground 'default "#d0d0d0")
@@ -123,7 +124,7 @@
 ;; helm
 (req 'helm-config
      (global-set-key (kbd "C-c h") 'helm-mini)
-     (helm-mode 1))
+     (helm-mode t))
 
 ;; icicles
 (req 'icicles

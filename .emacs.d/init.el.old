@@ -1,9 +1,9 @@
 ;; from emacs wiki, load path section
-(let ((default-directory "~/.emacs.d/elisp/"))
-  (normal-top-level-add-to-load-path '("."))
-  (normal-top-level-add-subdirs-to-load-path))
-(concat user-emacs-directory
-        (convert-standard-filename "elisp/"))
+; (let ((default-directory "~/.emacs.d/elisp/"))
+;   (normal-top-level-add-to-load-path '("."))
+;   (normal-top-level-add-subdirs-to-load-path))
+; (concat user-emacs-directory
+;         (convert-standard-filename "elisp/"))
 (setq default-directory "~/")
 (setq Info-additional-directory-list '("~/.emacs.d/info"))
 
@@ -12,10 +12,10 @@
 ;;; interfacing with ELPA, the package archive.
 ;;; Move this code earlier if you want to reference
 ;;; packages in your .emacs.
-(when
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el"))
-  (package-initialize))
+; (when
+;   (load
+;     (expand-file-name "~/.emacs.d/elpa/package.el"))
+;   (package-initialize))
 
 
 ;; server for emacsclient
@@ -73,17 +73,17 @@
 (iswitchb-mode t)
 ;; set initial frame size, place, font
 (if (boundp 'window-system)
-    (setq initial-frame-alist
-	  (append (list
-               '(alpha . 95) ;; tranparency for default
-	           '(vertical-scroll-bars . nil) ;; scroll bars
-	           '(width . 179) ;; window width
-	           '(height . 52) ;; window height
-	           '(top . 15)     ;; window placement
-	           '(left . 10)    ;; window placement
-	           '(font . "Ricty 13")
-	           )
-              initial-frame-alist)))
+  (setq initial-frame-alist
+        (append (list
+                  '(alpha . 95) ;; tranparency for default
+                  '(vertical-scroll-bars . nil) ;; scroll bars
+                  '(width . 179) ;; window width
+                  '(height . 52) ;; window height
+                  '(top . 15)     ;; window placement
+                  '(left . 10)    ;; window placement
+                  '(font . "Ricty 13")
+                  )
+                initial-frame-alist)))
 (setq default-frame-alist initial-frame-alist)
 
 ;; reload face setting for first frame
@@ -93,40 +93,39 @@
 
 (setq initial-scratch-message ";; *scratch buffer*
 
-")
+      ")
 
 
 ;;;;; faces  ;;;;;
 (custom-set-faces
- '(default   ((t
-       (:background "gray7"
-        :foreground "#d0d0d0"
-        :height 80
-        ))))
- '(cursor    ((t
-               (:background "white"
-               ))))
- '(highlight ((t
-               (:background "HotPink2"
-                :foreground "gray11"
-       ))))
- '(region    ((t
-         (:background "dark slate blue"
-         ))))
- '(modeline ((t
-        (:background "gray30"
-         :foreground "white"
-        ))))
- '(mode-line-buffer-id ((t
-                         (:background "gray15"
-                          :foreground "linen"
-                          ))))
- '(font-lock-comment-face ((t
-                            (:foreground "gray35"
-                            ))))
- '(linum    ((t
-        (:inherit shadow :background "gray45"
-        )))))
+  '(default   ((t
+                 (:background "gray7"
+                              :foreground "#d0d0d0"
+                                                            ))))
+  '(cursor    ((t
+                 (:background "white"
+                              ))))
+  '(highlight ((t
+                 (:background "HotPink2"
+                              :foreground "gray11"
+                              ))))
+  '(region    ((t
+                 (:background "dark slate blue"
+                              ))))
+  '(modeline ((t
+                (:background "gray30"
+                             :foreground "white"
+                             ))))
+  '(mode-line-buffer-id ((t
+                           (:background "gray15"
+                                        :foreground "linen"
+                                        ))))
+  '(font-lock-comment-face ((t
+                              (:foreground "gray35"
+                                           ))))
+  '(linum    ((t
+                (:inherit shadow :background "gray45"
+                          )))))
 
 ;; kepmap
 (keyboard-translate ?\C-h ?\C-?)
@@ -145,18 +144,18 @@
   "Run scheme on other window"
   (interactive)
   (switch-to-buffer-other-window
-   (get-buffer-create "*scheme*"))
+    (get-buffer-create "*scheme*"))
   (run-scheme scheme-program-name))
 ;; call func by Ctrl-c
 (define-key global-map
-  "\C-cS" 'scheme-other-window)
+            "\C-cS" 'scheme-other-window)
 
 ;; changelog
 (defun cl-memo ()
   (interactive)
-    (add-change-log-entry
-     nil
-     (expand-file-name "~/.changelog")))
+  (add-change-log-entry
+    nil
+    (expand-file-name "~/.changelog")))
 (define-key ctl-x-map  "M" 'cl-memo)
 
 
@@ -182,9 +181,9 @@
 (require 'w3m-load)
 (global-set-key (kbd "C-c C-w") 'w3m)
 (add-hook 'w3m-mode-hook
-         '(lambda ()
-            (local-set-key (kbd "f") 'w3m-go-to-linknum)
-            ( message "starting  w3m")))
+          '(lambda ()
+             (local-set-key (kbd "f") 'w3m-go-to-linknum)
+             ( message "starting  w3m")))
 ;; anything
 (require 'anything-startup)
 
