@@ -1,50 +1,124 @@
+
 (require 'cl)
 
-;; package.el
-(when (require 'package nil t)
-  ;; load MELPA
-  (add-to-list 'package-archives
-	       '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (package-initialize))
+;; http://e-arrows.sakura.ne.jp/2010/03/macros-in-emacs-el.html
+ (defmacro req (lib &rest body)
+   "load library if file is exits"
+   `(when (locate-library (symbol-name ,lib))
+     (require ,lib nil 'noerror)
+     ,@body))
 
-;; personal initialize
-(add-to-list 'load-path (concat user-emacs-directory "site-lisp"))
-(show-paren-mode)
-(global-font-lock-mode t)
+(defmacro add-to-load-path (path)
+ `(when (file-exists-p ,path)
+   (add-to-list 'load-path ,path)))
 
-;; gauche
-(setq process-coding-system-alist
-      (cons '("gosh" utf-8 . utf-8) process-coding-system-alist))
-(setq scheme-program-name "gosh -i")
-(autoload 'scheme-mode "cmuscheme" "Major mode for Scheme." t)
-(autoload 'run-scheme  "cmuscheme" "Run an inferior Scheme process." t)
+ ;; package.el
+ (req 'package
+      ;; load MELPA
+      (add-to-list 'package-archives
+                   '("melpa" . "http://melpa.milkbox.net/packages/") t)
+      (package-initialize))
+
+ ;; personal initialize
+;; plugin directory
+(setq *user-emacs-vendor-directory* (concat user-emacs-directory "vendor/"))
+;; user elisps
+(add-to-load-path (concat user-emacs-directory "elisp"))
+ ;;disable startup message
+ (setq inhibit-startup-screen -1)
+ (show-paren-mode)
+ (global-font-lock-mode t)
+ ;; read symlinked file
+ (setq vc-follow-symlinks t)
+ ;; encodings
+ (set-language-environment 'Japanese)
+ (set-default-coding-systems 'utf-8-unix)
+ (set-terminal-coding-system 'utf-8-unix)
+ (setq file-name-coding-system 'utf-8-unix)
+ (set-clipboard-coding-system 'utf-8-unix)
+ (setq buffer-file-coding-system 'utf-8-unix)
+ (prefer-coding-system 'utf-8-unix)
+ (set-keyboard-coding-system 'utf-8-unix)
+ (set-buffer-file-coding-system 'utf-8-unix)
+ ;; use space instead of tab
+ (setq-default tab-width 4 indent-tabs-mode nil)
+ (setq indent-line-function 'indent-relative-maybe)
+ ;; show info on mode-line
+ (line-number-mode t)
+ (column-number-mode t)
+ ;; change yes-no to y-n
+ (fset 'yes-or-no-p 'y-or-n-p)
+ ;; show images
+ (auto-image-file-mode t)
+ ;; highlight region
+ (transient-mark-mode t)
+ ;; highlight current line
+ (global-hl-line-mode nil)
+ ;; line by line scrolling
+ (setq scroll-step 1)
+
+;;; faces
+
+ (set-face-font 'default "Konatu-12")
+ (set-face-foreground 'default "#d0d0d0")
+ (set-face-foreground 'highlight "white")
+ (set-face-foreground 'modeline "white")
+ (set-face-foreground 'mode-line-buffer-id "linen")
+ (set-face-foreground 'font-lock-comment-face "gray35")
+ (set-face-background 'region "dark slate blue")
+ (set-face-background 'default "gray7")
+ (set-face-background 'cursor  "white")
+ (set-face-background 'highlight "gray11")
+ (set-face-background 'modeline  "gray30")
+ (set-face-background 'mode-line-buffer-id "gray15")
+
+ (custom-set-faces
+  '(default
+     ((t ( :height 110 ))))
+  )
+
+ ;; gauche
+ (setq process-coding-system-alist
+       (cons '("gosh" utf-8 . utf-8) process-coding-system-alist))
+ (setq scheme-program-name "gosh -i")
+ (autoload 'scheme-mode "cmuscheme" "Major mode for Scheme." t)
+ (autoload 'run-scheme  "cmuscheme" "Run an inferior Scheme process." t)
 
 
-;; rainbow-delimiters
-(when (require 'rainbow-delimiters nil 'noerror)
-  (add-hook 'scheme-mode-hook       'rainbow-delimiters-mode)
-  (add-hook 'lisp-mode-hook         'rainbow-delimiters-mode)
-  (add-hook 'emacs-lisp-mode-hook   'rainbow-delimiters-mode))
+ ;; rainbow-delimiters
+ (req 'rainbow-delimiters
+      (add-hook 'scheme-mode-hook       'rainbow-delimiters-mode)
+      (add-hook 'lisp-mode-hook         'rainbow-delimiters-mode)
+      (add-hook 'emacs-lisp-mode-hook   'rainbow-delimiters-mode))
 
-;; auto-complete
-(require 'auto-complete)
-(require 'auto-complete-config)
-(global-auto-complete-mode t)
-(define-key ac-completing-map (kbd "C-n") 'ac-next)
-(define-key ac-completing-map (kbd "C-p") 'ac-previous)
-(setq ac-dwim t)
+ ;; auto-complete
+ (req 'auto-complete
+      (req 'auto-complete-config )
+      (global-auto-complete-mode t)
+      (define-key ac-completing-map (kbd "C-n") 'ac-next)
+      (define-key ac-completing-map (kbd "C-p") 'ac-previous)
+      (setq ac-dwim t))
 
-;; dired+
-(require 'dired+)
+ ;; dired+
+ (req 'dired+)
 
-;; helm
-(when (require 'helm-config nil 'noerror)
-  (global-set-key (kbd "C-c h") 'helm-mini)
-  (helm-mode 1))
+ ;; helm
+ (req 'helm-config
+      (global-set-key (kbd "C-c h") 'helm-mini)
+      (helm-mode 1))
 
-;; icicles
-(when (require 'icicles nil 'noerror)
-  (icy-mode 1))
+ ;; icicles
+ (req 'icicles
+      (icy-mode 1))
 
-;; powerline
-(require 'powerline nil 'noerror)
+ ;; powerline
+(add-to-load-path (concat *user-emacs-vendor-directory*
+                                   "emacs-powerline"))
+(req 'powerline
+(setq powerline-arrow-shape 'arrow14)   ;; arrow, curve, arrow14
+ )
+
+;; transparent
+;; http://www.emacswiki.org/emacs/TransparentEmacs
+(set-frame-parameter (selected-frame) 'alpha '(85 50))
+(add-to-list 'default-frame-alist '(alpha 85 50))
