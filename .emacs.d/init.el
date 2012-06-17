@@ -44,8 +44,12 @@
 (setq-default tab-width 4 indent-tabs-mode nil)
 (setq indent-line-function 'indent-relative-maybe)
 ;; show info on mode-line
-(line-number-mode t)
-(column-number-mode t)
+(progn
+  (setq display-time-24hr-format t)
+  (setq display-time-day-and-date t)
+  (display-time)
+  (line-number-mode t)
+  (column-number-mode t))
 ;; change yes-no to y-n
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; show images
@@ -59,10 +63,15 @@
 ;; disable bars
 (menu-bar-mode nil)
 (tool-bar-mode nil)
+;; delete whole line with C-k once
+(setq kill-whole-line t)
+;; enable rectangular mode
+(cua-mode t)
+(setq cua-enable-cua-keys nil) ; don't make fancy keymaps
 
 ;;; faces
 
-(set-face-font 'default "Konatu-12")
+;;(set-face-font 'default "Konatu-12")
 (set-face-foreground 'default "#d0d0d0")
 (set-face-foreground 'highlight "white")
 (set-face-foreground 'modeline "white")
@@ -75,10 +84,12 @@
 (set-face-background 'modeline  "gray30")
 (set-face-background 'mode-line-buffer-id "gray15")
 
+
 (custom-set-faces
  '(default
-    ((t ( :height 110 ))))
- )
+    ((t (:height 110
+         )))))
+
 ;; transparent 
 ;; http://www.emacswiki.org/emacs/TransparentEmacs
 (set-frame-parameter (selected-frame) 'alpha '(85 50))
