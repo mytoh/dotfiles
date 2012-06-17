@@ -125,6 +125,7 @@
         (div (@ (class "bookmark"))
              ,(delicious "//d.me"
                          '("zsh"
+                           "emacs"
                            "vim"
                            "scheme"
                            "lisp"
@@ -138,6 +139,7 @@
                            ))
              ,(hatena "//b.hatena.ne.jp"
                       '("vim"
+                        "emacs"
                         "zsh"
                         "scheme"
                         "lisp"
