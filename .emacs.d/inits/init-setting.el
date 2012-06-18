@@ -63,6 +63,9 @@
 (which-function-mode t)
 ;; enable lexical binding
 (setq lexical-binding t)
+;; save buffer history
+(savehist-mode 1)
+(setq history-length 3000)
 
 ;;; faces
 

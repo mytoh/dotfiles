@@ -9,8 +9,6 @@
                   '("marmalade" . "http://marmalade-repo.org/packages/"))
      (package-initialize))
 
-
-
 ;; rainbow-delimiters
 (req 'rainbow-delimiters
      (add-hook 'scheme-mode-hook       'rainbow-delimiters-mode)
@@ -23,7 +21,8 @@
      (global-auto-complete-mode t)
      (define-key ac-completing-map (kbd "C-n") 'ac-next)
      (define-key ac-completing-map (kbd "C-p") 'ac-previous)
-     (setq ac-dwim t))
+     (setq ac-dwim t)
+     (setq ac-ignore-case t))
 
 ;; dired+
 (req 'dired+)
@@ -46,6 +45,41 @@
 (req 'expand-region
      (global-set-key (kbd "C-@") 'er/expand-region)
      (global-set-key (kbd "C-M-@") 'er/contract-region))
+
+;; tabbar
+(req 'tabbar
+     ;; http://d.hatena.ne.jp/alfad/20100425/1272208744
+     ;; http://idita.blog11.fc2.com/blog-entry-810.html
+     (tabbar-mode t)
+     ;; disbale buttons no left side
+     (dolist (btn '(tabbar-home-button
+                    tabbar-scroll-right-button
+                    tabbar-scroll-left-button))
+       (set btn (cons (cons "" nil)
+                      (cons "" nil))))
+     ;; face
+     (set-face-attribute
+      'tabbar-default nil :background "black")
+     (set-face-attribute
+      'tabbar-unselected nil
+      :foreground "white"
+      :background "black"
+      :box '(:line-width 1 :color "white" :style released-button))
+     (set-face-attribute
+      'tabbar-selected nil
+      :foreground "white"
+      :background "gray38"
+      :box '(:line-width 1 :color "white" :style pressed-button))
+     (set-face-attribute
+      'tabbar-button nil
+      :box '(:line-width 1 :color "gray72" :style released-button))
+     (set-face-attribute
+      'tabbar-separator nil
+      :height 60)
+
+     ;; firefox keybind
+     (global-set-key [(control tab)] 'tabbar-forward-tab)
+     (global-set-key [(control shift tab)] 'tabbar-backward-tab))
 
 ;; isearch+
 (eval-after-load "isearch" '(require 'isearch+))
