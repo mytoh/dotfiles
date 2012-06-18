@@ -2,7 +2,7 @@
 
 (define-module kirjasto.verkko.palvelin
   (export
-    define-page-handler)
+   define-page-handler)
   (use makiki))
 (select-module kirjasto.verkko.palvelin)
 
@@ -10,9 +10,9 @@
 (define define-page-handler
   (lambda (rx proc)
     (add-http-handler!
-      rx
-      (^(req app)
-        (respond/ok
-          req
-          (proc req))))))
+     rx
+     (^(req app)
+       (respond/ok
+        req
+        (proc req))))))
 

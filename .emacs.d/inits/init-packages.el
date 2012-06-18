@@ -44,8 +44,8 @@
 
 ;; expand-region
 (req 'expand-region
-(global-set-key (kbd "C-@") 'er/expand-region)
-(global-set-key (kbd "C-M-@") 'er/contract-region))
+     (global-set-key (kbd "C-@") 'er/expand-region)
+     (global-set-key (kbd "C-M-@") 'er/contract-region))
 
 ;; isearch+
 (eval-after-load "isearch" '(require 'isearch+))
@@ -62,13 +62,13 @@
 ;;; plugins under vendor directory
 ;; update plugins
 (update-vendor-directory *user-emacs-vendor-directory*)
-;; powerline
+;; powerline, github.com/jonathanchu/emacs-powrline
 (add-to-load-path (concat *user-emacs-vendor-directory*
                           "emacs-powerline"))
 (req 'powerline
      (setq powerline-arrow-shape 'arrow14)   ;; arrow, curve, arrow14
      )
-;; nyan-mode
+;; nyan-mode, github.com/TeMPOraL/nyan-mode
 (add-to-load-path (concat *user-emacs-vendor-directory*
                           "nyan-mode"))
 ;; emux-el github.com/m2ym/emux-el
@@ -81,15 +81,15 @@
 (req 'whitespace
      (setq whitespace-line-column 80)
      (setq whitespace-style '(face
-                             trailing
-                             lines-tail
-                             space-before-tab
-                             space-after-tab))
+                              trailing
+                              lines-tail
+                              space-before-tab
+                              space-after-tab))
      (global-whitespace-mode t))
 
 ;; save curosr position
 (req 'saveplace
-(setq-default save-place t))
+     (setq-default save-place t))
 
 
 

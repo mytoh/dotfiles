@@ -2,7 +2,7 @@
 
 (define-module kirjasto.verkko.merkintä
   (export
-    html5)
+   html5)
   (use text.tree)
   (use sxml.tools)
   )
@@ -17,7 +17,7 @@
 (define html5
   (lambda (body-list)
     (tree->string
-      `(,doctype-html
-         ,charset-utf8
-         ,(sxml:sxml->xml
-            body-list)))))
+     `(,doctype-html
+       ,charset-utf8
+       ,(sxml:sxml->xml
+         body-list)))))

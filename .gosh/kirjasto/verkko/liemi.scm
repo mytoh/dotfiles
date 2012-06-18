@@ -2,7 +2,7 @@
 
 (define-module kirjasto.verkko.liemi
   (export
-    find-all-tags)
+   find-all-tags)
   (use rfc.uri))
 (select-module kirjasto.verkko.liemi)
 
@@ -10,11 +10,11 @@
   (lambda (tag body)
     (let loop ((str body))
       (let  ((match (rxmatch
-                      (string->regexp
-                        (string-append "<" tag "[^>]*>.*?<\/" tag ">"))
-                      str)))
+                     (string->regexp
+                      (string-append "<" tag "[^>]*>.*?<\/" tag ">"))
+                     str)))
         (cond
-          (match
-            (cons (match) (loop (match 'after))))
-          (else
-            '()))))))
+         (match
+          (cons (match) (loop (match 'after))))
+         (else
+          '()))))))
