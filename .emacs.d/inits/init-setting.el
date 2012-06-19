@@ -3,16 +3,19 @@
 ;; plugin directory
 (setq *user-emacs-vendor-directory* (concat user-emacs-directory (file-name-as-directory "vendor")))
 ;; user elisps
-(add-to-load-path (concat user-emacs-directory "elisp"))
+(my-add-to-load-path (concat user-emacs-directory "elisp"))
+
 ;;disable startup message
 (setq inhibit-startup-screen -1)
 (show-paren-mode)
+
 ;; syntax highlight
 (global-font-lock-mode t)
 (setq font-lock-maximum-decoration t)
 
 ;; read symlinked file
 (setq vc-follow-symlinks t)
+
 ;; encodings
 (set-language-environment 'Japanese)
 (set-default-coding-systems 'utf-8-unix)
@@ -23,6 +26,10 @@
 (prefer-coding-system 'utf-8-unix)
 (set-keyboard-coding-system 'utf-8-unix)
 (set-buffer-file-coding-system 'utf-8-unix)
+
+;; start server
+(if window-system
+    (server-start))
 ;; use space instead of tab
 (setq-default tab-width 4 indent-tabs-mode nil)
 (setq indent-line-function 'indent-relative-maybe)
@@ -53,7 +60,6 @@
 (setq cua-enable-cua-keys nil) ; don't make fancy keymaps
 ;; delete auto save file when exit
 (setq delete-auto-save-files t)
-
 ;; ignore case
 (setq completion-ignore-case t)
 (setq read-file-name-completion-ignore-case t)
@@ -66,29 +72,11 @@
 ;; save buffer history
 (savehist-mode 1)
 (setq history-length 3000)
-
-;;; faces
-
-(set-face-colours 'default "#d0d0d0" "gray7")
-(set-face-colours 'highlight "white" "gray11")
-(set-face-colours 'modeline "white"  "gray30")
-(set-face-colours 'mode-line-buffer-id "linen" "gray15")
-
-;;(set-face-font 'default "Konatu-12")
-
-(set-face-foreground 'font-lock-comment-face "gray35")
-(set-face-background 'region "dark slate blue")
-(set-face-background 'cursor  "white")
-
-(custom-set-faces
- '(default
-    ((t (:height 110
-         )))))
-
-;; transparent 
-;; http://www.emacswiki.org/emacs/TransparentEmacs
-(set-frame-parameter (selected-frame) 'alpha '(85 50))
-(add-to-list 'default-frame-alist '(alpha 85 50))
+;; disable bell
+(setq ring-bell-function nil)
+(setq visible-bell nil)
+;; show buffer list by C-x b
+(iswitchb-mode t)
 
 ;; gauche
 (setq process-coding-system-alist
