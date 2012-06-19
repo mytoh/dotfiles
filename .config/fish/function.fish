@@ -41,7 +41,7 @@ exit
 end
 
 function em
-emacsclient -an $argv
+	emacsclient -n -a emacs $argv
 end
 
 function mps

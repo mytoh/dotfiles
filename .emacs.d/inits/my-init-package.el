@@ -63,20 +63,21 @@
                          (cons "" nil))))
         ;; face
         (set-face-attribute
-         'tabbar-default nil :background "black")
+         'tabbar-default nil 
+:background "black")
         (set-face-attribute
          'tabbar-unselected nil
          :foreground "white"
          :background "black"
-         :box '(:line-width 1 :color "white" :style released-button))
+         :box '(:line-width 1 :color "white" :style nil))
         (set-face-attribute
          'tabbar-selected nil
          :foreground "white"
          :background "gray38"
-         :box '(:line-width 1 :color "white" :style pressed-button))
+         :box '(:line-width 1 :color "white" :style nil))
         (set-face-attribute
          'tabbar-button nil
-         :box '(:line-width 1 :color "gray72" :style released-button))
+         :box '(:line-width 1 :color "gray72" :style nil))
         (set-face-attribute
          'tabbar-separator nil
          :height 60)
@@ -100,8 +101,12 @@
 ;; info+
 (eval-after-load 'info '(my-req 'info+))
 
+;; haskell-mode
+(my-req 'haskell-mode
+(my-req 'haskell-cabal)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation))
 
-;;; marmalade
 ;; flex-autopair
 (my-req 'flex-autopair
         (flex-autopair-mode 1))
@@ -123,4 +128,4 @@
         (setq-default save-place t))
 
 
-(provide 'init-packages)
+(provide 'my-init-package)

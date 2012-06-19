@@ -96,7 +96,8 @@ myTerminal       :: String
 myTerminal       = "urxvtcd "
 myBorderWidth    = 2
 myModMask        :: KeyMask
-myModMask        = mod1Mask
+-- mod1 = alt , mod4 = windows key
+myModMask        = mod4Mask
 myIconsDirectory = "/home/mytoh/.dzen/icons/"
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False

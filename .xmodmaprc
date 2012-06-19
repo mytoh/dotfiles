@@ -20,3 +20,20 @@ pointer = 3 2 1
 keycode 211 = grave asciitilde
 ! }}}
 
+! hyper , super  {{{
+! ctrl to hyper
+keycode 37 = Hyper_L
+! windows to super
+keycode 115 = Super_L
+! }}}
+
+! audio keys {{{
+! insert to audio-mute
+keycode 106 = XF86AudioMute
+! home to audio-raise
+keycode 97  = XF86AudioRaiseVolume
+! page-up (keysym is prior) to audio-lower
+keycode 99  = XF86AudioLowerVolume
+! }}}
+
+

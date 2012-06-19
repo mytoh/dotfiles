@@ -2,7 +2,7 @@
 (progn
 
 ;; font
-(set-face-attribute 'default nil :family "Ricty" :height 110)
+(set-face-attribute 'default nil :family "Ricty" :height 100)
 (set-fontset-font "fontset-default" 'japanese-jisx0208 '("Ricty" . "iso-10646-*" ) )
 
 (my-set-face-colours 'default "#d0d0d0" "gray7")
@@ -12,7 +12,12 @@
 (my-set-face-colours 'font-lock-comment-face "gray35" nil)
 (my-set-face-colours 'region nil "dark slate blue")
 (my-set-face-colours 'cursor "white" nil)
-(set-face-attribute 'mode-line t :foreground "#030303" :background "#bdbdbd" :box nil)
+
+(set-face-attribute 'mode-line t 
+:foreground "#030303"
+:background "#bdbdbd"
+:height 80
+:box nil)
 (set-face-attribute 'mode-line-inactive t :foreground "#f9f9f9" :background "#666666" :box nil)
 ;(set-face-attribute 'font-lock-comment-face  t :foreground "#gray12")
 (set-face-attribute 'font-lock-constant-face t :foreground "#E9874A")
@@ -32,4 +37,4 @@
 
 )
 
-(provide 'init-face)
+(provide 'my-init-face)

@@ -1,5 +1,0 @@
-
-(load "init-macro")
-(require 'init-setting)
-(load "init-packages")
-(load "init-keys")

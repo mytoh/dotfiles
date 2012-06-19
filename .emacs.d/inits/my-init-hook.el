@@ -9,4 +9,4 @@
 (add-hook 'dired-load-hook
 (function (lambda () (load "dired-x"))))
 
-(provide 'init-hook)
+(provide 'my-init-hook)

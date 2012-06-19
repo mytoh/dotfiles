@@ -2,4 +2,4 @@
 ;; no split 
 (global-set-key (kbd "C-x C-b") 'buffer-menu)
 
-(provide 'init-keys)
+(provide 'my-init-key)

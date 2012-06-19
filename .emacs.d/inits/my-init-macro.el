@@ -20,37 +20,39 @@
 
 (defmacro* url-is-git-p (url)
   `(cond ( (or (string-match "git://" ,url)
-               (string-match "\.git$" ,url))
+               (string-match "\.git/?$" ,url))
            t)
          (t nil)))
+
+(defmacro* my-run-shell-command (command-string)
+  (cond
+   ((typep command-string 'string)
+    `(start-process-shell-command "shell-command" nil ,command-string))))
+
 
 (defmacro* my-vendor-update-packages (path)
   `(when (file-exists-p ,path)
      (lexical-let ((paths (directory-files ,path t "[^\.]"))
                    (directory-is-git-p (function* (lambda (p)
                                                     (if (directory-files p nil "\.git$") t nil)))))
-       (mapc
-        (function* (lambda (d)
-                     (when (funcall directory-is-git-p d)
-                       (progn
-                         (cd-absolute d)
-                         (message "updating vendor plugin %s" d)
-                         (my-run-shell-command "git pull")
-                         (cd user-emacs-directory)))))
-        paths))))
+       (mapc        (function* (lambda (d)
+                                 (when (funcall directory-is-git-p d)
+                                   (progn
+                                     (cd-absolute d)
+                                     (message "updating vendor plugin %s" d)
+                                     (my-run-shell-command "git pull")
+                                     (cd user-emacs-directory)))))
+                   paths)))) 
 
 (defmacro* my-vendor-install-packages (packages)
   `(dolist (p ,packages)
-     (unless (file-exists-p (car p))
-       (cd-absolute (concat *user-emacs-vendor-directory* (car p)))
+     (unless (file-exists-p (concat *user-emacs-vendor-directory* (car p)))
        (cond ((url-is-git-p (cadr p))
-               (message "installing plugin ")
-               (start-process "shell-command" nil "git" "clone" (cadr p) (car p))))
+              (cd-absolute *user-emacs-vendor-directory* )
+              (message "installing plugin " (car p))
+              (start-process "shell-command" nil "git" "clone" (cadr p) (car p))))
        (cd user-emacs-directory))))
 
-(defmacro* my-run-shell-command (command-string)
-  (cond
-   ((typep command-string 'string)
-    `(start-process "shell-command" nil ,@(split-string command-string)))))
 
-(provide 'init-macro)
+
+(provide 'my-init-macro)
