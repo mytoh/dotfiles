@@ -1,5 +1,5 @@
 
-(require 'my-init-macro)
+(eval-when-compile (require 'my-init-macro))
 (require 'my-init-setting)
 (require 'my-init-package)
 (require 'my-init-key)
