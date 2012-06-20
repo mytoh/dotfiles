@@ -17,19 +17,12 @@
 (setq vc-follow-symlinks t)
 
 ;; encodings
-(set-language-environment 'Japanese)
-(set-default-coding-systems 'utf-8-unix)
-(set-terminal-coding-system 'utf-8-unix)
-(setq file-name-coding-system 'utf-8-unix)
-(set-clipboard-coding-system 'utf-8-unix)
-(setq buffer-file-coding-system 'utf-8-unix)
 (prefer-coding-system 'utf-8-unix)
-(set-keyboard-coding-system 'utf-8-unix)
-(set-buffer-file-coding-system 'utf-8-unix)
 
 ;; start server
 (if window-system
-    (server-start))
+      (server-start))
+
 ;; use space instead of tab
 (setq-default tab-width 4 indent-tabs-mode nil)
 (setq indent-line-function 'indent-relative-maybe)
@@ -77,6 +70,8 @@
 (setq visible-bell nil)
 ;; show buffer list by C-x b
 (iswitchb-mode t)
+;; no warnings when compile
+(setq byte-compile-warnings '(not cl-functions))
 ;; backup and autosave
 (setq *my-backup-directory*
       (file-name-as-directory (concat user-emacs-directory "backup")))

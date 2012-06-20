@@ -7,18 +7,11 @@
 
 (my-set-face-colours 'default "#d0d0d0" "gray7")
 (my-set-face-colours 'highlight "white" "gray11")
-(my-set-face-colours 'modeline "white"  "gray30")
 (my-set-face-colours 'mode-line-buffer-id "linen" "gray15")
 (my-set-face-colours 'font-lock-comment-face "gray35" nil)
 (my-set-face-colours 'region nil "dark slate blue")
 (my-set-face-colours 'cursor "white" nil)
 
-(set-face-attribute 'mode-line t 
-:foreground "#030303"
-:background "#bdbdbd"
-:height 80
-:box nil)
-(set-face-attribute 'mode-line-inactive t :foreground "#f9f9f9" :background "#666666" :box nil)
 ;(set-face-attribute 'font-lock-comment-face  t :foreground "#gray12")
 (set-face-attribute 'font-lock-constant-face t :foreground "#E9874A")
 (set-face-attribute 'font-lock-builtin-face  t :foreground "#a0a486")

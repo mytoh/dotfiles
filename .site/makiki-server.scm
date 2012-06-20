@@ -171,6 +171,7 @@
                                        "scheme"
                                        "lisp_ja"
                                        "lisp"
+                                       "emacs"
                                        "bsd"
                                        "freebsd"
                                        "screenshots"
