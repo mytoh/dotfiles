@@ -9,6 +9,8 @@
 
 (define (usage status) (exit status "usage: ~a <file>\n" *program-name*))
 
+(define (kuva)
+(lambda ()))
 
 (define (main args)
   (cond ((< (length args) 2)

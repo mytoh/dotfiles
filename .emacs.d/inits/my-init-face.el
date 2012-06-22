@@ -2,9 +2,10 @@
 (progn
 
 ;; font
-(set-face-attribute 'default nil :family "Ricty" :height 100)
+(set-face-attribute 'default nil :family "Ricty" :height 90)
 (set-fontset-font "fontset-default" 'japanese-jisx0208 '("Ricty" . "iso-10646-*" ) )
 
+(setq-default frame-background-mode 'dark)
 (my-set-face-colours 'default "#d0d0d0" "gray7")
 (my-set-face-colours 'highlight "white" "gray11")
 (my-set-face-colours 'mode-line-buffer-id "linen" "gray15")

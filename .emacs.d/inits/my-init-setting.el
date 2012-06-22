@@ -84,11 +84,5 @@
 (make-directory *my-autosave-directory* t)
 (make-directory *my-backup-directory* t)
 
-;; gauche
-(setq process-coding-system-alist
-      (cons '("gosh" utf-8 . utf-8) process-coding-system-alist))
-(setq scheme-program-name "gosh -i")
-(autoload 'scheme-mode "cmuscheme" "Major mode for Scheme." t)
-(autoload 'run-scheme  "cmuscheme" "Run an inferior Scheme process." t)
 
 (provide 'my-init-setting)

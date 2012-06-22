@@ -12,7 +12,6 @@
   (srfi 1 11))
 
 
-
 (define (get-post-page page-number tag)
   (receive (status head body)
            (http-get "danbooru.donmai.us" (string-append "/post?page=" (number->string page-number) "&tags=" tag))
@@ -50,8 +49,7 @@
   (let loop ((lst  id-num-list))
     (when (not (null?  lst))
       (let ((id (car (car lst)))
-            (url (cadr   (car lst)))
-            )
+            (url (cadr   (car lst))))
         (swget url id)
         (loop (cdr lst))))))
 
@@ -82,4 +80,12 @@
               (cd tag)
               (get-posts-all tag)
               (cd "..")))
+                                       
+
+
+
+
+
+
+
 

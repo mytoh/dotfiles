@@ -146,9 +146,9 @@ myLayoutHook =  avoidStruts                $
 --                 collectiveLayouts = tabbed ||| twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex
                    collectiveLayouts = twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex
 
-                   full    = renamed [Replace "*"] (smartBorders (noBorders (dwmStyle shrinkText myTheme Full)))
+                   full    = renamed [Replace "*"] (smartBorders (withBorder 1 (dwmStyle shrinkText myTheme Full)))
                    tile    = renamed [Replace "+"] (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
-                   tabbed  = renamed [Replace "="] (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedBottomAlways shrinkText myTheme)))
+                   -- tabbed  = renamed [Replace "="] (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedBottomAlways shrinkText myTheme)))
                    twopane = renamed [Replace "-"] (smartBorders (withBorder 1 (TwoPane 0.02 0.4)))
                    mosaic  = renamed [Replace "%"] (smartBorders (withBorder 1 (MosaicAlt M.empty)))
                    sprl    = renamed [Replace "@"] (smartBorders (withBorder 1 (limitWindows 5 (spiral gratio))))
@@ -172,7 +172,7 @@ myKeys = [ -- M4 for Super key
        , ("M-p r", spawn ("dmenu_run -b -p \">\" -fn " ++ myDzenFont)) -- dzen prompt
        -- , ("M-p r", spawn ("yeganesh -x -- -b -p \">\" -fn " ++ myDzenFont)) -- dzen prompt
     -- , ("M-p r", shellPrompt myXPConfig) -- shell prompt
-       , ("M-p t", prompt (myTerminal ++ " -e") myXPConfig) -- run in term
+       -- , ("M-p t", prompt (myTerminal ++ " -e") myXPConfig) -- run in term
        , ("M-p g", windowPromptGoto myWaitSP ) -- window go prompt
        , ("M-p b", windowPromptBring myWaitSP ) -- window bring prompt
        -- , ("M-p b", bringMenu ) -- window bring prompt wth dmenu

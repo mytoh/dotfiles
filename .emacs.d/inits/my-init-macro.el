@@ -20,11 +20,23 @@
      (set-face-foreground ,face ,fore)
      (set-face-background ,face ,back)))
 
-(defmacro* url-is-git-p (url)
+(defmacro* %url-is-git-p (url)
   `(cond ((or (string-match (rx "git://") ,url)
                (string-match  (rx ".git" (zero-or-one "/") line-end) ,url))
                t)
            (t nil)))
+
+(defmacro* %url-is-github-p (url)
+  `(cond ((string-match
+            (rx   line-start
+                  (one-or-more (or (syntax symbol) (syntax word)))
+                  "/"
+                  (one-or-more (or (syntax symbol)
+                                (syntax word)))
+                  line-end)
+            ,url)
+           t)
+         (t nil)))
 
 (defmacro* my-shell-command (command-string)
   (cond
@@ -36,7 +48,7 @@
      (lexical-let ((paths (directory-files ,path t "[^\.]")))
                    (labels ( (directory-is-git-p (p)
                                                     (if (directory-files p nil "\.git$") t nil)))
-       (mapc (function* (lambda (d)
+       (cl-mapc (function* (lambda (d)
                                  (when (directory-is-git-p d)
                                    (progn
                                      (cd-absolute d)
@@ -48,12 +60,16 @@
 (defmacro* my-vendor-install-packages (packages)
   `(dolist (p ,packages)
      (unless (file-exists-p (concat *user-emacs-vendor-directory* (car p)))
-       (cond ((url-is-git-p (cadr p))
+       (cond ((%url-is-git-p (cadr p))
               (cd-absolute *user-emacs-vendor-directory* )
               (message "installing plugin " (car p))
-              (start-process "shell-command" nil "git" "clone" (cadr p) (car p))))
+              (start-process "shell-command" nil "git" "clone" (cadr p) (car p)))
+             ( (%url-is-github-p (cadr p))
+              (cd-absolute *user-emacs-vendor-directory* )
+              (message "installing %s from github " (car p))
+              (start-process "shell-command" nil
+                             "git" "clone" (concat "git://github.com/" (cadr p)) (car p))))
        (cd user-emacs-directory))))
-
 
 
 (provide 'my-init-macro)

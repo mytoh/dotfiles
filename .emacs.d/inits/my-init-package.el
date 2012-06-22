@@ -2,28 +2,53 @@
 
 ;; package.el
 (my-req 'package
-        ;; load MELPA
-        (add-to-list 'package-archives
-                     '("melpa" . "http://melpa.milkbox.net/packages/") t)
-        (add-to-list 'package-archives
-                     '("marmalade" . "http://marmalade-repo.org/packages/"))
-        (package-initialize))
+    ;; load MELPA
+    (add-to-list 'package-archives
+                 '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives
+               '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (package-initialize))
+
+;; install packages
+(setq *my-package-list*
+      '(rainbow-delimiters
+        auto-complete
+        dired+
+        image-dired+
+        helm
+        helm-git
+        magit
+        rainbow-mode
+        expand-region
+        tabbar
+        cursor-chg
+        suomalainen-kalenteri
+        isearch+
+        info+
+        haskell-mode
+        flex-autopair
+                ))
+
+(dolist (p *my-package-list*)
+  (unless (package-installed-p p)
+    (package-install p)
+    (message "install %s"  p)))
 
 ;; rainbow-delimiters
 (my-req 'rainbow-delimiters
-        (add-hook 'scheme-mode-hook       'rainbow-delimiters-mode)
-        (add-hook 'lisp-mode-hook         'rainbow-delimiters-mode)
-        (add-hook 'emacs-lisp-mode-hook   'rainbow-delimiters-mode))
+    (add-hook 'scheme-mode-hook       'rainbow-delimiters-mode)
+  (add-hook 'lisp-mode-hook         'rainbow-delimiters-mode)
+  (add-hook 'emacs-lisp-mode-hook   'rainbow-delimiters-mode))
 
 ;; auto-complete
 (my-req 'auto-complete
-        (my-req 'auto-complete-config )
+    (my-req 'auto-complete-config )
   (ac-config-default)
   (global-auto-complete-mode t)
   (define-key ac-completing-map (kbd "C-n") 'ac-next)
   (define-key ac-completing-map (kbd "C-p") 'ac-previous)
   (setq ac-dwim t)
-  (setq ac-ignore-case t))
+  )
 
 ;; dired+
 (my-req 'dired+)
@@ -70,15 +95,16 @@
    'tabbar-default nil 
    :background "black")
   (set-face-attribute
-   'tabbar-unselected nil
-   :foreground "white"
-   :background "black"
-   :box '(:line-width 1 :color "white" :style nil))
-  (set-face-attribute
    'tabbar-selected nil
    :foreground "white"
    :background "gray38"
    :box '(:line-width 1 :color "white" :style nil))
+  (set-face-attribute
+   'tabbar-unselected nil
+   :foreground "white"
+   :background "gray14"
+   :box nil)
+                                        ;  :box '(:line-width 1 :color "white" :style nil))
   (set-face-attribute
    'tabbar-button nil
    :box '(:line-width 1 :color "gray72" :style nil))
@@ -113,30 +139,35 @@
 
 ;; flex-autopair
 (my-req 'flex-autopair
-        (flex-autopair-mode 1))
+    (flex-autopair-mode 1))
 
 
 ;;; builtin
 ;; show trailing whitespace
 (my-req 'whitespace
-        (setq whitespace-line-column 80)
-        (setq whitespace-style '(face
-                                 trailing
-                                 lines-tail
-                                 space-before-tab
-                                 space-after-tab))
-        (global-whitespace-mode t))
+    (setq whitespace-line-column 80)
+  (setq whitespace-style '(face
+                           trailing
+                                        ;                                 lines-tail
+                           space-before-tab
+                           space-after-tab))
+  (global-whitespace-mode t)
+  (add-hook 'scheme-mode-hook
+            (lambda ()
+              (progn
+                         (add-hook 'write-contents-functions 'whitespace-cleanup)
+                         (add-hook 'write-contents-functions 'delete-trailing-whitespace)))))
 
 ;; save curosr position
 (my-req 'saveplace
-        (setq-default save-place t))
+    (setq-default save-place t))
 
 ;; eldoc
 (my-req 'eldoc
-(setq eldoc-idle-dely 0)
-(setq eldoc-echo-area-use-multiline-p t)
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
+    (setq eldoc-idle-dely 0)
+  (setq eldoc-echo-area-use-multiline-p t)
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
 (provide 'my-init-package)

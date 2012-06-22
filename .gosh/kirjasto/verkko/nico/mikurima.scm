@@ -14,7 +14,6 @@
   )
 (select-module kirjasto.verkko.nico.mikurima)
 
-
 (define mik:mik->sxml
   (lambda (mik-playlist)
     (ssax:xml->sxml
