@@ -179,6 +179,7 @@
                                        "xmonad"
                                        "unixporn"
                                        "desktops"
+                                       "unix"
                                        "vim"))
 
              ,(yotsuba "//www.4chan.org"

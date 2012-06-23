@@ -105,14 +105,6 @@
     (kahua         Kahua)
     (mozilla       mozilla-central)
     (shadow        shadow)
-    ; (git            git)
-    ; (dss-project   dswm)
-    ; "git://gauche.git.sourceforge.net/gitroot/gauche/Gauche"
-    ; "git://derf.homelinux.org/feh"
-    ; "git://gitorious.org/~ridiculousfish/fish-shell/fishfish.git"
-    ; "git://liferea.git.sourceforge.net/gitroot/liferea/liferea"
-    ; "git://repo.or.cz/ncmpcpp.git"
-    ; "git://sox.git.sourceforge.net/gitroot/sox/sox"
     ))
 
 ;; update git repository

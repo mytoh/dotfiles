@@ -98,12 +98,12 @@
    'tabbar-selected nil
    :foreground "white"
    :background "gray38"
-   :box '(:line-width 1 :color "white" :style nil))
+   :box nil)
   (set-face-attribute
    'tabbar-unselected nil
    :foreground "white"
    :background "gray14"
-   :box nil)
+   :box '(:line-width 1 :color "gray22" :style nil))
                                         ;  :box '(:line-width 1 :color "white" :style nil))
   (set-face-attribute
    'tabbar-button nil
@@ -154,9 +154,8 @@
   (global-whitespace-mode t)
   (add-hook 'scheme-mode-hook
             (lambda ()
-              (progn
-                         (add-hook 'write-contents-functions 'whitespace-cleanup)
-                         (add-hook 'write-contents-functions 'delete-trailing-whitespace)))))
+                                       (add-hook 'write-contents-functions 'whitespace-cleanup)
+                         (add-hook 'write-contents-functions 'delete-trailing-whitespace))))
 
 ;; save curosr position
 (my-req 'saveplace

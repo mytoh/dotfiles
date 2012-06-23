@@ -224,19 +224,20 @@ myWaitSP = myXPConfig { autoComplete   = Just 1000000 }
 -- manage hooks -------------------------------------------------------
 myManageHook = -- insertPosition End Newer <+> composeAll
        (composeAll . concat $
-        -- [ [isFullscreen                                     --> (doF W.focusDown <+> doFullFloat) ]
-        [ [isFullscreen                                        --> doFullFloat ]
-        , [isDialog                                            --> doFloat]
-        , [className  =? "feh"                                 --> viewShift "kolme"]
+        -- [ [isFullscreen                                                                             --> (doF W.focusDown <+> doFullFloat) ]
+        [ [isFullscreen                                                                                   --> doFullFloat ]
+        , [isDialog                                                                                           --> doFloat]
+        , [className  =? "feh"                                                                   --> viewShift "kolme"]
         , [(className =? c <||> title =? c <||> appName =? c)  --> doFloat | c <- myFloats ]
-        , [className  =? "MPlayer"                             --> (doFullFloat <+> viewShift "kolme")]
-        , [className  =? "V2C"                                 -->  viewShift "kaksi"]
-        , [className  =? "Firefox"                             -->  viewShift "kaksi"]
+        , [className  =? "MPlayer"                                                    --> (doFullFloat <+> viewShift "kolme")]
+        , [className  =? "V2C"                                                                -->  viewShift "kaksi"]
+        , [className  =? "Firefox"                                                           -->  viewShift "kaksi"]
         , [(className =? "Firefox" <&&> appName =? "Dialog")  --> (doFloat <+> viewShift "kaksi")]
-        , [className  =? "Xfce4-notifyd"                       --> doIgnore]
-        , [className  =? "trayer"                       --> doIgnore]
-        , [className  =? "stalonetray"                       --> doIgnore]
-        , [title      =? "Install user style"                  --> doFloat]
+       , [className   =? "Emacs"                                                          --> viewShift "neljä"]
+        , [className  =? "Xfce4-notifyd"                                               --> doIgnore]
+        , [className  =? "trayer"                                                            --> doIgnore]
+        , [className  =? "stalonetray"                                                  --> doIgnore]
+        , [title      =? "Install user style"                                                  --> doFloat]
         -- , [appName =? ""]
         ])
          <+> namedScratchpadManageHook myScratchPads

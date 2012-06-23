@@ -40,7 +40,7 @@
 (my-req 'highlight-sexp
     (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
   (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode)
-  (add-hook 'scheme-mode-hook 'highlight-sexp)
+;  (add-hook 'scheme-mode-hook 'highlight-sexp)
   (setq hl-sexp-foreground-color nil)
   (setq hl-sexp-background-color "#1a1a1a"))
 

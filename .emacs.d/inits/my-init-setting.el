@@ -64,14 +64,17 @@
 (setq lexical-binding t)
 ;; save buffer history
 (savehist-mode 1)
-(setq history-length 3000)
+(setq history-length 100)
 ;; disable bell
 (setq ring-bell-function nil)
 (setq visible-bell nil)
-;; show buffer list by C-x b
-(iswitchb-mode t)
 ;; no warnings when compile
 (setq byte-compile-warnings '(not cl-functions))
+
+;; dont split verticaly
+(setq split-height-threshold nil)
+(setq split-width-threshold nil)
+
 ;; backup and autosave
 (setq *my-backup-directory*
       (file-name-as-directory (concat user-emacs-directory "backup")))
@@ -83,6 +86,9 @@
       `((".*" . ,*my-backup-directory*)))
 (make-directory *my-autosave-directory* t)
 (make-directory *my-backup-directory* t)
+
+;; save more recent files
+(setq recentf-max-saved-items 100)
 
 
 (provide 'my-init-setting)

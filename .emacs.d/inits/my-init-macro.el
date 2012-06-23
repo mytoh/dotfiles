@@ -53,7 +53,7 @@
                                    (progn
                                      (cd-absolute d)
                                      (message "updating vendor plugin %s" d)
-                                     (my-shell-command "git pull")
+                                     (my-shell-command "git pull &")
                                      (cd user-emacs-directory)))))
                    paths)))))
 
