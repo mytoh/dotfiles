@@ -38,22 +38,28 @@
            t)
          (t nil)))
 
-(defmacro* my-shell-command (command-string)
+(defmacro* my-shell-command (command-string &optional directory)
+  (if directory
   (cond
    ((typep command-string 'string)
-    `(start-process-shell-command "shell-command" nil ,command-string))))
+    `(progn
+       (shell-command ,command-string))))
+  (cond
+   ((typep command-string 'string)
+    `(progn
+       (shell-command ,command-string))))))
 
 (defmacro* my-vendor-update-packages (path)
   `(when (file-exists-p ,path)
      (lexical-let ((paths (directory-files ,path t "[^\.]")))
                    (labels ( (directory-is-git-p (p)
                                                     (if (directory-files p nil "\.git$") t nil)))
-       (cl-mapc (function* (lambda (d)
+       (mapc (function* (lambda (d)
                                  (when (directory-is-git-p d)
                                    (progn
                                      (cd-absolute d)
                                      (message "updating vendor plugin %s" d)
-                                     (my-shell-command "git pull &")
+                                     (my-shell-command "git pull")
                                      (cd user-emacs-directory)))))
                    paths)))))
 
@@ -63,12 +69,11 @@
        (cond ((%url-is-git-p (cadr p))
               (cd-absolute *user-emacs-vendor-directory* )
               (message "installing plugin " (car p))
-              (start-process "shell-command" nil "git" "clone" (cadr p) (car p)))
+              (my-shell-command (concat  "git clone " (cadr p) " " (car p))))
              ( (%url-is-github-p (cadr p))
               (cd-absolute *user-emacs-vendor-directory* )
               (message "installing %s from github " (car p))
-              (start-process "shell-command" nil
-                             "git" "clone" (concat "git://github.com/" (cadr p)) (car p))))
+              (my-shell-command  (concat "git clone git://github.com/" (cadr p) " " (car p)))))
        (cd user-emacs-directory))))
 
 

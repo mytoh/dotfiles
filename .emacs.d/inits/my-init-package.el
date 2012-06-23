@@ -76,8 +76,8 @@
 
 ;; expand-region
 (my-req 'expand-region
-    (global-set-key (kbd "C-@") 'er/expand-region)
-  (global-set-key (kbd "C-M-@") 'er/contract-region))
+    (global-set-key (kbd "C-M-SPC") 'er/expand-region)
+  (global-set-key (kbd "C-M-s-SPC") 'er/contract-region))
 
 ;; tabbar
 (my-req 'tabbar

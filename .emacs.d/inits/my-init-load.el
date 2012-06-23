@@ -8,4 +8,4 @@
 (require 'my-init-face)
 (require 'my-init-vendor)
 
-(require 'my-init-language)
+(require 'my-init-progmodes)
