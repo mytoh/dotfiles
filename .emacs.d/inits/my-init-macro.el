@@ -1,6 +1,6 @@
 ;;; -*- coding: utf-8; lexical-binding: t -*-
 (eval-when-compile
- (require 'cl))
+  (require 'cl))
 
 ;; http://e-arrows.sakura.ne.jp/2010/03/macros-in-emacs-el.html
 (defmacro* my-req (lib &rest body)
@@ -22,46 +22,35 @@
 
 (defmacro* %url-is-git-p (url)
   `(cond ((or (string-match (rx "git://") ,url)
-               (string-match  (rx ".git" (zero-or-one "/") line-end) ,url))
-               t)
-           (t nil)))
+              (string-match  (rx ".git" (zero-or-one "/") line-end) ,url))
+          t)
+         (t nil)))
 
 (defmacro* %url-is-github-p (url)
   `(cond ((string-match
-            (rx   line-start
-                  (one-or-more (or (syntax symbol) (syntax word)))
-                  "/"
-                  (one-or-more (or (syntax symbol)
-                                (syntax word)))
-                  line-end)
-            ,url)
-           t)
+           (rx   line-start
+                 (one-or-more (or (syntax symbol) (syntax word)))
+                 "/"
+                 (one-or-more (or (syntax symbol)
+                                  (syntax word)))
+                 line-end)
+           ,url)
+          t)
          (t nil)))
-
-(defmacro* my-shell-command (command-string &optional directory)
-  (if directory
-  (cond
-   ((typep command-string 'string)
-    `(progn
-       (shell-command ,command-string))))
-  (cond
-   ((typep command-string 'string)
-    `(progn
-       (shell-command ,command-string))))))
 
 (defmacro* my-vendor-update-packages (path)
   `(when (file-exists-p ,path)
      (lexical-let ((paths (directory-files ,path t "[^\.]")))
-                   (labels ( (directory-is-git-p (p)
-                                                    (if (directory-files p nil "\.git$") t nil)))
-       (mapc (function* (lambda (d)
-                                 (when (directory-is-git-p d)
-                                   (progn
-                                     (cd-absolute d)
-                                     (message "updating vendor plugin %s" d)
-                                     (my-shell-command "git pull")
-                                     (cd user-emacs-directory)))))
-                   paths)))))
+       (labels ( (directory-is-git-p (p)
+                                     (if (directory-files p nil "\.git$") t nil)))
+         (mapc (function* (lambda (d)
+                            (when (directory-is-git-p d)
+                              (progn
+                                (cd-absolute d)
+                                (message "updating vendor plugin %s" d)
+                                (shell-command "git pull")
+                                (cd user-emacs-directory)))))
+               paths)))))
 
 (defmacro* my-vendor-install-packages (packages)
   `(dolist (p ,packages)
@@ -69,11 +58,12 @@
        (cond ((%url-is-git-p (cadr p))
               (cd-absolute *user-emacs-vendor-directory* )
               (message "installing plugin " (car p))
-              (my-shell-command (concat  "git clone " (cadr p) " " (car p))))
+              (shell-command (concat  "git clone " (cadr p) " " (car p))
+                             *user-emacs-vendor-directory*))
              ( (%url-is-github-p (cadr p))
-              (cd-absolute *user-emacs-vendor-directory* )
-              (message "installing %s from github " (car p))
-              (my-shell-command  (concat "git clone git://github.com/" (cadr p) " " (car p)))))
+               (cd-absolute *user-emacs-vendor-directory* )
+               (message "installing %s from github " (car p))
+               (shell-command  (concat "git clone git://github.com/" (cadr p) " " (car p)))))
        (cd user-emacs-directory))))
 
 

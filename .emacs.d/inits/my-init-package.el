@@ -13,20 +13,27 @@
 (setq *my-package-list*
       '(rainbow-delimiters
         auto-complete
+        bookmark+
+        cursor-chg
+        deferred
         dired+
+        dired-single
+        highlight-symbol
         image-dired+
         helm
         helm-git
+        icicles
         magit
         rainbow-mode
+        scheme-complete
         expand-region
         tabbar
-        cursor-chg
         suomalainen-kalenteri
         isearch+
         info+
         haskell-mode
         flex-autopair
+        yasnippet
                 ))
 
 (dolist (p *my-package-list*)
@@ -137,6 +144,10 @@
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation))
 
+;; yasnippet
+(my-req 'yasnippet
+    (yas/global-mode 1))
+
 ;; flex-autopair
 (my-req 'flex-autopair
     (flex-autopair-mode 1))
@@ -168,5 +179,6 @@
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
+
 
 (provide 'my-init-package)

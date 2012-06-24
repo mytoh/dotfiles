@@ -238,8 +238,8 @@ function! s:unite_my_settings() "{{{
   " vimfiler
   nnoremap <silent><buffer><expr> f unite#smart_map('f', unite#do_action('vimfiler'))
   inoremap <silent><buffer><expr> f unite#smart_map('f', unite#do_action('vimfiler'))
-  "call unite#custom_default_action('file', 'tabopen')
-  "call unite#custom_default_action('bookmark', 'tabopen')
+  call unite#custom_default_action('file', 'tabopen')
+  call unite#custom_default_action('bookmark', 'tabopen')
 endfunction "}}}
 
 " unite-launch {{{

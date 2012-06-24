@@ -1,7 +1,7 @@
 ;;; -*- coding: utf-8; lexical-binding: t -*-
 ;; personal initialize
 ;; plugin directory
-(setq *user-emacs-vendor-directory* (concat user-emacs-directory (file-name-as-directory "vendor")))
+(setq *user-emacs-vendor-directory* (expand-file-name (concat user-emacs-directory (file-name-as-directory "vendor"))))
 ;; user elisps
 (my-add-to-load-path (concat user-emacs-directory "elisp"))
 

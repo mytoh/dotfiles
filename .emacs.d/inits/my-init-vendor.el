@@ -31,7 +31,17 @@
 ;; emux-el github.com/m2ym/emux-el
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
                              "emux-el"))
-(my-req 'emux)
+(my-req 'emux
+;; prefix C-c
+;  "C-n" ' emux:term-next
+;  "SPC" 'emux:term-next
+;  "C-p"  'emux:term-previous
+;  "C-t"   'emux:term-new
+;  "A"      'emux:term-rename
+;  "k"      'emux:term-kill
+;  "d"      'emux:term-cd
+;  "~"     'emux:term-sync
+)
 
 ;; highlight-sexp
 (my-add-to-load-path

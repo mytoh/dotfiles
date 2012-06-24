@@ -11,7 +11,8 @@
 (my-set-face-colours 'mode-line-buffer-id "linen" "gray15")
 (my-set-face-colours 'font-lock-comment-face "gray35" nil)
 (my-set-face-colours 'region nil "dark slate blue")
-(my-set-face-colours 'cursor "white" nil)
+(set-cursor-color  "white")
+(set-mouse-color "blue" )
 
 (set-face-attribute 'font-lock-comment-face  t :foreground "gray40")
 (set-face-attribute 'font-lock-constant-face t :foreground "#E9874A")
@@ -29,7 +30,6 @@
 ;; http://www.emacswiki.org/emacs/TransparentEmacs
 (set-frame-parameter (selected-frame) 'alpha '(85 50))
 (add-to-list 'default-frame-alist '(alpha 85 50))
-
 )
 
 
