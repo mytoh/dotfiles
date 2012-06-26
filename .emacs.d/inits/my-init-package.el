@@ -34,7 +34,7 @@
         haskell-mode
         flex-autopair
         yasnippet
-                ))
+        ))
 
 (dolist (p *my-package-list*)
   (unless (package-installed-p p)
@@ -45,7 +45,16 @@
 (my-req 'rainbow-delimiters
     (add-hook 'scheme-mode-hook       'rainbow-delimiters-mode)
   (add-hook 'lisp-mode-hook         'rainbow-delimiters-mode)
-  (add-hook 'emacs-lisp-mode-hook   'rainbow-delimiters-mode))
+  (add-hook 'emacs-lisp-mode-hook   'rainbow-delimiters-mode)
+  (set-face-attribute 'rainbow-delimiters-depth-1-face nil :foreground "gray")
+  (set-face-attribute 'rainbow-delimiters-depth-2-face nil :foreground "dodger blue")
+  (set-face-attribute 'rainbow-delimiters-depth-3-face nil :foreground "orange")
+  (set-face-attribute 'rainbow-delimiters-depth-4-face nil :foreground "RoyalBlue3")
+  (set-face-attribute 'rainbow-delimiters-depth-5-face nil :foreground "darkgreen")
+  (set-face-attribute 'rainbow-delimiters-depth-6-face nil :foreground "brown")
+  (set-face-attribute 'rainbow-delimiters-depth-7-face nil :foreground "purple")
+  (set-face-attribute 'rainbow-delimiters-depth-8-face nil :foreground "khaki")
+  (set-face-attribute 'rainbow-delimiters-depth-9-face nil :foreground "salmon"))
 
 ;; auto-complete
 (my-req 'auto-complete
@@ -72,8 +81,8 @@
     (my-req 'helm-git))
 
 ;; icicles
-(my-req 'icicles
-    (icy-mode t))
+;(my-req 'icicles
+;    (icy-mode t))
 
 ;; rainbow-mode
 (my-req 'rainbow-mode
@@ -145,8 +154,8 @@
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation))
 
 ;; yasnippet
-(my-req 'yasnippet
-    (yas/global-mode 1))
+;(my-req 'yasnippet
+;    (yas/global-mode 1))
 
 ;; flex-autopair
 (my-req 'flex-autopair
@@ -165,8 +174,8 @@
   (global-whitespace-mode t)
   (add-hook 'scheme-mode-hook
             (lambda ()
-                                       (add-hook 'write-contents-functions 'whitespace-cleanup)
-                         (add-hook 'write-contents-functions 'delete-trailing-whitespace))))
+              (add-hook 'write-contents-functions 'whitespace-cleanup)
+              (add-hook 'write-contents-functions 'delete-trailing-whitespace))))
 
 ;; save curosr position
 (my-req 'saveplace

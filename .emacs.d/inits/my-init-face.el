@@ -2,7 +2,9 @@
 (progn
 
 ;; font
-(set-face-attribute 'default nil :family "Ricty" :height 90)
+(set-default-font "neep-alt-9")
+
+; (set-face-attribute 'default nil :family "Ricty" ght 90)
 (set-fontset-font "fontset-default" 'japanese-jisx0208 '("Ricty" . "iso-10646-*" ) )
 
 (setq-default frame-background-mode 'dark)

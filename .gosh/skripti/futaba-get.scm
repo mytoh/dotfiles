@@ -26,8 +26,13 @@
 
 
 (define (parse-img-url line board)
-  (rxmatch->string (string->regexp (string-append "http\:\/\/(\\w+)\\.2chan\\.net\/(\\w+)\/" board "\/src\/[^\"]+")) line)
-  ) ;; "
+  (rxmatch->string
+    (string->regexp
+      (string-append
+        "http\:\/\/(\\w+)\\.2chan\\.net\/(\\w+)\/"
+        board
+        "\/src\/[^\"]+"))
+    line))
 
 (define (fetch match)
   (when (string? match)

@@ -41,8 +41,12 @@
 (transient-mark-mode t)
 ;; highlight current line
 (global-hl-line-mode nil)
-;; line by line scrolling
-(setq scroll-step 1)
+;; smooth scrolling
+(setq redisplay-dont-pause t
+      scroll-margin 1
+      scroll-step 1
+      scroll-conservatively 10000
+      scroll-preserve-screen-position 1)
 ;; disable bars
 (menu-bar-mode t)
 (tool-bar-mode -1)
@@ -89,6 +93,9 @@
 
 ;; save more recent files
 (setq recentf-max-saved-items 100)
+;; undo
+(setq undo-limit 100000)
+(setq undo-string-limit 1300000)
 
 
 (provide 'my-init-setting)

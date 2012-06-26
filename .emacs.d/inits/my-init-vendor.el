@@ -1,4 +1,6 @@
+
 ;;; plugins under vendor directory
+;; github repositories
 (my-vendor-install-packages 
  '(("emacs-powerline" "jonathanchu/emacs-powerline")
    ("nyan-mode" "TeMPOraL/nyan-mode")
@@ -8,6 +10,7 @@
    ("highlight-cl" "emacsmirror/highlight-cl")
    ("helm-delicious" "emacs-helm/helm-delicious")
    ("helm-descbinds" "emacs-helm/helm-descbinds")
+   ("seijiseikana-el" "moriyamahiroshi/seijiseikana-el")
    ))
 
 ;; update plugins
@@ -85,5 +88,10 @@
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
                                   "helm-descbinds"))
 (my-req 'helm-descbinds)
+
+;; seijiseikana
+(my-add-to-load-path (concat-path *user-emacs-vendor-directory*
+                                  "seijiseikana-el"))
+(my-req 'seijiseikana)
 
 (provide 'my-init-vendor)

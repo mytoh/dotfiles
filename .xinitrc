@@ -30,17 +30,18 @@ xmodmap $HOME/.xmodmaprc
 xset b off # turn off beep
 xset r rate 200 30
 xsetroot -cursor_name right_ptr &
-xset fp+ /usr/local/lib/X11/fonts/local
-xset fp+ /usr/local/lib/X11/fonts/TrueType
-xset fp+ /usr/local/lib/X11/fonts/cyrillic
-xset fp+ /usr/local/lib/X11/fonts/profont
-xset fp+ /usr/local/lib/X11/fonts/terminus-font
-xset fp+ /usr/local/lib/X11/fonts/bitstream-vera
-xset fp+ /usr/local/lib/X11/fonts/dejavu
-xset fp+ /usr/local/lib/X11/fonts/Droid
-xset fp+ /usr/local/lib/X11/fonts/artwiz-aleczapka-en
-xset fp+ /usr/local/lib/X11/fonts/code2001
-xset fp+ $HOME/.fonts
+xset +fp /usr/local/lib/X11/fonts/local
+xset +fp /usr/local/lib/X11/fonts/TrueType
+xset +fp /usr/local/lib/X11/fonts/cyrillic
+xset +fp /usr/local/lib/X11/fonts/profont
+xset +fp /usr/local/lib/X11/fonts/terminus-font
+xset +fp /usr/local/lib/X11/fonts/bitstream-vera
+xset +fp /usr/local/lib/X11/fonts/dejavu
+xset +fp /usr/local/lib/X11/fonts/Droid
+xset +fp /usr/local/lib/X11/fonts/artwiz-aleczapka-en
+xset +fp /usr/local/lib/X11/fonts/code2001
+xset +fp $HOME/.fonts
+xset +fp $HOME/.fonts/jmk
 xset fp rehash
 urxvtcd &
 xbindkeys &
