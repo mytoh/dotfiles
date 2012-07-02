@@ -488,6 +488,7 @@ aug myautocommands
   au bufread,bufnewfile /usr/ports/UPDATING       setl filetype=changelog
   au bufread,bufnewfile *.mik                   setl filetype=xml
   au bufread,bufnewfile rc.conf.local             setl filetype=sh
+  au bufread,bufnewfile *.mksh                    setl filetype=sh
   au bufwritepost       .vimrc                    source ~/.vimrc
   au bufwritepost       ~/.vim/config/bundle.vim  source ~/.vim/config/bundle.vim
   au bufwritepost       .zshrc                    Silent !zcompile ~/.zshrc

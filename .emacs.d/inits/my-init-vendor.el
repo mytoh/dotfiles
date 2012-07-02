@@ -50,12 +50,12 @@
 (my-add-to-load-path
     (concat-path *user-emacs-vendor-directory*
             "highlight-sexp"))
-(my-req 'highlight-sexp
-    (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
-  (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode)
-;  (add-hook 'scheme-mode-hook 'highlight-sexp)
-  (setq hl-sexp-foreground-color nil)
-  (setq hl-sexp-background-color "#1a1a1a"))
+;; (my-req 'highlight-sexp
+;;     (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
+;;   (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode)
+;;   (add-hook 'scheme-mode-hook 'highlight-sexp)
+;;   (setq hl-sexp-foreground-color nil)
+;;   (setq hl-sexp-background-color "#1a1a1a"))
 
 ;; auto-highlight-symbol-mode
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*

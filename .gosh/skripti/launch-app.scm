@@ -16,8 +16,8 @@
                    :output :null
                    :error :null))
     (print (string-append "no such command " 
-             (car app)))
-    ))
+             (car app)))))
+
 
 (define (main args)
   (launch (cdr args)))

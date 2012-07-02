@@ -12,3 +12,4 @@
 (define (main args)
   (mkicons (cadr args))
   )
+

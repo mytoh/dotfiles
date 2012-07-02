@@ -2,4 +2,17 @@
 (defun* concat-path (&rest parts)
   (reduce  (lambda (a b) (expand-file-name b a)) parts))
 
+(defun my-before-save-hook ()
+  (save-excursion
+    (goto-char (point-min))
+    (delete-trailing-whitespace)
+    (while (re-search-forward (rx (submatch (syntax close-parenthesis))
+                                  (submatch (one-or-more (in  " \t")))
+                                  (submatch (syntax close-parenthesis))) nil t)
+      (replace-match  "))" nil nil))
+    (while (re-search-forward (rx (submatch (syntax open-parenthesis))
+                                  (submatch (one-or-more (in  " \t")))
+                                  (submatch (syntax open-parenthesis))) nil t)
+      (replace-match  "((" nil nil))))
+
 (provide 'my-init-func)

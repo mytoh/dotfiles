@@ -39,7 +39,7 @@ noproxy_netaddr 1
 no_proxy
 ftp_proxy
 https_proxy
-http_proxy http://localhost:3128
+http_proxy
 use_proxy 1
 max_news 50
 nntpmode

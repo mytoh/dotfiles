@@ -21,7 +21,8 @@
 
 (defun my-scheme-mode-hook ()
   (local-set-key  (kbd "C-c S") 'my-scheme-other-window)
-  (local-set-key (kbd "C-m") 'newline-and-indent))
+  (local-set-key (kbd "C-m") 'newline-and-indent)
+  (add-hook 'before-save-hook 'my-before-save-hook nil t))
 (add-hook 'scheme-mode-hook 'my-scheme-mode-hook)
 
 (defun* my-inferior-scheme-mode-hook ()
@@ -37,13 +38,13 @@
 (my-scheme-make-face 'my-font-lock-scheme-syntax-face "#73ca79")
 (my-scheme-make-face 'my-font-lock-scheme-function-face "#c3c279")
 
-(my-scheme-make-face 'my-font-lock-scheme-string-face "#ababab")
-(my-scheme-make-face 'my-font-lock-scheme-character-face "#ababab")
-(my-scheme-make-face 'my-font-lock-scheme-number-face "#ababab")
-(my-scheme-make-face 'my-font-lock-scheme-boolean-face "#ababab")
+(my-scheme-make-face 'my-font-lock-scheme-string-face "#f24f47")
+(my-scheme-make-face 'my-font-lock-scheme-character-face "#fee1a2")
+(my-scheme-make-face 'my-font-lock-scheme-number-face "#b5ae5b")
+(my-scheme-make-face 'my-font-lock-scheme-boolean-face "#ffbe5c")
 
 (my-scheme-make-face 'my-font-lock-scheme-delimiter-face "#ababab")
-(my-scheme-make-face 'my-font-lock-scheme-constant-face "#ababab")
+(my-scheme-make-face 'my-font-lock-scheme-constant-face "#e9c3b9")
 
 (my-scheme-make-face 'my-font-lock-scheme-comment-face "#ababab")
 (my-scheme-make-face 'my-font-lock-scheme-multicomment-face "#ababab")
@@ -191,11 +192,11 @@
    (1 . file-is-directory? )
    (1 . sys-symlink)
    (1 . sys-dirname)
-   
+
    (1 . sys-setenv)
    (1 . sys-unsetenv)
    (1 . sys-getenv)
-   
+
    (1 . rxmatch->string)
    (1 . string->regexp)
    (1 . string-scan)
@@ -1679,7 +1680,7 @@
    (1 . ip-destination-address)
    (1 . ip-header-length)
    (1 . ip-protocol)
-   (1 . ip-source-address) 
+   (1 . ip-source-address)
    (1 . ip-version)
    (1 . ipv4-global-address?)
    (1 . is-a?)
@@ -2327,7 +2328,7 @@
    (1 . rxmatch-before)
    (1 . rxmatch-end)
    (1 . rxmatch-num-matches)
-   (1 . rxmatch-start)  
+   (1 . rxmatch-start)
    (1 . rxmatch-substring)
    (1 . s16vector)
    (1 . s16vector->list)
@@ -3558,7 +3559,7 @@
 ;;  method
 (my-scheme-add-keywords
  'my-font-lock-scheme-module-method-face
- 
+
  '(
    (1 . add-hook!)
    (1 . add-method!)
@@ -3826,9 +3827,9 @@
 ;;  class
 (my-scheme-add-keywords
  'my-font-lock-scheme-constant-face
- 
- 
- 
+
+
+
  '(
    (1 . &condition)
    (1 . &error)
@@ -4193,22 +4194,23 @@
                                  (syntax open-parenthesis)
                                  (submatch
                                   "srfi")
-                                 (one-or-more (or numeric
-                                                  (in " \t\n" )))
+                                 (submatch (one-or-more (or numeric
+                                                  (in " \t\n" ))))
+                                 (syntax close-parenthesis)
+                                 (syntax close-parenthesis)
                                         ;(one-or-more
                                         ;(one-or-more (in " \n\t"))
                                         ;(submatch (one-or-more numeric)))
                                  ))
-                           (2 'font-lock-variable-name-face)
-                           (3 'font-lock-type-face))
+                           (1 'font-lock-variable-name-face)
+                           (2 'font-lock-type-face))
                           ;; (export some-function)
                           (,(rx (and
                                  (syntax open-parenthesis) "export" (zero-or-more (in " \t\n"))
                                  (submatch
                                   (one-or-more  (or (syntax word)
                                                     (syntax symbol)
-                                                    (in " \t\n"))))
-                                 ))
+                                                    (in " \t\n"))))))
                            1  'font-lock-variable-name-face)
                           ;; (export some-function)
                                         ;                        (,(rx (and
@@ -4244,6 +4246,12 @@
                                   any))
                                 "/")
                            0 'my-font-lock-scheme-regexp-face)
+                          (,(rx "*"
+                                (submatch
+                                 (one-or-more
+                                  any))
+                                "*")
+                           0 'my-font-lock-scheme-constant-face)
                           ))
 
 
@@ -4263,8 +4271,3 @@
             (add-to-list 'ac-sources 'ac-source-scheme)))
 
 (provide 'my-init-gauche)
-
-
-
-
-

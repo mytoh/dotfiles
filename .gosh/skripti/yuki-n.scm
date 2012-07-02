@@ -13,10 +13,10 @@
           (begin
             (newline)
            (prompt l)
-           (newline)
-           ))
+           (newline)))
     *script*)
     (fin))
+
 
 (define-constant *script*
   '(" YUKI.N>みえてる?"
@@ -83,22 +83,19 @@
   (flush)
   (tput 'cub1) ;move left cursor
   (tput 'dch1) ;delete one character
-  (tput 'sgr0)
-)
-  
+  (tput 'sgr0))
+
 (define (prompt s)
   (force (休む 5))
   (flush)
   (if (not (string? s))
       (tput s)
       (begin
-  (for-each 
+  (for-each
    (lambda (c)
      (display  c)
        (flush (standard-output-port))
        (force (休む 1)) ; 0.x seconds
      )
    (string->list s))
-  (cursor 20)))
-  )
-
+  (cursor 20))))

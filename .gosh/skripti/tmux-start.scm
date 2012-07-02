@@ -4,7 +4,7 @@
 (use gauche.process)
 (use gauche.parseopt)
 (use util.match)
-(require-extension (srfi 98))
+(use srfi-98)
 
 (define (new-session session window-name . options)
   (when (not (has-sessin? session))
@@ -48,9 +48,9 @@
 
             ;; create second session
             (new-session second-session "futaba")
-            (new-window  second-session 1 "4ch" "fish")
-            (new-window  second-session 2 "danbooru" "fish")
-            (new-window  second-session 3 "rtorrent" "fish")
+            (new-window  second-session 1 "4ch" "mksh")
+            (new-window  second-session 2 "danbooru" "mksh")
+            (new-window  second-session 3 "rtorrent" "mksh")
             ; (new-window  second-session "rtorrent" "rtorrent")
 
             ; attach main session

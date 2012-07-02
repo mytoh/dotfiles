@@ -27,15 +27,15 @@
            (let ((page (call-with-input-string  pagination  (lambda (in)
                                                               (ssax:xml->sxml in ())))))
              (caddr (find-max
-                     ((node-closure (ntype-names?? '(a))) page)
-                     :key (lambda (e) (x->number (caddr e))))))
+                        ((node-closure (ntype-names?? '(a))) page)
+                      :key (lambda (e) (x->number (caddr e))))))
            1))
 
 
 (define (get-tags-page page-number tag)
   (receive (status head body)
-           (http-get "konachan.com" (string-append "/post?page=" (number->string page-number) "&tags=" tag))
-           body ))
+    (http-get "konachan.com" (string-append "/post?page=" (number->string page-number) "&tags=" tag))
+    body ))
 
 (define (get-tags-pages tag)
   (let ((last (x->number (parse-last-page-number (get-tags-page 1 tag)))))
@@ -48,10 +48,9 @@
 
 (define (main args)
   (let-args (cdr args)
-            ((tag "t|tag=s")
-             . rest)
-            (mkdir tag)
-            (cd tag)
-            (get-tags-pages tag)
-            (cd "..")))
-
+    ((tag "t|tag=s")
+     . rest)
+    (mkdir tag)
+    (cd tag)
+    (get-tags-pages tag)
+    (cd "..")))

@@ -24,7 +24,6 @@
     "git://tron.homeunix.org/cvscvt"
     "git://pcmanfm.git.sourceforge.net/gitroot/pcmanfm/libfm"
     "git://pcmanfm.git.sourceforge.net/gitroot/pcmanfm/pcmanfm"
-    "git://git.torproject.org/tor.git"
     ; repo with other name
     ("git://git.sourceforge.jp/gitroot/ninix-aya/master.git"  "ninix-aya")
     ; minun github repo
@@ -105,6 +104,7 @@
     (kahua         Kahua)
     (mozilla       mozilla-central)
     (shadow        shadow)
+    (tlatsas       xcolors)
     ))
 
 ;; update git repository
@@ -203,7 +203,6 @@
            (print (string-append (colour-string 3 "cloning ") "repositories"))
            (clone-gitdir)))
         (_ (usage 1)))
-      (current-directory previous-directory)
-      ))
+      (current-directory previous-directory)))
   0)
 

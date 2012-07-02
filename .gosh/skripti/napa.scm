@@ -17,9 +17,7 @@
     (let ((user (process-output->string
                   "git config --get github.user"))
           (token (process-output->string 
-                   "git config --get github.token")))
-      )
-    ))
+                   "git config --get github.token"))))))
 
 (define  (git args)
   (cond

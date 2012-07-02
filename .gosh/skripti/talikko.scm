@@ -40,8 +40,7 @@
                 (lambda (x) (eq? x version-number)) full-name)
               "-")
             version-number
-            (file->string (build-path package-directory s "+COMMENT"))
-            )))
+            (file->string (build-path package-directory s "+COMMENT")))))
       (list-packages name))))
 
 (define (info-print-packages name)
@@ -52,8 +51,7 @@
                ,(colour-string colour-package (car x))
                " "
                "["
-               ,(colour-string 172 (cadr x)) "]"))
-           )
+               ,(colour-string 172 (cadr x)) "]")))
          (display "    ")
          (display (caddr x))
          (newline))
@@ -82,8 +80,7 @@
                   #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                   #/^===>/   "[38;5;39m>>>[0m"
                   #/^=>/   "[38;5;99m>>>[0m"
-                  #/\*\*\*.*$/    "[38;5;3m\\0[0m"
-                  ))
+                  #/\*\*\*.*$/    "[38;5;3m\\0[0m"))
 ; }}}
 
 ; deinstall {{{
@@ -93,8 +90,7 @@
   (colour-command "sudo make deinstall"
                   #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                   #/^===>/   "[38;5;39m>>>[0m"
-                  #/\*\*\*.*$/    "[38;5;3m\\0[0m"
-                  ))
+                  #/\*\*\*.*$/    "[38;5;3m\\0[0m"))
 
 ; }}}
 
@@ -169,8 +165,7 @@
                                     "]")))
             (newline)
             (print
-              (string-concatenate `("    " ,(colour-string 244  (cadddr x)))))
-            )))
+              (string-concatenate `("    " ,(colour-string 244  (cadddr x))))))))
       found-list)))
 
 ; }}}
@@ -203,8 +198,7 @@
            (search-package-by-name (cadr rest)))
           ("srcup"
            (update-source-tree))
-          (_ (usage 1)))
-        )))
+          (_ (usage 1))))))
   0)
 
 ; vim: foldmethod=marker

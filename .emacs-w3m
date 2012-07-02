@@ -1,10 +1,10 @@
-; brouse-url
-; open url like string by press 'C-x m'
+;; brouse-url
+;; open url like string by press 'C-x m'
 (setq brouse-url-browser-function 'w3m-browse-url)
 (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
 (global-set-key "\C-xm" 'browser-url-at-point)
 ; home page
-(setq w3m-home-page "http://www.google.com")
+(setq w3m-home-page "http://localhost:8888")
 ; enable cookies to login site , hatena
 (setq w3m-use-cookies t)
 ; don't delete favicon cache
@@ -16,10 +16,15 @@
 (setq w3m-bookmark-file-coding-system 'utf-8)
 ;; set icon directory
 (setq w3m-icon-directory "~/.emacs.d/icons")
-(setq w3m-output-coding-system 'utf-8)
-(setq w3m-input-coding-system 'utf-8)
 ;; use favicon
 (setq w3m-use-favicon t)
 ;; show favicon in mode-line
 (setq w3m-show-graphic-icons-in-mode-line t)
+
+  (setq w3m-coding-system 'utf-8
+   w3m-file-coding-system 'utf-8
+   w3m-file-name-coding-system 'utf-8
+   w3m-input-coding-system 'utf-8
+   w3m-output-coding-system 'utf-8
+   w3m-terminal-coding-system 'utf-8)
 

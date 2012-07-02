@@ -46,6 +46,8 @@
                    #`",|fname|.,|ext|"))
            (flusher (lambda (s h) (print file) #t)))
       (if (not (file-is-readable? file))
-        (http-get hostname path
-                  :sink (open-output-file file) :flusher flusher)))))
+        (call-with-output-file
+          file
+        (cut http-get hostname path
+                  :sink <> :flusher flusher))))))
 

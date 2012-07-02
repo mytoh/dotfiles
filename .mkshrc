@@ -18,12 +18,12 @@ reload-rc() {
 source ~/.mkshrc
 }
 
-current-directory() {
-  local d=${PWD:-?} p=~; [[ $p = ?(*/) ]] || \
-    d=${d/#$p/~}; local m=${%d} n p=...; (( m > 0 )) || m=${#d}
-  (( m > (n = (COLUMNS/3 < 7 ? 7 : COLUMNS/3)) )) && d=${d:(-n)} || \
-    p=; print -nr -- "$p$d"
-}
+# current-directory() {
+#   local d=${PWD:-?} p=~; [[ $p = ?(*/))] || \
+#     d=${d/#$p/~}; local m=${%d} n p=...; (( m > 0 )) || m=${#d}
+#   (( m > (n = (COLUMNS/3 < 7 ? 7 : COLUMNS/3)))) && d=${d:(-n)} || \
+#     p=; print -nr -- "$p$d"
+# }
 
 parse-git-branch() { #{{{
   if [[ -e $PWD/.git ]]; then
@@ -53,7 +53,8 @@ printf "%s%s%s\n%s"       \
 
 
 }
-PS1='$(set-prompt)''$(reload-rc)'
+# PS1='$(set-prompt)''$(reload-rc)'
+PS1='$(gosh ~/.gosh/skripti/prompt.scm)'
 
 # environmet variables {{{
 
@@ -62,17 +63,18 @@ set-path() {
 unset PATH
 local p
 for p in \
-  /sbin                \
-  /bin                 \
-  /usr/local/sbin      \
-  /usr/local/bin       \
-  /usr/sbin            \
-  /usr/bin             \
-  /usr/X11/bin         \
-  /usr/games           \
-  /opt/X11/bin         \
-  ~/local/homebrew/bin \
+  /sbin                 \
+  /bin                  \
+  /usr/local/sbin       \
+  /usr/local/bin        \
+  /usr/sbin             \
+  /usr/bin              \
+  /usr/X11/bin          \
+  /usr/games            \
+  /opt/X11/bin          \
+  ~/local/homebrew/bin  \
   ~/local/homebrew/sbin \
+  ~/.panna/bin          \
   ~/local/bin      ;
 do
   [[ -d $p/. ]] || continue
@@ -90,7 +92,7 @@ for m in     \
   /usr/local/share/man         \
   ~/local/homebrew/share/man \
   ~/local/share/man \
-  ~/local/man ;    
+  ~/local/man ;
   do
     [[ -d $m/. ]] || continue
     [[ :$MANPATH: = *:$m:* ]] || MANPATH=$m:$MANPATH
@@ -112,12 +114,11 @@ else
   : ${EDITOR:=vi}
 fi
 : ${TERM:=xterm} ${LANG:=en_GB.UTF-8}
-[[ $HOSTNAME = @(localhost|*([	 ])) ]] && HOSTNAME=$(ulimit -c 0;hostname 2>&-)
+# [[ $HOSTNAME = @(localhost|*([	 ])))] && HOSTNAME=$(ulimit -c 0;hostname 2>&-)
 export HOSTNAME EDITOR TERM LANG
 export SHELL=$MKSH MANWIDTH=80 LESSHISTFILE=-
 export HISTFILE=~/.mksh_history
 export HISTSIZE=999999
-export GAUCHE_LOAD_PATH=~/.gosh
 export DYLD_FALLBACK_LIBRARY_PATH=$HOME/local/lib:$HOME/local/homebrew/lib
 if [[ -d $HOME/local/stow ]]; then
   export STOW=$HOME/local/stow
@@ -142,9 +143,9 @@ fi
 
 # named directories {{{
 # $ cd ~dir
-alias -d quatre=~/local/mnt/quatre
-alias -d desk=~/local/mnt/deskstar
-alias -d mypass=~/local/mnt/mypassport
+alias -d quatre=/mnt/quatre
+alias -d desk=/mnt/deskstar
+alias -d mypass=/mnt/mypassport
 alias -d git=~/local/git
 alias -d ports=/usr/ports
 alias -d tmp=~/local/tmp
@@ -158,20 +159,6 @@ setenv() {
   eval export $1'="$2"'
 }
 
-if whence -p gosh >&- && [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
-  cd() {
-    builtin cd "$@" && \
-      command gosh ls.scm -d .
-  }
-else
-  cd() {
-    buitin cd "$@"
-  }
-fi
-
-tm() {
-  tmux -u attach
-}
 
 color-numbers() {
 for i in $(seq 000 16 255)
@@ -212,11 +199,11 @@ scm() {
   case $1 in
     g|gauche|gosh)
       print "gauche"
-      rlwrap -pBlue -b '(){}[].,#@;| ' -c gosh 
+      rlwrap -pBlue -b '(){}[].,#@;| ' -c gosh
       ;;
     sc|scsh)
       print "scsh"
-      rlwrap -pBlue -b '(){}[],#;| ' -c scsh   
+      rlwrap -pBlue -b '(){}[],#;| ' -c scsh
       ;;
     s4|scheme48)
       print "scheme48"
@@ -224,7 +211,7 @@ scm() {
       ;;
     e|elk)
       print "elk"
-      rlwrap -pBlue -b '(){}[],#;| ' -c elk 
+      rlwrap -pBlue -b '(){}[],#;| ' -c elk
       ;;
     *)
       print "  g  gauche"
@@ -243,7 +230,7 @@ vim() {
   fi
 }
 
-trls() { 
+trls() {
   aria2c -S "$@" | grep "./"
 }
 
@@ -257,20 +244,6 @@ exif-remove() {
 #}}}
 
 # aliases {{{
-if whence -p gosh >&- ; then
-  alias yotsuba='command gosh yotsuba-get.scm'
-  alias futaba='command gosh futaba-get.scm'
-  alias spc2ubar='command gosh space2underbar.scm'
-  alias ea='command gosh extattr.scm'
-  alias unpack='command gosh unpack.scm'
-  if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
-    alias ls='command gosh ls.scm -d'
-    alias la='command gosh ls.scm -d -a'
-    alias ll='command gosh ls.scm -d -psf'
-    alias lla='command gosh ls.scm -d -psf -a'
-    alias l='command gosh ls.scm -d'
-  fi
-fi
 
 if whence -p cdf >&- ; then
   alias df='cdf -h'
@@ -303,34 +276,30 @@ alias destep="figlet -w 80 -nkf rowancap DESTEP TRED | tr 'd' 'â–Ÿ' | tr 'P' 'â–
 #}}}
 
 # key bindings
-bind ''=search-history-up
+bind '^P'=search-history-up
+bind '^U'=kill-line
 
 # misc {{{
- # f.sh {{{
-if [[ -e $HOME/local/git/f/f.sh ]]; then
-  # MAX total score/weight, default is 2000
-  _F_MAX=10000
-  xsource $HOME/local/git/f/f.sh 
-  # ignore commands , default "_f cd ls echo"
-  _F_IGNORE+=" make gnumake gmake ./configure"
-  alias z='f -d -e cd'
-  alias v='f -e vim'
-  alias m='f -e mplayer'
-  alias o='f -e xdg-open'
+ # fasd {{{
+if whence -p fasd >&- ; then
+  eval "$(fasd --init posix-alias posix-hook)"
 fi
  # }}}
 
-if [[ -n $DISPLAY ]];then
-  if [[ -e ~/.fonts ]]; then
-    for d in ~/.fonts/*(/); do
-      if [[ -e $d/fonts.dir ]]; then
-      xset +fp $d
-    fi
-      xset fp rehash
-    done
-  fi
-fi
+# if [[ -n $DISPLAY ]];then
+#   if [[ -e ~/.fonts ]]; then
+#     for d in ~/.fonts/*(/); do
+#       if [[ -e $d/fonts.dir ]]; then
+#       xset +fp $d
+#     fi
+#       xset fp rehash
+#     done
+#   fi
+# fi
 #}}}
+
+xsource ~/.mksh.d/gauche.mksh
+
 
 # os {{{
 case $(uname) in
@@ -339,7 +308,7 @@ case $(uname) in
     alias pup="sudo portsnap fetch update "
     alias pcheck='sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends'
     alias pfetch="sudo make  fetch-recursive"
-    alias pinst="sudo make  install distclean; rehash"
+    alias pinst="sudo make  install distclean"
     alias pconf="sudo make config-recursive"
     alias pclean="sudo make  clean "
     alias pkg_add="pkg_add -v"
@@ -352,26 +321,26 @@ fi
 
   beastie() {
     echo '
-    
-    
-                \e[31m,        ,                              
-               /(        )`                                   
-               \ \___   / |                                   
-               /- \e[37m_\e[31m  `-/  '\''                      
-              (\e[37m/\/ \\\e[31m \   /\                       
-              \e[37m/ /   |\e[31m `    \                      
-              \e[34mO O   \e[37m) \e[31m/    |                
-              \e[37m`-^--'\''\e[31m`<     '\''                      
-             (_.)  _  )   /                                   
-              `.___/`    /                                   
-                `-----'\'' /                                     
-   \e[33m<----.\e[31m     __ / __   \                         
-   \e[33m<----|====\e[31mO)))\e[33m==\e[31m) \) /\e[33m====]  
-   \e[33m<----'\''\e[31m    `--'\'' `.__,'\'' \                        
-               |        |                                    
-                \       /       /\                           
-           \e[36m______\e[31m( (_  / \______/                
-         \e[36m,'\''  ,-----'\''   |                               
+
+
+                \e[31m,        ,
+               /(        )`
+               \ \___   / |
+               /- \e[37m_\e[31m  `-/  '\''
+              (\e[37m/\/ \\\e[31m \   /\
+              \e[37m/ /   |\e[31m `    \
+              \e[34mO O   \e[37m) \e[31m/    |
+              \e[37m`-^--'\''\e[31m`<     '\''
+             (_.)  _  )   /
+              `.___/`    /
+                `-----'\'' /
+   \e[33m<----.\e[31m     __ / __   \
+   \e[33m<----|====\e[31mO)))\e[33m==\e[31m) \) /\e[33m====]
+   \e[33m<----'\''\e[31m    `--'\'' `.__,'\'' \
+               |        |
+                \       /       /\
+           \e[36m______\e[31m((_  / \______/
+         \e[36m,'\''  ,-----'\''   |
          `--{__________)\e[37m                                 '
 
 
@@ -380,20 +349,20 @@ fi
 
 orb() {
   echo '
-     \e[31m```                        \e[31;1m`\e[31m    
-\e[31;1m    s` `.....---...\e[31;1m....--.```   -/\e[31m         
-    +o   .--`         \e[31;1m/y:`      +.\e[31m         
-     yo`:.            \e[31;1m:o      `+-\e[31m          
-      y/               \e[31;1m-/`   -o/\e[31m           
-     .-                  \e[31;1m::/sy+:.\e[31m          
-\e[37m     /                     \e[31;1m`--  /\e[31m          
-\e[37m    `\e[31m:                          \e[31;1m:`\e[31m         
-\e[37m    `\e[31m:                          \e[31;1m:`\e[31m         
-\e[37m     /                          \e[31;1m/\e[31m          
-\e[37m     .\e[31m-                        \e[31;1m-.\e[31m          
-      --                      \e[31;1m-.\e[31m           
-       `:`                  \e[01;31m`:`                  
-         \e[31;1m.--             \e[37m`-\e[33m-.                    
+     \e[31m```                        \e[31;1m`\e[31m
+\e[31;1m    s` `.....---...\e[31;1m....--.```   -/\e[31m
+    +o   .--`         \e[31;1m/y:`      +.\e[31m
+     yo`:.            \e[31;1m:o      `+-\e[31m
+      y/               \e[31;1m-/`   -o/\e[31m
+     .-                  \e[31;1m::/sy+:.\e[31m
+\e[37m     /                     \e[31;1m`--  /\e[31m
+\e[37m    `\e[31m:                          \e[31;1m:`\e[31m
+\e[37m    `\e[31m:                          \e[31;1m:`\e[31m
+\e[37m     /                          \e[31;1m/\e[31m
+\e[37m     .\e[31m-                        \e[31;1m-.\e[31m
+      --                      \e[31;1m-.\e[31m
+       `:`                  \e[01;31m`:`
+         \e[31;1m.--             \e[37m`-\e[33m-.
             .---...\e[33m...----                         '
 }
 

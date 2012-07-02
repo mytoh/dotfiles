@@ -9,11 +9,9 @@
 
 (define (usage status) (exit status "usage: ~a <file>\n" *program-name*))
 
-(define (kuva)
-(lambda ()))
-
-(define (main args)
-  (cond ((< (length args) 2)
+(define kuva
+  (lambda (args)
+    (cond ((< (length args) 2)
     (run-process `(feh) :wait #t))
     (else
     (let-args (cdr args) ((#f "h|help" (usage 0)) . args)
@@ -30,9 +28,13 @@
            (make-directory* temp)
            (unpack file temp)
            (run-process `(feh -F -Z -r -q ,temp) :wait #t)
-           (remove-directory* temp)
-           ))
+           (remove-directory* temp)))
         ((? file-is-regular? file)
-         (run-process `(feh -Z -F  -q --start-at ,(sys-realpath file) ,(sys-dirname (sys-realpath file))) :wait #t))
-        (_ (usage 1))))))
-  0)
+         (run-process `(feh -Z -F  -q --start-at
+                            ,(sys-realpath file)
+                            ,(sys-dirname (sys-realpath file)))
+           :wait #t))
+        (_ (usage 1))))))))
+
+(define (main args)
+  (kuva args))

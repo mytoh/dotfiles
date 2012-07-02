@@ -1,4 +1,4 @@
-;;; -*- coding: utf-8; lexical-binding: t -*-
+ ;;; -*- coding: utf-8; lexical-binding: t -*-
 
 ;; package.el
 (my-req 'package
@@ -13,6 +13,8 @@
 (setq *my-package-list*
       '(rainbow-delimiters
         auto-complete
+        ac-ja
+        ac-slime
         bookmark+
         cursor-chg
         deferred
@@ -31,9 +33,11 @@
         suomalainen-kalenteri
         isearch+
         info+
+        redo+
         haskell-mode
         flex-autopair
         yasnippet
+        w3m
         ))
 
 (dolist (p *my-package-list*)
@@ -64,7 +68,9 @@
   (define-key ac-completing-map (kbd "C-n") 'ac-next)
   (define-key ac-completing-map (kbd "C-p") 'ac-previous)
   (setq ac-dwim t)
-  )
+
+  (my-req 'ac-ja))
+
 
 ;; dired+
 (my-req 'dired+)
@@ -80,9 +86,9 @@
 (my-req 'magit
     (my-req 'helm-git))
 
-;; icicles
-;(my-req 'icicles
-;    (icy-mode t))
+;; ;; icicles
+;;                                         ;(my-req 'icicles
+;;                                         ;    (icy-mode t))
 
 ;; rainbow-mode
 (my-req 'rainbow-mode
@@ -108,7 +114,7 @@
                    (cons "" nil))))
   ;; face
   (set-face-attribute
-   'tabbar-default nil 
+   'tabbar-default nil
    :background "black")
   (set-face-attribute
    'tabbar-selected nil
@@ -120,14 +126,12 @@
    :foreground "white"
    :background "gray14"
    :box '(:line-width 1 :color "gray22" :style nil))
-                                        ;  :box '(:line-width 1 :color "white" :style nil))
   (set-face-attribute
    'tabbar-button nil
    :box '(:line-width 1 :color "gray72" :style nil))
   (set-face-attribute
    'tabbar-separator nil
    :height 60)
-
   ;; firefox keybind
   (global-set-key [(control tab)] 'tabbar-forward-tab)
   (global-set-key [(control shift tab)] 'tabbar-backward-tab))
@@ -141,10 +145,10 @@
 (eval-after-load 'calendar
   '(my-req 'suomalainen-kalenteri))
 
-;; isearch+
+;; ;; isearch+
 (eval-after-load 'isearch '(my-req 'isearch+))
 
-;; info+
+;; ;; info+
 (eval-after-load 'info '(my-req 'info+))
 
 ;; haskell-mode
@@ -153,33 +157,42 @@
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation))
 
-;; yasnippet
-;(my-req 'yasnippet
-;    (yas/global-mode 1))
+;; ;; egg
+;; (my-req 'egg
+;;     (setq egg-auto-update nil))
+
+;; ;; redo+
+;; (my-req 'redo+
+;;     (global-set-key (kbd "C-_") 'redo))
+
+;; ack-and-a-half
+(autoload 'ack-and-a-half-same "ack-and-a-half" nil t)
+(autoload 'ack-and-a-half "ack-and-a-half" nil t)
+(autoload 'ack-and-a-half-find-file-same "ack-and-a-half" nil t)
+(autoload 'ack-and-a-half-find-file "ack-and-a-half" nil t)
+(defalias 'ack 'ack-and-a-half)
+(defalias 'ack-same 'ack-and-a-half-same)
+(defalias 'ack-find-file 'ack-and-a-half-find-file)
+(defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
+
+;; ;; yasnippet
+;; ;;(my-req 'yasnippet
+;; ;;    (yas/global-mode 1))
 
 ;; flex-autopair
 (my-req 'flex-autopair
     (flex-autopair-mode 1))
 
+;; multi-term
+(my-req 'multi-term)
 
-;;; builtin
-;; show trailing whitespace
-(my-req 'whitespace
-    (setq whitespace-line-column 80)
-  (setq whitespace-style '(face
-                           trailing
-                                        ;                                 lines-tail
-                           space-before-tab
-                           space-after-tab))
-  (global-whitespace-mode t)
-  (add-hook 'scheme-mode-hook
-            (lambda ()
-              (add-hook 'write-contents-functions 'whitespace-cleanup)
-              (add-hook 'write-contents-functions 'delete-trailing-whitespace))))
+;; w3m
+(setq w3m-command "/usr/local/bin/w3m")
+(my-req 'w3m-load)
 
 ;; save curosr position
 (my-req 'saveplace
-    (setq-default save-place t))
+   (setq-default save-place t))
 
 ;; eldoc
 (my-req 'eldoc
@@ -190,4 +203,5 @@
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
 
-(provide 'my-init-package)
+
+ (provide 'my-init-package)

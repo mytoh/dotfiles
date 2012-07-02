@@ -145,7 +145,6 @@
     '(15 . 196)
     ))
 
-
 (define (list-files directory)
   (map (^s (ces-convert s (ces-guess-from-string s "*jp")))
        (directory-list directory :children? #t :add-path? #t)))
@@ -219,8 +218,7 @@
                                           (n (ls-make-colour 0 "-"))
                                           (r (ls-make-colour 6 "r"))
                                           (w (ls-make-colour 7 "w"))
-                                          (x (ls-make-colour 5 "x"))
-                                          )
+                                          (x (ls-make-colour 5 "x")))
                                       (case c
                                         ((0) #`",n,n,n")
                                         ((1) #`",n,n,x")
@@ -229,8 +227,7 @@
                                         ((4) #`",r,n,n")
                                         ((5) #`",r,n,x")
                                         ((6) #`",r,w,n")
-                                        ((7) #`",r,w,x")
-                                        )))
+                                        ((7) #`",r,w,x"))))
                                   lst))
                           "")))
     (case type
@@ -411,7 +408,6 @@
 (define (usage)
   (print "help"))
 
-
 (define (main args)
   (let-args (cdr args)
     ((pf "pf|perm-file")
@@ -424,5 +420,3 @@
       (dfirst (ls-file directories all dfirst))
       (else (ls-file directories all dfirst))))
   0)
-
-

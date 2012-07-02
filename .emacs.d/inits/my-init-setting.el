@@ -14,7 +14,7 @@
 (setq font-lock-maximum-decoration t)
 
 ;; read symlinked file
-(setq vc-follow-symlinks t)
+;;(setq vc-follow-symlinks t)
 
 ;; encodings
 (prefer-coding-system 'utf-8-unix)
@@ -55,8 +55,7 @@
 ;; enable rectangular mode
 (cua-mode t)
 (setq cua-enable-cua-keys nil) ; don't make fancy keymaps
-;; delete auto save file when exit
-(setq delete-auto-save-files t)
+
 ;; ignore case
 (setq completion-ignore-case t)
 (setq read-file-name-completion-ignore-case t)
@@ -70,8 +69,8 @@
 (savehist-mode 1)
 (setq history-length 100)
 ;; disable bell
-(setq ring-bell-function nil)
-(setq visible-bell nil)
+(setq ring-bell-function 'ignore)
+(setq visible-bell t)
 ;; no warnings when compile
 (setq byte-compile-warnings '(not cl-functions))
 
@@ -80,19 +79,22 @@
 (setq split-width-threshold nil)
 
 ;; backup and autosave
-(setq *my-backup-directory*
-      (file-name-as-directory (concat user-emacs-directory "backup")))
-(setq *my-autosave-directory*
-      (file-name-as-directory (concat user-emacs-directory "autosave")))
-(setq auto-save-file-name-transforms
-      `((".*" ,(concat *my-autosave-directory* "\\1") t)))
-(setq backup-directory-alist
-      `((".*" . ,*my-backup-directory*)))
-(make-directory *my-autosave-directory* t)
-(make-directory *my-backup-directory* t)
+;; disable backup
+(setq backup-inhibited t)
+;; disable autosave
+(setq auto-save-default nil)
+;; delete auto save file when exit
+;(setq delete-auto-save-files t)
+
+;; (setq auto-save-file-name-transforms
+;;       `((".*" ,temporary-file-directory t)))
+;; (setq backup-directory-alist
+;;       `((".*" . ,temporary-file-directory)))
 
 ;; save more recent files
 (setq recentf-max-saved-items 100)
+;; recentf exclude
+(setq recentf-exclude `(,(rx  ".el.gz" string-end)))
 ;; undo
 (setq undo-limit 100000)
 (setq undo-string-limit 1300000)

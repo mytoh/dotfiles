@@ -1,0 +1,35 @@
+
+# gauche {{{
+export GAUCHE_ARCH=$(/usr/local/bin/gauche-config --arch )
+export GAUCHE_LOAD_PATH="$HOME/.gosh:$HOME/.gosh/skripti:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
+# aliases
+if whence -p gosh >&- ; then
+  alias yotsuba='command gosh yotsuba-get.scm'
+  alias futaba='command gosh futaba-get.scm'
+  alias spc2ubar='command gosh space2underbar.scm'
+  alias ea='command gosh extattr.scm'
+  alias unpack='command gosh unpack.scm'
+  alias tk='command gosh talikko.scm'
+  alias tm='gosh tmux-start.scm'
+  alias nap='gosh napa.scm'
+  alias pahvi='gosh pahvi.scm'
+  alias ls='command gosh ls.scm -d'
+  alias la='command gosh ls.scm -d -a'
+  alias ll='command gosh ls.scm -d -psf'
+  alias lla='command gosh ls.scm -d -psf -a'
+  alias l='command gosh ls.scm -d'
+fi
+
+# panna {{{
+# add panna to PATH
+export OLUTPANIMO="$HOME/.panna"
+export PATH=$OLUTPANIMO/bin:$PATH
+export GAUCHE_LOAD_PATH=$OLUTPANIMO/kirjasto:$GAUCHE_LOAD_PATH
+# }}}
+
+# lehti {{{
+export GAUCHE_LOAD_PATH=$HOME/.lehti/share/gauche-0.9/site/lib:$GAUCHE_LOAD_PATH
+export GAUCHE_DYNLOAD_PATH=$HOME/.lehti/lib/gauche-0.9/site/$GAUCHE_ARCH
+#}}}
+
+#}}}
