@@ -11,6 +11,7 @@
    ("helm-delicious" "emacs-helm/helm-delicious")
    ("helm-descbinds" "emacs-helm/helm-descbinds")
    ("seijiseikana-el" "moriyamahiroshi/seijiseikana-el")
+;   ("emacs-evernote-mode" "http://emacs-evernote-mode.google.com/svn/trunk")
    ))
 
 ;; update plugins
@@ -59,7 +60,7 @@
 
 ;; auto-highlight-symbol-mode
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
-                             "auto-highlight-symbol"))
+                             "auto-highlight-symbol-mode"))
 (my-req 'auto-highlight-symbol
     (global-auto-highlight-symbol-mode t))
 

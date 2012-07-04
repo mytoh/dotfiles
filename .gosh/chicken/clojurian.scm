@@ -47,6 +47,3 @@
      (->>* (receive args x
              (apply y (append (list z ...) args)))
            rest ...))))
-
-(provide "chicken.clojurian")
-

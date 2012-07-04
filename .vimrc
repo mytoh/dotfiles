@@ -327,7 +327,7 @@ hi StatusLine     ctermfg=gray ctermbg=235 cterm=none
 hi ActiveBuffer   ctermfg=232 ctermbg=244 cterm=none
 hi InactiveBuffer ctermfg=gray ctermbg=235 cterm=none
 hi Comment        ctermfg=244 ctermbg=234 cterm=bold
-hi ColorColumn ctermbg=234
+hi ColorColumn    ctermfg=white    ctermbg=234 
 hi MatchParen     cterm=bold,reverse
 
 " }}}

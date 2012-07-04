@@ -1,0 +1,65 @@
+
+# PACKAGESITE="ftp://ftp.jp.FreeBSD.org/pub/FreeBSD/ports/i386/packages/Latest/"
+alias pup="sudo portsnap fetch update "
+alias pcheck='sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends'
+alias pfetch="sudo make  fetch-recursive"
+alias pinst="sudo make  install distclean"
+alias pconf="sudo make config-recursive"
+alias pclean="sudo make  clean "
+alias pkg_add="pkg_add -v"
+alias pcreate="pkg_create -RJvnb"
+alias pcreateall="pkg_info -Ea |xargs -n 1 sudo pkg_create -Jnvb"
+
+if [[ $TERM = cons25 && -e `which jfbterm` ]]; then
+  jfbterm
+fi
+
+  beastie() {
+    echo '
+
+
+                \e[31m,        ,
+               /(        )`
+               \ \___   / |
+               /- \e[37m_\e[31m  `-/  '\''
+              (\e[37m/\/ \\\e[31m \   /\
+              \e[37m/ /   |\e[31m `    \
+              \e[34mO O   \e[37m) \e[31m/    |
+              \e[37m`-^--'\''\e[31m`<     '\''
+             (_.)  _  )   /
+              `.___/`    /
+                `-----'\'' /
+   \e[33m<----.\e[31m     __ / __   \
+   \e[33m<----|====\e[31mO)))\e[33m==\e[31m) \) /\e[33m====]
+   \e[33m<----'\''\e[31m    `--'\'' `.__,'\'' \
+               |        |
+                \       /       /\
+           \e[36m______\e[31m((_  / \______/
+         \e[36m,'\''  ,-----'\''   |
+         `--{__________)\e[37m                                 '
+
+
+
+}
+
+orb() {
+  echo '
+     \e[31m```                        \e[31;1m`\e[31m
+\e[31;1m    s` `.....---...\e[31;1m....--.```   -/\e[31m
+    +o   .--`         \e[31;1m/y:`      +.\e[31m
+     yo`:.            \e[31;1m:o      `+-\e[31m
+      y/               \e[31;1m-/`   -o/\e[31m
+     .-                  \e[31;1m::/sy+:.\e[31m
+\e[37m     /                     \e[31;1m`--  /\e[31m
+\e[37m    `\e[31m:                          \e[31;1m:`\e[31m
+\e[37m    `\e[31m:                          \e[31;1m:`\e[31m
+\e[37m     /                          \e[31;1m/\e[31m
+\e[37m     .\e[31m-                        \e[31;1m-.\e[31m
+      --                      \e[31;1m-.\e[31m
+       `:`                  \e[01;31m`:`
+         \e[31;1m.--             \e[37m`-\e[33m-.
+            .---...\e[33m...----                         '
+}
+
+
+

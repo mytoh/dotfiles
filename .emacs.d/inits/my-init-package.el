@@ -63,7 +63,7 @@
 ;; auto-complete
 (my-req 'auto-complete
     (my-req 'auto-complete-config )
-  (ac-config-default)
+;  (ac-config-default)
   (global-auto-complete-mode t)
   (define-key ac-completing-map (kbd "C-n") 'ac-next)
   (define-key ac-completing-map (kbd "C-p") 'ac-previous)

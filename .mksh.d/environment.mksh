@@ -1,0 +1,48 @@
+
+# environmet variables {{{
+
+
+MKSH=$(whence -p mksh)
+if whence -p vim >&-; then
+  : ${EDITOR:=vim}
+else
+  : ${EDITOR:=vi}
+fi
+: ${TERM:=xterm} ${LANG:=en_GB.UTF-8}
+# [[ $HOSTNAME = @(localhost|*([	 ])))] && HOSTNAME=$(ulimit -c 0;hostname 2>&-)
+export HOSTNAME EDITOR TERM LANG
+export SHELL=$MKSH MANWIDTH=80 LESSHISTFILE=-
+export HISTFILE=~/.mksh_history
+export HISTSIZE=999999
+export DYLD_FALLBACK_LIBRARY_PATH=$HOME/local/lib:$HOME/local/homebrew/lib
+if [[ -d $HOME/local/stow ]]; then
+  export STOW=$HOME/local/stow
+fi
+
+# pager
+export LESS='-i  -w -z-4 -g -M -X -F -R -P%t?f%f \
+  :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+
+
+# set default browser
+if whence -p w3m >&-; then
+  export BROWSER=w3m
+fi
+
+# named directories {{{
+# $ cd ~dir
+alias -d quatre=/mnt/quatre
+alias -d desk=/mnt/deskstar
+alias -d mypass=/mnt/mypassport
+alias -d git=~/local/git
+alias -d ports=/usr/ports
+alias -d tmp=~/local/tmp
+# }}}
+#}}}

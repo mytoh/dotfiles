@@ -38,6 +38,8 @@
           t)
          (t nil)))
 
+
+        
 (defmacro* my-vendor-update-packages (path)
   `(when (file-exists-p ,path)
      (lexical-let ((paths (directory-files ,path t "[^\.]")))
@@ -52,6 +54,7 @@
                                 (cd user-emacs-directory)))))
                paths)))))
 
+
 (defmacro* my-vendor-install-packages (packages)
   `(dolist (p ,packages)
      (unless (file-exists-p (concat *user-emacs-vendor-directory* (car p)))
@@ -63,8 +66,8 @@
              ( (%url-is-github-p (cadr p))
                (cd-absolute *user-emacs-vendor-directory* )
                (message "installing %s from github " (car p))
-               (shell-command  (concat "git clone git://github.com/" (cadr p) " " (car p)))))
-       (cd user-emacs-directory))))
+               (shell-command  (concat "git clone git://github.com/" (cadr p) " " (car p))))
+       (cd user-emacs-directory)))))
 
 
 (provide 'my-init-macro)

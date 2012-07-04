@@ -159,6 +159,8 @@ else
   NeoBundle 'skammer/vim-css-color'
   " svg
   NeoBundle 'svg.vim'
+  " rst
+  NeoBundle 'Rykka/riv.vim'
   " colorscheme {{{
   NeoBundle 'altercation/vim-colors-solarized'
   NeoBundle 'jelera/vim-gummybears-colorscheme'

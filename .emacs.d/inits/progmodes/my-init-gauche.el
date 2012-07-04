@@ -20,7 +20,7 @@
      (get-buffer-create buf-name))))
 
 (defun my-scheme-mode-hook ()
-  (local-set-key  (kbd "C-c S") 'my-scheme-other-window)
+  (define-key my-original-map (kbd "C-s") 'my-scheme-other-window)
   (local-set-key (kbd "C-m") 'newline-and-indent)
   (add-hook 'before-save-hook 'my-before-save-hook nil t))
 (add-hook 'scheme-mode-hook 'my-scheme-mode-hook)
@@ -4235,8 +4235,13 @@
                           (,(rx ",@")
                            0 'my-font-lock-scheme-string-face)
                           ;; #`
-                          (,(rx "#`")
-                           0 'my-font-lock-scheme-string-face)
+                          (,(rx (submatch "#`\"")
+                                (submatch (one-or-more any))
+                                (submatch  "\""))
+                           (1 'my-font-lock-scheme-regexp-face)
+                           (2 'my-font-lock-scheme-regexp-face)
+                           (3 'my-font-lock-scheme-regexp-face)
+                           )
                           ;; #t #f
                           (,(rx (or  "#t" "#f"))
                            0 'my-font-lock-scheme-boolean-face)

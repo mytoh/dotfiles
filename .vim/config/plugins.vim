@@ -417,7 +417,7 @@ let g:syntastic_enable_highlighting = 1
 let g:syntastic_enable_signs        = 1
 let g:syntastic_auto_loc_list       = 2
 let g:syntastic_mode_map = { 'mode': 'active',
-      \ 'active_filetypes': ['ruby', 'javascript', 'sh', 'html', 'css', 'haskell'],
+      \ 'active_filetypes': ['ruby', 'javascript', 'sh', 'html', 'css', 'haskell', 'rst'],
       \ 'passive_filetypes': ['puppet'] }
 " }}}
 

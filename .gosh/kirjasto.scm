@@ -9,5 +9,3 @@
     kirjasto.arkisto
     kirjasto.verkko
     ))
-
-(provide "kirjasto")

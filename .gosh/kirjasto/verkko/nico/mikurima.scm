@@ -25,16 +25,14 @@
     (let-values
       (((s u h pt id query frap)
         (uri-parse url)))
-      (uri-merge "http://ext.nicovideo.jp/api/getthumbinfo/" (sys-basename id))
-      )))
+      (uri-merge "http://ext.nicovideo.jp/api/getthumbinfo/" (sys-basename id)))))
 
 (define mylist-url->thumb_mylist
   (lambda (url)
     (let-values
       (((s u h pt id query frap)
         (uri-parse url)))
-      (uri-merge "http://ext.nicovideo.jp/thumb_mylist/" (sys-basename id))
-      )))
+      (uri-merge "http://ext.nicovideo.jp/thumb_mylist/" (sys-basename id)))))
 
 (define getthumbinfo
   (lambda (url)
@@ -56,8 +54,7 @@
                         (else
                           '())))))
                    div)))
-          a-tags
-          )))
+          a-tags)))
 
 
 (define mik:nico-playlist->mik
@@ -71,4 +68,3 @@
         getthumbinfo
         (cdr  (mylist->video-url-list url)))
       )))
-
