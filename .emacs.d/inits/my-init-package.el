@@ -42,6 +42,7 @@
 
 (dolist (p *my-package-list*)
   (unless (package-installed-p p)
+    (package-refresh-contents)
     (package-install p)
     (message "install %s"  p)))
 

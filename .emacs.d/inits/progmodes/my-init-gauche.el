@@ -58,6 +58,7 @@
 (my-scheme-make-face 'my-font-lock-scheme-module-charset-face "#9bc993")
 (my-scheme-make-face 'my-font-lock-scheme-module-class-face "#ebc893")
 (my-scheme-make-face 'my-font-lock-scheme-module-parameter-face "#e999b3")
+(my-scheme-make-face 'my-font-lock-scheme-module-name-face "#6a93cc")
 
 (my-scheme-make-face 'my-font-lock-scheme-regexp-face "#7ea978")
 (my-scheme-make-face 'my-font-lock-scheme-srfi62-comment-face "#ababab")
@@ -3208,7 +3209,7 @@
 ;   (1 . touch-instance!)
 ;   (1 . tr)
 ;   (1 . transliterate)
-;   (1 . tree->string)
+   (1 . tree->string)
 ;   (1 . tree-fold)
 ;   (1 . tree-fold-bf)
 ;   (1 . tree-map->alist)
@@ -4230,7 +4231,7 @@
                                  (submatch
                                   (one-or-more (or (syntax symbol)
                                                    (syntax word))))))
-                           1  'font-lock-type-face)
+                           1  'my-font-lock-scheme-module-name-face)
                           ;; ,@
                           (,(rx ",@")
                            0 'my-font-lock-scheme-string-face)

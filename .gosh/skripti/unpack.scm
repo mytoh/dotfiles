@@ -13,25 +13,26 @@
     (run-process `(unzip -q ,file -d ,(caar directory)) :wait #t)))
 
 
-(define (rar-unpacker file . diretory)
-  (run-process `(unrar x -ad ,file) :wait #t))
+(define (rar-unpacker file . directory)
+  (cond ((null-list? directory)
+         (run-process `(unrar x -ad ,file) :wait #t))
+    (else
+      (run-process `(unrar x -ad ,file ,(caar directory)) :wait #t))))
 
 (define (lha-unpacker file . diretory)
   (run-process `(lha xq ,file) :wait #t))
 
 (define (tar-unpacker file . directory)
   (cond ((null-list? directory)
-    (run-process `(tar xf ,file) :wait #t))
+         (run-process `(tar xf ,file) :wait #t))
     (else
       (make-directory* (caar directory))
-    (run-process `(tar xf ,file -C ,(caar directory)) :wait #t))
-    ))
+      (run-process `(tar xf ,file -C ,(caar directory)) :wait #t))))
 
 (define (sevenzip-unpacker file . directory)
   (if (null-list? directory )
     (run-process `(7z x ,file) :wait #t)
-    (run-process `(7z x ,file -o ,(car directory)) :wait #t)
-    ))
+    (run-process `(7z x ,file -o ,(caar directory)) :wait #t)))
 
 (define-constant *unpacker-alist*
   `(
@@ -51,8 +52,7 @@
     ("xz"  ,tar-unpacker)
     ("txz" ,tar-unpacker)
     ("cbx" ,tar-unpacker)
-    ("tar" ,tar-unpacker)
-    ))
+    ("tar" ,tar-unpacker)))
 
 (define (unpack file . directory)
   (let ((unpacker (assoc (path-extension file)

@@ -16,5 +16,13 @@
 ;; dired
 (add-hook 'dired-load-hook
           (function (lambda () (load "dired-x"))))
+(setq dired-guess-shell-alist-user
+      `(( ,(rx  "."
+                (or "jpg"
+                    "png"
+                    "bmp"
+                    "gif")
+                line-end)
+          "kuva")))
 
 (provide 'my-init-hook)
