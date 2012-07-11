@@ -1,4 +1,6 @@
 
+" gVimでもテキストベースのタブページを使う
+set guioptions-=e
 
 if has('gui_macvim')
   let $PATH = $HOME . '/local/homebrew/sbin:' . $HOME . '/local/homebrew/bin:' . $PATH

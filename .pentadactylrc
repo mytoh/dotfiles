@@ -22,7 +22,8 @@ cmap -b <C-i> <Tab>
 
 set hintkeys=aoeuidhtns
 set guioptions=bCrs
-set defsearch=duck-duck-go-google-suggest-encrypted
+""set defsearch=duck-duck-go-google-suggest-encrypted
+set defsearch=google
 
 
 " color {{{

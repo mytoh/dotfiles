@@ -35,7 +35,7 @@
      (make-face ,face)
      (set-face-foreground ,face  ,fore)))
 
-(my-scheme-make-face 'my-font-lock-scheme-syntax-face "#73ca79")
+(my-scheme-make-face 'my-font-lock-scheme-syntax-face "#9baa99")
 (my-scheme-make-face 'my-font-lock-scheme-function-face "#c3c279")
 
 (my-scheme-make-face 'my-font-lock-scheme-string-face "#f24f47")
@@ -4207,7 +4207,7 @@
                            (2 'font-lock-type-face))
                           ;; (export some-function)
                           (,(rx (and
-                                 (syntax open-parenthesis) "export" (zero-or-more (in " \t\n"))
+                                 (syntax open-parenthesis) "export" (one-or-more (in " \t\n"))
                                  (submatch
                                   (one-or-more  (or (syntax word)
                                                     (syntax symbol)

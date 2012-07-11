@@ -45,7 +45,7 @@ else
   NeoBundle 'mattn/hahhah-vim'
   NeoBundle 'mattn/gist-vim'
   NeoBundle 'mattn/sonictemplate-vim'
-  NeoBundle 'rson/vim-bufstat'
+  " NeoBundle 'rson/vim-bufstat'
   NeoBundle 'scrooloose/syntastic'
   NeoBundle 'scrooloose/nerdcommenter'
   NeoBundle 'thinca/vim-quickrun'

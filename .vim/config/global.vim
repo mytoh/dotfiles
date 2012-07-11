@@ -33,6 +33,14 @@ let vimrc.P = vimrc.V.import('Prelude')
 let vimrc.M = vimrc.V.import('Mapping')
 " }}}
 
+
+function! vimrc.xrdb() dict
+  if strlen(expand($DISPLAY))
+    Silent !xrdb -remove
+    Silent !xrdb -merge ~/.Xresources
+  endif
+endfunction
+
 function! vimrc.scheme()
   setl lisp
   setl cindent&
@@ -51,13 +59,6 @@ endfunction
 function! vimrc.scheme_bufwritepost() dict
   silent! call vimrc.trimspacelisp()
   silent! call vimrc.trimspace()
-endfunction
-
-function! vimrc.xrdb() dict
-  if strlen(expand($DISPLAY))
-    Silent !xrdb -remove
-    Silent !xrdb -merge ~/.Xresources
-  endif
 endfunction
 
 " }}}

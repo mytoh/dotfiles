@@ -62,11 +62,13 @@
               (cd-absolute *user-emacs-vendor-directory* )
               (message "installing plugin " (car p))
               (shell-command (concat  "git clone " (cadr p) " " (car p))
-                             *user-emacs-vendor-directory*))
+                             *user-emacs-vendor-directory*)
+              (byte-recompile-directory (concat *user-emacs-vendor-directory* (car p))))
              ( (%url-is-github-p (cadr p))
                (cd-absolute *user-emacs-vendor-directory* )
                (message "installing %s from github " (car p))
-               (shell-command  (concat "git clone git://github.com/" (cadr p) " " (car p))))
+               (shell-command  (concat "git clone git://github.com/" (cadr p) " " (car p)) )
+               (byte-recompile-directory (concat *user-emacs-vendor-directory* (car p))))
        (cd user-emacs-directory)))))
 
 

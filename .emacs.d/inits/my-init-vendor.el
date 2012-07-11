@@ -7,10 +7,12 @@
    ("highlight-sexp" "daimrod/highlight-sexp")
    ("emux-el" "m2ym/emux-el")
    ("auto-highlight-symbol-mode" "mitsuo-saito/auto-highlight-symbol-mode")
-   ("highlight-cl" "emacsmirror/highlight-cl")
    ("helm-delicious" "emacs-helm/helm-delicious")
    ("helm-descbinds" "emacs-helm/helm-descbinds")
    ("seijiseikana-el" "moriyamahiroshi/seijiseikana-el")
+   
+   ("highlight-cl" "emacsmirror/highlight-cl")
+   ("eldoc-extension" "emacsmirror/eldoc-extension")
 ;   ("emacs-evernote-mode" "http://emacs-evernote-mode.google.com/svn/trunk")
    ))
 
@@ -94,5 +96,10 @@
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
                                   "seijiseikana-el"))
 (my-req 'seijiseikana)
+
+;; eldoc-extension
+(my-add-to-load-path (concat-path *user-emacs-vendor-directory*
+                                  "eldoc-extension"))
+(my-req 'eldoc-extension)
 
 (provide 'my-init-vendor)

@@ -168,14 +168,14 @@ unlet my_vimfiler_vsplit_action
 "}}}
 
 "{{{ rson's bufstat
-nnoremap <silent>gn :<c-u>bnext<cr>
-nnoremap <silent>gp :<c-u>bNext<cr>
-let g:bufstat_debug                 = 1
-let g:bufstat_surround_buffers      = '(:)'
-let g:bufstat_number_before_bufname = 0
-
-let g:bufstat_active_hl_group = "ActiveBuffer"
-let g:bufstat_inactive_hl_group = "InactiveBuffer"
+" nnoremap <silent>gn :<c-u>bnext<cr>
+" nnoremap <silent>gp :<c-u>bNext<cr>
+" let g:bufstat_debug                 = 1
+" let g:bufstat_surround_buffers      = '(:)'
+" let g:bufstat_number_before_bufname = 0
+" 
+" let g:bufstat_active_hl_group = "ActiveBuffer"
+" let g:bufstat_inactive_hl_group = "InactiveBuffer"
 
 "}}}
 
@@ -218,7 +218,7 @@ nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
 nnoremap <silent> [unite]l :<c-u>Unite launcher<cr>
 nnoremap <silent> [unite]o :<c-u>Unite outline<cr>
 nnoremap <silent> [unite]k :<c-u>Unite bookmark<cr>
-nnoremap <silent> [unite]p :<c-u>call <SID>unite_project('-start-insert')<cr>
+nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>noremap <silent> [unite]p :<c-u>call <SID>unite_project('-start-insert')<cr>
 
 function! s:unite_project(...)
   let opts = (a:0 ? join(a:000, ' ') : '')
@@ -475,7 +475,7 @@ let g:haddock_browser="/usr/local/bin/firefox"
 let g:vinarise_enable_auto_detect = 0
 " }}}
 
-" kien/rainbow_parentheses {
+" kien/rainbow_parentheses {{{
 aug rainbow_parentheses
   au!
   au vimenter * RainbowParenthesesToggle
@@ -505,3 +505,6 @@ let g:rbpt_colorpairs = [
 " }
 
 " }}}
+
+
+"}}}
