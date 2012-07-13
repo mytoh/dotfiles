@@ -218,7 +218,9 @@ nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
 nnoremap <silent> [unite]l :<c-u>Unite launcher<cr>
 nnoremap <silent> [unite]o :<c-u>Unite outline<cr>
 nnoremap <silent> [unite]k :<c-u>Unite bookmark<cr>
-nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>noremap <silent> [unite]p :<c-u>call <SID>unite_project('-start-insert')<cr>
+nnoremap <silent> [unite]t :<c-u>Unite tab<cr>
+nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+noremap <silent> [unite]p :<c-u>call <SID>unite_project('-start-insert')<cr>
 
 function! s:unite_project(...)
   let opts = (a:0 ? join(a:000, ' ') : '')

@@ -30,6 +30,12 @@
   (let ((ks (mapcar #'(lambda (k) (cons 'defkey-input k)) keys)))
     `(progn ,@ks)))
 
+(defmacro defkey-group (key cmd)
+  `(define-key *group-map* (kbd ,key) ,cmd))
+(defmacro defkeys-group (&rest keys)
+  (let ((ks (mapcar #'(lambda (k) (cons 'defkey-group k)) keys)))
+    `(progn ,@ks)))
+
 (defkeys-root
   ("C-."  "mymenu")
   ;; window operation
@@ -44,11 +50,11 @@
 (defkeys-top
   ;; window operation
   ("s-RET" "fullscreen")
-  ("M-TAB" "next")
+  ("s-TAB" "next")
   ;; group key map
-  ("M-1" "gselect main")
-  ("M-2" "gselect web")
-  ("M-3" "gselect media"))
+  ("s-1" "gselect main")
+  ("s-2" "gselect web")
+  ("s-3" "gselect media"))
 
 ;;input window keymap
 (defkeys-input
@@ -57,7 +63,8 @@
   ("C-h" 'input-delete-backward-char))
 
 ;; group key map
-(define-key *groups-map* (kbd "f") "gmove media")
+(defkeys-group 
+  ("f" "gmove media"))
 
 ;;; }}}
 

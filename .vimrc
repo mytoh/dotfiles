@@ -15,9 +15,11 @@ endif
 "}}}
 
 
-if isdirectory(expand('~/.vim/config'))
-  runtime! config/*.vim
-endif
+ if isdirectory(expand('~/.vim/config'))
+   runtime! config/*.vim
+ endif
+
+"runtime! userautoload/*.vim
 
 
 
@@ -176,9 +178,11 @@ hi InactiveBuffer ctermfg=gray ctermbg=235 cterm=none
 hi Comment        ctermfg=244 ctermbg=234 cterm=bold
 hi ColorColumn    ctermfg=white    ctermbg=234 
 hi MatchParen     cterm=bold,reverse
+
 hi TabLine        ctermfg=111 ctermbg=237
 hi TabLineSel     ctermfg=10  ctermbg=238
 hi TabLineFill     ctermbg=238
+hi TabLineInfo     ctermfg=39 ctermbg=238
 
 " highlight for statusline
 " set colorscheme above these settings

@@ -138,7 +138,6 @@ else
   NeoBundle 'majutsushi/tagbar'
   NeoBundle 'nefo-mi/nyan-modoki.vim'
   NeoBundle 'pasela/unite-webcolorname'
-  NeoBundle 'ujihisa/neco-ghc'
   NeoBundle 'raduwen/peca.vim'
   NeoBundle 'vim2ansi'
   " syntax
@@ -151,6 +150,10 @@ else
   NeoBundle 'zenzike/vim-haskell-unicode'
   NeoBundle 'haskell.vim'
   NeoBundle 'lukerandall/haskellmode-vim'
+  NeoBundle 'kana/vim-filetype-haskell'
+  NeoBundle 'eagletmt/ghcmod-vim'
+  NeoBundle 'ujihisa/neco-ghc'
+  NeoBundle 'dag/vim2hs'
   "javascript
   NeoBundle 'jelera/vim-javascript-syntax'
   NeoBundle 'teramako/jscomplete-vim'

@@ -105,7 +105,10 @@ endfunction
 set stl=%!MakeStatusLine()
 
 function! MakeStatusLine()
-  return '%2*%t %=%9* mode' . '%3*\ ' . '%<'
+  let path  = fnamemodify(getcwd(),':~')
+  let left  = '%2*%t ' . '%4*' . path . ' %=' 
+  let right =  '%9* mode' . '%3*\ ' . '%<' . '%{&dictionary}> ' . '%{&fileformat}' 
+  return left . right
 endfunction
 
 
