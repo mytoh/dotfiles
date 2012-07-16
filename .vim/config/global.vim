@@ -28,9 +28,12 @@ function! vimrc.trimspacelisp() dict
 endfunction
 
 " vital {{{
-let vimrc.V = vital#of('vital')
-let vimrc.P = vimrc.V.import('Prelude')
-let vimrc.M = vimrc.V.import('Mapping')
+let vimrc.V  = vital#of('vital')
+let vimrc.P  = vimrc.V.import('Prelude')
+let vimrc.M  = vimrc.V.import('Mapping')
+let vimrc.L  = vimrc.V.import('Data.List')
+let vimrc.F  = vimrc.V.import('System.File')
+let vimrc.FP = vimrc.V.import('System.Filepath')
 " }}}
 
 

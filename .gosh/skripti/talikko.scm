@@ -60,8 +60,7 @@
 
 ; update {{{
 (define (update-ports-tree)
-  (run-command-sudo '(portsnap fetch update))
-  )
+  (run-command-sudo '(portsnap fetch update)))
 ; }}}
 
 ;; srcup {{{
@@ -110,8 +109,7 @@
                   #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                   #/^===>/   "[38;5;39m>>>[0m"
                   #/^=>/   "[38;5;99m>>>[0m"
-                  #/\*\*\*.*$/    "[38;5;3m\\0[0m")
-  )
+                  #/\*\*\*.*$/    "[38;5;3m\\0[0m"))
 ; }}}
 
 ; search {{{

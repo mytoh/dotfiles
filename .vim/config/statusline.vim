@@ -44,11 +44,11 @@ function! Statusmode(mode)
   if a:mode == 'enter'
     hi clear User9
     silent exec 'highlight User9 ctermfg=195 ctermbg=154 cterm=none'
-    return 'Insert'
+    let s:mymode = 'I'
   else
     hi clear User9
     silent exec 'highlight User9 ctermfg=18 ctermbg=154 cterm=none'
-    return 'N'
+    let s:mymode = 'N'
   endif
 endfunction
 " }}}
@@ -106,8 +106,8 @@ set stl=%!MakeStatusLine()
 
 function! MakeStatusLine()
   let path  = fnamemodify(getcwd(),':~')
-  let left  = '%2*%t ' . '%4*' . path . ' %=' 
-  let right =  '%9* mode' . '%3*\ ' . '%<' . '%{&dictionary}> ' . '%{&fileformat}' 
+  let left  = '%9* mode' . '%2* %t ' . '%4*' . path . ' %=' 
+  let right =  '%3*\ ' . '%<' . '%{&dictionary}> ' . '%{&fileformat}' 
   return left . right
 endfunction
 

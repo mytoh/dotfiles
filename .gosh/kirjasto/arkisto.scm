@@ -7,7 +7,6 @@
 (select-module kirjasto.arkisto)
 
 
-
 (define (file-is-archive? file)
   (let ((extension (path-extension file)))
     (cond
@@ -20,5 +19,5 @@
          (string=? extension "rar")
          (string=? extension "zip"))
        #t)
-      (else  #f)
-      )))
+      (else  #f))))
+

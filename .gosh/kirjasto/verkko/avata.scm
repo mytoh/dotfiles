@@ -1,8 +1,7 @@
 (define-module kirjasto.verkko.avata
   (export
     open
-    swget
-    )
+    swget)
 
   (use gauche.net)
   (use rfc.http)
@@ -22,21 +21,19 @@
     (let-values (((scheme user-info hostname port-number path query fragment)
                   (uri-parse uri)))
       ;; returns html body
-      (cond (file
-              (call-with-output-file file
-                                     (lambda (out)
-                                       (http-get hostname (or  path "/")
-                                                 :proxy proxy
-                                                 :secure secure
-                                                 :sink out 
-                                                 :flusher (lambda _ #t)))))
+      (cond (file (call-with-output-file
+                    file
+                    (lambda (out)
+                      (http-get hostname (or  path "/")
+                                :proxy proxy
+                                :secure secure
+                                :sink out 
+                                :flusher (lambda _ #t)))))
         (else
           (values-ref (http-get hostname (or  path "/")
                                 :proxy proxy
                                 :secure secure)
-            2)
-          )
-        ))))
+            2))))))
 
 (define (swget uri)
   (let-values (((scheme user-info hostname port-number path query fragment)
@@ -48,6 +45,6 @@
       (if (not (file-is-readable? file))
         (call-with-output-file
           file
-        (cut http-get hostname path
-                  :sink <> :flusher flusher))))))
+          (cut http-get hostname path
+            :sink <> :flusher flusher))))))
 

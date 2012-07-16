@@ -1,0 +1,18 @@
+mk_add_options MOZ_MAKE_FLAGS="-j4"
+
+# build firefox
+ac_add_options --enable-application=browser
+
+ac_add_options --enable-extensions=default
+
+# disable test build
+ac_add_options --disable-tests
+
+ac_add_options --disable-necko-wifi
+
+ac_add_options --enable-svg
+ac_add_options --enable-svg-renderer=cairo
+ac_add_options --disable-updater
+ac_add_options --enable-canvas
+ac_add_options --enable-libxul
+		# --with-system-libevent=${LOCALBASE}

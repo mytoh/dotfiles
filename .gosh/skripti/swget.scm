@@ -15,11 +15,8 @@
       (receive (a fname ext) (decompose-path path) (string-append fname "." ext))
      (lambda (out)
        (http-get host path
-            :sink out :flusher (lambda _ #t))
-       )
-       )))
+            :sink out :flusher (lambda _ #t))))))
 
 (define (main args)
-      (get (cadr args))
-      )
+      (get (cadr args)))
 

@@ -199,9 +199,9 @@ let g:unite_split_rule = "belowright"
 " :help filename-modifiers
 let g:unite_source_file_mru_filename_format = ''
 let g:unite_source_file_mru_time_format = ''
-let g:unite_cursor_line_highlight = 'TabLineSel'
+let g:unite_cursor_line_highlight = 'uniteTabLineSel'
 " let g:unite_abbr_highlight = 'TabLine'
-hi TabLineSel cterm=bold   ctermbg=235
+hi uniteTabLineSel cterm=bold   ctermbg=235
 
 " auto session loading
 " let g:unite_source_session_enable_auto_save = 1
