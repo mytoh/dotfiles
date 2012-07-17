@@ -138,7 +138,6 @@ else
   NeoBundle 'majutsushi/tagbar'
   NeoBundle 'nefo-mi/nyan-modoki.vim'
   NeoBundle 'pasela/unite-webcolorname'
-  NeoBundle 'raduwen/peca.vim'
   NeoBundle 'vim2ansi'
   " syntax
   "lisp
