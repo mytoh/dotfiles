@@ -1,0 +1,29 @@
+diff --git a/autoload/proc.c b/autoload/proc.c
+index 0ead8c2..7cd17c6 100644
+--- a/autoload/proc.c
++++ b/autoload/proc.c
+@@ -47,7 +47,7 @@
+ #endif
+ 
+ /* for ioctl() */
+-#ifdef __APPLE__ 
++#ifdef __APPLE__
+ # include <sys/ioctl.h>
+ #endif
+ 
+@@ -69,6 +69,7 @@
+ #if defined __FreeBSD__
+ #define __BSD_VISIBLE 1
+ #include <arpa/inet.h>
++#define PF_INET  AF_INET
+ #endif
+ #include <sys/types.h>
+ #include <sys/socket.h>
+@@ -940,6 +941,6 @@ vp_decode(char *args)
+     return vp_stack_return(&_result);
+ }
+ 
+-/* 
++/*
+  * vim:set sw=4 sts=4 et:
+  */

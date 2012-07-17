@@ -41,4 +41,4 @@ printf "%s%s%s\n%s"       \
 
 }
 # PS1='$(set-prompt)''$(reload-rc)'
-PS1='$(gosh ~/.gosh/skripti/prompt.scm)'
+PS1='$(gosh ~/.gosh/skripti/prompt.scm)''$(hash -r)'
