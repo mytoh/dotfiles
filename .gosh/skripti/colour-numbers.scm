@@ -20,9 +20,9 @@
 
     (print "other colours")
     (let loop ((l (cdr ls)))
-      (cond 
-        ((null? l)  
-        '())  
+      (cond
+        ((null? l)
+        '())
          (else
           (for-each colour-numbers
             (car l))

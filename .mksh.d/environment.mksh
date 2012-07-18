@@ -41,8 +41,8 @@ fi
 alias -d quatre=/mnt/quatre
 alias -d desk=/mnt/deskstar
 alias -d mypass=/mnt/mypassport
-alias -d git=~/local/git
 alias -d ports=/usr/ports
+alias -d git=~/local/git
 alias -d tmp=~/local/tmp
 # }}}
 #}}}

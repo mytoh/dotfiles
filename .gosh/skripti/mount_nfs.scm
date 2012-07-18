@@ -22,21 +22,21 @@
        (mount-mypassport)
        (mount-deskstar)
        (mount-quatre (cadr rest)))
-      (_ (usage 1))))
-  )
+      (_ (usage 1)))))
+
+(define mount
+  (lambda (src dest)
+    (run-command
+      `(sudo mount -v ,src ,dest))))
 
 (define (mount-mypassport)
-  (run-command
-    `(sudo mount -v quatrevingtdix:/Volumes/MyPassport
-           /mnt/mypassport)))
+  (mount "quatrevingtdix:/Volumes/MyPassport"
+         "/mnt/mypassport"))
 
 (define (mount-deskstar)
-  (run-command
-    `(sudo mount -v quatrevingtdix:/Volumes/Deskstar
-           /mnt/deskstar)
-    ))
+  (mount "quatrevingtdix:/Volumes/Deskstar"
+         "/mnt/deskstar"))
 
 (define (mount-quatre user)
-  (run-command
-    `(sudo mount -v ,(string-append "quatrevingtdix:/Users/" user)
-           /mnt/quatre)))
+  (mount (string-append "quatrevingtdix:/Users/" user)
+         "/mnt/quatre"))

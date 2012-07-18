@@ -183,10 +183,10 @@ hi Comment        ctermfg=244 ctermbg=234 cterm=bold
 hi ColorColumn    ctermfg=white    ctermbg=234 
 hi MatchParen     cterm=bold,reverse
 
-hi TabLine        ctermfg=111 ctermbg=237
-hi TabLineSel     ctermfg=10  ctermbg=238
-hi TabLineFill     ctermbg=238
-hi TabLineInfo     ctermfg=39 ctermbg=238
+hi TabLine        ctermfg=10  ctermbg=235
+hi TabLineSel     ctermfg=111 ctermbg=234
+hi TabLineFill    ctermbg=238 ctermbg=235
+hi TabLineInfo    ctermfg=39  ctermbg=235
 
 " highlight for statusline
 " set colorscheme above these settings
@@ -338,6 +338,7 @@ endfunc "}}}
 
 aug myautocommands
   au!
+  au bufenter           *                         if expand("%:p:h") !~ '^/tmp' | silent lcd %:p:h | endif
   au bufread,bufnewfile .tmux.conf                setl filetype=tmux
   au bufread,bufnewfile *.changelog               setl filetype=changelog
   au bufread,bufnewfile *.twmrc                   setl filetype=conf

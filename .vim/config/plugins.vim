@@ -188,6 +188,12 @@ let g:quickrun_config['scheme.scss'] = {
       \   'outputter': 'file_scss',
       \   'runner':    'vimproc',
       \}
+let g:quickrun_config['cobol'] = {
+      \   'command':   'cobc',
+      \   'exec':      ['%c -x %s'],
+      \   'shebang':   0,
+      \   'runner':    'vimproc',
+      \}
 
 "}}}
 
@@ -234,6 +240,7 @@ function! s:unite_my_settings() "{{{
   imap <buffer> <c-w>     <plug>(unite_delete_backward_path)
   imap <buffer> <c-j>     <plug>(unite_exit)
   imap <buffer> \\         <c-u>/
+  imap <buffer> \kv         <c-u>~/.panna/kirjasto/kaava/
   " <C-l>: manual neocomplcache completion.
   inoremap <buffer> <C-l>  <C-x><C-u><C-p><Down>
   imap     <buffer> <c-w> <plug>(unite_delete_backward_path)
