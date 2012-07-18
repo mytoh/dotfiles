@@ -140,6 +140,8 @@ else
   NeoBundle 'pasela/unite-webcolorname'
   NeoBundle 'vim2ansi'
   " syntax
+  "c
+  NeoBundle 'cg433n/better-c'
   "lisp
   NeoBundle 'emezeske/paredit.vim'
   NeoBundle 'aharisu/vim_goshrepl'

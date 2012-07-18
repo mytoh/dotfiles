@@ -97,13 +97,11 @@ function! MakeStatusLine()
         \  '%2*',
         \  '%t',
         \  path,
-        \  ' %=',
         \  '%{SyntasticStatuslineFlag()}',
         \])
-
   " right
   let fileinfos = join([
-        \  '%3*' . '%<',
+        \  '%3*',
         \  '%{&dictionary}',
         \  '%<',
         \  '%{&fileformat}',
@@ -130,7 +128,7 @@ function! MakeStatusLine()
         \   charcode,
         \   cursor,
         \])
-  return left . right
+  return left . '%=' . right
 endfunction
 
 
