@@ -340,6 +340,7 @@ aug myautocommands
   au!
   au bufenter           *                         if expand("%:p:h") !~ '^/tmp' | silent lcd %:p:h | endif
   au bufread,bufnewfile .tmux.conf                setl filetype=tmux
+  au bufread,bufnewfile jfbterm.conf*             setl filetype=jfbterm
   au bufread,bufnewfile *.changelog               setl filetype=changelog
   au bufread,bufnewfile *.twmrc                   setl filetype=conf
   au bufread,bufnewfile .vimshrc,.vimrc.*         setl filetype=vim

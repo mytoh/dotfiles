@@ -5,12 +5,19 @@
 (use file.util)
 (use util.match)
 (use kirjasto)
+(require-extension (srfi 1 13)) ;count
 
-(define (git-clone url)
-  (if (rxmatch->string #/^http:\/\/.*|^git:\/\/.*/ url)
-    (run-process `(git clone ,url) :wait #t)
-    ; clone github repository
-    (run-process `(git clone ,(string-append "git://github.com/" url)) :wait #t)))
+(define (git-clone args)
+  (let-args args
+    ((private-repo "p|private=s")
+     . rest)
+    (cond ( private-repo
+            (run-process `(git clone ,(string-append "git@github.com:" private-repo)) :wait #t))
+      (else
+        (if (rxmatch->string #/^http:\/\/.*|^git:\/\/.*/ (car rest))
+          (run-process `(git clone ,(car rest)) :wait #t)
+          ; clone github repository
+          (run-process `(git clone ,(string-append "git://github.com/" (car rest))) :wait #t))))))
 
 (define git-create
   (lambda (repo-name)
@@ -26,10 +33,10 @@
     (else
       (match (car args)
         ("clone"
-         (git-clone (cadr args)))
+         (git-clone (cdr args)))
         ("st"
          (run-process `(git status) :wait #t))
-        ("up"
+        ((or"up" "pl")
          (run-process '(git pull) :wait #t))
         ("create"
          (git-create args))
@@ -79,7 +86,7 @@
       (_
         (run-process `(darcs ,@args) :wait #t))))))
 
-(define (hub args)
+(define (napa args)
   (cond
     ((file-exists? (build-path (current-directory) ".hg"))
      (hg args))
@@ -96,6 +103,6 @@
       (git args))))
 
 
-
 (define (main args)
-  (hub (cdr args)))
+  (napa (cdr args)))
+
