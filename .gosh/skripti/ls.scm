@@ -4,11 +4,12 @@
 ;; colour codes are hardcoded so edit this file
 
 (use gauche.parseopt)
-(use gauche.process) ;process-output->string
-(use gauche.sequence) ;remove
+(use gauche.process :only (process-output->string))
+(use gauche.sequence :only (remove)) ;remove
 (use gauche.charconv)
-(use util.list) ;take*
-(use file.util)
+(use util.list :only (take* drop*)) ;take*
+(use file.util
+  :only (file-is-executable? current-directory directory-list path-extension))
 (require-extension (srfi 1 13)) ;count
 
 (define *extension-colours*

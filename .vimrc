@@ -196,7 +196,7 @@ hi User2 ctermfg=61    ctermbg=233
 hi User3 ctermfg=243    ctermbg=234
 hi User4 ctermfg=59   ctermbg=235
 hi User5 ctermfg=38   ctermbg=239
-hi User6 ctermfg=24   ctermbg=243
+hi User6 ctermfg=190   ctermbg=243
 hi User7 ctermfg=17   ctermbg=247
 hi User8 ctermfg=95   ctermbg=251
 " mode
