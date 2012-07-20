@@ -13,14 +13,14 @@ syn keyword jfbOption
       \ fontset keyboard mouse term history splash encoding
       \ screensaver cursor bell writecombine font video
       \ color1 color2 color3 color4 color5 color6 color7 color8 color9 
-syn match jfbOptionSub /\.(\w):/ display oneline
+syn match jfbOptionSub /\.(\w):/ contained display
 
 syn keyword jfbValue
       \ None Normal Middle High
       \ SysMouse
       \ Shadow
 
-syn match jfbNumber 		/\d\+/			display
+syn match jfbNumber 		'/\d\+/' contained display
 syn keyword jfbFont	any current none
 syn keyword jfbBoolean	Off On
 

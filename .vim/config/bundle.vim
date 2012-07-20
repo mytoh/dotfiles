@@ -91,7 +91,7 @@ else
   NeoBundle 'nathanaelkane/vim-indent-guides'
   NeoBundle 'haruyama/scheme.vim'
   NeoBundle 'Lokaltog/vim-easymotion'
-  " NeoBundle 'Lokaltog/vim-powerline'
+  NeoBundle 'Lokaltog/vim-powerline'
   NeoBundle 'kien/rainbow_parentheses.vim'
   NeoBundle 'kergoth/fish.vim'
   NeoBundle 'kana/vim-textobj-user'

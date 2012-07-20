@@ -1,5 +1,4 @@
 
-" statusline {{{
 set laststatus=2
 
 function! GetCharCode() " {{{ from powerline
@@ -33,60 +32,60 @@ function! GetCharCode() " {{{ from powerline
   return "'". char ."' ". nr
 endfunction "}}}
 
+" add hook to change mode highlight {{{
+function! Statusmode()
+  let curmode = mode()
+  let is_unite = &filetype == 'unite' ? 1 : 0
+  if is_unite
+    if curmode == 'i'
+      hi clear User9
+      silent exec 'highlight User9 ctermfg=45 ctermbg=194 cterm=none'
+      return 'uI'
+    elseif curmode == 'n'
+      hi clear User9
+      silent exec 'highlight User9 ctermfg=18 ctermbg=154 cterm=none'
+      return 'uN'
+    else
+      hi clear User9
+      silent exec 'highlight User9 ctermfg=18 ctermbg=154 cterm=none'
+      return 'u' . curmode
+    endif
+  else
+    if curmode == 'i'
+      hi clear User9
+      silent exec 'highlight User9 ctermfg=45 ctermbg=194 cterm=none'
+      return 'I'
+    elseif curmode == 'n'
+      hi clear User9
+      silent exec 'highlight User9 ctermfg=18 ctermbg=154 cterm=none'
+      return 'N'
+    elseif curmode == 'v' || curmode == 'V'
+      hi clear User9
+      silent exec 'highlight User9 ctermfg=18 ctermbg=94 cterm=none'
+      return 'V'
+    else
+      hi clear User9
+      silent exec 'highlight User9 ctermfg=18 ctermbg=154 cterm=none'
+      return curmode
+    endif
+  endif
+endfunction
+augroup InsertHook
+  autocmd!
+  autocmd insertenter * call Statusmode()
+  autocmd insertleave * call Statusmode()
+  autocmd bufleave,winleave * call Statusmode()
+augroup END
+"}}}
 
-" statusline
-" left , buffer list
-" set stl=     " clear statusline when reloaded
-"
-" set stl+=%2*\     " left side
-"
-" set stl+=%=  " separator
-"
-" " right
-" set stl+=%9*
-" let &stl= &stl . "\ " . "mode"
-"
-" set stl+=%3*
-" let &stl= &stl . "\ "
-" set stl+=%<%{fnamemodify(getcwd(),':~')}   "get filepath
-" let &stl= &stl . "\ "
-"
-" set stl+=%4*
-" if exists('*fugitive#statusline')
-"   set stl+=%{fugitive#statusline()}  "git repo info
-" endif
-"
-" set stl+=%{SyntasticStatuslineFlag()}
-"
-" set stl+=%5*
-" let stl= &stl . "\ "
-" set stl+=%{&dictionary}
-" set stl+=%{&fileformat}\
-" set stl+=<\
-" set stl+=%{&fenc}\
-" set stl+=<\
-" set stl+=%{&filetype}\
-"
-" set stl+=%6*
-" set stl+=\
-" set stl+=%{GetCharCode()}\  " hex under cursor
-"
-" set stl+=%7*
-" set stl+=%3p%%\  "percentage of current line
-" set stl+=%*    "reset color
-" set stl+=%8*
-" set stl+=\
-" set stl+=%l,  "current line number
-" set stl+=%c   "columns
-" set stl+=/%L   "total line number
-" set stl+=\
-"
+" active status {{{
 
-" run function on startup
-au vimenter * call MakeStatusLine()
-
-set stl=%!MakeStatusLine()
-function! MakeStatusLine()
+function! SetActiveStatusLine()
+  " setl stl=""
+  " setl stl=%!MakeActiveStatusLine()
+  let &l:statusline = '%!MakeActiveStatusLine()'
+endfunction
+function! MakeActiveStatusLine()
   " left
   let path  = '%3*' . fnamemodify(getcwd(),':~') . '%*'
   " let curmode  =  mode()
@@ -100,65 +99,83 @@ function! MakeStatusLine()
         \  '%{SyntasticStatuslineFlag()}',
         \])
   " right
+  let fileinfo = {
+        \ 'dict': '%{&dictionary}',
+        \ 'format': '%{&fileformat}',
+        \ 'enc': '%{&fileencoding}',
+        \ 'type': '%{&filetype}',
+        \ 'separator': '<',
+        \}
   let fileinfos = join([
         \  '%3*',
-        \  '%{&dictionary}',
+        \  fileinfo.dict,
         \  '%<',
-        \  '%{&fileformat}',
-        \  '<',
-        \  '%{&fenc}',
-        \  '<',
-        \  '%{&filetype}',
-        \  '%*'
+        \  fileinfo.format,
+        \  fileinfo.separator,
+        \  fileinfo.enc,
+        \  fileinfo.separator,
+        \   fileinfo.type,
+        \  '%*',
         \])
+
   let charcode = join([
         \   '%6*',
         \   '%{GetCharCode()}'
         \])
-  let cursor = join([
+  
+  let ruler = {
+        \ 'percent': '%3p%%',
+        \ 'curline': '%l/%L',
+        \ 'column': '%c',
+        \}
+  let rulers = join([
         \   '%7*',
-        \   '%3p%%',
-        \   '%8*',
-        \   '%l,',
-        \   '%c' ,
-        \   '/%L',
+        \   ruler.percent,
+        \   ruler.column . ',' . ruler.curline,
+        \   '%0*'
         \])
   let right = join([
         \   fileinfos,
         \   charcode,
-        \   cursor,
+        \   rulers,
         \])
   return left . '%=' . right
 endfunction
 
+" au VimEnter     * call SetActiveStatusLine()
+" au InsertEnter  * call SetActiveStatusLine()
+" au InsertLeave  * call SetActiveStatusLine()
+au bufenter,winenter     * call SetActiveStatusLine()
+" }}}
 
-" add hook to change mode highlight {{{
-function! Statusmode()
-  let curmode = mode()
-  if curmode == 'i'
-    hi clear User9
-    silent exec 'highlight User9 ctermfg=45 ctermbg=194 cterm=none'
-    return 'I'
-  elseif curmode == 'n'
-    hi clear User9
-    silent exec 'highlight User9 ctermfg=18 ctermbg=154 cterm=none'
-    return 'N'
-  elseif curmode == 'v' || curmode == 'V'
-    hi clear User9
-    silent exec 'highlight User9 ctermfg=18 ctermbg=94 cterm=none'
-    return 'V'
-  else
-    hi clear User9
-    silent exec 'highlight User9 ctermfg=18 ctermbg=154 cterm=none'
-    return curmode
-  endif
+" inactive status {{{
+function! SetInactiveStatusLine()
+  " setl stl=""
+  " setl stl=%!MakeInactiveStatusLine()
+  let &l:statusline = '%!MakeInactiveStatusLine()'
 endfunction
-augroup InsertHook
-  autocmd!
-  autocmd InsertEnter * call Statusmode()
-  autocmd InsertLeave * call Statusmode()
-augroup END
-"}}}
+
+function! MakeInactiveStatusLine()
+  " left
+  let path  = '%3*' . fnamemodify(getcwd(),':~') . '%*'
+  " let curmode  =  mode()
+  let curmode  =  Statusmode()
+  let left  = join([
+        \  '%8*',
+        \  'n',
+        \  '%2*',
+        \  '%t',
+        \])
+  return left
+endfunction
+
+" Update when leaving Buffer {{{
+function! SetStatusLeaveBuffer()
+  call SetInactiveStatusLine()
+endfunction
+au bufleave,winleave * call SetInactiveStatusLine() " }}}
+
+" }}}
 
 " change StatusLine color when insert mode {{{
 " http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-color#color-theme-mod
@@ -193,4 +210,3 @@ augroup END
 " endfunction
 "}}}
 
-"}}}

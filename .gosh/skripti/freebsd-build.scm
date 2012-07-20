@@ -5,15 +5,15 @@
 
 (define-syntax colour-command
   (syntax-rules ()
-    ((_ command r1 s1 ...)
+    ((_ ?command ?regexp ?string ...)
      (with-input-from-process
-       command
+       ?command
        (lambda ()
          (port-for-each
            (lambda (in)
              (print
                (regexp-replace* in
-                                r1 s1
+                                ?regexp ?string
                                 ...
                                 )))
            read-line))))))

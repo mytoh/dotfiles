@@ -22,15 +22,15 @@
 
 (define-syntax colour-command
   (syntax-rules ()
-    ((_ command r1 s1 ...)
+    ((_ ?command ?r1 ?s1 ...)
      (with-input-from-process
-      command
+      ?command
       (lambda ()
         (port-for-each
          (lambda (in)
            (print
             (regexp-replace* in
-                             r1 s1
+                             ?r1 ?s1
                              ...
                                         ; example:
                                         ; #/^>>>/   "[38;5;99m\\0[0m"

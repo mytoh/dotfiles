@@ -13,10 +13,10 @@
 
 (define-syntax doto
   (syntax-rules ()
-    ((_ x) x)
-    ((_ x (fn args ...) ...)
-     (let ((val x))
-       (fn val args ...)
+    ((_ ?x) ?x)
+    ((_ ?x (?fn ?args ...) ...)
+     (let ((val ?x))
+       (?fn val ?args ...)
        ...
        val))))
 

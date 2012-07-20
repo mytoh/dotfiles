@@ -8,19 +8,19 @@
 
 (define-syntax make-xpm
   (syntax-rules ()
-    ((_ name data ...)
+    ((_ ?name ?data ...)
      (cond
-      ((file-is-readable? name)
-       name)
+      ((file-is-readable? ?name)
+       ?name)
       (else
        (call-with-output-file
-           name
+           ?name
          (lambda (out)
            (format
             out
-            data
+            ?data
             ...))
          :if-exists #f
          :if-does-not-exist :create)
-       name)))))
+       ?name)))))
 

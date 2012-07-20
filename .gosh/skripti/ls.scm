@@ -20,9 +20,8 @@
     '(com  . 2)
     '(btm  . 2)
     '(bat  . 2)
-    '(sh   . 2)
-    '(csh  . 2)
 
+    ; archives
     '(tar  . 1)
     '(tgz  . 1)
     '(arj  . 1)
@@ -49,6 +48,7 @@
     '(7z   . 1)
     '(rz   . 1)
 
+    ; images
     '(jpg  . 5)
     '(jpeg . 5)
     '(gif  . 5)
@@ -63,7 +63,10 @@
     '(mng  . 5)
     '(xcf  . 5)
     '(pcx  . 5)
+    '(ico  . 5)
+    '(svg  . 5)
 
+    ; video
     '(mpg  . 5)
     '(mpeg . 5)
     '(m2v  . 5)
@@ -82,6 +85,7 @@
     '(rm   . 5)
     '(rmvb . 5)
 
+    ; audio
     '(mp3  . 6)
     '(wav  . 6)
     '(mid  . 6)
@@ -97,7 +101,6 @@
     '(dl   . 5)
     '(pdf  . 2)
     '(ps   . 2)
-    '(txt  . 2)
     '(ini  . 2)
     '(patch . 2)
     '(diff . 2)
@@ -112,17 +115,50 @@
     '(sls  . 72)
     '(sps  . 72)
     '(rkt  . 72)
+    ; list
+    '(el  . 162)
+    '(lisp  . 162)
+    '(cl  . 162)
 
-
+    ; langs
     '(pl  . 72)
+    '(py  . 88)
+    '(pyc  . 38)
     '(html . 38)
     '(xml . 38)
-    '(vim  . 162)
-    '(conf . 12)
-    '(d    . 1)
+    '(vim  . 70)
+    '(c  . 123)
+    '(h  . 123)
+    '(hs  . 23)
+
+    ; text
     '(md   . 40)
+    '(mkd   . 40)
+    '(rst   . 49)
+    '(rest   . 49)
+    '(txt  . 2)
+    '(text  . 2)
+
+    ; shell
+    '(sh   . 2)
+    '(csh  . 2)
+    '(zsh  . 2)
+    '(fish  . 2)
+    '(ksh  . 2)
+    '(mksh  . 2)
+
+    '(conf . 12)
+    '(rc   . 109)
+    '(man . 32)
+    '(core . 22)
+    '(d    . 1)
+    '(pro  . 3)
     '(db   . 30)
     '(swap   . 39)
+    '(in   . 139)
+    '(mk   . 103)
+    '(mak   . 103)
+    '(nds   . 103)
     ))
 
 (define *colours*

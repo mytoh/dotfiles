@@ -26,8 +26,8 @@
 (define-syntax forever
   ;;macro for endless loop
   (syntax-rules ()
-    ((_ e1 e2 ...)
-     (let loop () e1 e2 ...
+    ((_ ?e1 ?e2 ...)
+     (let loop () ?e1 ?e2 ...
        (sys-sleep 200) ; sleep 
        (loop)))))
 

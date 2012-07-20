@@ -42,6 +42,13 @@ snippet let-args
        (${2}))
       (_ (usage 1))))
 
+
+snippet syntax
+        (define-syntax ${1}
+          (syntax-rules ()
+            ((_ ${2}))))
+
+
 snippet usage
    (define (usage status)
      (exit status "usage: ~a <command> <package-name>\n" *program-name*))
@@ -52,9 +59,9 @@ abbr    panna kaava script
 
         (use panna.kaava)
 
-        (define kaava "${1}")
-        (define homepage "${2}")
-        (define repository "${3}")
+        (kaava "${1}")
+        (homepage "${2}")
+        (repository "${3}")
 
         (define (install tynnyri)
           (with-clang)
