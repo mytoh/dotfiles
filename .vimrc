@@ -161,8 +161,6 @@ if executable('ack')
 endif
 
 " change cursor colour
-let &t_SI  = "\<Esc>[3 q"
-let &t_EI  = "\<Esc>[0 q"
 " let &t_SI  = "\<Esc>[3 q;orange\x7"
 " let &t_EI  = "\<Esc>[0 q;red\x7"
 silent !echo -ne "\033]12;red\007"
@@ -342,7 +340,6 @@ aug myautocommands
   au!
   au bufenter           *                         if expand("%:p:h") !~ '^/tmp' | silent lcd %:p:h | endif
   au bufread,bufnewfile .tmux.conf                setl filetype=tmux
-  au bufread,bufnewfile jfbterm.conf*             setl filetype=jfbterm
   au bufread,bufnewfile *.changelog               setl filetype=changelog
   au bufread,bufnewfile *.twmrc                   setl filetype=conf
   au bufread,bufnewfile .vimshrc,.vimrc.*         setl filetype=vim
