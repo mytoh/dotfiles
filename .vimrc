@@ -161,8 +161,10 @@ if executable('ack')
 endif
 
 " change cursor colour
-let &t_SI  = "\<Esc>]12;orange\x7"
-let &t_EI  = "\<Esc>]12;red\x7"
+let &t_SI  = "\<Esc>[3 q"
+let &t_EI  = "\<Esc>[0 q"
+" let &t_SI  = "\<Esc>[3 q;orange\x7"
+" let &t_EI  = "\<Esc>[0 q;red\x7"
 silent !echo -ne "\033]12;red\007"
 autocmd VimLeave * silent !echo -ne "\033]112\007"
 

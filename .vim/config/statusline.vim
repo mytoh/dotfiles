@@ -38,34 +38,27 @@ function! Statusmode()
   let is_unite = &filetype == 'unite' ? 1 : 0
   if is_unite
     if curmode == 'i'
-      hi clear User9
-      silent exec 'highlight User9 ctermfg=45 ctermbg=194 cterm=none'
+      call SetHighlight('User9', 45, 194)
       return 'uI'
     elseif curmode == 'n'
-      hi clear User9
-      silent exec 'highlight User9 ctermfg=18 ctermbg=154 cterm=none'
+      call SetHighlight('User9', 18, 154)
       return 'uN'
     else
-      hi clear User9
-      silent exec 'highlight User9 ctermfg=18 ctermbg=154 cterm=none'
+      call SetHighlight('User9', 18, 154)
       return 'u' . curmode
     endif
   else
     if curmode == 'i'
-      hi clear User9
-      silent exec 'highlight User9 ctermfg=45 ctermbg=194 cterm=none'
+      call SetHighlight('User9', 45, 194)
       return 'I'
     elseif curmode == 'n'
-      hi clear User9
-      silent exec 'highlight User9 ctermfg=18 ctermbg=154 cterm=none'
+      call SetHighlight('User9', 18, 154)
       return 'N'
     elseif curmode == 'v' || curmode == 'V'
-      hi clear User9
-      silent exec 'highlight User9 ctermfg=18 ctermbg=94 cterm=none'
+      call SetHighlight('User9', 18, 94)
       return 'V'
     else
-      hi clear User9
-      silent exec 'highlight User9 ctermfg=18 ctermbg=154 cterm=none'
+      call SetHighlight('User9', 18, 154)
       return curmode
     endif
   endif
@@ -77,6 +70,20 @@ augroup InsertHook
   autocmd bufleave,winleave * call Statusmode()
 augroup END
 "}}}
+
+function! SetHighlight(hl, fg, bg)
+  hi clear a:hl
+  let command = join([
+        \  'highlight',
+        \  a:hl,
+        \  'ctermfg=',
+        \  a:fg,
+        \  'ctermbg=',
+        \  a:bg,
+        \  'cterm=none',
+        \])
+  silent exec command
+endfunction
 
 " active status {{{
 
@@ -122,7 +129,7 @@ function! MakeActiveStatusLine()
         \   '%6*',
         \   '%{GetCharCode()}'
         \])
-  
+
   let ruler = {
         \ 'percent': '%3p%%',
         \ 'curline': '%l/%L',

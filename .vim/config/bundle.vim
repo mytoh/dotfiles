@@ -138,6 +138,7 @@ else
   NeoBundle 'majutsushi/tagbar'
   NeoBundle 'nefo-mi/nyan-modoki.vim'
   NeoBundle 'pasela/unite-webcolorname'
+  NeoBundle 'tsukkee/unite-help'
   NeoBundle 'vim2ansi'
   " syntax
   "c
