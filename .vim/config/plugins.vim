@@ -18,10 +18,10 @@ let chalice_previewflags              = 'autoclose'
 let chalice_reloadinterval_threadlist = 0
 let chalice_basedir                   = $HOME . '/.chalice'
 let chalice_exbrowser                 = 'tmux new-window w3m %URL% '
-aug chalice
-  au!
-  au filetype 2ch_thread       CMiniBufExplorer
-aug end
+augroup chalice
+  autocmd!
+  autocmd filetype 2ch_thread       CMiniBufExplorer
+augroup end
 "call mkdir($HOME.'/.chalice', 'p')
 "}}}
 
@@ -83,7 +83,9 @@ let g:neocomplcache_snippets_dir='~/.vim/snippets'
 
 
 " force cache dict when insert
-autocmd myautocommands InsertEnter * call s:neco_pre_cache()
+augroup myautocommands
+autocmd InsertEnter * call s:neco_pre_cache()
+augroup end
 function! s:neco_pre_cache()
   if exists('b:neco_pre_cache')
     return
@@ -105,7 +107,9 @@ nnoremap <silent> <c-e> :VimFiler -buffer-name=explorer -split -winwidth=35 -tog
 let g:vimfiler_as_default_explorer  = 1
 let g:vimfiler_safe_mode_by_default = 0
 
-autocmd! myautocommands filetype vimfiler call g:my_vimfiler_settings()
+augroup vimfiler
+autocmd myautocommands filetype vimfiler call g:my_vimfiler_settings()
+augroup end
 function! g:my_vimfiler_settings() "{{{
   nmap     <buffer><expr><cr>        vimfiler#smart_cursor_map("\<plug>(vimfiler_expand_tree)", "\<plug>(vimfiler_edit_file)")
   nnoremap <buffer><localleader><silent>s    :call vimfiler#mappings#do_action('my_split')<cr>
@@ -234,13 +238,16 @@ function! s:unite_project(...)
   execute 'Unite' opts 'file_rec:' . dir
 endfunction
 
-autocmd myautocommands FileType unite call s:unite_my_settings()
+augroup unite_my_settings
+autocmd  FileType unite call s:unite_my_settings()
+augroup end
 function! s:unite_my_settings() "{{{
   " Overwrite settings.
   imap <buffer> <c-w>     <plug>(unite_delete_backward_path)
   imap <buffer> <c-j>     <plug>(unite_exit)
   imap <buffer> \\         <c-u>/
-  imap <buffer> \kv         <c-u>~/.panna/kirjasto/kaava/
+  imap <buffer> <localleader><localleader>  <c-u>~/
+  imap <buffer> <localleader>kv         <c-u>~/.panna/kirjasto/kaava/
   " <C-l>: manual neocomplcache completion.
   inoremap <buffer> <C-l>  <C-x><C-u><C-p><Down>
   imap     <buffer> <c-w> <plug>(unite_delete_backward_path)
@@ -284,7 +291,7 @@ if has('vim_starting')
 endif
 
 " http://kstn.fc2web.com/seikana_zisyo.html
-au myautocommands User eskk-initialize-pre call s:eskk_initial_pre()
+autocmd myautocommands User eskk-initialize-pre call s:eskk_initial_pre()
 function! s:eskk_initial_pre()
   " User can be allowed to modify
   " eskk global variables (`g:eskk#...`)
@@ -345,10 +352,10 @@ let g:vimshell_enable_smart_case = 1
 let g:vimshell_enable_auto_slash = 1
 let g:vimshell_split_height = 20
 let g:vimshell_split_command = 'split'
-aug vimshell
-  au!
-  au filetype vimshell  call vimshell#hook#set('chpwd', ['g:my_chpwd'])
-  au filetype vimshell  call unite#custom_default_action('vimshell/history', 'insert')
+augroup vimshell
+  autocmd!
+  autocmd filetype vimshell  call vimshell#hook#set('chpwd', ['g:my_chpwd'])
+  autocmd filetype vimshell  call unite#custom_default_action('vimshell/history', 'insert')
   function! g:my_chpwd(args, context)
     call vimshell#execute('ls')
   endfunction
@@ -357,7 +364,7 @@ aug vimshell
         \ ['vimshell/history'], {
         \ 'start_insert' : 0,
         \ 'input' : vimshell#get_cur_text()})
-aug end
+augroup end
 
 nnoremap [vimshell] <nop>
 nmap     <localleader>s [vimshell]
@@ -458,10 +465,10 @@ nmap <C-i> <Plug>(poslist_next)
 let delimitMate_matchpairs = "(:),[:],{:},<:>"
 let delimitMate_excluded_regions = "Comment,String"
 
-aug delimitMateSettings
-  au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
-  au FileType scheme let b:delimitMate_quotes = "\" ' *"
-aug end
+augroup delimitMateSettings
+  autocmd FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
+  autocmd FileType scheme let b:delimitMate_quotes = "\" ' *"
+augroup end
 " }}}
 
 " scratch {{{
@@ -485,13 +492,13 @@ let g:vinarise_enable_auto_detect = 0
 " }}}
 
 " kien/rainbow_parentheses {{{
-aug rainbow_parentheses
-  au!
-  au vimenter * RainbowParenthesesToggle
-  au syntax   * RainbowParenthesesLoadRound
-  au syntax   * RainbowParenthesesLoadSquare
-  au syntax   * RainbowParenthesesLoadBraces
-aug end
+augroup rainbow_parentheses
+  autocmd!
+  autocmd vimenter * RainbowParenthesesToggle
+  autocmd syntax   * RainbowParenthesesLoadRound
+  autocmd syntax   * RainbowParenthesesLoadSquare
+  autocmd syntax   * RainbowParenthesesLoadBraces
+augroup end
 
 let g:rbpt_colorpairs = [
 	\ ['brown',       'RoyalBlue3'],

@@ -298,63 +298,77 @@
         (files (list-files directory)))
     (remove dotfile files)))
 
-(define (ls-perm-size-file directories allfiles dfirst)
-  (let ((ls (lambda (dir)
-              (let ((fullpath-list (cond
-                                     ((and allfiles dfirst)
-                                      (directory-first  (list-files dir)))
-                                     (allfiles (list-files dir))
-                                     (dfirst   (directory-first (normal-files dir)))
-                                     (else (normal-files dir)))))
-                (for-each
-                  (lambda (e) (display e) (newline))
-                  (map (lambda (f)
-                         (let1 stat (sys-lstat f)
-                           (format "~a~10a~a~a~a~a"
-                                   (print-delim 1)
-                                   (print-permission f stat)
-                                   (print-delim 2)
-                                   (print-size f stat)
-                                   (print-delim 3)
-                                   (print-filename f stat))))
-                       fullpath-list))))))
-    (cond
-      ((null? directories)
-       (ls (current-directory)))
-      (else
-        (let loop ((dirs  directories))
-          (cond
-            ((null? dirs)
-             (read-from-string "")) ;return EOF
-            (else
-              (ls  (car dirs))
-              (loop (cdr dirs)))))))))
+(define (directory-first dirlist)
+  (receive (dirs files)
+    (partition
+      file-is-directory?
+      dirlist)
+    (append dirs files)))
 
-(define (ls-perm-file directories allfiles)
-  (let ((ls (lambda (dir)
-              (for-each
-                (lambda (e) (display e) (newline))
-                (map (lambda (f)
-                       (let1 stat (sys-lstat f)
-                         (format "~1a~10a~a~a"
-                                 (print-delim 1)
-                                 (print-permission f stat)
-                                 (print-delim 2)
-                                 (print-filename f stat))))
-                     (if allfiles
-                       (list-files dir)
-                       (normal-files dir)))))))
-    (cond ((null? directories)
-           (ls (current-directory)))
-      (else
-        (let loop ((dirs  directories))
-          (cond
-            ((null? dirs)
-             (read-from-string "")) ;return EOF
-            (else
-              (ls (car dirs))
-              (loop (cdr dirs)))))))))
 
+
+(define-syntax define-list-proc
+  (syntax-rules ()
+    ((_ name ls directories allfiles dfirst)
+     (define (name directories allfiles dfirst)
+       (cond
+         ((null? directories)
+          (ls (current-directory) allfiles dfirst))
+         (else
+           (let loop ((dirs directories))
+             (cond
+               ((null? dirs)
+                (values))
+               (else
+                 (ls (car dirs) allfiles dfirst)
+                 (loop (cdr dirs)))))))))))
+
+
+;; list files with permission, size, filename
+(define ls-perm-size-file-proc
+  (lambda (dir allfiles dfirst)
+    (let ((fullpath-list (cond
+                           ((and allfiles dfirst)
+                            (directory-first  (list-files dir)))
+                           (allfiles (list-files dir))
+                           (dfirst   (directory-first (normal-files dir)))
+                           (else (normal-files dir)))))
+      (for-each
+        (lambda (e) (display e) (newline))
+        (map (lambda (f)
+               (let1 stat (sys-lstat f)
+                 (format "~a~10a~a~a~a~a"
+                         (print-delim 1)
+                         (print-permission f stat)
+                         (print-delim 2)
+                         (print-size f stat)
+                         (print-delim 3)
+                         (print-filename f stat))))
+             fullpath-list)))))
+(define-list-proc ls-perm-size-file
+                  ls-perm-size-file-proc
+                  directories allfiles dfirst)
+
+;; list files with permission, filename
+(define ls-perm-file-proc
+  (lambda (dir allfiles dfirst)
+    (for-each
+      (lambda (e) (display e) (newline))
+      (map (lambda (f)
+             (let1 stat (sys-lstat f)
+               (format "~1a~10a~a~a"
+                       (print-delim 1)
+                       (print-permission f stat)
+                       (print-delim 2)
+                       (print-filename f stat))))
+           (if allfiles
+             (list-files dir)
+             (normal-files dir))))))
+(define-list-proc ls-perm-file
+                  ls-perm-file-proc
+                  directories allfiles dfirst)
+
+;
 (define (ls-file directories allfiles dfirst)
   (cond
     ((null? directories)
@@ -367,13 +381,6 @@
           (else
             (printcol (car dirs) allfiles dfirst)
             (loop (cdr dirs))))))))
-
-(define (directory-first dirlist)
-  (receive (dirs files)
-    (partition
-      file-is-directory?
-      dirlist)
-    (append dirs files)))
 
 (define (print-filename-col filename stat)
   (let*  ((file (sys-basename filename))
@@ -452,7 +459,7 @@
      (all "a|all")
      (dfirst "d|directory-first")
      . directories)
-    (cond (pf (ls-perm-file directories all))
+    (cond (pf (ls-perm-file directories all dfirst))
       (psf (ls-perm-size-file directories all dfirst))
       (dfirst (ls-file directories all dfirst))
       (else (ls-file directories all dfirst))))

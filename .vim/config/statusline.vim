@@ -152,7 +152,7 @@ endfunction
 " au VimEnter     * call SetActiveStatusLine()
 " au InsertEnter  * call SetActiveStatusLine()
 " au InsertLeave  * call SetActiveStatusLine()
-au bufenter,winenter     * call SetActiveStatusLine()
+autocmd bufenter,winenter     * call SetActiveStatusLine()
 " }}}
 
 " inactive status {{{
@@ -180,7 +180,7 @@ endfunction
 function! SetStatusLeaveBuffer()
   call SetInactiveStatusLine()
 endfunction
-au bufleave,winleave * call SetInactiveStatusLine() " }}}
+autocmd bufleave,winleave * call SetInactiveStatusLine() " }}}
 
 " }}}
 

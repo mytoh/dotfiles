@@ -6,7 +6,8 @@
     url-is-hg?
     url-is-svn?
     url-is-cvs?
-    url-is-bzr?)
+    url-is-bzr?
+    url-is-fossil?) 
   (use file.util)
   (use rfc.uri)
   (require-extension
@@ -26,29 +27,29 @@
         #t)
        (else #f)))))
 
+
 (define (url-is-hg? url)
-  (cond ((rxmatch->string #/^https?:\/\/(.+?\.)?googlecode\.com\/hg/ url) #t)
-        ((rxmatch->string #/^hg:\/\// url) #t)
-        ((rxmatch->string #/^http:\/\/hg\./ url) #t)
-        (else #f)))
+  (or (rxmatch #/^https?:\/\/(.+?\.)?googlecode\.com\/hg/ url)
+        (rxmatch #/^hg:\/\// url)
+        (rxmatch #/^http:\/\/hg\./ url)
+        (rxmatch #/^http:\/\/(.+?\/)\/hg/ url)))
 
 (define (url-is-svn? url)
-  (cond ((rxmatch->string #/^https?:\/\/(.+?\.)?googlecode\.com\/svn/ url) #t)
-        ((rxmatch->string #/^https?:\/\/(.+?\.)?sourceforge\.net\/svnroot/ url) #t)
-        ((rxmatch->string #/^svn:\/\// url) #t)
-        ((rxmatch->string #/^svn\+http:\/\// url) #t)
-        ((rxmatch->string #/^http:\/\/svn.apache.org\/repos/ url) #t)
-        ((rxmatch->string #/^http:\/\/svn\./ url) #t)
-        (else #f)))
+  (or (rxmatch #/^https?:\/\/(.+?\.)?googlecode\.com\/svn/ url)
+        (rxmatch #/^https?:\/\/(.+?\.)?sourceforge\.net\/svnroot/ url)
+        (rxmatch #/^svn:\/\// url)
+        (rxmatch #/^svn\+http:\/\// url)
+        (rxmatch #/^http:\/\/svn.apache.org\/repos/ url)
+        (rxmatch #/^http:\/\/svn\./ url)))
 
 (define (url-is-bzr? url)
-  (cond ((rxmatch->string #/^bzr:\/\// url) #t)
+  (cond ((rxmatch #/^bzr:\/\// url) #t)
         (else #f)))
 
 (define (url-is-fossil? url)
-  (cond ((rxmatch->string #/^fossil:\/\// url) #t)
+  (cond ((rxmatch #/^fossil:\/\// url) #t)
         (else #f)))
 
 (define (url-is-cvs? url)
-  (cond ((rxmatch->string #/^cvs:\/\// url) #t)
+  (cond ((rxmatch #/^cvs:\/\// url) #t)
         (else #f)))

@@ -108,6 +108,7 @@ else
   NeoBundle 'bronson/vim-trailing-whitespace'
   NeoBundle 'chrisbra/SudoEdit.vim'
   NeoBundle 'yuratomo/w3m.vim'
+NeoBundle 'tsukkee/lingr-vim'
   NeoBundle 'xolox/vim-reload'
   NeoBundle 'gmarik/github-search.vim'
   NeoBundle 'gregsexton/gitv'
@@ -118,6 +119,9 @@ else
   NeoBundle 'vim-jp/vital.vim'
   NeoBundle 'vim-jp/cpp-vim'
   NeoBundle 'Twinside/vim-codeoverview'
+  NeoBundle 'vim2ansi'
+  NeoBundle 'majutsushi/tagbar'
+  NeoBundle 'nefo-mi/nyan-modoki.vim'
   " NeoBundle 'anekos/runes-vim'
   "unite
   NeoBundle     'Shougo/unite.vim'
@@ -135,11 +139,10 @@ else
   NeoBundle 'osyo-manga/unite-u-nya-'
   NeoBundle 'tsukkee/unite-tag'
   NeoBundle 'Sixeight/unite-grep'
-  NeoBundle 'majutsushi/tagbar'
-  NeoBundle 'nefo-mi/nyan-modoki.vim'
   NeoBundle 'pasela/unite-webcolorname'
   NeoBundle 'tsukkee/unite-help'
-  NeoBundle 'vim2ansi'
+  NeoBundle 't9md/vim-unite-ack'
+  NeoBundle 'Shougo/unite-ssh'
   " syntax
   "c
   NeoBundle 'cg433n/better-c'
@@ -166,6 +169,8 @@ else
   NeoBundle 'svg.vim'
   " rst
   NeoBundle 'Rykka/riv.vim'
+  " markdow
+NeoBundle 'hallison/vim-markdown'
   " colorscheme {{{
   NeoBundle 'altercation/vim-colors-solarized'
   NeoBundle 'jelera/vim-gummybears-colorscheme'
@@ -188,6 +193,7 @@ else
   NeoBundle 'Gentooish'
   NeoBundle '256-jungle'
   NeoBundle 'desert256.vim'
+NeoBundle 'git://gist.github.com/187578.git' " <- h2u_black
   "}}}
   NeoBundle 'http://voikko.svn.sourceforge.net/svnroot/voikko/', {'type' : 'svn', 'rtp' : 'trunk/tools/vim'}
   " bitbucket

@@ -11,80 +11,82 @@
   (let-args args
     ((private-repo "p|private=s")
      . rest)
-    (cond ( private-repo
-            (run-process `(git clone ,(string-append "git@github.com:" private-repo)) :wait #t))
+    (cond (private-repo
+            (run-command `(git clone ,(string-append "git@github.com:" private-repo))))
       (else
         (if (rxmatch->string #/^http:\/\/.*|^git:\/\/.*/ (car rest))
-          (run-process `(git clone ,(car rest)) :wait #t)
+          (run-command `(git clone ,(car rest)))
           ; clone github repository
-          (run-process `(git clone ,(string-append "git://github.com/" (car rest))) :wait #t))))))
+          (run-command `(git clone ,(string-append "git://github.com/" (car rest)))))))))
 
 (define git-create
   (lambda (repo-name)
     (let ((user (process-output->string
                   "git config --get github.user"))
-          (token (process-output->string 
+          (token (process-output->string
                    "git config --get github.token"))))))
 
 (define  (git args)
   (cond
     ((null? args)
-     (run-process '(git) :wait #t ))
+     (run-command '(git)))
     (else
       (match (car args)
         ("clone"
          (git-clone (cdr args)))
         ("st"
-         (run-process `(git status) :wait #t))
+         (run-command `(git status)))
         ((or"up" "pl")
-         (run-process '(git pull) :wait #t))
+         (run-command '(git pull)))
         ("create"
          (git-create args))
-        (_  (run-process `(git ,@args) :wait #t))))))
+        ("co"
+         (run-command `(git checkout ,@(cdr args))))
+        (_  (run-command `(git ,@args)))))))
 
 (define (svn args)
   (cond
     ((null? args)
-     (run-process '(svn) :wait #t))
+     (run-command '(svn)))
     (else
       (match  (car args)
         ("st"
-         (run-process '(svn status) :wait #t))
+         (run-command '(svn status)))
         (_
-          (run-process `(svn ,@args) :wait #t))))))
+          (run-command `(svn ,@args)))))))
 
 (define (hg args)
   (cond
     ((null? args)
-     (run-process '(hg) :wait #t))
+     (run-command '(hg)))
     (else
       (match (car args)
         ("st"
-         (run-process '(hg status) :wait #t))
+         (run-command '(hg status)))
         (_
-          (run-process `(hg ,@args) :wait #t))))))
+          (run-command `(hg ,@args)))))))
 
 (define (cvs args)
   (cond
     ((null? args)
-    (run-process '(cvs) :wait #t))
+    (run-command '(cvs)))
    (else
      (match (car args)
       ("up"
-       (run-process '(cvs update) :wait #t))
+       (run-command '(cvs update)))
       (_
-        (run-process `(cvs ,@args) :wait #t))))))
+        (run-command `(cvs ,@args)))))))
 
 (define (darcs args)
-  (cond  
-    ( (null? args)  
-    (run-process '(darcs) :wait #t))  
-    (else  
+  (cond
+    ( (null? args)
+    (run-command '(darcs)))
+    (else
       (match (car args)
       ("up"
-       (run-process '(darcs pull) :wait #t))
+       (run-command '(darcs pull)))
       (_
-        (run-process `(darcs ,@args) :wait #t))))))
+        (run-command `(darcs ,@args)))))))
 
 (define (napa args)
   (cond

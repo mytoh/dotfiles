@@ -10,7 +10,7 @@
 (use rfc.http)
 
 (define (parse-img-url str)
-  (let ((url (lambda (line) (rxmatch->string #/http\:\/\/konachan\.com\/(image|jpeg)\/[^"]+/ line)))) ;; "
+  (let ((url (lambda (line) (rxmatch->string #/http\:\/\/konachan\.com\/(image|jpeg)\/[^"]+/ line))))
     (remove not ;; remove #f
             (delete-duplicates
               (call-with-input-string str
@@ -24,12 +24,12 @@
 (define (parse-last-page-number str)
   (if-let1 pagination  (rxmatch->string #/<div class\=\"pagination\">.*?<\/div>/
                                         str)
-           (let ((page (call-with-input-string  pagination  (lambda (in)
-                                                              (ssax:xml->sxml in ())))))
-             (caddr (find-max
-                        ((node-closure (ntype-names?? '(a))) page)
-                      :key (lambda (e) (x->number (caddr e))))))
-           1))
+    (let ((page (call-with-input-string  pagination  (lambda (in)
+                                                       (ssax:xml->sxml in ())))))
+      (caddr (find-max
+               ((node-closure (ntype-names?? '(a))) page)
+               :key (lambda (e) (x->number (caddr e))))))
+    1))
 
 
 (define (get-tags-page page-number tag)
@@ -42,9 +42,9 @@
     (dotimes (num last)
       (print (string-append (colour-string 99 "getting page ") (colour-string 33 (+ num 1))))
       (map
-       (lambda (u)
-         (swget u))
-       (parse-img-url (get-tags-page (+ num 1) tag))))))
+        (lambda (u)
+          (swget u))
+        (parse-img-url (get-tags-page (+ num 1) tag))))))
 
 (define (main args)
   (let-args (cdr args)

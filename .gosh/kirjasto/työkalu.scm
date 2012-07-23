@@ -4,6 +4,7 @@
   (use text.tr)
   (use gauche.net)
   (use gauche.process)
+  (use gauche.sequence)
   (use file.util)
   (use rfc.http)
   (use rfc.uri)
@@ -17,6 +18,7 @@
     p
     daemonize
     nothing
+    from
     ))
 
 (select-module kirjasto.työkalu)
@@ -67,6 +69,12 @@
     (values)))
 
 
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; http://rosettacode.org/wiki/Y_combinator#Scheme
 (define Y
   (lambda (f)
@@ -89,4 +97,5 @@
         (if (< x 2)
           x
           (+ (f (- x 1)) (f (- x 2))))))))
+
 

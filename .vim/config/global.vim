@@ -45,9 +45,9 @@ function! vimrc.xrdb() dict
 endfunction
 
 function! vimrc.scheme()
-  setl lisp
-  setl cindent&
-  setl iskeyword=@,33,35-38,42-43,45-58,60-64,94,_,126
+  setlocal lisp
+  setlocal cindent&
+  setlocal iskeyword=@,33,35-38,42-43,45-58,60-64,94,_,126
   if executable('scmindent.scm')
     if executable('racket')
       setlocal equalprg=scmindent.scm

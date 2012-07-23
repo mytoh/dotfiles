@@ -17,8 +17,7 @@
            ?name
          (lambda (out)
            (format
-            out
-            ?data
+            out ?data
             ...))
          :if-exists #f
          :if-does-not-exist :create)

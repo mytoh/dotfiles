@@ -8,7 +8,7 @@ set tabline=%!MakeTabLine()
 
 function! MakeTabLine()
   let titles = map(range(1, tabpagenr('$')), 's:tabpage_label(v:val)')
-  let sep = ' | '  " タブ間の区切り
+  let sep = '|'  " タブ間の区切り
   let tabpages = join(titles, sep) . sep . '%#TabLineFill#%T'
   let info = '%#TabLineInfo#'  " 好きな情報を入れる
  let info .= fnamemodify(getcwd(), ":~") . ' '
@@ -44,6 +44,6 @@ function! s:tabpage_label(n)
 
   let label = no . mod . sp . fname
 
-  return '%' . a:n . 'T' . hi . label . '%T%#TabLineFill#'
+  return '%' . a:n . 'T' . hi . ' ' . label . ' ' . '%T%#TabLineFill#'
 endfunction
 

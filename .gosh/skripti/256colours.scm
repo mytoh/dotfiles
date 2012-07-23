@@ -4,6 +4,8 @@
 (use gauche.parseopt)
 (use util.match)
 (use file.util)
+(require-extension
+  (srfi 1))
 
 (define (system-colours)
   (print "System colors")
@@ -11,21 +13,21 @@
     (lambda (s)
       (display
         (format "[48;5;~Am  " s)))
-    '(0 1 2 3 4 5 6 7))
+    (iota 8))
   (display "[0m")
   (newline)
   (for-each
     (lambda (s)
       (display
         (format "[48;5;~Am  " s)))
-    '(8 9 10 11 12 13 14 15))
+    (iota 8 8))
   (display "[0m")
   (newline))
 
 (define (colour-cube)
-  (print "Colour cube, 6x6x6:")
   (newline)
-  (let ((ls '(0 1 2 3 4 5)))
+  (print "Colour cube, 6x6x6:")
+  (let ((ls (iota 6)))
     (for-each
       (lambda (g)
         (for-each
