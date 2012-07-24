@@ -2,11 +2,14 @@
 (define-module kirjasto.merkkijono
   (use text.tr)
   (use gauche.uvector)
+  (require-extension
+    (srfi 13))
   (export
     whitespace->dash
     whitespace->underbar
     print-strings
     port->incomplete-string
+    concat
     ))
 
 (select-module kirjasto.merkkijono)
@@ -26,6 +29,13 @@
       (else
         (print (car  string-lst))
         (print-strings (cdr string-lst))))))
+
+(define-syntax concat
+  (syntax-rules ()
+    ((_ lst)
+     (string-concatenate lst))
+    ((_ str ...)
+     (string-append str ...))))
 
 (define (port->incomplete-string port)
   (let ((strport (open-output-string))
