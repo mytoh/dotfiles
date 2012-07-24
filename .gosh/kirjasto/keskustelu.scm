@@ -16,10 +16,10 @@
 
 ;; colours
 (define *colours*
-  '(
-    (number . 13)
+  '((number . 13)
     (list   . 11)
     (string . 63)
+    (symbol . 163)
     (true   . 4)
     (false  . 1)
     ))
@@ -32,25 +32,37 @@
 (define evaluator
   #t)
 
-;; printer
 (define printer-colourize
   (lambda (result)
     (let ((make-colour (lambda (assoc-key str)
                     (colour-string
                       (assoc-ref *colours* assoc-key)
                       (x->string  str)))))
-    (cond
+    (case (class-name (class-of result))
       ;; list
-      ((list? result)
+      ((<pair>)
        (make-colour 'list  result))
+      ((<list>)
+       (make-colour 'list  result))
+
+      ;; symbol
+      ((<symbol>)
+       (make-colour 'symbol  result))
+
       ;; string
-      ((string? result)
+      ((<string>)
        (make-colour 'string result))
+      ((<char>)
+       (make-colour 'string result))
+
       ;; number
-      ((number? result)
+      ((<number>)
        (make-colour  'number  result))
+      ((<integer>)
+       (make-colour  'number  result))
+
       ;; boolean
-      ((is-a? result <boolean>)
+      ((<boolean>)
        (cond
          (result
            (make-colour 'true "#t"))
@@ -62,7 +74,7 @@
 (define printer
   (lambda results
     (map (lambda (r)
-           (display "=> " )
+           (display (colour-string 39 "=> "))
 
            (display
              (printer-colourize r))

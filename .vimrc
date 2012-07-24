@@ -191,7 +191,7 @@ highlight TabLineInfo    ctermfg=39  ctermbg=235
 " highlight for statusline
 " User1-9 => %{1-9}*
 highlight User1 ctermfg=white ctermbg=244 cterm=none
-highlight User2 ctermfg=61    ctermbg=233
+highlight User2 ctermfg=172    ctermbg=233
 highlight User3 ctermfg=243    ctermbg=234
 highlight User4 ctermfg=59   ctermbg=235
 highlight User5 ctermfg=38   ctermbg=239

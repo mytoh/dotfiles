@@ -1,5 +1,5 @@
 
-augroup myauutocommands
+augroup myautocommands
   autocmd bufread,bufnewfile .gaucherc                 setlocal filetype=scheme
   autocmd bufread,bufnewfile *.scss                    setlocal filetype=scheme.scss
   autocmd bufread,bufnewfile *.stub                    setlocal filetype=scheme.c
@@ -9,5 +9,5 @@ augroup myauutocommands
   autocmd bufread,bufnewfile *.leh                     setlocal filetype=scheme
   autocmd bufwritepost       {*.scm,*.scss}            call vimrc.scheme_bufwritepost()
   autocmd filetype           scheme                    call vimrc.scheme()
-augroup END
+augroup end
 

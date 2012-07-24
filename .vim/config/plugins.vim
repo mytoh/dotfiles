@@ -51,7 +51,7 @@ let g:neocomplcache_context_filetype_lists.perl6 =
       \ [{'filetype' : 'pir', 'start' : 'Q:PIR\s*{', 'end' : '}'}]
 let g:neocomplcache_context_filetype_lists.vim =
       \ [{'filetype' : 'python', 'start' : '^\s*python <<\s*\(\h\w*\)', 'end' : '^\1'}]
-" Plugin key-mappings.
+" neocomplcache key-mappings {{{
 imap <C-k>     <Plug>(neocomplcache_snippets_expand)
 smap <C-k>     <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g>     neocomplcache#undo_completion()
@@ -62,6 +62,7 @@ inoremap <expr><CR>  neocomplcache#close_popup() . "\<CR>"
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
+" }}}
 
 augroup myautocommands
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -101,8 +102,14 @@ endfunction
 
 " vimfiler"{{{
 " from http://d.hatena.ne.jp/hrsh7th/20120229/1330525683
-nnoremap <localleader><silent>ff :<c-u>VimFilerTab<cr>
+
+" vimfiler key-mappings {{{
+nnoremap [filer] <nop>
+nmap     <localleader>f [filer]
+nnoremap <silent> [filer]f :<c-u>VimFiler<cr>
+nnoremap <silent> [filer]t :<c-u>VimFilerTab<cr>
 nnoremap <silent> <c-e> :VimFiler -buffer-name=explorer -split -winwidth=35 -toggle -no-quit<cr>
+" }}}
 
 let g:vimfiler_as_default_explorer  = 1
 let g:vimfiler_safe_mode_by_default = 0
@@ -218,19 +225,21 @@ hi uniteTabLineSel cterm=bold   ctermbg=235
 " autocmd VimEnter * UniteSessionLoad
 
 
-" keymaps
+" unite keymappings {{{
 nnoremap [unite] <Nop>
 nmap     <localleader>u [unite]
-nnoremap <silent> [unite]f :<c-u>UniteWithBufferDir -buffer-name=files -prompt=%\  file file/new<CR>
-nnoremap <silent> [unite]c :<c-u>UniteWithCurrentDir -buffer-name=files buffer file file/new<CR>
-nnoremap <silent> [unite]b :<c-u>Unite buffer<cr>
-nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
-nnoremap <silent> [unite]l :<c-u>Unite launcher<cr>
-nnoremap <silent> [unite]o :<c-u>Unite outline<cr>
-nnoremap <silent> [unite]k :<c-u>Unite bookmark<cr>
-nnoremap <silent> [unite]t :<c-u>Unite tab<cr>
 nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
-noremap <silent> [unite]p :<c-u>call <SID>unite_project('-start-insert')<cr>
+nnoremap <silent> [unite]b :<c-u>Unite buffer<cr>
+nnoremap <silent> [unite]c :<c-u>UniteWithCurrentDir -buffer-name=files buffer file file/new<CR>
+nnoremap <silent> [unite]f :<c-u>UniteWithBufferDir -buffer-name=files -prompt=%\  file file/new<CR>
+nnoremap <silent> [unite]k :<c-u>Unite bookmark<cr>
+" nnoremap <silent> [unite]r :<c-u>Unite launcher<cr>
+nnoremap <silent> [unite]l :<c-u>Unite line<cr>
+nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
+nnoremap <silent> [unite]o :<c-u>Unite outline<cr>
+noremap  <silent> [unite]p :<c-u>call <SID>unite_project('-start-insert')<cr>
+nnoremap <silent> [unite]t :<c-u>Unite tab<cr>
+" }}}
 
 function! s:unite_project(...)
   let opts = (a:0 ? join(a:000, ' ') : '')
@@ -366,12 +375,14 @@ augroup vimshell
         \ 'input' : vimshell#get_cur_text()})
 augroup end
 
+" vimshell key-mappings {{{
 nnoremap [vimshell] <nop>
 nmap     <localleader>s [vimshell]
 nmap     <silent> [vimshell]s <Plug>(vimshell_split_create)
 nmap     <silent> [vimshell]c <Plug>(vimshell_create)
 nnoremap <silent> [vimshell]p :<c-u>VimShellPop<cr>
 nnoremap <silent> [vimshell]p :<c-u>VimShellTab<cr>
+" }}}
 "}}}
 
 " gauref{{{
@@ -457,8 +468,8 @@ let g:slimv_keybindings = 3
 " }}}
 
 " poslist {{{
-nmap <C-o> <Plug>(poslist_prev)
-nmap <C-i> <Plug>(poslist_next)
+" nmap <C-o> <Plug>(poslist_prev)
+" nmap <C-i> <Plug>(poslist_next)
 " }}}
 
 " delimitMate {{{

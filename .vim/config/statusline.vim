@@ -36,16 +36,40 @@ endfunction "}}}
 function! Statusmode()
   let curmode = mode()
   let is_unite = &filetype == 'unite' ? 1 : 0
+  let is_vimfiler = &filetype == 'vimfiler' ? 1 : 0 
+  let is_gosh_repl = &filetype == 'gosh-repl' ? 1 : 0 
   if is_unite
     if curmode == 'i'
-      call SetHighlight('User9', 45, 194)
+      call SetHighlight('User9', 45, 144)
       return 'uI'
     elseif curmode == 'n'
-      call SetHighlight('User9', 18, 154)
+      call SetHighlight('User9', 18, 134)
       return 'uN'
     else
-      call SetHighlight('User9', 18, 154)
+      call SetHighlight('User9', 18, 134)
       return 'u' . curmode
+    endif
+  elseif is_vimfiler
+    if curmode == 'i'
+      call SetHighlight('User9', 45, 94)
+      return 'vfI'
+    elseif curmode == 'n'
+      call SetHighlight('User9', 18, 152)
+      return 'vfN'
+    else
+      call SetHighlight('User9', 18, 152)
+      return 'vf' . curmode
+    endif
+  elseif is_gosh_repl
+    if curmode == 'i'
+      call SetHighlight('User9', 45, 34)
+      return 'vfI'
+    elseif curmode == 'n'
+      call SetHighlight('User9', 18, 202)
+      return 'vfN'
+    else
+      call SetHighlight('User9', 18, 202)
+      return 'vf' . curmode
     endif
   else
     if curmode == 'i'
@@ -191,8 +215,8 @@ autocmd bufleave,winleave * call SetInactiveStatusLine() " }}}
 " if has('sytax')
 "   augroup InsertHook
 "     autocmd!
-"     autocmd InsertEnter * call s:StatusLine('Enter')
-"     autocmd InsertLeave * call s:StatusLine('Leave')
+"     autocmd InsertEnter * call StatusLine('Enter')
+"     autocmd InsertLeave * call StatusLine('Leave')
 "   augroup END
 " endif
 
