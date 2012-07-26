@@ -218,7 +218,7 @@ let g:unite_source_file_mru_filename_format = ''
 let g:unite_source_file_mru_time_format = ''
 let g:unite_cursor_line_highlight = 'uniteTabLineSel'
 " let g:unite_abbr_highlight = 'TabLine'
-hi uniteTabLineSel cterm=bold   ctermbg=235
+highlight uniteTabLineSel cterm=bold   ctermbg=235
 
 " auto session loading
 " let g:unite_source_session_enable_auto_save = 1
@@ -234,11 +234,12 @@ nnoremap <silent> [unite]c :<c-u>UniteWithCurrentDir -buffer-name=files buffer f
 nnoremap <silent> [unite]f :<c-u>UniteWithBufferDir -buffer-name=files -prompt=%\  file file/new<CR>
 nnoremap <silent> [unite]k :<c-u>Unite bookmark<cr>
 " nnoremap <silent> [unite]r :<c-u>Unite launcher<cr>
-nnoremap <silent> [unite]l :<c-u>Unite line<cr>
 nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
 nnoremap <silent> [unite]o :<c-u>Unite outline<cr>
 noremap  <silent> [unite]p :<c-u>call <SID>unite_project('-start-insert')<cr>
+noremap  <silent> [unite]s :<c-u>Unite ack --nogroup<cr>
 nnoremap <silent> [unite]t :<c-u>Unite tab<cr>
+nnoremap <silent> / :<C-u>Unite -buffer-name=search line -start-insert<CR>
 " }}}
 
 function! s:unite_project(...)
@@ -275,6 +276,14 @@ let g:unite_launch_apps = [
       \ 'git pull',
       \ 'git push' ]
 "}}}
+
+" unite-ack {{{
+highlight UniteAck cterm=bold ctermfg=19 ctermbg=205
+let g:unite_source_ack_command = 'ack --nocolor'
+let g:unite_source_ack_search_word_highlight = 'UniteAck'
+
+" }}}
+
 "}}}
 
 " eskk{{{

@@ -30,7 +30,7 @@
   (syntax-rules ()
     ((_ ?e1 ?e2 ...)
      (let loop () ?e1 ?e2 ...
-       (sys-sleep 200) ; sleep 
+       (sys-sleep #e2e2) ; sleep 
        (loop)))))
 
 (define get-os-type

@@ -1,5 +1,7 @@
 #!/usr/bin/env gosh
 
+;; FreeBSD ports tool
+
 (use gauche.process)
 (use gauche.parseopt)
 (use gauche.collection)
@@ -8,15 +10,18 @@
 (use util.list) ; slices
 (use text.csv)
 (require-extension (srfi 1 11 13))
-(use kirjasto) ; run-command, run-command-sudo, colour-string, colour-command
+(use kirjasto) ; run-command, run-command-sudo, colour-string, colour-command , concat
 
 (define-constant package-directory "/var/db/pkg")
 (define-constant ports-directory   "/usr/ports")
 
 ;; colour values, 256 terminal colour
-(define-constant colour-category 172)
-(define-constant colour-package  148)
-(define-constant colour-version  172)
+(define-constant colour-message  138)
+(define-constant colour-symbol   97)
+(define-constant colour-package  49)
+(define-constant colour-package-category 172)
+(define-constant colour-package-version  142)
+(define-constant colour-package-description  244)
 
 ; info {{{
 (define (package-list)
@@ -46,7 +51,7 @@
 (define (info-print-packages name)
   (map (lambda (x)
          (print
-           (string-concatenate
+           (concat
              `(" "
                ,(colour-string colour-package (car x))
                " "
@@ -60,7 +65,11 @@
 
 ; update {{{
 (define (update-ports-tree)
-  (run-command-sudo '(portsnap fetch update)))
+  (cond 
+    ((file-exists? "/usr/ports")
+     (run-command-sudo '(svn up /usr/ports)))
+    (else
+      (run-command-sudo '(svn checkout http://svn.freebsd.org/ports/head /usr/ports)))))
 ; }}}
 
 ;; srcup {{{
@@ -72,9 +81,11 @@
 ; install {{{
 (define (install-package package)
   (current-directory (build-path ports-directory package))
-  (print (string-append ">>> Installing " (colour-string 44 package)))
-  (run-command '(sudo make clean))
-  (run-command '(sudo make config-recursive))
+  (print (concat (colour-string colour-symbol ":: ")
+                 (colour-string colour-message "Installing ")
+                 (colour-string colour-package package)))
+  (run-command-sudo '(make clean))
+  (run-command-sudo '(make config-recursive))
   (colour-command "sudo make install clean"
                   #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                   #/^===>/   "[38;5;39m>>>[0m"
@@ -85,7 +96,9 @@
 ; deinstall {{{
 (define (deinstall-package package)
   (current-directory (build-path ports-directory package))
-  (print (string-append ">>> Deinstalling " (colour-string 44 package)))
+  (print (concat  (colour-string colour-symbol ":: ")
+                 (colour-string colour-message "Deinstalling ")
+                 (colour-string colour-package package)))
   (colour-command "sudo make deinstall"
                   #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                   #/^===>/   "[38;5;39m>>>[0m"
@@ -96,9 +109,11 @@
 ; reinstall {{{
 (define (reinstall-package package)
   (current-directory (build-path ports-directory package))
-  (print (string-append ">>> Installing " (colour-string 44 package)))
-  (run-command '(sudo make clean))
-  (run-command '(sudo make config))
+  (print (string-append (colour-string colour-symbol ":: ")
+                        (colour-string colour-message "Reinstalling ")
+                        (colour-string colour-package package)))
+  (run-command-sudo '(make clean))
+  (run-command-sudo '(make config))
   (colour-command "sudo make"
                   #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                   #/^===>/   "[38;5;39m>>>[0m"
@@ -133,6 +148,9 @@
             index-list)))
 
 (define (search-package-by-name package)
+  (print (string-append (colour-string colour-symbol ":: ")
+                        (colour-string colour-message "Searching ")
+                        (colour-string colour-package package)))
   (let1 found-list (search-find-package package)
     (for-each
       (lambda (x)
@@ -152,18 +170,15 @@
             (display
               (string-concatenate
                 `(" "
-                  ,(colour-string colour-category
+                  ,(colour-string colour-package-category
                                   category)
                   "/"
                   ,(colour-string colour-package
                                   name))))
-            (display
-              (string-concatenate `(" ["
-                                    ,(colour-string colour-version version)
-                                    "]")))
-            (newline)
             (print
-              (string-concatenate `("    " ,(colour-string 244  (cadddr x))))))))
+              (concat " [" (colour-string colour-package-version version) "]"))
+            (print
+              (concat `("    " ,(colour-string 244  (cadddr x))))))))
       found-list)))
 
 ; }}}

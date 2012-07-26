@@ -8,8 +8,8 @@
     whitespace->dash
     whitespace->underbar
     print-strings
-    port->incomplete-string
     concat
+    port->incomplete-string
     ))
 
 (select-module kirjasto.merkkijono)

@@ -14,23 +14,15 @@ source $HOME/.vim/config/bundle.vim
 endif
 "}}}
 
+filetype plugin indent on " required
+syntax enable
 
  if isdirectory(expand('~/.vim/config'))
    source ~/.vim/config/global.vim
-   source ~/.vim/config/plugins.vim
-   source ~/.vim/config/scheme.vim
-   source ~/.vim/config/statusline.vim
-   source ~/.vim/config/tabpage.vim
  endif
-
 "runtime! userautoload/*.vim
 
-
-
 "  options{{{
-
-filetype plugin indent on " required
-syntax enable
 
 " fix problem when vim on fish shell
 if $SHELL =~ '/fish$'
@@ -117,7 +109,8 @@ set showfulltag
 " colors
 set t_Co=256
 set background=dark
-colorscheme jellybeans
+colorscheme molokai
+let g:molokai_original = 1
 
 " set mouse
 set mouse=a
@@ -183,10 +176,11 @@ highlight Comment        ctermfg=244 ctermbg=234 cterm=bold
 highlight ColorColumn    ctermfg=white    ctermbg=234 
 highlight MatchParen     cterm=bold,reverse
 
-highlight TabLine        ctermfg=10  ctermbg=235
-highlight TabLineSel     ctermfg=220 ctermbg=239
-highlight TabLineFill    ctermbg=238 ctermbg=235
-highlight TabLineInfo    ctermfg=39  ctermbg=235
+highlight TabLine       ctermfg=10  ctermbg=235
+highlight TabLineSel    ctermfg=220 ctermbg=239
+highlight TabLineFill   ctermbg=238 ctermbg=235
+highlight TabLineInfo   ctermfg=39  ctermbg=235
+highlight TabLineSep    ctermbg=218  ctermbg=235
 
 " highlight for statusline
 " User1-9 => %{1-9}*
@@ -420,9 +414,11 @@ augroup JumpCursorOnEdit
 augroup END
 
 
-if filereadable(expand('~/.vim/config/plugins.vim'))
-  source ~/.vim/config/plugins.vim
-endif
+
+   source ~/.vim/config/plugins.vim
+   source ~/.vim/config/scheme.vim
+   source ~/.vim/config/statusline.vim
+   source ~/.vim/config/tabpage.vim
 
 " }}}
 

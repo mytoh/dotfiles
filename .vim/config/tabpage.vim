@@ -8,10 +8,10 @@ set tabline=%!MakeTabLine()
 
 function! MakeTabLine()
   let titles = map(range(1, tabpagenr('$')), 's:tabpage_label(v:val)')
-  let sep = '|'  " タブ間の区切り
-  let tabpages = join(titles, sep) . sep . '%#TabLineFill#%T'
+  let sep = '%#TabLineSep#' . '|'  " タブ間の区切り
+  let tabpages = join(titles, sep) . '%#TabLineFill#%T'
   let info = '%#TabLineInfo#'  " 好きな情報を入れる
- let info .= fnamemodify(getcwd(), ":~") . ' '
+  let info .= ' ' . fnamemodify(getcwd(), ":~") . ' '
   return tabpages . '%=' . info  " タブリストを左に、情報を右に表示
 endfunction
 

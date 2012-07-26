@@ -3,13 +3,15 @@
 (use gauche.process)
 (use util.list) ; slices
 (require-extension (srfi 1))    ; iota
+(use kirjasto)
 
 (define (colour-names)
   (let ((ls (slices (iota 256) 16))
         (colour-numbers (lambda (n)
                           (display
                             (format " ~a"
-                                    (string-append "[38;5;" (x->string n) "m" (x->string n) "[0m" ))))))
+                                    (concat "[38;5;" (number->string n) "m"
+                                            (number->string n) "[0m" ))))))
     (newline)
 
     (print "system colours")
@@ -22,10 +24,10 @@
     (let loop ((l (cdr ls)))
       (cond
         ((null? l)
-        '())
-         (else
+         '())
+        (else
           (for-each colour-numbers
-            (car l))
+                    (car l))
           (newline)
           (loop (cdr l)))))))
 

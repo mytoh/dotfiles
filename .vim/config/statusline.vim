@@ -63,20 +63,22 @@ function! Statusmode()
   elseif is_gosh_repl
     if curmode == 'i'
       call SetHighlight('User9', 45, 34)
-      return 'vfI'
+      return 'gI'
     elseif curmode == 'n'
       call SetHighlight('User9', 18, 202)
-      return 'vfN'
+      return 'gN'
     else
       call SetHighlight('User9', 18, 202)
-      return 'vf' . curmode
+      return 'g' . curmode
     endif
   else
     if curmode == 'i'
       call SetHighlight('User9', 45, 194)
+      call SetHighlight('StatusLine', 39, 224)
       return 'I'
     elseif curmode == 'n'
       call SetHighlight('User9', 18, 154)
+      call SetHighlight('StatusLine', 18, 234)
       return 'N'
     elseif curmode == 'v' || curmode == 'V'
       call SetHighlight('User9', 18, 94)
@@ -129,6 +131,7 @@ function! MakeActiveStatusLine()
         \  path,
         \  '%{SyntasticStatuslineFlag()}',
         \])
+
   " right
   let fileinfo = {
         \ 'dict': '%{&dictionary}',
@@ -159,12 +162,13 @@ function! MakeActiveStatusLine()
         \ 'curline': '%l/%L',
         \ 'column': '%c',
         \}
-  let rulers = join([
-        \   '%7*',
+  let rulers = '%7*' .
+        \ join([
         \   ruler.percent,
         \   ruler.column . ',' . ruler.curline,
-        \   '%0*'
         \])
+        \ . '%0*'
+
   let right = join([
         \   fileinfos,
         \   charcode,
@@ -176,7 +180,7 @@ endfunction
 " au VimEnter     * call SetActiveStatusLine()
 " au InsertEnter  * call SetActiveStatusLine()
 " au InsertLeave  * call SetActiveStatusLine()
-autocmd bufenter,winenter     * call SetActiveStatusLine()
+autocmd BufEnter,WinEnter     * call SetActiveStatusLine()
 " }}}
 
 " inactive status {{{
@@ -204,7 +208,7 @@ endfunction
 function! SetStatusLeaveBuffer()
   call SetInactiveStatusLine()
 endfunction
-autocmd bufleave,winleave * call SetInactiveStatusLine() " }}}
+" autocmd bufleave,winleave * call SetInactiveStatusLine() " }}}
 
 " }}}
 

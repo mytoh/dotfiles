@@ -41,7 +41,15 @@
                 cwd)
        (m)
        (colour-fs "quatre" m))
-      (else cwd))))
+      (else (prettify-directory cwd)))))
+
+(define (prettify-directory dir)
+       (string-join
+         (map
+           (lambda (d) (colour-string 110 d))
+           (cdr (string-split dir "/")))
+              (colour-string 240 "/"))) ;U2A20
+
 
 (define (git)
   (let ((git-branch (lambda ()
@@ -82,7 +90,7 @@
         ,(colour-string 0 ".")
         ,(colour-string 118 (car (string-split (sys-gethostname) "." )))
         " :: "
-        ,(colour-string 4 (directory))
+         ,(directory)
         ,(cond
            ((file-exists? "./.hg")
             (hg))

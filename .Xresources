@@ -49,7 +49,7 @@ urxvt.tabbed.tab-bg:    0
 
 #define FONT \
 neep-8, \
-k10,k10rk,k10b,\
+k10,k10rk,\
 9x12,\
 mplus_j10r, \
 -gnu-unifont-medium-r-normal--0-0-75-75-c-0-iso10646-1,\
@@ -58,8 +58,10 @@ mplus_j10r, \
 -misc-code2001-medium-r-normal--0-0-0-0-p-0-iso8859-1, \
 -misc-code2001-medium-r-normal--0-0-0-0-p-0-iso8859-15
 
-#define FONT_BOLD -artwiz-glispbold-bold-r-bold--11-110-75-75-p-100-iso8859-1, \
-  -misc-fixed-medium-r-normal--10-90-75-75-c-50-*, \
+#define FONT_BOLD \
+-artwiz-glispbold-bold-r-bold--11-110-75-75-p-100-iso8859-1, \
+k10b,\
+-misc-fixed-medium-r-normal--10-90-75-75-c-50-*, \
 -misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0, \
 -mplus-*-medium-r-normal--10-*-*-*-*-*-*-*, \
 k10, k10rk, k10b, \
