@@ -15,7 +15,7 @@ if whence -p gosh >&- ; then
   alias pahvi='gosh pahvi.scm'
   alias ls='command gosh ls.scm -d'
   alias la='command gosh ls.scm -d -a'
-  alias ll='command gosh ls.scm -d -psf'
+  alias ll='command gosh ls.scm -d -ptsf'
   alias lla='command gosh ls.scm -d -psf -a'
   alias l='command gosh ls.scm -d'
   alias gsi='rlwrap gosh repl.scm'

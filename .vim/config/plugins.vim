@@ -239,7 +239,7 @@ nnoremap <silent> [unite]o :<c-u>Unite outline<cr>
 noremap  <silent> [unite]p :<c-u>call <SID>unite_project('-start-insert')<cr>
 noremap  <silent> [unite]s :<c-u>Unite ack --nogroup<cr>
 nnoremap <silent> [unite]t :<c-u>Unite tab<cr>
-nnoremap <silent> / :<C-u>Unite -buffer-name=search line -start-insert<CR>
+nnoremap <silent> [unite]/ :<c-u>Unite -buffer-name=search line -start-insert<CR>
 " }}}
 
 function! s:unite_project(...)

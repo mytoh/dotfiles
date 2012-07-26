@@ -232,7 +232,7 @@
          (if (file-is-executable? name)
                        #`",(ls-make-colour 4 name),(ls-make-colour 2 \"*\")"
                        (ls-make-colour 14 name )))
-        ('directory 
+        ('directory
          #`",(ls-make-colour 1 name),(ls-make-colour 2 \"/\")")
         ('character
          (ls-make-colour 2 name))
@@ -334,7 +334,7 @@
           (ls-make-colour 6 group))))
 
 (define (print-time-format unit colour time)
-  (match unit 
+  (match unit
     ('sec (format "~17@a ~a" (ls-make-colour colour time) (ls-make-colour colour "sec ")))
     ('min (format "~17@a ~a" (ls-make-colour colour (round->exact (/. time 60))) (ls-make-colour colour "min ")))
     ('hour (format "~17@a ~a" (ls-make-colour colour (round->exact (/. (round->exact (/. time 60)) 60))) (ls-make-colour colour "hour")))
@@ -347,7 +347,7 @@
   (let* ((curtime (sys-time))
         (file-time (file-ctime file))
         (delta (- curtime file-time) ))
-    (cond 
+    (cond
       ;; sec
       ((< delta 10)
        (print-time-format 'sec 3 delta ))
@@ -385,12 +385,7 @@
        (print-time-format 'month 14 delta))
       ;; year
       (else
-       (print-time-format 'year 0 delta))
-
-
-      )
-    )
-  )
+       (print-time-format 'year 0 delta)))))
 
 ; }}}
 
@@ -408,7 +403,7 @@
 
 
 
-(define-syntax define-list-proc
+(define-syntax define-ls-proc
   (syntax-rules ()
     ((_ name ls directories allfiles dfirst)
      (define (name directories allfiles dfirst)
@@ -446,7 +441,7 @@
                          (print-delimiter 3)
                          (print-filename f stat))))
              fullpath-list)))))
-(define-list-proc ls-perm-size-file
+(define-ls-proc ls-perm-size-file
                   ls-perm-size-file-proc
                   directories allfiles dfirst)
 
@@ -465,7 +460,7 @@
            (if allfiles
              (list-files dir)
              (normal-files dir))))))
-(define-list-proc ls-perm-file
+(define-ls-proc ls-perm-file
                   ls-perm-file-proc
                   directories allfiles dfirst)
 
@@ -486,7 +481,7 @@
            (if allfiles
              (list-files dir)
              (normal-files dir))))))
-(define-list-proc ls-perm-owner-file
+(define-ls-proc ls-perm-owner-file
                   ls-perm-owner-file-proc
                   directories allfiles dfirst)
 
@@ -513,7 +508,7 @@
                          (print-delimiter 3)
                          (print-filename f stat))))
              fullpath-list)))))
-(define-list-proc ls-perm-owner-size-file
+(define-ls-proc ls-perm-owner-size-file
                   ls-perm-owner-size-file-proc
                   directories allfiles dfirst)
 
@@ -534,7 +529,7 @@
            (if allfiles
              (list-files dir)
              (normal-files dir))))))
-(define-list-proc ls-perm-time-file
+(define-ls-proc ls-perm-time-file
                   ls-perm-time-file-proc
                   directories allfiles dfirst)
 
@@ -561,11 +556,37 @@
                          (print-delimiter 3)
                          (print-filename f stat))))
              fullpath-list)))))
-(define-list-proc ls-perm-time-size-file
+(define-ls-proc ls-perm-time-size-file
                   ls-perm-time-size-file-proc
                   directories allfiles dfirst)
 
-
+(define  ls-perm-owner-time-size-file-proc
+  (lambda (dir allfiles dfirst)
+    (let ((fullpath-list (cond
+                           ((and allfiles dfirst)
+                            (directory-first  (list-files dir)))
+                           (allfiles (list-files dir))
+                           (dfirst   (directory-first (normal-files dir)))
+                           (else (normal-files dir)))))
+      (for-each
+        (lambda (e) (display e) (newline))
+        (map (lambda (f)
+               (let1 stat (sys-lstat f)
+                 (format "~a~10a~a~a~a~a~a~a~a~a"
+                         (print-delimiter 1)
+                         (print-permission f stat)
+                         (print-delimiter 2)
+                         (print-owner f stat)
+                         (print-delimiter 3)
+                         (print-time f stat)
+                         (print-delimiter 3)
+                         (print-size f stat)
+                         (print-delimiter 3)
+                         (print-filename f stat))))
+             fullpath-list)))))
+(define-ls-proc ls-perm-owner-time-size-file
+                  ls-perm-owner-time-size-file-proc
+                  directories allfiles dfirst)
 
 ;
 (define (ls-file directories allfiles dfirst)
@@ -659,6 +680,7 @@
      (pof "pof|perm-owner-file")
      (psf "psf|perm-size-file")
      (posf "posf|perm-owner-size-file")
+     (potsf "potsf|perm-owner-time-size-file")
      (all "a|all")
      (dfirst "d|directory-first")
      . directories)
@@ -668,6 +690,7 @@
       (ptsf (ls-perm-time-size-file directories all dfirst))
       (pof (ls-perm-owner-file directories all dfirst))
       (posf (ls-perm-owner-size-file directories all dfirst))
+      (potsf (ls-perm-owner-time-size-file directories all dfirst))
       (psf (ls-perm-size-file directories all dfirst))
       (dfirst (ls-file directories all dfirst))
       (else (ls-file directories all dfirst))))
