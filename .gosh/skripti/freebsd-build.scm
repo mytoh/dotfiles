@@ -39,6 +39,27 @@
     (string-concatenate
       '("[38;5;80m" "------------" "[0m" ))))
 
+(define (after)
+  (print
+  "
+      # reboot
+        -- single user mode ---
+      # mount -u /
+      # mount -a -t ufs
+      # mergemaster -p
+      # cd /usr/src
+      # make installworld
+      # yes y | make delete-old
+      # mergemaster
+      # reboot
+      # mount -u /
+      # mount -a -t ufs
+      # cd /usr/src
+      # make delete-old-libs
+") )
+
+
+
 (define (main args)
   (current-directory "/usr/src")
   (when (file-exists? "/usr/obj")
@@ -47,4 +68,5 @@
     (process "sudo rm -rfv /usr/obj"))
   (process "sudo make buildworld")
   (process "sudo make buildkernel")
-  (process "sudo make installkernel"))
+  (process "sudo make installkernel")
+  (after))
