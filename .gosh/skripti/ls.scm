@@ -38,6 +38,7 @@
     '(gz   . 1)
     '(bz2  . 1)
     '(bz   . 1)
+    '(tbz  . 1)
     '(tbz2 . 1)
     '(tz   . 1)
     '(deb  . 1)
@@ -130,12 +131,16 @@
     '(xml . 38)
     '(vim  . 70)
     '(c  . 123)
+    '(stub . 123)
     '(h  . 123)
     '(hs  . 23)
+    '(java  . 93)
+    '(jnlp  . 93)
 
     ;; text
     '(md   . 40)
     '(mkd   . 40)
+    '(markdown   . 40)
     '(rst   . 49)
     '(rest   . 49)
     '(txt  . 2)
@@ -170,29 +175,127 @@
     '(mak   . 103)
     '(bin  . 99)
     '(nds   . 103)
+    '(gba   . 103)
+    '(GBA   . 103)
     '(air  . 49)
+    '(m4 . 23)
+    '(ac . 24)
+    '(spec . 28)
+    '(guess . 42)
+    '(gpd . 22)
+    '(sub . 72)
     ))
 
-(define *colours*
-  (hash-table
-    'eq?
-    '(0  . 237)
-    '(1  . 131)
-    '(2  . 107)
-    '(3  . 75 )
-    '(4  . 240)
-    '(5  . 209)
-    '(6  . 185)
-    '(7  . 216)
-    '(8  . 220)
-    '(9  . 208)
-    '(10 . 243)
-    '(11 . 161)
-    '(12 . 240)
-    '(13 . 025)
-    '(14 . 248)
-    '(15 . 196)
+
+(define *normal-file-colours*
+  '(
+    ("README$" 33)
+    ("readme$" 33)
+    ("LICENSE$" 33)
+    ("NEWS$" 33)
+    ("HACKING$" 33)
+    ("Changelog$" 33)
+    ("AUTHORS$" 33)
+    ("COPYING$" 33)
+    ("DIST$" 33)
+    ("VERSION$" 33)
+
+    ("Makefile" 103)
+
+    ("Rakefile" 133)
+    ("Gemfile" 133)
     ))
+
+
+; ;;colorscheme trapd00r
+(define *colours*
+  (vector
+    237
+    131
+    107
+    75
+    240
+    209
+    185
+    216
+    220
+    208
+    243
+    161
+    240
+    025
+    248
+    196
+    ))
+;;colorscheme early
+; (define *colours*
+;   (vector
+;     233
+;     245
+;     250
+;     201
+;     239
+;     209
+;     185
+;     216
+;     244
+;     254
+;     243
+;     241
+;     240
+;     239
+;     237
+;     220
+;     ))
+
+;;colorscheme normal
+; (define *colours*
+;   (vector
+;     208
+;     197
+;     190
+;     196
+;     242
+;     209
+;     185
+;     215
+;     032
+;     061
+;     142
+;     197
+;     106
+;     060
+;     236
+;     215
+;     ))
+; 
+;;colorscheme greyscale
+; (define *colours*
+;   (vector
+;     252
+;     251
+;     250
+;     249
+;     239
+;     244
+;     240
+;     242
+;     244
+;     244
+;     243
+;     241
+;     240
+;     239
+;     236
+;     242
+;     ))
+; 
+
+
+
+
+
+
 
 (define (convert-jp-filename name)
   (ces-convert name (ces-guess-from-string name "*jp")))
@@ -203,7 +306,7 @@
 
 (define (ls-make-colour colour str)
   (cond
-    ((<= colour (hash-table-num-entries *colours*))
+    ((<= colour (vector-length *colours*))
      (let1 c  (ref *colours* colour #f)
        ((lambda (colour s)
           (string-append "[38;5;" (number->string colour) "m"  (x->string s) "[0m"))
@@ -212,6 +315,7 @@
       ((lambda (colour s)
          (string-append "[38;5;" (number->string colour) "m"  (x->string s) "[0m"))
        colour str))))
+
 (define (colour-filename name type . ecolour)
   (cond
     ((not (null? ecolour))
@@ -222,7 +326,7 @@
                       (string-concatenate  `(,(ls-make-colour e name) ,(ls-make-colour 2 "*")))
                       (ls-make-colour e name)))
          ('directory
-          (string-append (ls-make-colour e name) (ls-make-colour 4 "/")))
+          (string-append (ls-make-colour e name) (ls-make-colour 12 "/")))
          ('symlink
           (string-append (ls-make-colour e name) (ls-make-colour 2 "@")))
          (_        (ls-make-colour e name)))))
@@ -231,9 +335,11 @@
         ('regular
          (if (file-is-executable? name)
                        #`",(ls-make-colour 4 name),(ls-make-colour 2 \"*\")"
-                       (ls-make-colour 14 name )))
+                       (colour-normal-file name)
+                       ; (ls-make-colour 14 name)
+                       ))
         ('directory
-         #`",(ls-make-colour 1 name),(ls-make-colour 2 \"/\")")
+         #`",(ls-make-colour 1 name),(ls-make-colour 12 \"/\")")
         ('character
          (ls-make-colour 2 name))
         ('block
@@ -245,6 +351,17 @@
         ('socket
          (ls-make-colour 6 name))
         (_        (ls-make-colour 2 name))))))
+
+(define (colour-normal-file name)
+  (let ((colour (filter
+                  (lambda (r) (rxmatch (string->regexp (car r)) name))
+                  *normal-file-colours*) ))
+    (cond
+      ((null? colour)  
+      (ls-make-colour 14 name ))
+      (else
+    (ls-make-colour (cadar colour) name))  
+      )))
 
 
 ;; componets for display {{{
@@ -320,14 +437,17 @@
             size)))
 
 
+(define-constant *delimiters*
+    (vector
+    (ls-make-colour 0 "├")  
+    (ls-make-colour 0 "┤")  
+    (ls-make-colour 0 "│")) 
+  )
 (define (print-delimiter num)
-  (match num
-    (1 (ls-make-colour 0 "├"))
-    (2 (ls-make-colour 0 "┤"))
-    (3 (ls-make-colour 0 "│"))))
+  (vector-ref *delimiters* (- num 1)))
 
 (define (print-owner file stat)
-  (let ((user (sys-uid->user-name (ref stat 'uid)))
+  (let* ((user (if-let1 u (sys-uid->user-name (ref stat 'uid)) u (ref stat 'uid)))
         (group (sys-gid->group-name (ref stat 'gid))))
   (format "~a:~a"
           (ls-make-colour 2 user)

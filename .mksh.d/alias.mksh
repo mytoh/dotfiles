@@ -3,6 +3,8 @@
 
 if whence -p cdf >&- ; then
   alias df='cdf -h'
+else if whence -p dfc >&-; then
+  alias df='dfc'
 else
   alias df='df -h'
 fi

@@ -10,12 +10,10 @@
 
 (define (directory)
   (let* ((cwd (current-directory))
-        (colour-fs (lambda (fs m)
-                     (regexp-replace (string->regexp m)
-                                     cwd
-                                     (string-append
-                                       "~"
-                                       (colour-string 83 fs))))))
+         (colour-fs (lambda (fs d)
+                      (string-append
+                        "~"
+                        d))))
     (rxmatch-cond
       ;; /usr/home => ~
       ((rxmatch (string->regexp (string-concatenate `("/usr" ,(home-directory))))
@@ -30,25 +28,30 @@
       ((rxmatch (string->regexp "/mnt/mypassport")
                 cwd)
        (m)
-       (colour-fs "mypass" m))
+       (colour-fs
+         "mypass"
+         (prettify-directory (cddr (string-split cwd "/")))))
       ;; /mnt/deskstar => ~deskstar
       ((rxmatch (string->regexp "/mnt/deskstar")
                 cwd)
        (m)
-       (colour-fs "deskstar" m))
+       (colour-fs "deskstar"
+                  (prettify-directory (cddr (string-split cwd "/")))))
       ;; /mnt/quatre => ~quatre
       ((rxmatch (string->regexp "/mnt/quatre")
                 cwd)
        (m)
-       (colour-fs "quatre" m))
-      (else (prettify-directory cwd)))))
+       (colour-fs "quatre"
+                  (prettify-directory (cddr (string-split cwd "/")))))
+      (else
+        (prettify-directory
+          (string-split cwd "/"))))))
 
-(define (prettify-directory dir)
-       (string-join
-         (map
-           (lambda (d) (colour-string 110 d))
-           (cdr (string-split dir "/")))
-              (colour-string 240 "/"))) ;U2A20
+(define (prettify-directory lst)
+  (string-join (map
+                 (lambda (d) (colour-string 110 d))
+                 lst)
+               (colour-string 240 "/"))) ;U2A20
 
 
 (define (git)
@@ -90,7 +93,7 @@
         ,(colour-string 0 ".")
         ,(colour-string 118 (car (string-split (sys-gethostname) "." )))
         " :: "
-         ,(directory)
+        ,(directory)
         ,(cond
            ((file-exists? "./.hg")
             (hg))
@@ -102,9 +105,9 @@
             (darcs))
            (else ""))
         " "
-         ,(colour-string 95 "✖")
-         ,(colour-string 172 "╹◡╹")
-         ,(colour-string 95 "✖")
+        ,(colour-string 95 "✖")
+        ,(colour-string 172 "╹◡╹")
+        ,(colour-string 95 "✖")
         "\n"
         ,(colour-string 235 ">")
         ,(colour-string 238 ">")

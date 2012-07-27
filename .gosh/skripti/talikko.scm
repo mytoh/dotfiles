@@ -69,13 +69,17 @@
     ((file-exists? "/usr/ports")
      (run-command-sudo '(svn up /usr/ports)))
     (else
-      (run-command-sudo '(svn checkout http://svn.freebsd.org/ports/head /usr/ports)))))
+      (run-command-sudo '(svn checkout -q http://svn.freebsd.org/ports/head /usr/ports)))))
 ; }}}
 
 ;; srcup {{{
 ;; update kernel source
 (define (update-source-tree)
-  (run-command-sudo '(svn up /usr/src)))
+  (cond
+    ((file-exists? "/usr/src")
+     (run-command-sudo '(svn up /usr/src)))
+    (else
+      (run-command-sudo '(svn co -q http://svn.freebsd.org/base/head /usr/src)))))
 ;; }}}
 
 ; install {{{

@@ -16,7 +16,7 @@ if whence -p gosh >&- ; then
   alias ls='command gosh ls.scm -d'
   alias la='command gosh ls.scm -d -a'
   alias ll='command gosh ls.scm -d -ptsf'
-  alias lla='command gosh ls.scm -d -psf -a'
+  alias lla='command gosh ls.scm -d -ptsf -a'
   alias l='command gosh ls.scm -d'
   alias gsi='rlwrap gosh repl.scm'
   alias gsp='command gosh -ptime'

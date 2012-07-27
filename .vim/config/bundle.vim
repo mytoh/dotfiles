@@ -171,6 +171,10 @@ else
   NeoBundle 'Rykka/riv.vim'
   " markdow
   NeoBundle 'hallison/vim-markdown'
+  " obj-c
+  NeoBundle 'msanders/cocoa.vim'
+  " supercollider
+  NeoBundle 'sbl/scvim'
   " colorscheme {{{
   NeoBundle 'altercation/vim-colors-solarized'
   NeoBundle 'jelera/vim-gummybears-colorscheme'
