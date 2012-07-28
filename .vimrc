@@ -109,7 +109,7 @@ set showfulltag
 " colors
 set t_Co=256
 set background=dark
-colorscheme molokai
+colorscheme peachpuff
 let g:molokai_original = 1
 
 " set mouse

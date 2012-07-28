@@ -19,11 +19,15 @@
       ((rxmatch (string->regexp (string-concatenate `("/usr" ,(home-directory))))
                 cwd)
        (home)
-       (regexp-replace (string->regexp home) cwd "~"))
+       (prettify-directory
+         (string-split
+       (regexp-replace (string->regexp home) cwd "~") "/")))
       ;; $HOME => ~`
       ((rxmatch (home-directory) cwd)
        (home)
-       (regexp-replace (string->regexp home) cwd "~"))
+       (prettify-directory
+         (string-split
+           (regexp-replace (string->regexp home) cwd "~") "/")))
       ;; /mnt/mypassport => ~mypass
       ((rxmatch (string->regexp "/mnt/mypassport")
                 cwd)

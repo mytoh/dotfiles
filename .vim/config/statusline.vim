@@ -140,8 +140,8 @@ function! MakeActiveStatusLine()
         \ 'type': '%{&filetype}',
         \ 'separator': '<',
         \}
-  let fileinfos = join([
-        \  '%3*',
+  let fileinfos = '%3*'.
+        \ join([
         \  fileinfo.dict,
         \  '%<',
         \  fileinfo.format,
@@ -149,8 +149,7 @@ function! MakeActiveStatusLine()
         \  fileinfo.enc,
         \  fileinfo.separator,
         \   fileinfo.type,
-        \  '%*',
-        \])
+        \]) . '%0*'
 
   let charcode = join([
         \   '%6*',
@@ -169,7 +168,10 @@ function! MakeActiveStatusLine()
         \])
         \ . '%0*'
 
+  let hahhah = '%4*' . '%{g:HahHah()}' . '%*'
+
   let right = join([
+        \   hahhah,
         \   fileinfos,
         \   charcode,
         \   rulers,

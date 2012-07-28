@@ -1,15 +1,22 @@
 #!/usr/bin/env gosh
 
-(use kirjasto) ; swget mkdir cd colour-string
-(use gauche.parseopt)
-(use gauche.collection)
-(use sxml.ssax)
-(use sxml.sxpath)
-(use file.util)
-(use rfc.http)
-(use rfc.uri)
-(require-extension
+(define-module kirjasto.komento.pahvi
+  (export pahvi)
+  (use gauche.parseopt)
+  (use gauche.collection)
+  (use sxml.ssax)
+  (use sxml.sxpath)
+  (use file.util)
+  (use rfc.http)
+  (use rfc.uri)
+  (require-extension
     (srfi 1 11))
+  (use kirjasto.komento.työkalu)
+  (use kirjasto.väri)
+  (use kirjasto.merkkijono)
+  )
+(select-module kirjasto.komento.pahvi)
+
 
 
 (define (get-post-page page-number tag)
@@ -72,14 +79,19 @@
       (print (string-append (colour-string 99 "getting page ") (colour-string 33 (number->string (+ num 1)))))
       (get-image (parse-post-number-url (get-post-page (+ num 1) tag))))))
 
-(define (main args)
-  (let-args (cdr args)
+(define (usage status)
+  (exit status "usage: ~a <command> <package-name>\n" "pahvi"))
+
+(define (pahvi args)
+  (let-args args
     ((tag "t|tag=s")
+     (#f "h|help" (usage 0))
      . rest)
     (mkdir tag)
     (cd tag)
     (get-posts-all tag)
-    (cd "..")))
+    (cd ".."))
+  )
 
 
 

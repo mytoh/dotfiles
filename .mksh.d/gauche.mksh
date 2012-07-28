@@ -9,10 +9,7 @@ if whence -p gosh >&- ; then
   alias spc2ubar='command gosh space2underbar.scm'
   alias ea='command gosh extattr.scm'
   alias unpack='command gosh unpack.scm'
-  alias tk='command gosh talikko.scm'
   alias tm='gosh tmux-start.scm'
-  alias nap='gosh napa.scm'
-  alias pahvi='gosh pahvi.scm'
   alias ls='command gosh ls.scm -d'
   alias la='command gosh ls.scm -d -a'
   alias ll='command gosh ls.scm -d -ptsf'
@@ -20,6 +17,12 @@ if whence -p gosh >&- ; then
   alias l='command gosh ls.scm -d'
   alias gsi='rlwrap gosh repl.scm'
   alias gsp='command gosh -ptime'
+
+  alias komento='gosh komento.scm'
+  alias rm='komento rm'
+  alias nap='komento napa'
+  alias tk='komento talikko'
+  alias pahvi='komento pahvi'
 fi
 
 # panna {{{

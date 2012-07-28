@@ -26,8 +26,8 @@
 
 (define mount
   (lambda (src dest)
-    (run-command
-      `(sudo mount -v ,src ,dest))))
+    (run-command-sudo
+      `( mount -v ,src ,dest))))
 
 (define (mount-mypassport)
   (mount "quatrevingtdix:/Volumes/MyPassport"

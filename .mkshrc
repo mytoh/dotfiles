@@ -21,11 +21,11 @@ xsource() { # {{{
   return 0
 } #}}}
 xsource ~/.mksh.d/path.mksh
+xsource ~/.mksh.d/environment.mksh
 xsource ~/.mksh.d/function.mksh
-xsource ~/.mksh.d/alias.mksh
 xsource ~/.mksh.d/prompt.mksh
 xsource ~/.mksh.d/gauche.mksh
-xsource ~/.mksh.d/environment.mksh
+xsource ~/.mksh.d/alias.mksh
 
 # variables
 blue="[38;5;004m"

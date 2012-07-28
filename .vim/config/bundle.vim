@@ -199,7 +199,7 @@ else
   NeoBundle 'desert256.vim'
   NeoBundle 'git://gist.github.com/187578.git' " <- h2u_black
   "}}}
-  NeoBundle 'http://voikko.svn.sourceforge.net/svnroot/voikko/', {'type' : 'svn', 'rtp' : 'trunk/tools/vim'}
+  " NeoBundle 'http://voikko.svn.sourceforge.net/svnroot/voikko/', {'type' : 'svn', 'rtp' : 'trunk/tools/vim'}
   " bitbucket
   " NeoBundle 'https://bitbucket.org/kovisoft/slimv'
   " }}}

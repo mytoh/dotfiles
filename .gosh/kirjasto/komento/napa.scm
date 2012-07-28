@@ -1,11 +1,14 @@
-#!/usr/bin/env gosh
 
-(use gauche.process)
-(use gauche.parseopt)
-(use file.util)
-(use util.match)
-(use kirjasto)
-(require-extension (srfi 1 13)) ;count
+(define-module kirjasto.komento.napa
+  (export napa)
+  (use gauche.process)  
+  (use gauche.parseopt)  
+  (use file.util)  
+  (use util.match)  
+  (use kirjasto.komento.työkalu)
+  (require-extension (srfi 1 13))
+  )
+(select-module kirjasto.komento.napa)
 
 (define (git-clone args)
   (let-args args
@@ -103,8 +106,4 @@
     (else
       (print "not vcs directory launching GIT.")
       (git args))))
-
-
-(define (main args)
-  (napa (cdr args)))
 

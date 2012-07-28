@@ -2,18 +2,32 @@
 
 ;; FreeBSD ports tool
 
-(use gauche.process)
-(use gauche.parseopt)
-(use gauche.collection)
-(use file.util)
-(use util.match)
-(use util.list) ; slices
-(use text.csv)
-(require-extension (srfi 1 11 13))
-(use kirjasto) ; run-command, run-command-sudo, colour-string, colour-command , concat
+
+(define-module kirjasto.komento.talikko
+  (export talikko)
+  (use gauche.process)
+  (use gauche.parseopt)
+  (use gauche.collection)
+  (use file.util)
+  (use util.match)
+  (use util.list) ; slices
+  (use text.csv)
+  (require-extension (srfi 1 11 13))
+  (use kirjasto.komento.työkalu)
+  (use kirjasto.väri)
+  (use kirjasto.merkkijono)
+  (require-extension (srfi 1 13))
+  )
+(select-module kirjasto.komento.talikko)
+
 
 (define-constant package-directory "/var/db/pkg")
 (define-constant ports-directory   "/usr/ports")
+(define-constant index-file   (string-append
+                                "INDEX-"
+                                (car (string-split
+                                       (caddr (sys-uname))
+                                       "."))))
 
 ;; colour values, 256 terminal colour
 (define-constant colour-message  138)
@@ -67,9 +81,15 @@
 (define (update-ports-tree)
   (cond 
     ((file-exists? "/usr/ports")
-     (run-command-sudo '(svn up /usr/ports)))
+     (print (concat (colour-string colour-symbol ":: ")
+                    (colour-string colour-message "Updating source tree")))
+     (run-command-sudo '(svn up /usr/ports))
+     (fetch-index-file))
     (else
-      (run-command-sudo '(svn checkout -q http://svn.freebsd.org/ports/head /usr/ports)))))
+      (print (concat (colour-string colour-symbol ":: ")
+                     (colour-string colour-message "Updating source tree")))
+      (run-command-sudo '(svn checkout -q http://svn.freebsd.org/ports/head /usr/ports))
+      (fetch-index-file))))
 ; }}}
 
 ;; srcup {{{
@@ -101,8 +121,8 @@
 (define (deinstall-package package)
   (current-directory (build-path ports-directory package))
   (print (concat  (colour-string colour-symbol ":: ")
-                 (colour-string colour-message "Deinstalling ")
-                 (colour-string colour-package package)))
+                  (colour-string colour-message "Deinstalling ")
+                  (colour-string colour-package package)))
   (colour-command "sudo make deinstall"
                   #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                   #/^===>/   "[38;5;39m>>>[0m"
@@ -137,11 +157,7 @@
   (let ((index-list
           (call-with-input-file
             (build-path ports-directory
-                        (string-concatenate
-                          `("INDEX-"
-                            ,(car (string-split
-                                    (caddr (sys-uname))
-                                    ".")))))
+                        index-file)
             (cut port->list
               (make-csv-reader #\|) <>))))
     (filter (^x (let ((x (map (^s (string-downcase s))
@@ -151,7 +167,15 @@
                     (string-scan (cadddr x) package))))
             index-list)))
 
+(define (fetch-index-file)
+  (when (not (file-exists? index-file))
+    (print (string-append (colour-string colour-symbol ":: ")
+                          (colour-string colour-message "Fetching INDEX file")))
+    (current-directory ports-directory)
+    (run-command-sudo '(make fetchindex))))
+
 (define (search-package-by-name package)
+  (fetch-index-file)
   (print (string-append (colour-string colour-symbol ":: ")
                         (colour-string colour-message "Searching ")
                         (colour-string colour-package package)))
@@ -188,16 +212,16 @@
 ; }}}
 
 (define (usage status)
-  (exit status "usage: ~a <command> <package-name>\n" *program-name*))
+  (exit status "usage: ~a <command> <package-name>\n" "talikko"))
 
-(define (main args)
-  (let-args (cdr args)
+(define (talikko args)
+  (let-args args
     ((search "S|search=s")
      (#f "h|help" (usage 0))
      . rest)
     (cond
       (search
-        (search-package-by-name (caddr args)))
+        (search-package-by-name search))
       (else
         (match (car rest)
           ; commands
