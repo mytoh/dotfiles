@@ -1,28 +1,28 @@
 
 # gauche {{{
 export GAUCHE_ARCH=$(/usr/local/bin/gauche-config --arch )
-export GAUCHE_LOAD_PATH="$HOME/.gosh:$HOME/.gosh/skripti:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
+export GAUCHE_LOAD_PATH="$HOME/.gosh/skripti:$HOME/.gosh:$HOME/.gosh/kirjasto:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
 # aliases
 if whence -p gosh >&- ; then
-  alias yotsuba='command gosh yotsuba-get.scm'
-  alias futaba='command gosh futaba-get.scm'
   alias spc2ubar='command gosh space2underbar.scm'
   alias ea='command gosh extattr.scm'
-  alias unpack='command gosh unpack.scm'
   alias tm='gosh tmux-start.scm'
-  alias ls='command gosh ls.scm -d'
-  alias la='command gosh ls.scm -d -a'
-  alias ll='command gosh ls.scm -d -ptsf'
-  alias lla='command gosh ls.scm -d -ptsf -a'
-  alias l='command gosh ls.scm -d'
-  alias gsi='rlwrap gosh repl.scm'
   alias gsp='command gosh -ptime'
 
-  alias komento='gosh komento.scm'
-  alias rm='komento rm'
-  alias nap='komento napa'
-  alias tk='komento talikko'
-  alias pahvi='komento pahvi'
+  alias pikkukivi='gosh run-pikkukivi.scm'
+  alias rm='pikkukivi rm'
+  alias nap='pikkukivi napa'
+  alias tk='pikkukivi talikko'
+  alias pahvi='pikkukivi pahvi'
+  alias unpack='pikkukivi unpack'
+  alias futaba='pikkukivi futaba'
+  alias yotsuba='pikkukivi yotsuba'
+  alias gsi='rlwrap gosh pikkukivi.scm repl'
+  alias ls='pikkukivi ls -d'
+  alias la='pikkukivi ls -d -a'
+  alias ll='pikkukivi ls -d -ptsf'
+  alias lla='pikkukivi ls -d -ptsf -a'
+  alias l='pikkukivi ls -d'
 fi
 
 # panna {{{

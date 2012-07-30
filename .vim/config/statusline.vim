@@ -41,24 +41,24 @@ function! Statusmode()
   if is_unite
     if curmode == 'i'
       call SetHighlight('User9', 45, 144)
-      return 'uI'
+      return 'I.un'
     elseif curmode == 'n'
       call SetHighlight('User9', 18, 134)
-      return 'uN'
+      return 'N.un'
     else
       call SetHighlight('User9', 18, 134)
-      return 'u' . curmode
+      return curmode . '.un'
     endif
   elseif is_vimfiler
     if curmode == 'i'
       call SetHighlight('User9', 45, 94)
-      return 'vfI'
+      return 'I.vf'
     elseif curmode == 'n'
       call SetHighlight('User9', 18, 152)
-      return 'vfN'
+      return 'N.vf'
     else
       call SetHighlight('User9', 18, 152)
-      return 'vf' . curmode
+      return curmode . '.vf'
     endif
   elseif is_gosh_repl
     if curmode == 'i'

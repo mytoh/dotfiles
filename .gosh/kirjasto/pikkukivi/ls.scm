@@ -3,14 +3,20 @@
 ;; lesser copy of ls++ by trapd00r
 ;; colour codes are hardcoded so edit this file
 
-(use gauche.parseopt)
-(use gauche.process)
-(use gauche.sequence) ;remove
-(use gauche.charconv)
-(use util.match)
-(use util.list) ;take*
-(use file.util)
-(require-extension (srfi 1 13)) ;count
+(define-module pikkukivi.ls
+  (export
+    ls
+    )
+  (use gauche.parseopt)
+  (use gauche.process)
+  (use gauche.sequence) ;remove
+  (use gauche.charconv)
+  (use util.match)
+  (use util.list) ;take*
+  (use file.util)
+  (require-extension (srfi 1 13)) ;count
+  )
+(select-module pikkukivi.ls)
 
 (define *extension-colours*
   (hash-table
@@ -792,8 +798,8 @@
 (define (usage)
   (print "help"))
 
-(define (main args)
-  (let-args (cdr args)
+(define (ls args)
+  (let-args args
     ((pf "pf|perm-file")
      (ptf "ptf|perm-time-file")
      (ptsf "ptsf|perm-time-size-file")

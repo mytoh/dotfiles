@@ -1,18 +1,17 @@
-(define-module kirjasto.keskustelu
+
+(define-module pikkukivi.repl
   (extend gauche.interactive)
   (export
-    reader
-    evaluator
-    printer
-    prompter
+    repl
     )
   (use file.util)
   (use util.list)
+  (use util.match)
   (use srfi-1)
   (use gauche.reload)
   (use kirjasto.väri) ; colour-string
   )
-(select-module kirjasto.keskustelu)
+(select-module pikkukivi.repl)
 
 ;; colours
 (define *colours*
@@ -38,38 +37,37 @@
                     (colour-string
                       (assoc-ref *colours* assoc-key)
                       (x->string  str)))))
-    (case (class-name (class-of result))
+    (match (class-name (class-of result))
       ;; list
-      ((<pair>)
+      ('<pair>
        (make-colour 'list  result))
-      ((<list>)
+      ('<list>
        (make-colour 'list  result))
 
       ;; symbol
-      ((<symbol>)
+      ('<symbol>
        (make-colour 'symbol  result))
 
       ;; string
-      ((<string>)
+      ('<string>
        (make-colour 'string result))
-      ((<char>)
+      ('<char>
        (make-colour 'string result))
 
       ;; number
-      ((<number>)
+      ('<number>
        (make-colour  'number  result))
-      ((<integer>)
+      ('<integer>
        (make-colour  'number  result))
 
       ;; boolean
-      ((<boolean>)
+      ('<boolean>
        (cond
          (result
            (make-colour 'true "#t"))
          (else
            (make-colour 'false "#f"))))
-      (else
-        result)))))
+      (_ result)))))
 
 (define printer
   (lambda results
@@ -87,3 +85,12 @@
   (lambda ()
     (display (colour-string 33 "> "))
     (flush)))
+
+
+(define (repl args)
+  (read-eval-print-loop
+    reader
+    evaluator
+    printer
+    prompter
+    ))

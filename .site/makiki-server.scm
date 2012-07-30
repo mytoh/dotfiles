@@ -15,7 +15,7 @@
 (use rfc.uri)
 (require-extension
   (srfi 13))
-(use kirjasto) ;daemonize
+(use kirjasto.verkko) ;define-page-handler
 
 (define document-root
   (build-path (home-directory) ".site"))
@@ -25,10 +25,10 @@
 
 (define start-server
   (lambda ()
-    (daemonize
+    
       (start-http-server :access-log #t :error-log #t
                          :document-root document-root
-                         :port 8888))))
+                         :port 8888)))
 
 (define tag-link
   (lambda (url seg lst)

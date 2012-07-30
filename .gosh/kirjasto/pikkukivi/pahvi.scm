@@ -1,6 +1,5 @@
-#!/usr/bin/env gosh
 
-(define-module kirjasto.komento.pahvi
+(define-module pikkukivi.pahvi
   (export pahvi)
   (use gauche.parseopt)
   (use gauche.collection)
@@ -15,7 +14,7 @@
   (use kirjasto.väri)
   (use kirjasto.merkkijono)
   )
-(select-module kirjasto.komento.pahvi)
+(select-module pikkukivi.pahvi)
 
 
 

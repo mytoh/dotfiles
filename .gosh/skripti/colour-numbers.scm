@@ -3,7 +3,7 @@
 (use gauche.process)
 (use util.list) ; slices
 (require-extension (srfi 1))    ; iota
-(use kirjasto)
+(use kirjasto.merkkijono)
 
 (define (colour-names)
   (let ((ls (slices (iota 256) 16))

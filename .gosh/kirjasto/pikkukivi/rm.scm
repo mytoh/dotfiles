@@ -1,11 +1,11 @@
 
 ;; -*- coding: utf-8 -*-
 
-(define-module kirjasto.komento.rm
+(define-module pikkukivi.rm
   (export rm)
   (use file.util)
   (use gauche.parseopt))
-(select-module kirjasto.komento.rm)
+(select-module pikkukivi.rm)
 
 (define (rm args)
  (let-args args

@@ -1,14 +1,23 @@
-#!/usr/bin/env gosh
 
-(use rfc.http)
-(use rfc.uri)
-(use gauche.process)
-(use gauche.charconv)
-(use file.util)
-(use gauche.collection) ;find
-(use gauche.parseopt)
-(use srfi-11)
-(use kirjasto) ; forever
+(define-module pikkukivi.futaba
+  (export futaba)
+  (use rfc.http)
+  (use rfc.uri)
+  (use gauche.process)
+  (use gauche.charconv)
+  (use file.util)
+  (use util.match)
+  (use gauche.collection) ;find
+  (use gauche.parseopt)
+  (use srfi-11)
+  (use kirjasto.komento.työkalu)
+  (use kirjasto.työkalu)
+  (use kirjasto.väri) ; colour-string
+  (use kirjasto.merkkijono)
+  (use kirjasto.verkko)
+  )
+(select-module pikkukivi.futaba)
+
 
 
 (define (usage)
@@ -52,16 +61,16 @@
 
 (define (get-html board td)
   (let-values (((status headers body)
-                (let* ((bd (string->symbol board))
+                (let* ((bd board)
                        (fget (lambda (server)
                                (http-get (string-append server ".2chan.net")
                                          (string-append "/" board "/res/" td ".htm")))))
-                  (case bd
-                    ((l) ;二次元壁紙
+                  (match bd
+                    ("l" ;二次元壁紙
                      (fget  "dat" ))
-                    ((k) ;壁紙
+                    ("k" ;壁紙
                      (fget "cgi"))
-                    ((b) ;虹裏
+                    ("b" ;虹裏
                      (let ((servs '("jun" "dec" "may"))
                            (get-res (lambda (srv)
                                       (receive (a b c)
@@ -78,9 +87,9 @@
                          (and-let* ((s (get-res "may")))
                            (get-values "may"))
                          (values "404" #f #f))))
-                    ((7) ;ゆり
+                    ("7" ;ゆり
                      (fget "zip"))
-                    ((40) ;東方
+                    ("40" ;東方
                      (fget "may"))))))
     (cond ((not (string=? status "404"))
            (let ((html (ces-convert body "*jp" "utf-8")))
@@ -88,6 +97,12 @@
                (string-incomplete->complete html :omit)
                html)))
       (else  #f))))
+
+
+
+
+
+
 
 (define (futaba-get args )
   (let* ((board (car args))
@@ -140,9 +155,8 @@
       (else (print "no directories")))
     (print (colour-string 237 "----------"))))
 
-
-(define (main args)
-  (let-args (cdr args)
+(define (futaba args)
+  (let-args args
     ((all "a|all")
      (repeat "r|repeat")
      (else (opt . _) (print "Unknown option: " opt) (usage))

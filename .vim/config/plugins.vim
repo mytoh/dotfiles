@@ -33,7 +33,8 @@ let g:neocomplcache_enable_ignore_case             = 1
 " let g:neocomplcache_enable_underbar_completi on  = 1
 let g:neocomplcache_enable_fuzzy_completion        = 1
 let g:neocomplcache_enable_auto_select             = 1
-let g:neocomplcache_use_vimproc                        = 1
+let g:neocomplcache_use_vimproc                    = 1
+let g:neocomplcache_enable_prefetch                = 1
 let g:neocomplcache_dictionary_filetype_lists      = {
       \ 'default'  : '',
       \ 'scheme'   : $RLWRAP_HOME . '/gosh_completions',
@@ -113,32 +114,20 @@ nnoremap <silent> <c-e> :VimFiler -buffer-name=explorer -split -winwidth=35 -tog
 
 let g:vimfiler_as_default_explorer  = 1
 let g:vimfiler_safe_mode_by_default = 0
+let g:vimfiler_sort_type = "Time"
+let g:vimfiler_edit_action = 'tabopen'
 
 augroup vimfiler
-autocmd myautocommands filetype vimfiler call g:my_vimfiler_settings()
+  autocmd myautocommands filetype vimfiler call g:my_vimfiler_settings()
 augroup end
 function! g:my_vimfiler_settings() "{{{
   nmap     <buffer><expr><cr>        vimfiler#smart_cursor_map("\<plug>(vimfiler_expand_tree)", "\<plug>(vimfiler_edit_file)")
   nnoremap <buffer><localleader><silent>s    :call vimfiler#mappings#do_action('my_split')<cr>
   nnoremap <buffer><localleader><silent>S    :call vimfiler#mappings#do_action('my_vsplit')<cr>
-  let g:vimfiler_execute_file_list = {
-        \ 'mkv' : 'mplayer',
-        \ 'mpg' : 'mplayer',
-        \ 'mp4' : 'mplayer',
-        \ 'jpg' : 'kuva',
-        \ 'JPG' : 'kuva',
-        \ 'jpeg' : 'kuva',
-        \ 'png' : 'kuva',
-        \ 'gif' : 'kuva',
-        \ 'bmp' : 'kuva',
-        \ 'cbz' : 'kuva',
-        \ 'cbr' : 'kuva',
-        \ 'cbx' : 'kuva',
-        \}
+  call vimfiler#set_execute_file('mkv,mpg,mp4', 'mplayer')
+  call vimfiler#set_execute_file('jpg,JPG,jpeg,png,gif,bmp,cbz,cbr,cbx', 'mplayer')
   if exists('*vimfiler#set_extensions')
-    call vimfiler#set_extensions(
-          \ 'archive', 'xz,txz,cbz,cbr,lzh,zip,gz,bz2,cab,rar,7z,tgz,tar'
-          \)
+    call vimfiler#set_extensions('archive', 'xz,txz,cbz,cbr,lzh,zip,gz,bz2,cab,rar,7z,tgz,tar')
   endif
 endfunction "}}}
 
@@ -206,6 +195,11 @@ let g:quickrun_config['cobol'] = {
       \   'runner':    'vimproc',
       \}
 
+let g:quickrun_config['rst'] = {
+      \   'command':   'rst2html',
+      \   'runner':    'vimproc',
+      \   'outputter':    'browser',
+      \}
 "}}}
 
 " unite{{{
@@ -397,6 +391,51 @@ nnoremap <silent> [vimshell]p :<c-u>VimShellTab<cr>
 " gauref{{{
 let g:gauref_file = $HOME . '/.bundle/gauref.vim/doc/gauche-refj.txt'
 "}}}
+
+" vim-ref {{{
+"http://www.karakaram.com/vim/ref-webdict/
+let g:ref_source_webdict_sites = {
+      \   'je': {
+      \     'url': 'http://dictionary.infoseek.ne.jp/jeword/%s',
+      \   },
+      \   'ej': {
+      \     'url': 'http://dictionary.infoseek.ne.jp/ejword/%s',
+      \   },
+      \   'ef': {
+      \     'url': 'http://www.fincd.com/index.php?txtSearch=%s',
+      \   },
+      \   'fe': {
+      \     'url': 'http://www.fincd.com/index.php?txtSearch=%s',
+      \   },
+      \   'wiki': {
+      \     'url': 'http://ja.wikipedia.org/wiki/%s',
+      \   },
+      \ }
+
+" default site
+let g:ref_source_webdict_sites.default = 'ej'
+
+" function for outputs. remove first some lines
+function! g:ref_source_webdict_sites.je.filter(output)
+  return join(split(a:output, "\n")[15 :], "\n")
+endfunction
+function! g:ref_source_webdict_sites.ej.filter(output)
+  return join(split(a:output, "\n")[15 :], "\n")
+endfunction
+function! g:ref_source_webdict_sites.wiki.filter(output)
+  return join(split(a:output, "\n")[17 :], "\n")
+endfunction
+function! g:ref_source_webdict_sites.ef.filter(output)
+  return join(split(a:output, "\n")[4 :], "\n")
+endfunction
+function! g:ref_source_webdict_sites.fe.filter(output)
+  return join(split(a:output, "\n")[4 :], "\n")
+endfunction
+
+" keymap
+autocmd filetype ref-webdict nnoremap <buffer> q <c-w>c
+
+" }}}
 
 " changelog{{{
 let g:changelog_username = " "

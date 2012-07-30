@@ -1,11 +1,14 @@
-#!/usr/bin/env gosh
 
 ;;; methods from
 ;;; cv2tar.scm by
 ;;;  Walter C. Pelissero
 
-(use gauche.process)
-(use file.util) ; path-extension
+(define-module pikkukivi.unpack
+  (export unpack)
+  (use gauche.process)
+  (use file.util) ; path-extension
+  )
+(select-module pikkukivi.unpack)
 
 
 (define (zip-unpacker file . directory)
@@ -55,7 +58,7 @@
     ("cbx" ,tar-unpacker)
     ("tar" ,tar-unpacker)))
 
-(define (unpack file . directory)
+(define (unpacker file . directory)
   (let ((unpacker (cadr (assoc (path-extension file)
                          *unpacker-alist*))))
     (print file)
@@ -65,7 +68,7 @@
         (unpacker file))
       (error "unknown file type" file))))
 
-(define (main args)
-  (if (< 2 (length args))
-    (unpack (cadr args) (caddr args))
-    (unpack (cadr args))))
+(define (unpack args)
+  (if (<= 2 (length args))
+    (unpacker (car args) (cadr args))
+    (unpacker (car args))))

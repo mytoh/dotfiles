@@ -1,30 +1,39 @@
 #!/usr/bin/env gosh
 ;; -*- coding: utf-8 -*-
 
-(use rfc.http)
-(use rfc.uri)
-(use gauche.process)
-(use gauche.charconv)
-(use file.util)
-(use gauche.collection) ;find
-(use gauche.parseopt)
-(require-extension
-  (srfi 1 11 13))
-(use kirjasto) ; swget cd  mkdir
+
+(define-module pikkukivi.yotsuba
+  (export yotsuba)
+  (use rfc.http)
+  (use rfc.uri)
+  (use gauche.process)
+  (use gauche.charconv)
+  (use file.util)
+  (use gauche.collection) ;find
+  (use gauche.parseopt)
+  (require-extension
+    (srfi 1 11 13))
+  (use kirjasto.komento.työkalu)
+  (use kirjasto.työkalu)
+  (use kirjasto.väri) ; colour-string
+  (use kirjasto.merkkijono)
+  (use kirjasto.verkko)
+  )
+(select-module pikkukivi.yotsuba)
 
 
 (define (usage )
   (print-strings
     '("Usage: yotsuba board thread"
-       "  option)"
-       "\t-a|all      get thread number from directories under cwd"
-       "\t-r|repeat   repeat script with interval 5 minutes"
-       "\tboard       b g a v hc ..."
-       "\tthread      3839 2230 93988 482208 ..."
-       "  expamle) "
-       "\t$ yotsuba b 999999        # get images from /b/999999 with repeat option"
-       "\t$ yotsuba -r g 9999       # get images from /g/9999 with repeat option"
-       "\t$ yotsuba -a b            # get images from b with directory name as thread number"))
+      "  option)"
+      "\t-a|all      get thread number from directories under cwd"
+      "\t-r|repeat   repeat script with interval 5 minutes"
+      "\tboard       b g a v hc ..."
+      "\tthread      3839 2230 93988 482208 ..."
+      "  expamle) "
+      "\t$ yotsuba b 999999        # get images from /b/999999 with repeat option"
+      "\t$ yotsuba -r g 9999       # get images from /g/9999 with repeat option"
+      "\t$ yotsuba -a b            # get images from b with directory name as thread number"))
   (exit 2))
 
 
@@ -139,8 +148,8 @@
 
 
 
-(define (main args)
-  (let-args (cdr args)
+(define (yotsuba args)
+  (let-args args
     ((all "a|all")
      (repeat "r|repeat")
      (else (opt . _) (print "Unknown option: " opt) (usage))
@@ -152,7 +161,7 @@
        (forever (yotsuba-get-repeat-all restargs)))
       (repeat
         (forever (yotsuba-get-repeat restargs)
-                       (print (colour-string 237 "----------"))))
+                 (print (colour-string 237 "----------"))))
       (all
         (yotsuba-get-all restargs))
       (else

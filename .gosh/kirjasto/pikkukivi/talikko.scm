@@ -3,7 +3,7 @@
 ;; FreeBSD ports tool
 
 
-(define-module kirjasto.komento.talikko
+(define-module pikkukivi.talikko
   (export talikko)
   (use gauche.process)
   (use gauche.parseopt)
@@ -18,7 +18,7 @@
   (use kirjasto.merkkijono)
   (require-extension (srfi 1 13))
   )
-(select-module kirjasto.komento.talikko)
+(select-module pikkukivi.talikko)
 
 
 (define-constant package-directory "/var/db/pkg")
@@ -36,6 +36,8 @@
 (define-constant colour-package-category 172)
 (define-constant colour-package-version  142)
 (define-constant colour-package-description  244)
+
+
 
 ; info {{{
 (define (package-list)
@@ -63,6 +65,11 @@
       (list-packages name))))
 
 (define (info-print-packages name)
+  (let ((lst (info-find-packages name)))
+    (cond
+      ((null? lst)
+       (print (colour-string colour-message "no package found")))
+      (else
   (map (lambda (x)
          (print
            (concat
@@ -74,7 +81,7 @@
          (display "    ")
          (display (caddr x))
          (newline))
-       (info-find-packages name)))
+       lst)))))
 ; }}}
 
 ; update {{{
