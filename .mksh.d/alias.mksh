@@ -14,7 +14,6 @@ alias reboot="sync;sync;sync;sudo shutdown -r now"
 alias sudo="sudo -E "
 alias xfont="xlsatoms | grep '-'"
 alias which='whence -p'
-alias rr='command rm -rf'
 alias mkd='command mkdir -p'
 alias stow='stow --verbose=3'
 # net {{{

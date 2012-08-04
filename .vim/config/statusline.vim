@@ -32,6 +32,7 @@ function! GetCharCode() " {{{ from powerline
   return "'". char ."' ". nr
 endfunction "}}}
 
+
 " add hook to change mode highlight {{{
 function! Statusmode()
   let curmode = mode()
@@ -123,12 +124,15 @@ function! MakeActiveStatusLine()
   let path  = '%3*' . fnamemodify(getcwd(),':~') . '%*'
   " let curmode  =  mode()
   let curmode  =  Statusmode()
+  let fugitive = '%6*' . '%{fugitive#statusline()}' . '%0*'
+
   let left  = join([
         \  '%9*',
         \  curmode,
         \  '%2*',
         \  '%t',
         \  path,
+        \  fugitive,
         \  '%{SyntasticStatuslineFlag()}',
         \])
 

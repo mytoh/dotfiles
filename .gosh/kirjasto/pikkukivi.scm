@@ -14,8 +14,10 @@
     pikkukivi.repl
     pikkukivi.ls
     pikkukivi.rm
-    )
-)
+    pikkukivi.emma
+    pikkukivi.sgit
+    pikkukivi.colour
+    ))
 (select-module pikkukivi)
 
 (define (pikkukivi args)
@@ -37,5 +39,12 @@
     ("yotsuba"
      (yotsuba (cdr args)))
     ("futaba"
-     (futaba (cdr args))))
-  )
+     (futaba (cdr args)))
+    ("emma"
+     (emma (cdr args))) 
+    ("sgit"
+     (sgit (cdr args))) 
+    ("colour"
+     (colour (cdr args))) 
+    (_
+      (print "no matching command"))) )

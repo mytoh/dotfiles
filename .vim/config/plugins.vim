@@ -249,8 +249,8 @@ function! s:unite_my_settings() "{{{
   " Overwrite settings.
   imap <buffer> <c-w>     <plug>(unite_delete_backward_path)
   imap <buffer> <c-j>     <plug>(unite_exit)
-  imap <buffer> \\         <c-u>/
   imap <buffer> <localleader><localleader>  <c-u>~/
+  imap <buffer> <localleader>/  <c-u>/
   imap <buffer> <localleader>kv         <c-u>~/.panna/kirjasto/kaava/
   " <C-l>: manual neocomplcache completion.
   inoremap <buffer> <C-l>  <C-x><C-u><C-p><Down>
@@ -302,47 +302,60 @@ if has('vim_starting')
   endif
 endif
 
-" http://kstn.fc2web.com/seikana_zisyo.html
-autocmd myautocommands User eskk-initialize-pre call s:eskk_initial_pre()
-function! s:eskk_initial_pre()
-  " User can be allowed to modify
-  " eskk global variables (`g:eskk#...`)
-  " until `User eskk-initialize-pre` event.
-  " So user can do something heavy process here.
-  " (I'm a paranoia, eskk#table#new() is not so heavy.
-  " But it loads autoload/vice.vim recursively)
-  let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
-  call t.add_map('gwa', 'ぐゎ')
-  call t.add_map('gwe', 'ぐぇ')
-  call t.add_map('gwi', 'ぐぃ')
-  call t.add_map('gwo', 'ぐぉ')
-  call t.add_map('gwu', 'ぐ')
-  call t.add_map('kwa', 'くゎ')
-  call t.add_map('kwe', 'くぇ')
-  call t.add_map('kwi', 'くぃ')
-  call t.add_map('kwo', 'くぉ')
-  call t.add_map('kwu', 'く')
-  call t.add_map('we', 'ゑ')
-  call t.add_map('wha', 'うぁ')
-  call t.add_map('whe', 'うぇ')
-  call t.add_map('whi', 'うぃ')
-  call t.add_map('who', 'うぉ')
-  call t.add_map('whu', 'う')
-  call t.add_map('wi', 'ゐ')
-  call t.add_map(':',':')
-  call t.add_map(';',';')
-  call t.add_map('!','!')
-  call t.add_map('?','?')
-  call t.add_map('{','『')
-  call t.add_map('}','』')
-  call eskk#register_mode_table('hira', t)
-endfunction
+    " http://subtech.g.hatena.ne.jp/motemen/20110527/1306485690
+    " in eskk config.
+    " NOTE: This config remains the last character "z"
+    " if g:eskk#rom_input_style is not "skk".
+    autocmd myautocommands User eskk-initialize-pre call s:eskk_initial_pre()
+    function! s:eskk_initial_pre() "{{{
+        for [orgtable, mode] in [['rom_to_hira', 'hira'], ['rom_to_kata', 'kata']]
+            let t = eskk#table#new(orgtable.'*', orgtable)
+            call t.add_map('zw', 'w', 'z')
+            call eskk#register_mode_table(mode, t)
+        endfor
+    endfunction "}}}
+" " http://kstn.fc2web.com/seikana_zisyo.html
+" autocmd myautocommands User eskk-initialize-pre call s:eskk_initial_pre()
+" function! s:eskk_initial_pre()
+"   " User can be allowed to modify
+"   " eskk global variables (`g:eskk#...`)
+"   " until `User eskk-initialize-pre` event.
+"   " So user can do something heavy process here.
+"   " (I'm a paranoia, eskk#table#new() is not so heavy.
+"   " But it loads autoload/vice.vim recursively)
+"   let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
+"   call t.add_map('gwa', 'ぐゎ')
+"   call t.add_map('gwe', 'ぐぇ')
+"   call t.add_map('gwi', 'ぐぃ')
+"   call t.add_map('gwo', 'ぐぉ')
+"   call t.add_map('gwu', 'ぐ')
+"   call t.add_map('kwa', 'くゎ')
+"   call t.add_map('kwe', 'くぇ')
+"   call t.add_map('kwi', 'くぃ')
+"   call t.add_map('kwo', 'くぉ')
+"   call t.add_map('kwu', 'く')
+"   call t.add_map('we', 'ゑ')
+"   call t.add_map('wha', 'うぁ')
+"   call t.add_map('whe', 'うぇ')
+"   call t.add_map('whi', 'うぃ')
+"   call t.add_map('who', 'うぉ')
+"   call t.add_map('whu', 'う')
+"   call t.add_map('wi', 'ゐ')
+"   call t.add_map(':',':')
+"   call t.add_map(';',';')
+"   call t.add_map('!','!')
+"   call t.add_map('?','?')
+"   call t.add_map('{','『')
+"   call t.add_map('}','』')
+"   call eskk#register_mode_table('hira', t)
+" endfunction
 
 let g:eskk#egg_like_newline = 1
 let g:eskk#enable_completion = 1
 let g:eskk#select_cand_keys = "aoeuidhts"
 let g:eskk#show_annotation = 1
 "let g:eskk_revert_henkan_style = "okuri"
+
 "}}}
 
 " vimshell {{{
@@ -559,6 +572,7 @@ augroup rainbow_parentheses
   autocmd syntax   * RainbowParenthesesLoadBraces
 augroup end
 
+let g:rbpt_loadcmd_toggle = 0
 let g:rbpt_colorpairs = [
 	\ ['brown',       'RoyalBlue3'],
 	\ ['Darkblue',    'SeaGreen3'],
@@ -577,6 +591,7 @@ let g:rbpt_colorpairs = [
 	\ ['blue',        'DarkOrchid3'],
 	\ ['red',         'firebrick3'],
 	\ ]
+" (1 (2 (3 (4 (5 (6 (7 (8 (9 (10 (11 (12 (13 (14 (15 (16 (17 (18 (19)))))))))))))))))))
 " }
 
 " }}}

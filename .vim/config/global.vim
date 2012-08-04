@@ -47,7 +47,7 @@ endfunction
 function! vimrc.scheme()
   setlocal lisp
   setlocal cindent&
-  setlocal iskeyword=@,33,35-38,42-43,45-58,60-64,94,_,126
+  setlocal iskeyword=@,33,35-38,42-43,45-58,60-64,94,_,126,.
   if executable('scmindent.scm')
     if executable('racket')
       setlocal equalprg=scmindent.scm

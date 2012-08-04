@@ -1,10 +1,16 @@
-#!/usr/bin/env gosh
 
-(use gauche.process) ; run-process
-(use gauche.parseopt)
-(use util.match)
-(use file.util) ; directory-list, current-directory
-(use kirjasto) #; 'colour-string
+(define-module pikkukivi.sgit
+  (extend gauche.interactive)
+  (export
+    sgit)
+  (use gauche.process) ; run-process
+  (use gauche.parseopt)
+  (use util.match)
+  (use file.util) ; directory-list, current-directory
+  (use kirjasto.väri))
+(select-module pikkukivi.sgit)
+
+
 
 (define-constant *gitdir*  (expand-path "~/local/git/"))
 
@@ -104,8 +110,7 @@
     (kahua         Kahua)
     (mozilla       mozilla-central)
     (shadow        shadow)
-    (tlatsas       xcolors)
-    ))
+    (tlatsas       xcolors)))
 
 ;; update git repository
 (define (update-gitdir)
@@ -184,8 +189,8 @@
   (exit status "usage: ~a <command> <package-name>\n" *program-name*))
 
 
-(define (main args)
-  (let-args (cdr args)
+(define (sgit args)
+  (let-args args
     ((#f "h|help" (usage 0))
      . rest)
     (let ((previous-directory (current-directory)))

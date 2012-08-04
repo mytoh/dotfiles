@@ -10,7 +10,7 @@ if whence -p gosh >&- ; then
   alias gsp='command gosh -ptime'
 
   alias pikkukivi='gosh run-pikkukivi.scm'
-  alias rm='pikkukivi rm'
+  alias rr='pikkukivi rm'
   alias nap='pikkukivi napa'
   alias tk='pikkukivi talikko'
   alias pahvi='pikkukivi pahvi'
@@ -23,6 +23,11 @@ if whence -p gosh >&- ; then
   alias ll='pikkukivi ls -d -ptsf'
   alias lla='pikkukivi ls -d -ptsf -a'
   alias l='pikkukivi ls -d'
+  alias emma='pikkukivi emma'
+  alias sgit='pikkukivi sgit'
+  alias colour-numbers='pikkukivi colour numbers'
+  alias colour-pacman='pikkukivi colour pacman'
+  alias colour-spect='pikkukivi colour spect'
 fi
 
 # panna {{{
