@@ -33,8 +33,7 @@
      (print "[38;5;1myou're inside of tmux[0m"))
     (else
       (let ((main-session   "main")
-            (second-session "daemon")
-            )
+            (second-session "daemon"))
         (cond
           ; session exists
           ((has-sessin? main-session)
