@@ -115,7 +115,8 @@
         "\n"
         ,(colour-string 235 ">")
         ,(colour-string 238 ">")
-        ,(colour-string 60  ">")
+        ; ,(colour-string 60  ">")
+        ,(colour-string 60 "λ")
         " "))))
 
 (define (main args)

@@ -597,4 +597,10 @@ let g:rbpt_colorpairs = [
 " }}}
 
 
+" vimclojure {{{
+let g:vimclojure#ParenRainbow = 1
+let g:vimclojure#DynamicHighlighting = 1
+
+" }}}
+
 "}}}

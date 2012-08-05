@@ -415,10 +415,10 @@ augroup END
 
 
 
-   source ~/.vim/config/plugins.vim
-   source ~/.vim/config/scheme.vim
-   source ~/.vim/config/statusline.vim
-   source ~/.vim/config/tabpage.vim
+source ~/.vim/config/plugins.vim
+source ~/.vim/config/scheme.vim
+source ~/.vim/config/statusline.vim
+source ~/.vim/config/tabpage.vim
 
 " }}}
 
