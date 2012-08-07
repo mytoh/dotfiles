@@ -110,6 +110,7 @@
     (kahua         Kahua)
     (mozilla       mozilla-central)
     (shadow        shadow)
+    (digego         extempore)
     (tlatsas       xcolors)))
 
 ;; update git repository

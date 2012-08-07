@@ -360,8 +360,8 @@ let g:eskk#show_annotation = 1
 
 " vimshell {{{
 
-let g:vimshell_user_prompt = '"┌─" . "(" . fnamemodify(getcwd(), ":~") . ")"'
-let g:vimshell_prompt = '└┈╸ '
+let g:vimshell_user_prompt = '":: " . "(" . fnamemodify(getcwd(), ":~") . ")"'
+let g:vimshell_prompt = '>> '
 " let g:vimshell_right_prompt = 'vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 
 "if isdirectory(expand('~/.vim/bundle/vimproc/'))
