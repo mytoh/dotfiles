@@ -1,10 +1,10 @@
 
 (define-module pikkukivi.napa
   (export napa)
-  (use gauche.process)  
-  (use gauche.parseopt)  
-  (use file.util)  
-  (use util.match)  
+  (use gauche.process)
+  (use gauche.parseopt)
+  (use file.util)
+  (use util.match)
   (use kirjasto.komento.työkalu)
   (require-extension (srfi 1 13))
   )
@@ -43,6 +43,9 @@
          (run-command '(git pull)))
         ("create"
          (git-create args))
+        ("remote"
+         ; default verobose
+         (run-command `(git remote -v)))
         ("co"
          (run-command `(git checkout ,@(cdr args))))
         (_  (run-command `(git ,@args)))))))

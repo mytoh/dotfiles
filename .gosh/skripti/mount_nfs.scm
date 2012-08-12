@@ -4,7 +4,10 @@
 (use gauche.parseopt)
 (use file.util)
 (use util.match)
-(use kirjasto)
+(use kirjasto.komento)
+
+(define (usage status))
+ 
 
 (define (main args)
   (let-args (cdr args)

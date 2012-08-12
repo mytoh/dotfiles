@@ -15,8 +15,9 @@
     pikkukivi.ls
     pikkukivi.rm
     pikkukivi.emma
-    pikkukivi.sgit
     pikkukivi.colour
+    pikkukivi.topless
+    pikkukivi.ääliö
     ))
 (select-module pikkukivi)
 
@@ -42,9 +43,11 @@
      (futaba (cdr args)))
     ("emma"
      (emma (cdr args))) 
-    ("sgit"
-     (sgit (cdr args))) 
+    ("ääliö"
+     (ääliö (cdr args))) 
     ("colour"
      (colour (cdr args))) 
+    ("topless"
+     (topless (cdr args))) 
     (_
       (print "no matching command"))) )

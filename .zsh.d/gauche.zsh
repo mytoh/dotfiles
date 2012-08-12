@@ -1,9 +1,24 @@
 
+
 # gauche {{{
 export GAUCHE_ARCH=$(/usr/local/bin/gauche-config --arch )
 export GAUCHE_LOAD_PATH="$HOME/.gosh/skripti:$HOME/.gosh:$HOME/.gosh/kirjasto:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
+
+# compdef
+compdef _gosh gosh
+_gosh() {
+  _arguments -s : \
+    '::scheme files:_files -W $GAUCHE_LOAD_PATH -g "*.scm" ' \
+    ':file:_files' \
+    && return 0
+
+  _
+
+  return 1
+  }
+
 # aliases
-if whence -p gosh >&- ; then
+if check_com -c gosh; then
   alias spc2ubar='command gosh space2underbar.scm'
   alias ea='command gosh extattr.scm'
   alias tm='gosh tmux-start.scm'
@@ -24,11 +39,10 @@ if whence -p gosh >&- ; then
   alias lla='pikkukivi ls -d -ptsf -a'
   alias l='pikkukivi ls -d'
   alias emma='pikkukivi emma'
-  alias sgit='pikkukivi ääliö'
+  alias sgit='pikkukivi sgit'
   alias colour-numbers='pikkukivi colour numbers'
   alias colour-pacman='pikkukivi colour pacman'
   alias colour-spect='pikkukivi colour spect'
-  alias colour-square='pikkukivi colour square'
   alias topless='pikkukivi topless'
 fi
 

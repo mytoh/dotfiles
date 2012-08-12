@@ -35,6 +35,7 @@ let g:neocomplcache_enable_fuzzy_completion        = 1
 let g:neocomplcache_enable_auto_select             = 1
 let g:neocomplcache_use_vimproc                    = 1
 let g:neocomplcache_enable_prefetch                = 1
+let g:neocomplcache_max_list                       = 1000
 let g:neocomplcache_dictionary_filetype_lists      = {
       \ 'default'  : '',
       \ 'scheme'   : $RLWRAP_HOME . '/gosh_completions',
@@ -225,6 +226,7 @@ nmap     <localleader>u [unite]
 nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 nnoremap <silent> [unite]b :<c-u>Unite buffer<cr>
 nnoremap <silent> [unite]c :<c-u>UniteWithCurrentDir -buffer-name=files buffer file file/new<CR>
+nnoremap <silent> [unite]d :<c-u>Unite menu:directory<cr>
 nnoremap <silent> [unite]f :<c-u>UniteWithBufferDir -buffer-name=files -prompt=%\  file file/new<CR>
 nnoremap <silent> [unite]k :<c-u>Unite bookmark<cr>
 " nnoremap <silent> [unite]r :<c-u>Unite launcher<cr>
@@ -260,7 +262,39 @@ function! s:unite_my_settings() "{{{
   inoremap <silent><buffer><expr> f unite#smart_map('f', unite#do_action('vimfiler'))
   call unite#custom_default_action('file', 'tabopen')
   call unite#custom_default_action('bookmark', 'tabopen')
+  " call unite#custom_default_action('directory', 'tabvimfiler')
+  call unite#custom_default_action('directory_mru', 'vimfiler')
 endfunction "}}}
+
+" unite-menu {{{
+if !exists("g:unite_source_menu_menus")
+  let g:unite_source_menu_menus = {}
+endif
+
+" menu description
+let s:commands = {
+      \   'description' : 'directory shortcut',
+      \ }
+" set commands
+let s:commands.candidates = {
+      \   "quatre" : "VimFiler /mnt/quatre",
+      \   "deskstar" : "VimFiler /mnt/deskstar",
+      \   "mypassport" : "VimFiler /mnt/mypassport",
+      \ }
+
+" register function
+function s:commands.map(key, value)
+  return {
+        \   'word' : a:key,
+        \   'kind' : 'command',
+        \   'action__command' : a:value,
+        \ }
+endfunction
+
+let g:unite_source_menu_menus["directory"] = deepcopy(s:commands)
+unlet s:commands
+
+" }}}
 
 " unite-launch {{{
 let g:unite_launch_apps = [
@@ -407,6 +441,7 @@ let g:gauref_file = $HOME . '/.bundle/gauref.vim/doc/gauche-refj.txt'
 
 " vim-ref {{{
 "http://www.karakaram.com/vim/ref-webdict/
+let g:ref_use_vimproc = 1
 let g:ref_source_webdict_sites = {
       \   'je': {
       \     'url': 'http://dictionary.infoseek.ne.jp/jeword/%s',

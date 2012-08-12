@@ -127,9 +127,8 @@ home=$HOME
 #export UNAME_r=9.9-CURRENT
 
 export LANG=fi_FI.UTF-8
-REPORTTIME=3
+# REPORTTIME=3
 
-export GAUCHE_LOAD_PATH="$home/.gosh"
 export FTP_PASSIVE_MODE=true
 export G_FILENAME_ENCODING=@locale
 export RLWRAP_HOME=~/.rlwrap
@@ -204,7 +203,7 @@ path=(
 /usr/X11/bin(N-/)
 /usr/games(N-/)
 /usr/local/{sbin,bin}(N-/)
-/usr/local/*/{sbin,bin}(N-/)
+/usr/local/kde4/{sbin,bin}(N-/)
 /usr/{sbin,bin}(N-/)
 /{sbin,bin}(N-/))
 
@@ -214,18 +213,6 @@ fi
 ## zsh functions directory
 fpath=(~/.zsh.d/functions/completion ${fpath})
 
-if [[ "$OSTYPE" != freebsd* && $OSTYPE != linux* ]]; then
-  typeset -U manpath
-  MANPATH="`manpath`"
-  manpath=(
-  ~/local/*/man(N-/)
-  ~/local/*/share/man(N-/)
-  /usr/local/man(N-/)
-  /usr/local/*/man(N-/)
-  /usr/share/man(N-/)
-  $manpath)
-  export MANPATH
-fi
 
 unset INFOPATH
 typeset -xT INFOPATH infopath
@@ -266,17 +253,6 @@ zmodload zsh/complist
 
 # compdef {{{
 compdef _portmaster portbuilder 
-compdef _gosh gosh
-_gosh() {
-  _arguments -s : \
-    '::scheme files:_files -W $GAUCHE_LOAD_PATH -g "*.scm" ' \
-    ':file:_files' \
-    && return 0
-
-  _
-
-  return 1
-  }
 # }}}
 
 # Zstyles {{{
@@ -352,7 +328,7 @@ else
   RPROMPT=$viprompt
 }
 
-add-zsh-hook precmd _precmd_setup_vi_prompt
+# add-zsh-hook precmd _precmd_setup_vi_prompt
 # }}}
 
 setup_prompt(){ #{{{
@@ -382,7 +358,8 @@ setup_prompt(){ #{{{
     #RPROMPT=$muridana
   fi
 }
-setup_prompt
+# setup_prompt
+PROMPT="$(gosh ~/.gosh/skripti/prompt.scm)"
 #}}}
 
 #unicode characters {{{
@@ -480,17 +457,11 @@ fi
 #}}}
 
 _chpwd_title() { printf "_`echo $PWD|awk '{print $1;exit}'`\\" }
-if check_com -c gosh && [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
-_chpwd_ls(){
-    gosh ls.scm -d
-}
-else
 _chpwd_ls(){
   emulate -L zsh
   ls -F
 }
 
-fi
 add-zsh-hook chpwd _chpwd_title
 add-zsh-hook chpwd _chpwd_ls
 
@@ -1170,19 +1141,9 @@ alias sumo='mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_hais
 alias jblive='mplayer rtsp://videocdn-us.geocdn.scaleengine.net/jblive/jblive.stream'
 alias destep="figlet -w 80 -nkf rowancap DESTEP TRED | tr 'd' '▟' | tr 'P' '▛' | tr 'M' '█' | tr 'V' '▜' | tr '\"' ' ' | tr '.' ' ' | tr 'a' '▟' | tr 'b' '▙' | tr 'K' '█' | tr 'A' '▟' | tr 'F' '▛' | tr 'Y' '▜' | tr 'v' '█' | tr 'm' '█' | tr 'r' '▛' | toilet -w 80 --gay -f term"
 
-# gauche alias
+# gauche
 if check_com -c gosh; then
-    alias yotsuba="gosh yotsuba-get.scm"
-    alias futaba="gosh futaba-get.scm"
-    alias spc2ubar="gosh space2underbar.scm"
-    alias ea="gosh extattr.scm"
-  if [[ -e $GAUCHE_LOAD_PATH/ls.scm ]]; then
-    alias ls="gosh ls.scm -d"
-    alias la="gosh ls.scm -d -a"
-    alias ll="gosh ls.scm -d -psf"
-    alias lla="gosh ls.scm -d -psf -a"
-    alias l="gosh ls.scm -d"
-  fi
+  xsource ~/.zsh.d/gauche.zsh
 fi
 # suffix aliases
 alias -s txt=cat
@@ -1253,6 +1214,10 @@ fi
 
 xsource ~/perl5/perlbrew/etc/bashrc
 
+if check_com fasd ;then
+eval "$(fasd --init auto)"
+fi
+
 
 #[[ -s $home/.rvm/scripts/rvm ]] && source $home/.rvm/scripts/rvm
 
@@ -1303,6 +1268,18 @@ case ${OSTYPE} in
     alias ls="ls  -F"
     ;;
   darwin*)
+    # manpath
+  typeset -U manpath
+  MANPATH="`manpath`"
+  manpath=(
+  ~/local/*/man(N-/)
+  ~/local/*/share/man(N-/)
+  /usr/local/man(N-/)
+  /usr/local/*/man(N-/)
+  /usr/share/man(N-/)
+  $manpath)
+  export MANPATH
+
     alias mp2="/Applications/mplayer2.app/Contents/MacOS/mplayer-bin"
     alias bsearch="brew search "
     alias binst="brew install -v"
@@ -1399,6 +1376,7 @@ orb() {
 
 ;;
 esac
+
 #}}}
 
 # vim:foldmethod=marker

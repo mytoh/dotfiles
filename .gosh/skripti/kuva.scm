@@ -5,7 +5,7 @@
 (use util.match)
 (use file.util)
 (use kirjasto.arkisto)
-(load "unpack.scm")
+(use pikkukivi.unpack)
 
 (define (usage status) (exit status "usage: ~a <file>\n" *program-name*))
 

@@ -1,14 +1,14 @@
 
-(define-module pikkukivi.sgit
+(define-module pikkukivi.ääliö
   (extend gauche.interactive)
   (export
-    sgit)
+    ääliö)
   (use gauche.process) ; run-process
   (use gauche.parseopt)
   (use util.match)
   (use file.util) ; directory-list, current-directory
   (use kirjasto.väri))
-(select-module pikkukivi.sgit)
+(select-module pikkukivi.ääliö)
 
 
 
@@ -190,7 +190,7 @@
   (exit status "usage: ~a <command> <package-name>\n" *program-name*))
 
 
-(define (sgit args)
+(define (ääliö args)
   (let-args args
     ((#f "h|help" (usage 0))
      . rest)

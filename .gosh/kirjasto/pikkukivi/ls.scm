@@ -360,7 +360,7 @@
 
 (define (colour-normal-file name)
   (let ((colour (filter
-                  (lambda (r) (rxmatch (string->regexp (car r)) name))
+                  (lambda (r) ((string->regexp (car r)) name))
                   *normal-file-colours*) ))
     (cond
       ((null? colour)  

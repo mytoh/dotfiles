@@ -39,9 +39,9 @@
           (newline)
           (loop (cdr l)))))))
 
- ; set blackf  (tput setaf 0); set redf    (tput setaf 1); set greenf  (tput setaf 2)
- ; set yellowf (tput setaf 3); set bluef   (tput setaf 4); set purplef (tput setaf 5)
- ; set cyanf   (tput setaf 6); set whitef  (tput setaf 7)
+; set blackf  (tput setaf 0); set redf    (tput setaf 1); set greenf  (tput setaf 2)
+; set yellowf (tput setaf 3); set bluef   (tput setaf 4); set purplef (tput setaf 5)
+; set cyanf   (tput setaf 6); set whitef  (tput setaf 7)
 
 (define blackf  "[38;5;0m")
 (define redf    "[38;5;1m")
@@ -57,22 +57,22 @@
 
 (define (colour-pacman)
   (print
- #`"
- ,|yellowf|  ▄███████▄,reset   ,|redf|  ▄██████▄,reset    ,|greenf|  ▄██████▄,reset    ,|bluef|  ▄██████▄,reset    ,|purplef|  ▄██████▄,reset    ,|cyan|  ▄██████▄,reset
- ,|yellowf|▄█████████▀▀,reset  ,|redf|▄,|white|█▀█,|redf|██,|white|█▀█,|redf|██▄,reset  ,|greenf|▄,|white|█▀█,|greenf|██,|white|█▀█,|greenf|██▄,reset  ,|bluef|▄,|white|█▀█,|bluef|██,|white|█▀█,|bluef|██▄,reset  ,|purplef|▄,|white|█▀█,|purplef|██,|white|█▀█,|purplef|██▄,reset  ,|cyan|▄,|white|█▀█,|cyan|██,|white|█▀█,|cyan|██▄,reset
- ,|yellowf|███████▀,reset      ,|redf|█,|white|▄▄█,|redf|██,|white|▄▄█,|redf|███,reset  ,|greenf|█,|white|▄▄█,|greenf|██,|white|▄▄█,|greenf|███,reset  ,|bluef|█,|white|▄▄█,|bluef|██,|white|▄▄█,|bluef|███,reset  ,|purplef|█,|white|▄▄█,|purplef|██,|white|▄▄█,|purplef|███,reset  ,|cyan|█,|white|▄▄█,|cyan|██,|white|▄▄█,|cyan|███,reset
- ,|yellowf|███████▄,reset      ,|redf|████████████,reset  ,|greenf|████████████,reset  ,|bluef|████████████,reset  ,|purplef|████████████,reset  ,|cyan|████████████,reset
- ,|yellowf|▀█████████▄▄,reset  ,|redf|██▀██▀▀██▀██,reset  ,|greenf|██▀██▀▀██▀██,reset  ,|bluef|██▀██▀▀██▀██,reset  ,|purplef|██▀██▀▀██▀██,reset  ,|cyan|██▀██▀▀██▀██,reset
- ,|yellowf|  ▀███████▀,reset   ,|redf|▀   ▀  ▀   ▀,reset  ,|greenf|▀   ▀  ▀   ▀,reset  ,|bluef|▀   ▀  ▀   ▀,reset  ,|purplef|▀   ▀  ▀   ▀,reset  ,|cyan|▀   ▀  ▀   ▀,reset
-  ,boldon
- ,|yellowf|  ▄███████▄   ,|redf|  ▄██████▄    ,|greenf|  ▄██████▄    ,|bluef|  ▄██████▄    ,|purplef|  ▄██████▄    ,|cyan|  ▄██████▄,reset
- ,boldon,|yellowf|▄█████████▀▀  ,|redf|▄,|white|█▀█,|redf|██,|white|█▀█,|redf|██▄  ,|greenf|▄,|white|█▀█,|greenf|██,|white|█▀█,|greenf|██▄  ,|bluef|▄,|white|█▀█,|bluef|██,|white|█▀█,|bluef|██▄  ,|purplef|▄,|white|█▀█,|purplef|██,|white|█▀█,|purplef|██▄  ,|cyan|▄,|white|█▀█,|cyan|██,|white|█▀█,|cyan|██▄,reset
- ,boldon,|yellowf|███████▀      ,|redf|█,|white|▄▄█,|redf|██,|white|▄▄█,|redf|███  ,|greenf|█,|white|▄▄█,|greenf|██,|white|▄▄█,|greenf|███  ,|bluef|█,|white|▄▄█,|bluef|██,|white|▄▄█,|bluef|███  ,|purplef|█,|white|▄▄█,|purplef|██,|white|▄▄█,|purplef|███  ,|cyan|█,|white|▄▄█,|cyan|██,|white|▄▄█,|cyan|███,reset
- ,boldon,|yellowf|███████▄      ,|redf|████████████  ,|greenf|████████████  ,|bluef|████████████  ,|purplef|████████████  ,|cyan|████████████,reset
- ,boldon,|yellowf|▀█████████▄▄  ,|redf|██▀██▀▀██▀██  ,|greenf|██▀██▀▀██▀██  ,|bluef|██▀██▀▀██▀██  ,|purplef|██▀██▀▀██▀██  ,|cyan|██▀██▀▀██▀██,reset
- ,boldon,|yellowf|  ▀███████▀   ,|redf|▀   ▀  ▀   ▀  ,|greenf|▀   ▀  ▀   ▀  ,|bluef|▀   ▀  ▀   ▀  ,|purplef|▀   ▀  ▀   ▀  ,|cyan|▀   ▀  ▀   ▀,reset
- "
-  ))
+    #`"
+    ,|yellowf|  ▄███████▄,reset   ,|redf|  ▄██████▄,reset    ,|greenf|  ▄██████▄,reset    ,|bluef|  ▄██████▄,reset    ,|purplef|  ▄██████▄,reset    ,|cyan|  ▄██████▄,reset
+    ,|yellowf|▄█████████▀▀,reset  ,|redf|▄,|white|█▀█,|redf|██,|white|█▀█,|redf|██▄,reset  ,|greenf|▄,|white|█▀█,|greenf|██,|white|█▀█,|greenf|██▄,reset  ,|bluef|▄,|white|█▀█,|bluef|██,|white|█▀█,|bluef|██▄,reset  ,|purplef|▄,|white|█▀█,|purplef|██,|white|█▀█,|purplef|██▄,reset  ,|cyan|▄,|white|█▀█,|cyan|██,|white|█▀█,|cyan|██▄,reset
+    ,|yellowf|███████▀,reset      ,|redf|█,|white|▄▄█,|redf|██,|white|▄▄█,|redf|███,reset  ,|greenf|█,|white|▄▄█,|greenf|██,|white|▄▄█,|greenf|███,reset  ,|bluef|█,|white|▄▄█,|bluef|██,|white|▄▄█,|bluef|███,reset  ,|purplef|█,|white|▄▄█,|purplef|██,|white|▄▄█,|purplef|███,reset  ,|cyan|█,|white|▄▄█,|cyan|██,|white|▄▄█,|cyan|███,reset
+    ,|yellowf|███████▄,reset      ,|redf|████████████,reset  ,|greenf|████████████,reset  ,|bluef|████████████,reset  ,|purplef|████████████,reset  ,|cyan|████████████,reset
+    ,|yellowf|▀█████████▄▄,reset  ,|redf|██▀██▀▀██▀██,reset  ,|greenf|██▀██▀▀██▀██,reset  ,|bluef|██▀██▀▀██▀██,reset  ,|purplef|██▀██▀▀██▀██,reset  ,|cyan|██▀██▀▀██▀██,reset
+    ,|yellowf|  ▀███████▀,reset   ,|redf|▀   ▀  ▀   ▀,reset  ,|greenf|▀   ▀  ▀   ▀,reset  ,|bluef|▀   ▀  ▀   ▀,reset  ,|purplef|▀   ▀  ▀   ▀,reset  ,|cyan|▀   ▀  ▀   ▀,reset
+    ,boldon
+    ,|yellowf|  ▄███████▄   ,|redf|  ▄██████▄    ,|greenf|  ▄██████▄    ,|bluef|  ▄██████▄    ,|purplef|  ▄██████▄    ,|cyan|  ▄██████▄,reset
+    ,boldon,|yellowf|▄█████████▀▀  ,|redf|▄,|white|█▀█,|redf|██,|white|█▀█,|redf|██▄  ,|greenf|▄,|white|█▀█,|greenf|██,|white|█▀█,|greenf|██▄  ,|bluef|▄,|white|█▀█,|bluef|██,|white|█▀█,|bluef|██▄  ,|purplef|▄,|white|█▀█,|purplef|██,|white|█▀█,|purplef|██▄  ,|cyan|▄,|white|█▀█,|cyan|██,|white|█▀█,|cyan|██▄,reset
+    ,boldon,|yellowf|███████▀      ,|redf|█,|white|▄▄█,|redf|██,|white|▄▄█,|redf|███  ,|greenf|█,|white|▄▄█,|greenf|██,|white|▄▄█,|greenf|███  ,|bluef|█,|white|▄▄█,|bluef|██,|white|▄▄█,|bluef|███  ,|purplef|█,|white|▄▄█,|purplef|██,|white|▄▄█,|purplef|███  ,|cyan|█,|white|▄▄█,|cyan|██,|white|▄▄█,|cyan|███,reset
+    ,boldon,|yellowf|███████▄      ,|redf|████████████  ,|greenf|████████████  ,|bluef|████████████  ,|purplef|████████████  ,|cyan|████████████,reset
+    ,boldon,|yellowf|▀█████████▄▄  ,|redf|██▀██▀▀██▀██  ,|greenf|██▀██▀▀██▀██  ,|bluef|██▀██▀▀██▀██  ,|purplef|██▀██▀▀██▀██  ,|cyan|██▀██▀▀██▀██,reset
+    ,boldon,|yellowf|  ▀███████▀   ,|redf|▀   ▀  ▀   ▀  ,|greenf|▀   ▀  ▀   ▀  ,|bluef|▀   ▀  ▀   ▀  ,|purplef|▀   ▀  ▀   ▀  ,|cyan|▀   ▀  ▀   ▀,reset
+    "
+    ))
 
 
 (define (spect-system-colours)
@@ -127,6 +127,30 @@
   (spect-colour-cube)
   (spect-grayscale-colours))
 
+
+(define (colour-square)
+  (newline)
+  (dotimes (i 7)
+    (display " ")
+    (for-each
+      (lambda (s)
+        (display
+          (format "[48;5;~Am     " s))
+        (display "[0m "))
+      (iota 8))
+    (newline)) 
+  (print "[0m")
+  (dotimes (i 7)
+    (display " ")
+    (for-each
+      (lambda (s)
+        (display
+          (format "[48;5;~Am     " s))
+        (display "[0m "))
+      (iota 8 8))
+    (newline)) 
+  (print "[0m"))
+
 (define (colour args)
   (match (car args)  
     ("numbers"
@@ -134,5 +158,7 @@
     ("spect"
      (colour-spect))
     ("pacman"
-     (colour-pacman))))
+     (colour-pacman))
+    ("square"
+     (colour-square))))
 

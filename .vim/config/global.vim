@@ -201,8 +201,8 @@ endif
 " change cursor colour
 " let &t_SI  = "\<Esc>[3 q;orange\x7"
 " let &t_EI  = "\<Esc>[0 q;red\x7"
-silent !echo -ne "\033]12;red\007"
-autocmd VimLeave * silent !echo -ne "\033]112\007"
+"silent !echo -ne "\033]12;red\007"
+"autocmd VimLeave * silent !echo -ne "\033]112\007"
 
 " change cursor when insert mode
 " let &t_SI .= "[4 q"

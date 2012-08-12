@@ -24,8 +24,8 @@
     body))
 
 (define (parse-post-number-url body)
-  (let ((parse-image-url (lambda (line) (rxmatch #/\"file_url\"\:\"(http\:\/\/[[:alpha:]]+\.donmai\.us\/data\/[^\"]+)/ line)))
-        (parse-image-id  (lambda (line) (rxmatch #/\"id\"\:(\d+)/ line)))
+  (let ((parse-image-url (lambda (line) (#/\"file_url\"\:\"(http\:\/\/[[:alpha:]]+\.donmai\.us\/data\/[^\"]+)/ line)))
+        (parse-image-id  (lambda (line) (#/\"id\"\:(\d+)/ line)))
         (parse-element (lambda (proc str)
                          (remove not
                            (delete-duplicates

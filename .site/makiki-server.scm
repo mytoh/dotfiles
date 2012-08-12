@@ -97,7 +97,7 @@
         "))")
     ))
 
-(define reject-ie
+(define script-reject-ie
   (lambda ()
     `(script
        ,(string-append
@@ -109,6 +109,13 @@
           "}"
           ))))
 
+(define div-loader
+  (lambda ()
+    `(div (@ (class "loader"))
+          (span)
+          (span)
+          (span))))
+
 (define index-page
   (lambda (req)
     (html5
@@ -116,7 +123,9 @@
         (title "start page")
         (link (@ (rel "stylesheet") (href "css/style.css")))
         (link (@ (rel "stylesheet") (href "//fonts.googleapis.com/css?family=Convergence")))
-        ,(reject-ie)
+        (script (@ (src "//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js")))
+        (script (@ (src "js/pointer.js")))
+        ,(script-reject-ie)
 
         ,(let* ((browser (request-header-ref req "user-agent" )))
            (if (string=? browser "Opera") ; browser supporting webp
@@ -232,6 +241,7 @@
         (title "nico")
         (link (@ (rel "stylesheet") (href "css/nico.css") (type "text/css")))
 
+        ,(div-loader)
         (div (@ (id "wrapper"))
              (header
                (h1 "niconico playlist") (br))

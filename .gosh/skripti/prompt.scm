@@ -16,33 +16,33 @@
                         d))))
     (rxmatch-cond
       ;; /usr/home => ~
-      ((rxmatch (string->regexp (string-concatenate `("/usr" ,(home-directory))))
+      (( (string->regexp (string-concatenate `("/usr" ,(home-directory))))
                 cwd)
        (home)
        (prettify-directory
          (string-split
        (regexp-replace (string->regexp home) cwd "~") "/")))
       ;; $HOME => ~`
-      ((rxmatch (home-directory) cwd)
+      (( (string->regexp (home-directory)) cwd)
        (home)
        (prettify-directory
          (string-split
            (regexp-replace (string->regexp home) cwd "~") "/")))
       ;; /mnt/mypassport => ~mypass
-      ((rxmatch (string->regexp "/mnt/mypassport")
+      (( (string->regexp "/mnt/mypassport")
                 cwd)
        (m)
        (colour-fs
          "mypass"
          (prettify-directory (cddr (string-split cwd "/")))))
       ;; /mnt/deskstar => ~deskstar
-      ((rxmatch (string->regexp "/mnt/deskstar")
+      (( (string->regexp "/mnt/deskstar")
                 cwd)
        (m)
        (colour-fs "deskstar"
                   (prettify-directory (cddr (string-split cwd "/")))))
       ;; /mnt/quatre => ~quatre
-      ((rxmatch (string->regexp "/mnt/quatre")
+      (( (string->regexp "/mnt/quatre")
                 cwd)
        (m)
        (colour-fs "quatre"
@@ -60,10 +60,10 @@
 
 (define (git)
   (let ((git-branch (lambda ()
-                      (string-copy
+                      (sys-basename (string-copy
                         (process-output->string
-                          "git branch")
-                        2)))
+                          "git symbolic-ref HEAD")
+                        2))))
         (git-darty (lambda ()
                      (let* ((p (run-process '(git diff --quiet HEAD) :wait #t))
                             (status (process-exit-status p)))
