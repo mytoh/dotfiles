@@ -4,20 +4,19 @@ set-path() {
 unset PATH
 local p
 for p in \
-  ~/.panna/bin          \
   /sbin                 \
   /bin                  \
   /usr/local/kde4/bin   \
   /usr/local/kde4/sbin   \
   /usr/local/sbin       \
   /usr/local/bin        \
-  /usr/sbin             \
-  /usr/bin              \
   /usr/X11/bin          \
   /usr/games            \
   /opt/X11/bin          \
   ~/local/homebrew/bin  \
   ~/local/homebrew/sbin \
+  /usr/sbin             \
+  /usr/bin              \
   ~/local/bin      ;
 do
   [[ -d $p/. ]] || continue
