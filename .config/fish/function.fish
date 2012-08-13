@@ -79,9 +79,9 @@ function reboot
   sudo shutdown -r now
 end
 
-function sudo
-  sudo -E $argv
-end
+#function sudo
+#  sudo -E $argv
+#end
 
 function xfont
   xlsatoms |  grep --colour=never '-'
