@@ -1,4 +1,3 @@
-#!/usr/bin/env gosh
 
 (define-module pikkukivi.colour
   (export

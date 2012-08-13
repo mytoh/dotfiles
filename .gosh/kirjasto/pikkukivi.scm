@@ -18,6 +18,7 @@
     pikkukivi.colour
     pikkukivi.topless
     pikkukivi.ääliö
+    pikkukivi.radio
     ))
 (select-module pikkukivi)
 
@@ -49,5 +50,7 @@
      (colour (cdr args))) 
     ("topless"
      (topless (cdr args))) 
+    ("radio"
+     (radio (cdr args))) 
     (_
       (print "no matching command"))) )

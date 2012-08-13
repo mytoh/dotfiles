@@ -114,6 +114,8 @@ if which gosh 1>  /dev/null
   alias colour-spect='pikkukivi colour spect'
   alias colour-square='pikkukivi colour square'
   alias topless='pikkukivi topless'
+  alias radio='pikkukivi radio listen'
+  alias radio-list='pikkukivi radio list'
 end
 
 #}}}
