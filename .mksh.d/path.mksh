@@ -17,6 +17,7 @@ for p in \
   ~/local/homebrew/sbin \
   /usr/sbin             \
   /usr/bin              \
+  ~/.panna/bin \
   ~/local/bin      ;
 do
   [[ -d $p/. ]] || continue
