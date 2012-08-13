@@ -4,6 +4,7 @@ set-path() {
 unset PATH
 local p
 for p in \
+  ~/.panna/bin          \
   /sbin                 \
   /bin                  \
   /usr/local/kde4/bin   \
@@ -17,7 +18,6 @@ for p in \
   /opt/X11/bin          \
   ~/local/homebrew/bin  \
   ~/local/homebrew/sbin \
-  ~/.panna/bin          \
   ~/local/bin      ;
 do
   [[ -d $p/. ]] || continue

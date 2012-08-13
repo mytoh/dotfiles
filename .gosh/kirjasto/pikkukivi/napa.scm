@@ -14,8 +14,11 @@
   (let-args args
     ((private-repo "p|private=s")
      . rest)
-    (cond (private-repo
-            (run-command `(git clone ,(string-append "git@github.com:" private-repo))))
+    (cond
+      (private-repo
+        (if (string-scan private-repo "/")
+          (run-command `(git clone ,(string-append "git@github.com:" private-repo)))
+          (run-command `(git clone ,(string-append "git@github.com:" (sys-getenv "USER") "/" private-repo)))))
       (else
         (if (rxmatch->string #/^http:\/\/.*|^git:\/\/.*/ (car rest))
           (run-command `(git clone ,(car rest)))
