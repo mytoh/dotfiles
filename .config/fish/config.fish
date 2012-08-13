@@ -307,7 +307,7 @@ end
 # os {{{
 switch (uname)
   case FreeBSD
-. ~/.config/fish/freebsd.fish
+  xsource ~/.config/fish/freebsd.fish
 
 # mac settings
   case Darwin

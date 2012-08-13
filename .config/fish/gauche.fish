@@ -101,7 +101,7 @@ if which gosh 1>  /dev/null
   alias unpack='pikkukivi unpack'
   alias futaba='pikkukivi futaba'
   alias yotsuba='pikkukivi yotsuba'
-  alias gsi='rlwrap gosh pikkukivi.scm repl'
+  alias gsi='rlwrap gosh run-pikkukivi.scm repl'
   alias ls='pikkukivi ls -d'
   alias la='pikkukivi ls -d -a'
   alias ll='pikkukivi ls -d -ptsf'
