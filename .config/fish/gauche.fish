@@ -3,7 +3,7 @@
 
 
 set    GAUCHE_ARCH (gauche-config --arch)
-set -x GAUCHE_LOAD_PATH "$HOME/.gosh:$HOME/.gosh/skripti:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
+set -x GAUCHE_LOAD_PATH "$HOME/.gosh/skripti:$HOME/.gosh:$HOME/.gosh/kirjasto:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
 
 
 # gauche completions {{{
@@ -31,9 +31,6 @@ complete -c gosh -f -a "(__gosh_completion_current_directory)" -d "files in CWD"
 set -x OLUTPANIMO "$HOME/.panna"
 set -x GAUCHE_LOAD_PATH $OLUTPANIMO/kirjasto:$GAUCHE_LOAD_PATH
 push-to-path $OLUTPANIMO/bin
-if test ! -L $OLUTPANIMO/bin/pan
-  ln -sf $OLUTPANIMO/kirjasto/run-panna.scm $OLUTPANIMO/bin/pan
-end
 
 function __fish_complete_panna_kaava
   set arguments (commandline -opc)
@@ -89,120 +86,34 @@ complete -c tl -f -a "(__fish_complete_talikko_ports_tree)"
 
 #}}}
 
-# gauche functions {{{
-if which gosh >&-
 
-        if test -n $GAUCHE_LOAD_PATH
-                function cd
-                        if test -d $argv[1]
-                                builtin cd $argv
-                                and command gosh ls.scm -d .
-                        else
-                                builtin cd (dirname $argv[1])
-                                and command gosh ls.scm -d .
-                        end
-                end
-        else
-                function cd
-                        builtin cd $argv
-                end
-        end
+if which gosh 1>  /dev/null
+  alias spc2ubar='command gosh space2underbar.scm'
+  alias ea='command gosh extattr.scm'
+  alias tm='gosh tmux-start.scm'
+  alias gsp='command gosh -ptime'
 
-        function gi
-                rlwrap -c -q '"' -b '(){}[].,#@;|`"' gosh repl.scm $argv
-       end
-
-       function tk
-                command gosh talikko.scm $argv
-       end
-
-        function yotsuba
-                command gosh yotsuba-get.scm $argv
-        end
-        function futaba
-                command gosh futaba-get.scm $argv
-        end
-
-        function pahvi
-                command gosh pahvi.scm $argv
-        end
-
-        function spc2ubar
-                command gosh space2underbar.scm $argv
-        end
-
-        function ea
-                command gosh extattr.scm $argv
-        end
-
-        function unpack
-                command gosh unpack.scm $argv
-        end
-
-
-        function colour-numbers
-                command gosh colour-numbers.scm
-        end
-
-        function colour-pacman
-                command gosh colour-pacman.scm
-        end
-
-        function fi-en
-                command gosh kääntää.scm fi en $argv[1]
-        end
-
-        function en-fi
-                command gosh kääntää.scm en fi $argv[1]
-        end
-
-        function fi-ja
-                command gosh kääntää.scm fi ja $argv[1]
-        end
-
-        function sanoa
-                command gosh sanoa.scm $argv
-        end
-
-        function v
-                command gosh v.scm $argv
-        end
-
-        function a
-                command gosh launch-app.scm $argv
-        end
-        complete -c a -a "(complete -C(commandline -ct))" -x
-
-        function nap
-              command gosh napa.scm $argv
-        end
-
-        function tm
-                command gosh tmux-start.scm
-        end
-
-        function urxvtcd
-                command gosh urxvtcd.scm
-        end
-
-        function kuv
-               command gosh kuva.scm
-        end
-
-
-        function la
-                command gosh ls.scm -d -a
-        end
-        function ll
-                command gosh ls.scm -d -psf
-        end
-        function lla
-                command gosh ls.scm -d -psf -a
-        end
-        function l
-                command gosh ls.scm -d
-        end
+  alias pikkukivi='gosh run-pikkukivi.scm'
+  alias rr='pikkukivi rm'
+  alias nap='pikkukivi napa'
+  alias tk='pikkukivi talikko'
+  alias pahvi='pikkukivi pahvi'
+  alias unpack='pikkukivi unpack'
+  alias futaba='pikkukivi futaba'
+  alias yotsuba='pikkukivi yotsuba'
+  alias gsi='rlwrap gosh pikkukivi.scm repl'
+  alias ls='pikkukivi ls -d'
+  alias la='pikkukivi ls -d -a'
+  alias ll='pikkukivi ls -d -ptsf'
+  alias lla='pikkukivi ls -d -ptsf -a'
+  alias l='pikkukivi ls -d'
+  alias emma='pikkukivi emma'
+  alias sgit='pikkukivi ääliö'
+  alias colour-numbers='pikkukivi colour numbers'
+  alias colour-pacman='pikkukivi colour pacman'
+  alias colour-spect='pikkukivi colour spect'
+  alias colour-square='pikkukivi colour square'
+  alias topless='pikkukivi topless'
 end
-#}}}
 
 #}}}
