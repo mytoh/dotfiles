@@ -20,11 +20,24 @@
        ...
        val))))
 
+; (define-syntax ->
+;   (syntax-rules ()
+;     ((_ x) x)
+;     ((_ x (y z ...) rest ...)
+;      (-> (y x z ...) rest ...))))
 (define-syntax ->
   (syntax-rules ()
+    ((_ x (f v) f2 ...)
+     (-> (f x v) f2 ...))
+    ((_ x f f2 ...)
+     (-> (f x) f2 ...))
+    ((_ x (f v))
+     (-> (f x v)))
+    ((_ x f)
+     (f x))
     ((_ x) x)
-    ((_ x (y z ...) rest ...)
-     (-> (y x z ...) rest ...))))
+    ))
+
 
 (define-syntax ->>
   (syntax-rules ()

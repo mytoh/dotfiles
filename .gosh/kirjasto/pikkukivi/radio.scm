@@ -23,7 +23,7 @@
     ))
 
 (define (listen args)
-  (run-process `(mplayer -playlist ,(cadr (assoc-ref station-list (string->symbol (car args)))))) )
+  (run-process `(mplayer -playlist ,(cadr (assoc-ref station-list (string->symbol (car args))))) :wait #t) )
 
 (define (list-stations)
   (let loop ((st station-list))  
