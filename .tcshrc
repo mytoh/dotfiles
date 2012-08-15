@@ -1,0 +1,85 @@
+
+source ~/.tcsh.d/prompt.tcsh
+set history=100000
+set savehist=(100000 merge)
+set autolist = ambiguous
+set autocorrect
+set ignoreeof
+set histdup=erase
+set rmstar
+set inputmode=insert
+set listlinks
+set listjobs=long
+set ellipsis
+set implicitcd=verbose
+set color
+set colorcat
+set autoexpand
+set complete=enhance
+set path = ( ~/local/bin /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} )
+set cdpath = (~/local/ ~/local/var/)
+set noclobber
+set notify
+set padhour
+# set time=(8 "\                                     
+#     Time spent in user mode   (CPU seconds) : %Us\ 
+#     Time spent in kernel mode (CPU seconds) : %Ss\ 
+#     Total time                              : %Es\ 
+#     CPU utilisation (percentage)            : %P\  
+#     Times the process was swapped           : %W\  
+#     Times of major page faults              : %F\  
+#     Times of major page faults              : %R") 
+
+#umask 022
+limit coredumpsize 0
+setenv LANG en_GB.UTF-8
+#setenv LC_ALL ja_JP.UTF-8
+setenv EDITOR vim
+setenv PAGER less
+setenv FTP_PASSIVE_MODE true
+setenv MYVIMRC ~/.vimrc
+setenv G_FILENAME_ENCODING @locale
+setenv SCSH_LIB_DIRS ' "." "/usr/home/mytoh/.scsh" "/usr/local/lib/scsh/" "/usr/local/lib/scsh/0.6" "#f"'
+setenv YPSILON_SITELIB ~/.ypsilon
+setenv YPSILON_LOADPATH ~/.ypsilon
+set catalog=ja.ayanami.cat
+setenv NLSPATH ~/local/lib/tcsh/%N
+setenv RLWRAP_HOME ~/.rlwrap
+
+bindkey -e
+bindkey '' backward-delete-word
+bindkey '' history-search-backward
+bindkey '' history-search-forward
+
+stty kill 
+stty stop undef # disable C-s key
+
+source ~/.tcsh.d/alias.tcsh
+source ~/.tcsh.d/gauche.tcsh
+
+# }}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+foreach f ($HOME/.complete.tcsh $HOME/perl5/perlbrew/etc/cshrc)
+  if (-f $f) then
+    source $f
+    endif
+end
+
