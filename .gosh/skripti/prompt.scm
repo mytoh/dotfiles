@@ -5,7 +5,7 @@
 (use gauche.parseopt)
 (use util.match)
 (use file.util)
-(require-extension (srfi 13))
+(require-extension (srfi 13 98))
 (use kirjasto.väri)
 
 (define (directory)
@@ -117,6 +117,9 @@
         ,(colour-string 238 ">")
         ,(colour-string 60  ">")
         " "))))
+
+
+
 
 (define (main args)
   (prompt))

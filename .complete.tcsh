@@ -131,3 +131,16 @@ complete sysctl 'c/-/(b d e h N n o x a)/' \
                 'C@*@`\/sbin\/sysctl -Noa | awk -F . '"'"'{if(NF>1) print $1"."; else print $1}'"'"' | sort | uniq`@@' 
 
 
+
+
+
+
+##############################
+# gauche commands
+##############################
+
+set panna_cmds = (install ase asentaa update up list ls cat edit rm remove uninstall unlink)
+complete {panna,pan} 'p/1/$panna_cmds/'
+
+set talikko_cmds = (up update srcup info deinstall remove reinstall install search )
+complete {talikko,tk} 'p/1/$talikko_cmds/'

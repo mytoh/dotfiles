@@ -93,6 +93,7 @@
     (lf94           dwm-lee)
     (Cloudef        monsterwm-xcb)
     (Cloudef        dotFiles   cloudef-dotFiles)
+    (Cloudef        dotfiles-ng   cloudef-dotFiles-ng)
     (Cloudef        milkyhelper)
     (chjj           compton)
     (samirahmed           fu)
