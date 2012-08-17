@@ -154,7 +154,7 @@ set showfulltag
 " colors
 set t_Co=256
 set background=dark
-colorscheme peachpuff
+colorscheme jellybeans
 let g:molokai_original = 1
 
 " set mouse
@@ -213,19 +213,22 @@ endif
 
 " highlights {{{
 highlight clear cursorline
-highlight cursorline     ctermbg=237  gui=underline guibg=black
-highlight StatusLine     ctermfg=gray ctermbg=235 cterm=none
-highlight ActiveBuffer   ctermfg=232 ctermbg=244 cterm=none
-highlight InactiveBuffer ctermfg=gray ctermbg=235 cterm=none
-highlight Comment        ctermfg=244 ctermbg=234 cterm=bold
-highlight ColorColumn    ctermfg=white    ctermbg=234 
+highlight cursorline                   ctermbg=237  gui=underline guibg=black
+highlight StatusLine     ctermfg=gray  ctermbg=235 cterm=none
+highlight ActiveBuffer   ctermfg=232   ctermbg=244 cterm=none
+highlight InactiveBuffer ctermfg=gray  ctermbg=235 cterm=none
+highlight Comment        ctermfg=244   ctermbg=234 cterm=bold
+highlight ColorColumn    ctermfg=white ctermbg=234
 highlight MatchParen     cterm=bold,reverse
 
 highlight TabLine       ctermfg=10  ctermbg=235
 highlight TabLineSel    ctermfg=220 ctermbg=239
-highlight TabLineFill   ctermbg=238 ctermbg=235
+highlight TabLineFill   ctermfg=238 ctermbg=235
 highlight TabLineInfo   ctermfg=39  ctermbg=235
-highlight TabLineSep    ctermbg=218  ctermbg=235
+highlight TabLineSep    ctermfg=218 ctermbg=235
+
+highlight Pmenu          ctermfg=110    ctermbg=235
+highlight PmenuSel      ctermfg=189    ctermbg=238
 
 " highlight for statusline
 " User1-9 => %{1-9}*
@@ -240,6 +243,7 @@ highlight User8 ctermfg=95   ctermbg=251
 " mode
 highlight User9 ctermfg=18   ctermbg=154
 " }}}
+
 
 command! -nargs=1 Silent
       \ | execute ':silen !'.<q-args>

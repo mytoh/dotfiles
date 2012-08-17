@@ -12,7 +12,7 @@ setenv GAUCHE_LOAD_PATH "$HOME/.gosh/skripti:$HOME/.gosh:$HOME/.gosh/kirjasto:$H
 #}}}
 
 
-if ( { which gosh >& /dev/null } ) then
+if ( { where gosh >& /dev/null } ) then
     alias spc2ubar 'command gosh space2underbar.scm'
     alias ea 'command gosh extattr.scm'
     alias tm 'gosh tmux-start.scm'

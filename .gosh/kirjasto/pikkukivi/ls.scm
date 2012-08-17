@@ -205,6 +205,7 @@
     ("COPYING$" 33)
     ("DIST$" 33)
     ("VERSION$" 33)
+    ("INSTALL$" 33)
 
     ("Makefile" 103)
 

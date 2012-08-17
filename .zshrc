@@ -1380,3 +1380,5 @@ esac
 #}}}
 
 # vim:foldmethod=marker
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

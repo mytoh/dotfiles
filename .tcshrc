@@ -5,6 +5,7 @@ set savehist=(100000 merge)
 set autolist = ambiguous
 set autocorrect
 set ignoreeof
+set filec
 set histdup=erase
 set rmstar
 set inputmode=insert
@@ -16,19 +17,19 @@ set color
 set colorcat
 set autoexpand
 set complete=enhance
-set path = ( ~/local/bin /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} )
+set path = ( ~/local/bin ~/local/homebrew/bin /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} )
 set cdpath = (~/local/ ~/local/var/)
 set noclobber
 set notify
 set padhour
-# set time=(8 "\                                     
-#     Time spent in user mode   (CPU seconds) : %Us\ 
-#     Time spent in kernel mode (CPU seconds) : %Ss\ 
-#     Total time                              : %Es\ 
-#     CPU utilisation (percentage)            : %P\  
-#     Times the process was swapped           : %W\  
-#     Times of major page faults              : %F\  
-#     Times of major page faults              : %R") 
+# set time=(8 "\
+#     Time spent in user mode   (CPU seconds) : %Us\
+#     Time spent in kernel mode (CPU seconds) : %Ss\
+#     Total time                              : %Es\
+#     CPU utilisation (percentage)            : %P\
+#     Times the process was swapped           : %W\
+#     Times of major page faults              : %F\
+#     Times of major page faults              : %R")
 
 #umask 022
 limit coredumpsize 0
@@ -47,9 +48,10 @@ setenv NLSPATH ~/local/lib/tcsh/%N
 setenv RLWRAP_HOME ~/.rlwrap
 
 bindkey -e
-bindkey '' backward-delete-word
+bindkey '' delete-char
 bindkey '' history-search-backward
 bindkey '' history-search-forward
+bindkey '' backward-delete-word
 
 stty kill 
 stty stop undef # disable C-s key
@@ -59,23 +61,9 @@ source ~/.tcsh.d/gauche.tcsh
 
 # }}}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+if ( { where fasd >& /dev/null } ) then
+  eval "`fasd --init tcsh-alias tcsh-hook`"
+endif
 
 foreach f ($HOME/.complete.tcsh $HOME/perl5/perlbrew/etc/cshrc)
   if (-f $f) then
