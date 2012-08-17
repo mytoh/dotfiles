@@ -6,7 +6,13 @@
 (use util.match)
 (use file.util)
 (require-extension (srfi 13 98))
-(use kirjasto.väri)
+
+(define (colour-string colour-number str)
+  ;; take number, string -> return string
+  (string-concatenate
+   `("%{[38;5;" ,(number->string colour-number) "m%}"
+     ,str
+     "%{[0m%}")))
 
 (define (directory)
   (let* ((cwd (current-directory))

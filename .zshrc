@@ -1142,9 +1142,7 @@ alias jblive='mplayer rtsp://videocdn-us.geocdn.scaleengine.net/jblive/jblive.st
 alias destep="figlet -w 80 -nkf rowancap DESTEP TRED | tr 'd' '▟' | tr 'P' '▛' | tr 'M' '█' | tr 'V' '▜' | tr '\"' ' ' | tr '.' ' ' | tr 'a' '▟' | tr 'b' '▙' | tr 'K' '█' | tr 'A' '▟' | tr 'F' '▛' | tr 'Y' '▜' | tr 'v' '█' | tr 'm' '█' | tr 'r' '▛' | toilet -w 80 --gay -f term"
 
 # gauche
-if check_com -c gosh; then
   xsource ~/.zsh.d/gauche.zsh
-fi
 # suffix aliases
 alias -s txt=cat
 alias -s {zip,rar,tgb,tgz,tar,xz,gz,bz2}=unpack
