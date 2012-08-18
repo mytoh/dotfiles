@@ -4,6 +4,7 @@
   (use file.util)
   (use util.match)
   (use util.list)
+  (use kirjasto.komento.työkalu)
   (export pikkukivi)
   (extend
     pikkukivi.napa
@@ -53,8 +54,10 @@
          (cmd (if c (car c) #f)))
     (cond
       ((string? cmd)
+       (screen-title command)
        (run-process `(,@(string-split cmd " ") ,@args) :wait #t))
       ((procedure? cmd)
+       (screen-title command)
        (cmd args))
       (else
         (print "alias not found"))

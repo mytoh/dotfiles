@@ -6,6 +6,7 @@
   (export
     run-command
     run-command-sudo
+    screen-title
     mkdir
     cd)
   )
@@ -37,3 +38,6 @@
   (if (file-is-directory? kansio)
     (current-directory kansio)))
 
+
+(define (screen-title command)
+  (display (string-append "k" command "\\")))

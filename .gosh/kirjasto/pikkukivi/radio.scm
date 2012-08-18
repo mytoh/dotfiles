@@ -23,7 +23,7 @@
 
     (wappy   "FMわっぴ〜 (北海道稚内市)" "mplayer mms://fmwappy.aa0.netvolante.jp:8080")
     (wakkanai  "FMわっぴ〜 (北海道稚内市)"  "mplayer mms://fmwappy.aa0.netvolante.jp:8080")
-    (837       "FMりべーる (北海道旭川市)" "mplayer http://wms.shibapon.net/fm837" )
+    (fm837       "FMりべーる (北海道旭川市)" "mplayer http://wms.shibapon.net/fm837" )
     (asahikawa "FMりべーる (北海道旭川市)"  "mplayer http://wms.shibapon.net/fm837" )
     (dramacity "FM Dramacity           (北海道札幌市厚別区)" "mplayer -novideo http://bipscweb.ddo.jp:8080/" )
     (sapporod "FM Dramacity           (北海道札幌市厚別区)" "mplayer -novideo http://bipscweb.ddo.jp:8080/" )
