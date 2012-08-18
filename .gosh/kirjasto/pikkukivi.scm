@@ -41,6 +41,11 @@
     ("mkd"     "mkdir -p")
     ("gsp"     "gosh -ptime")
     ("tm"      "gosh tmux-start.scm")
+    ("starwars" "telnet towel.blinkenlights.nl" )
+    ("jblive" "mplayer rtsp://videocdn-us.geocdn.scaleengine.net/jblive/jblive.stream" )
+    ("sumo" "mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_haishin/asx/sumolive.asx" )
+    ("sumo2" "mplayer mms://a776.l12513450775.c125134.a.lm.akamaistream.net/D/776/125134/v0001/reflector:50775" )
+    ("sumo3" "mplayer mms://a792.l12513450791.c125134.a.lm.akamaistream.net/D/792/125134/v0001/reflector:50791" )
     ))
 
 (define (run command args)
@@ -57,36 +62,3 @@
 
 (define (pikkukivi args)
   (run (car args) (cdr args)))
-
-; (define (pikkukivi args)
-;   (match (car args)
-;     ("rm"
-;      (rm (cdr args)))
-;     ("napa"
-;      (napa (cdr args)))
-;     ("talikko"
-;      (talikko (cdr args)))
-;     ("pahvi"
-;      (pahvi (cdr args)))
-;     ("unpack"
-;      (unpack (cdr args)))
-;     ("repl"
-;      (repl (cdr args)))
-;     ("ls"
-;      (ls (cdr args)))
-;     ("yotsuba"
-;      (yotsuba (cdr args)))
-;     ("futaba"
-;      (futaba (cdr args)))
-;     ("emma"
-;      (emma (cdr args)))
-;     ("ääliö"
-;      (ääliö (cdr args)))
-;     ("colour"
-;      (colour (cdr args)))
-;     ("topless"
-;      (topless (cdr args)))
-;     ("radio"
-;      (radio (cdr args)))
-;     (_
-;       (print "no matching command"))) )

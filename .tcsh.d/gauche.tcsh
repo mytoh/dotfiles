@@ -42,4 +42,9 @@ if ( { where gosh >& /dev/null } ) then
     alias mkd 'pikkukivi mkd'
     alias gsp 'pikkukivi gsp'
     alias tm 'pikkukivi tm'
+    alias starwars 'pikkukivi starwars'
+    alias jblive   'pikkukivi jblive'
+    alias sumo     'pikkukivi sumo'
+    alias sumo2    'pikkukivi sumo2'
+    alias sumo3    'pikkukivi sumo3'
 endif
