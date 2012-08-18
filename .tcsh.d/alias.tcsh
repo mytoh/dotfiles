@@ -11,10 +11,7 @@ alias sc screen -U -D -RR  -s /bin/tcsh -m
 #             else                            \\ 
 #               tmux -u2                      \\ 
 #           endif'                               
-alias cp 'cp -rLpv'
 alias mv 'mv -iv'
-alias rr 'command rm -rfv'
-alias mkd 'mkdir -pv'
 which dfc >& /dev/null
 if ($? == 0) then
 alias df 'dfc'
@@ -29,7 +26,6 @@ alias view "vim -X -R -"
 alias vim "vim -X"
 alias .. 'cd ..'
 alias scsh 'rlwrap scsh'
-alias goshrl "rlwrap -pBlue -b '(){}[],#;| ' gosh"
 alias ew 'emacs -f w3m'
 alias single 'sudo shutdown now'
 alias halt 'sync;sync;sync;sudo shutdown -p now'

@@ -15,8 +15,6 @@ setenv GAUCHE_LOAD_PATH "$HOME/.gosh/skripti:$HOME/.gosh:$HOME/.gosh/kirjasto:$H
 if ( { where gosh >& /dev/null } ) then
     alias spc2ubar 'command gosh space2underbar.scm'
     alias ea 'command gosh extattr.scm'
-    alias tm 'gosh tmux-start.scm'
-    alias gsp 'command gosh -ptime'
 
     alias pikkukivi 'gosh run-pikkukivi.scm'
     alias rr 'pikkukivi rm'
@@ -41,4 +39,7 @@ if ( { where gosh >& /dev/null } ) then
     alias topless 'pikkukivi topless'
     alias radio 'pikkukivi radio listen'
     alias radio-list 'pikkukivi radio list'
-    endif
+    alias mkd 'pikkukivi mkd'
+    alias gsp 'pikkukivi gsp'
+    alias tm 'pikkukivi tm'
+endif

@@ -12,7 +12,7 @@
 (select-module pikkukivi.colour)
 
 
-(define (colour-names)
+(define (colour-numbers)
   (let ((ls (slices (iota 256) 16))
         (colour-numbers (lambda (n)
                           (display
@@ -153,7 +153,7 @@
 (define (colour args)
   (match (car args)  
     ("numbers"
-     (colour-names))
+     (colour-numbers))
     ("spect"
      (colour-spect))
     ("pacman"
