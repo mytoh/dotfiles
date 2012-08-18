@@ -215,26 +215,26 @@
 
 
 ; ;;colorscheme trapd00r
-(define *colours*
-  (vector
-    237
-    131
-    107
-    75
-    240
-    209
-    185
-    216
-    220
-    208
-    243
-    161
-    240
-    025
-    248
-    196
-    ))
-;;colorscheme early
+; (define *colours*
+;   (vector
+;     237
+;     131
+;     107
+;     75
+;     240
+;     209
+;     185
+;     216
+;     220
+;     208
+;     243
+;     161
+;     240
+;     025
+;     248
+;     196
+;     ))
+;colorscheme early
 ; (define *colours*
 ;   (vector
 ;     233
@@ -255,26 +255,26 @@
 ;     220
 ;     ))
 
-;;colorscheme normal
-; (define *colours*
-;   (vector
-;     208
-;     197
-;     190
-;     196
-;     242
-;     209
-;     185
-;     215
-;     032
-;     061
-;     142
-;     197
-;     106
-;     060
-;     236
-;     215
-;     ))
+;colorscheme normal
+(define *colours*
+  (vector
+    208
+    197
+    190
+    196
+    242
+    209
+    185
+    215
+    032
+    061
+    142
+    197
+    106
+    060
+    236
+    215
+    ))
 ; 
 ;;colorscheme greyscale
 ; (define *colours*

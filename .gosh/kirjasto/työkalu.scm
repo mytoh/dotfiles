@@ -12,7 +12,7 @@
     (srfi 11 13))
   (use kirjasto.merkkijono)
   (export
-    forever
+    loop-forever
     get-os-type
     tap
     p
@@ -25,12 +25,14 @@
 
 
 
-(define-syntax forever
+(define-syntax loop-forever
   ;;macro for endless loop
   (syntax-rules ()
-    ((_ ?e1 ?e2 ...)
-     (let loop () ?e1 ?e2 ...
-       (sys-sleep #e10e1) ; sleep 
+    ((_ body ...)
+     (let loop () 
+       body
+       ...
+       (sys-sleep #e3e1) ; sleep 
        (loop)))))
 
 (define get-os-type

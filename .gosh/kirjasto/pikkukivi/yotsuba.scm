@@ -158,9 +158,9 @@
       ((null? restargs)
        (usage))
       ((and all repeat)
-       (forever (yotsuba-get-repeat-all restargs)))
+       (loop-forever (yotsuba-get-repeat-all restargs)))
       (repeat
-        (forever (yotsuba-get-repeat restargs)
+        (loop-forever (yotsuba-get-repeat restargs)
                  (print (colour-string 237 "----------"))))
       (all
         (yotsuba-get-all restargs))

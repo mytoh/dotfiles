@@ -165,9 +165,9 @@
       ((null? restargs)
        (usage))
       ((and all repeat)
-       (forever (futaba-get-repeat-all restargs)))
+       (loop-forever (futaba-get-repeat-all restargs)))
       (repeat
-        (forever (futaba-get-repeat restargs)))
+        (loop-forever (futaba-get-repeat restargs)))
       (all
         (futaba-get-all restargs))
       (else

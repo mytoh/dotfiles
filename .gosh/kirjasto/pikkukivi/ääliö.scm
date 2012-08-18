@@ -112,6 +112,7 @@
     (mozilla       mozilla-central)
     (shadow        shadow)
     (digego         extempore)
+    (calvis         cKanren)
     (tlatsas       xcolors)))
 
 ;; update git repository
