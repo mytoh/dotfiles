@@ -33,7 +33,8 @@
      (print "[38;5;1myou're inside of tmux[0m"))
     (else
       (let ((main-session   "main")
-            (second-session "daemon"))
+            (second-session "daemon")
+            (shell (get-environment-variable "SHELL")))
         (cond
           ; session exists
           ((has-sessin? main-session)
@@ -47,9 +48,9 @@
 
             ;; create second session
             (new-session second-session "futaba")
-            (new-window  second-session 1 "4ch" "mksh")
-            (new-window  second-session 2 "danbooru" "mksh")
-            (new-window  second-session 3 "rtorrent" "mksh")
+            (new-window  second-session 1 "4ch" shell)
+            (new-window  second-session 2 "danbooru" shell)
+            (new-window  second-session 3 "rtorrent" shell)
             ; (new-window  second-session "rtorrent" "rtorrent")
 
             ; attach main session

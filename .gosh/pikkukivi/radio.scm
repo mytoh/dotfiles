@@ -21,19 +21,19 @@
     (nhkr2   "NHK第二" http://mfile.akamai.com/129932/live/reflector:46056.asx)
     (nhkfm  "NHK-FM" http://mfile.akamai.com/129933/live/reflector:46051.asx)
 
-    (wappy   "FMわっぴ〜 (北海道稚内市)" "mplayer mms://fmwappy.aa0.netvolante.jp:8080")
-    (wakkanai  "FMわっぴ〜 (北海道稚内市)"  "mplayer mms://fmwappy.aa0.netvolante.jp:8080")
-    (fm837       "FMりべーる (北海道旭川市)" "mplayer http://wms.shibapon.net/fm837" )
-    (asahikawa "FMりべーる (北海道旭川市)"  "mplayer http://wms.shibapon.net/fm837" )
-    (dramacity "FM Dramacity           (北海道札幌市厚別区)" "mplayer -novideo http://bipscweb.ddo.jp:8080/" )
-    (sapporod "FM Dramacity           (北海道札幌市厚別区)" "mplayer -novideo http://bipscweb.ddo.jp:8080/" )
-    (sankakuyama "三角山放送局           (北海道札幌市西区)" "mplayer -playlist http://wm.sankakuyama.co.jp/asx/sankaku_24k.asx" )
-    (sapporos "三角山放送局           (北海道札幌市西区)"  "mplayer -playlist http://wm.sankakuyama.co.jp/asx/sankaku_24k.asx" )
-    (jaga "FM-JAGA                (北海道帯広市)" "mplayer mms://simul.freebit.net/fmjaga" )
-    (obihiroj "FM-JAGA                (北海道帯広市)" "mplayer mms://simul.freebit.net/fmjaga" )
-    (wing "FM WING                (北海道帯広市)" "mplayer mms://simul.freebit.net/fmwing" )
-    (obihirow "FM WING                (北海道帯広市)" "mplayer mms://simul.freebit.net/fmwing" )
-    (kushiro "FMくしろ               (北海道釧路市)" "mplayer -playlist http://www.simulradio.jp/asx/FmKushiro.asx" )
+    (wappy   "FMわっぴ〜 (北海道稚内市)" "mms://fmwappy.aa0.netvolante.jp:8080")
+    (wakkanai  "FMわっぴ〜 (北海道稚内市)"  "mms://fmwappy.aa0.netvolante.jp:8080")
+    (fm837       "FMりべーる (北海道旭川市)" "http://wms.shibapon.net/fm837" )
+    (asahikawa "FMりべーる (北海道旭川市)"  "http://wms.shibapon.net/fm837" )
+    (dramacity "FM Dramacity (北海道札幌市厚別区)" "-novideo http://bipscweb.ddo.jp:8080/" )
+    (sapporod "FM Dramacity (北海道札幌市厚別区)" "-novideo http://bipscweb.ddo.jp:8080/" )
+    (sankakuyama "三角山放送局 (北海道札幌市西区)" "-playlist http://wm.sankakuyama.co.jp/asx/sankaku_24k.asx" )
+    (sapporos "三角山放送局 (北海道札幌市西区)"  "-playlist http://wm.sankakuyama.co.jp/asx/sankaku_24k.asx" )
+    (jaga "FM-JAGA (北海道帯広市)" "mms://simul.freebit.net/fmjaga" )
+    (obihiroj "FM-JAGA (北海道帯広市)" "mms://simul.freebit.net/fmjaga" )
+    (wing "FM WING (北海道帯広市)" "mms://simul.freebit.net/fmwing" )
+    (obihirow "FM WING  (北海道帯広市)" mms://simul.freebit.net/fmwing )
+    (kushiro "FMくしろ (北海道釧路市)" http://www.simulradio.jp/asx/FmKushiro.asx )
 
     ))
 
@@ -47,7 +47,10 @@
        '())  
       (else
         (print
-          (string-append (symbol->string (car (car st)))  
+          (string-append
+          (colour-string
+            123
+            (symbol->string (car (car st))))  
                          ": "
                          (cadr (car st))))
         (loop (cdr st))))))
