@@ -21,6 +21,7 @@
     pikkukivi.topless
     pikkukivi.ääliö
     pikkukivi.radio
+    pikkukivi.ascii-taide
     ))
 (select-module pikkukivi)
 
@@ -39,6 +40,7 @@
     ("colour"  ,colour)
     ("topless" ,topless)
     ("radio"   ,radio)
+    ("ascii-taide"     ,ascii-taide)
     ("mkd"     "mkdir -p")
     ("gsp"     "gosh -ptime")
     ("tm"      "gosh tmux-start.scm")
