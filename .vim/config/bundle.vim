@@ -152,8 +152,8 @@ else
   NeoBundle 'emezeske/paredit.vim'
   NeoBundle 'aharisu/vim_goshrepl'
   " clojure
-  " NeoBundle 'https://bitbucket.org/kotarak/vimclojure'
-  NeoBundle 'VimClojure'
+  NeoBundle 'https://bitbucket.org/kotarak/vimclojure'
+  " NeoBundle 'VimClojure'
   "haskell
   " NeoBundle 'Twinside/vim-haskellConceal'
   NeoBundle 'Twinside/vim-syntax-haskell-cabal'

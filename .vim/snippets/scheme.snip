@@ -66,11 +66,11 @@ abbr    panna kaava script
         (define (install tynnyri)
           (with-clang)
           (system
-          '(make clean)
-          '(make distclean)
           `(./configure ,(string-append "--prefix=" tynnyri))
           '(make)
           '(make install)
+          '(make clean)
+          '(make distclean)
           ))
 
 

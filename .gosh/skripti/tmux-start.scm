@@ -53,6 +53,10 @@
             (new-window  second-session 3 "rtorrent" shell)
             ; (new-window  second-session "rtorrent" "rtorrent")
 
+            ;; create third session
+            (new-session second-session "servers")
+            (new-window  second-session 1 "2ch" "ssh mona@2ch.homelinux.org")
+
             ; attach main session
             (attach-session main-session)))))))
 
