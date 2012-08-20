@@ -34,11 +34,27 @@
     (wing "FM WING (北海道帯広市)" "mms://simul.freebit.net/fmwing" )
     (obihirow "FM WING  (北海道帯広市)" mms://simul.freebit.net/fmwing )
     (kushiro "FMくしろ (北海道釧路市)" http://www.simulradio.jp/asx/FmKushiro.asx )
+    (morioka "ラヂオもりおか         (岩手県盛岡市)" " mms://simul.freebit.net/radiomorioka" )
+    (yokote "横手かまくらエフエム   (秋田県横手市)" " -playlist http://www.simulradio.jp/asx/FmYokote.asx" )
+    (yutopia "FMゆーとぴあ  24時間   (秋田県湯沢市)" " -playlist http://www.simulradio.jp/asx/FmYutopia.asx" )
+    (yuzawa   "FMゆーとぴあ  24時間   (秋田県湯沢市)" " -playlist http://www.simulradio.jp/asx/FmYutopia.asx" )
+    (ishinomaki "ラジオ石巻             (宮城県石巻市)" " -playlist http://www.simulradio.jp/asx/RadioIshinomaki.asx" )
+    (izumi "fmいずみ               (宮城県仙台市)" " -playlist http://www.simulradio.jp/asx/fmIzumi.asx" )
+    (sendaii "fmいずみ               (宮城県仙台市)" " -playlist http://www.simulradio.jp/asx/fmIzumi.asx" )
+    (radio3 "RADIO3                 (宮城県仙台市)" " mms://simul.freebit.net/radio3" )
+    (sendai3 "RADIO3                 (宮城県仙台市)" " mms://simul.freebit.net/radio3" )
+    (motcom "FM Mot.com             (福島県本宮市)" " mms://simul.freebit.net/fmmotcom" )
+    (motomiya "FM Mot.com             (福島県本宮市)" " mms://simul.freebit.net/fmmotcom" )
+    (aizu "エフエム会津           (福島県会津若松市)" " -playlist http://www.simulradio.jp/asx/FmAizu.asx" )
+    (koco "郡山コミュニティ放送   (福島県郡山市)" " -playlist http://www.simulradio.jp/asx/kocofm.asx" )
+    (koriyama sb-koco )
+    (iwaki "FMいわき               (福島県いわき市)" " http://wms.shibapon.net/SeaWaveFmIwaki" )
+
 
     ))
 
 (define (listen args)
-  (run-process `(mplayer -playlist ,(cadr (assoc-ref station-list (string->symbol (car args))))) :wait #t) )
+  (run-process `(mplayer ,@(cdr (assoc-ref station-list (string->symbol (car args))))) :wait #t) )
 
 (define (list-stations)
   (let loop ((st station-list))  
@@ -70,35 +86,11 @@
 
 
 
-; #
-; #
-; 
-; #
-; sb-morioka "ラヂオもりおか         (岩手県盛岡市)" "mplayer mms://simul.freebit.net/radiomorioka"
-; #
-; sb-yokote "横手かまくらエフエム   (秋田県横手市)" "mplayer -playlist http://www.simulradio.jp/asx/FmYokote.asx"
-; #
-; sb-yutopia "FMゆーとぴあ  24時間   (秋田県湯沢市)" "mplayer -playlist http://www.simulradio.jp/asx/FmYutopia.asx"
-; sb-yuzawa   "FMゆーとぴあ  24時間   (秋田県湯沢市)" "mplayer -playlist http://www.simulradio.jp/asx/FmYutopia.asx"
-; #
-; sb-ishinomaki "ラジオ石巻             (宮城県石巻市)" "mplayer -playlist http://www.simulradio.jp/asx/RadioIshinomaki.asx"
-; #
-; sb-izumi "fmいずみ               (宮城県仙台市)" "mplayer -playlist http://www.simulradio.jp/asx/fmIzumi.asx"
-; sb-sendaii "fmいずみ               (宮城県仙台市)" "mplayer -playlist http://www.simulradio.jp/asx/fmIzumi.asx"
-; #
-; sb-radio3 "RADIO3                 (宮城県仙台市)" "mplayer mms://simul.freebit.net/radio3"
-; sb-sendai3 "RADIO3                 (宮城県仙台市)" "mplayer mms://simul.freebit.net/radio3"
-; #
-; sb-motcom "FM Mot.com             (福島県本宮市)" "mplayer mms://simul.freebit.net/fmmotcom"
-; sb-motomiya "FM Mot.com             (福島県本宮市)" "mplayer mms://simul.freebit.net/fmmotcom"
-; #
-; sb-aizu "エフエム会津           (福島県会津若松市)" "mplayer -playlist http://www.simulradio.jp/asx/FmAizu.asx"
-; #
-; sb-koco "郡山コミュニティ放送   (福島県郡山市)" "mplayer -playlist http://www.simulradio.jp/asx/kocofm.asx"
-; sb-koriyama sb-koco
-; # FMいわき               (福島県いわき市)
-; sb-iwaki 'mplayer http://wms.shibapon.net/SeaWaveFmIwaki'
-; 
+
+
+
+
+
 ; # FMぱるるん             (茨城県水戸市)
 ; sb-palulun 'mplayer -playlist http://www.simulradio.jp/asx/FmPalulun.asx'
 ; sb-mito sb-palulun
