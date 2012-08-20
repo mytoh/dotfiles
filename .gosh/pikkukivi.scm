@@ -9,10 +9,7 @@
   (extend
     pikkukivi.napa
     pikkukivi.talikko
-    pikkukivi.pahvi
     pikkukivi.unpack
-    pikkukivi.futaba
-    pikkukivi.yotsuba
     pikkukivi.repl
     pikkukivi.ls
     pikkukivi.rm
@@ -20,7 +17,6 @@
     pikkukivi.colour
     pikkukivi.topless
     pikkukivi.ääliö
-    pikkukivi.radio
     pikkukivi.ascii-taide
     pikkukivi.verkko
     ))
@@ -54,38 +50,30 @@
 
     ; taken from oh-my-zsh
     ; Source: http://aur.archlinux.org/packages/lolbash/lolbash/lolbash.sh
-
     (wtf "dmesg" )
     (onoz "cat /var/log/errors.log" )
     (rtfm "man" )
-
     (visible "echo" )
     (invisible "cat" )
     (moar "more" )
     (tldr "less" )
     (alwayz "tail -f" )
-
     (icanhas "mkdir" )
     (gimmeh "touch" )
     (donotwant "rm" )
     (dowant "cp" )
     (gtfo "mv" )
     (nowai "chmod" )
-
     (hai "cd" )
     (iz "ls" )
     (plz "pwd" )
     (ihasbucket "df -h" )
-
     (inur "locate" )
     (iminurbase "finger" )
-
     (btw "nice" )
     (obtw "nohup" )
-
     (nomz "ps -aux" )
     (nomnom "killall" )
-
     (byes "exit" )
     (cya "reboot" )
     (kthxbai "halt" )
