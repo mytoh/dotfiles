@@ -48,6 +48,7 @@ if ( { where gosh >& /dev/null } ) then
     alias sumo     'pikkukivi sumo'
     alias sumo2    'pikkukivi sumo2'
     alias sumo3    'pikkukivi sumo3'
+    alias sssh     'pikkukivi sssh'
 
     # taken from oh-my-zsh
     # Source: http://aur.archlinux.org/packages/lolbash/lolbash/lolbash.sh

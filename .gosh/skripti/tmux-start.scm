@@ -34,6 +34,7 @@
     (else
       (let ((main-session   "main")
             (second-session "daemon")
+            (third-session  "servers")
             (shell (get-environment-variable "SHELL")))
         (cond
           ; session exists
@@ -54,8 +55,8 @@
             ; (new-window  second-session "rtorrent" "rtorrent")
 
             ;; create third session
-            (new-session second-session "servers")
-            (new-window  second-session 1 "2ch" "ssh mona@2ch.homelinux.org")
+            (new-session third-session "servers")
+            (new-window  third-session 1 "2ch" "ssh mona@2ch.homelinux.org")
 
             ; attach main session
             (attach-session main-session)))))))

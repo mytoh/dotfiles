@@ -69,8 +69,7 @@
                 (string-split
                   body
                   (string->regexp
-                    "<\/?(?:img)[^>]*>"))))))
-  )
+                    "<\/?(?:img)[^>]*>")))))))
 
 (define (get-html bd td)
   (let-values (((status headers body )
@@ -117,8 +116,8 @@
          dirs)
        (run-process `(notify-send ,(string-append bd " fetch finished"))))
       (else
-        (print "no directories"))
-      )))
+        (print "no directories")))))
+
 
 (define (yotsuba-get-repeat restargs )
   (let* ((board (car restargs))
@@ -134,7 +133,9 @@
       (else
         #t))))
 
+
 (define (yotsuba-get-repeat-all restargs )
+  (print (string-append "getting " (car restargs)))
   (let ((bd (car restargs))
         (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
     (if (not (null? dirs))
@@ -142,9 +143,7 @@
         (lambda (d)
           (yotsuba-get-repeat (list bd d)))
         dirs)
-      (print "no directories"))
-    (print (colour-string 237 "----------"))
-    ))
+      (print "no directories"))))
 
 
 
@@ -158,10 +157,12 @@
       ((null? restargs)
        (usage))
       ((and all repeat)
-       (loop-forever (yotsuba-get-repeat-all restargs)))
+       (loop-forever
+         (yotsuba-get-repeat-all restargs)))
       (repeat
-        (loop-forever (yotsuba-get-repeat restargs)
-                 (print (colour-string 237 "----------"))))
+        (loop-forever
+          (yotsuba-get-repeat restargs))  
+        (print "------------"))
       (all
         (yotsuba-get-all restargs))
       (else

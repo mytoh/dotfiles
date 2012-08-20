@@ -98,12 +98,6 @@
                html)))
       (else  #f))))
 
-
-
-
-
-
-
 (define (futaba-get args )
   (let* ((board (car args))
          (thread (cadr args))
@@ -144,16 +138,16 @@
       (else  #t))))
 
 (define (futaba-get-repeat-all args)
-  (let ((board (car args))
-        (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
-    (cond
-      ((not (null? dirs))
-       (for-each
-         (lambda (d)
-           (futaba-get-repeat (list board d)))
-         dirs))
-      (else (print "no directories")))
-    (print (colour-string 237 "----------"))))
+    (let ((board (car args))
+          (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
+      (cond
+        ((not (null? dirs))
+         (for-each
+           (lambda (d)
+             (futaba-get-repeat (list board d)))
+           dirs))
+        (else (print "no directories")))
+      (print (colour-string 237 "----------"))))
 
 (define (futaba args)
   (let-args args
@@ -165,9 +159,11 @@
       ((null? restargs)
        (usage))
       ((and all repeat)
-       (loop-forever (futaba-get-repeat-all restargs)))
+       (loop-forever
+       (futaba-get-repeat-all restargs)))
       (repeat
-        (loop-forever (futaba-get-repeat restargs)))
+        (loop-forever
+        (futaba-get-repeat restargs)))
       (all
         (futaba-get-all restargs))
       (else
