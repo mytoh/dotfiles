@@ -1,5 +1,5 @@
 
-(define-module pikkukivi.ääliö
+(define-module pikkukivi.scm.ääliö
   (extend gauche.interactive)
   (export
     ääliö)
@@ -8,7 +8,7 @@
   (use util.match)
   (use file.util) ; directory-list, current-directory
   (use kirjasto.väri))
-(select-module pikkukivi.ääliö)
+(select-module pikkukivi.scm.ääliö)
 
 
 

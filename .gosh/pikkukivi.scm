@@ -7,7 +7,6 @@
   (use kirjasto.pääte)
   (export pikkukivi)
   (extend
-    pikkukivi.napa
     pikkukivi.talikko
     pikkukivi.unpack
     pikkukivi.repl
@@ -16,9 +15,9 @@
     pikkukivi.emma
     pikkukivi.colour
     pikkukivi.topless
-    pikkukivi.ääliö
     pikkukivi.ascii-taide
     pikkukivi.verkko
+    pikkukivi.scm
     ))
 (select-module pikkukivi)
 

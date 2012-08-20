@@ -1,5 +1,5 @@
 
-(define-module pikkukivi.napa
+(define-module pikkukivi.scm.napa
   (export napa)
   (use gauche.process)
   (use gauche.parseopt)
@@ -8,7 +8,7 @@
   (use kirjasto.komento.työkalu)
   (require-extension (srfi 1 13))
   )
-(select-module pikkukivi.napa)
+(select-module pikkukivi.scm.napa)
 
 (define (git-clone args)
   (let-args args
