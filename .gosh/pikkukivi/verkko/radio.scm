@@ -34,23 +34,147 @@
     (wing "FM WING (北海道帯広市)" "mms://simul.freebit.net/fmwing" )
     (obihirow "FM WING  (北海道帯広市)" mms://simul.freebit.net/fmwing )
     (kushiro "FMくしろ (北海道釧路市)" http://www.simulradio.jp/asx/FmKushiro.asx )
+
     (morioka "ラヂオもりおか         (岩手県盛岡市)" " mms://simul.freebit.net/radiomorioka" )
+
     (yokote "横手かまくらエフエム   (秋田県横手市)" " -playlist http://www.simulradio.jp/asx/FmYokote.asx" )
     (yutopia "FMゆーとぴあ  24時間   (秋田県湯沢市)" " -playlist http://www.simulradio.jp/asx/FmYutopia.asx" )
     (yuzawa   "FMゆーとぴあ  24時間   (秋田県湯沢市)" " -playlist http://www.simulradio.jp/asx/FmYutopia.asx" )
+
     (ishinomaki "ラジオ石巻             (宮城県石巻市)" " -playlist http://www.simulradio.jp/asx/RadioIshinomaki.asx" )
     (izumi "fmいずみ               (宮城県仙台市)" " -playlist http://www.simulradio.jp/asx/fmIzumi.asx" )
     (sendaii "fmいずみ               (宮城県仙台市)" " -playlist http://www.simulradio.jp/asx/fmIzumi.asx" )
     (radio3 "RADIO3                 (宮城県仙台市)" " mms://simul.freebit.net/radio3" )
     (sendai3 "RADIO3                 (宮城県仙台市)" " mms://simul.freebit.net/radio3" )
+
     (motcom "FM Mot.com             (福島県本宮市)" " mms://simul.freebit.net/fmmotcom" )
     (motomiya "FM Mot.com             (福島県本宮市)" " mms://simul.freebit.net/fmmotcom" )
     (aizu "エフエム会津           (福島県会津若松市)" " -playlist http://www.simulradio.jp/asx/FmAizu.asx" )
     (koco "郡山コミュニティ放送   (福島県郡山市)" " -playlist http://www.simulradio.jp/asx/kocofm.asx" )
-    (koriyama sb-koco )
+    (koriyama "郡山コミュニティ放送   (福島県郡山市)" " -playlist http://www.simulradio.jp/asx/kocofm.asx")
     (iwaki "FMいわき               (福島県いわき市)" " http://wms.shibapon.net/SeaWaveFmIwaki" )
 
+    (palulun "FMぱるるん             (茨城県水戸市)" "-playlist http://www.simulradio.jp/asx/FmPalulun.asx" )
+    (mito "FMぱるるん             (茨城県水戸市)" "-playlist http://www.simulradio.jp/asx/FmPalulun.asx" )
+    (tsukuba "ラヂオつくば  24時間   (茨城県つくば市)" "-novideo mms://ir298.com/IRTsukuba/radiotsukuba.asx" )
+    (kashima "エフエムかしま         (茨城県鹿嶋市)" "-playlist http://www.simulradio.jp/asx/FmKashima.asx" )
+    (kiryu "FM桐生                 (群馬県桐生市)" " http://wms.shibapon.net/kiryu.fm" )
+    (maebashi "まえばしCITYエフエム  24時間   (群馬県前橋市)" " http://radio.maebashi.fm:8080/mwave" )
 
+    (kazusa "かずさエフエム         (千葉県木更津市)" " -playlist http://www.simulradio.jp/asx/KazusaFM.asx" )
+    (kisarazu "かずさエフエム         (千葉県木更津市)" " -playlist http://www.simulradio.jp/asx/KazusaFM.asx" )
+
+    (flower "フラワーラジオ         (埼玉県鴻巣市)" " http://wms.shibapon.net/flower" )
+    (kounosu "フラワーラジオ         (埼玉県鴻巣市)" " http://wms.shibapon.net/flower" )
+    (redswave "REDS WAVE              (埼玉県さいたま市浦和区)" " http://wms.shibapon.net/reds-wave" )
+    (smile "SMILE FM    24時間     (埼玉県朝霞市)" " mms://simul.freebit.net/smilefm" )
+    (asaka  "SMILE FM    24時間     (埼玉県朝霞市)" " mms://simul.freebit.net/smilefm" )
+
+    (katsushika "かつしかFM  24時間     (東京都葛飾区)" " -playlist http://www.simulradio.jp/asx/KatsushikaFM.asx" )
+    (rainbowtown "レインボータウンFM     (東京都江東区)" " -playlist http://www.simulradio.jp/asx/RainbowtownFM.asx" )
+    (musashino "むさしのFM             (東京都武蔵野市)" " -playlist http://www.simulradio.jp/asx/MusashinoFM.asx" )
+    (nishitokyo "FM 西東京   24時間     (東京都西東京市)" " http://wms.shibapon.net/FmNishiTokyo" )
+    (tachikawa "FM たちかわ            (東京都立川市)" " http://wms.shibapon.net/FmTachikawa" )
+    (chofu "調布FM      24時間     (東京都調布市)" " -playlist http://www.simulradio.jp/asx/ChofuFM.asx" )
+
+    (kawasaki "かわさきFM             (神奈川県川崎市)" " http://wms.shibapon.net/FM_K-City" )
+    (salus "FMサルース             (神奈川県横浜市)" " -playlist http://www.simulradio.jp/asx/FmSalus.asx" )
+    (totsuka "FM戸塚                 (神奈川県横浜市)" " http://wms.shibapon.net/FmTotsuka" )
+    (yamato "FMやまと               (神奈川県大和市)" " http://wms.shibapon.net/FMYamato" )
+    (shonanbeach "湘南ビーチFM  24時間   (神奈川県逗子市/三浦郡葉山町)" " mms://simul.freebit.net/shonanbeachfma" )
+    (hayama "湘南ビーチFM  24時間   (神奈川県逗子市/三浦郡葉山町)" " mms://simul.freebit.net/shonanbeachfma" )
+    (radioshonan "レディオ湘南           (神奈川県藤沢市)" " mms://simul.freebit.net/radioshonan" )
+    (fujisawa "レディオ湘南           (神奈川県藤沢市)" " mms://simul.freebit.net/radioshonan" )
+    (sagami "エフエムさがみ         (神奈川県相模原市)" " -novideo -playlist http://www.fmsagami.co.jp/asx/fmsagami.asx" )
+    (odawara "FMおだわら  24時間     (神奈川県小田原市)" " mms://simul.freebit.net/fmodawara" )
+
+    (kento "FM Kento               (新潟県新潟市)" " mms://simul.freebit.net/fmkento" )
+    (niigata "FM Kento               (新潟県新潟市)" " mms://simul.freebit.net/fmkento" )
+    (pikkara "FM PIKKARA             (新潟県柏崎市)" " -novideo -playlist http://www.happy-kashiwazaki.com/pikkara/livekcb.asx" )
+    (kashiwazaki "FM PIKKARA             (新潟県柏崎市)" " -novideo -playlist http://www.happy-kashiwazaki.com/pikkara/livekcb.asx" )
+    (karuizawa "FM軽井沢    24時間     (長野県軽井沢町)" " mms://simul.freebit.net/fmkaruizawa" )
+
+
+    (kahoku "FMかほく    24時間     (石川県かほく市)" " http://radio.kahoku.net:8000/" )
+
+    ; ( sb-harbor779 "ハーバーステーション   (福井県敦賀市)" " `wget -O - http://www.web-services.jp/harbor779/radio.html | sed -n "/mp3/s/^.*\(http:[^;]*\).*$/\1/p"`" )
+    ; ( sb-tsuruga "ハーバーステーション   (福井県敦賀市)" " `wget -O - http://www.web-services.jp/harbor779/radio.html | sed -n "/mp3/s/^.*\(http:[^;]*\).*$/\1/p"`" )
+
+    (ciao "エフエム熱海湯河原     (静岡県熱海市)" " http://simul.freebit.net:8310/ciao" )
+    (atami "エフエム熱海湯河原     (静岡県熱海市)" " http://simul.freebit.net:8310/ciao" )
+
+    (okazaki "FMおかざき             (愛知県岡崎市)" " -playlist http://www.simulradio.jp/asx/FmOkazaki.asx" )
+    (mid "MID-FM                 (愛知県名古屋市)" " http://wms.shibapon.net/mid-fm761" )
+    (nagoya "MID-FM                 (愛知県名古屋市)" " http://wms.shibapon.net/mid-fm761" )
+    (portwave "PORT WAVE              (三重県四日市)" " -playlist http://www.p-wave.ne.jp/live/wmedia/portwave.asx" )
+    (yokkaichi "PORT WAVE              (三重県四日市)" " -playlist http://www.p-wave.ne.jp/live/wmedia/portwave.asx" )
+
+    (ikaru "FMいかる               (京都府綾部市)" " http://wms.shibapon.net/FMIkaruAtAyabe" )
+    (ayabe "FMいかる               (京都府綾部市)" " http://wms.shibapon.net/FMIkaruAtAyabe" )
+    ; ( sb-castle "FM CASTLE   24時間     (京都府福知山市)"  `wget -O - http://www.fm-castle.jp/simul.asx | sed -n "s/^.*\(mms:[^\"]*\).*$/\1/p"`' )
+    ; ( sb-fukuchiyama "FM CASTLE   24時間     (京都府福知山市)"  `wget -O - http://www.fm-castle.jp/simul.asx | sed -n "s/^.*\(mms:[^\"]*\).*$/\1/p"`' )
+
+    (hirakata "FMひらかた  24時間     (大阪府枚方市)" " http://wms.shibapon.net/Fmhirakata" )
+    (minoh "みのおエフエム  24時間 (大阪府箕面市)" " -playlist http://fm.minoh.net/minohfm.asx" )
+    (senri "FM千里                 (大阪府豊中市)" " http://simul.freebit.net:8310/fmsenri" )
+    ; ( sb-hanako "FM HANAKO              (大阪府守口市)" " -novideo `wget -O - http://fmhanako.jp/radio/824.asx | sed -n "/mms/{s/^.*\(mms:[^\"]*\).*$/\1/p; q;}"`" )
+    ; ( sb-moriguchi "FM HANAKO              (大阪府守口市)" " -novideo `wget -O - http://fmhanako.jp/radio/824.asx | sed -n "/mms/{s/^.*\(mms:[^\"]*\).*$/\1/p; q;}"`" )
+    (umeda "ウメダFM Be Happy! 789  24時間  (大阪府大阪市)" " -playlist http://www.simulradio.jp/asx/FmKita.asx" )
+    (yes "YES-fm                          (大阪府大阪市中央区)" " -playlist http://www.simulradio.jp/asx/YesFM.asx" )
+    (nanba "YES-fm                          (大阪府大阪市中央区)" " -playlist http://www.simulradio.jp/asx/YesFM.asx" )
+
+    (jungle "FM JUNGLE   24時間     (兵庫県豊岡市)" " http://wms.shibapon.net/FmJungle" )
+    (toyooka "FM JUNGLE   24時間     (兵庫県豊岡市)" " http://wms.shibapon.net/FmJungle" )
+    (takarazuka "FM宝塚                 (兵庫県宝塚市)" " -playlist http://www.simulradio.jp/asx/FmTakarazuka.asx" )
+    (yy "FMわぃわぃ             (兵庫県神戸市)" " http://simul.freebit.net:8310/fmyy" )
+    (miki "エフエムみっきぃ       (兵庫県三木市)" " http://wms.shibapon.net/FmMiki" )
+    (banban "BAN-BANラジオ  24時間  (兵庫県加古川市)" " http://wms.shibapon.net/BAN-BAN_Radio" )
+    (kakogawa "BAN-BANラジオ  24時間  (兵庫県加古川市)" " http://wms.shibapon.net/BAN-BAN_Radio" )
+    (genki "FM GENKI               (兵庫県姫路市)" " http://wms.shibapon.net/FmGenki" )
+    (himeji "FM GENKI               (兵庫県姫路市)" " http://wms.shibapon.net/FmGenki" )
+
+    (banana "BananaFM    24時間     (和歌山県和歌山市)" " http://wms.shibapon.net/BananaFM" )
+    (wakayama "BananaFM    24時間     (和歌山県和歌山市)" " http://wms.shibapon.net/BananaFM" )
+    (tanabe "FM TANABE              (和歌山県田辺市)" " http://wms.shibapon.net/FmTanabe" )
+    (beachstation "FMビーチステーション   (和歌山県白浜町)" " -playlist http://www.simulradio.jp/asx/BeachStation.asx" )
+    (shirahama "FMビーチステーション   (和歌山県白浜町)" " -playlist http://www.simulradio.jp/asx/BeachStation.asx" )
+
+    (daraz "DARAZ FM               (鳥取県米子市)" " -playlist http://www.darazfm.com/streaming.asx" )
+    (yonago "DARAZ FM               (鳥取県米子市)" " -playlist http://www.darazfm.com/streaming.asx" )
+    (tsuyama "エフエムつやま         (岡山県津山市)" " -playlist http://www.tsuyama.tv/encoder/fmtsuyamalive.ram" )
+    (chupea "FMちゅーピー           (広島県広島市)" " http://wms.shibapon.net/FmChuPea" )
+    (hiroshima "FMちゅーピー           (広島県広島市)" " http://wms.shibapon.net/FmChuPea" )
+
+    (takamatsu "FM高松                 (香川県高松市)" " http://wms.shibapon.net/FmTakamatsu" )
+    (bfm "FMびざん               (徳島県徳島市)" " http://wms.shibapon.net/B-FM791" )
+    (tokushima "FMびざん               (徳島県徳島市)" " http://wms.shibapon.net/B-FM791" )
+
+    (kitaqk "FM KITAQ               (福岡県北九州市)" " -playlist http://www.simulradio.jp/asx/FmKitaq.asx" )
+    (hibiki "AIR STATION HIBIKI     (福岡県北九州市)" " -playlist http://std1.ladio.net:8000/soxisix37494.m3u" )
+    (kitaqw "AIR STATION HIBIKI     (福岡県北九州市)" " -playlist http://std1.ladio.net:8000/soxisix37494.m3u" )
+
+    (shimabara "FMしまばら             (長崎県島原市)" " mms://st1.shimabara.jp/fmlive" )
+
+    (noas "NOAS FM                (大分県中津市)" " mms://simul.freebit.net/fmnakatsu" )
+    (nakatsu "NOAS FM                (大分県中津市)" " mms://simul.freebit.net/fmnakatsu" )
+
+    (sunshine "SunshineFM             (宮崎県宮崎市)" " mms://simul.freebit.net/sunshinefm" )
+    (miyazaki "SunshineFM             (宮崎県宮崎市)" " mms://simul.freebit.net/sunshinefm" )
+
+    (osumi "おおすみ半島FM 24時間  (鹿児島県鹿屋市)" " -af volume 10:0 -playlist http://fm.osumi.or.jp:8000/0033FM.m3u" )
+    (amami "あまみFM               (鹿児島県奄美市)" " -playlist http://www.simulradio.jp/asx/AmamiFM.asx" )
+
+    (uruma "FMうるま       24時間  (沖縄県うるま市)" " -playlist http://www.simulradio.jp/asx/FmUruma.asx" )
+
+    (nirai "FMニライ               (沖縄県北谷町) ちゃたんちょう" " http://wms.shibapon.net/FmNirai" )
+    (chatan "FMニライ               (沖縄県北谷町) ちゃたんちょう" " http://wms.shibapon.net/FmNirai" )
+
+    (fm21 "FM21           24時間  (沖縄県浦添市)" " -playlist http://www.simulradio.jp/asx/Fm21inOkinawa.asx" )
+
+    (lequio "FMレキオ       24時間  (沖縄県那覇市)" " -playlist http://www.simulradio.jp/asx/FmLequio.asx" )
+
+    (toyomi "FMとよみ               (沖縄県豊見城市)" " -playlist http://www.simulradio.jp/asx/FmToyomi.asx" )
+    (tomigusuku "FMとよみ               (沖縄県豊見城市)" " -playlist http://www.simulradio.jp/asx/FmToyomi.asx" )
     ))
 
 (define (listen args)
@@ -64,11 +188,11 @@
       (else
         (print
           (string-append
-          (colour-string
-            123
-            (symbol->string (car (car st))))  
-                         ": "
-                         (cadr (car st))))
+            (colour-string
+              123
+              (symbol->string (car (car st))))  
+            ": "
+            (cadr (car st))))
         (loop (cdr st))))))
 
 (define (radio args)
@@ -89,182 +213,4 @@
 
 
 
-
-
-; # FMぱるるん             (茨城県水戸市)
-; sb-palulun 'mplayer -playlist http://www.simulradio.jp/asx/FmPalulun.asx'
-; sb-mito sb-palulun
-; # ラヂオつくば  24時間   (茨城県つくば市)
-; sb-tsukuba 'mplayer -novideo mms://ir298.com/IRTsukuba/radiotsukuba.asx'
-; # エフエムかしま         (茨城県鹿嶋市)
-; sb-kashima "mplayer -playlist http://www.simulradio.jp/asx/FmKashima.asx"
-; # FM桐生                 (群馬県桐生市)
-; sb-kiryu 'mplayer http://wms.shibapon.net/kiryu.fm'
-; # まえばしCITYエフエム  24時間   (群馬県前橋市)
-; sb-maebashi "mplayer http://radio.maebashi.fm:8080/mwave"
-; 
-; # かずさエフエム         (千葉県木更津市)
-; sb-kazusa "mplayer -playlist http://www.simulradio.jp/asx/KazusaFM.asx"
-; sb-kisarazu sb-kazusa
-; 
-; # フラワーラジオ         (埼玉県鴻巣市)
-; sb-flower 'mplayer http://wms.shibapon.net/flower'
-; sb-kounosu sb-flower
-; # REDS WAVE              (埼玉県さいたま市浦和区)
-; sb-redswave 'mplayer http://wms.shibapon.net/reds-wave'
-; # SMILE FM    24時間     (埼玉県朝霞市)
-; sb-smile 'mplayer mms://simul.freebit.net/smilefm'
-; sb-asaka sb-smile
-; 
-; # かつしかFM  24時間     (東京都葛飾区)
-; sb-katsushika "mplayer -playlist http://www.simulradio.jp/asx/KatsushikaFM.asx"
-; # レインボータウンFM     (東京都江東区)
-; sb-rainbowtown "mplayer -playlist http://www.simulradio.jp/asx/RainbowtownFM.asx"
-; # むさしのFM             (東京都武蔵野市)
-; sb-musashino "mplayer -playlist http://www.simulradio.jp/asx/MusashinoFM.asx"
-; # FM 西東京   24時間     (東京都西東京市)
-; sb-nishitokyo 'mplayer http://wms.shibapon.net/FmNishiTokyo'
-; # FM たちかわ            (東京都立川市)
-; sb-tachikawa 'mplayer http://wms.shibapon.net/FmTachikawa'
-; # 調布FM      24時間     (東京都調布市)
-; sb-chofu "mplayer -playlist http://www.simulradio.jp/asx/ChofuFM.asx"
-; 
-; # かわさきFM             (神奈川県川崎市)
-; sb-kawasaki 'mplayer http://wms.shibapon.net/FM_K-City'
-; # FMサルース             (神奈川県横浜市)
-; sb-salus "mplayer -playlist http://www.simulradio.jp/asx/FmSalus.asx"
-; # FM戸塚                 (神奈川県横浜市)
-; sb-totsuka 'mplayer http://wms.shibapon.net/FmTotsuka'
-; # FMやまと               (神奈川県大和市)
-; sb-yamato 'mplayer http://wms.shibapon.net/FMYamato'
-; # 湘南ビーチFM  24時間   (神奈川県逗子市/三浦郡葉山町)
-; sb-shonanbeach 'mplayer mms://simul.freebit.net/shonanbeachfma'
-; sb-hayama sb-shonanbeach
-; # レディオ湘南           (神奈川県藤沢市)
-; sb-radioshonan 'mplayer mms://simul.freebit.net/radioshonan'
-; sb-fujisawa sb-radioshonan
-; # エフエムさがみ         (神奈川県相模原市)
-; sb-sagami "mplayer -novideo -playlist http://www.fmsagami.co.jp/asx/fmsagami.asx"
-; # FMおだわら  24時間     (神奈川県小田原市)
-; sb-odawara 'mplayer mms://simul.freebit.net/fmodawara'
-; 
-; # FM Kento               (新潟県新潟市)
-; sb-kento 'mplayer mms://simul.freebit.net/fmkento'
-; sb-niigata sb-kento
-; # FM PIKKARA             (新潟県柏崎市)
-; sb-pikkara 'mplayer -novideo -playlist http://www.happy-kashiwazaki.com/pikkara/livekcb.asx'
-; sb-kashiwazaki sb-pikkara
-; # FM軽井沢    24時間     (長野県軽井沢町)
-; sb-karuizawa 'mplayer mms://simul.freebit.net/fmkaruizawa'
-; 
-; # FMかほく    24時間     (石川県かほく市)
-; sb-kahoku 'mplayer http://radio.kahoku.net:8000/'
-; # ハーバーステーション   (福井県敦賀市)
-; sb-harbor779 'mplayer `wget -O - http://www.web-services.jp/harbor779/radio.html | sed -n "/mp3/s/^.*\(http:[^;]*\).*$/\1/p"`'
-; sb-tsuruga sb-harbor779
-; 
-; # エフエム熱海湯河原     (静岡県熱海市)
-; sb-ciao 'mplayer http://simul.freebit.net:8310/ciao'
-; sb-atami sb-ciao
-; 
-; # FMおかざき             (愛知県岡崎市)
-; sb-okazaki "mplayer -playlist http://www.simulradio.jp/asx/FmOkazaki.asx"
-; # MID-FM                 (愛知県名古屋市)
-; sb-mid 'mplayer http://wms.shibapon.net/mid-fm761'
-; sb-nagoya sb-mid
-; # PORT WAVE              (三重県四日市)
-; sb-portwave 'mplayer -playlist http://www.p-wave.ne.jp/live/wmedia/portwave.asx'
-; sb-yokkaichi sb-portwave
-; 
-; # FMいかる               (京都府綾部市)
-; sb-ikaru 'mplayer http://wms.shibapon.net/FMIkaruAtAyabe'
-; sb-ayabe sb-ikaru
-; # FM CASTLE   24時間     (京都府福知山市)
-; sb-castle 'mplayer `wget -O - http://www.fm-castle.jp/simul.asx | sed -n "s/^.*\(mms:[^\"]*\).*$/\1/p"`'
-; sb-fukuchiyama sb-castle
-; 
-; # FMひらかた  24時間     (大阪府枚方市)
-; sb-hirakata 'mplayer http://wms.shibapon.net/Fmhirakata'
-; # みのおエフエム  24時間 (大阪府箕面市)
-; sb-minoh "mplayer -playlist http://fm.minoh.net/minohfm.asx"
-; # FM千里                 (大阪府豊中市)
-; sb-senri 'mplayer http://simul.freebit.net:8310/fmsenri'
-; # FM HANAKO              (大阪府守口市)
-; sb-hanako 'mplayer -novideo `wget -O - http://fmhanako.jp/radio/824.asx | sed -n "/mms/{s/^.*\(mms:[^\"]*\).*$/\1/p; q;}"`'
-; sb-moriguchi sb-hanako
-; # ウメダFM Be Happy! 789  24時間  (大阪府大阪市)
-; sb-umeda "mplayer -playlist http://www.simulradio.jp/asx/FmKita.asx"
-; # YES-fm                          (大阪府大阪市中央区)
-; sb-yes "mplayer -playlist http://www.simulradio.jp/asx/YesFM.asx"
-; sb-nanba sb-yes
-; 
-; # FM JUNGLE   24時間     (兵庫県豊岡市)
-; sb-jungle 'mplayer http://wms.shibapon.net/FmJungle'
-; sb-toyooka sb-jungle
-; # FM宝塚                 (兵庫県宝塚市)
-; sb-takarazuka "mplayer -playlist http://www.simulradio.jp/asx/FmTakarazuka.asx"
-; # FMわぃわぃ             (兵庫県神戸市)
-; sb-yy 'mplayer http://simul.freebit.net:8310/fmyy'
-; # エフエムみっきぃ       (兵庫県三木市)
-; sb-miki 'mplayer http://wms.shibapon.net/FmMiki'
-; # BAN-BANラジオ  24時間  (兵庫県加古川市)
-; sb-banban 'mplayer http://wms.shibapon.net/BAN-BAN_Radio'
-; sb-kakogawa sb-banban
-; # FM GENKI               (兵庫県姫路市)
-; sb-genki 'mplayer http://wms.shibapon.net/FmGenki'
-; sb-himeji sb-genki
-; 
-; # BananaFM    24時間     (和歌山県和歌山市)
-; sb-banana "mplayer http://wms.shibapon.net/BananaFM"
-; sb-wakayama sb-banana
-; # FM TANABE              (和歌山県田辺市)
-; sb-tanabe 'mplayer http://wms.shibapon.net/FmTanabe'
-; # FMビーチステーション   (和歌山県白浜町)
-; sb-beachstation "mplayer -playlist http://www.simulradio.jp/asx/BeachStation.asx"
-; sb-shirahama sb-beachstation
-; 
-; # DARAZ FM               (鳥取県米子市)
-; sb-daraz "mplayer -playlist http://www.darazfm.com/streaming.asx"
-; sb-yonago sb-daraz
-; # エフエムつやま         (岡山県津山市)
-; sb-tsuyama 'mplayer -playlist http://www.tsuyama.tv/encoder/fmtsuyamalive.ram'
-; # FMちゅーピー           (広島県広島市)
-; sb-chupea 'mplayer http://wms.shibapon.net/FmChuPea'
-; sb-hiroshima sb-chupea
-; 
-; # FM高松                 (香川県高松市)
-; sb-takamatsu 'mplayer http://wms.shibapon.net/FmTakamatsu'
-; # FMびざん               (徳島県徳島市)
-; sb-bfm 'mplayer http://wms.shibapon.net/B-FM791'
-; sb-tokushima sb-bfm
-; 
-; # FM KITAQ               (福岡県北九州市)
-; sb-kitaqk "mplayer -playlist http://www.simulradio.jp/asx/FmKitaq.asx"
-; # AIR STATION HIBIKI     (福岡県北九州市)
-; sb-hibiki "mplayer -playlist http://std1.ladio.net:8000/soxisix37494.m3u"
-; sb-kitaqw sb-hibiki
-; # FMしまばら             (長崎県島原市)
-; sb-shimabara 'mplayer mms://st1.shimabara.jp/fmlive'
-; # NOAS FM                (大分県中津市)
-; sb-noas 'mplayer mms://simul.freebit.net/fmnakatsu'
-; sb-nakatsu sb-noas
-; # SunshineFM             (宮崎県宮崎市)
-; sb-sunshine 'mplayer mms://simul.freebit.net/sunshinefm'
-; sb-miyazaki sb-sunshine
-; # おおすみ半島FM 24時間  (鹿児島県鹿屋市)
-; sb-osumi 'mplayer -af volume 10:0 -playlist http://fm.osumi.or.jp:8000/0033FM.m3u'
-; # あまみFM               (鹿児島県奄美市)
-; sb-amami "mplayer -playlist http://www.simulradio.jp/asx/AmamiFM.asx"
-; 
-; # FMうるま       24時間  (沖縄県うるま市)
-; sb-uruma "mplayer -playlist http://www.simulradio.jp/asx/FmUruma.asx"
-; # FMニライ               (沖縄県北谷町) ちゃたんちょう
-; sb-nirai 'mplayer http://wms.shibapon.net/FmNirai'
-; sb-chatan sb-nirai
-; # FM21           24時間  (沖縄県浦添市)
-; sb-fm21 "mplayer -playlist http://www.simulradio.jp/asx/Fm21inOkinawa.asx"
-; # FMレキオ       24時間  (沖縄県那覇市)
-; sb-lequio "mplayer -playlist http://www.simulradio.jp/asx/FmLequio.asx"
-; # FMとよみ               (沖縄県豊見城市)
-; sb-toyomi "mplayer -playlist http://www.simulradio.jp/asx/FmToyomi.asx"
-; sb-tomigusuku sb-toyomi
+; #
