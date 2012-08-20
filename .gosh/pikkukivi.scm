@@ -46,6 +46,7 @@
     (sumo2 "mplayer mms://a776.l12513450775.c125134.a.lm.akamaistream.net/D/776/125134/v0001/reflector:50775" )
     (sumo3 "mplayer mms://a792.l12513450791.c125134.a.lm.akamaistream.net/D/792/125134/v0001/reflector:50791" )
     (sssh  ,sssh) 
+    (sget  ,sget) 
 
     ; taken from oh-my-zsh
     ; Source: http://aur.archlinux.org/packages/lolbash/lolbash/lolbash.sh

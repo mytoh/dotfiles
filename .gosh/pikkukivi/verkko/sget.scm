@@ -1,8 +1,11 @@
-#!/usr/bin/env gosh
 
+(define-module pikkukivi.verkko.sget
 (use gauche.net)
 (use file.util)
 (use rfc.http)
+  (export sget))
+(select-module pikkukivi.verkko.sget)
+
 
 (define (parse-url url)
   (rxmatch-let (rxmatch #/^http:\/\/([-A-Za-z\d.]+)(:(\d+))?(\/.*)?/ url)
@@ -17,6 +20,6 @@
        (http-get host path
             :sink out :flusher (lambda _ #t))))))
 
-(define (main args)
-      (get (cadr args)))
+(define (sget args)
+      (get (car args)))
 
