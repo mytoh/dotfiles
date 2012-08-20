@@ -11,7 +11,6 @@
 (select-module pikkukivi.scm.ääliö)
 
 
-
 (define-constant *gitdir*  (expand-path "~/local/git/"))
 
 (define-constant *repos*
