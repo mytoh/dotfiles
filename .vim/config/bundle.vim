@@ -204,6 +204,7 @@ else
   NeoBundle 'desert256.vim'
   NeoBundle 'git://gist.github.com/187578.git' " <- h2u_black
   NeoBundle 'tristen/superman' " <- h2u_black
+  NeoBundle 'jelera/vim-nazca-colorscheme'
   "}}}
   " NeoBundle 'http://voikko.svn.sourceforge.net/svnroot/voikko/', {'type' : 'svn', 'rtp' : 'trunk/tools/vim'}
   " bitbucket
