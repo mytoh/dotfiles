@@ -8,11 +8,18 @@
 (require-extension (srfi 13 98))
 
 (define (colour-string colour-number str)
-  ;; take number, string -> return string
-  (string-concatenate
-   `("%{[38;5;" ,(number->string colour-number) "m%}"
-     ,str
-     "%{[0m%}")))
+  (let ((shell (sys-basename (get-environment-variable "SHELL"))))
+    (cond
+      ((string=? shell "tcsh")
+        (string-concatenate
+          `("%{[38;5;" ,(number->string colour-number) "m%}"
+            ,str
+            "%{[0m%}")))
+      (else
+        (string-concatenate
+          `("[38;5;" ,(number->string colour-number) "m"
+            ,str
+            "[0m"))))))
 
 (define (directory)
   (let* ((cwd (current-directory))
@@ -23,11 +30,11 @@
     (rxmatch-cond
       ;; /usr/home => ~
       (( (string->regexp (string-concatenate `("/usr" ,(home-directory))))
-                cwd)
+        cwd)
        (home)
        (prettify-directory
          (string-split
-       (regexp-replace (string->regexp home) cwd "~") "/")))
+           (regexp-replace (string->regexp home) cwd "~") "/")))
       ;; $HOME => ~`
       (( (string->regexp (home-directory)) cwd)
        (home)
@@ -36,20 +43,20 @@
            (regexp-replace (string->regexp home) cwd "~") "/")))
       ;; /mnt/mypassport => ~mypass
       (( (string->regexp "/mnt/mypassport")
-                cwd)
+        cwd)
        (m)
        (colour-fs
          "mypass"
          (prettify-directory (cddr (string-split cwd "/")))))
       ;; /mnt/deskstar => ~deskstar
       (( (string->regexp "/mnt/deskstar")
-                cwd)
+        cwd)
        (m)
        (colour-fs "deskstar"
                   (prettify-directory (cddr (string-split cwd "/")))))
       ;; /mnt/quatre => ~quatre
       (( (string->regexp "/mnt/quatre")
-                cwd)
+        cwd)
        (m)
        (colour-fs "quatre"
                   (prettify-directory (cddr (string-split cwd "/")))))
@@ -67,9 +74,9 @@
 (define (git)
   (let ((git-branch (lambda ()
                       (sys-basename (string-copy
-                        (process-output->string
-                          "git symbolic-ref HEAD")
-                        2))))
+                                      (process-output->string
+                                        "git symbolic-ref HEAD")
+                                      2))))
         (git-darty (lambda ()
                      (let* ((p (run-process '(git diff --quiet HEAD) :wait #t))
                             (status (process-exit-status p)))

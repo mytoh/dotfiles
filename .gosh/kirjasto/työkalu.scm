@@ -18,7 +18,8 @@
     p
     daemonize
     nothing
-    from
+    blockc
+    loopc
     ))
 
 (select-module kirjasto.työkalu)
@@ -70,6 +71,22 @@
   (lambda ()
     (values)))
 
+
+;; http://www.geocities.co.jp/SiliconValley-PaloAlto/7043/index.html#continuation
+ (define-syntax blockc
+   (syntax-rules ()
+     ((_ tag body1 body2 ...)
+      (call-with-current-continuation
+        (lambda (tag)
+          body1 body2 ...)))))
+
+(define-syntax loopc
+  (syntax-rules ()
+    ((_ tag body1 body2 ...)
+     (blockc tag
+            (let rec ()
+              body1 body2 ...
+              (rec))))))
 
 
 

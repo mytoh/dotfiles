@@ -8,9 +8,15 @@ function xsource
 end
 
 
-. ~/.config/fish/function.fish
-. ~/.config/fish/environment.fish
-. ~/.config/fish/gauche.fish
+set -l plugins function environment gauche
+for p in $plugins
+  . ~/.config/fish/plugins/$p.fish
+end
+set -e p
+
+#. ~/.config/fish/function.fish
+#. ~/.config/fish/environment.fish
+#. ~/.config/fish/gauche.fish
 
 # complete {{{
 function push-to-comp-path
