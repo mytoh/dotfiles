@@ -186,8 +186,7 @@
       ("asx"
        (run-process `(mplayer -playlist ,station) :wait #t))
       (else
-       (run-process `(mplayer ,@(cdr (assoc-ref station-list (string->symbol (car args))))) :wait #t) )
-      )))
+        (run-process `(mplayer ,@(cdr (assoc-ref station-list (string->symbol (car args))))) :wait #t)))))
 
 (define (list-stations)
   (let loop ((st station-list))

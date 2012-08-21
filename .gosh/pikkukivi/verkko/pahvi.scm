@@ -28,22 +28,22 @@
         (parse-image-id  (lambda (line) (#/\"id\"\:(\d+)/ line)))
         (parse-element (lambda (proc str)
                          (remove not
-                           (delete-duplicates
-                               (call-with-input-string str
-                                 (lambda (in)
-                                   (port-map
-                                       (lambda (line)
-                                         (let ((match (proc line)))
-                                           (cond
-                                            (match (match 1))
-                                            (else #f))))
-                                     (cut read-line in #t )))))))))
+                                 (delete-duplicates
+                                   (call-with-input-string str
+                                                           (lambda (in)
+                                                             (port-map
+                                                               (lambda (line)
+                                                                 (let ((match (proc line)))
+                                                                   (cond
+                                                                     (match (match 1))
+                                                                     (else #f))))
+                                                               (cut read-line in #t )))))))))
     (zip
-        (parse-element parse-image-id body)
+      (parse-element parse-image-id body)
       (parse-element parse-image-url body))))
 
 
- (define (swget uri filename)
+(define (swget uri filename)
   (let-values (((scheme user-info hostname port-number path query fragment)
                 (uri-parse uri)))
     (let ((file (receive (a f ext) (decompose-path path) #`",|filename|.,|ext|")))
@@ -62,18 +62,18 @@
 (define (parse-last-page-number str)
   (if-let1 pagination  (rxmatch->string #/<div class\=\"pagination\">.*?<\/div>/
                                         str)
-           (let ((page (call-with-input-string  pagination  (lambda (in)
-                                                              (ssax:xml->sxml in ())))))
-             (caddr (find-max
-                        ((node-closure (ntype-names?? '(a))) page)
-                      :key (lambda (e) (x->number (caddr e))))))
-           1))
+    (let ((page (call-with-input-string  pagination  (lambda (in)
+                                                       (ssax:xml->sxml in ())))))
+      (caddr (find-max
+               ((node-closure (ntype-names?? '(a))) page)
+               :key (lambda (e) (x->number (caddr e))))))
+    1))
 
 (define (get-posts-all tag)
   (print tag)
   (let ((last (x->number (parse-last-page-number (get-post-page 1 tag)))))
     (print (string-append (colour-string 82 (number->string last))
-             " pages found"))
+                          " pages found"))
     (dotimes (num last)
       (print (string-append (colour-string 99 "getting page ") (colour-string 33 (number->string (+ num 1)))))
       (get-image (parse-post-number-url (get-post-page (+ num 1) tag))))))

@@ -1,3 +1,4 @@
+;;; github.com/ayamada/copy-of-svn.tir.jp/nekoie/goshtags/make_gosh_completions.scm
 ;;; usage:
 ;;; cat gauche_modules | gosh make_gosh_completions.scm | sort | uniq \
 ;;; > ~/.gosh_completions

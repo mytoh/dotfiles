@@ -432,7 +432,7 @@ nmap     <localleader>s [vimshell]
 nmap     <silent> [vimshell]s <Plug>(vimshell_split_create)
 nmap     <silent> [vimshell]c <Plug>(vimshell_create)
 nnoremap <silent> [vimshell]p :<c-u>VimShellPop<cr>
-nnoremap <silent> [vimshell]p :<c-u>VimShellTab<cr>
+nnoremap <silent> [vimshell]t :<c-u>VimShellTab<cr>
 " }}}
 "}}}
 

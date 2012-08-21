@@ -1,3 +1,4 @@
+;;; github.com/ayamada/copy-of-svn.tir.jp/nekoie/goshtags/make_scheme_vim.scm
 ;;; usage:
 ;;; cat ./gosh_completions \
 ;;; | gosh make_scheme_vim.scm ./gauche_modules ./scheme.vim.tmpl > scheme.vim
@@ -20,6 +21,14 @@
      srfi-14.query
      srfi-14.set))
 
+(define *other-lispwords*
+  '(
+    call-with-output-file
+    call-with-input-file
+    with-input-from-port
+    call-with-input-string 
+    ))
+
 ;;; load all modules
 (use file.util)
 (define (use-gauche_modules)
@@ -30,7 +39,7 @@
           (warn (ref e 'message)))
         (lambda ()
           (unless (member (string->symbol line) *exclude-modules*)
-          (eval `(use ,(string->symbol line)) (interaction-environment))))))
+            (eval `(use ,(string->symbol line)) (interaction-environment))))))
     (file->list read-line (expand-path *gauche_modules-file*))))
 
 
@@ -70,6 +79,7 @@
 (use srfi-2)
 (define (output-gauche-define)
   (let1 result-table (make-hash-table 'eq?)
+
     (define (print-label type)
       (print (format "    \" ~a" type)))
     (define (print-syntax target)
@@ -77,6 +87,7 @@
       (print (format "    set lispwords+=~a" target)))
     (define (print-func target)
       (print (format "    syn keyword schemeExtFunc ~a" target)))
+
     (define (print-result type printer)
       (print-label type)
       (for-each
@@ -85,8 +96,7 @@
             (printer target)))
         (sort (hash-table-get result-table type '())))
       ;(newline) ; overridden from parser.peg
-      (print "\n")
-      )
+      (print "\n"))
 
     (let loop ((line (read-line)))
       (if (eof-object? line)
@@ -103,7 +113,15 @@
     (print-result 'class print-func)
     (print-result 'char-set print-func)
     (print-result 'parameter print-func)
+
+    (print-lispwords *other-lispwords*)
     #t))
+
+(define (print-lispwords lst)
+  (print (format "    \" ~a" "other lispwords"))
+  (for-each
+    (^k (print (format "    set lispwords+=~a" k)) )
+    lst))
 
 
 (define (main args)
