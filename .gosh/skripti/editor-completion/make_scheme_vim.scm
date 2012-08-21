@@ -5,6 +5,21 @@
 (define *gauche_modules-file* "./gauche_modules")
 (define *template-file* "./scheme.vim.tmpl")
 
+(define *exclude-modules*
+  '(gauche-init
+     gauche.common-macros
+     gauche.let-opt
+     gauche.logical
+     gauche.matrix
+     gauche.numerical
+     gauche.redefutil
+     gauche.signal
+     gauche.singleton
+     gauche.validator
+     os.windows
+     srfi-14.query
+     srfi-14.set))
+
 ;;; load all modules
 (use file.util)
 (define (use-gauche_modules)
@@ -14,7 +29,8 @@
         (lambda (e)
           (warn (ref e 'message)))
         (lambda ()
-          (eval `(use ,(string->symbol line)) (interaction-environment)))))
+          (unless (member (string->symbol line) *exclude-modules*)
+          (eval `(use ,(string->symbol line)) (interaction-environment))))))
     (file->list read-line (expand-path *gauche_modules-file*))))
 
 

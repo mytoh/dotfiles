@@ -1275,6 +1275,7 @@ bitwise-ior
 bitwise-merge
 bitwise-not
 bitwise-xor
+blockc
 boolean
 boolean?
 booleans->integer
@@ -1549,7 +1550,16 @@ codepoints-titlecase
 codepoints-upcase
 coerce-to
 colour-command
+colour-info
+colour-info-homepage
+colour-info-package
+colour-info-repository
+colour-message
+colour-package
+colour-path
 colour-string
+colour-symbol1
+colour-symbol2
 combinations
 combinations*
 combinations*-for-each
@@ -1565,6 +1575,7 @@ compute-cpl
 compute-get-n-set
 compute-slot-accessor
 compute-slots
+concat
 concatenate
 concatenate!
 cond
@@ -2034,7 +2045,6 @@ force-output
 foreign-pointer-attribute-get
 foreign-pointer-attribute-set
 foreign-pointer-attributes
-forever
 format
 format/ss
 fourth
@@ -2442,6 +2452,7 @@ julian-day->time-monotonic
 julian-day->time-tai
 julian-day->time-utc
 kaava-kansio
+kellari-kansio
 keyword->string
 keyword?
 kmp-step
@@ -2532,6 +2543,8 @@ logior
 lognot
 logtest
 logxor
+loop-forever
+loopc
 lower
 lset-adjoin
 lset-diff+intersection
@@ -2847,6 +2860,7 @@ pair-fold
 pair-fold-right
 pair-for-each
 pair?
+panna-kansio
 parameter-observer-add!
 parameter-observer-delete!
 parameter-post-observers
@@ -3256,6 +3270,7 @@ rfc822-quoted-string
 rfc822-read-headers
 rfc822-skip-cfws
 rfc822-write-headers
+riisi-kansio
 rlet1
 rope->string
 rope-finalize
@@ -3433,6 +3448,11 @@ set-time-second!
 set-time-type!
 setenv!
 setter
+setter of dict-get
+setter of instance-pool-of
+setter of instance-pools-of
+setter of object-apply
+setter of ref
 seventh
 sha1-digest
 sha1-digest-string
@@ -4506,7 +4526,12 @@ uri-encode-string
 uri-merge
 uri-parse
 uri-scheme&specific
+url-is-bzr?
+url-is-cvs?
+url-is-fossil?
 url-is-git?
+url-is-hg?
+url-is-svn?
 use
 use-version
 user-vicinity
