@@ -7,39 +7,37 @@ function xsource
   end
 end
 
-
-set -l plugins function environment gauche
-for p in $plugins
-  . ~/.config/fish/plugins/$p.fish
-end
-set -e p
-
-#. ~/.config/fish/function.fish
-#. ~/.config/fish/environment.fish
-#. ~/.config/fish/gauche.fish
-
-# complete {{{
-function push-to-comp-path
-set -l comp-directory ~/local/git
-  for p in $argv
-    if test -d $comp-directory/$p
-      if not contains $comp-directory/$p $fish_complete_path
-        set fish_complete_path $comp-directory/$p $fish_complete_path
+function push-to-path
+    for p in $argv
+      if test -d $p
+        if not contains $p $PATH
+          set -gx PATH $p $PATH
+        end
       end
     end
+end
+
+
+# load fish fise {{{
+
+set -l fish_base_dir ~/.config/fish
+set -l fish_lib_dir $fish_base_dir/lib
+set -l fish_plugin_dir $fish_base_dir/plugins
+
+# load library files
+for config in $fish_lib_dir/*.fish
+  . $config
+end
+
+
+set -l plugins function environment gauche z-fish
+for plugin in $plugins
+  if test $fish_plugin_dir/$plugin/$plugin.plugin.fish
+  . $fish_plugin_dir/$plugin/$plugin.plugin.fish
   end
 end
-push-to-comp-path fish-nuggets/completions fish_completions/ fishystuff/completions
 
-
-# h function {{{
-complete -x -c h -a "(__fish_complete_cd)"
-complete -x -c h -a "(__fish_complete_directories $HOME)"
-complete -c h -s h -l help --description 'Display help and exit'
 # }}}
-
-#}}}
-
 
 # fish variables {{{
 set fish_greeting ""
@@ -302,11 +300,6 @@ bind \cd 'delete-char'
 
 # misc {{{
 
-if xsource ~/local/git/z-fish/z.fish
-  function --on-event fish_prompt z-fish
-    z --add "$PWD"
-  end
-end
 
 #}}}
 

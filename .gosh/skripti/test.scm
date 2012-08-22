@@ -1,5 +1,6 @@
 
 (use file.util)
+(use srfi-1)
 
 (define-syntax colour-command
   (syntax-rules ()
@@ -21,7 +22,9 @@
 
 (add-load-path ".")
 
+
+
 (define (main args)
-  (print (current-directory))
-  (print *load-path*))
+  (print-repeat)
+  )
 

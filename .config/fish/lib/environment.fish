@@ -6,16 +6,6 @@ ulimit -c 0
 set -ge PATH
 set -gx PATH  /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/ $PATH
 
-function push-to-path
-    for p in $argv
-      if test -d $p
-        if not contains $p $PATH
-          set -gx PATH $p $PATH
-        end
-      end
-    end
-end
-
 push-to-path $HOME/.config/fish/bin
 
 # gentoo prefix {{{
