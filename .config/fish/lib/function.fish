@@ -103,6 +103,11 @@ function q
 exit
 end
 
+function take
+	mkdir -p $argv
+	cd $argv
+end
+
 function load_lol_aliases
         # taken from oh-my-zsh
         # Source: http://aur.archlinux.org/packages/lolbash/lolbash/lolbash.sh

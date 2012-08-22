@@ -1,10 +1,10 @@
 ;; -*- coding: utf-8 -*-
 
-(define-module kirjasto.verkko.liemi
+(define-module kirjasto.verkko.keitto
   (export
    find-all-tags)
   (use rfc.uri))
-(select-module kirjasto.verkko.liemi)
+(select-module kirjasto.verkko.keitto)
 
 (define find-all-tags
   (lambda (tag body)

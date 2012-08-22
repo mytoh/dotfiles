@@ -4,7 +4,7 @@
   (extend
     kirjasto.verkko.nico
     kirjasto.verkko.avata
-    kirjasto.verkko.liemi
+    kirjasto.verkko.keitto
     kirjasto.verkko.merkintä
     kirjasto.verkko.palvelin
     kirjasto.verkko.scm

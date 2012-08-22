@@ -306,11 +306,11 @@ bind \cd 'delete-char'
 # os {{{
 switch (uname)
   case FreeBSD
-  xsource ~/.config/fish/freebsd.fish
+  xsource $fish_base_dir/freebsd.fish
 
 # mac settings
   case Darwin
-  xsource ~/.config/fish/mac.fish
+  xsource $fish_base_dir/mac.fish
 end
 #}}}
 

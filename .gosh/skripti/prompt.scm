@@ -126,7 +126,7 @@
         ,(colour-string 172 "╹◡╹")
         ,(colour-string 95 "✖")
         "\n"
-        ,(colour-string 235 ">")
+        ,(colour-string 236 "-")
         ,(colour-string 238 ">")
         ,(colour-string 60  ">")
         " "))))

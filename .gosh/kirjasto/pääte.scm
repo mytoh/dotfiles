@@ -13,6 +13,9 @@
 (define (screen-title command)
   (display (string-append "k" command "\\")))
 
+(define (window-name command)
+   (display  (string-append "]2;" command  "\a")))
+
 (define (print-repeat string-list inter)
   (for-each (^i (format (current-output-port) "~a\r" i)
               (flush)
