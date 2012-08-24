@@ -71,6 +71,7 @@
     (trapd00r      zsh-syntax-highlighting-filetypes)
     (trapd00r      ls--)
     (trapd00r      utils trapd00r-utils)
+    (trapd00r      configs trapd00r-configs)
     (hchbaw        auto-fu.zsh)
     (buntine       Fractals)
     (SanskritFritz fish_completions)
@@ -112,7 +113,9 @@
     (shadow        shadow)
     (digego         extempore)
     (calvis         cKanren)
-    (tlatsas       xcolors)))
+    (tlatsas       xcolors)
+    (Raynes       fs)
+    (webyrd        miniKanren)))
 
 ;; update git repository
 (define (update-gitdir)
@@ -187,6 +190,18 @@
           (list e))))
     *repos* ))
 
+(define (list-repos)
+  (map 
+  (^ (x) (cond
+           ((list? x)
+            (print
+            (string-append (colour-string 33 (x->string (car x)))
+                        ": "
+                        (colour-string 93 (x->string (cadr x))))))
+           (else
+             (print x))))
+  *repos*))
+
 (define (usage status)
   (exit status "usage: ~a <command> <package-name>\n" *program-name*))
 
@@ -205,6 +220,8 @@
            (update-gitdir)))
         ("clean"
          (clean-gitdir))
+        ("list"
+         (list-repos))
         ("clone"
          (begin
            (print (string-append (colour-string 3 "cloning ") "repositories"))

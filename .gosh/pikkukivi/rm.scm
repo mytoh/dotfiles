@@ -8,14 +8,14 @@
 (select-module pikkukivi.rm)
 
 (define (rm args)
- (let-args args
-           ((verbose "v|verbose")
-            . files)
-           (cond
-             (verbose
-               (rm-verbose files))
-             (else
-               (rm-normal files)))))
+  (let-args args
+    ((verbose "v|verbose")
+     . files)
+    (cond
+      (verbose
+        (rm-verbose files))
+      (else
+        (rm-normal files)))))
 
 (define (rm-normal files)
   (let loop ((files files))

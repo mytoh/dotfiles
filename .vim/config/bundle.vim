@@ -9,15 +9,16 @@
 
 set shell=sh
 
-let $VIMBUNDLE_DIR=$HOME."/.bundle"
+let $VIMBUNDLE_DIR=$HOME."/.vim/bundle"
 if !isdirectory($VIMBUNDLE_DIR."/neobundle.vim")
   call mkdir($VIMBUNDLE_DIR, "p")
 else
 
   if has('vim_starting')
-    set runtimepath^=$HOME/.bundle/neobundle.vim
+    set runtimepath^=$VIMBUNDLE_DIR/neobundle.vim
+    set nocompatible
     filetype off
-    call neobundle#rc(expand('$HOME/.bundle'))
+    call neobundle#rc($VIMBUNDLE_DIR)
   endif
 
   NeoBundle 'Shougo/neobundle.vim'
@@ -25,9 +26,12 @@ else
   " my bundles here {{{
   "
   " github repo {{{
-  NeoBundle 'Shougo/neocomplcache'
-  NeoBundle 'Shougo/neocomplcache-snippets-complete'
-  NeoBundle 'Shougo/vimfiler'
+  NeoBundle 'Shougo/neocomplcache', {'depends' :
+        \ [ 'Shougo/neocomplcache-snippets-complete.git',
+        \   ['rstacruz/sparkup', {'rtp': 'vim'}],
+        \ ]}
+  NeoBundle 'Shougo/vimfiler',
+        \ {'depends' : 'Shougo/unite.vim' }
   NeoBundle 'Shougo/vimproc'
   NeoBundle 'Shougo/vimshell'
   NeoBundle 'Shougo/vinarise'
@@ -124,6 +128,7 @@ else
   NeoBundle 'majutsushi/tagbar'
   NeoBundle 'nefo-mi/nyan-modoki.vim'
   NeoBundle 'coderifous/textobj-word-column.vim'
+  NeoBundle 'spolu/dwm.vim'
   " NeoBundle 'anekos/runes-vim'
   "unite
   NeoBundle     'Shougo/unite.vim'
@@ -152,8 +157,8 @@ else
   NeoBundle 'emezeske/paredit.vim'
   NeoBundle 'aharisu/vim_goshrepl'
   " clojure
-  NeoBundle 'https://bitbucket.org/kotarak/vimclojure'
-  " NeoBundle 'VimClojure'
+  " NeoBundle 'https://bitbucket.org/kotarak/vimclojure/vim'
+  NeoBundle 'VimClojure'
   "haskell
   " NeoBundle 'Twinside/vim-haskellConceal'
   NeoBundle 'Twinside/vim-syntax-haskell-cabal'
@@ -181,6 +186,7 @@ else
   " supercollider
   NeoBundle 'sbl/scvim'
   " colorscheme {{{
+  NeoBundle 'paulwib/vim-colorschemes'
   NeoBundle 'altercation/vim-colors-solarized'
   NeoBundle 'jelera/vim-gummybears-colorscheme'
   NeoBundle 'shawncplus/skittles_berry'
@@ -244,5 +250,12 @@ endif
 filetype plugin on
 filetype indent on
 
-" vim:set foldmethod=marker:
+" Installation check.
+if neobundle#exists_not_installed_bundles()
+  echomsg 'Not installed bundles : ' .
+        \ string(neobundle#get_not_installed_bundle_names())
+  echomsg 'Please execute ":NeoBundleInstall" command.'
+  "finish
+endif
 
+" vim:set foldmethod=marker:

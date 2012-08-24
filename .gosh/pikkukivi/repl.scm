@@ -33,10 +33,10 @@
 
 (define printer-colourize
   (lambda (result)
-    (let ((make-colour (lambda (assoc-key str)
+    (let ((make-colour (lambda (assoc-key s)
                     (colour-string
                       (assoc-ref *colours* assoc-key)
-                      (x->string  str)))))
+                      (x->string  s)))))
     (match (class-name (class-of result))
       ;; list
       ('<pair>

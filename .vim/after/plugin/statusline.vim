@@ -1,6 +1,19 @@
 
 set laststatus=2
 
+" highlight for statusline
+" User1-9 => %{1-9}*
+highlight User1 ctermfg=white ctermbg=244 cterm=none
+highlight User2 ctermfg=172    ctermbg=233
+highlight User3 ctermfg=243    ctermbg=234
+highlight User4 ctermfg=59   ctermbg=235
+highlight User5 ctermfg=38   ctermbg=239
+highlight User6 ctermfg=190   ctermbg=243
+highlight User7 ctermfg=17   ctermbg=247
+highlight User8 ctermfg=95   ctermbg=251
+" mode
+highlight User9 ctermfg=18   ctermbg=154
+
 function! GetCharCode() " {{{ from powerline
   " Get the output of :ascii
   redir => ascii
@@ -32,6 +45,19 @@ function! GetCharCode() " {{{ from powerline
   return "'". char ."' ". nr
 endfunction "}}}
 
+let s:statusline_mode_i = 'insert'
+let s:statusline_mode_R = 'replace'
+let s:statusline_mode_n = 'normal'
+let s:statusline_mode_v = 'visual'
+let s:statusline_mode_V = 'lvisual'
+let s:statusline_mode_cv = 'cvisual'
+let s:statusline_mode_s = 'select'
+let s:statusline_mode_S = 'lselect'
+let s:statusline_mode_cs = 'cselect'
+let s:statusline_mode_unite_insert = 'U.insert'
+let s:statusline_mode_unite_normal = 'U.normal'
+let s:statusline_mode_vimfiler_insert = 'Vf.insert'
+let s:statusline_mode_vimfiler_normal = 'Vf.normal'
 
 " add hook to change mode highlight {{{
 function! Statusmode()
@@ -39,28 +65,31 @@ function! Statusmode()
   let is_unite = &filetype == 'unite' ? 1 : 0
   let is_vimfiler = &filetype == 'vimfiler' ? 1 : 0 
   let is_gosh_repl = &filetype == 'gosh-repl' ? 1 : 0 
+  " unite
   if is_unite
     if curmode == 'i'
       call SetHighlight('User9', 45, 144)
-      return 'I.un'
+      return s:statusline_mode_unite_insert
     elseif curmode == 'n'
       call SetHighlight('User9', 18, 134)
-      return 'N.un'
+      return s:statusline_mode_unite_normal
     else
       call SetHighlight('User9', 18, 134)
       return curmode . '.un'
     endif
+    " vimfiler
   elseif is_vimfiler
     if curmode == 'i'
       call SetHighlight('User9', 45, 94)
-      return 'I.vf'
+      return s:statusline_mode_vimfiler_insert
     elseif curmode == 'n'
       call SetHighlight('User9', 18, 152)
-      return 'N.vf'
+      return s:statusline_mode_vimfiler_normal
     else
       call SetHighlight('User9', 18, 152)
       return curmode . '.vf'
     endif
+    " gosh_repl
   elseif is_gosh_repl
     if curmode == 'i'
       call SetHighlight('User9', 45, 34)
@@ -76,14 +105,29 @@ function! Statusmode()
     if curmode == 'i'
       call SetHighlight('User9', 45, 194)
       call SetHighlight('StatusLine', 39, 224)
-      return 'I'
+      return s:statusline_mode_i
     elseif curmode == 'n'
       call SetHighlight('User9', 18, 154)
       call SetHighlight('StatusLine', 18, 234)
-      return 'N'
-    elseif curmode == 'v' || curmode == 'V'
+      return s:statusline_mode_n
+    elseif curmode == 'v'
       call SetHighlight('User9', 18, 94)
-      return 'V'
+      return s:statusline_mode_v
+    elseif curmode == 'V'
+      call SetHighlight('User9', 18, 94)
+      return s:statusline_mode_V
+    elseif curmode == 'cv'
+      call SetHighlight('User9', 18, 94)
+      return s:statusline_mode_cv
+    elseif curmode == 's'
+      call SetHighlight('User9', 18, 94)
+      return s:statusline_mode_s
+    elseif curmode == 'S'
+      call SetHighlight('User9', 18, 94)
+      return s:statusline_mode_S
+    elseif curmode == 'cs'
+      call SetHighlight('User9', 18, 94)
+      return s:statusline_mode_cs
     else
       call SetHighlight('User9', 18, 154)
       return curmode

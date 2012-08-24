@@ -30,7 +30,8 @@ for config in $fish_lib_dir/*.fish
 end
 
 
-set -l plugins function environment gauche z-fish
+# plugins
+set -l plugins gauche z-fish panna talikko
 for plugin in $plugins
   if test $fish_plugin_dir/$plugin/$plugin.plugin.fish
   . $fish_plugin_dir/$plugin/$plugin.plugin.fish

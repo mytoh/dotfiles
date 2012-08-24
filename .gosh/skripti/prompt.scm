@@ -29,33 +29,33 @@
                         d))))
     (rxmatch-cond
       ;; /usr/home => ~
-      (( (string->regexp (string-concatenate `("/usr" ,(home-directory))))
+      (((string->regexp (string-concatenate `("/usr" ,(home-directory))))
         cwd)
        (home)
        (prettify-directory
          (string-split
            (regexp-replace (string->regexp home) cwd "~") "/")))
       ;; $HOME => ~`
-      (( (string->regexp (home-directory)) cwd)
+      (((string->regexp (home-directory)) cwd)
        (home)
        (prettify-directory
          (string-split
            (regexp-replace (string->regexp home) cwd "~") "/")))
-      ;; /mnt/mypassport => ~mypass
-      (( (string->regexp "/mnt/mypassport")
+      ;; /nfs/mypassport => ~mypass
+      (((string->regexp "/nfs/mypassport")
         cwd)
        (m)
        (colour-fs
          "mypass"
          (prettify-directory (cddr (string-split cwd "/")))))
-      ;; /mnt/deskstar => ~deskstar
-      (( (string->regexp "/mnt/deskstar")
+      ;; /nfs/deskstar => ~deskstar
+      (((string->regexp "/nfs/deskstar")
         cwd)
        (m)
        (colour-fs "deskstar"
                   (prettify-directory (cddr (string-split cwd "/")))))
-      ;; /mnt/quatre => ~quatre
-      (( (string->regexp "/mnt/quatre")
+      ;; /nfs/quatre => ~quatre
+      (((string->regexp "/nfs/quatre")
         cwd)
        (m)
        (colour-fs "quatre"

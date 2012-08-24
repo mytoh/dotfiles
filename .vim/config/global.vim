@@ -154,7 +154,7 @@ set showfulltag
 " colors
 set t_Co=256
 set background=dark
-colorscheme jellybeans
+colorscheme 256-jungle
 let g:molokai_original = 1
 
 " set mouse
@@ -230,18 +230,6 @@ highlight TabLineSep    ctermfg=218 ctermbg=235
 highlight Pmenu          ctermfg=110    ctermbg=235
 highlight PmenuSel      ctermfg=189    ctermbg=238
 
-" highlight for statusline
-" User1-9 => %{1-9}*
-highlight User1 ctermfg=white ctermbg=244 cterm=none
-highlight User2 ctermfg=172    ctermbg=233
-highlight User3 ctermfg=243    ctermbg=234
-highlight User4 ctermfg=59   ctermbg=235
-highlight User5 ctermfg=38   ctermbg=239
-highlight User6 ctermfg=190   ctermbg=243
-highlight User7 ctermfg=17   ctermbg=247
-highlight User8 ctermfg=95   ctermbg=251
-" mode
-highlight User9 ctermfg=18   ctermbg=154
 " }}}
 
 

@@ -107,10 +107,11 @@ endfunction
 " from http://d.hatena.ne.jp/hrsh7th/20120229/1330525683
 
 " vimfiler key-mappings {{{
-nnoremap [filer] <nop>
-nmap     <localleader>f [filer]
-nnoremap <silent> [filer]f :<c-u>VimFiler<cr>
-nnoremap <silent> [filer]t :<c-u>VimFilerTab<cr>
+nnoremap [vimfiler] <nop>
+nmap     <localleader>f [vimfiler]
+nnoremap <silent> [vimfiler]f :<c-u>VimFiler<cr>
+nnoremap <silent> [vimfiler]t :<c-u>VimFilerTab<cr>
+nnoremap <silent> [vimfiler]k :<c-u>Unite bookmark:directory<cr>
 nnoremap <silent> <c-e> :VimFiler -buffer-name=explorer -split -winwidth=35 -toggle -no-quit<cr>
 " }}}
 
@@ -124,6 +125,8 @@ augroup vimfiler
 augroup end
 function! g:my_vimfiler_settings() "{{{
   nmap     <buffer><expr><cr>        vimfiler#smart_cursor_map("\<plug>(vimfiler_expand_tree)", "\<plug>(vimfiler_edit_file)")
+  nmap     <buffer> q         <plug>(vimfiler_exit)
+  nmap     <buffer> Q         <plug>(vimfiler_hide)
   nnoremap <buffer><localleader><silent>s    :call vimfiler#mappings#do_action('my_split')<cr>
   nnoremap <buffer><localleader><silent>S    :call vimfiler#mappings#do_action('my_vsplit')<cr>
   call vimfiler#set_execute_file('mkv,mpg,mp4', 'mplayer')

@@ -7,10 +7,7 @@
   (require-extension
     (srfi 11 13))
   (export
-    cat-file
-
-    spit
-    slurp))
+    cat-file ))
 (select-module kirjasto.tiedosto)
 
 (define (cat-file args)
@@ -30,23 +27,3 @@
   (or ( #/^https?:\/\// str)
     ( #/^http:\/\// str)))
 
-(define (slurp file)
-  (cond
-    ((file-exists? file)
-      (file->string file))
-    ((string-is-url? file)
-     (open file))
-    (else
-      (print "file not exists"))))
-
-(define (spit file string :key (append? #f))
-  (cond
-    (append?
-      (call-with-output-file file
-        (^ (in)
-          (display string in))
-        :if-exists :append))
-    (else
-      (call-with-output-file file
-        (^ (in)
-          (display string in))))))

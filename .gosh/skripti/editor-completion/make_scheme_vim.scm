@@ -27,6 +27,7 @@
     call-with-input-file
     with-input-from-port
     call-with-input-string 
+    let-args
     ))
 
 ;;; load all modules

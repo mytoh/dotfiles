@@ -20,6 +20,8 @@
     nothing
     blockc
     loopc
+    eval-string
+    implications
     ))
 
 (select-module kirjasto.työkalu)
@@ -66,10 +68,22 @@
                            (port-fd-dup! (standard-output-port) out)
                            (port-fd-dup! (standard-error-port) out))))
 
+(define (eval-string s)
+  (eval (string->symbol s)
+        (interaction-environment)))
 
 (define nothing
   (lambda ()
     (values)))
+
+
+;; http://people.csail.mit.edu/jhbrown/scheme/macroslides03.pdf
+;; http://valvallow.blogspot.jp/2010/05/implecations.html
+(define-syntax implications
+  (syntax-rules (=>)
+    ((_ (pred => body ...) ...)
+     (begin
+       (when pred body ...) ...))))
 
 
 ;; http://www.geocities.co.jp/SiliconValley-PaloAlto/7043/index.html#continuation

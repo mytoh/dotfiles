@@ -34,12 +34,12 @@
 
 (define (mount-mypassport)
   (mount "quatrevingtdix:/Volumes/MyPassport"
-         "/mnt/mypassport"))
+         "/nfs/mypassport"))
 
 (define (mount-deskstar)
   (mount "quatrevingtdix:/Volumes/Deskstar"
-         "/mnt/deskstar"))
+         "/nfs/deskstar"))
 
 (define (mount-quatre user)
   (mount (string-append "quatrevingtdix:/Users/" user)
-         "/mnt/quatre"))
+         "/nfs/quatre"))

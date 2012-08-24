@@ -17,8 +17,7 @@
   ; run processes
   (syntax-rules ()
     ((_ c1 )
-     (run-process c1 :wait #t)
-     )
+     (run-process c1 :wait #t))
     ((_ c1 c2 ...)
      (begin
        (run-process c1 :wait #t)
@@ -26,8 +25,7 @@
 
 
 (define (run-command-sudo command)
-  (run-process (append '(sudo) command) :wait #t)
-  )
+  (run-process (append '(sudo) command) :wait #t))
 
 (define (mkdir kansio)
   (if (not (file-exists? kansio))
