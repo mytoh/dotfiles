@@ -117,6 +117,7 @@
     (calvis         cKanren)
     (tlatsas       xcolors)
     (Raynes       fs)
+    (clojure      clojure-contrib)
     (webyrd        miniKanren)))
 
 ;; update git repository
@@ -127,12 +128,11 @@
         ((null? dirs)
          (display "update finished!\n"))
         (else
+          (when (file-is-directory? (car dirs))
           (display (colour-string 4 "=> "))
           (display (colour-string 3 (sys-basename (car dirs))))
           (newline)
-          (if (file-is-directory? (car dirs))
-            (run-process '(git pull) :wait #t :directory (car dirs))
-            #t)
+            (run-process '(git pull) :wait #t :directory (car dirs)))
           (newline)
           (loop (cdr dirs)))))))
 
