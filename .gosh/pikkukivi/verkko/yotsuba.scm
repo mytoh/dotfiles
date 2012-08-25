@@ -18,6 +18,7 @@
   (use kirjasto.väri) ; colour-string
   (use kirjasto.merkkijono)
   (use kirjasto.verkko)
+  (use clojure)
   )
 (select-module pikkukivi.verkko.yotsuba)
 
@@ -138,7 +139,7 @@
   (print (string-append "getting " (car restargs)))
   (let ((bd (car restargs))
         (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
-    (if (not (null? dirs))
+    (if-not (null? dirs)
       (for-each
         (lambda (d)
           (yotsuba-get-repeat (list bd d)))

@@ -26,7 +26,7 @@
                              (sys-basename
                                (path-sans-extension file))))))
                (make-directory* temp)
-               (unpack file temp)
+               (unpack (list file temp))
                (run-process `(feh -F -Z -r -q ,temp) :wait #t)
                (remove-directory* temp)))
             ((? file-is-regular? file)

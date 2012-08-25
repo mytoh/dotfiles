@@ -16,6 +16,7 @@
   (use kirjasto.komento.työkalu)
   (use kirjasto.väri)
   (use kirjasto.merkkijono)
+  (use clojure.fs)
   (require-extension (srfi 1 13))
   )
 (select-module pikkukivi.talikko)
@@ -111,17 +112,17 @@
 
 ; install {{{
 (define (install-package package)
-  (current-directory (build-path ports-directory package))
+  (with-cwd (build-path ports-directory package)
   (print (concat (colour-string colour-symbol ":: ")
                  (colour-string colour-message "Installing ")
-                 (colour-string colour-package package)))
-  (run-command-sudo '(make clean))
-  (run-command-sudo '(make config-recursive))
+                 (colour-string colour-package package))) 
+  (run-command-sudo '(make clean))  
+  (run-command-sudo '(make config-recursive))  
   (colour-command "sudo make install clean"
                   #/^(===>  )Patching (.*$)/   "[38;5;99m *[0m Applying patch \\2"
                   #/^===>/   "[38;5;39m>>>[0m"
                   #/^=>/   "[38;5;99m>>>[0m"
-                  #/\*\*\*.*$/    "[38;5;3m\\0[0m"))
+                  #/\*\*\*.*$/    "[38;5;3m\\0[0m")))
 ; }}}
 
 ; deinstall {{{
@@ -178,8 +179,8 @@
   (when (not (file-exists? index-file))
     (print (string-append (colour-string colour-symbol ":: ")
                           (colour-string colour-message "Fetching INDEX file")))
-    (current-directory ports-directory)
-    (run-command-sudo '(make fetchindex))))
+    (with-cwd ports-directory
+    (run-command-sudo '(make fetchindex)))))
 
 (define (search-package-by-name package)
   (fetch-index-file)

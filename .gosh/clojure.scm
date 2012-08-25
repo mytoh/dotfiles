@@ -5,6 +5,7 @@
   (use file.util)
   (extend clojure.fs)
   (export
+    if-not
     str
     condp
     comment
@@ -51,3 +52,10 @@
          result-expr
          #f)
        ...))))
+
+(define-syntax if-not
+  (syntax-rules ()
+    ((_ test then)
+     (if-not test then #f))
+    ((_ test then else)
+     (if (not test) then else))))

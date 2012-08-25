@@ -40,11 +40,5 @@
            (dest ,dir))
        (current-directory dest)
        ,@body
-       (current-directory cur))
-  )
+       (current-directory cur)))
 
-; (defmacro with-cwd
-;   "Execute body with a changed working directory."
-;   [cwd & body]
-;   `(binding [*cwd* (file ~cwd)]
-;      ~@body))

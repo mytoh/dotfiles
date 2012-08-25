@@ -7,7 +7,9 @@
   (use gauche.parseopt)
   (use util.match)
   (use file.util) ; directory-list, current-directory
-  (use kirjasto.väri))
+  (use kirjasto.väri)
+  (use clojure))
+
 (select-module pikkukivi.scm.ääliö)
 
 
@@ -159,7 +161,7 @@
   (let ((clone (lambda (url dirname) (run-process `(git clone ,url ,dirname) :wait #t))))
     (for-each
       (lambda (l)
-        (if (not (file-is-directory? (x->string (car l))))
+        (if-not (file-is-directory? (x->string (car l)))
           (clone (cadr l) (car l))
           #t))
       (repo-url-directory-list))
@@ -191,16 +193,16 @@
     *repos* ))
 
 (define (list-repos)
-  (map 
-  (^ (x) (cond
-           ((list? x)
-            (print
-            (string-append (colour-string 33 (x->string (car x)))
-                        ": "
-                        (colour-string 93 (x->string (cadr x))))))
-           (else
-             (print x))))
-  *repos*))
+  (map
+    (^ (x) (cond
+             ((list? x)
+              (print
+                (string-append (colour-string 33 (x->string (car x)))
+                               ": "
+                               (colour-string 93 (x->string (cadr x))))))
+             (else
+               (print x))))
+    *repos*))
 
 (define (usage status)
   (exit status "usage: ~a <command> <package-name>\n" *program-name*))
@@ -210,23 +212,21 @@
   (let-args args
     ((#f "h|help" (usage 0))
      . rest)
-    (let ((previous-directory (current-directory)))
-      (current-directory *gitdir*)
-      (match (car rest)
-        ;; commands
-        ((or "update" "up")
-         (begin
-           (print (string-append (colour-string 8 "updating ") "repositories"))
-           (update-gitdir)))
-        ("clean"
-         (clean-gitdir))
-        ("list"
-         (list-repos))
-        ("clone"
-         (begin
-           (print (string-append (colour-string 3 "cloning ") "repositories"))
-           (clone-gitdir)))
-        (_ (usage 1)))
-      (current-directory previous-directory)))
+    (with-cwd *gitdir*
+              (match (car rest)
+                ;; commands
+                ((or "update" "up")
+                 (begin
+                   (print (string-append (colour-string 8 "updating ") "repositories"))
+                   (update-gitdir)))
+                ("clean"
+                 (clean-gitdir))
+                ("list"
+                 (list-repos))
+                ("clone"
+                 (begin
+                   (print (string-append (colour-string 3 "cloning ") "repositories"))
+                   (clone-gitdir)))
+                (_ (usage 1)))))
   0)
 

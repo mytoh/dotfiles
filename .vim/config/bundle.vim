@@ -144,6 +144,7 @@ else
   NeoBundle 'shiracha/unite-related_files'
   NeoBundle 'osyo-manga/unite-homo'
   NeoBundle 'osyo-manga/unite-u-nya-'
+  NeoBundle 'osyo-manga/unite-quickfix'
   NeoBundle 'tsukkee/unite-tag'
   NeoBundle 'Sixeight/unite-grep'
   NeoBundle 'pasela/unite-webcolorname'
@@ -187,6 +188,7 @@ else
   NeoBundle 'sbl/scvim'
   " colorscheme {{{
   NeoBundle 'paulwib/vim-colorschemes'
+  NeoBundle 'w0ng/vim-hybrid'
   NeoBundle 'altercation/vim-colors-solarized'
   NeoBundle 'jelera/vim-gummybears-colorscheme'
   NeoBundle 'shawncplus/skittles_berry'
@@ -255,6 +257,8 @@ if neobundle#exists_not_installed_bundles()
   echomsg 'Not installed bundles : ' .
         \ string(neobundle#get_not_installed_bundle_names())
   echomsg 'Please execute ":NeoBundleInstall" command.'
+  echomsg 'installing bundle'
+  :NeoBundleInstall
   "finish
 endif
 

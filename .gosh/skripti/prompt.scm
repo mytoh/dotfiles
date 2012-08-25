@@ -5,6 +5,7 @@
 (use gauche.parseopt)
 (use util.match)
 (use file.util)
+(use clojure)
 (require-extension (srfi 13 98))
 
 (define (colour-string colour-number str)
@@ -80,7 +81,7 @@
         (git-darty (lambda ()
                      (let* ((p (run-process '(git diff --quiet HEAD) :wait #t))
                             (status (process-exit-status p)))
-                       (if (not (zero? status))
+                       (if-not (zero? status)
                          " ÷"
                          "")))))
     (string-concatenate

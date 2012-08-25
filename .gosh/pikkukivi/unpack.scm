@@ -19,9 +19,9 @@
 
 (define (rar-unpacker file . directory)
   (cond ((null? (car directory))
-         (run-process `(unrar x -ad ,file) :wait #t))
+         (run-process `(unrar x -ad -inul ,file) :wait #t))
     (else
-      (run-process `(unrar x -ad ,file ,(caar directory)) :wait #t))))
+      (run-process `(unrar x -ad -inul ,file ,(caar directory)) :wait #t))))
 
 (define (lha-unpacker file . diretory)
   (run-process `(lha xq ,file) :wait #t))

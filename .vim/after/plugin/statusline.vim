@@ -63,8 +63,8 @@ let s:statusline_mode_vimfiler_normal = 'Vf.normal'
 function! Statusmode()
   let curmode = mode()
   let is_unite = &filetype == 'unite' ? 1 : 0
-  let is_vimfiler = &filetype == 'vimfiler' ? 1 : 0 
-  let is_gosh_repl = &filetype == 'gosh-repl' ? 1 : 0 
+  let is_vimfiler = &filetype == 'vimfiler' ? 1 : 0
+  let is_gosh_repl = &filetype == 'gosh-repl' ? 1 : 0
   " unite
   if is_unite
     if curmode == 'i'
@@ -158,6 +158,49 @@ endfunction
 
 " active status {{{
 
+let s:segment = {}
+
+let s:segment.curpath  = join([
+      \ '%3*'. '%{fnamemodify(getcwd(),":~")}' . '%*',
+      \])
+
+let s:segment.curmode = join([
+      \  '%9*' . '%{Statusmode()}'. '%0*',
+      \])
+
+let s:segment.fileinfo = '%3*' .
+      \ join([
+        \  '%{&dictionary}',
+        \  '%<',
+        \  '%{&fileformat}',
+        \  '%{&fileencoding}',
+        \  '%{&filetype}',
+        \  '<',
+        \]) . '%0*'
+
+let s:segment.charcode = join([
+      \   '%6*' . '%{GetCharCode()}',
+      \])
+
+let s:segment.ruler = join([
+      \ '%7*',
+      \ '%3p%%',
+      \  '%c' . ',' . '%l/%L' . '%0*',
+      \])
+
+let s:segment.hahhah = join([
+      \ '%4*',
+      \ '%{g:HahHah()}' . '%*',
+      \])
+
+let s:segment.fugitive = join([
+      \ '%6*' . '%{fugitive#statusline()}' . '%0*',
+      \])
+
+let s:segment.syntastic = join([
+      \ '%7*' . '%{SyntasticStatuslineFlag()}' . '%0*',
+      \])
+
 function! SetActiveStatusLine()
   " setl stl=""
   " setl stl=%!MakeActiveStatusLine()
@@ -165,64 +208,22 @@ function! SetActiveStatusLine()
 endfunction
 function! MakeActiveStatusLine()
   " left
-  let path  = '%3*' . fnamemodify(getcwd(),':~') . '%*'
-  " let curmode  =  mode()
-  let curmode  =  Statusmode()
-  let fugitive = '%6*' . '%{fugitive#statusline()}' . '%0*'
 
   let left  = join([
-        \  '%9*',
-        \  curmode,
+        \  s:segment.curmode,
         \  '%2*',
         \  '%t',
-        \  path,
-        \  fugitive,
-        \  '%{SyntasticStatuslineFlag()}',
+        \  s:segment.curpath,
+        \  s:segment.fugitive,
+        \  s:segment.syntastic,
         \])
 
   " right
-  let fileinfo = {
-        \ 'dict': '%{&dictionary}',
-        \ 'format': '%{&fileformat}',
-        \ 'enc': '%{&fileencoding}',
-        \ 'type': '%{&filetype}',
-        \ 'separator': '<',
-        \}
-  let fileinfos = '%3*'.
-        \ join([
-        \  fileinfo.dict,
-        \  '%<',
-        \  fileinfo.format,
-        \  fileinfo.separator,
-        \  fileinfo.enc,
-        \  fileinfo.separator,
-        \   fileinfo.type,
-        \]) . '%0*'
-
-  let charcode = join([
-        \   '%6*',
-        \   '%{GetCharCode()}'
-        \])
-
-  let ruler = {
-        \ 'percent': '%3p%%',
-        \ 'curline': '%l/%L',
-        \ 'column': '%c',
-        \}
-  let rulers = '%7*' .
-        \ join([
-        \   ruler.percent,
-        \   ruler.column . ',' . ruler.curline,
-        \])
-        \ . '%0*'
-
-  let hahhah = '%4*' . '%{g:HahHah()}' . '%*'
-
   let right = join([
-        \   hahhah,
-        \   fileinfos,
-        \   charcode,
-        \   rulers,
+        \   s:segment.hahhah,
+        \   s:segment.fileinfo,
+        \   s:segment.charcode,
+        \   s:segment.ruler,
         \])
   return left . '%=' . right
 endfunction

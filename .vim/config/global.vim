@@ -154,7 +154,8 @@ set showfulltag
 " colors
 set t_Co=256
 set background=dark
-colorscheme 256-jungle
+" colorscheme 256-jungle
+colorscheme hybrid
 let g:molokai_original = 1
 
 " set mouse

@@ -15,6 +15,7 @@
   (use kirjasto.väri) ; colour-string
   (use kirjasto.merkkijono)
   (use kirjasto.verkko)
+  (use clojure)
   )
 (select-module pikkukivi.verkko.futaba)
 
@@ -75,7 +76,7 @@
                            (get-res (lambda (srv)
                                       (receive (a b c)
                                         (fget srv)
-                                        (if (not (string=? a "404")) srv #f))))
+                                        (if-not (string=? a "404") srv #f))))
                            (get-values (lambda (srv)
                                          (receive (a b c)
                                            (fget srv)
