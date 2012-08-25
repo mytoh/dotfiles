@@ -44,9 +44,9 @@
 ;; not full implementation
 (define-syntax condp
   (syntax-rules ()
-    ((_ pred expr 
-         (test-expr result-expr)
-         ...)
+    ((_ pred expr
+        (test-expr result-expr)
+        ...)
      (or
        (if (pred test-expr expr)
          result-expr

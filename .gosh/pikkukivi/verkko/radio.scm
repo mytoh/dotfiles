@@ -17,6 +17,11 @@
     (bbc3 "bbc radio 3" "http://www.bbc.co.uk/radio/listen/live/r3.asx")
     (bbc4 "bbc radio 4" "http://www.bbc.co.uk/radio/listen/live/r4.asx")
     (bbc6 "bbc radio 6" "http://www.bbc.co.uk/radio/listen/live/r6.asx")
+
+    ;; fin
+    (ylex "ylex" "http://mediau.yle.fi/liveylex?MSWMExt=.asf")
+    (ylex2 "ylex"  "http://10.1.1.86:80/liveylex?MSWMExt=.asf")
+
     (nhkr1 "NHK第一" "http://mfile.akamai.com/129931/live/reflector:46032.asx")
     (nhkr2   "NHK第二" "http://mfile.akamai.com/129932/live/reflector:46056.asx")
     (nhkfm  "NHK-FM" "http://mfile.akamai.com/129933/live/reflector:46051.asx")

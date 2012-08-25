@@ -118,6 +118,7 @@
     (tlatsas       xcolors)
     (Raynes       fs)
     (clojure      clojure-contrib)
+    (clojure      core.logic)
     (webyrd        miniKanren)))
 
 ;; update git repository
