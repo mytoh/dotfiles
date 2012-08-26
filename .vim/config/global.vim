@@ -44,21 +44,6 @@ function! vimrc.xrdb() dict
   endif
 endfunction
 
-function! vimrc.scheme()
-  setlocal lisp
-  setlocal cindent&
-  setlocal iskeyword=@,33,35-38,42-43,45-58,60-64,94,_,126,.
-  if executable('scmindent.scm')
-    if executable('racket')
-      setlocal equalprg=scmindent.scm
-    endif
-  endif
-  let g:vimshell_split_command = 'vsplit'
-  nnoremap <buffer><silent><LocalLeader>gi  :VimShellInteractive gosh<cr>
-  nnoremap <buffer><silent><LocalLeader>gs <S-v>:VimShellSendString<cr>
-  vmap     <buffer><silent><LocalLeader>gs :VimShellSendString<cr>
-endfunction
-
 function! vimrc.scheme_bufwritepost() dict
   silent! call vimrc.trimspacelisp()
   silent! call vimrc.trimspace()

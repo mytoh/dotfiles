@@ -7,6 +7,5 @@ augroup myautocommands
   autocmd bufread,bufnewfile *.kahua                   setlocal filetype=kahua.scheme
   autocmd bufread,bufnewfile *.leh                     setlocal filetype=scheme
   autocmd bufwritepost       {*.scm,*.scss}            call vimrc.scheme_bufwritepost()
-  autocmd filetype           scheme                    call vimrc.scheme()
 augroup end
 
