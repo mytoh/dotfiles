@@ -28,7 +28,7 @@ else
   " github repo {{{
   NeoBundle 'Shougo/neocomplcache', {'depends' :
         \ [ 'Shougo/neocomplcache-snippets-complete.git',
-        \   ['rstacruz/sparkup', {'rtp': 'vim'}],
+        \ ['rstacruz/sparkup', {'rtp': 'vim'}],
         \ ]}
   NeoBundle 'Shougo/vimfiler',
         \ {'depends' : 'Shougo/unite.vim' }

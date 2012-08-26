@@ -23,7 +23,3 @@
        (^ (in)
          (copy-port in (current-output-port)))))))
 
-(define (string-is-url? str)
-  (or ( #/^https?:\/\// str)
-    ( #/^http:\/\// str)))
-

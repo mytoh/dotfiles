@@ -8,4 +8,5 @@
     kirjasto.verkko.merkintä
     kirjasto.verkko.palvelin
     kirjasto.verkko.scm
+    kirjasto.verkko.työkalu
     ))
