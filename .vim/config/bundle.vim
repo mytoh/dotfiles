@@ -258,7 +258,7 @@ if neobundle#exists_not_installed_bundles()
         \ string(neobundle#get_not_installed_bundle_names())
   echomsg 'Please execute ":NeoBundleInstall" command.'
   echomsg 'installing bundle'
-  :NeoBundleInstall
+  ":NeoBundleInstall
   "finish
 endif
 
