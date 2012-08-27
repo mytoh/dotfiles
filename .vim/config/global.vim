@@ -20,12 +20,6 @@ function! vimrc.trimspace() dict
 endfunction
 " }}}
 
-function! vimrc.trimspacelisp() dict
-  " trim space for lisp file
-  silent! %s/(\s\+/(/
-  silent! %s/)\s\+)/))/
-  ''
-endfunction
 
 " vital {{{
 let vimrc.V  = vital#of('vital')
@@ -44,10 +38,6 @@ function! vimrc.xrdb() dict
   endif
 endfunction
 
-function! vimrc.scheme_bufwritepost() dict
-  silent! call vimrc.trimspacelisp()
-  silent! call vimrc.trimspace()
-endfunction
 
 " }}}
 
@@ -360,21 +350,7 @@ endfunc "}}}
 augroup myautocommands
   autocmd!
   autocmd bufenter           *                         if expand("%:p:h") !~ '^/tmp' | silent lcd %:p:h | endif
-  autocmd bufread,bufnewfile .tmux.conf                setl filetype=tmux
-  autocmd bufread,bufnewfile *.changelog               setl filetype=changelog
-  autocmd bufread,bufnewfile *.twmrc                   setl filetype=conf
-  autocmd bufread,bufnewfile .vimshrc,.vimrc.*         setl filetype=vim
-  autocmd bufread,bufnewfile ~/.xcolours/*             setl filetype=xdefaults
   autocmd bufread,bufnewfile ~/.xcolours/*             ColorHighlight
-  autocmd bufread,bufnewfile .mkshrc                   setl filetype=sh
-  autocmd bufread,bufnewfile {*stumpwmrc*,*sawfish/rc} setl filetype=lisp
-  autocmd bufread,bufnewfile *.fish                    setl filetype=fish
-  autocmd bufread,bufnewfile loader.conf.local         setl filetype=conf
-  autocmd bufread,bufnewfile {*.md,*.mkd,*.markdown}   set filetype=markdown
-  autocmd bufread,bufnewfile /usr/ports/UPDATING       setl filetype=changelog
-  autocmd bufread,bufnewfile *.mik                   setl filetype=xml
-  autocmd bufread,bufnewfile rc.conf.local             setl filetype=sh
-  autocmd bufread,bufnewfile *.mksh                    setl filetype=sh
   autocmd bufwritepost       .vimrc                    source ~/.vimrc
   autocmd bufwritepost       ~/.vim/config/bundle.vim  source ~/.vim/config/bundle.vim
   autocmd bufwritepost       .zshrc                    Silent !zcompile ~/.zshrc

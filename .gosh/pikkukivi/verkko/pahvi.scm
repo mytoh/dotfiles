@@ -13,6 +13,7 @@
   (use kirjasto.komento.työkalu)
   (use kirjasto.väri)
   (use kirjasto.merkkijono)
+  (use clojure) ; str
   )
 (select-module pikkukivi.verkko.pahvi)
 
@@ -20,7 +21,7 @@
 
 (define (get-post-page page-number tag)
   (receive (status head body)
-    (http-get "danbooru.donmai.us" (string-append "/post?page=" (number->string page-number) "&tags=" tag))
+    (http-get "danbooru.donmai.us" (str "/post?page=" (number->string page-number) "&tags=" tag))
     body))
 
 (define (parse-post-number-url body)
@@ -70,12 +71,12 @@
     1))
 
 (define (get-posts-all tag)
-  (print tag)
+  (print (str  "Tag: " (colour-string 33 tag)))
   (let ((last (x->number (parse-last-page-number (get-post-page 1 tag)))))
-    (print (string-append (colour-string 82 (number->string last))
+    (print (str (colour-string 82 (number->string last))
                           " pages found"))
     (dotimes (num last)
-      (print (string-append (colour-string 99 "getting page ") (colour-string 33 (number->string (+ num 1)))))
+      (print (str (colour-string 99 "getting page ") (colour-string 33 (number->string (+ num 1)))))
       (get-image (parse-post-number-url (get-post-page (+ num 1) tag))))))
 
 (define (usage status)
@@ -89,8 +90,7 @@
     (mkdir tag)
     (cd tag)
     (get-posts-all tag)
-    (cd ".."))
-  )
+    (cd "..")))
 
 
 

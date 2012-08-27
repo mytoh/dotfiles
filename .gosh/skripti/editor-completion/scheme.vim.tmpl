@@ -74,9 +74,9 @@ syn region schemeUnquote matchgroup=Delimiter start=",@#\[" end="\]" contains=AL
 " R5RS Scheme Functions and Syntax:
 
 if version < 600
-  set iskeyword=33,35-38,42,43,45-58,60-90,94,95,97-122,126,_
+  set iskeyword=33,35-38,42,43,45-58,60-90,94,95,97-122,126,_,.
 else
-  setlocal iskeyword=33,35-38,42,43,45-58,60-90,94,95,97-122,126,_
+  setlocal iskeyword=33,35-38,42,43,45-58,60-90,94,95,97-122,126,_,.
 endif
 
 set lispwords=

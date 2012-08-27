@@ -42,7 +42,7 @@
          (git-clone (cdr args)))
         ("st"
          (run-command `(git status)))
-        ((or"up" "pl")
+        ((or "up" "pl")
          (run-command '(git pull)))
         ("create"
          (git-create args))
@@ -51,6 +51,13 @@
          (run-command `(git remote -v)))
         ("co"
          (run-command `(git checkout ,@(cdr args))))
+         ;; github.com/zaiste/dotfiles
+         ("changes"
+          (run-command '(git log "--pretty=format:%Cred%h %Cgreen(%cr) %C(bold blue)<%cn>%Creset %s" --name-status)))
+         ("short"
+          (run-command '(git log "--pretty=format:%Cred%h %Cgreen(%cr)\t %C(bold blue):%cn:%Creset %s")))
+         ("lg"
+          (run-command '(git log --graph "--pretty=format:%Cred%h -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue):%an:%Creset" --abbrev-commit --date=relative)))
         (_  (run-command `(git ,@args)))))))
 
 (define (svn args)

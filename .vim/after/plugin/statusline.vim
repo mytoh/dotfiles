@@ -173,14 +173,16 @@ let s:segment.fileinfo = '%3*' .
         \  '%{&dictionary}',
         \  '%<',
         \  '%{&fileformat}',
-        \  '%{&fileencoding}',
-        \  '%{&filetype}',
         \  '<',
+        \  '%{&fileencoding}',
+        \  '<',
+        \  '%{&filetype}',
         \]) . '%0*'
 
-let s:segment.charcode = join([
-      \   '%6*' . '%{GetCharCode()}',
-      \])
+let s:segment.charcode = '%6*' .
+        \ join([
+        \  '%{GetCharCode()}',
+        \])
 
 let s:segment.ruler = join([
       \ '%7*',

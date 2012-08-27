@@ -2,6 +2,7 @@
  (export
     if-not
     str
+    join
     condp
     comment
     slurp
@@ -14,7 +15,8 @@
   (use file.util)
   (use chicken.clojurian)
 
-  (extend clojure.fs)
+  (extend clojure.fs
+          clojure.string)
   )
 (select-module clojure)
 
@@ -44,9 +46,8 @@
 
 (define-syntax comment
   (syntax-rules ()
-    ( (_ x ...)
+    ((_ x ...)
      (values))))
-
 
 ;; not full implementation
 (define-syntax condp
@@ -58,7 +59,7 @@
        (if (pred test-expr expr)
          result-expr
          #f)
-       ...))))
+       ...))))   
 
 (define-syntax if-not
   (syntax-rules ()

@@ -20,8 +20,6 @@ syntax enable
  if isdirectory(expand('~/.vim/config'))
    source ~/.vim/config/global.vim
    source ~/.vim/config/plugins.vim
-   source ~/.vim/config/scheme.vim
-   " source ~/.vim/config/statusline.vim
    source ~/.vim/config/tabpage.vim
  endif
 

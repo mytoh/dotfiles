@@ -15,6 +15,7 @@
   (use util.list) ;take*
   (use file.util)
   (require-extension (srfi 1 13)) ;count
+  (use clojure)
   )
 (select-module pikkukivi.ls)
 
@@ -214,49 +215,52 @@
     ))
 
 
-; ;;colorscheme trapd00r
-; (define *colours*
-;   (vector
-;     237
-;     131
-;     107
-;     75
-;     240
-;     209
-;     185
-;     216
-;     220
-;     208
-;     243
-;     161
-;     240
-;     025
-;     248
-;     196
-;     ))
+;;colorscheme trapd00r
+(define *trapd00r*
+  (vector
+    237
+    131
+    107
+    75
+    240
+    209
+    185
+    216
+    220
+    208
+    243
+    161
+    240
+    025
+    248
+    196))
+
 ;colorscheme early
-; (define *colours*
-;   (vector
-;     233
-;     245
-;     250
-;     201
-;     239
-;     209
-;     185
-;     216
-;     244
-;     254
-;     243
-;     241
-;     240
-;     239
-;     237
-;     220
-;     ))
+(define *early*
+  (vector
+    233
+    245
+    250
+    201
+    239
+    209
+    185
+    216
+    244
+    254
+    243
+    241
+    240
+    239
+    237
+    220
+    ))
+
+
+(define *colours* *trapd00r*)
 
 ;colorscheme normal
-(define *colours*
+(define *normal*
   (vector
     208
     197
@@ -275,7 +279,7 @@
     236
     215
     ))
-; 
+
 ;;colorscheme greyscale
 ; (define *colours*
 ;   (vector
@@ -311,17 +315,17 @@
   (map convert-jp-filename
        (directory-list directory :children? #t :add-path? #t)))
 
-(define (ls-make-colour colour str)
+(define (ls-make-colour colour stg)
   (cond
     ((<= colour (vector-length *colours*))
      (let1 c  (ref *colours* colour #f)
        ((lambda (colour s)
-          (string-append "[38;5;" (number->string colour) "m"  (x->string s) "[0m"))
-        c str)))
+          (str "[38;5;" colour "m"  s "[0m"))
+        c stg)))
     (else
       ((lambda (colour s)
-         (string-append "[38;5;" (number->string colour) "m"  (x->string s) "[0m"))
-       colour str))))
+         (str "[38;5;" colour "m"  s "[0m"))
+       colour stg))))
 
 (define (colour-filename name type . ecolour)
   (cond
@@ -330,21 +334,19 @@
        (match type
          ('regular
           (if (file-is-executable? name)
-                      (string-concatenate  `(,(ls-make-colour e name) ,(ls-make-colour 2 "*")))
+                      (str  (ls-make-colour e name) (ls-make-colour 2 "*"))
                       (ls-make-colour e name)))
          ('directory
-          (string-append (ls-make-colour e name) (ls-make-colour 12 "/")))
+          (str (ls-make-colour e name) (ls-make-colour 12 "/")))
          ('symlink
-          (string-append (ls-make-colour e name) (ls-make-colour 2 "@")))
+          (str (ls-make-colour e name) (ls-make-colour 2 "@")))
          (_        (ls-make-colour e name)))))
     (else
       (match type
         ('regular
          (if (file-is-executable? name)
                        #`",(ls-make-colour 4 name),(ls-make-colour 2 \"*\")"
-                       (colour-normal-file name)
-                       ; (ls-make-colour 14 name)
-                       ))
+                       (colour-normal-file name)))
         ('directory
          #`",(ls-make-colour 1 name),(ls-make-colour 12 \"/\")")
         ('character
@@ -367,8 +369,7 @@
       ((null? colour)  
       (ls-make-colour 14 name ))
       (else
-    (ls-make-colour (cadar colour) name))  
-      )))
+    (ls-make-colour (cadar colour) name)))))
 
 
 ;; componets for display {{{
@@ -382,10 +383,10 @@
       ((symlink)  (cond
                     (extension
                       (if-let1 ext (ref *extension-colours* (string->symbol extension) #f)
-                        (string-concatenate `(,(colour-filename file type ext) " -> " ,(ls-make-colour 10 realname)))
-                        (string-concatenate `(,(colour-filename file type) " -> " ,(ls-make-colour 10 realname)))))
+                        (str (colour-filename file type ext) " -> " (ls-make-colour 10 realname))
+                        (str (colour-filename file type) " -> " (ls-make-colour 10 realname))))
                     (else
-                      (string-concatenate `(,(colour-filename file type) " -> " ,(ls-make-colour 10 realname))))))
+                      (str (colour-filename file type) " -> " (ls-make-colour 10 realname)))))
       (else (cond
               (extension
                 (if-let1 ext (ref  *extension-colours* (string->symbol extension) #f)
@@ -418,27 +419,27 @@
                                   lst))
                           "")))
     (match type
-      ('directory (string-append (ls-make-colour 1 "d") p))
-      ('block     (string-append (ls-make-colour 2 "b") p))
-      ('character (string-append (ls-make-colour 3 "c") p))
-      ('symlink   (string-append (ls-make-colour 4 "l") p))
-      ('fifo      (string-append (ls-make-colour 6 "p") p))
-      ('socket    (string-append (ls-make-colour 7 "s") p))
-      (_          (string-append (ls-make-colour 0 "-") p)))))
+      ('directory (str (ls-make-colour 1 "d") p))
+      ('block     (str (ls-make-colour 2 "b") p))
+      ('character (str (ls-make-colour 3 "c") p))
+      ('symlink   (str (ls-make-colour 4 "l") p))
+      ('fifo      (str (ls-make-colour 6 "p") p))
+      ('socket    (str (ls-make-colour 7 "s") p))
+      (_          (str (ls-make-colour 0 "-") p)))))
 
 (define (print-size file stat)
   (let* ((filesize (ref stat 'size))
          (size (cond
                  ((> filesize 1073741824)
-                  (string-append (ls-make-colour 7 (number->string (truncate (/ (/ (/ filesize 1024) 1024) 1024)))) (ls-make-colour 3 "G")))
+                  (str (ls-make-colour 7 (truncate (/ (/ (/ filesize 1024) 1024) 1024))) (ls-make-colour 3 "G")))
                  ((> filesize 1048576)
-                  (string-append (ls-make-colour 7  (number->string (truncate (/ (/ filesize 1024) 1024)))) (ls-make-colour 7 "M")))
+                  (str (ls-make-colour 7  (truncate (/ (/ filesize 1024) 1024))) (ls-make-colour 7 "M")))
                  ((> filesize 1024)
-                  (string-append (ls-make-colour 7  (number->string  (truncate (/ filesize 1024)))) (ls-make-colour 2 "K")))
+                  (str (ls-make-colour 7  (truncate (/ filesize 1024))) (ls-make-colour 2 "K")))
                  ((< filesize 1024)
-                  (string-append (ls-make-colour 7  (number->string filesize)) (ls-make-colour 14 "B")))
+                  (str (ls-make-colour 7  filesize) (ls-make-colour 14 "B")))
                  (else
-                  (string-append (ls-make-colour 7  (number->string filesize)) (ls-make-colour 14 "B")))
+                  (str (ls-make-colour 7  filesize) (ls-make-colour 14 "B")))
                  )))
     (format "~35@a"
             size)))

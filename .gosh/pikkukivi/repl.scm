@@ -3,12 +3,14 @@
   (extend gauche.interactive)
   (export
     repl
+    info
     )
   (use file.util)
   (use util.list)
   (use util.match)
   (use srfi-1)
   (use gauche.reload)
+  (use gauche.interactive.info)
   (use kirjasto.väri) ; colour-string
   )
 (select-module pikkukivi.repl)
@@ -22,6 +24,29 @@
     (true   . 4)
     (false  . 1)
     ))
+
+
+;; http://d.hatena.ne.jp/teppey/20120826/1345996327
+;; thanks teppey
+(define-macro (info fn)
+  (define (%info fn)
+    (with-module gauche.interactive.info
+      (or (and-let* ([string? *pager*]
+                     [orig    *pager*]
+                     [alt (case (string->symbol (sys-basename *pager*))
+                            [(more) (^p (list orig "-p" #`"+/^ --.+: ,p"))]
+                            [(less) (^p (list orig "-p" #`"^ --.+: ,p"))]
+                            [(lv)   (^p (list orig #`"+/^ --.+: ,p"))]
+                            [else #f])])
+            (dynamic-wind
+              (^[] (set! *pager* (alt (regexp-quote (x->string fn)))))
+              (^[] (info fn))
+              (^[] (set! *pager* orig)))
+            (values))
+        (info fn))))
+  (let1 fn (if (pair? fn) (cadr fn) fn)
+    `(,%info ',fn)))
+
 
 ;; reader
 (define reader
