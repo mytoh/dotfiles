@@ -119,6 +119,7 @@
     (Raynes       fs)
     (clojure      clojure-contrib)
     (clojure      core.logic)
+    (sgrove       tahila)
     (webyrd        miniKanren)))
 
 ;; update git repository
