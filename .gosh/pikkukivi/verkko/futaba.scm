@@ -39,7 +39,7 @@
 (define (parse-img-url line board)
   (rxmatch->string
     (string->regexp
-      (string-append
+      (str
         "http\:\/\/(\\w+)\\.2chan\\.net\/(\\w+)\/"
         board
         "\/src\/[^\"]+"))
@@ -49,8 +49,8 @@
   (when (string? match)
     (swget match)))
 
-(define (get-img str board)
-  (call-with-input-string str
+(define (get-img html board)
+  (call-with-input-string html
                           (lambda (in)
                             (port-for-each
                               (lambda (line)
@@ -64,8 +64,8 @@
   (let-values (((status headers body)
                 (let* ((bd board)
                        (fget (lambda (server)
-                               (http-get (string-append server ".2chan.net")
-                                         (string-append "/" board "/res/" td ".htm")))))
+                               (http-get (str server ".2chan.net")
+                                         (str "/" board "/res/" td ".htm")))))
                   (match bd
                     ("l" ;二次元壁紙
                      (fget  "dat" ))
@@ -99,7 +99,7 @@
                html)))
       (else  #f))))
 
-(define (futaba-get args )
+(define (futaba-get arg)
   (let* ((board (car args))
          (thread (cadr args))
          (html (get-html board thread)))
@@ -111,9 +111,9 @@
        (get-img html board)
        (cd ".."))
       (else
-        (print (colour-string 237 (string-append thread "'s gone")))))))
+        (print (colour-string 237 (str thread "'s gone")))))))
 
-(define (futaba-get-all args )
+(define (futaba-get-all arg)
   (let ((board (car args))
         (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
     (cond
@@ -122,7 +122,7 @@
          (lambda (d)
            (futaba-get (list board d)))
          dirs)
-       (run-process `(notify-send ,(string-append "futaba " board  " fetch finished"))))
+       (run-process `(notify-send ,(str "futaba " board  " fetch finished"))))
       (else  (print "no directories")))))
 
 (define (futaba-get-repeat args)

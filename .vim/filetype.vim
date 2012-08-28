@@ -12,6 +12,7 @@ augroup filetypedetect
   autocmd! bufread,bufnewfile *.leh                     setfiletype scheme
 
   autocmd bufread,bufnewfile .tmux.conf                setfiletype tmux
+  autocmd bufread,bufnewfile *.tmux                    setfiletype tmux
   autocmd bufread,bufnewfile *.changelog               setfiletype changelog
   autocmd bufread,bufnewfile *.twmrc                   setfiletype conf
   autocmd bufread,bufnewfile .vimshrc,.vimrc.*         setfiletype vim

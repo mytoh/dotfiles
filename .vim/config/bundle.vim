@@ -129,6 +129,9 @@ else
   NeoBundle 'github:nefo-mi/nyan-modoki.vim'
   NeoBundle 'github:coderifous/textobj-word-column.vim'
   NeoBundle 'github:spolu/dwm.vim'
+  NeoBundle 'sherlock.vim'
+  " tmux
+  NeoBundle 'github:peterhoeg/vim-tmux'
   " NeoBundle 'github:anekos/runes-vim'
   "unite
   NeoBundle 'github:Shougo/unite.vim'
@@ -151,6 +154,7 @@ else
   NeoBundle 'github:tsukkee/unite-help'
   NeoBundle 'github:t9md/vim-unite-ack'
   NeoBundle 'github:Shougo/unite-ssh'
+  NeoBundle 'github:hrsh7th/vim-unite-vcs'
   " syntax
   "c
   NeoBundle 'github:cg433n/better-c'
@@ -173,6 +177,7 @@ else
   "javascript
   NeoBundle 'github:jelera/vim-javascript-syntax'
   NeoBundle 'github:teramako/jscomplete-vim'
+  NeoBundle 'jsbeautify'
   " css
   NeoBundle 'github:hail2u/vim-css3-syntax'
   NeoBundle 'github:skammer/vim-css-color'
@@ -186,6 +191,8 @@ else
   NeoBundle 'github:msanders/cocoa.vim'
   " supercollider
   NeoBundle 'github:sbl/scvim'
+  " brainfuck
+  NeoBundle 'brainfuck-syntax'
   " colorscheme {{{
   NeoBundle 'github:paulwib/vim-colorschemes'
   NeoBundle 'github:w0ng/vim-hybrid'
@@ -199,6 +206,8 @@ else
   NeoBundle 'github:chriskempson/vim-tomorrow-theme'
   NeoBundle 'github:sjl/badwolf'
   NeoBundle 'github:nanotech/jellybeans.vim'
+  NeoBundle 'github:Lokaltog/vim-distinguished'
+  NeoBundle 'github:zachwill/github.vim'
   NeoBundle 'xoria256.vim'
   NeoBundle 'wombat256.vim'
   NeoBundle 'void'

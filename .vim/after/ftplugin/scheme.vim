@@ -12,14 +12,12 @@ function! s:trimspacelisp()
   " trim space for lisp file
   silent! %s/(\s\+/(/
   silent! %s/)\s\+)/))/
-  silent! %s/\w\s\+)$/)/
+  silent! %s/\(\w\)\s\+\()\+\)$/\1\2/
   silent! %s/\s\+$//
   ''
 endfunction
 
-aug myscheme
 autocmd! bufwritepost       *.scm            call s:trimspacelisp()
-aug END
 
 setlocal lisp
 setlocal cindent&
@@ -29,6 +27,10 @@ if executable('racket')
 setlocal equalprg=scmindent.scm
 endif
 endif
+
+" paredit
+let g:paredit_mode = 0
+
 let g:vimshell_split_command = 'vsplit'
 nnoremap <buffer><silent><LocalLeader>gi  :VimShellInteractive gosh<cr>
 nnoremap <buffer><silent><LocalLeader>gs <S-v>:VimShellSendString<cr>

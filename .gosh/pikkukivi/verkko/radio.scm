@@ -8,7 +8,8 @@
   (use file.util)
   (require-extension (srfi 1 13))    ; iota
   (use kirjasto.merkkijono)
-  (use kirjasto.väri))
+  (use kirjasto.väri)
+  (use clojure))
 (select-module pikkukivi.verkko.radio)
 
 (define station-list
@@ -203,7 +204,7 @@
        '())
       (else
         (print
-          (string-append
+          (str
             (colour-string
               123
               (symbol->string (car (car st))))

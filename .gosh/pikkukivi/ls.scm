@@ -5,8 +5,7 @@
 
 (define-module pikkukivi.ls
   (export
-    ls
-    )
+    ls)
   (use gauche.parseopt)
   (use gauche.process)
   (use gauche.sequence) ;remove
@@ -15,8 +14,7 @@
   (use util.list) ;take*
   (use file.util)
   (require-extension (srfi 1 13)) ;count
-  (use clojure)
-  )
+  (use clojure))
 (select-module pikkukivi.ls)
 
 (define *extension-colours*
@@ -300,7 +298,7 @@
 ;     236
 ;     242
 ;     ))
-; 
+;
 
 
 
@@ -364,9 +362,9 @@
 (define (colour-normal-file name)
   (let ((colour (filter
                   (lambda (r) ((string->regexp (car r)) name))
-                  *normal-file-colours*) ))
+                  *normal-file-colours*)))
     (cond
-      ((null? colour)  
+      ((null? colour)
       (ls-make-colour 14 name ))
       (else
     (ls-make-colour (cadar colour) name)))))
@@ -447,9 +445,9 @@
 
 (define-constant *delimiters*
     (vector
-    (ls-make-colour 0 "├")  
-    (ls-make-colour 0 "┤")  
-    (ls-make-colour 0 "│")) 
+    (ls-make-colour 0 "├")
+    (ls-make-colour 0 "┤")
+    (ls-make-colour 0 "│"))
   )
 (define (print-delimiter num)
   (vector-ref *delimiters* (- num 1)))
@@ -474,7 +472,7 @@
 (define (print-time file stat)
   (let* ((curtime (sys-time))
         (file-time (file-ctime file))
-        (delta (- curtime file-time) ))
+        (delta (- curtime file-time)))
     (cond
       ;; sec
       ((< delta 10)

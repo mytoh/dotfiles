@@ -23,7 +23,7 @@
 (select-module pikkukivi.verkko.yotsuba)
 
 
-(define (usage )
+(define (usage)
   (print-strings
     '("Usage: yotsuba board thread"
       "  option)"
@@ -59,7 +59,7 @@
     (lambda (url)
       ;; download indivisual image
       (fetch
-        (string-append
+        (str
           "http:"
           url)))
     (delete-duplicates
@@ -73,7 +73,7 @@
                     "<\/?(?:img)[^>]*>")))))))
 
 (define (get-html bd td)
-  (let-values (((status headers body )
+  (let-values (((status headers body)
                 (http-get  "boards.4chan.org"
                            (string-concatenate
                              `("/" ,(x->string bd) "/res/"  ,(x->string td))))))
@@ -87,7 +87,7 @@
       (else
         (ces-convert body "*jp" "utf-8")))))
 
-(define (yotsuba-get restargs )
+(define (yotsuba-get restargs)
   (let* ((board (car restargs))
          (thread (cadr restargs))
          (html (get-html board thread)))
@@ -101,12 +101,12 @@
       (else
         (print (colour-string
                  237
-                 (string-append
+                 (str
                    thread
                    "'s gone")))))))
 
 
-(define (yotsuba-get-all restargs )
+(define (yotsuba-get-all restargs)
   (let ((bd (car restargs))
         (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
     (cond
@@ -115,12 +115,13 @@
          (lambda (d)
            (yotsuba-get (list bd d)))
          dirs)
-       (run-process `(notify-send ,(string-append bd " fetch finished"))))
+       (print (str (colour-string 33 bd) " fetch finished"))
+       )
       (else
         (print "no directories")))))
 
 
-(define (yotsuba-get-repeat restargs )
+(define (yotsuba-get-repeat restargs)
   (let* ((board (car restargs))
          (thread (cadr restargs))
          (html (get-html board thread)))
@@ -135,7 +136,7 @@
         #t))))
 
 
-(define (yotsuba-get-repeat-all restargs )
+(define (yotsuba-get-repeat-all restargs)
   (print (string-append "getting " (car restargs)))
   (let ((bd (car restargs))
         (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
@@ -162,7 +163,7 @@
          (yotsuba-get-repeat-all restargs)))
       (repeat
         (loop-forever
-          (yotsuba-get-repeat restargs))  
+          (yotsuba-get-repeat restargs))
         (print "------------"))
       (all
         (yotsuba-get-all restargs))
