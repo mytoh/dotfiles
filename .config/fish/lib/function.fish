@@ -108,6 +108,10 @@ function take
 	cd $argv
 end
 
+function openports
+nc -z 127.0.0.1 1-10000
+end
+
 function load_lol_aliases
         # taken from oh-my-zsh
         # Source: http://aur.archlinux.org/packages/lolbash/lolbash/lolbash.sh
