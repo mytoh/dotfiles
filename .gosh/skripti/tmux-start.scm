@@ -6,9 +6,9 @@
 (use util.match)
 (use srfi-98)
 
-(define (new-session session window-name . options)
-  (when (not (has-sessin? session))
-    (run-process `(tmux new-session -d -s ,session -n ,window-name ,@options) :wait #t)))
+(define (new-session session window-name . command)
+  (when (not (has-session? session))
+    (run-process `(tmux new-session -d -s ,session -n ,window-name ,@command) :wait #t)))
 
 (define (new-window session window-number window-name . command)
   (run-process `(tmux new-window
@@ -19,7 +19,7 @@
 (define (attach-session session)
   (run-process `(tmux -u2 attach-session -t ,session) :wait #t))
 
-(define  (has-sessin? session)
+(define  (has-session? session)
   (let* ((p (run-process `(tmux -q has-session -t ,session) :wait #t :output :null :error :null))
          (status (process-exit-status p)))
     (if (zero? status)
@@ -38,7 +38,7 @@
             (shell (get-environment-variable "SHELL")))
         (cond
           ; session exists
-          ((has-sessin? main-session)
+          ((has-session? main-session)
            (attach-session main-session))
           ; session not exists
           (else
