@@ -41,9 +41,9 @@
 (define (parse-img line board)
   (rxmatch->string
     (string->regexp
-      (string-concatenate `("\\/\\/images\\.4chan\\.org\\/"
-                            ,(x->string  board)
-                            "\\/src\\/[^\"]+")))
+      (str "\\/\\/images\\.4chan\\.org\\/"
+           (x->string  board)
+           "\\/src\\/[^\"]+"))
     line))
 ;; "
 
@@ -59,9 +59,7 @@
     (lambda (url)
       ;; download indivisual image
       (fetch
-        (str
-          "http:"
-          url)))
+        (str "http:" url)))
     (delete-duplicates
       (remove not
               (map
@@ -75,8 +73,7 @@
 (define (get-html bd td)
   (let-values (((status headers body)
                 (http-get  "boards.4chan.org"
-                           (string-concatenate
-                             `("/" ,(x->string bd) "/res/"  ,(x->string td))))))
+                           (str "/" (x->string bd) "/res/"  (x->string td)))))
     (cond
       ((string=? status "404")
        #f)
@@ -141,11 +138,11 @@
   (let ((bd (car restargs))
         (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
     (if-not (null? dirs)
-      (for-each
-        (lambda (d)
-          (yotsuba-get-repeat (list bd d)))
-        dirs)
-      (print "no directories"))))
+            (for-each
+              (lambda (d)
+                (yotsuba-get-repeat (list bd d)))
+              dirs)
+            (print "no directories"))))
 
 
 

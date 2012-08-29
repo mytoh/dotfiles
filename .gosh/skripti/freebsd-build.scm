@@ -1,5 +1,6 @@
 (use gauche.process)
 (use file.util)
+(use util.match)
 (require-extension (srfi 13))
 
 
@@ -14,8 +15,7 @@
              (print
                (regexp-replace* in
                                 ?regexp ?string
-                                ...
-                                )))
+                                ...)))
            read-line))))))
 
 (define (process command)
@@ -30,8 +30,7 @@
                   #/\/(\w*\.c)/  "/[38;5;68m\\1[0m"
                   #/(\w*\.o)/  "[38;5;148m\\1[0m"
                   #/(\w*\.(S|s)o)/  "[38;5;28m\\1[0m"
-                  #/(\w*\.S)/  "[38;5;28m\\1[0m"
-                  )
+                  #/(\w*\.S)/  "[38;5;28m\\1[0m")
   (print (string-append "[38;5;218m" "-------------" "[0m"))
   (newline)
   (print command)
@@ -39,28 +38,18 @@
     (string-concatenate
       '("[38;5;80m" "------------" "[0m" ))))
 
-(define (after)
-  (print
-  "
-      # reboot
-        -- single user mode ---
-      # mount -u /
-      # mount -a -t ufs
-      # mergemaster -p
-      # cd /usr/src
-      # make installworld
-      # yes y | make delete-old
-      # mergemaster
-      # reboot
-      # mount -u /
-      # mount -a -t ufs
-      # cd /usr/src
-      # make delete-old-libs
-") )
+(define (second)
+      (process "mount -u /" )
+      (process "mount -a -t ufs" )
+      (process "mergemaster -p" )
+      (current-directory "/usr/src")
+      (process "make installworld" )
+      (process "yes y | make delete-old" )
+      (process "mergemaster" )
+      (print "please reboot")
+)
 
-
-
-(define (main args)
+(define (first)
   (current-directory "/usr/src")
  (when (file-exists? "/usr/obj")
    (process "sudo make cleandir")
@@ -68,5 +57,21 @@
    (process "sudo rm -rfv /usr/obj"))
  (process "sudo make buildworld")
   (process "sudo make buildkernel")
-  (process "sudo make installkernel")
-  (after))
+  (process "sudo make installkernel"))
+
+
+
+  (print
+  "
+      # reboot
+      # mount -u /
+      # mount -a -t ufs
+      # cd /usr/src
+      # make delete-old-libs
+")
+
+(define (main args)
+  (match (cdr args)
+    ("first"
+     (first))
+    ))

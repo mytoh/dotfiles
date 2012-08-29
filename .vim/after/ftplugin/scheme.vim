@@ -29,7 +29,7 @@ endif
 endif
 
 " paredit
-let g:paredit_mode = 0
+let g:paredit_mode = 1
 
 let g:vimshell_split_command = 'vsplit'
 nnoremap <buffer><silent><LocalLeader>gi  :VimShellInteractive gosh<cr>

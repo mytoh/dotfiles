@@ -19,6 +19,7 @@ augroup filetypedetect
   autocmd bufread,bufnewfile ~/.xcolours/*             setfiletype xdefaults
   autocmd bufread,bufnewfile {*stumpwmrc*,*sawfish/rc} setfiletype lisp
   autocmd bufread,bufnewfile *.fish                    setfiletype fish
+  autocmd bufread,bufnewfile *.fish-theme              setfiletype fish
   autocmd bufread,bufnewfile loader.conf.local         setfiletype conf
   autocmd bufread,bufnewfile {*.md,*.mkd,*.markdown}   setfiletype markdown
   autocmd bufread,bufnewfile /usr/ports/UPDATING       setfiletype changelog

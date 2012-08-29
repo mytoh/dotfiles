@@ -10,10 +10,9 @@
   (when (not (has-session? session))
     (run-process `(tmux new-session -d -s ,session -n ,window-name ,@command) :wait #t)))
 
-(define (new-window session window-number window-name . command)
+(define (new-window session window-name . command)
   (run-process `(tmux new-window
                       -d
-                      -t ,(string-append  session ":" (number->string window-number))
                       -n ,window-name ,@command) :wait #t))
 
 (define (attach-session session)
@@ -44,19 +43,19 @@
           (else
             ;; create main session
             (new-session main-session "main")
-            (new-window main-session 1 "vim" "vim")
-            (new-window main-session 2 "w3m" "w3m google.com")
+            (new-window main-session  "vim" "vim")
+            (new-window main-session  "w3m" "w3m google.com")
 
             ;; create second session
-            (new-session second-session "futaba")
-            (new-window  second-session 1 "4ch" shell)
-            (new-window  second-session 2 "danbooru" shell)
-            (new-window  second-session 3 "rtorrent" shell)
+            (new-session second-session "futaba" )
+            (new-window  second-session  "4ch" shell)
+            (new-window  second-session  "danbooru" shell)
+            (new-window  second-session  "rtorrent" shell)
             ; (new-window  second-session "rtorrent" "rtorrent")
 
             ;; create third session
             (new-session third-session "servers")
-            (new-window  third-session 1 "2ch" "ssh mona@2ch.homelinux.org")
+            (new-window  third-session  "2ch" "ssh mona@2ch.homelinux.org")
 
             ; attach main session
             (attach-session main-session)))))))
