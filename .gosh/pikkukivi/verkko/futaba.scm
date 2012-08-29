@@ -14,8 +14,8 @@
   (use kirjasto.työkalu)
   (use kirjasto.väri) ; colour-string
   (use kirjasto.merkkijono)
-  (use kirjasto.verkko)
   (use clojure)
+  (require-extension (srfi 1))
   )
 (select-module pikkukivi.verkko.futaba)
 
@@ -45,18 +45,41 @@
         "\/src\/[^\"]+"))
     line))
 
-(define (fetch match)
-  (when (string? match)
-    (swget match)))
 
 (define (get-img html board)
-  (call-with-input-string html
-                          (lambda (in)
-                            (port-for-each
-                              (lambda (line)
-                                (let ((match (parse-img-url line board)))
-                                  (fetch match)))
-                              (cut read-line in #t)))))
+  (let ((image-url-list (remove not
+                  (call-with-input-string html
+                    (lambda (in)
+                      (port-map
+                        (lambda (line)
+                          (let ((m (parse-img-url line board)))
+                            m))
+                        (cut read-line in #t)))))))
+    (let ((got-images (remove not
+                              (map (lambda (url) (fetch url))
+                                   image-url-list))))
+      (match (length got-images)
+        (0 (newline))
+        (1 (print (str " " (colour-string 49 (number->string (length got-images)))
+                    " new file")))
+        (_ (print (str " " (colour-string 49 (number->string (length got-images)))
+                    " new files")))))))
+
+(define (fetch uri)
+  (when (string? uri)
+  (let-values (((scheme user-info hostname port-number path query fragment)
+                (uri-parse uri)))
+    (let* ((file (receive (a fname ext)
+                   (decompose-path (whitespace->dash path))
+                   #`",|fname|.,|ext|"))
+           (flusher (lambda (s h)  #t)))
+      (if (not (file-is-readable? file))
+        (call-with-output-file
+          file
+          (cut http-get hostname path
+            :sink <> :flusher flusher))
+        #f)))))
+
 
 
 
@@ -99,13 +122,13 @@
                html)))
       (else  #f))))
 
-(define (futaba-get arg)
+(define (futaba-get args)
   (let* ((board (car args))
          (thread (cadr args))
          (html (get-html board thread)))
     (cond
       ((string? html)
-       (print (colour-string 4 thread))
+       (display (colour-string 4 thread))
        (mkdir thread)
        (cd thread)
        (get-img html board)
@@ -113,7 +136,7 @@
       (else
         (print (colour-string 237 (str thread "'s gone")))))))
 
-(define (futaba-get-all arg)
+(define (futaba-get-all args)
   (let ((board (car args))
         (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
     (cond
@@ -131,7 +154,7 @@
          (html (get-html board thread)))
     (cond
       ((string? html)
-       (print (colour-string 4 thread))
+       (display (colour-string 4 thread))
        (mkdir thread)
        (cd thread)
        (get-img html board)
@@ -139,8 +162,10 @@
       (else  #t))))
 
 (define (futaba-get-repeat-all args)
+  (loop-forever
     (let ((board (car args))
           (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
+      (print (str "Board " (colour-string 229 board)))
       (cond
         ((not (null? dirs))
          (for-each
@@ -148,7 +173,7 @@
              (futaba-get-repeat (list board d)))
            dirs))
         (else (print "no directories")))
-      (print (colour-string 237 "----------"))))
+      (print (colour-string 237 "----------")))))
 
 (define (futaba args)
   (let-args args
@@ -160,11 +185,10 @@
       ((null? restargs)
        (usage))
       ((and all repeat)
-       (loop-forever
-       (futaba-get-repeat-all restargs)))
+       (futaba-get-repeat-all restargs))
       (repeat
         (loop-forever
-        (futaba-get-repeat restargs)))
+          (futaba-get-repeat restargs)))
       (all
         (futaba-get-all restargs))
       (else

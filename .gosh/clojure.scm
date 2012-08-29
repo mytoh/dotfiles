@@ -1,8 +1,6 @@
 (define-module clojure
  (export
     if-not
-    str
-    join
     condp
     comment
     slurp
@@ -59,7 +57,7 @@
        (if (pred test-expr expr)
          result-expr
          #f)
-       ...))))   
+       ...))))
 
 (define-syntax if-not
   (syntax-rules ()

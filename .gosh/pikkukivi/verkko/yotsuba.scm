@@ -76,8 +76,6 @@
                                            body
                                            (string->regexp
                                              "<\/?(?:img)[^>]*>")))))))
-    ; (display  (str "found " (length img-url-list)))
-    ; (display " ")
     (let ((got-images (remove not (map
                                (lambda (url)
                                  ;; download indivisual image
@@ -86,9 +84,8 @@
                                img-url-list))))
       (if (= (length got-images) 0)
         (newline)
-    (print (str " " (length got-images)
-                " new files"))))
-  ))
+    (print (str " " (colour-string 49 (number->string (length got-images)))  
+                " new files"))))))
 
 
 (define (get-html bd td)

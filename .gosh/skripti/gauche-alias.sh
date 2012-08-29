@@ -16,13 +16,12 @@ alias l='pk ls -d'
 alias pahvi='pk pahvi'
 alias futaba='pk futaba'
 alias yotsuba='pk yotsuba'
-alias yotsuba='pk yotsuba'
 
 alias buk='pk buk'
 alias ningen-ng='buk ningen-ng'
 alias ningen-ok='buk ningen-ok'
 
-alias gsi='rlwrap gosh-skripti run-pikkukivi.scm repl'
+alias gsi="rlwrap gosh -I$GAUCHE_SKRIPTI_DIR run-pikkukivi.scm repl"
 alias emma='pk emma'
 alias sgit='pk ääliö'
 
