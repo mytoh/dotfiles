@@ -17,7 +17,6 @@
   (use kirjasto.työkalu)
   (use kirjasto.väri) ; colour-string
   (use kirjasto.merkkijono)
-  (use kirjasto.verkko)
   (use clojure)
   )
 (select-module pikkukivi.verkko.yotsuba)
@@ -48,27 +47,49 @@
 ;; "
 
 
-(define (fetch url)
-  ;; downloda file from url
-  (when (string? url)
-    (swget url)))
 
+(define (fetch uri)
+  (when (string? uri)
+  (let-values (((scheme user-info hostname port-number path query fragment)
+                (uri-parse uri)))
+    (let* ((file (url->filename uri))
+           (flusher (lambda (s h)  #t)))
+      (if (not (file-is-readable? file))
+        (call-with-output-file
+          file
+          (cut http-get hostname path
+            :sink <> :flusher flusher))
+        #f)))))
+
+(define (url->filename url)
+  (receive (a fname ext)
+    (decompose-path (values-ref (uri-parse url) 4))
+    (path-swap-extension fname ext)))
+
+;
 
 (define (get-img body board)
-  (map
-    (lambda (url)
-      ;; download indivisual image
-      (fetch
-        (str "http:" url)))
-    (delete-duplicates
-      (remove not
-              (map
-                (lambda (x)
-                  (parse-img x board))
-                (string-split
-                  body
-                  (string->regexp
-                    "<\/?(?:img)[^>]*>")))))))
+  (let ((img-url-list (delete-duplicates
+                        (remove not (map (lambda (x)
+                                           (parse-img x board))
+                                         (string-split
+                                           body
+                                           (string->regexp
+                                             "<\/?(?:img)[^>]*>")))))))
+    ; (display  (str "found " (length img-url-list)))
+    ; (display " ")
+    (let ((got-images (remove not (map
+                               (lambda (url)
+                                 ;; download indivisual image
+                                 (fetch
+                                   (str "http:" url)))
+                               img-url-list))))
+      (if (= (length got-images) 0)
+        (newline)
+    (print (str " " (length got-images)
+                " new files"))))
+  ))
+
 
 (define (get-html bd td)
   (let-values (((status headers body)
@@ -90,17 +111,13 @@
          (html (get-html board thread)))
     (cond
       ((string? html)
-       (print (colour-string 4 thread))
+       (display (colour-string 4 thread))
        (mkdir thread)
        (cd thread)
        (get-img html board)
        (cd ".."))
       (else
-        (print (colour-string
-                 237
-                 (str
-                   thread
-                   "'s gone")))))))
+        (print (colour-string 237 (str thread "'s gone")))))))
 
 
 (define (yotsuba-get-all restargs)
@@ -112,37 +129,36 @@
          (lambda (d)
            (yotsuba-get (list bd d)))
          dirs)
-       (print (str (colour-string 33 bd) " fetch finished"))
-       )
+       (print (str (colour-string 33 bd) " fetch finished")))
       (else
         (print "no directories")))))
 
 
-(define (yotsuba-get-repeat restargs)
-  (let* ((board (car restargs))
-         (thread (cadr restargs))
-         (html (get-html board thread)))
-    (cond
-      ((string? html)
-       (print (colour-string 4 thread))
-       (mkdir thread)
-       (cd thread)
-       (get-img html board)
-       (cd ".."))
-      (else
-        #t))))
+(define (yotsuba-get-repeat args)
+    (let* ((board (car args))
+           (thread (cadr args))
+           (html (get-html board thread)))
+      (cond
+        ((string? html)
+         (display (colour-string 4 thread))
+         (mkdir thread)
+         (cd thread)
+         (get-img html board)
+         (cd ".."))
+        (else #t))))
 
 
-(define (yotsuba-get-repeat-all restargs)
-  (print (string-append "getting " (car restargs)))
-  (let ((bd (car restargs))
-        (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
-    (if-not (null? dirs)
-            (for-each
-              (lambda (d)
-                (yotsuba-get-repeat (list bd d)))
-              dirs)
-            (print "no directories"))))
+(define (yotsuba-get-repeat-all args)
+  (loop-forever
+    (let ((bd (car args))
+          (dirs (values-ref (directory-list2 (current-directory) :children? #t) 0)))
+      (print (string-append "getting " bd))
+      (if-not (null? dirs)
+              (for-each
+                (lambda (d)
+                  (yotsuba-get-repeat (list bd d)))
+                dirs)
+              (print "no directories")))))
 
 
 
@@ -156,12 +172,10 @@
       ((null? restargs)
        (usage))
       ((and all repeat)
-       (loop-forever
-         (yotsuba-get-repeat-all restargs)))
+       (yotsuba-get-repeat-all restargs))
       (repeat
         (loop-forever
-          (yotsuba-get-repeat restargs))
-        (print "------------"))
+        (yotsuba-get-repeat restargs)))
       (all
         (yotsuba-get-all restargs))
       (else
