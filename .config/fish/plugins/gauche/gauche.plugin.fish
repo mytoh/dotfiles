@@ -3,7 +3,13 @@
 
 
 set    GAUCHE_ARCH (gauche-config --arch)
-set -x GAUCHE_LOAD_PATH "$HOME/.gosh/skripti:$HOME/.gosh:$HOME/.gosh/kirjasto:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
+set    GAUCHE_BASE_DIR "$HOME/.gosh"
+set -x GAUCHE_SKRIPTI_DIR "$GAUCHE_BASE_DIR/skripti"
+set -x GAUCHE_LOAD_PATH "$GAUCHE_BASE_DIR:$GAUCHE_BASE_DIR/kirjasto:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
+
+function gosh-skripti
+  gosh -I$GAUCHE_SKRIPTI_DIR $argv
+end
 
 
 # gauche completions {{{
@@ -31,7 +37,7 @@ complete -c gosh -f -a "(__gosh_completion_current_directory)" -d "files in CWD"
 
 
 if which gosh 1>  /dev/null
-  . ~/.gosh/skripti/gauche-alias.sh
+  . $GAUCHE_SKRIPTI_DIR/gauche-alias.sh
 end
 
 #}}}

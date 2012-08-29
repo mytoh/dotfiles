@@ -1,7 +1,7 @@
-alias spc2ubar='command gosh space2underbar.scm'
-alias ea='command gosh extattr.scm'
+alias spc2ubar='gosh-skripti space2underbar.scm'
+alias ea='gosh-skripti extattr.scm'
 
-alias pk='gosh run-pikkukivi.scm'
+alias pk='gosh-skripti run-pikkukivi.scm'
 alias rr='pk rm'
 alias nap='pk napa'
 alias tk='pk talikko'
@@ -22,7 +22,7 @@ alias buk='pk buk'
 alias ningen-ng='buk ningen-ng'
 alias ningen-ok='buk ningen-ok'
 
-alias gsi='rlwrap gosh run-pikkukivi.scm repl'
+alias gsi='rlwrap gosh-skripti run-pikkukivi.scm repl'
 alias emma='pk emma'
 alias sgit='pk ääliö'
 
@@ -49,39 +49,3 @@ alias sssh='pk sssh'
 alias sget='pk sget'
 alias a='pk launch-app'
 
-# taken from oh-my-zsh
-# Source: http://aur.archlinux.org/packages/lolbash/lolbash/lolbash.sh
-alias wtf='dmesg'
-alias onoz='cat /var/log/errors.log'
-alias rtfm='man'
-
-alias visible='echo'
-alias invisible='cat'
-alias moar='more'
-alias tldr='less'
-alias alwayz='tail -f'
-
-alias icanhas='mkdir'
-alias gimmeh='touch'
-alias donotwant='rm'
-alias dowant='cp'
-alias gtfo='mv'
-alias nowai='chmod'
-
-alias hai='cd'
-alias iz='ls'
-alias plz='pwd'
-alias ihasbucket='df -h'
-
-alias inur='locate'
-alias iminurbase='finger'
-
-alias btw='nice'
-alias obtw='nohup'
-
-alias nomz='ps -aux'
-alias nomnom='killall'
-
-alias byes='exit'
-alias cya='reboot'
-alias kthxbai='halt'
