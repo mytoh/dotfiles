@@ -140,19 +140,8 @@
     (print "not symlink")
   (print-list 38 exist-files)
   (newline)
-    (print "not-managed-files")
-  (print-list 103 not-managed-files)
-  )
-  ; (for-each
-  ;   (^(f) (cond
-  ;           ((file-is-symlink? (path-home-file f))
-  ;              (print (string-append (colour-string 38 f))))
-  ;           ((file-exists? (path-home-file f))
-  ;            (print (string-append (colour-string 89 f) " is not symlink")))
-  ;           (else
-  ;              (print (string-append (colour-string 1 f) " not linked")))))
-  ;      *dotfiles*)
-  )
+    (print "not managed files")
+  (print-list 103 not-managed-files)))
 
 ;; commands
 
