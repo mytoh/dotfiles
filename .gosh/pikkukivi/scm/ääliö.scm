@@ -121,6 +121,7 @@
     (clojure      clojure-contrib)
     (clojure      core.logic)
     (sgrove       tehila)
+    (tyru         dotto)
     (webyrd        miniKanren)))
 
 ;; update git repository

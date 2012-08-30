@@ -47,7 +47,12 @@
       (process "yes y | make delete-old" )
       (process "mergemaster" )
       (print "please reboot")
-)
+  (print
+ " # reboot
+      # mount -u /
+      # mount -a -t ufs
+      # cd /usr/src
+      # make delete-old-libs "))
 
 (define (first)
   (current-directory "/usr/src")
@@ -61,17 +66,9 @@
 
 
 
-  (print
-  "
-      # reboot
-      # mount -u /
-      # mount -a -t ufs
-      # cd /usr/src
-      # make delete-old-libs
-")
 
 (define (main args)
-  (match (cdr args)
+  (match (cadr args)
     ("first"
      (first))
     ))

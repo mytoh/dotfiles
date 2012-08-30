@@ -648,4 +648,8 @@ let g:vimclojure#DynamicHighlighting = 1
 
 " }}}
 
+"dwm.vim {{{
+let g:dwm_map_keys=0
+" }}}
+
 "}}}

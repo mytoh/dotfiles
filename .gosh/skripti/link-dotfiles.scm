@@ -5,41 +5,10 @@
 (use kirjasto)
 
 (define gitdir (expand-path "~/local/git/dotfiles/"))
-(define dotfiles
+(define *dotfiles*
   '(
-    ".config/fish/config.fish"
-    ".config/feh"
-    ".gaucherc"
-    ".gosh"
-    ".dzen/bin/status"
-    ".dwm/startdwm"
-    ".gimv/gimvrc"
-    ".gtkrc.mine"
-    ".ncmpcpp/config"
-    ".mpdconf"
-    ".mplayer/config"
-    ".pentadactylrc"
-    ".portmasterrc"
-    ".screenrc"
-    ".stumpwmrc"
-    ".vimrc"
-    ".bundles.vim"
-    ".rtorrent.rc"
-    ".vimshrc"
-    ".vimperatorrc"
-    ".w3m/keymap"
-    ".w3m/config"
-    ".w3m/mailcap"
-    ".xinitrc"
-    ".xbindkeysrc"
-    ".xcolours/dark"
-    ".xcolours/darkpastel"
-    ".xcolours/darkblue"
-    ".xcolours/dzen"
-    ".xmonad/xmonad.hs"
-    ".xmodmap"
-    ".Xresources"
-    ))
+    ".vim/after"
+))
 
 
 (define (make-symlink files)

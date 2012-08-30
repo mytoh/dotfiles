@@ -7,6 +7,7 @@ alias nap='pk napa'
 alias tk='pk talikko'
 alias unpack='pk unpack'
 alias paths='pk print-path'
+alias piste='pk piste'
 
 alias ls='pk ls -d'
 alias la='pk ls -d -a'
