@@ -32,10 +32,10 @@
   ;;macro for endless loop
   (syntax-rules ()
     ((_ body ...)
-     (let loop () 
+     (let loop ()
        body
        ...
-       (sys-sleep #e3e1) ; sleep 
+       (sys-sleep #e3e1) ; sleep
        (loop)))))
 
 (define get-os-type
@@ -76,6 +76,9 @@
   (lambda ()
     (values)))
 
+;; from info combinator page
+(define safe-length (every-pred list? length))
+
 
 ;; http://people.csail.mit.edu/jhbrown/scheme/macroslides03.pdf
 ;; http://valvallow.blogspot.jp/2010/05/implecations.html
@@ -101,6 +104,7 @@
             (let rec ()
               body1 body2 ...
               (rec))))))
+
 
 
 
