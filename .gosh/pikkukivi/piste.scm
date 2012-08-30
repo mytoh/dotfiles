@@ -12,7 +12,7 @@
   (use kirjasto.väri))
 (select-module pikkukivi.piste)
 
-(define *srcdir* (expand-path "~/local/git/dotfiles/"))
+(define *srcdir* (expand-path "~/local/git/dotfiles"))
 (define *dotfiles*
   '(
     ".vim/after"
@@ -69,40 +69,90 @@
 ))
 
 
+;; util
+(define (path-home-file file)
+  (build-path (home-directory) file))
+
+(define (path-src-file file)
+  (build-path *srcdir* file))
+
+(define (print-list num lyst)
+  (for-each (^f (print (colour-string num f)))
+            lyst))
+
+;; link
 (define (link-make-symlink files)
   (if (null? files)
-    ; (print "link finish")
     '()
-
     (let ((file (car files)))
       (cond
-        ((file-exists? (build-path (home-directory) file))
+        ((file-exists? (path-home-file file))
          (print (string-append (colour-string 1 file) " exists, skip")))
-        ((file-is-directory? (sys-dirname (build-path (home-directory) file)))
+        ((file-is-directory? (sys-dirname (path-home-file file)))
          (link-file-home file))
         (else
-          (print #`"making ,(sys-dirname (build-path (home-directory) file))")
-          (make-directory* (sys-dirname (build-path (home-directory) file)))
-          (link-file-home file)
-          ))
+          (print (string-append "making ,(sys-dirname (path-home-file file))"))
+          (make-directory* (sys-dirname (path-home-file file)))
+          (link-file-home file)))
       (link-make-symlink (cdr files)))))
 
 (define (link-file-home file)
   (print (string-append (colour-string 38 file)
                         " linked"))
-  (sys-symlink (build-path *srcdir* file)
-               (build-path (home-directory) file)))
+  (sys-symlink (path-src-file file)
+               (path-home-file file)))
+
+;; list
+
+
+(define (list-not-symlinks lyst)
+  (filter (^f (if (and (file-exists? (path-home-file f))
+                    (not (file-is-symlink? (path-home-file f))))
+                #t #f))
+       lyst))
+
+(define (list-symlinks lyst)
+  (filter (^f (if (file-is-symlink? (path-home-file f))
+                #t #f))
+       lyst))
+
+(define (list-managed-symlinks lyst)
+  (filter (^f (if (and (file-is-symlink? (path-home-file f))
+                    (file-eqv?  (sys-realpath (path-home-file f))
+                                 (path-src-file f)))
+                #t #f))
+          lyst))
+
+(define (list-not-managed-symlinks lyst)
+  (remove (^f (if (and (file-is-symlink? (path-home-file f))
+                    (file-eqv?  (sys-realpath (path-home-file f))
+                                (path-src-file f)))
+                #t #f))
+          lyst))
 
 (define (list-dotfiles)
-  (for-each
-    (^(f) (cond
-            ((file-is-symlink? (build-path (home-directory) f))
-               (print (string-append (colour-string 38 f))))
-            ((file-exists? (build-path (home-directory) f))
-             (print (string-append (colour-string 89 f) " is not symlink")))
-            (else
-               (print (string-append (colour-string 1 f) " not linked")))))
-       *dotfiles*))
+  (let ((exist-files (list-not-symlinks *dotfiles*))
+        (managed-files (list-managed-symlinks *dotfiles*))
+        (not-managed-files (list-not-managed-symlinks *dotfiles*)))
+    (print "managed files")
+  (print-list 190 managed-files)
+  (newline)
+    (print "not symlink")
+  (print-list 38 exist-files)
+  (newline)
+    (print "not-managed-files")
+  (print-list 103 not-managed-files)
+  )
+  ; (for-each
+  ;   (^(f) (cond
+  ;           ((file-is-symlink? (path-home-file f))
+  ;              (print (string-append (colour-string 38 f))))
+  ;           ((file-exists? (path-home-file f))
+  ;            (print (string-append (colour-string 89 f) " is not symlink")))
+  ;           (else
+  ;              (print (string-append (colour-string 1 f) " not linked")))))
+  ;      *dotfiles*)
+  )
 
 ;; commands
 
@@ -117,5 +167,5 @@
   (match (car args)
     ("link"
      (dot-link))
-    ("list"
+    ((or "list" "ls")
      (dot-list))))
