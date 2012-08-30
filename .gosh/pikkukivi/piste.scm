@@ -95,9 +95,13 @@
 
 (define (list-dotfiles)
   (for-each
-    (^(f) (if (file-is-symlink? (build-path (home-directory) f))
-               (print (string-append (colour-string 1 f)))
-               (print (string-append (colour-string 38 f) " not linked"))))
+    (^(f) (cond
+            ((file-is-symlink? (build-path (home-directory) f))
+               (print (string-append (colour-string 38 f))))
+            ((file-exists? (build-path (home-directory) f))
+             (print (string-append (colour-string 89 f) " is not symlink")))
+            (else
+               (print (string-append (colour-string 1 f) " not linked")))))
        *dotfiles*))
 
 ;; commands
