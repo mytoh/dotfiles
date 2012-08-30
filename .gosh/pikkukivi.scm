@@ -20,6 +20,7 @@
     pikkukivi.verkko
     pikkukivi.scm
     pikkukivi.launch-app
+    pikkukivi.print-path
     ))
 (select-module pikkukivi)
 

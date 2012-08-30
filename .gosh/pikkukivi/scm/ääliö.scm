@@ -97,6 +97,7 @@
     (Cloudef        dotFiles   cloudef-dotFiles)
     (Cloudef        dotfiles-ng   cloudef-dotFiles-ng)
     (Cloudef        milkyhelper)
+    (DaisukeAramaki Dotfiles)
     (chjj           compton)
     (samirahmed           fu)
     (defunkt        hub)
@@ -119,7 +120,7 @@
     (Raynes       fs)
     (clojure      clojure-contrib)
     (clojure      core.logic)
-    (sgrove       tahila)
+    (sgrove       tehila)
     (webyrd        miniKanren)))
 
 ;; update git repository

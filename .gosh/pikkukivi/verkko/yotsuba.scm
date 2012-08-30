@@ -9,6 +9,7 @@
   (use gauche.process)
   (use gauche.charconv)
   (use file.util)
+  (use util.match)
   (use gauche.collection) ;find
   (use gauche.parseopt)
   (require-extension
@@ -70,25 +71,25 @@
 
 (define (get-img body board)
   (let ((img-url-list (delete-duplicates
-                        (remove not (map (lambda (x)
+                        (filter string? (map (lambda (x)
                                            (parse-img x board))
                                          (string-split
                                            body
                                            (string->regexp
                                              "<\/?(?:img)[^>]*>")))))))
-    (let ((got-images (remove not (map
+    (let ((got-images (filter string? (map
                                (lambda (url)
                                  ;; download indivisual image
                                  (fetch
                                    (str "http:" url)))
                                img-url-list))))
+      (flush)
  (match (length got-images)
         (0 (newline))
         (1 (print (str " " (colour-string 49 (number->string (length got-images)))
-                    " new file")))
+                       " new file")))
         (_ (print (str " " (colour-string 49 (number->string (length got-images)))
-                    " new files")))))))
-
+                       " new files")))))))
 
 (define (get-html bd td)
   (let-values (((status headers body)

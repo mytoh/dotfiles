@@ -223,6 +223,10 @@ command! -nargs=+ -bang -complete=file Rename let pbnr=fnamemodify(bufname('%'))
       \| w<bang>
       \| call delet(pbnc)
 
+if executable('pdftotext')
+  command! -complete=file -nargs=1 Pdf :r !pdftotext -nopgbrk -layout <q-args> -
+endif
+
 
 " general keymaps{{{
 let maplocalleader = ","

@@ -100,11 +100,33 @@ urxvt.boldFont: FONT_BOLD
 ! xterm
 ! ------------
 xterm*font: -nil-profont-medium-r-normal--10-100-72-72-c-50-iso8859-1
-xterm*background: #090911
-xterm*scrollBar: false
-xterm*faceName: terminus:pixelsize=10
 xterm*utf8: always
 xterm*utf8Fonts: always
+xterm*title: xterm
+xterm*faceName: terminus:pixelsize=10
+xterm*geometry: 90x25
+xterm*boldMode: false
+xterm*cutNewline: false
+xterm*on4Clicks: group
+xterm*on5Clicks: page
+xterm*internalBorder: 2
+xterm*background: #222222
+xterm*foreground: #ddccbb
+xterm*customization: color
+xterm*metaSendsEscape: true
+xterm*colorBD: #afd700
+xterm*colorBDMode: false
+xterm*cursorBlink: false
+xterm*cursorColor: #ff9900
+xterm*dynamiccolors: true
+xterm*loginShell: true
+xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48,35:48,58:48,63:48,61:48,44:48,38:48,59:48
+xterm*jumpScroll: true
+xterm*multiScroll: true
+xterm*saveLines: 512
+xterm*scrollBar: false
+xterm*xftAntialias: false
+
 
 
 !-------------
