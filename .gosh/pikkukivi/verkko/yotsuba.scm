@@ -82,10 +82,12 @@
                                  (fetch
                                    (str "http:" url)))
                                img-url-list))))
-      (if (= (length got-images) 0)
-        (newline)
-    (print (str " " (colour-string 49 (number->string (length got-images)))  
-                " new files"))))))
+ (match (length got-images)
+        (0 (newline))
+        (1 (print (str " " (colour-string 49 (number->string (length got-images)))
+                    " new file")))
+        (_ (print (str " " (colour-string 49 (number->string (length got-images)))
+                    " new files")))))))
 
 
 (define (get-html bd td)
