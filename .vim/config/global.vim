@@ -79,6 +79,7 @@ set display+=lastline
 " key sequence timeout length (default: 1000(ms))
 set timeoutlen=10000
 set wildignorecase
+set visualbell
 
 " indent {{{
 

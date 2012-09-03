@@ -22,8 +22,6 @@
     "git://a-chinaman.com/nuscsh"
     "git://git.sv.gnu.org/screen.git"
     "git://git.savannah.gnu.org/stow.git"
-    "git://gitorious.org/fish-shell/fish-shell.git"
-    "git://gitorious.org/~otherchirps/fish-shell/otherchirps-fish-shell.git"
     "git://git.infradead.org/get_iplayer.git"
     "git://git.mplayer2.org/mplayer2.git"
     "git://git.informatik.uni-erlangen.de/re06huxa/herbstluftwm"
@@ -56,7 +54,6 @@
     (pkgng         pkgng)
     (coderholic    pyradio)
     (bmizerany     roundup)
-    (holman        spark)
     (muennich      sxiv)
     (alice0775     userChrome.js)
     (Griever       userChromeJS)
@@ -85,10 +82,7 @@
     (sabetts       stumpwm)
     (aredridel      es-shell)
     (ThomasAdam     tmux)
-    (midgetspy      Sick-Beard)
     (mooz           percol)
-    (trizen         gtk-youtube-viewer)
-    (trizen         youtube-viewer)
     (xorg62         wmfs)
     (shawncplus     ghub)
     (86me           pentadactyl-scripts)
@@ -96,7 +90,6 @@
     (Cloudef        monsterwm-xcb)
     (Cloudef        dotFiles   cloudef-dotFiles)
     (Cloudef        dotfiles-ng   cloudef-dotFiles-ng)
-    (Cloudef        milkyhelper)
     (DaisukeAramaki Dotfiles)
     (chjj           compton)
     (samirahmed           fu)
@@ -112,8 +105,6 @@
     (robm           dzen)
     (jhawthorn     meh)
     (kahua         Kahua)
-    (mozilla       mozilla-central)
-    (shadow        shadow)
     (digego         extempore)
     (calvis         cKanren)
     (tlatsas       xcolors)
@@ -122,6 +113,7 @@
     (clojure      core.logic)
     (sgrove       tehila)
     (tyru         dotto)
+    (erikw        tmux-powerline)
     (webyrd        miniKanren)))
 
 ;; update git repository

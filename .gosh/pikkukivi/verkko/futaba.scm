@@ -14,6 +14,7 @@
   (use kirjasto.työkalu)
   (use kirjasto.väri) ; colour-string
   (use kirjasto.merkkijono)
+  (use kirjasto.pääte)
   (use clojure)
   (require-extension (srfi 1))
   )
@@ -48,38 +49,43 @@
 
 (define (get-img html board)
   (let ((image-url-list (remove not
-                  (call-with-input-string html
-                    (lambda (in)
-                      (port-map
-                        (lambda (line)
-                          (let ((m (parse-img-url line board)))
-                            m))
-                        (cut read-line in #t)))))))
+                                (call-with-input-string html
+                                  (lambda (in)
+                                    (port-map
+                                      (lambda (line)
+                                        (let ((m (parse-img-url line board)))
+                                          m))
+                                      (cut read-line in #t)))))))
+    (flush)
     (let ((got-images (remove not
                               (map (lambda (url) (fetch url))
                                    image-url-list))))
       (match (length got-images)
         (0 (newline))
         (1 (print (str " " (colour-string 49 (number->string (length got-images)))
-                    " new file")))
+                       " new file")))
         (_ (print (str " " (colour-string 49 (number->string (length got-images)))
-                    " new files")))))))
+                       " new files")))))))
+
+(define (url->filename url)
+  (receive (a fname ext)
+    (decompose-path (values-ref (uri-parse url) 4))
+    (path-swap-extension fname ext)))
 
 (define (fetch uri)
   (when (string? uri)
-  (let-values (((scheme user-info hostname port-number path query fragment)
-                (uri-parse uri)))
-    (let* ((file (receive (a fname ext)
-                   (decompose-path (whitespace->dash path))
-                   #`",|fname|.,|ext|"))
-           (flusher (lambda (s h)  #t)))
-      (if (not (file-is-readable? file))
-        (call-with-output-file
-          file
-          (cut http-get hostname path
-            :sink <> :flusher flusher))
-        #f)))))
-
+    (let-values (((scheme user-info hostname port-number path query fragment)
+                  (uri-parse uri)))
+      (let* ((file (url->filename uri))
+             (flusher (lambda (sink headers)  #t)))
+        (if (not (file-is-readable? file))
+          (receive (temp-out temp-file)
+            (sys-mkstemp "yotsuba-temp")
+            (http-get hostname path
+                      :sink temp-out :flusher flusher)
+            (close-output-port temp-out)
+            (move-file temp-file file))
+          #f)))))
 
 
 
@@ -154,12 +160,18 @@
          (html (get-html board thread)))
     (cond
       ((string? html)
+       (tput-clr-bol)
        (display (colour-string 4 thread))
        (mkdir thread)
        (cd thread)
        (get-img html board)
        (cd ".."))
-      (else  #t))))
+      (else
+        (display (colour-string 237 (str thread "'s gone")))
+        (flush)
+        (sys-select #f #f #f 100000)
+        (display "\r")
+        (tput-clr-eol)))))
 
 (define (futaba-get-repeat-all args)
   (loop-forever

@@ -10,8 +10,12 @@
 (select-module pikkukivi.launch-app)
 
 
+(define additional-paths `(,(expand-path  "~/local/apps/v2c")))
+
 (define (launch app)
-  (if (find-file-in-paths (car app))
+  (if (or (find-file-in-paths (car app))
+        (find-file-in-paths (car app)
+                            :paths additional-paths))
     (begin
       (display "launching ")
       (display (car  app))

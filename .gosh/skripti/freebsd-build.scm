@@ -30,7 +30,7 @@
                   #/\/(\w*\.c)/  "/[38;5;68m\\1[0m"
                   #/(\w*\.o)/  "[38;5;148m\\1[0m"
                   #/(\w*\.(S|s)o)/  "[38;5;28m\\1[0m"
-                  #/(\w*\.S)/  "[38;5;28m\\1[0m")
+                  )
   (print (string-append "[38;5;218m" "-------------" "[0m"))
   (newline)
   (print command)
@@ -39,28 +39,28 @@
       '("[38;5;80m" "------------" "[0m" ))))
 
 (define (second)
-      (process "mount -u /" )
-      (process "mount -a -t ufs" )
-      (process "mergemaster -p" )
-      (current-directory "/usr/src")
-      (process "make installworld" )
-      (process "yes y | make delete-old" )
-      (process "mergemaster" )
-      (print "please reboot")
+  (process "mount -u /" )
+  (process "mount -a -t ufs" )
+  (run-process '(mergemaster -p ) :wait #t)
+  (current-directory "/usr/src")
+  (process "make installworld" )
+  (process "yes y | make delete-old" )
+  (run-process '(mergemaster ) :wait #t)
+  (print "please reboot")
   (print
- " # reboot
-      # mount -u /
-      # mount -a -t ufs
-      # cd /usr/src
-      # make delete-old-libs "))
+    " # reboot
+    # mount -u /
+    # mount -a -t ufs
+    # cd /usr/src
+    # make delete-old-libs "))
 
 (define (first)
   (current-directory "/usr/src")
- (when (file-exists? "/usr/obj")
-   (process "sudo make cleandir")
-   (process "sudo make cleandir")
-   (process "sudo rm -rfv /usr/obj"))
- (process "sudo make buildworld")
+  (when (file-exists? "/usr/obj")
+    (process "sudo make cleandir")
+    (process "sudo make cleandir")
+    (process "sudo rm -rfv /usr/obj"))
+  (process "sudo make buildworld")
   (process "sudo make buildkernel")
   (process "sudo make installkernel"))
 
@@ -71,4 +71,6 @@
   (match (cadr args)
     ("first"
      (first))
+    ("second"
+     (second))
     ))

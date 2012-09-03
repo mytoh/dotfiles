@@ -24,10 +24,9 @@
 
 (define (directory)
   (let* ((cwd (current-directory))
-         (colour-fs (lambda (fs d)
+         (add-tilde (lambda (fs d)
                       (string-append
-                        "~"
-                        d))))
+                        "~" d))))
     (rxmatch-cond
       ;; /usr/home => ~
       (((string->regexp (string-concatenate `("/usr" ,(home-directory))))
@@ -43,23 +42,19 @@
          (string-split
            (regexp-replace (string->regexp home) cwd "~") "/")))
       ;; /nfs/mypassport => ~mypass
-      (((string->regexp "/nfs/mypassport")
-        cwd)
+      (((string->regexp "/nfs/mypassport") cwd)
        (m)
-       (colour-fs
-         "mypass"
+       (add-tilde "mypass"
          (prettify-directory (cddr (string-split cwd "/")))))
       ;; /nfs/deskstar => ~deskstar
-      (((string->regexp "/nfs/deskstar")
-        cwd)
+      (((string->regexp "/nfs/deskstar") cwd)
        (m)
-       (colour-fs "deskstar"
+       (add-tilde "deskstar"
                   (prettify-directory (cddr (string-split cwd "/")))))
       ;; /nfs/quatre => ~quatre
-      (((string->regexp "/nfs/quatre")
-        cwd)
+      (((string->regexp "/nfs/quatre") cwd)
        (m)
-       (colour-fs "quatre"
+       (add-tilde "quatre"
                   (prettify-directory (cddr (string-split cwd "/")))))
       (else
         (prettify-directory

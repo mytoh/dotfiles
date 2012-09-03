@@ -66,7 +66,7 @@
     ".xmodmaprc"
     ".xmonad/xmonad.hs"
     ".zshrc"
-))
+    ))
 
 
 ;; util
@@ -104,44 +104,42 @@
 
 ;; list
 
+(define file-is-managed?
+  (every-pred
+    (^f (file-is-symlink? (path-home-file f)))
+    (^f (file-eqv? (sys-realpath (path-home-file f))
+                   (path-src-file f)))))
 
 (define (list-not-symlinks lyst)
   (filter (^f (if (and (file-exists? (path-home-file f))
                     (not (file-is-symlink? (path-home-file f))))
                 #t #f))
-       lyst))
+          lyst))
 
 (define (list-symlinks lyst)
   (filter (^f (if (file-is-symlink? (path-home-file f))
                 #t #f))
-       lyst))
+          lyst))
 
 (define (list-managed-symlinks lyst)
-  (filter (^f (if (and (file-is-symlink? (path-home-file f))
-                    (file-eqv?  (sys-realpath (path-home-file f))
-                                 (path-src-file f)))
-                #t #f))
+  (filter file-is-managed?
           lyst))
 
 (define (list-not-managed-symlinks lyst)
-  (remove (^f (if (and (file-is-symlink? (path-home-file f))
-                    (file-eqv?  (sys-realpath (path-home-file f))
-                                (path-src-file f)))
-                #t #f))
-          lyst))
+  (remove file-is-managed?  lyst))
 
 (define (list-dotfiles)
   (let ((exist-files (list-not-symlinks *dotfiles*))
         (managed-files (list-managed-symlinks *dotfiles*))
         (not-managed-files (list-not-managed-symlinks *dotfiles*)))
     (print "managed files")
-  (print-list 190 managed-files)
-  (newline)
+    (print-list 190 managed-files)
+    (newline)
     (print "not symlink")
-  (print-list 38 exist-files)
-  (newline)
+    (print-list 38 exist-files)
+    (newline)
     (print "not managed files")
-  (print-list 103 not-managed-files)))
+    (print-list 103 not-managed-files)))
 
 ;; commands
 

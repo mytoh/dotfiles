@@ -62,11 +62,11 @@
   (sys-chdir "/")
   (sys-umask 0)
   (call-with-input-file "/dev/null"
-                        (cut port-fd-dup! (standard-input-port) <>))
+    (cut port-fd-dup! (standard-input-port) <>))
   (call-with-output-file "/dev/null"
-                         (lambda (out)
-                           (port-fd-dup! (standard-output-port) out)
-                           (port-fd-dup! (standard-error-port) out))))
+    (lambda (out)
+      (port-fd-dup! (standard-output-port) out)
+      (port-fd-dup! (standard-error-port) out))))
 
 (define (eval-string s)
   (eval (string->symbol s)
@@ -90,20 +90,20 @@
 
 
 ;; http://www.geocities.co.jp/SiliconValley-PaloAlto/7043/index.html#continuation
- (define-syntax blockc
-   (syntax-rules ()
-     ((_ tag body1 body2 ...)
-      (call-with-current-continuation
-        (lambda (tag)
-          body1 body2 ...)))))
+(define-syntax blockc
+  (syntax-rules ()
+    ((_ tag body1 body2 ...)
+     (call-with-current-continuation
+       (lambda (tag)
+         body1 body2 ...)))))
 
 (define-syntax loopc
   (syntax-rules ()
     ((_ tag body1 body2 ...)
      (blockc tag
-            (let rec ()
-              body1 body2 ...
-              (rec))))))
+             (let rec ()
+               body1 body2 ...
+               (rec))))))
 
 
 

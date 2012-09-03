@@ -22,6 +22,7 @@
     pikkukivi.launch-app
     pikkukivi.print-path
     pikkukivi.piste
+    pikkukivi.tmux-start
     ))
 (select-module pikkukivi)
 
@@ -29,7 +30,7 @@
   `(
     (mkd     "mkdir -p")
     (gsp     "gosh -ptime")
-    (tm      ,(string-append "gosh -I" (home-directory) "/.gosh/skripti" "tmux-start.scm"))
+    ; (tm      ,(string-append "gosh -I" (home-directory) "/.gosh/skripti " "tmux-start.scm"))
     (starwars "telnet towel.blinkenlights.nl" )
     (jblive "mplayer rtsp://videocdn-us.geocdn.scaleengine.net/jblive/jblive.stream" )
     (sumo "mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_haishin/asx/sumolive.asx" )

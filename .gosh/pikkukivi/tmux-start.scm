@@ -1,10 +1,14 @@
 #!/usr/bin/env gosh
 ;; -*- coding: utf-8 -*-
 
-(use gauche.process)
-(use gauche.parseopt)
-(use util.match)
-(use srfi-98)
+(define-module pikkukivi.tmux-start
+  (export tmux-start)
+  (use gauche.process)
+  (use gauche.parseopt)
+  (use util.match)
+  (use srfi-98))
+(select-module pikkukivi.tmux-start)
+
 
 (define (new-session session window-name . command)
   (when (not (has-session? session))
@@ -28,13 +32,13 @@
 (define (tmux)
   (cond
     ; inside tmux
-    ((get-environment-variable "TMUX")
+    ((sys-getenv "TMUX")
      (print "[38;5;1myou're inside of tmux[0m"))
     (else
       (let ((main-session   "main")
             (second-session "daemon")
             (third-session  "servers")
-            (shell (get-environment-variable "SHELL")))
+            (shell (sys-getenv "SHELL")))
         (cond
           ; session exists
           ((has-session? main-session)
@@ -60,5 +64,5 @@
             ; attach main session
             (attach-session main-session)))))))
 
-(define (main args)
+(define (tmux-start args)
   (tmux))

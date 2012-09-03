@@ -61,6 +61,8 @@ else
   NeoBundle 'github:thinca/vim-poslist'
   NeoBundle 'github:thinca/vim-qfreplace'
   NeoBundle 'github:thinca/vim-editvar'
+  NeoBundle 'github:thinca/vim-github'
+  NeoBundle 'github:thinca/vim-localrc'
   NeoBundle 'github:tpope/vim-fugitive'
   NeoBundle 'github:tpope/vim-surround'
   NeoBundle 'github:tpope/vim-afterimage'
@@ -99,6 +101,7 @@ else
   NeoBundle 'github:Lokaltog/vim-easymotion'
   " NeoBundle 'github:Lokaltog/vim-powerline'
   NeoBundle 'github:kien/rainbow_parentheses.vim'
+  NeoBundle 'github:kien/tabman.vim'
   NeoBundle 'github:kergoth/fish.vim'
   NeoBundle 'github:kana/vim-textobj-user'
   NeoBundle 'github:kana/vim-textobj-line'
@@ -164,6 +167,7 @@ else
   " clojure
   " NeoBundle 'bitbucket:kotarak/vimclojure', {'rtp': 'vim/src/main/vim'}
   NeoBundle 'VimClojure'
+  NeoBundle 'github:emanon001/fclojure.vim'
   "haskell
   " NeoBundle 'github:Twinside/vim-haskellConceal'
   NeoBundle 'github:Twinside/vim-syntax-haskell-cabal'
@@ -205,7 +209,8 @@ else
   NeoBundle 'github:lorry-lee/vim-ayumi'
   NeoBundle 'github:chriskempson/vim-tomorrow-theme'
   NeoBundle 'github:sjl/badwolf'
-  NeoBundle 'github:nanotech/jellybeans.vim'
+  " NeoBundle 'github:nanotech/jellybeans.vim'
+  NeoBundle 'github:cloudshen/jellybeans.vim'
   NeoBundle 'github:Lokaltog/vim-distinguished'
   NeoBundle 'github:zachwill/github.vim'
   NeoBundle 'xoria256.vim'
@@ -222,6 +227,7 @@ else
   NeoBundle 'git://gist.github.com/187578.git' " <- h2u_black
   NeoBundle 'github:tristen/superman' " <- h2u_black
   NeoBundle 'github:jelera/vim-nazca-colorscheme'
+  NeoBundle 'bitbucket:abudden/easycolour'
   "}}}
   " NeoBundle 'http://voikko.svn.sourceforge.net/svnroot/voikko/', {'type' : 'svn', 'rtp' : 'trunk/tools/vim'}
   " bitbucket

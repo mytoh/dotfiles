@@ -13,7 +13,7 @@
   (use kirjasto.komento.työkalu)
   (use kirjasto.väri)
   (use kirjasto.merkkijono)
-  (use clojure) ; str
+  (use clojure) 
   )
 (select-module pikkukivi.verkko.pahvi)
 

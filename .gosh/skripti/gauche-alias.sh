@@ -27,17 +27,18 @@ alias gsi="rlwrap gosh -I$GAUCHE_SKRIPTI_DIR run-pikkukivi.scm repl"
 alias emma='pk emma'
 alias sgit='pk ääliö'
 
-alias colour-numbers='pk colour numbers'
-alias colour-pacman='pk colour pacman'
-alias colour-spect='pk colour spect'
-alias colour-square='pk colour square'
+alias colour='pk colour'
+alias colour-numbers='colour numbers'
+alias colour-pacman='colour pacman'
+alias colour-spect='colour spect'
+alias colour-square='colour square'
 
 alias topless='pk topless'
 alias radio='pk radio listen'
 alias radio-list='pk radio list'
 alias mkd='pk mkd'
 alias gsp='pk gsp'
-alias tm='pk tm'
+alias tm='pk tmux-start'
 alias aa='pk ascii-taide'
 alias starwars='pk starwars'
 
