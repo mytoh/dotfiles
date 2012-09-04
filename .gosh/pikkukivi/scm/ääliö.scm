@@ -81,7 +81,6 @@
     (joelagnel     stumpwm-goodies)
     (sabetts       stumpwm)
     (aredridel      es-shell)
-    (ThomasAdam     tmux)
     (mooz           percol)
     (xorg62         wmfs)
     (shawncplus     ghub)
@@ -113,7 +112,10 @@
     (clojure      core.logic)
     (sgrove       tehila)
     (tyru         dotto)
+    (ThomasAdam     tmux)
     (erikw        tmux-powerline)
+    (seebi        tmux-colors-solarized)
+    (altercation        solarized)
     (webyrd        miniKanren)))
 
 ;; update git repository

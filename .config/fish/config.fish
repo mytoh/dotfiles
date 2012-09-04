@@ -45,7 +45,7 @@ set fish_pager_color_progress    green
 
 
 # plugins
-set plugins gauche z-fish panna talikko lol
+set plugins gauche panna talikko lol # z-fish
 # theme
 set FISH_THEME gauche
 

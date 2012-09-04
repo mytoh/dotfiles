@@ -28,7 +28,7 @@ xrdb -merge $HOME/.Xresources
 setxkbmap dvorak
 xmodmap $HOME/.xmodmaprc
 xset b off # turn off beep
-xset r rate 200 30
+xset r rate 200 40
 xsetroot -cursor_name right_ptr &
 xset +fp /usr/local/lib/X11/fonts/local
 xset +fp /usr/local/lib/X11/fonts/TrueType

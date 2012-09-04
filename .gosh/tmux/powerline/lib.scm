@@ -3,7 +3,7 @@
   (export
     <left-segment>
     *left-segments*
-    print-left-status
+    make-segment
     )
   (use gauche.process))
 (select-module tmux.powerline.lib)
@@ -24,16 +24,10 @@
   (push! *left-segments* self))
 
 
-(define-method print-segment ((self <left-segment>))
-  (format #f "#[fg=~a,bg=~a]~a~a#[default]"
-                    (ref self 'foreground)
-                    (ref self 'background)
-                    ((ref self 'function))
-                    (ref self 'separator)))
-
-
-(define (print-left-status)
-  (display
-  (print-segment (car *left-segments*)))
-  )
-
+(define (make-segment fg bg seg)
+  (string-append
+    "#[fg=colour" fg ",bg=colour" bg "]"
+    " "
+    (seg)
+    " "
+    "#[default]"))

@@ -41,6 +41,7 @@
     ".xcolours"
     ".zsh.d"
     ".Xresources"
+    ".xresources.d"
     ".bash_profile"
     ".bashrc"
     ".complete.tcsh"

@@ -9,7 +9,7 @@
 
 (define (print-date)
  (date->string (current-date)
-               " ~a ~d. ~b ~H.~M.~S ")
+              "~a ~d. ~b ~H.~M.~S")
   )
 
 (define (segment.time)

@@ -361,7 +361,7 @@ augroup myautocommands
   autocmd bufwritepost       .conkyrc                  Silent !killall -SIGUSR1  conky
   autocmd bufwritepost       xmonad.hs                 Silent !xmonad --recompile
   autocmd bufwritepost       *.c                       call vimrc.trimspace()
-  autocmd filetype           xdefaults                 call vimrc.xrdb()
+  " autocmd filetype           xdefaults                 call vimrc.xrdb()
   autocmd filetype           help                      nnoremap q :<c-u>q<cr>
   autocmd filetype           haskell                       ColorHighlight
   autocmd filetype           fish                       setl equalprg=fish_indent

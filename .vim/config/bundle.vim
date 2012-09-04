@@ -97,7 +97,6 @@ else
   NeoBundle 'github:basyura/TweetVim'
   NeoBundle 'github:nathanaelkane/vim-indent-guides'
   " NeoBundle 'github:haruyama/scheme.vim'
-  NeoBundle 'github:mytoh/scheme.vim'
   NeoBundle 'github:Lokaltog/vim-easymotion'
   " NeoBundle 'github:Lokaltog/vim-powerline'
   NeoBundle 'github:kien/rainbow_parentheses.vim'
@@ -258,7 +257,9 @@ else
   " }}}
 
   "personal repo
-  NeoBundle 'github:mytoh/jfbterm.vim'
+  NeoBundle 'github:mytoh/vim-jfbterm'
+  NeoBundle 'github:mytoh/scheme.vim'
+  NeoBundle 'github:mytoh/vim-vala'
   " }}}
 
 
