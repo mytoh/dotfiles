@@ -7,7 +7,9 @@
 (use util.match)
 (use text.tree)
 (use file.util)
-(require-extension (srfi 1 13 19))
+(use srfi-1)
+(use srfi-13)
+(use srfi-19)
 (use kirjasto.grafiikka)
 
 (define-syntax forever
@@ -84,7 +86,7 @@
                           "_"
                           (string-trim  c1 #\#) "_"
                           (string-trim  c2 #\#)
-                          ".xpm")))) 
+                          ".xpm"))))
       (make-xpm icon-name arrow-left c1 c2))))
 
 (define icon
@@ -187,7 +189,7 @@
         (list
           "Not playng")))))
 
-(define ip 
+(define ip
   (lambda ()
     (process-output->string "curl --silent --ssl -x http://127.0.0.1:8118 ifconfig.me/ip")))
 
@@ -195,18 +197,18 @@
 (define (dzen)
   (tree->string
     (list
-      (icon (arrow-left-xpm "#292929" "None"))
-      (bg "#292929")
-      (ip)
+      ; (icon (arrow-left-xpm "#292929" "None"))
+      ; (bg "#292929")
+      ; (ip)
       (icon (arrow-left-xpm "#303633" "#292929"))
       (bg "#303633")
       (memory)
       (icon (arrow-left-xpm "#444444" "#303633"))
       (bg "#444444")
-      (fs) 
+      (fs)
       (icon (arrow-left-xpm "#555555" "#444444"))
       (bg "#555555")
-      (volume) 
+      (volume)
       (icon (arrow-left-xpm "#858180" "#555555"))
       (bg "#858080")
       (date) " ")))
@@ -215,4 +217,4 @@
   (let loop ()
     (print
       (dzen))
-    (loop )))
+    (loop)))
