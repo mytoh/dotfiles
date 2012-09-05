@@ -116,6 +116,10 @@
     (erikw        tmux-powerline)
     (seebi        tmux-colors-solarized)
     (altercation        solarized)
+    (cucumber        cucumber)
+    (cavalle        steak)
+    (cldwalker        boson-more)
+    (cldwalker        boson)
     (webyrd        miniKanren)))
 
 ;; update git repository

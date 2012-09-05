@@ -1,3 +1,4 @@
+
 alias pup='sudo portsnap fetch update '
 alias pcheck='sudo portmaster -PBidav && sudo portaudit -Fdav && sudo portmaster -y --clean-packages --clean-distfiles --check-depends'
 alias pfetch='sudo make  fetch-recursive'

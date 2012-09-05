@@ -253,6 +253,7 @@ else
   NeoBundle 'Vimchant'
   NeoBundle 'copypath.vim'
   NeoBundle 'MPD-syntax-highlighting'
+  NeoBundle 'HybridText'
   "Bundle 'buftabs'
   " }}}
 
