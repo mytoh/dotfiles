@@ -1,11 +1,5 @@
 
 
-# cmmand not found
-# http://bjeanes.com/2009/10/using-fish-shells-event-system-to-behave-like-method-missing
-function __fish_method_missing --on-event fish_command_not_found
-   method_missing $argv
-end
-
 
 function cdl -d 'cd to the last path'
   cd $last_cwd

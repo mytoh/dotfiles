@@ -8,18 +8,18 @@
 (use clojure)
 (require-extension (srfi 13 98))
 
-(define (colour-string colour-number str)
+(define (colour-string colour-number s)
   (let ((shell (sys-basename (get-environment-variable "SHELL"))))
     (cond
       ((string=? shell "tcsh")
         (string-concatenate
           `("%{[38;5;" ,(number->string colour-number) "m%}"
-            ,str
+            ,s
             "%{[0m%}")))
       (else
         (string-concatenate
           `("[38;5;" ,(number->string colour-number) "m"
-            ,str
+            ,s
             "[0m"))))))
 
 (define (directory)
@@ -95,7 +95,7 @@
   (lambda ()
     (colour-string 33 " darcs ")))
 
-(define (prompt)
+(define (prompt status)
   (display
     (string-concatenate
       `(
@@ -122,13 +122,17 @@
         ,(colour-string 172 "╹◡╹")
         ,(colour-string 95 "✘")
         "\n"
-        ,(colour-string 236 "-")
-        ,(colour-string 238 ">")
-        ,(colour-string 60  ">")
+        ,(match status
+           ("0" (str
+                (colour-string 236 "-")
+                (colour-string 238 ":")
+                (colour-string 60  ">")))
+           (_ (colour-string 124 ">")))
         " "))))
 
 
 
 
 (define (main args)
-  (prompt))
+  (let ((status (cadr args)))
+    (prompt status)))
