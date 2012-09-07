@@ -45,6 +45,14 @@ function! GetCharCode() " {{{ from powerline
   return "'". char ."' ". nr
 endfunction "}}}
 
+function! GetCharHighlightGroup()
+  redir => highlights
+  silent! echo map(synstack(line('.'),col('.')),'synIDattr(synIDtrans(v:val),"name")')
+  redir END
+
+  return highlights
+endfunction
+
 let s:statusline_mode_i = 'insert'
 let s:statusline_mode_R = 'replace'
 let s:statusline_mode_n = 'normal'
@@ -203,6 +211,10 @@ let s:segment.syntastic = join([
       \ '%7*' . '%{SyntasticStatuslineFlag()}' . '%0*',
       \])
 
+let s:segment.charhighlight = join([
+      \ '%9*' . '%{GetCharHighlightGroup()}' . '%0*',
+      \])
+
 function! SetActiveStatusLine()
   " setl stl=""
   " setl stl=%!MakeActiveStatusLine()
@@ -225,6 +237,7 @@ function! MakeActiveStatusLine()
         \   s:segment.hahhah,
         \   s:segment.fileinfo,
         \   s:segment.charcode,
+        \   s:segment.charhighlight,
         \   s:segment.ruler,
         \])
   return left . '%=' . right

@@ -24,6 +24,7 @@ uim-toolbar-gtk-systray &
 export QT_PLUGIN_PATH="/usr/local/kde4/lib/kde4/plugins"
 
 export PATH="$HOME/local/bin:$PATH"
+export VTE_CJK_WIDTH=1
 xrdb -merge $HOME/.Xresources
 setxkbmap dvorak
 xmodmap $HOME/.xmodmaprc

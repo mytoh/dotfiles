@@ -1,5 +1,5 @@
 
 function fish_prompt -d "fish prompt with gauche script"
- gosh-skripti prompt.scm $status
+ gosh-skripti kehote.scm $status
 end
 

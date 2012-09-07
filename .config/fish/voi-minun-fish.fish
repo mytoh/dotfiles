@@ -18,9 +18,9 @@ end
 
 # load theme
 if test $FISH_THEME
-. $fish_themes_dir/$FISH_THEME.fish-theme
+. $fish_themes_dir/$FISH_THEME.theme.fish
 else
-. $fish_themes_dir/default.fish-theme
+. $fish_themes_dir/default.theme.fish
 end
 
 
