@@ -1,5 +1,4 @@
 
-source ~/.tcsh.d/prompt.tcsh
 set history=100000
 set savehist=(100000 merge)
 set autolist = ambiguous
@@ -56,14 +55,13 @@ bindkey '' backward-delete-word
 stty kill 
 stty stop undef # disable C-s key
 
-source ~/.tcsh.d/alias.tcsh
-source ~/.tcsh.d/gauche.tcsh
+
+set plugins = (gauche panna pikkukivi fasd)
+set TCSH_THEME='default'
+source ~/.tcsh.d/oh-my-tcsh.tcsh
 
 # }}}
 
-if ( { where fasd >& /dev/null } ) then
-  eval "`fasd --init tcsh-alias tcsh-hook`"
-endif
 
 foreach f ($HOME/.complete.tcsh $HOME/perl5/perlbrew/etc/cshrc)
   if (-f $f) then

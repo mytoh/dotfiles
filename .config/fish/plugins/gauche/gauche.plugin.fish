@@ -36,8 +36,4 @@ complete -c gosh -f -a "(__gosh_completion_current_directory)" -d "files in CWD"
 #}}}
 
 
-if which gosh 1>  /dev/null
-  . $GAUCHE_SKRIPTI_DIR/gauche-alias.sh
-end
-
 #}}}

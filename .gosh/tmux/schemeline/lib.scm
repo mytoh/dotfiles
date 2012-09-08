@@ -1,12 +1,12 @@
 
-(define-module tmux.powerline.lib
+(define-module tmux.schemeline.lib
   (export
     <left-segment>
     *left-segments*
     make-segment
     )
   (use gauche.process))
-(select-module tmux.powerline.lib)
+(select-module tmux.schemeline.lib)
 
 (define-class <segment> ()
   ((function :init-value values :init-keyword :function)

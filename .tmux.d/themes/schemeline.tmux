@@ -32,5 +32,5 @@ set-option -g display-panes-colour colour166 #orange
 set-window-option -g clock-mode-colour colour64 #green
 
 # statusline
-set-option -g status-left "#(gosh ~/.gosh/tmux/powerline/status-left.scm)"
-set-option -g status-right "#(gosh ~/.gosh/tmux/powerline/status-right.scm)"
+set-option -g status-left "#(gosh ~/.gosh/tmux/schemeline/status-left.scm)"
+set-option -g status-right "#(gosh ~/.gosh/tmux/schemeline/status-right.scm)"

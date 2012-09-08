@@ -1,10 +1,10 @@
 
 
-(define-module tmux.powerline.segments.hostname
+(define-module tmux.schemeline.segments.hostname
   (export
     segment.hostname)
   (use gauche.process))
-(select-module tmux.powerline.segments.hostname)
+(select-module tmux.schemeline.segments.hostname)
 
 
 (define (print-hostname)

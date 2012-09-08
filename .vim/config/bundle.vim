@@ -112,7 +112,6 @@ else
   NeoBundle 'github:kana/vim-operator-replace'
   " NeoBundle 'github:Raimondi/delimitMate'
   NeoBundle 'github:hobbestigrou/Vim-wmfs'
-  NeoBundle 'github:aharisu/Gauche-Complete'
   NeoBundle 'github:bronson/vim-trailing-whitespace'
   NeoBundle 'github:chrisbra/SudoEdit.vim'
   NeoBundle 'github:yuratomo/w3m.vim'
@@ -162,7 +161,8 @@ else
   NeoBundle 'github:cg433n/better-c'
   "lisp
   NeoBundle 'github:emezeske/paredit.vim'
-  NeoBundle 'github:aharisu/vim_goshrepl'
+  " NeoBundle 'github:aharisu/vim_goshrepl'
+  " NeoBundle 'github:aharisu/Gauche-Complete'
   " clojure
   " NeoBundle 'bitbucket:kotarak/vimclojure', {'rtp': 'vim/src/main/vim'}
   NeoBundle 'VimClojure'
@@ -210,6 +210,7 @@ else
   NeoBundle 'github:sjl/badwolf'
   " NeoBundle 'github:nanotech/jellybeans.vim'
   NeoBundle 'github:cloudshen/jellybeans.vim'
+  NeoBundle 'github:hukl/Smyck-Color-Scheme'
   NeoBundle 'github:Lokaltog/vim-distinguished'
   NeoBundle 'github:zachwill/github.vim'
   NeoBundle 'xoria256.vim'

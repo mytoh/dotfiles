@@ -1,9 +1,9 @@
 
-(define-module tmux.powerline.segments.tmux-title
+(define-module tmux.schemeline.segments.tmux-title
   (export
     segment.tmux-title)
   (use gauche.process))
-(select-module tmux.powerline.segments.tmux-title)
+(select-module tmux.schemeline.segments.tmux-title)
 
 
 (define (segment.tmux-title)
