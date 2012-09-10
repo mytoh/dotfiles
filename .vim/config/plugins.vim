@@ -596,7 +596,7 @@ endif
 
 " paredit {{{
 let g:paredit_leader = '\'
-let g:paredit_mode = 0
+let g:paredit_mode = 1
 " }}}
 
 " haskell-mode {{{

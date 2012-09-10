@@ -22,12 +22,10 @@ xsource() { # {{{
 } #}}}
 
 
-xsource ~/.mksh.d/path.mksh
-xsource ~/.mksh.d/environment.mksh
-xsource ~/.mksh.d/function.mksh
-xsource ~/.mksh.d/prompt.mksh
-xsource ~/.mksh.d/gauche.mksh
-xsource ~/.mksh.d/alias.mksh
+
+export MKSH_THEME='gauche'
+mksh_plugins="gauche panna pikkukivi fasd"
+source ~/.mksh.d/oh-my-mksh.mksh
 
 # variables
 blue="[38;5;004m"
@@ -42,26 +40,6 @@ bind '^P'=search-history-up
 bind '^U'=kill-line
 
 # misc {{{
- # fasd {{{
-if whence -p fasd >&- ; then
-  eval "$(fasd --init posix-alias posix-hook)"
-  elif whence -p panna >&-; then
-      panna install fasd
-fi
- # }}}
-
-# if [[ -n $DISPLAY ]];then
-#   if [[ -e ~/.fonts ]]; then
-#     for d in ~/.fonts/*(/); do
-#       if [[ -e $d/fonts.dir ]]; then
-#       xset +fp $d
-#     fi
-#       xset fp rehash
-#     done
-#   fi
-# fi
-#}}}
-
 
 # os {{{
 case $(uname) in

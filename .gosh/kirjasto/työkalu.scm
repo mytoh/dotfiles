@@ -69,8 +69,8 @@
       (port-fd-dup! (standard-error-port) out))))
 
 (define (eval-string s)
-  (eval (string->symbol s)
-        (interaction-environment)))
+  (eval (read-from-string s)
+        'user))
 
 (define nothing
   (lambda ()

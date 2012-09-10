@@ -88,7 +88,7 @@ else
   NeoBundle 'github:gregsexton/MatchTag'
   NeoBundle 'github:djjcast/mirodark'
   NeoBundle 'github:houtsnip/vim-emacscommandline'
-  NeoBundle 'github:acustodioo/vim-cmdline-completion'
+  " NeoBundle 'github:acustodioo/vim-cmdline-completion'
   NeoBundle 'github:acustodioo/vim-enter-indent'
   NeoBundle 'github:h1mesuke/vim-alignta'
   NeoBundle 'github:baskerville/bubblegum'
@@ -160,7 +160,7 @@ else
   "c
   NeoBundle 'github:cg433n/better-c'
   "lisp
-  NeoBundle 'github:emezeske/paredit.vim'
+  NeoBundle 'paredit.vim'
   " NeoBundle 'github:aharisu/vim_goshrepl'
   " NeoBundle 'github:aharisu/Gauche-Complete'
   " clojure

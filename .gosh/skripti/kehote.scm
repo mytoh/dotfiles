@@ -13,9 +13,9 @@
     (cond
       ((string=? shell "tcsh")
         (string-concatenate
-          `("%{[38;5;" ,(number->string colour-number) "m%}"
+          `("[38;5;" ,(number->string colour-number) "m"
             ,s
-            "%{[0m%}")))
+            "[0m")))
       (else
         (string-concatenate
           `("[38;5;" ,(number->string colour-number) "m"
@@ -29,7 +29,7 @@
                         "~" d))))
     (rxmatch-cond
       ;; /usr/home => ~
-      (((string->regexp (string-concatenate `("/usr" ,(home-directory))))
+      (((string->regexp (str "/usr" (home-directory)))
         cwd)
        (home)
        (prettify-directory
@@ -79,10 +79,9 @@
                        (if-not (zero? status)
                          " ÷"
                          "")))))
-    (string-concatenate
-      `(,(colour-string 33 "  ♠ ")
-         ,(colour-string 82 (git-branch))
-         ,(colour-string 1  (git-darty))))))
+      (str (colour-string 33 "  ♠ ")
+         (colour-string 82 (git-branch))
+         (colour-string 1  (git-darty)))))
 
 (define (hg)
   (colour-string 33 " ⮘ ")
@@ -97,17 +96,16 @@
 
 (define (prompt status)
   (display
-    (string-concatenate
-      `(
-        ; ,(colour-string 172 "X / _ / X")
-        ,(colour-string 123 "(")
-        ,(colour-string 74 "・x・")
-        ,(colour-string 123 ")")
-        ,(colour-string 0 ".")
-        ,(colour-string 118 (car (string-split (sys-gethostname) "." )))
+      (str
+        ; (colour-string 172 "X / _ / X")
+        (colour-string 123 "(")
+        (colour-string 74 "・x・")
+        (colour-string 123 ")")
+        (colour-string 0 ".")
+        (colour-string 118 (car (string-split (sys-gethostname) "." )))
         " :: "
-        ,(directory)
-        ,(cond
+        (directory)
+        (cond
            ((file-exists? "./.hg")
             (hg))
            ((file-exists? "./.git")
@@ -118,17 +116,17 @@
             (darcs))
            (else ""))
         " "
-        ,(colour-string 95 "✘")
-        ,(colour-string 172 "╹◡╹")
-        ,(colour-string 95 "✘")
+        (colour-string 95 "✘")
+        (colour-string 172 "╹◡╹")
+        (colour-string 95 "✘")
         "\n"
-        ,(match status
+        (match status
            ("0" (str
                 (colour-string 236 "-")
                 (colour-string 238 ":")
                 (colour-string 60  ">")))
            (_ (colour-string 124 ">")))
-        " "))))
+        " ")))
 
 
 (define (main args)

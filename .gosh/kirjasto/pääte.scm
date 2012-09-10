@@ -14,10 +14,14 @@
 (select-module kirjasto.pääte)
 
 (define (screen-title command)
-  (display (string-append "k" command "\\")))
+  (cond (equal?  (sys-basename (sys-getenv "SHELL"))
+                 "tcsh")
+    (display (string-append "_" command ""))
+    (else
+      (display (string-append "k" command "\\")))))
 
 (define (window-name command)
-   (display  (string-append "]2;" command  "\a")))
+  (display  (string-append "]2;" command  "\a")))
 
 (define (print-repeat string-list inter)
   (for-each (^i (format #t (current-output-port) "~a\r" i)

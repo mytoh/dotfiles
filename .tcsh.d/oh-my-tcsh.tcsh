@@ -18,7 +18,7 @@ foreach plugin ( $plugins )
 end
 
 # load theme
-if ( -s $TCSH_THEME) then
+if ( "$TCSH_THEME" != "" ) then
  source $tcsh_themes_dir/$TCSH_THEME.theme.tcsh
 else
  source $tcsh_themes_dir/default.theme.tcsh

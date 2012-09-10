@@ -8,6 +8,8 @@ else if whence -p dfc >&-; then
 else
   alias df='df -h'
 fi
+fi
+
 alias single="sudo shutdown now"
 alias halt="sync;sync;sync;sudo shutdown -p now"
 alias reboot="sync;sync;sync;sudo shutdown -r now"

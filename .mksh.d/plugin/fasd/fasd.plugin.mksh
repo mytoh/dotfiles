@@ -1,0 +1,9 @@
+
+ # fasd {{{
+if whence -p fasd >&- ; then
+  eval "$(fasd --init posix-alias posix-hook)"
+  elif whence -p panna >&-; then
+      panna install fasd
+fi
+ # }}}
+
