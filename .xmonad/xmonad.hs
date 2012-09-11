@@ -332,7 +332,7 @@ myStartupHook = do
                 spawn bgmgr
                 spawn clipmgr
                 spawn volumemgr
-                spawn compmgr
+                -- spawn compmgr
                 {- spawn uimPanel -}
                 execScriptHook "startup"
 

@@ -129,9 +129,9 @@ set showfulltag
 
 " colors
 set t_Co=256
-set background=dark
-colorscheme molokai
-let g:molokai_original = 1
+" set background=dark
+colorscheme mycolour
+let g:molokai_original = 0
 
 " set mouse
 set mouse=a

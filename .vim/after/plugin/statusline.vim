@@ -151,7 +151,6 @@ augroup END
 "}}}
 
 function! SetHighlight(hl, fg, bg)
-  hi clear a:hl
   let command = join([
         \  'highlight',
         \  a:hl,

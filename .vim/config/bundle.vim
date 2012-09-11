@@ -196,6 +196,11 @@ else
   NeoBundle 'github:sbl/scvim'
   " brainfuck
   NeoBundle 'brainfuck-syntax'
+  " python
+  NeoBundle 'python.vim'
+  " mml
+  NeoBundle 'stephencelis/vim-mml'
+
   " colorscheme {{{
   NeoBundle 'github:paulwib/vim-colorschemes'
   NeoBundle 'github:w0ng/vim-hybrid'
@@ -228,6 +233,7 @@ else
   NeoBundle 'github:tristen/superman' " <- h2u_black
   NeoBundle 'github:jelera/vim-nazca-colorscheme'
   NeoBundle 'bitbucket:abudden/easycolour'
+  NeoBundle 'tropikos'
   "}}}
   " NeoBundle 'http://voikko.svn.sourceforge.net/svnroot/voikko/', {'type' : 'svn', 'rtp' : 'trunk/tools/vim'}
   " bitbucket
