@@ -53,6 +53,7 @@ else
   " NeoBundle 'github:rson/vim-bufstat'
   NeoBundle 'github:scrooloose/syntastic'
   NeoBundle 'github:scrooloose/nerdcommenter'
+  NeoBundle 'github:chikatoike/activefix.vim'
   NeoBundle 'github:thinca/vim-quickrun'
   NeoBundle 'github:thinca/vim-ref'
   NeoBundle 'github:thinca/vim-ambicmd'
@@ -156,17 +157,19 @@ else
   NeoBundle 'github:t9md/vim-unite-ack'
   NeoBundle 'github:Shougo/unite-ssh'
   NeoBundle 'github:hrsh7th/vim-unite-vcs'
+  NeoBundle 'github:Rykka/colorv.vim'
   " syntax
   "c
   NeoBundle 'github:cg433n/better-c'
   "lisp
   NeoBundle 'paredit.vim'
   " NeoBundle 'github:aharisu/vim_goshrepl'
-  " NeoBundle 'github:aharisu/Gauche-Complete'
+  NeoBundle 'github:aharisu/Gauche-Complete'
   " clojure
   " NeoBundle 'bitbucket:kotarak/vimclojure', {'rtp': 'vim/src/main/vim'}
-  NeoBundle 'VimClojure'
-  NeoBundle 'github:emanon001/fclojure.vim'
+  " NeoBundle 'VimClojure'
+  " NeoBundle 'github:emanon001/fclojure.vim'
+  NeoBundle 'github:thinca/vim-ft-clojure'
   "haskell
   " NeoBundle 'github:Twinside/vim-haskellConceal'
   NeoBundle 'github:Twinside/vim-syntax-haskell-cabal'
@@ -214,7 +217,7 @@ else
   NeoBundle 'github:chriskempson/vim-tomorrow-theme'
   NeoBundle 'github:sjl/badwolf'
   " NeoBundle 'github:nanotech/jellybeans.vim'
-  NeoBundle 'github:cloudshen/jellybeans.vim'
+  " NeoBundle 'github:cloudshen/jellybeans.vim'
   NeoBundle 'github:hukl/Smyck-Color-Scheme'
   NeoBundle 'github:Lokaltog/vim-distinguished'
   NeoBundle 'github:zachwill/github.vim'

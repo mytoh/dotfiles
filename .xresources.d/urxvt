@@ -42,7 +42,7 @@ urxvt.tabbed.tab-fg:    3
 urxvt.tabbed.tab-bg:    0
 
 #define FONT \
-neep-8, \
+ -artwiz-lime-medium-r-normal--10-100-75-75-m-50-iso646.1991-irv,\
 k10,k10rk,\
 9x12,\
 mplus_j10r, \
