@@ -2,10 +2,8 @@
 !-------------
 ! xterm
 ! ------------
-xterm*font: -nil-profont-medium-r-normal--10-100-72-72-c-50-iso8859-1, \
-k10,k10rk,\
-9x12,\
-mplus_j10r
+
+xterm*font: FONT
 
 xterm*utf8: always
 xterm*utf8Fonts: always

@@ -1,0 +1,23 @@
+
+#define FONT \
+-jmk-neep-medium-r-normal--10-80-75-75-c-50-*, \
+k10,k10rk,\
+9x12,\
+mplus_j10r, \
+-gnu-unifont-medium-r-normal--0-0-75-75-c-0-iso10646-1,\
+-gnu-unifont-medium-r-normal--16-160-75-75-c-80-iso10646-1,\
+-misc-code2001-medium-r-normal--0-0-0-0-p-0-iso10646-1, \
+-misc-code2001-medium-r-normal--0-0-0-0-p-0-iso8859-1, \
+-misc-code2001-medium-r-normal--0-0-0-0-p-0-iso8859-15, \
+xft:IPAMonaGothic:antialias=false,xft:Symbola
+
+#define FONT_BOLD \
+-artwiz-glispbold-bold-r-bold--11-110-75-75-p-100-iso8859-1, \
+k10b,\
+-misc-fixed-medium-r-normal--10-90-75-75-c-50-*, \
+-misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0, \
+-mplus-*-medium-r-normal--10-*-*-*-*-*-*-*, \
+k10, k10rk, k10b, \
+-aaron-*-*-*-*-*-10-*-*-*-*-*-iso8859-1, \
+xft:IPAMonaGothic:antialias=false,xft:Symbola
+

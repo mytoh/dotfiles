@@ -8,6 +8,7 @@
 
 (define *exclude-modules*
   '(gauche-init
+     gauche.auxsys
      gauche.common-macros
      gauche.let-opt
      gauche.logical
@@ -19,14 +20,15 @@
      gauche.validator
      os.windows
      srfi-14.query
-     srfi-14.set))
+     srfi-14.set
+     slib))
 
 (define *other-lispwords*
   '(
     call-with-output-file
     call-with-input-file
     with-input-from-port
-    call-with-input-string 
+    call-with-input-string
     let-args
     ))
 
@@ -84,10 +86,10 @@
     (define (print-label type)
       (print (format "    \" ~a" type)))
     (define (print-syntax target)
-      (print (format "    syn keyword schemeExtSyntax ~a" target))
+      (print (format "    syn keyword schemeGaucheExtSyntax ~a" target))
       (print (format "    set lispwords+=~a" target)))
     (define (print-func target)
-      (print (format "    syn keyword schemeExtFunc ~a" target)))
+      (print (format "    syn keyword schemeGaucheExtFunc ~a" target)))
 
     (define (print-result type printer)
       (print-label type)
@@ -121,7 +123,7 @@
 (define (print-lispwords lst)
   (print (format "    \" ~a" "other lispwords"))
   (for-each
-    (^k (print (format "    set lispwords+=~a" k)) )
+    (^k (print (format "    set lispwords+=~a" k)))
     lst))
 
 

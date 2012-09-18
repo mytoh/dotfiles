@@ -27,6 +27,9 @@ elseif exists("b:current_syntax")
   finish
 endif
 
+let s:cpo_save = &cpo
+set cpo&vim
+
 syn case ignore
 
 " this defines first for nested srfi-62 comment
@@ -74,9 +77,9 @@ syn region schemeUnquote matchgroup=Delimiter start=",@#\[" end="\]" contains=AL
 " R5RS Scheme Functions and Syntax:
 
 if version < 600
-  set iskeyword=33,35-38,42,43,45-58,60-90,94,95,97-122,126,_,\.
+  set iskeyword=33,35-39,42,43,45-58,60-90,94,95,97-122,126,_,\.
 else
-  setlocal iskeyword=33,35-38,42,43,45-58,60-90,94,95,97-122,126,_,\.
+  setlocal iskeyword=33,35-39,42,43,45-58,60-90,94,95,97-122,126,_,\.
 endif
 
 set lispwords=
@@ -88,6 +91,8 @@ syn keyword schemeSyntax lambda and or if cond case define let let* letrec
 syn keyword schemeSyntax begin do delay set! else =>
 syn keyword schemeSyntax quote quasiquote unquote unquote-splicing
 syn keyword schemeSyntax define-syntax let-syntax letrec-syntax syntax-rules
+" R6RS
+syn keyword schemeSyntax define-record-type fields protocol
 
 syn keyword schemeFunc not boolean? eq? eqv? equal? pair? cons car cdr set-car!
 syn keyword schemeFunc set-cdr! caar cadr cdar cddr caaar caadr cadar caddr
@@ -126,6 +131,15 @@ syn keyword schemeFunc char-ready? load transcript-on transcript-off eval
 syn keyword schemeFunc dynamic-wind port? values call-with-values
 syn keyword schemeFunc scheme-report-environment null-environment
 syn keyword schemeFunc interaction-environment
+" R6RS
+syn keyword schemeFunc make-eq-hashtable make-eqv-hashtable make-hashtable
+syn keyword schemeFunc hashtable? hashtable-size hashtable-ref hashtable-set!
+syn keyword schemeFunc hashtable-delete! hashtable-contains? hashtable-update!
+syn keyword schemeFunc hashtable-copy hashtable-clear! hashtable-keys
+syn keyword schemeFunc hashtable-entries hashtable-equivalence-function hashtable-hash-function
+syn keyword schemeFunc hashtable-mutable? equal-hash string-hash string-ci-hash symbol-hash
+syn keyword schemeFunc find for-all exists filter partition fold-left fold-right
+syn keyword schemeFunc remp remove remv remq memp assp cons*
 
 " ... so that a single + or -, inside a quoted context, would not be
 " interpreted as a number (outside such contexts, it's a schemeFunc)
@@ -164,6 +178,7 @@ syn region schemeString start=+\%(\\\)\@<!"+ skip=+\\[\\"]+ end=+"+
 
 " Comments:
 
+syn match	schemeComment	";.*$" contains=@Spell
 syn match	schemeSrfi62Comment	oneline    ,#;[a-z!$%&*/:<=>?^_~+@#%-][-a-z!$%&*/:<=>?^_~0-9+.@#%]*,
 syn match	schemeError		oneline    ,#;[a-z!$%&*/:<=>?^_~+@#%-][-a-z!$%&*/:<=>?^_~0-9+.@#%]*[^-a-z!$%&*/:<=>?^_~0-9+.@ \t\[\]()";]\+[^ \t\[\]()";]*,
 syn match	schemeSrfi62Comment	oneline    ,#;['`][a-z!$%&*/:<=>?^_~+@#%-][-a-z!$%&*/:<=>?^_~0-9+.@#%]*,
@@ -194,25 +209,25 @@ syn match	schemeError	oneline    "+nan\.0[^-#+/0-9a-f@i.boxesfdl \t\[\]()";][^ \
 syn match	schemeBoolean	oneline    "#[tf]"
 syn match	schemeError	oneline    !#[tf][^ \t\[\]()";]\+!
 
-syn match	schemeChar	oneline    "#\\"
-syn match	schemeChar	oneline    "#\\."
+syn match	schemeCharacter	oneline    "#\\"
+syn match	schemeCharacter	oneline    "#\\."
 syn match	schemeError	oneline    !#\\.[^ \t\[\]()";]\+!
-syn match	schemeChar	oneline    "#\\space"
+syn match	schemeCharacter	oneline    "#\\space"
 syn match	schemeError	oneline    !#\\space[^ \t\[\]()";]\+!
-syn match	schemeChar	oneline    "#\\newline"
+syn match	schemeCharacter	oneline    "#\\newline"
 syn match	schemeError	oneline    !#\\newline[^ \t\[\]()";]\+!
 
 if exists("b:is_mzscheme") || exists("is_mzscheme")
     " MzScheme extensions
     " multiline comment
-    syn region	schemeComment start="#|" end="|#"
+    syn region	schemeComment start="#|" end="|#" contains=@Spell
 
     " #%xxx are the special MzScheme identifiers
     syn match schemeOther oneline    "#%[-a-z!$%&*/:<=>?^_~0-9+.@#%]\+"
     " anything limited by |'s is identifier
     syn match schemeOther oneline    "|[^|]\+|"
 
-    syn match	schemeChar	oneline    "#\\\%(return\|tab\)"
+    syn match	schemeCharacter	oneline    "#\\\%(return\|tab\)"
 
     " Modules require stmt
     syn keyword schemeExtSyntax module require dynamic-require lib prefix all-except prefix-all-except rename
@@ -263,10 +278,10 @@ endif
 
 if exists("b:is_chicken") || exists("is_chicken")
     " multiline comment
-    syntax region schemeMultilineComment start=/#|/ end=/|#/ contains=schemeMultilineComment,schemeTodo
+    syntax region schemeMultilineComment start=/#|/ end=/|#/ contains=@Spell,schemeMultilineComment,schemeTodo
 
-    syn match schemeOther oneline    "##[-a-z!$%&*/:<=>?^_~0-9+.@#%]\+"
-    syn match schemeExtSyntax oneline    "#:[-a-z!$%&*/:<=>?^_~0-9+.@#%]\+"
+    syn match schemeOther "##[-a-z!$%&*/:<=>?^_~0-9+.@#%]\+"
+    syn match schemeExtSyntax "#:[-a-z!$%&*/:<=>?^_~0-9+.@#%]\+"
 
     syn keyword schemeExtSyntax unit uses declare hide foreign-declare foreign-parse foreign-parse/spec
     syn keyword schemeExtSyntax foreign-lambda foreign-lambda* define-external define-macro load-library
@@ -278,8 +293,8 @@ if exists("b:is_chicken") || exists("is_chicken")
     syn keyword schemeExtFunc ##core#inline ##sys#error ##sys#update-errno
 
     " here-string
-    syn region schemeString start=+#<<\s*\z(.*\)+ end=+^\z1$+
- 
+    syn region schemeString start=+#<<\s*\z(.*\)+ end=+^\z1$+ contains=@Spell
+
     if filereadable(expand("<sfile>:p:h")."/cpp.vim")
 	unlet! b:current_syntax
 	syn include @ChickenC <sfile>:p:h/cpp.vim
@@ -297,69 +312,19 @@ if exists("b:is_chicken") || exists("is_chicken")
     endif
 
     " suggested by Alex Queiroz
-    syn match schemeExtSyntax oneline    "#![-a-z!$%&*/:<=>?^_~0-9+.@#%]\+"
-    syn region schemeString start=+#<#\s*\z(.*\)+ end=+^\z1$+ 
+    syn match schemeExtSyntax "#![-a-z!$%&*/:<=>?^_~0-9+.@#%]\+"
+    syn region schemeString start=+#<#\s*\z(.*\)+ end=+^\z1$+ contains=@Spell
 endif
 
 
 if exists("b:is_gauche") || exists("is_gauche")
-    " Gauche extensions
-    " multiline comment
-    syntax region schemeMultilineComment start=/#|/ end=/|#/ contains=schemeMultilineComment,schemeTodo
+call gauche#syntax#define_keywords()
 
-    " #/xxx/ are the special Gauche identifiers for regexp
-    syn region schemeRegexp start=+\%(\\\)\@<!#/+ skip=+\\[\\/]+ end=+/+
+" this part was auto-generated.
+##gauche-define##
 
-    " anything limited by |'s is identifier
-    syn match schemeOther oneline    "|[^|]\+|"
-
-    " SharpBang
-    syn match	schemeSharpBang	oneline    "#!.*"
-
-    " include (use hoge)
-    syn match	schemeInclude	oneline    "(use .*)"
-    syn match	schemeInclude	oneline    "(require .*)"
-    syn match	schemeInclude	oneline    "(import .*)"
-
-    " misc
-    syn match	schemeInterpolation	oneline    "#`"
-    syn match	schemeInterpolation	oneline    "#?="
-
-    " char
-    "syn match	schemeChar	oneline    "#\\space"
-    "syn match	schemeError	oneline    !#\\space[^ \t\[\]()";]\+!
-    "syn match	schemeChar	oneline    "#\\newline"
-    "syn match	schemeError	oneline    !#\\newline[^ \t\[\]()";]\+!
-    syn match	schemeChar	oneline    "#\\nl"
-    syn match	schemeError	oneline    !#\\nl[^ \t\[\]()";]\+!
-    syn match	schemeChar	oneline    "#\\lf"
-    syn match	schemeError	oneline    !#\\lf[^ \t\[\]()";]\+!
-    syn match	schemeChar	oneline    "#\\return"
-    syn match	schemeError	oneline    !#\\return[^ \t\[\]()";]\+!
-    syn match	schemeChar	oneline    "#\\cr"
-    syn match	schemeError	oneline    !#\\cr[^ \t\[\]()";]\+!
-    syn match	schemeChar	oneline    "#\\tab"
-    syn match	schemeError	oneline    !#\\tab[^ \t\[\]()";]\+!
-    syn match	schemeChar	oneline    "#\\ht"
-    syn match	schemeError	oneline    !#\\ht[^ \t\[\]()";]\+!
-    syn match	schemeChar	oneline    "#\\page"
-    syn match	schemeError	oneline    !#\\page[^ \t\[\]()";]\+!
-    syn match	schemeChar	oneline    "#\\esc"
-    syn match	schemeError	oneline    !#\\esc[^ \t\[\]()";]\+!
-    syn match	schemeChar	oneline    "#\\escape"
-    syn match	schemeError	oneline    !#\\escape[^ \t\[\]()";]\+!
-    syn match	schemeChar	oneline    "#\\del"
-    syn match	schemeError	oneline    !#\\del[^ \t\[\]()";]\+!
-    syn match	schemeChar	oneline    "#\\delete"
-    syn match	schemeError	oneline    !#\\delete[^ \t\[\]()";]\+!
-    syn match	schemeChar	oneline    "#\\null"
-    syn match	schemeError	oneline    !#\\null[^ \t\[\]()";]\+!
-
-    " this part was auto-generated.
-    ##gauche-define##
-
-    " meddlesome
-    set ts=8 sts=2 sw=2 et nocindent lisp
+" meddlesome
+set ts=8 sts=2 sw=2 et nocindent lisp
 endif
 
 
@@ -368,43 +333,10 @@ endif
 syn sync match matchPlace grouphere NONE "^[^ \t]"
 " ... i.e. synchronize on a line that starts at the left margin
 
-" Define the default highlighting.
-" For version 5.7 and earlier: only when not done already
-" For version 5.8 and later: only when an item doesn't have highlighting yet
-if version >= 508 || !exists("did_scheme_syntax_inits")
-  if version < 508
-    let did_scheme_syntax_inits = 1
-    command -nargs=+ HiLink hi link <args>
-  else
-    command -nargs=+ HiLink hi def link <args>
-  endif
-
-  HiLink schemeSyntax		Statement
-  HiLink schemeFunc		Function
-
-  HiLink schemeString		String
-  HiLink schemeChar		Character
-  HiLink schemeNumber		Number
-  HiLink schemeBoolean		Boolean
-
-  HiLink schemeDelimiter	Delimiter
-  HiLink schemeConstant		Constant
-
-  HiLink schemeComment		Comment
-  HiLink schemeMultilineComment	Comment
-  HiLink schemeTodo             Todo
-  HiLink schemeError		Error
-
-  HiLink schemeExtSyntax	Type
-  HiLink schemeExtFunc		PreProc
-
-  HiLink schemeRegexp		schemeString
-  HiLink schemeSrfi62Comment	schemeComment
-  HiLink schemeSharpBang	Special
-  HiLink schemeInclude		Include
-  HiLink schemeInterpolation	Debug
-
-  delcommand HiLink
-endif
+call scheme#syntax#define_highligts()
 
 let b:current_syntax = "scheme"
+
+let &cpo = s:cpo_save
+unlet s:cpo_save
+" vim:filetype=vim

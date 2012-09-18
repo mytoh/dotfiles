@@ -4,6 +4,8 @@
 // @include        http://may.2chan.net/b/*
 // ==/UserScript==
 
+
+
 (function(){
  var tds = document.getElementsByTagName('td');
  for(var i in tds)
@@ -16,6 +18,7 @@
 
  // reload page every 1 minute
  setTimeout("location.reload()", 60000);
+
 
 })();
 

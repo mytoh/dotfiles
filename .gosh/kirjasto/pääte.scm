@@ -24,7 +24,7 @@
   (display  (string-append "]2;" command  "\a")))
 
 (define (print-repeat string-list inter)
-  (for-each (^i (format #t (current-output-port) "~a\r" i)
+  (for-each (^i (format #t  "~a\r" i)
               (flush)
               (sys-select #f #f #f inter))
             string-list))

@@ -94,17 +94,24 @@
   (lambda ()
     (colour-string 33 " darcs ")))
 
-(define (prompt status)
-  (display
-      (str
-        ; (colour-string 172 "X / _ / X")
+(define (segment.muridana)
+  (str
         (colour-string 123 "(")
         (colour-string 74 "・x・")
         (colour-string 123 ")")
         (colour-string 0 ".")
-        (colour-string 118 (car (string-split (sys-gethostname) "." )))
-        " :: "
-        (directory)
+        (colour-string 118 (car (string-split (sys-gethostname) "." ))))
+  )
+
+(define (segment.yuno)
+  (str
+        ; (colour-string 172 "X / _ / X")
+        (colour-string 95 "✘")
+        (colour-string 172 "╹◡╹")
+        (colour-string 95 "✘")
+    ))
+
+(define (segment.scm)
         (cond
            ((file-exists? "./.hg")
             (hg))
@@ -114,18 +121,31 @@
             (svn))
            ((file-exists? "./_darcs")
             (darcs))
-           (else ""))
-        " "
-        (colour-string 95 "✘")
-        (colour-string 172 "╹◡╹")
-        (colour-string 95 "✘")
-        "\n"
+           (else "")))
+
+(define (segment.promptchar status)
         (match status
            ("0" (str
                 (colour-string 236 "-")
                 (colour-string 238 ":")
                 (colour-string 60  ">")))
-           (_ (colour-string 124 ">")))
+           (_ (colour-string 124 "->"))))
+
+
+(define (segment.directory)
+  (directory))
+
+(define (prompt status)
+  (display
+      (str
+        (segment.muridana)
+        " :: "
+        (segment.directory)
+        (segment.scm)
+        " "
+        (segment.yuno)
+        "\n"
+        (segment.promptchar status)
         " ")))
 
 

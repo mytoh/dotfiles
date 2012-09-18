@@ -129,7 +129,7 @@ else
   NeoBundle 'vim2ansi'
   NeoBundle 'github:majutsushi/tagbar'
   NeoBundle 'github:nefo-mi/nyan-modoki.vim'
-  NeoBundle 'github:coderifous/textobj-word-column.vim'
+  " NeoBundle 'github:coderifous/textobj-word-column.vim'
   NeoBundle 'github:spolu/dwm.vim'
   NeoBundle 'sherlock.vim'
   " tmux
@@ -164,7 +164,7 @@ else
   "lisp
   NeoBundle 'paredit.vim'
   " NeoBundle 'github:aharisu/vim_goshrepl'
-  NeoBundle 'github:aharisu/Gauche-Complete'
+  " NeoBundle 'github:aharisu/Gauche-Complete'
   " clojure
   " NeoBundle 'bitbucket:kotarak/vimclojure', {'rtp': 'vim/src/main/vim'}
   " NeoBundle 'VimClojure'

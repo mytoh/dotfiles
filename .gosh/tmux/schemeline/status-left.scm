@@ -3,10 +3,14 @@
 (use gauche.process)
 (use file.util)
 (use tmux.schemeline.segments)
+(use tmux.schemeline.lib)
 
 (define (main args)
   (print
-  (string-append "#[fg=colour234,bg=colour148]" (segment.tmux-session) "#[default]"))
+    (string-append
+      (make-segment "234" "148" segment.tmux-session)
+      ; (make-segment "255" "24" segment.lan-ip)
+      ))
   )
 
 

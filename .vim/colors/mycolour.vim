@@ -22,7 +22,7 @@ endfunction
 
 hi Normal       ctermfg=188 ctermbg=234   
 hi CursorLine               ctermbg=234   cterm=none
-hi Boolean         ctermfg=135
+hi Boolean         ctermfg=204
 hi Character       ctermfg=144
 hi Number          ctermfg=135
 hi String          ctermfg=144
@@ -45,7 +45,7 @@ hi Exception       ctermfg=118               cterm=bold
 hi Float           ctermfg=135
 hi FoldColumn      ctermfg=67  ctermbg=16
 hi Folded          ctermfg=67  ctermbg=16
-hi Function        ctermfg=118
+hi Function        ctermfg=172
 hi Identifier      ctermfg=208               cterm=none
 hi Ignore          ctermfg=244 ctermbg=232
 hi IncSearch       ctermfg=193 ctermbg=16
@@ -55,7 +55,7 @@ hi Label           ctermfg=229               cterm=none
 hi Macro           ctermfg=193
 hi SpecialKey      ctermfg=81
 
-hi MatchParen      ctermfg=16  ctermbg=208 cterm=bold
+hi MatchParen      ctermfg=16  ctermbg=116 cterm=bold
 hi ModeMsg         ctermfg=229
 hi MoreMsg         ctermfg=229
 hi Operator        ctermfg=161
@@ -67,7 +67,7 @@ hi PmenuSbar                   ctermbg=232
 hi PmenuThumb      ctermfg=81
 
 hi PreCondit       ctermfg=118               cterm=bold
-hi PreProc         ctermfg=118
+hi PreProc         ctermfg=112
 hi Question        ctermfg=81
 hi Repeat          ctermfg=161               cterm=bold
 hi Search          ctermfg=253 ctermbg=66
@@ -87,7 +87,7 @@ hi Tag             ctermfg=161
 hi Title           ctermfg=166
 hi Todo            ctermfg=231 ctermbg=232   cterm=bold
 
-hi Typedef         ctermfg=81
+hi Typedef         ctermfg=80
 hi Type            ctermfg=81                cterm=none
 hi Underlined      ctermfg=244               cterm=underline
 

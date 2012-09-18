@@ -1,8 +1,6 @@
 
 
-
-
-set plugins = (gauche panna pikkukivi fasd)
+set plugins = (gauche panna pikkukivi fasd lehti)
 set TCSH_THEME='gauche'
 source ~/.tcsh.d/oh-my-tcsh.tcsh
 

@@ -5,6 +5,8 @@ xft.hintstyle: hintslight
 
 Xcursor.theme: whiteglass
 
+#include ".xresources.d/font"
+
 #include ".xresources.d/urxvt"
 
 
