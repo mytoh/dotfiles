@@ -216,6 +216,7 @@ let g:unite_split_rule = "belowright"
 let g:unite_source_file_mru_filename_format = ''
 let g:unite_source_file_mru_time_format = ''
 let g:unite_cursor_line_highlight = 'uniteTabLineSel'
+let g:unite_source_file_mru_limit = 1000
 " let g:unite_abbr_highlight = 'TabLine'
 highlight uniteTabLineSel cterm=bold   ctermbg=235
 

@@ -13,3 +13,5 @@ set catalog=ja.ayanami.cat
 setenv NLSPATH ~/local/lib/tcsh/%N
 setenv RLWRAP_HOME ~/.rlwrap
 setenv _JAVA_OPTIONS '-Dawt.useSystemAAFontSettings=on'
+
+setenv CURRENT_SHELL tcsh

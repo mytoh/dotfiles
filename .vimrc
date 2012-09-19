@@ -32,7 +32,7 @@ set secure
 " make install clean distclean
 
 "" umlaut characters
-" ^v228 ä
+" ^v228 ^vu00e4 ä
 " ^v246 ö
 " ^v235 ë
 
@@ -42,3 +42,5 @@ set secure
 " :AnsiEsc
 
 " vim:set foldmethod=marker:
+
+

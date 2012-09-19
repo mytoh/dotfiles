@@ -6,6 +6,8 @@ ulimit -c 0
 set -ge PATH
 set -gx PATH  /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/ $PATH
 
+set -x CURRENT_SHELL fish
+
 push-to-path $HOME/.config/fish/bin
 
 # gentoo prefix {{{

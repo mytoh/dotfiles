@@ -1,0 +1,18 @@
+
+/* freebsd forum */
+@-moz-document domain("forums.freebsd.org") {
+  body, table, tbody, thead, tr, td, thead, div, a {
+    font-family: "Verdana";
+    background-image: none !important;
+    background-color: #121212 !important;
+    color: #777777 !important;
+  }
+
+  .tborder {
+    background-color: #121212 !important;
+  }
+  strong {
+    color: #a8b888 !important;
+  }
+}
+
