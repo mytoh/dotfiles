@@ -150,6 +150,7 @@ else
   NeoBundle 'github:osyo-manga/unite-homo'
   NeoBundle 'github:osyo-manga/unite-u-nya-'
   NeoBundle 'github:osyo-manga/unite-quickfix'
+  NeoBundle 'github:osyo-manga/shabadou.vim'
   NeoBundle 'github:tsukkee/unite-tag'
   " NeoBundle 'github:Sixeight/unite-grep'
   NeoBundle 'github:pasela/unite-webcolorname'
