@@ -183,6 +183,7 @@ else
   NeoBundle 'github:dag/vim2hs'
   "javascript
   NeoBundle 'github:jelera/vim-javascript-syntax'
+  NeoBundle 'github:pangloss/vim-javascript'
   NeoBundle 'github:teramako/jscomplete-vim'
   NeoBundle 'jsbeautify'
   " css
