@@ -1,9 +1,5 @@
 
-.vim/after
-.vim/config
-.vim/snippets
-.vim/colors
-.vim/filetype.vim
+.vim
 .config/fish/config.fish
 .config/fish/freebsd.fish
 .config/fish/mac.fish

@@ -53,19 +53,27 @@ function! GetCharHighlightGroup()
   return highlights
 endfunction
 
-let s:statusline_mode_i = 'insert'
-let s:statusline_mode_R = 'replace'
-let s:statusline_mode_n = 'normal'
-let s:statusline_mode_v = 'visual'
-let s:statusline_mode_V = 'lvisual'
-let s:statusline_mode_cv = 'cvisual'
-let s:statusline_mode_s = 'select'
-let s:statusline_mode_S = 'lselect'
-let s:statusline_mode_cs = 'cselect'
 let s:statusline_mode_unite_insert = 'U.insert'
 let s:statusline_mode_unite_normal = 'U.normal'
 let s:statusline_mode_vimfiler_insert = 'Vf.insert'
 let s:statusline_mode_vimfiler_normal = 'Vf.normal'
+
+let s:status_sign = {
+      \ 'i': 'insert',
+      \ 'R': 'replace',
+      \ 'n': 'normal',
+      \ 'v': 'visual',
+      \ 'V': 'lvisual',
+      \ 'cv': 'cvisual',
+      \ 's': 'select',
+      \ 'S': 'lselect',
+      \ 'cs': 'cselect',
+      \}
+
+function! StatusSign(group, fg, bg, mode)
+  call SetHighlight(a:group, a:fg, a:bg)
+  call get(s:status_sign, a:mode)
+endfunction
 
 " add hook to change mode highlight {{{
 function! Statusmode()
@@ -113,29 +121,32 @@ function! Statusmode()
     if curmode == 'i'
       call SetHighlight('User9', 45, 194)
       call SetHighlight('StatusLine', 39, 224)
-      return s:statusline_mode_i
+      return s:status_sign.i
     elseif curmode == 'n'
       call SetHighlight('User9', 18, 154)
       call SetHighlight('StatusLine', 18, 234)
-      return s:statusline_mode_n
+      return s:status_sign.n
     elseif curmode == 'v'
       call SetHighlight('User9', 18, 94)
-      return s:statusline_mode_v
+      return s:status_sign.v
     elseif curmode == 'V'
       call SetHighlight('User9', 18, 94)
-      return s:statusline_mode_V
+      return s:status_sign.V
     elseif curmode == 'cv'
       call SetHighlight('User9', 18, 94)
-      return s:statusline_mode_cv
+      return s:status_sign.cv
     elseif curmode == 's'
-      call SetHighlight('User9', 18, 94)
-      return s:statusline_mode_s
+      call SetHighlight('User9', 18, 34)
+      return s:status_sign.s
     elseif curmode == 'S'
-      call SetHighlight('User9', 18, 94)
-      return s:statusline_mode_S
+      call SetHighlight('User9', 18, 34)
+      return s:status_sign.S
     elseif curmode == 'cs'
-      call SetHighlight('User9', 18, 94)
-      return s:statusline_mode_cs
+      call SetHighlight('User9', 18, 34)
+      return s:status_sign.cs
+    elseif curmode == 'R'
+      call SetHighlight('User9', 18, 53)
+      return s:status_sign.R
     else
       call SetHighlight('User9', 18, 154)
       return curmode
@@ -165,54 +176,8 @@ endfunction
 
 " active status {{{
 
-let s:segment = {}
 
-let s:segment.curpath  = join([
-      \ '%3*'. '%{fnamemodify(getcwd(),":~")}' . '%*',
-      \])
 
-let s:segment.curmode = join([
-      \  '%9*' . '%{Statusmode()}'. '%0*',
-      \])
-
-let s:segment.fileinfo = '%3*' .
-      \ join([
-        \  '%{&dictionary}',
-        \  '%<',
-        \  '%{&fileformat}',
-        \  '<',
-        \  '%{&fileencoding}',
-        \  '<',
-        \  '%{&filetype}',
-        \]) . '%0*'
-
-let s:segment.charcode = '%6*' .
-        \ join([
-        \  '%{GetCharCode()}',
-        \])
-
-let s:segment.ruler = join([
-      \ '%7*',
-      \ '%3p%%',
-      \  '%c' . ',' . '%l/%L' . '%0*',
-      \])
-
-let s:segment.hahhah = join([
-      \ '%4*',
-      \ '%{g:HahHah()}' . '%*',
-      \])
-
-let s:segment.fugitive = join([
-      \ '%6*' . '%{fugitive#statusline()}' . '%0*',
-      \])
-
-let s:segment.syntastic = join([
-      \ '%7*' . '%{SyntasticStatuslineFlag()}' . '%0*',
-      \])
-
-let s:segment.charhighlight = join([
-      \ '%9*' . '%{GetCharHighlightGroup()}' . '%0*',
-      \])
 
 function! SetActiveStatusLine()
   " setl stl=""
@@ -223,21 +188,21 @@ function! MakeActiveStatusLine()
   " left
 
   let left  = join([
-        \  s:segment.curmode,
+        \  mystatus#segment('curmode'),
         \  '%2*',
         \  '%t',
-        \  s:segment.curpath,
-        \  s:segment.fugitive,
-        \  s:segment.syntastic,
+        \  mystatus#segment('curpath'),
+        \  mystatus#segment('fugitive'),
+        \  mystatus#segment('syntastic'),
         \])
 
   " right
   let right = join([
-        \   s:segment.hahhah,
-        \   s:segment.fileinfo,
-        \   s:segment.charcode,
-        \   s:segment.charhighlight,
-        \   s:segment.ruler,
+        \   mystatus#segment('hahhah'),
+        \   mystatus#segment('fileinfo'),
+        \   mystatus#segment('charcode'),
+        \   mystatus#segment('charhighlight'),
+        \   mystatus#segment('ruler'),
         \])
   return left . '%=' . right
 endfunction

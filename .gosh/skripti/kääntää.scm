@@ -37,7 +37,6 @@
       (string-append
         text
         " -> "
-        (colour-string 123 translated)
-        ))))
+        (colour-string 123 translated)))))
 
 ; http://translate.google.com/translate_a/t?client=t&ie=UTF-8&text=talikko&sl=fi&tl=en
