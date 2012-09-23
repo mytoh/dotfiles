@@ -1,54 +1,62 @@
 
-.vim
-.config/fish/config.fish
-.config/fish/freebsd.fish
-.config/fish/mac.fish
-.config/fish/voi-minun-fish.fish
-.config/fish/lib
-.config/fish/plugins
-.config/fish/themes
-.config/feh/buttons
-.config/feh/keys
-.config/feh/themes
-.mksh.d
-.gosh
-.aa
-.dwm
-.ncmpc
-.site
-.stumpwm.d
-.tcsh.d
-.tmux.d
-.tmux.conf
-.xcolours
-.zsh.d
-.Xresources
-.xresources.d
-.bash_profile
-.bashrc
-.complete.tcsh
-.emacs-w3m
-.gaucherc
-.gtkrc.mine
-.inputrc
-.mkshrc
-.ls
-.mpdconf
-.pentadactylrc
-.portmasterrc
-.qvwm-theme
-.qvwmrc
-.rcrc
-.rtorrent.rc
-.screenrc
-.stumpwmrc
-.tcshrc
-.vimperatorrc
-.vimrc
-.vimshrc
-.xinitrc
-.xmodmaprc
-.xmonad/xmonad.hs
-.zshrc
-.dzen
-.rlwrap/gosh_completions
+("~/local/git/dotfiles"
+ ( ".vim"
+  ".config/fish/config.fish"
+  ".config/fish/freebsd.fish"
+  ".config/fish/mac.fish"
+  ".config/fish/voi-minun-fish.fish"
+  ".config/fish/lib"
+  ".config/fish/plugins"
+  ".config/fish/themes"
+  ".config/feh/buttons"
+  ".config/feh/keys"
+  ".config/feh/themes"
+  ".mksh.d"
+  ".gosh"
+  ".aa"
+  ".dwm"
+  ".ncmpc"
+  ".site"
+  ".stumpwm.d"
+  ".tcsh.d"
+  ".tmux.d"
+  ".tmux.conf"
+  ".xcolours"
+  ".zsh.d"
+  ".Xresources"
+  ".xresources.d"
+  ".bash_profile"
+  ".bashrc"
+  ".bash.d"
+  ".complete.tcsh"
+  ".emacs-w3m"
+  ".w3m/config"
+  ".w3m/keymap"
+  ".w3m/mailcap"
+  ".gaucherc"
+  ".gtkrc.mine"
+  ".inputrc"
+  ".mkshrc"
+  ".ls"
+  ".mpdconf"
+  ".pentadactylrc"
+  ".portmasterrc"
+  ".qvwm-theme"
+  ".qvwmrc"
+  ".rcrc"
+  ".rtorrent.rc"
+  ".screenrc"
+  ".stumpwmrc"
+  ".tcshrc"
+  ".vimperatorrc"
+  ".vimrc"
+  ".vimshrc"
+  ".xinitrc"
+  ".xmodmaprc"
+  ".xmonad/xmonad.hs"
+  ".zshrc"
+  ".dzen"
+  ".rlwrap/gosh_completions"
+  ))
+
+;; vim:filetype=scheme

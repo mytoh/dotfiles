@@ -1,2 +1,2 @@
 
-PS1="$(gosh prompt.scm)"
+PS1="$(kehote 0)"

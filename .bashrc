@@ -8,6 +8,7 @@ HISTFILESIZE=100000
 
 source ~/.bash.d/gauche.bash
 source ~/.bash.d/prompt.bash
+source ~/.bash.d/lehti.bash
 
 case ${OSTYPE} in
   # FreeBSD) source ~/.bash.d/freebsd.bash ;;

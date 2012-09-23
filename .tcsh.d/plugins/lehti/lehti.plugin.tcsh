@@ -1,6 +1,6 @@
 
 
 # lehti {{{
-setenv LEHTIDIR  "$HOME/.lehti"
-source $LEHTIDIR/etc/setup.tcsh
+setenv LEHTI_DIR  "$HOME/.lehti"
+source $LEHTI_DIR/etc/setup.tcsh
 #}}}

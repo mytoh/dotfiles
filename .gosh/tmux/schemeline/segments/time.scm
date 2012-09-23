@@ -8,8 +8,25 @@
 
 
 (define (print-date)
- (date->string (current-date)
-              "~a < ~Y-~m-~d < ~H:~M.~S"))
+  (string-append
+    (week)
+    " #[fg=colour122]> #[default]"
+    (months)
+    " #[fg=colour122]> #[default]"
+    (now)
+    ))
+
+(define (week)
+  (date->string (current-date)
+                "~a"))
+
+(define (months)
+  (date->string (current-date)
+                "~m/~d"))
+
+(define (now)
+  (date->string (current-date)
+                "~H:~M"))
 
 (define (segment.time)
   (print-date))

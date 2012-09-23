@@ -1,10 +1,9 @@
 
 
 set plugins = (gauche panna pikkukivi fasd lehti)
-set TCSH_THEME='gauche'
+set TCSH_THEME = 'kehote'
 source ~/.tcsh.d/oh-my-tcsh.tcsh
 
-# }}}
 
 
 foreach f ($HOME/.complete.tcsh $HOME/perl5/perlbrew/etc/cshrc)

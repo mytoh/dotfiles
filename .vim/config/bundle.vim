@@ -185,7 +185,9 @@ else
   NeoBundle 'github:jelera/vim-javascript-syntax'
   NeoBundle 'github:pangloss/vim-javascript'
   NeoBundle 'github:teramako/jscomplete-vim'
-  NeoBundle 'jsbeautify'
+  NeoBundle 'github:einars/js-beautify'
+  NeoBundle 'github:maksimr/vim-jsbeautify'
+  NeoBundle 'JSON.vim'
   " css
   NeoBundle 'github:hail2u/vim-css3-syntax'
   NeoBundle 'github:skammer/vim-css-color'

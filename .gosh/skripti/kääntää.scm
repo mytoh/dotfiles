@@ -9,7 +9,7 @@
 (require-extension (srfi 13))
 
 
-(define translate
+(define get-google-translate
   (lambda (sl tl text)
     (rxmatch->string #/\"([^\"]*)\"/
                      (string-delete
@@ -25,18 +25,22 @@
                            2)
                          "iso-8859-1")
                        #[\[\],])
-                     1) ) )
+                     1)) )
 
-(define (main args)
+(define (google-translate args)
   (let* ((source-lang (cadr args))
          (target-lang   (caddr args))
          (text      (cadddr args))
-         (translated (translate source-lang target-lang text))
+         (translated (get-google-translate source-lang target-lang text))
          )
     (print
       (string-append
         text
         " -> "
         (colour-string 123 translated)))))
+
+(define (sanakirja word)
+  )
+
 
 ; http://translate.google.com/translate_a/t?client=t&ie=UTF-8&text=talikko&sl=fi&tl=en

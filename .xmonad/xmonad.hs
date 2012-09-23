@@ -131,6 +131,7 @@ myTabFont  = "-*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*"
 myXPFont   = "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1"
 -- myDzenFont = "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1"
 myDzenFont = "-nil-profont-medium-r-normal--10-100-72-72-c-50-iso8859-1"
+-- myDzenFont = "-jmk-neep-medium-r-normal--10-80-75-75-c-50-*"
 
 -- Layouts ------------------------------------------
 myLayoutHook =  avoidStruts                $
@@ -146,13 +147,13 @@ myLayoutHook =  avoidStruts                $
 --                 collectiveLayouts = tabbed ||| twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex
                    collectiveLayouts = twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex
 
-                   full    = renamed [Replace "*"] (smartBorders (withBorder 1 (dwmStyle shrinkText myTheme Full)))
-                   tile    = renamed [Replace "+"] (smartBorders (withBorder 1 (limitWindows 5 (ResizableTall 1 0.03 0.5 []))))
+                   full    = renamed [Replace "*"] $ smartBorders $ withBorder 1 $ dwmStyle shrinkText myTheme Full
+                   tile    = renamed [Replace "+"] $ smartBorders $ withBorder 1 $ limitWindows 5 $ ResizableTall 1 0.03 0.5 []
                    -- tabbed  = renamed [Replace "="] (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedBottomAlways shrinkText myTheme)))
-                   twopane = renamed [Replace "-"] (smartBorders (withBorder 1 (TwoPane 0.02 0.4)))
-                   mosaic  = renamed [Replace "%"] (smartBorders (withBorder 1 (MosaicAlt M.empty)))
-                   sprl    = renamed [Replace "@"] (smartBorders (withBorder 1 (limitWindows 5 (spiral gratio))))
-                   onebig  = renamed [Replace "#"] (smartBorders (withBorder 1 (limitWindows 5 (OneBig 0.75 0.75))))
+                   twopane = renamed [Replace "-"] $ smartBorders $ withBorder 1 $ TwoPane 0.02 0.4
+                   mosaic  = renamed [Replace "%"] $ smartBorders $ withBorder 1 $ MosaicAlt M.empty
+                   sprl    = renamed [Replace "@"] $ smartBorders $ withBorder 1 $ limitWindows 5 $ spiral gratio
+                   onebig  = renamed [Replace "#"] $ smartBorders $ withBorder 1 $ limitWindows 5 $ OneBig 0.75 0.75
 
                    gratio      = toRational goldenratio
                    goldenratio = 2 / (1 + sqrt(5)::Double);
@@ -169,7 +170,7 @@ myTheme = defaultTheme {
 myKeys = [ -- M4 for Super key
          ("Tab",   windows W.focusDown)
 
-       , ("M-p r", spawn ("dmenu_run -b -p \">\" -fn " ++ myDzenFont)) -- dzen prompt
+       , ("M-p r", spawn $ "dmenu_run -b -p \">\" -fn " ++ myDzenFont) -- dzen prompt
        -- , ("M-p r", spawn ("yeganesh -x -- -b -p \">\" -fn " ++ myDzenFont)) -- dzen prompt
     -- , ("M-p r", shellPrompt myXPConfig) -- shell prompt
        -- , ("M-p t", prompt (myTerminal ++ " -e") myXPConfig) -- run in term
@@ -262,10 +263,10 @@ myScratchPads = [ NS "dolphin" spawnFiler findFiler manageFiler
 
 -- log hooks --------------------------------------------------------------
 myLogHook h =  dynamicLogWithPP $ dzenPP {
-                ppCurrent         = dzenColor "#8fae9f" "" . pad
-              , ppHidden          = dzenColor "#909090" "" . pad
-              , ppHiddenNoWindows = dzenColor "#606060" "" . pad
-              , ppLayout          = dzenColor "#77a8bf" "" .
+                ppCurrent         = (dzenColor "#fe974f" "") . pad
+              , ppHidden          = (dzenColor "#909090" "") . pad
+              , ppHiddenNoWindows = (dzenColor "#606060" "") . pad
+              , ppLayout          = (dzenColor "#77a8bf" "") .
                                     (\x -> case x of
                                         "Full" -> wrapBitmap "sm4tik/full.xbm"
                                         "*"          -> wrapBitmap "rob/full.xbm"
@@ -296,9 +297,9 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
 
               , ppUrgent          = wrap (dzenColor "#ff0000" "" "{") (dzenColor "#ff0000" "" "}") . pad
             --, ppTitle           = wrap "^fg(#909090)[ " " ]^fg()" . shorten 100
-              , ppTitle           = wrap "^fg(#909090)( " " )^fg()" 
+              , ppTitle           = wrap (dzenColor "#9e4f4a" "" "(") (dzenColor "#9e4f4a" "" ")")
               , ppVisible         = wrap "{" "}"
-              , ppWsSep           = ""
+              , ppWsSep           = (dzenColor "#89b3c3" "" "::")
               , ppSep             = " | "
               , ppSort            = fmap (namedScratchpadFilterOutWorkspace.) (ppSort dzenPP)
               , ppOutput          = hPutStrLn h
@@ -312,12 +313,12 @@ myEventHook = ewmhDesktopsEventHook
 
 -- dzen bars {{{
 myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 420 -h 15 -bg \"#212122\" -fn " ++ myDzenFont
-myRightBar  = "~/.dzen/bin/status.scm | exec dzen2 -p -ta r -x 420 -y 0 -w 710 -h 15 -bg \"#212122\" -fn " ++ myDzenFont ++ " -fn-preload k10,mplus_j10r"
+myRightBar  = "~/.dzen/bin/status.scm | exec dzen2 -p -ta r -x 420 -y 0 -w 710 -h 15 -bg \"#212122\" -fn " ++ myDzenFont
 -- }}}
 trayer      = "exec trayer --expand true --alpha 10  --tint 0x232324 --transparent true --padding 0 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 15 --widthtype pixel --width 150 "
 -- stalonetray = "exec stalonetray -i 1 --dockapp-mode simple --icon-gravity W --grow-gravity E --geometry 8x1-0+0 --max-geometry 40x13 -bg '#333333' --sticky --skip-taskbar"
 mail        = "gmail-notifier"
-compmgr     = "xcompmgr -c -I1 -O1 -Ff"
+compmgr     = "xcompmgr -c -C -I1 -O1 -Ff"
 -- bgmgr       = "feh --bg-scale ~/.wallpapers/images.4chan.org-1268382153153.jpg"
 bgmgr       = "hsetroot -fill ~/.wallpapers/images.4chan.org-1268382267394.jpg"
 clipmgr     = "parcellite"

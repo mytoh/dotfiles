@@ -54,8 +54,8 @@ export GAUCHE_LOAD_PATH=$OLUTPANIMO/kirjasto:$GAUCHE_LOAD_PATH
 # }}}
 
 # lehti {{{
-export GAUCHE_LOAD_PATH=$HOME/.lehti/share/gauche-0.9/site/lib:$GAUCHE_LOAD_PATH
-export GAUCHE_DYNLOAD_PATH=$HOME/.lehti/lib/gauche-0.9/site/$GAUCHE_ARCH
+export LEHTI_DIR="$HOME/.lehti"
+source $LEHTI_DIR/etc/setup.bash
 #}}}
 
 #}}}
