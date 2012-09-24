@@ -1,5 +1,5 @@
 
 # lehti {{{
-set -x LEHTIDIR  "$HOME/.lehti"
-. $LEHTIDIR/etc/setup.fish
+set -x LEHTI_DIR  "$HOME/.lehti"
+. $LEHTI_DIR/etc/setup.fish
 #}}}
