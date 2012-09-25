@@ -163,6 +163,7 @@ else
   NeoBundle 'github:hrsh7th/vim-unite-vcs'
   NeoBundle 'github:Rykka/colorv.vim'
   NeoBundle 'Highlight-UnMatched-Brackets'
+  NeoBundle 'github:dahu/vim-fanfingtastic'
   " syntax
   "c
   NeoBundle 'github:cg433n/better-c'
@@ -175,6 +176,7 @@ else
   " NeoBundle 'VimClojure'
   " NeoBundle 'github:emanon001/fclojure.vim'
   NeoBundle 'github:thinca/vim-ft-clojure'
+
   "haskell
   " NeoBundle 'github:Twinside/vim-haskellConceal'
   NeoBundle 'github:Twinside/vim-syntax-haskell-cabal'
@@ -184,8 +186,10 @@ else
   NeoBundle 'github:kana/vim-filetype-haskell'
   NeoBundle 'github:eagletmt/ghcmod-vim'
   NeoBundle 'github:ujihisa/neco-ghc'
+  NeoBundle 'github:ujihisa/ref-hoogle'
   NeoBundle 'github:dag/vim2hs'
   NeoBundle 'github:eagletmt/unite-haddock'
+
   "javascript
   NeoBundle 'github:jelera/vim-javascript-syntax'
   NeoBundle 'github:pangloss/vim-javascript'
