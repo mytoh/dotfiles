@@ -50,8 +50,8 @@ function! s:unite_my_settings() "{{{
   imap <buffer> <c-j>     <plug>(unite_exit)
   imap <buffer> <localleader><localleader>  <c-u>~/
   imap <buffer> <localleader>/  <c-u>/
-  imap <buffer> <localleader>kv         <c-u>~/local/git/panna/kirjasto/kaava/
-  imap <buffer> <localleader>pk         <c-u>~/local/git/pikkukivi/
+  imap <buffer> <localleader>kv         <c-u>~/local/repo/panna/kirjasto/kaava/
+  imap <buffer> <localleader>pk         <c-u>~/local/repo/pikkukivi/
   " <C-l>: manual neocomplcache completion.
   inoremap <buffer> <C-l>  <C-x><C-u><C-p><Down>
   imap     <buffer> <c-w> <plug>(unite_delete_backward_path)

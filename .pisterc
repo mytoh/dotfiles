@@ -1,5 +1,5 @@
 
-("~/local/git/dotfiles"
+("~/local/repo/dotfiles"
  ( ".vim"
   ".config/fish/config.fish"
   ".config/fish/freebsd.fish"

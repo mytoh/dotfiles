@@ -193,7 +193,6 @@ function! MakeActiveStatusLine()
         \  '%t',
         \  mystatus#segment('curpath'),
         \  mystatus#segment('fugitive'),
-        \  mystatus#segment('syntastic'),
         \])
 
   " right
