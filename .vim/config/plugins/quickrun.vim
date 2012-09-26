@@ -1,6 +1,18 @@
 
 " quickrun{{{
 let g:quickrun_config = {}
+let g:quickrun_config['_'] = {
+      \ 'hook/u_nya_/enable': 1,
+      \ 'hook/close_unite_quickfix/enable_hook_loaded': 1,
+      \ 'hook/unite_quickfix/enable_failure': 1,
+      \ 'hook/close_quickfix/enable_exit': 1,
+      \ 'hook/close_buffer/enable_failure': 1,
+      \ 'hook/close_buffer/enable_empty_data': 1,
+      \ 'outputter': 'multi:buffer:quickfix',
+      \ 'outputter/buffer/split': ':botright 8sp',
+      \ 'runner': 'vimproc',
+      \ 'runner/vimproc/updatetime': 40,
+      \}
 let g:quickrun_config.scss = {
       \   'command':   '/usr/local/bin/scss2css',
       \   'exec':      ['%c %s'],
@@ -23,21 +35,19 @@ let g:quickrun_config.rst = {
 
 " watchdogs.vim
 let s:watchdogs_config = {}
-let s:watchdogs_config['_'] = {
-      \ 'hook/u_nya_/enable': 1,
-      \ 'hook/unite_quickfix/enable_failure': 1,
+
+let s:watchdogs_config['watchdogs_checker/_'] = {
+      \ 'hook/copen/enable_exist_data': 1,
       \}
 
-let s:watchdogs_config = {
-      \ 'watchdogs_checker/ghc-mod': {
+let s:watchdogs_config['watchdogs_checker/ghc-mod'] = {
       \ 'command': 'ghc-mod',
       \ 'exec':    '%c %o --hlintOpt="--language=XmlSyntax" check %s:p',
-      \ },
-      \
-      \ 'haskell/watchdogs_checker': {
+      \ }
+let s:watchdogs_config['haskell/watchdogs_checker'] = {
       \ 'type': 'watchdogs_checker/ghc-mod',
-      \ },
-      \}
+      \ }
+
 let s:watchdogs_config['watchdogs_checker/gjslint'] = {
       \ 'command'   : 'gjslint',
       \ 'exec'      : '%c %s:p ',

@@ -90,17 +90,9 @@ import XMonad.Util.NamedWindows (getName)
 import XMonad.Util.WindowProperties
 import XMonad.Util.NamedScratchpad
 
+import Mylib.Configs
 -- }}}
 
-myTerminal       :: String
-myTerminal       = "urxvtcd "
-myBorderWidth    = 2
-myModMask        :: KeyMask
--- mod1 = alt , mod4 = windows key
-myModMask        = mod4Mask
-myIconsDirectory = "/home/mytoh/.dzen/icons/"
-myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = False
 
 myWorkspaces    =
     [
@@ -334,7 +326,7 @@ myStartupHook = do
                 spawn bgmgr
                 spawn clipmgr
                 spawn volumemgr
-                spawn compmgr
+                -- spawn compmgr
                 {- spawn uimPanel -}
                 execScriptHook "startup"
 

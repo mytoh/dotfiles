@@ -25,7 +25,7 @@
 
 (define start-server
   (lambda ()
-    
+
       (start-http-server :access-log #t :error-log #t
                          :document-root document-root
                          :port 8888)))
@@ -116,6 +116,13 @@
           (span)
           (span))))
 
+(define background-image
+  (lambda (req)
+    (let* ((browser (request-header-ref req "user-agent")))
+    (if (string=? browser "Opera") ; browser supporting webp
+      '(img (@ (class "bg") (src "image/sicp-mod.webp") (alt "")))
+      '(img (@ (class "bg") (src "image/sicp-mod.png") (alt "")))))))
+
 (define index-page
   (lambda (req)
     (html5
@@ -127,10 +134,8 @@
         (script (@ (src "js/pointer.js")))
         ,(script-reject-ie)
 
-        ,(let* ((browser (request-header-ref req "user-agent" )))
-           (if (string=? browser "Opera") ; browser supporting webp
-             '(img (@ (class "bg") (src "image/sicp-mod.webp") (alt "")))
-             '(img (@ (class "bg") (src "image/sicp-mod.png") (alt "")))))
+        ; ,(background-image req)
+
         (div (@ (class "bookmark"))
              ,(delicious "//d.me"
                          '("zsh"
@@ -196,7 +201,7 @@
 
              ,(yotsuba "//www.4chan.org"
                        "//boards.4chan.org"
-                       '( ("g" "technology")
+                       '(("g" "technology")
                          ("b" "random")
                          ("e" "ecchi")
                          ("h" "hentai")
@@ -222,7 +227,7 @@
                    (span (@ (class popup)) "file-util"))
                 "))"))
 
-        ,(make-link '(( "/niconico" "nico")))
+        ,(make-link '(("/niconico" "nico")))
 
         (p (@ (id "test"))
            (a (@ (href "/test") (target "_blank"))
@@ -315,11 +320,11 @@
 
 (define-page-handler
   #/^\/$/
-  index-page )
+  index-page)
 
 (define-page-handler
   #/^\/niconico/
-  nico-page )
+  nico-page)
 
 (define-page-handler
   #/^\/test/

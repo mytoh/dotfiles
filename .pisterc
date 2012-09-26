@@ -54,6 +54,7 @@
   ".xinitrc"
   ".xmodmaprc"
   ".xmonad/xmonad.hs"
+  ".xmonad/lib"
   ".zshrc"
   ".dzen"
   ".rlwrap/gosh_completions"
