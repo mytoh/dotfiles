@@ -2,7 +2,8 @@
 
 (define-module kirjasto.verkko.merkintä
   (export
-   html5)
+   html5
+   robots-noindex)
   (use text.tree)
   (use sxml.tools)
   )
@@ -21,3 +22,8 @@
        ,charset-utf8
        ,(sxml:sxml->xml
          body-list)))))
+
+(define robots-noindex
+  (lambda ()
+    '(meta (@ (name "robots")
+              (content "noindex,nofollow")))))

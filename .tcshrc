@@ -1,6 +1,6 @@
 
 
-set plugins = (gauche panna pikkukivi fasd lehti)
+set plugins = (gauche panna pikkukivi fasd lehti nopea)
 set TCSH_THEME = 'kehote'
 source ~/.tcsh.d/oh-my-tcsh.tcsh
 

@@ -133,6 +133,7 @@
         (script (@ (src "//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js")))
         (script (@ (src "js/pointer.js")))
         ,(script-reject-ie)
+        ,(robots-noindex)
 
         ; ,(background-image req)
 

@@ -2,7 +2,8 @@
 
 (define-module kirjasto.verkko.palvelin
   (export
-   define-page-handler)
+   define-page-handler
+   )
   (use makiki))
 (select-module kirjasto.verkko.palvelin)
 

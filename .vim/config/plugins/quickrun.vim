@@ -2,12 +2,6 @@
 " quickrun{{{
 let g:quickrun_config = {}
 let g:quickrun_config['_'] = {
-      \ 'hook/u_nya_/enable': 1,
-      \ 'hook/close_unite_quickfix/enable_hook_loaded': 1,
-      \ 'hook/unite_quickfix/enable_failure': 1,
-      \ 'hook/close_quickfix/enable_exit': 1,
-      \ 'hook/close_buffer/enable_failure': 1,
-      \ 'hook/close_buffer/enable_empty_data': 1,
       \ 'outputter': 'multi:buffer:quickfix',
       \ 'outputter/buffer/split': ':botright 8sp',
       \ 'runner': 'vimproc',
@@ -38,6 +32,12 @@ let s:watchdogs_config = {}
 
 let s:watchdogs_config['watchdogs_checker/_'] = {
       \ 'hook/copen/enable_exist_data': 1,
+      \ 'hook/u_nya_/enable': 1,
+      \ 'hook/close_unite_quickfix/enable_hook_loaded': 1,
+      \ 'hook/unite_quickfix/enable_failure': 1,
+      \ 'hook/close_quickfix/enable_exit': 1,
+      \ 'hook/close_buffer/enable_failure': 1,
+      \ 'hook/close_buffer/enable_empty_data': 1,
       \}
 
 let s:watchdogs_config['watchdogs_checker/ghc-mod'] = {
@@ -57,7 +57,8 @@ let s:watchdogs_config["javascript/watchdogs_checker"] = {
       \}
 
 let g:watchdogs_check_BufWritePost_enables = {
-      \ "haskell" : 1
+      \ 'haskell' : 1,
+      \ 'javascript': 1,
       \}
 
 call extend(g:quickrun_config, s:watchdogs_config)
