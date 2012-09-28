@@ -61,9 +61,7 @@ else
   NeoBundle 'github:thinca/vim-poslist'
   NeoBundle 'github:thinca/vim-qfreplace'
   NeoBundle 'github:thinca/vim-editvar'
-  NeoBundle 'github:thinca/vim-github'
   NeoBundle 'github:thinca/vim-localrc'
-  NeoBundle 'github:tpope/vim-fugitive'
   NeoBundle 'github:tpope/vim-surround'
   NeoBundle 'github:tpope/vim-afterimage'
   NeoBundle 'github:tpope/vim-markdown'
@@ -118,8 +116,6 @@ else
   NeoBundle 'github:yuratomo/w3m.vim'
   NeoBundle 'github:tsukkee/lingr-vim'
   NeoBundle 'github:xolox/vim-reload'
-  NeoBundle 'github:gmarik/github-search.vim'
-  NeoBundle 'github:gregsexton/gitv'
   NeoBundle 'github:jpalardy/vim-slime'
   NeoBundle 'github:godlygeek/tabular'
   NeoBundle 'github:sjl/gundo.vim'
@@ -145,7 +141,6 @@ else
   NeoBundle 'github:ujihisa/unite-launch'
   NeoBundle 'github:mfumi/unite-mpc'
   NeoBundle 'github:h1mesuke/unite-outline'
-  NeoBundle 'github:taka84u9/unite-git'
   NeoBundle 'github:shiracha/unite-related_files'
   NeoBundle 'github:osyo-manga/unite-homo'
   NeoBundle 'github:osyo-manga/unite-u-nya-'
@@ -160,10 +155,19 @@ else
   NeoBundle 'github:tsukkee/unite-help'
   NeoBundle 'github:t9md/vim-unite-ack'
   NeoBundle 'github:Shougo/unite-ssh'
-  NeoBundle 'github:hrsh7th/vim-unite-vcs'
   NeoBundle 'github:Rykka/colorv.vim'
   NeoBundle 'Highlight-UnMatched-Brackets'
   NeoBundle 'github:dahu/vim-fanfingtastic'
+
+  " git
+  NeoBundle 'github:thinca/vim-github'
+  NeoBundle 'github:tpope/vim-fugitive'
+  NeoBundle 'github:taka84u9/unite-git'
+  NeoBundle 'github:gmarik/github-search.vim'
+  NeoBundle 'github:gregsexton/gitv'
+  NeoBundle 'github:yomi322/vim-gitq'
+  NeoBundle 'github:hrsh7th/vim-unite-vcs'
+
   " syntax
   "c
   NeoBundle 'github:cg433n/better-c'
