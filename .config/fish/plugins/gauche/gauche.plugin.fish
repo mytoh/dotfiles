@@ -3,9 +3,9 @@
 
 
 set    GAUCHE_ARCH (gauche-config --arch)
-set    GAUCHE_BASE_DIR "$HOME/.gosh"
+set    GAUCHE_BASE_DIR "$HOME/.kirjasto"
 set -x GAUCHE_SKRIPTI_DIR "$GAUCHE_BASE_DIR/skripti"
-set -x GAUCHE_LOAD_PATH "$GAUCHE_BASE_DIR:$GAUCHE_BASE_DIR/kirjasto:$HOME/local/share/gauche-0.9/site/lib:$HOME/local/lib/gauche-0.9/site/$GAUCHE_ARCH"
+set -x GAUCHE_LOAD_PATH "$GAUCHE_BASE_DIR/lib"
 
 function gosh-skripti
   gosh -I$GAUCHE_SKRIPTI_DIR $argv

@@ -12,7 +12,6 @@
   ".config/feh/keys"
   ".config/feh/themes"
   ".mksh.d"
-  ".gosh"
   ".aa"
   ".dwm"
   ".ncmpc"

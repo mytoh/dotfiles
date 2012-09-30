@@ -34,7 +34,7 @@
   (lambda (url seg lst)
     (map
       (lambda (tag)
-        `(a (@ (href ,(string-append url seg tag))
+        `(a (@ (href ,(string-append url seg (uri-encode-string tag)))
                (target "_blank"))
             ,tag))
       lst)))
@@ -59,6 +59,14 @@
 
 (define hatena
   (tag-pages "hatena" "/t/"))
+
+(define github
+  (tag-pages "github" "/languages/"))
+
+(define github-tag
+  '("clojure"
+    "common lisp"
+    "scheme"))
 
 (define yotsuba
   (lambda (title-url tag-url tag-list)
@@ -212,6 +220,9 @@
                          ("s" "sexy beautiful women")
                          ("hr" "high resolution")
                          ("u" "yuri")))
+
+             ,(github "//github.com"
+                      github-tag)
 
              (p (@ (class "gauche"))
                 "(" (a (@ (href "//practical-scheme.net/gauche/man/gauche-refj.html")

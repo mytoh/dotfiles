@@ -20,6 +20,8 @@ set path = (~/.cabal/bin ~/local/app/* ~/local/bin ~/local/homebrew/bin /usr/loc
 set cdpath = (~/local/ ~/local/var/)
 set noclobber
 set notify
+set autorehash
+set highlight
 set padhour
 # set time=(8 "\
 #     Time spent in user mode   (CPU seconds) : %Us\
