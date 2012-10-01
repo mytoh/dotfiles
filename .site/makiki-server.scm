@@ -26,9 +26,9 @@
 (define start-server
   (lambda ()
 
-      (start-http-server :access-log #t :error-log #t
-                         :document-root document-root
-                         :port 8888)))
+    (start-http-server :access-log #t :error-log #t
+                       :document-root document-root
+                       :port 8888)))
 
 (define tag-link
   (lambda (url seg lst)
@@ -56,6 +56,23 @@
 
 (define reddit
   (tag-pages "reddit" "/r/"))
+(define reddit-tags
+  '("linuxactionshow"
+    "scheme"
+    "lisp_ja"
+    "lisp"
+    "clojure"
+    "emacs"
+    "bsd"
+    "freebsd"
+    "screenshots"
+    "commandline"
+    "xmonad"
+    "unixporn"
+    "desktops"
+    "unix"
+    "rust"
+    "vim"))
 
 (define hatena
   (tag-pages "hatena" "/t/"))
@@ -63,10 +80,11 @@
 (define github
   (tag-pages "github" "/languages/"))
 
-(define github-tag
+(define github-tags
   '("clojure"
     "common lisp"
-    "scheme"))
+    "scheme"
+    "rust"))
 
 (define yotsuba
   (lambda (title-url tag-url tag-list)
@@ -127,9 +145,9 @@
 (define background-image
   (lambda (req)
     (let* ((browser (request-header-ref req "user-agent")))
-    (if (string=? browser "Opera") ; browser supporting webp
-      '(img (@ (class "bg") (src "image/sicp-mod.webp") (alt "")))
-      '(img (@ (class "bg") (src "image/sicp-mod.png") (alt "")))))))
+      (if (string=? browser "Opera") ; browser supporting webp
+        '(img (@ (class "bg") (src "image/sicp-mod.webp") (alt "")))
+        '(img (@ (class "bg") (src "image/sicp-mod.png") (alt "")))))))
 
 (define index-page
   (lambda (req)
@@ -167,7 +185,7 @@
                         "zsh"
                         "scheme"
                         "lisp"
-                           "clojure"
+                        "clojure"
                         "bash"
                         "freebsd"
                         "tmux"
@@ -192,21 +210,8 @@
                                "//forums.freebsd.org"
                                "freebsd"
                                '(("//forums.freebsd.org/forumdisplay.php?f=38" "Xorg")))
-             ,(reddit "//reddit.com" '("linuxactionshow"
-                                       "scheme"
-                                       "lisp_ja"
-                                       "lisp"
-                                       "clojure"
-                                       "emacs"
-                                       "bsd"
-                                       "freebsd"
-                                       "screenshots"
-                                       "commandline"
-                                       "xmonad"
-                                       "unixporn"
-                                       "desktops"
-                                       "unix"
-                                       "vim"))
+             ,(reddit "//reddit.com"
+                      reddit-tags)
 
              ,(yotsuba "//www.4chan.org"
                        "//boards.4chan.org"
@@ -222,7 +227,7 @@
                          ("u" "yuri")))
 
              ,(github "//github.com"
-                      github-tag)
+                      github-tags)
 
              (p (@ (class "gauche"))
                 "(" (a (@ (href "//practical-scheme.net/gauche/man/gauche-refj.html")

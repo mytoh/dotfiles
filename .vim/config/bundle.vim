@@ -53,7 +53,6 @@ else
   " NeoBundle 'github:rson/vim-bufstat'
   NeoBundle 'github:scrooloose/nerdcommenter'
   NeoBundle 'github:chikatoike/activefix.vim'
-  NeoBundle 'github:thinca/vim-quickrun'
   NeoBundle 'github:thinca/vim-ref'
   NeoBundle 'github:thinca/vim-ambicmd'
   NeoBundle 'github:thinca/vim-openbuf'
@@ -144,10 +143,6 @@ else
   NeoBundle 'github:shiracha/unite-related_files'
   NeoBundle 'github:osyo-manga/unite-homo'
   NeoBundle 'github:osyo-manga/unite-u-nya-'
-  NeoBundle 'github:osyo-manga/unite-quickfix'
-  NeoBundle 'github:osyo-manga/shabadou.vim'
-  NeoBundle 'github:osyo-manga/vim-watchdogs'
-  NeoBundle 'github:osyo-manga/quickrun-hook-u-nya-'
   NeoBundle 'github:jceb/vim-hier'
   NeoBundle 'github:tsukkee/unite-tag'
   " NeoBundle 'github:Sixeight/unite-grep'
@@ -155,9 +150,15 @@ else
   NeoBundle 'github:tsukkee/unite-help'
   NeoBundle 'github:t9md/vim-unite-ack'
   NeoBundle 'github:Shougo/unite-ssh'
-  NeoBundle 'github:Rykka/colorv.vim'
-  NeoBundle 'Highlight-UnMatched-Brackets'
-  NeoBundle 'github:dahu/vim-fanfingtastic'
+  " NeoBundle 'github:tungd/unite-session'
+
+
+  " quickrun
+  NeoBundle 'github:osyo-manga/unite-quickfix'
+  NeoBundle 'github:osyo-manga/shabadou.vim'
+  NeoBundle 'github:osyo-manga/vim-watchdogs'
+  NeoBundle 'github:osyo-manga/quickrun-hook-u-nya-'
+  NeoBundle 'github:thinca/vim-quickrun'
 
   " git
   NeoBundle 'github:thinca/vim-github'
@@ -167,6 +168,11 @@ else
   NeoBundle 'github:gregsexton/gitv'
   NeoBundle 'github:yomi322/vim-gitq'
   NeoBundle 'github:hrsh7th/vim-unite-vcs'
+
+  " others
+  NeoBundle 'github:Rykka/colorv.vim'
+  NeoBundle 'Highlight-UnMatched-Brackets'
+  NeoBundle 'github:dahu/vim-fanfingtastic'
 
   " syntax
   "c
@@ -289,6 +295,7 @@ else
   NeoBundle 'github:mytoh/vim-jfbterm'
   NeoBundle 'github:mytoh/scheme.vim'
   NeoBundle 'github:mytoh/vim-vala'
+  " NeoBundleLocal '~/.vim/dev'
   " }}}
 
 
