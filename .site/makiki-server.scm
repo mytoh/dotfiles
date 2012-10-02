@@ -219,6 +219,7 @@
                          ("b" "random")
                          ("e" "ecchi")
                          ("h" "hentai")
+                         ("int" "international")
                          ("w" "anime wallpaper")
                          ("t" "torrent")
                          ("r" "request")
