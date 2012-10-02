@@ -16,7 +16,7 @@ endif
 " remove trailing spaces {{{
 function! vimrc.trimspace() dict
   silent! %s/\s\+$//
-  ''
+  let @/=''
 endfunction
 " }}}
 

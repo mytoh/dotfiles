@@ -25,7 +25,6 @@
 
 (define start-server
   (lambda ()
-
     (start-http-server :access-log #t :error-log #t
                        :document-root document-root
                        :port 8888)))
@@ -84,6 +83,7 @@
   '("clojure"
     "common lisp"
     "scheme"
+    "viml"
     "rust"))
 
 (define yotsuba
@@ -335,15 +335,15 @@
 ;;
 
 
-(define-page-handler
+(define-page
   #/^\/$/
   index-page)
 
-(define-page-handler
+(define-page
   #/^\/niconico/
   nico-page)
 
-(define-page-handler
+(define-page
   #/^\/test/
   test-page)
 

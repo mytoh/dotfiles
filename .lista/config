@@ -1,6 +1,6 @@
 
 (
-  (*colour-theme* "normal")
+  (*colour-theme* "trapd00r")
 
   (*extension-colours*
     (cmd  . 2)

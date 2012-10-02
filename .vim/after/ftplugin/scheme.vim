@@ -32,6 +32,4 @@ endif
 let g:paredit_mode = 1
 
 let g:vimshell_split_command = 'vsplit'
-nnoremap <buffer><silent><LocalLeader>gi  :VimShellInteractive gosh<cr>
-nnoremap <buffer><silent><LocalLeader>gs <S-v>:VimShellSendString<cr>
-vmap     <buffer><silent><LocalLeader>gs :VimShellSendString<cr>
+

@@ -179,7 +179,7 @@ else
   NeoBundle 'github:cg433n/better-c'
   "lisp
   NeoBundle 'paredit.vim'
-  " NeoBundle 'github:aharisu/vim_goshrepl'
+  NeoBundle 'github:aharisu/vim-gdev'
   " NeoBundle 'github:aharisu/Gauche-Complete'
   " clojure
   " NeoBundle 'bitbucket:kotarak/vimclojure', {'rtp': 'vim/src/main/vim'}
