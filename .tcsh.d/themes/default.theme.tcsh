@@ -16,8 +16,8 @@ set      c5="%{\033[38;5;103m%}"
 
 set promptchars=">,#"
 # set title = '%{\033[0000m\033k\033\\%}'
-set title = '%{_ %c3\\%}'
+set title='%{_ %c3\\%}'
 # set prompt='%{[0000mk\\%}[%{[34m%n[37m@[32m%m[m%}] %c2 > '
-set prompt = "${title}%{\ek\e\\%}${c4}%m ${c5}:: ${cyan}%c2 \n${c1}>${c2}>${c3}>${end} "
+set prompt="${title}%{\ek\e\\%}${c4}%m ${c5}:: ${cyan}%c2 \n${c1}>${c2}>${c3}>${end} "
 
 

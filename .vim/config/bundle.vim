@@ -227,6 +227,10 @@ else
   " mml
   NeoBundle 'stephencelis/vim-mml'
 
+  " genie
+  NeoBundle 'github:GrAndSE/genie-script-vim-syntax'
+  " NeoBundle 'genie.vim'
+
   " colorscheme {{{
   NeoBundle 'github:paulwib/vim-colorschemes'
   NeoBundle 'github:w0ng/vim-hybrid'

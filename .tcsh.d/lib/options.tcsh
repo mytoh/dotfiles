@@ -1,7 +1,7 @@
 
 set history=100000
 set savehist=(100000 merge)
-set autolist = ambiguous
+set autolist=ambiguous
 set autocorrect
 set ignoreeof
 set filec
@@ -16,8 +16,8 @@ set color
 set colorcat
 set autoexpand
 set complete=enhance
-set path = (~/.cabal/bin ~/local/app/* ~/local/bin ~/local/homebrew/bin /usr/local/kde4/{sbin,bin} /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} )
-set cdpath = (~/local/ ~/local/var/)
+set path=(~/.cabal/bin ~/local/app/* ~/local/bin ~/local/homebrew/bin /usr/local/kde4/{sbin,bin} /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} )
+set cdpath=(~/local/ ~/local/var/)
 set noclobber
 set notify
 set autorehash
