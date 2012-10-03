@@ -8,7 +8,7 @@ alias portsup=" sudo port -v selfupdate && sudo port -v sync && sudo port -vRu u
 alias cpanup="cpanm -Sv --self-upgrade;cpan-outdated | xargs cpanm -Sv"
 alias mp='mplayer'
 export PERL_CPANM_DEV=1
-export PATH=$HOME/local/bin:$HOME/local/ports/bin:$PATH
+export PATH=$HOME/local/homebrew/bin/:$HOME/local/bin:$HOME/local/ports/bin:$PATH
 
 #complete -C perldoc-complete -o nospace -o default perldoc
 
