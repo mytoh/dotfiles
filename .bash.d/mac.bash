@@ -139,7 +139,6 @@ history -r  # .bash_historyから履歴を読み込み直す
  alias make='gmake'
 
 
- source $HOME/perl5/perlbrew/etc/bashrc
 
  #if [ -z $SCREEN_STARTED ]; then
  #         export SCREEN_STARTED=true
