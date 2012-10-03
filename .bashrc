@@ -15,7 +15,7 @@ plugins=(gauche lehti)
 
 case ${OSTYPE} in
   # FreeBSD) source ~/.bash.d/freebsd.bash ;;
-  darwin) source ~/.bash.d/mac.bash ;;
+  darwin*) source ~/.bash.d/mac.bash ;;
 esac
 
 source ~/.bash.d/oh-my-bash.bash
