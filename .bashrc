@@ -9,7 +9,6 @@ HISTFILESIZE=100000
 bash_theme='default'
 plugins=(gauche lehti)
 
-source ~/.bash.d/oh-my-bash.bash
 # source ~/.bash.d/gauche.bash
 # source ~/.bash.d/prompt.bash
 # source ~/.bash.d/lehti.bash
@@ -19,3 +18,4 @@ case ${OSTYPE} in
   darwin) source ~/.bash.d/mac.bash ;;
 esac
 
+source ~/.bash.d/oh-my-bash.bash
