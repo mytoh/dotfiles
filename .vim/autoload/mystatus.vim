@@ -49,6 +49,10 @@ let s:segments.charhighlight = join([
       \ '%9*' . '%{GetCharHighlightGroup()}' . '%0*',
       \])
 
+let s:segments.nyan_modoki = join ([
+      \ '%3*' . '%{g:NyanModoki()}' . '%*',
+      \])
+
 function! mystatus#segment(seg)
   return get(s:segments, a:seg)
 endfunction

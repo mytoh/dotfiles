@@ -197,6 +197,7 @@ function! MakeActiveStatusLine()
 
   " right
   let right = join([
+        \   mystatus#segment('nyan_modoki'),
         \   mystatus#segment('hahhah'),
         \   mystatus#segment('fileinfo'),
         \   mystatus#segment('charcode'),

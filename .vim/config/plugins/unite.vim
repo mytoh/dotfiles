@@ -75,9 +75,9 @@ let s:commands = {
       \ }
 " set commands
 let s:commands.candidates = {
-      \   "quatre" : "VimFiler /mnt/quatre",
-      \   "deskstar" : "VimFiler /mnt/deskstar",
-      \   "mypassport" : "VimFiler /mnt/mypassport",
+      \   "quatre" : "VimFiler /nfs/quatre",
+      \   "deskstar" : "VimFiler /nfs/deskstar",
+      \   "mypassport" : "VimFiler /nfs/mypassport",
       \ }
 
 " register function

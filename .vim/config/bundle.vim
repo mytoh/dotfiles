@@ -53,7 +53,6 @@ else
   " NeoBundle 'github:rson/vim-bufstat'
   NeoBundle 'github:scrooloose/nerdcommenter'
   NeoBundle 'github:chikatoike/activefix.vim'
-  NeoBundle 'github:thinca/vim-ref'
   NeoBundle 'github:thinca/vim-ambicmd'
   NeoBundle 'github:thinca/vim-openbuf'
   NeoBundle 'github:thinca/vim-singleton'
@@ -67,7 +66,7 @@ else
   NeoBundle 'github:tpope/vim-unimpaired'
   NeoBundle 'github:tpope/vim-repeat'
   "dont map <cr> if install vim-endwise
-  " NeoBundle 'github:tpope/vim-endwise'
+  NeoBundle 'github:tpope/vim-endwise'
   NeoBundle 'github:tyru/eskk.vim'
   NeoBundle 'github:tyru/skkdict.vim'
   NeoBundle 'github:tyru/open-browser.vim'
@@ -127,9 +126,15 @@ else
   " NeoBundle 'github:coderifous/textobj-word-column.vim'
   NeoBundle 'github:spolu/dwm.vim'
   NeoBundle 'sherlock.vim'
+
   " tmux
   NeoBundle 'github:peterhoeg/vim-tmux'
   " NeoBundle 'github:anekos/runes-vim'
+
+  " ref
+  NeoBundle 'github:thinca/vim-ref'
+  NeoBundle 'github:h1mesuke/ref-dicts-en'
+  
   "unite
   NeoBundle 'github:Shougo/unite.vim'
   NeoBundle 'github:hakobe/unite-script'

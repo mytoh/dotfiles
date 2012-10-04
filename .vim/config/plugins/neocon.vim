@@ -32,12 +32,12 @@ imap <C-k>     <Plug>(neocomplcache_snippets_expand)
 smap <C-k>     <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 inoremap <expr><C-l>     neocomplcache#complete_common_string()
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><CR>  neocomplcache#close_popup() . "\<CR>"
-inoremap <expr><C-m>  neocomplcache#close_popup() . "\<CR>"
+inoremap <silent><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><CR>  <CR><C-R>=neocomplcache#smart_close_popup()<CR>
+inoremap <silent><C-m>  <CR><C-R>neocomplcache#smart_close_popup()<CR>
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <silent><expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 " }}}
 
@@ -76,3 +76,4 @@ let g:neocomplcache_snippets_dir='~/.vim/snippets'
 "   :NeoComplCacheCachingDictionary
 " endfunction
 "}}}
+
