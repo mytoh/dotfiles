@@ -54,11 +54,6 @@ highlight Comment        ctermfg=244   ctermbg=234 cterm=bold
 highlight ColorColumn    ctermfg=white ctermbg=234
 highlight MatchParen     cterm=bold,reverse
 
-highlight TabLine       ctermfg=10  ctermbg=235
-highlight TabLineSel    ctermfg=220 ctermbg=239
-highlight TabLineFill   ctermfg=238 ctermbg=235
-highlight TabLineInfo   ctermfg=39  ctermbg=235
-highlight TabLineSep    ctermfg=218 ctermbg=235
 
 highlight Pmenu          ctermfg=110    ctermbg=235
 highlight PmenuSel      ctermfg=189    ctermbg=238

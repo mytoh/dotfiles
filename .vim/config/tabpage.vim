@@ -5,6 +5,12 @@ set showtabline=2
 
 set tabline=%!MakeTabLine()
 
+highlight TabLine       ctermfg=10  ctermbg=235
+highlight TabLineSel    ctermfg=220 ctermbg=239
+highlight TabLineFill   ctermfg=233
+highlight TabLineInfo   ctermfg=39  ctermbg=235
+highlight TabLineSep    ctermfg=218 ctermbg=235
+
 
 function! MakeTabLine()
   let titles = map(range(1, tabpagenr('$')), 's:tabpage_label(v:val)')

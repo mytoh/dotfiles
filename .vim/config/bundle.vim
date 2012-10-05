@@ -107,6 +107,7 @@ else
   NeoBundle 'github:kana/vim-tabpagecd'
   NeoBundle 'github:kana/vim-operator-user'
   NeoBundle 'github:kana/vim-operator-replace'
+  NeoBundle 'github:lucapette/vim-textobj-underscore'
   " NeoBundle 'github:Raimondi/delimitMate'
   NeoBundle 'github:hobbestigrou/Vim-wmfs'
   NeoBundle 'github:bronson/vim-trailing-whitespace'
