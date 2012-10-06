@@ -20,7 +20,7 @@ function! s:SetHighlight(hl, fg, bg, attr)
 endfunction
 
 
-hi Normal       ctermfg=188 ctermbg=234   
+hi Normal           ctermfg=188 ctermbg=234
 hi CursorLine               ctermbg=234   cterm=none
 hi Boolean         ctermfg=204
 hi Character       ctermfg=144
