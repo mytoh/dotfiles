@@ -7,11 +7,8 @@ HISTSIZE=100000
 HISTFILESIZE=100000
 
 bash_theme='default'
-plugins=(gauche lehti)
+plugins=(gauche lehti pikkukivi panna)
 
-# source ~/.bash.d/gauche.bash
-# source ~/.bash.d/prompt.bash
-# source ~/.bash.d/lehti.bash
 
 case ${OSTYPE} in
   # FreeBSD) source ~/.bash.d/freebsd.bash ;;
