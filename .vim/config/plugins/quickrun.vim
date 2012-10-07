@@ -27,6 +27,15 @@ let g:quickrun_config.rst = {
       \   'outputter':    'browser',
       \}
 
+let g:quickrun_config.lehti = {
+      \   'command':   'lehti',
+      \   'shebang':   0,
+      \   'exec':      ['%c %o'],
+      \   'runner':    'vimproc',
+      \   'cmdopt':    'test',
+      \   'hook/cd':      '..',
+      \}
+
 " watchdogs.vim
 let s:watchdogs_config = {}
 
@@ -40,6 +49,7 @@ let s:watchdogs_config['watchdogs_checker/_'] = {
       \ 'hook/close_buffer/enable_empty_data': 1,
       \}
 
+" haskell
 let s:watchdogs_config['watchdogs_checker/ghc-mod'] = {
       \ 'command': 'ghc-mod',
       \ 'exec':    '%c %o --hlintOpt="--language=XmlSyntax" check %s:p',
@@ -48,6 +58,7 @@ let s:watchdogs_config['haskell/watchdogs_checker'] = {
       \ 'type': 'watchdogs_checker/ghc-mod',
       \ }
 
+" javascript
 let s:watchdogs_config['watchdogs_checker/gjslint'] = {
       \ 'command'   : 'gjslint',
       \ 'exec'      : '%c %s:p ',
@@ -56,10 +67,13 @@ let s:watchdogs_config["javascript/watchdogs_checker"] = {
       \ "type" : "watchdogs_checker/gjslint",
       \}
 
+
+" watchdog hook
 let g:watchdogs_check_BufWritePost_enables = {
       \ 'haskell' : 1,
       \ 'javascript': 1,
       \}
+
 
 call extend(g:quickrun_config, s:watchdogs_config)
 call watchdogs#setup(g:quickrun_config)
