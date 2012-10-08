@@ -1,2 +1,2 @@
 
-aliaas nap napa
+alias nap napa
