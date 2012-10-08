@@ -142,7 +142,6 @@ else
   NeoBundle 'github:hakobe/unite-script'
   NeoBundle 'github:choplin/unite-vim_hacks'
   NeoBundle 'github:mattn/unite-remotefile'
-  NeoBundle 'github:tyru/unite-cmdwin'
   NeoBundle 'github:ujihisa/unite-colorscheme'
   NeoBundle 'github:ujihisa/unite-launch'
   NeoBundle 'github:mfumi/unite-mpc'
@@ -279,6 +278,7 @@ else
   " }}}
 
   " official vim-scripts repo {{{
+  NeoBundle 'vmark.vim--Visual-Bookmarking'
   NeoBundle 'info.vim'
   NeoBundle 'eregex.vim'
   NeoBundle 'sudo.vim'
