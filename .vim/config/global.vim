@@ -268,6 +268,16 @@ augroup JumpCursorOnEdit
 augroup END
 
 
+" utility from tyru's autochmodx
+function! s:echomsg(hl, msg) "{{{
+    execute 'echohl' a:hl
+    try
+        echomsg a:msg
+    finally
+        echohl None
+    endtry
+endfunction "}}}
+
 
 
 " }}}
