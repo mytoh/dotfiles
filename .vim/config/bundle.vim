@@ -271,6 +271,7 @@ else
   NeoBundle 'github:jelera/vim-nazca-colorscheme'
   NeoBundle 'bitbucket:abudden/easycolour'
   NeoBundle 'tropikos'
+  NeoBundle 'sickill/vim-monokai'
   "}}}
   " NeoBundle 'http://voikko.svn.sourceforge.net/svnroot/voikko/', {'type' : 'svn', 'rtp' : 'trunk/tools/vim'}
   " bitbucket
