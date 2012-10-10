@@ -49,6 +49,7 @@
   ".tcshrc"
   ".vimperatorrc"
   ".vimrc"
+  ".gvimrc"
   ".vimshrc"
   ".xinitrc"
   ".xmodmaprc"

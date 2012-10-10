@@ -1,6 +1,7 @@
 
 " gVimでもテキストベースのタブページを使う
 set guioptions-=e
+colorscheme Monokai
 
 if has('mac')
   let $PATH = $HOME . '/local/homebrew/sbin:' . $HOME . '/local/homebrew/bin:' . $PATH
@@ -11,7 +12,6 @@ if has('mac')
 
   set guioptions-=T
   set transparency=10
-  colorscheme xoria256
 
   set fuoptions=maxvert,maxhorz
   au GUIEnter * set fullscreen
