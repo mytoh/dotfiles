@@ -11,9 +11,10 @@ if has('mac')
   set guifont=Menlo:h12
 
   set guioptions-=T
-  set transparency=10
+  set transparency=0
 
   set fuoptions=maxvert,maxhorz
   au GUIEnter * set fullscreen
+
 
 endif
