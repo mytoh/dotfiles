@@ -130,7 +130,8 @@ else
   " NeoBundle 'github:coderifous/textobj-word-column.vim'
   NeoBundle 'github:spolu/dwm.vim'
   NeoBundle 'sherlock.vim'
-  NeoBundle 'guns/xterm-color-table.vim'
+  NeoBundle 'github:guns/xterm-color-table.vim'
+  NeoBundle 'github:AndrewRadev/switch.vim'
 
   " tmux
   NeoBundle 'github:peterhoeg/vim-tmux'
@@ -321,12 +322,13 @@ endif
 filetype plugin on
 filetype indent on
 
+
+
 " Installation check.
 if neobundle#exists_not_installed_bundles()
   echomsg 'Not installed bundles : ' .
         \ string(neobundle#get_not_installed_bundle_names())
   echomsg 'Please execute ":NeoBundleInstall" command.'
-  echomsg 'installing bundle'
   "finish
 endif
 
