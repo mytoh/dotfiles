@@ -27,10 +27,7 @@ let s:segments.curpath =  s:wrap('%3*',
       \])
 
 if neobundle#is_installed('vim-fugitive')
-  let s:segments.fugitive = s:wrap('%6*',
-        \[
-        \ '%{fugitive#statusline()}',
-        \])
+  let s:segments.fugitive = s:wrap('%6*', [ '%{fugitive#statusline()}'])
 endif
 
 

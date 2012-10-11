@@ -3,16 +3,16 @@ set laststatus=2
 
 " highlight for statusline
 " User1-9 => %{1-9}*
-highlight User1 ctermfg=white ctermbg=244 cterm=none
-highlight User2 ctermfg=172    ctermbg=233
-highlight User3 ctermfg=243    ctermbg=234
-highlight User4 ctermfg=59   ctermbg=235
-highlight User5 ctermfg=38   ctermbg=239
-highlight User6 ctermfg=190   ctermbg=243
-highlight User7 ctermfg=17   ctermbg=247
-highlight User8 ctermfg=95   ctermbg=251
+highlight User1 ctermfg=white ctermbg=244 cterm=none guifg=#ffffff guibg=#808080
+highlight User2 ctermfg=172    ctermbg=233           guifg=#df8700 guibg=#121212
+highlight User3 ctermfg=243    ctermbg=234           guifg=#767676 guibg=#1c1c1c
+highlight User4 ctermfg=59   ctermbg=235             guifg=#5f5f5f guibg=#262626 
+highlight User5 ctermfg=38   ctermbg=239             guifg=#444444 guibg=#4e4e4e 
+highlight User6 ctermfg=190   ctermbg=243            guifg=#dfff00 guibg=#767676 
+highlight User7 ctermfg=17   ctermbg=247             guifg=#007799 guibg=#808080 
+highlight User8 ctermfg=95   ctermbg=251             guifg=#bfaf0f guibg=#908080 
 " mode
-highlight User9 ctermfg=18   ctermbg=154
+highlight User9 ctermfg=18   ctermbg=154             guifg=#fafe9f guibg=#908080 
 
 function! GetCharCode() " {{{ from powerline
   " Get the output of :ascii
