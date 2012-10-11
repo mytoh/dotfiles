@@ -65,6 +65,7 @@ else
   NeoBundle 'github:tpope/vim-markdown'
   NeoBundle 'github:tpope/vim-unimpaired'
   NeoBundle 'github:tpope/vim-repeat'
+  NeoBundle 'github:tpope/vim-eunuch'
   "dont map <cr> if install vim-endwise
   NeoBundle 'github:tpope/vim-endwise'
   NeoBundle 'github:tyru/eskk.vim'
@@ -129,6 +130,7 @@ else
   " NeoBundle 'github:coderifous/textobj-word-column.vim'
   NeoBundle 'github:spolu/dwm.vim'
   NeoBundle 'sherlock.vim'
+  NeoBundle 'guns/xterm-color-table.vim'
 
   " tmux
   NeoBundle 'github:peterhoeg/vim-tmux'
