@@ -42,7 +42,7 @@ function! GetCharCode() " {{{ from powerline
   " Format the numeric value
   let nr = printf(nrformat, nr)
 
-  return "'". char ."' ". nr
+  return  "'" . char ."' ". nr
 endfunction "}}}
 
 function! GetCharHighlightGroup()
@@ -121,10 +121,12 @@ function! Statusmode()
     if curmode == 'i'
       call SetHighlight('User9', 45, 194)
       call SetHighlight('StatusLine', 39, 224)
+      call SetHighlight('NyanMdoki', 18, 234)
       return s:status_sign.i
     elseif curmode == 'n'
       call SetHighlight('User9', 18, 154)
       call SetHighlight('StatusLine', 18, 234)
+      call SetHighlight('NyanMdoki', 18, 234)
       return s:status_sign.n
     elseif curmode == 'v'
       call SetHighlight('User9', 18, 94)
@@ -193,7 +195,7 @@ function! MakeActiveStatusLine()
         \  '%t',
         \  mystatus#segment('curpath'),
         \  mystatus#segment('fugitive'),
-        \])
+        \], '')
 
   " right
   let right = join([
@@ -203,7 +205,7 @@ function! MakeActiveStatusLine()
         \   mystatus#segment('charcode'),
         \   mystatus#segment('charhighlight'),
         \   mystatus#segment('ruler'),
-        \])
+        \], '')
   return left . '%=' . right
 endfunction
 

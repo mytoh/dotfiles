@@ -79,8 +79,9 @@ let s:segments.charhighlight = s:wrap('%9*',
       \])
 
 if neobundle#is_installed('nyan-modoki.vim')
-let s:segments.nyan_modoki = s:wrap('%3*',
-      \ [
+highlight NyanModoki ctermfg=31   ctermbg=234             guifg=#fafe9f guibg=#908080 
+let s:segments.nyan_modoki =  s:wrap('%#NyanModoki#',
+      \[
       \ '%{g:NyanModoki()}'
       \])
 endif
