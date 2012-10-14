@@ -9,9 +9,14 @@ abbr    (define ())
           ${2}
           )
 
+snippet script-header
+abbr    gauche script templete
+        ":"; exec gosh -- "$0" "$@"
+        ;; -*- coding: utf-8 -*-
+
 snippet script
 abbr    gauche script templete
-        ":"; exec gosh -- $0 "$@"
+        ":"; exec gosh -- "$0" "$@"
         ;; -*- coding: utf-8 -*-
 
         (use gauche.process)
