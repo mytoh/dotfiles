@@ -163,7 +163,8 @@ else
   NeoBundle 'github:t9md/vim-unite-ack'
   NeoBundle 'github:Shougo/unite-ssh'
   " NeoBundle 'github:tungd/unite-session'
-
+  NeoBundle 'github:mytoh/unite-highlight'
+  NeoBundle 'github:raduwen/unite-peercast'
 
   " quickrun
   NeoBundle 'github:osyo-manga/unite-quickfix'
@@ -314,7 +315,6 @@ else
   NeoBundle 'github:mytoh/vim-jfbterm'
   NeoBundle 'github:mytoh/scheme.vim'
   NeoBundle 'github:mytoh/vim-vala'
-  NeoBundle 'github:mytoh/unite-highlight'
   " NeoBundleLocal '~/.vim/dev'
   " }}}
 
