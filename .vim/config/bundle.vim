@@ -313,6 +313,7 @@ else
   NeoBundle 'github:mytoh/vim-jfbterm'
   NeoBundle 'github:mytoh/scheme.vim'
   NeoBundle 'github:mytoh/vim-vala'
+  " NeoBundle 'github:mytoh/unite-highlight'
   " NeoBundleLocal '~/.vim/dev'
   " }}}
 
