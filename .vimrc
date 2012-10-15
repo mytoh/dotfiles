@@ -42,5 +42,3 @@ set secure
 " :AnsiEsc
 
 " vim:set foldmethod=marker:
-
-
