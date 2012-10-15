@@ -153,6 +153,7 @@ else
   NeoBundle 'github:shiracha/unite-related_files'
   NeoBundle 'github:osyo-manga/unite-homo'
   NeoBundle 'github:osyo-manga/unite-u-nya-'
+  NeoBundle 'github:osyo-manga/unite-env'
   NeoBundle 'github:mytoh/unite-sa-nya-'
   NeoBundle 'github:jceb/vim-hier'
   NeoBundle 'github:tsukkee/unite-tag'
@@ -313,7 +314,7 @@ else
   NeoBundle 'github:mytoh/vim-jfbterm'
   NeoBundle 'github:mytoh/scheme.vim'
   NeoBundle 'github:mytoh/vim-vala'
-  " NeoBundle 'github:mytoh/unite-highlight'
+  NeoBundle 'github:mytoh/unite-highlight'
   " NeoBundleLocal '~/.vim/dev'
   " }}}
 
