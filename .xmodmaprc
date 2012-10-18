@@ -1,3 +1,5 @@
+! all keys with
+! xmodmap -pke
 
 ! clear Mod1
 ! clear Mod2
@@ -9,7 +11,7 @@
 ! remove capslock key {{{
 keycode 66 = Control_L
 clear Lock
-add Control = Control_L  
+add Control = Control_L
 !}}}
 
 ! left handed mouse {{{
@@ -36,4 +38,10 @@ keycode 97  = XF86AudioRaiseVolume
 keycode 99  = XF86AudioLowerVolume
 ! }}}
 
-
+! for finnish
+! alt_r
+keycode 113 = Mode_switch
+! alt_r + 's' , dvorak
+keycode  47 = s S odiaeresis Odiaeresis
+! alt_r + '-' , dvorak
+keycode  48 = minus underscore adiaeresis Adiaeresis

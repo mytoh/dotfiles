@@ -84,7 +84,9 @@
     "common lisp"
     "scheme"
     "viml"
-    "rust"))
+    "ruby"
+    "rust"
+    "shell"))
 
 (define yotsuba
   (lambda (title-url tag-url tag-list)
