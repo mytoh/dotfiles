@@ -18,4 +18,4 @@ case ${OSTYPE} in
   darwin*) source ~/.bash.d/mac.bash ;;
 esac
 
-source ~/.bash.d/oh-my-bash.bash
+source ~/.sheller/bash/sheller.bash

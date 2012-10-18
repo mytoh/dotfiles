@@ -186,7 +186,7 @@ else
   " others
   NeoBundle 'github:Rykka/colorv.vim'
   NeoBundle 'Highlight-UnMatched-Brackets'
-  NeoBundle 'github:dahu/vim-fanfingtastic'
+  " NeoBundle 'github:dahu/vim-fanfingtastic'
 
   " syntax
   "c

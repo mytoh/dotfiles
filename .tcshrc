@@ -2,7 +2,7 @@
 
 set plugins=(gauche panna pikkukivi fasd lehti nopea lista napa nyan)
 set TCSH_THEME='kehote'
-source ~/.tcsh.d/oh-my-tcsh.tcsh
+source ~/.sheller/tcsh/sheller.tcsh
 
 
 

@@ -17,7 +17,6 @@
   ".ncmpc"
   ".site"
   ".stumpwm.d"
-  ".tcsh.d"
   ".tmux.d"
   ".tmux.conf"
   ".xcolours"
@@ -26,8 +25,6 @@
   ".xresources.d"
   ".bash_profile"
   ".bashrc"
-  ".bash.d"
-  ".complete.tcsh"
   ".emacs-w3m"
   ".w3m/config"
   ".w3m/keymap"
@@ -47,6 +44,7 @@
   ".screenrc"
   ".stumpwmrc"
   ".tcshrc"
+  ".complete.tcsh"
   ".vimperatorrc"
   ".vimrc"
   ".gvimrc"
@@ -58,6 +56,7 @@
   ".zshrc"
   ".dzen"
   ".rlwrap/gosh_completions"
+  ".sheller"
   ))
 
 ;; vim:filetype=scheme

@@ -1,5 +1,5 @@
 
-bash_base_dir=~/.bash.d
+bash_base_dir=~/.sheller/bash
 bash_lib_dir=$bash_base_dir/lib
 bash_plugins_dir=$bash_base_dir/plugins
 bash_themes_dir=$bash_base_dir/themes
