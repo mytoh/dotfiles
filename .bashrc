@@ -12,10 +12,11 @@ HISTFILESIZE=100000
 bash_theme='default'
 plugins=(gauche lehti pikkukivi panna)
 
+SHELLER=~/.sheller
 
 case ${OSTYPE} in
   # FreeBSD) source ~/.bash.d/freebsd.bash ;;
-  darwin*) source ~/.sheller/bash/mac.bash ;;
+  darwin*) source $SHELLER/bash/mac.bash ;;
 esac
 
-source ~/.sheller/bash/sheller.bash
+source $SHELLER/bash/sheller.bash

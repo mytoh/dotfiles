@@ -1,5 +1,5 @@
 
-set  tcsh_base_dir=~/.sheller/tcsh
+set  tcsh_base_dir=$sheller/tcsh
 set  tcsh_lib_dir=$tcsh_base_dir/lib
 set  tcsh_plugins_dir=$tcsh_base_dir/plugins
 set  tcsh_themes_dir=$tcsh_base_dir/themes
@@ -18,8 +18,8 @@ foreach plugin ( $plugins )
 end
 
 # load theme
-if ( "$TCSH_THEME" != "" ) then
- source $tcsh_themes_dir/$TCSH_THEME/$TCSH_THEME.theme.tcsh
+if ( "$sheller_theme" != "" ) then
+ source $tcsh_themes_dir/$sheller_theme/$sheller_theme.theme.tcsh
 else
  source $tcsh_themes_dir/default/default.theme.tcsh
 endif
