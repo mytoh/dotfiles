@@ -1,0 +1,7 @@
+
+# gauche {{{
+export GAUCHE_ARCH=$(/usr/local/bin/gauche-config --arch )
+export GAUCHE_LOAD_PATH="$GAUCHE_LOAD_PATH"
+
+
+#}}}

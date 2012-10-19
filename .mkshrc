@@ -23,9 +23,10 @@ xsource() { # {{{
 
 
 
-export MKSH_THEME='gauche'
-mksh_plugins="gauche panna pikkukivi fasd"
-source ~/.mksh.d/oh-my-mksh.mksh
+export sheller_theme='default'
+sheller_plugins="gauche panna pikkukivi fasd lehti"
+sheller="$HOME/.sheller"
+source $sheller/mksh/sheller.mksh
 
 # variables
 blue="[38;5;004m"
