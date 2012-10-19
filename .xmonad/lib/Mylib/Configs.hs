@@ -35,7 +35,7 @@ module Mylib.Configs where
  -- , wrapBitmap "sm4tik/ac.xbm"
      ]
      where
-        wrapBitmap bitmap = "^i(" ++ myIconsDirectory ++ bitmap ++ ")"
+        -- wrapBitmap bitmap = "^i(" ++ myIconsDirectory ++ bitmap ++ ")"
 
   -- colors {{{
   myNormalBorderColor  :: String
@@ -53,3 +53,4 @@ module Mylib.Configs where
   myDzenFont = "-nil-profont-medium-r-normal--10-100-72-72-c-50-iso8859-1"
   -- myDzenFont = "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1"
   -- myDzenFont = "-jmk-neep-medium-r-normal--10-80-75-75-c-50-*"
+  

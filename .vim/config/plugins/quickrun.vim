@@ -22,17 +22,15 @@ let g:quickrun_config.cobol = {
       \}
 
 let g:quickrun_config.rst = {
-      \   'command':   'rst2html',
+      \   'command':   'rst2html.py',
       \   'runner':    'vimproc',
-      \   'outputter':    'browser',
       \}
 
 let g:quickrun_config.lehti = {
-      \   'command':   'lehti',
+      \   'command':   'pieni',
       \   'shebang':   0,
-      \   'exec':      ['%c %o'],
+      \   'exec':      ['%c'],
       \   'runner':    'vimproc',
-      \   'cmdopt':    'test',
       \   'hook/cd':      '..',
       \}
 
