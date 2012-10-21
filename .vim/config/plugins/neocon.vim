@@ -28,8 +28,6 @@ let g:neocomplcache_context_filetype_lists.perl6 =
 let g:neocomplcache_context_filetype_lists.vim =
       \ [{'filetype' : 'python', 'start' : '^\s*python <<\s*\(\h\w*\)', 'end' : '^\1'}]
 " neocomplcache key-mappings {{{
-imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-smap <C-k>     <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 inoremap <expr><C-l>     neocomplcache#complete_common_string()
 inoremap <silent><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -56,8 +54,6 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
-" snippet directory
-let g:neocomplcache_snippets_dir='~/.vim/snippets'
 
 " call neocomplcache#initialize()
 

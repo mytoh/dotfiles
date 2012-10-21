@@ -27,7 +27,7 @@ else
   "
   " github repo {{{
   NeoBundle 'github:Shougo/neocomplcache', {'depends' :
-        \ [ 'github:Shougo/neocomplcache-snippets-complete.git',
+        \ [ 'github:Shougo/neosnippet',
         \ ['github:rstacruz/sparkup', {'rtp': 'vim'}],
         \ ]}
   NeoBundle 'github:Shougo/vimfiler',
@@ -193,7 +193,7 @@ else
   NeoBundle 'github:cg433n/better-c'
   "lisp
   NeoBundle 'paredit.vim'
-  NeoBundle 'github:aharisu/vim-gdev'
+  " NeoBundle 'github:aharisu/vim-gdev'
   " NeoBundle 'github:aharisu/Gauche-Complete'
   " clojure
   " NeoBundle 'bitbucket:kotarak/vimclojure', {'rtp': 'vim/src/main/vim'}

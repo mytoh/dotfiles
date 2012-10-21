@@ -71,7 +71,8 @@
     "desktops"
     "unix"
     "rust"
-    "vim"))
+    "vim"
+    "programming"))
 
 (define hatena
   (tag-pages "hatena" "/t/"))
