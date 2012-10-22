@@ -192,7 +192,7 @@ else
   "c
   NeoBundle 'github:cg433n/better-c'
   "lisp
-  NeoBundle 'paredit.vim'
+  NeoBundle 'bitbucket:kovisoft/paredit'
   " NeoBundle 'github:aharisu/vim-gdev'
   " NeoBundle 'github:aharisu/Gauche-Complete'
   " clojure

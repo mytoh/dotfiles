@@ -10,6 +10,7 @@ augroup filetypedetect
   autocmd! bufread,bufnewfile scheme.snip               setfiletype snippet.scheme
   autocmd! bufread,bufnewfile *.kahua                   setfiletype kahua.scheme
   autocmd! bufread,bufnewfile *.leh                     setfiletype scheme
+  autocmd! bufread,bufnewfile *.test.scm                setfiletype scheme.test
 
   autocmd bufread,bufnewfile .tmux.conf                setfiletype tmux
   autocmd bufread,bufnewfile *.tmux                    setfiletype tmux
@@ -26,6 +27,6 @@ augroup filetypedetect
   autocmd bufread,bufnewfile /usr/ports/UPDATING       setfiletype changelog
   autocmd bufread,bufnewfile *.mik                     setfiletype xml
   autocmd bufread,bufnewfile rc.conf.local             setfiletype sh
-  autocmd bufread,bufnewfile *.mksh                    setfiletype sh
+  autocmd bufread,bufnewfile *.mksh                    setfiletype ksh
   autocmd bufread,bufnewfile .mkshrc                   setfiletype sh
 augroup END

@@ -29,9 +29,7 @@ let g:quickrun_config.rst = {
 let g:quickrun_config.lehti = {
       \   'command':   'pieni',
       \   'shebang':   0,
-      \   'exec':      ['%c'],
       \   'runner':    'vimproc',
-      \   'hook/cd':      '..',
       \}
 
 " watchdogs.vim
