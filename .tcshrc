@@ -3,7 +3,7 @@
 set sheller=$HOME/.sheller
 set plugins=(gauche panna pikkukivi fasd lehti nopea lista napa nyan)
 set sheller_theme='kehote'
-source $sheller/tcsh/sheller.tcsh
+source $sheller/sheller/sheller.tcsh
 
 
 

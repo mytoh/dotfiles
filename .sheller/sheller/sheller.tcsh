@@ -1,5 +1,5 @@
 
-set  tcsh_base_dir=$sheller/tcsh
+set  tcsh_base_dir=$sheller
 set  tcsh_lib_dir=$tcsh_base_dir/lib
 set  tcsh_plugins_dir=$tcsh_base_dir/plugins
 set  tcsh_themes_dir=$tcsh_base_dir/themes

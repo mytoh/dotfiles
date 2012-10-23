@@ -26,7 +26,7 @@ let g:quickrun_config.rst = {
       \   'runner':    'vimproc',
       \}
 
-let g:quickrun_config.lehti = {
+let g:quickrun_config['scheme.test'] = {
       \   'command':   'pieni',
       \   'shebang':   0,
       \   'runner':    'vimproc',
