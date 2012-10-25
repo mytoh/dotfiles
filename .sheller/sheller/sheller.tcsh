@@ -6,8 +6,8 @@ set  tcsh_themes_dir=$tcsh_base_dir/themes
 
 
 # load library files
-foreach config ($tcsh_lib_dir/*.tcsh)
-  source $config
+foreach lib ($tcsh_lib_dir/*.tcsh)
+  source $lib
 end
 
 # load plugins
