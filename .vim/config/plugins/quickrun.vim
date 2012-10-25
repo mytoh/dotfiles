@@ -48,7 +48,8 @@ let s:watchdogs_config['watchdogs_checker/_'] = {
 " haskell
 let s:watchdogs_config['watchdogs_checker/ghc-mod'] = {
       \ 'command': 'ghc-mod',
-      \ 'exec':    '%c %o --hlintOpt="--language=XmlSyntax" check %s:p',
+      \ 'cmdopt':  '--hlintOpt="--language=XmlSyntax" --ghcOpt="-i$HOME/.xmonad/lib"',
+      \ 'exec':    '%c check %o %s:p',
       \ }
 let s:watchdogs_config['haskell/watchdogs_checker'] = {
       \ 'type': 'watchdogs_checker/ghc-mod',

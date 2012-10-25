@@ -30,6 +30,8 @@ else
         \ [ 'github:Shougo/neosnippet',
         \ ['github:rstacruz/sparkup', {'rtp': 'vim'}],
         \ ]}
+  NeoBundle 'github:Shougo/neocomplcache-clang'
+  NeoBundle 'github:Shougo/neocomplcache-clang_complete'
   NeoBundle 'github:Shougo/vimfiler',
         \ {'depends' : 'github:Shougo/unite.vim' }
   NeoBundle 'github:Shougo/vimproc'

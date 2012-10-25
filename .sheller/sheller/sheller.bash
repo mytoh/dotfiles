@@ -1,5 +1,5 @@
 
-bash_base_dir=~/.sheller/bash
+bash_base_dir=$sheller
 bash_lib_dir=$bash_base_dir/lib
 bash_plugins_dir=$bash_base_dir/plugins
 bash_themes_dir=$bash_base_dir/themes
@@ -26,9 +26,9 @@ done
 # load theme
 if [ -n $bash_theme  ]
 then
-source $bash_themes_dir/$bash_theme.theme.bash
+source $bash_themes_dir/$sheller_theme/$sheller_theme.theme.bash
 else
-source $bash_themes_dir/default.theme.bash
+source $bash_themes_dir/default/default.theme.bash
 fi
 
 

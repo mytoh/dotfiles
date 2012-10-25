@@ -9,14 +9,14 @@ LS_COLORS='di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:*.deb=90'
 HISTSIZE=100000
 HISTFILESIZE=100000
 
-bash_theme='default'
+sheller_theme='default'
 plugins=(gauche lehti pikkukivi panna)
 
-SHELLER=~/.sheller
+sheller=~/.sheller
 
 case ${OSTYPE} in
   # FreeBSD) source ~/.bash.d/freebsd.bash ;;
-  darwin*) source $SHELLER/bash/mac.bash ;;
+  darwin*) source $sheller/lib/mac.bash ;;
 esac
 
-source $SHELLER/bash/sheller.bash
+source $sheller/sheller/sheller.bash
