@@ -76,7 +76,7 @@ else
   NeoBundle 'github:tyru/savemap.vim'
   " NeoBundle 'github:tyru/vice.vim'
   NeoBundle 'github:tyru/current-func-info.vim'
-  NeoBundle 'github:tyru/caw.vim'
+  " NeoBundle 'github:tyru/caw.vim'
   NeoBundle 'github:tyru/autochmodx.vim'
   NeoBundle 'github:ujihisa/neco-look'
   NeoBundle 'github:ujihisa/vimshell-ssh'
@@ -134,6 +134,7 @@ else
   NeoBundle 'sherlock.vim'
   NeoBundle 'github:guns/xterm-color-table.vim'
   NeoBundle 'github:AndrewRadev/switch.vim'
+  NeoBundle 'github:tomtom/tcomment_vim'
 
   " tmux
   NeoBundle 'github:peterhoeg/vim-tmux'
@@ -331,11 +332,11 @@ filetype indent on
 
 
 " Installation check.
-if neobundle#exists_not_installed_bundles()
-  echomsg 'Not installed bundles : ' .
-        \ string(neobundle#get_not_installed_bundle_names())
-  echomsg 'Please execute ":NeoBundleInstall" command.'
-  "finish
-endif
+" if neobundle#exists_not_installed_bundles()
+"   echomsg 'Not installed bundles : ' .
+"         \ string(neobundle#get_not_installed_bundle_names())
+"   echomsg 'Please execute ":NeoBundleInstall" command.'
+"   "finish
+" endif
 
 " vim:set foldmethod=marker:

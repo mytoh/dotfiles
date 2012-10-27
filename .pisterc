@@ -11,7 +11,6 @@
   ".config/feh/buttons"
   ".config/feh/keys"
   ".config/feh/themes"
-  ".mksh.d"
   ".aa"
   ".dwm"
   ".ncmpc"
@@ -57,6 +56,7 @@
   ".dzen"
   ".rlwrap/gosh_completions"
   ".sheller"
+  ".xombrero.conf"
   ))
 
 ;; vim:filetype=scheme

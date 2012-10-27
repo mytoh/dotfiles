@@ -1,4 +1,4 @@
-music_directory   "~/local/var/musiiki"
+music_directory   "~/local/var/musiikki"
 playlist_directory    "~/.mpd/playlists"
 db_file     "~/.mpd/database"
 log_file      "~/.mpd/log"

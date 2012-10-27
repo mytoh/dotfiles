@@ -9,7 +9,8 @@ augroup filetypedetect
   autocmd! bufread,bufnewfile *.stub                    setfiletype scheme.c
   autocmd! bufread,bufnewfile scheme.snip               setfiletype snippet.scheme
   autocmd! bufread,bufnewfile *.kahua                   setfiletype kahua.scheme
-  autocmd! bufread,bufnewfile (*.leh,*.lehspec)         setfiletype scheme
+  autocmd! bufread,bufnewfile *.leh                     setfiletype scheme
+  autocmd! bufread,bufnewfile *.lehspec                 setfiletype scheme
   autocmd! bufread,bufnewfile *.test.scm                setfiletype scheme.test
 
   autocmd bufread,bufnewfile .tmux.conf                setfiletype tmux
