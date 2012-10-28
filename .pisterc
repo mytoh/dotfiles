@@ -34,6 +34,7 @@
   ".mkshrc"
   ".lista"
   ".mpdconf"
+  ".ncmpcpp/config"
   ".pentadactylrc"
   ".portmasterrc"
   ".qvwm-theme"

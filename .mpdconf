@@ -36,3 +36,10 @@ input {
 #       proxy_password "password"
 }
 filesystem_charset    "UTF-8"
+
+#fifo output
+audio_output {
+  type     "fifo"
+  name     "my-fifo"
+  path     "/tmp/mpd.fifo"
+}

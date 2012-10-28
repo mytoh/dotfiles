@@ -1,0 +1,15 @@
+
+
+! fontforge
+Gdraw.Foreground: #575757
+Gdraw.Background: #121212
+Gdraw.GGadget.Box.BorderBrightest: #404040
+Gdraw.GGadget.Box.BorderBrighter: #606060
+Gdraw.GGadget.Box.BorderDarker: #808080
+Gdraw.GGadget.Box.BorderDarkest: #a0a0a0
+Gdraw.GGadget.Box.DisableForeground:  #e0e0e0
+Gdraw.GGadget.Box.DisableBackground:  #808080
+Gdraw.GGadget.Box.PressedBackground: #707070
+fontforge.CharView.WidthColor: #ffffff
+fontforge.CharView.TransformOriginColor: #575757
+fontforge.CharView.ForegroundOutlineColor: #57577
