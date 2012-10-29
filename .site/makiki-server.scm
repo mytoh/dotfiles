@@ -15,10 +15,11 @@
   (srfi 1 13))
 (use kirjasto.verkko) ;define-page-handler
 
-(require "./src/index.scm")
-(require "./src/niconico.scm")
-(require "./src/test.scm")
-(require "./src/feedtest.scm")
+
+(load (build-path (sys-dirname (current-load-path)) "src/index.scm"))
+(load (build-path (sys-dirname (current-load-path)) "src/niconico.scm"))
+(load (build-path (sys-dirname (current-load-path)) "src/feedtest.scm"))
+(load (build-path (sys-dirname (current-load-path)) "src/test.scm"))
 
 (define document-root
   (build-path (home-directory) ".site"))

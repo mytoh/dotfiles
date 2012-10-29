@@ -135,9 +135,11 @@ else
   NeoBundle 'github:guns/xterm-color-table.vim'
   NeoBundle 'github:AndrewRadev/switch.vim'
   NeoBundle 'github:tomtom/tcomment_vim'
+  NeoBundle 'bash-support.vim'
 
   " tmux
-  NeoBundle 'github:peterhoeg/vim-tmux'
+  NeoBundle 'github:zaiste/tmux.vim'
+  " NeoBundle 'github:peterhoeg/vim-tmux'
   " NeoBundle 'github:anekos/runes-vim'
 
   " ref
@@ -167,7 +169,7 @@ else
   NeoBundle 'github:Shougo/unite-ssh'
   " NeoBundle 'github:tungd/unite-session'
   NeoBundle 'github:mytoh/unite-highlight'
-  NeoBundle 'github:raduwen/unite-peercast'
+  " NeoBundle 'github:raduwen/unite-peercast'
 
   " quickrun
   NeoBundle 'github:osyo-manga/unite-quickfix'

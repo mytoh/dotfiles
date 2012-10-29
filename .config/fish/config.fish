@@ -44,23 +44,24 @@ set fish_pager_color_prefix      magenta
 set fish_pager_color_progress    green
 
 
+# shellar
+set shellar ~/.shellar
 # plugins
-set plugins method_missing gauche pikkukivi panna lehti talikko lol # z-fish
+set plugins gauche pikkukivi panna talikko lol # z-fish
 # theme
-set FISH_THEME kehote
-
+set shellar_theme default
 # source oh-my-fish
-. ~/.config/fish/voi-minun-fish.fish
+. $shellar/shellar/shellar.fish
 
 
 # os {{{
 switch (uname)
   case FreeBSD
-  xsource $fish_base_dir/freebsd.fish
+  xsource $shellar/lib/os/freebsd.fish
 
 # mac settings
   case Darwin
-  xsource $fish_base_dir/mac.fish
+  xsource $shellar/lib/darwin.fish
 end
 #}}}
 

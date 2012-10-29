@@ -23,10 +23,10 @@ xsource() { # {{{
 
 
 
-export sheller_theme='default'
-sheller_plugins="gauche panna pikkukivi fasd lehti"
-sheller="$HOME/.sheller"
-source $sheller/mksh/sheller.mksh
+export shellar_theme='default'
+shellar_plugins="gauche panna pikkukivi fasd lehti"
+shellar="$HOME/.shellar"
+source $shellar/shellar/shellar.mksh
 
 # variables
 blue="[38;5;004m"
@@ -45,10 +45,10 @@ bind '^U'=kill-line
 # os {{{
 case $(uname) in
   FreeBSD)
-    xsource ~/.mksh.d/freebsd.mksh
+    xsource $shellar/lib/freebsd.mksh
     ;;
   Darwin)
-    xsource  ~/.mksh.d/mac.mksh
+    xsource  $shellar/lib/darwin.mksh
     ;;
 
 esac

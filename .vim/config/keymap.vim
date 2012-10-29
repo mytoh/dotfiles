@@ -27,7 +27,7 @@ vnoremap <silent> cy  c<c-r>0<esc>:let@/=@1<cr>:noh<cr>
 
 nmap [vim-keymap] <nop>
 nmap     <localleader>v [vim-keymap]
-nnoremap <silent> [vim-keymap]w :<c-u>up<cr>:e %<cr>
+nnoremap <silent> [vim-keymap]w :<c-u>up<cr>
 nnoremap <silent> [vim-keymap]q :<c-u>qa<cr>
 nnoremap <silent> [vim-keymap]bd :<c-u>bp<bar>sp<bar>bn<bar>bd<cr>
 

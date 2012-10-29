@@ -71,7 +71,7 @@
   \"       ...\",
   \"        ..\",
   \"         .\",
-  }; 
+  };
   "
   )
 
@@ -177,11 +177,12 @@
       (cadr pcm))))
 
 (define (mpd)
-  (let ((current-song (process-output->string "mpc current")))
+  (let ((current-song (and (find-file-in-paths "mpc")
+                        (process-output->string "mpc current"))))
     (cond
       (current-song
         (list
-          (fg "#ababab")
+          (fg "#baafa9")
           current-song))
       (else
         (list
@@ -195,9 +196,9 @@
 (define (dzen)
   (tree->string
     (list
-      ; (icon (arrow-left-xpm "#292929" "None"))
-      ; (bg "#292929")
-      ; (ip)
+      (icon (arrow-left-xpm "#292929" "None"))
+      (bg "#292929")
+      (mpd)
       (icon (arrow-left-xpm "#303633" "#292929"))
       (bg "#303633")
       (memory)

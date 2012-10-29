@@ -1,9 +1,0 @@
-
-
-# lehti {{{
-export LEHTI_DIR="$HOME/.lehti"
-source $LEHTI_DIR/etc/setup.mksh
-#}}}
-
-if whence -p leh >&-; then
-fi

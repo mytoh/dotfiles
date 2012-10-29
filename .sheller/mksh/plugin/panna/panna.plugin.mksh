@@ -1,8 +1,0 @@
-
-# panna {{{
-# add panna to PATH
-export OLUTPANIMO="$HOME/.panna"
-export PATH=$OLUTPANIMO/bin:$PATH
-export GAUCHE_LOAD_PATH=$OLUTPANIMO/kirjasto:$GAUCHE_LOAD_PATH
-# }}}
-

@@ -1,9 +1,9 @@
 
 
-set sheller=$HOME/.sheller
+set shellar=$HOME/.shellar
 set plugins=(gauche panna pikkukivi fasd lehti nopea lista napa nyan)
-set sheller_theme='kehote'
-source $sheller/sheller/sheller.tcsh
+set shellar_theme='kehote'
+source $shellar/shellar/shellar.tcsh
 
 
 
