@@ -77,7 +77,7 @@ else
   " NeoBundle 'github:tyru/vice.vim'
   NeoBundle 'github:tyru/current-func-info.vim'
   " NeoBundle 'github:tyru/caw.vim'
-  NeoBundle 'github:tyru/autochmodx.vim'
+  " NeoBundle 'github:tyru/autochmodx.vim'
   NeoBundle 'github:ujihisa/neco-look'
   NeoBundle 'github:ujihisa/vimshell-ssh'
   NeoBundle 'github:mfumi/mpc.vim'

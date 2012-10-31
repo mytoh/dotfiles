@@ -1,7 +1,7 @@
 
 
 set shellar=$HOME/.shellar
-set plugins=(gauche panna pikkukivi fasd lehti nopea lista napa nyan)
+set plugins=(gauche panna pikkukivi fasd lehti nopea lista napa nyan talikko)
 set shellar_theme='kehote'
 source $shellar/shellar/shellar.tcsh
 

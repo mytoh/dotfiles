@@ -65,6 +65,9 @@
 (define github
   (tag-pages "github" "/languages/"))
 
+(define tumblr
+  (tag-pages "tumblr" "/tageed/"))
+
 (define github-tags
   '("clojure"
     "common lisp"
@@ -165,7 +168,7 @@
                            "ruby"
                            "javascript"
                            "css"
-                           "pytohn"
+                           "python"
                            ))
              ,(hatena "//b.hatena.ne.jp"
                       '("vim"
@@ -184,20 +187,30 @@
                         "xmonad"
                         "python"
                         ))
+
+             ,(tumblr "//tumblr.com"
+                      '("vim"
+                        "zsh"
+                        "emacs"))
+
              ,(make-paren-link "arch"
                                "//archlinux.org"
                                "archlinux"
                                '(("//bbs.archlinux.org" "forum")
                                  ("//bbs.archlinux.org/viewforum.php?id=47" "artwork_screenshots")))
+
              ,(make-paren-link "crunchbang"
                                "//crunchbanglinux.org"
                                "#!"
                                '(("//crunchbanglinux.org/forums/forum/6/artwork-screenshots"
                                   "artwork_screenshots")))
+
              ,(make-paren-link "freebsd"
                                "//forums.freebsd.org"
                                "freebsd"
                                '(("//forums.freebsd.org/forumdisplay.php?f=38" "Xorg")))
+
+
              ,(reddit "//reddit.com"
                       reddit-tags)
 

@@ -17,6 +17,10 @@ nnoremap <c-c> <esc>
 nnoremap / /\v
 nnoremap Q <nop>
 
+" 
+nnoremap H ^
+nnoremap L g_
+
 nnoremap <tab> %
 vnoremap <tab> %
 
@@ -32,7 +36,6 @@ nnoremap <silent> [vim-keymap]q :<c-u>qa<cr>
 nnoremap <silent> [vim-keymap]bd :<c-u>bp<bar>sp<bar>bn<bar>bd<cr>
 
 cnoremap <Leader><Leader> ~/
-cnoremap <c-a>      <home>
 " vim.g.hatena.ne.jp/tyru/20100116
 cnoremap <silent><c-k>      <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<cr>
 
@@ -76,7 +79,7 @@ function! s:resizeWindow()
 
 endfunction
 
-nmap <C-w>r :<C-u>call <SID>resizeWindow()<CR>mws
+nmap <C-w>r :<c-u>call <SID>resizeWindow()<CR>mws
 " }}}
 
 " forward/backward word
@@ -86,7 +89,7 @@ inoremap <silent> <c-f> <s-right>
 " better C-a C-e  {{{
 " http://vim.g.hatena.ne.jp/tyru/20100305
 " goto head, or tail
-inoremap <expr> <C-a> <SID>goto_head()
+inoremap <expr> <c-a> <SID>goto_head()
 function! s:goto_head() "{{{
   let col       = col('.')
   let lnum      = line('.')
@@ -101,7 +104,7 @@ function! s:goto_head() "{{{
   endif
 endfunc "}}}
 
-inoremap <expr> <C-e> <SID>goto_tail()
+inoremap <expr> <c-e> <SID>goto_tail()
 function! s:goto_tail() "{{{
   let col       = col('.')
   let lnum      = line('.')
@@ -116,5 +119,8 @@ function! s:goto_tail() "{{{
   endif
 endfunc "}}}
 "}}}
+
+" sudo to write
+cmap w!! w !sudo tee % >/dev/null
 
 "}}}
