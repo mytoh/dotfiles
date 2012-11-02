@@ -30,7 +30,7 @@ urxvt.modifier: alt
 urxvt.inputMethod: uim
 ! urxvt.preeditType: OnTheSpot
 urxvt.preeditType: OverTheSpot
-!urxvt.backgroundPixmap: /Users/kazuki/.wallpapers/background
+!urxvt.backgroundPixmap: .wallpapers/background
 
 urxvt.perl-ext-common: default,matcher,clipboard-osc,tabbbed,xim-onthespot
 urxvt.urlLauncher: firefox
@@ -43,5 +43,6 @@ urxvt.tabbed.tab-bg:    0
 
 urxvt.font: FONT
 urxvt.boldFont: FONT_BOLD
+! urxvt.letterSpace: -1
 
 ! }}}

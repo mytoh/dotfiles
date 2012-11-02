@@ -17,7 +17,7 @@ function! s:trimspacelisp()
   ''
 endfunction
 
-autocmd! bufwritepost       *.scm            call s:trimspacelisp()
+autocmd! bufwritepost       {*.scm,*.ss,*.sls,*sps}            call s:trimspacelisp()
 
 setlocal lisp
 setlocal cindent&

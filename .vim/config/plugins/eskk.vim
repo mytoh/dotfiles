@@ -69,6 +69,7 @@ endif
 "   call eskk#register_mode_table('hira', t)
 " endfunction
 
+let g:eskk#no_default_mappings = 1
 let g:eskk#egg_like_newline = 1
 let g:eskk#enable_completion = 1
 let g:eskk#select_cand_keys = "aoeuidhts"
