@@ -8,8 +8,8 @@ inoremap <c-c> <esc>
 
 nnoremap ; :
 nnoremap : ;
-nnoremap j gj
-nnoremap k gk
+" nnoremap j gj
+" nnoremap k gk
 nnoremap <space>  i<space><esc>
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <silent> <tab> :<c-u>bnext<cr>

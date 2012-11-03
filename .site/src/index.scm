@@ -66,7 +66,7 @@
   (tag-pages "github" "/languages/"))
 
 (define tumblr
-  (tag-pages "tumblr" "/tageed/"))
+  (tag-pages "tumblr" "/tagged/"))
 
 (define github-tags
   '("clojure"

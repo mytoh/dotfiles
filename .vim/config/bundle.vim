@@ -107,6 +107,7 @@ else
   NeoBundle 'github:kana/vim-textobj-line'
   NeoBundle 'github:kana/vim-smartinput'
   NeoBundle 'github:kana/vim-smartchr'
+  NeoBundle 'github:kana/vim-smartword'
   NeoBundle 'github:kana/vim-scratch'
   NeoBundle 'github:kana/vim-tabpagecd'
   NeoBundle 'github:kana/vim-operator-user'
@@ -136,6 +137,7 @@ else
   NeoBundle 'github:AndrewRadev/switch.vim'
   NeoBundle 'github:tomtom/tcomment_vim'
   NeoBundle 'bash-support.vim'
+  NeoBundle 'rhysd/accelerated-jk'
 
   " tmux
   NeoBundle 'github:zaiste/tmux.vim'
@@ -301,7 +303,6 @@ else
   NeoBundle 'fluxbox.vim'
   NeoBundle 'matchit.zip'
   NeoBundle 'daemon_saver.vim'
-  NeoBundle 'smartword'
   " NeoBundle 'camelcasemotion'
   NeoBundle 'gtk-vim-syntax'
   NeoBundle 'submode'
