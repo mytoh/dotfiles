@@ -12,7 +12,8 @@
 ! xft:Symbola
 
 #define FONT_BOLD \
--artwiz-glispbold-bold-r-bold--11-110-75-75-p-100-iso8859-1
+FONT
+! -artwiz-glispbold-bold-r-bold--11-110-75-75-p-100-iso8859-1
 ! k10b,\
 ! -misc-fixed-medium-r-normal--10-90-75-75-c-50-*, \
 ! -misc-fixed-medium-r-normal--10-90-75-75-c-100-jisx0208.1983-0, \
@@ -23,9 +24,13 @@
 
 
 #define FONT \
-[codeset=ASCII]x:-jmk-neep-medium-r-normal--10-*-*-*-*-*-*, \
-[codeset=ISO8859]x:xft:DejaVu Sans Mono:size=10,\
-[codeset=ISO10646]x:xft:DejaVu Sans Mono:size=10,\
-[codeset=JISX0201]x:xft:DejaVu Sans Mono:size=10,\
-[codeset=JISX0208]x:xft:DejaVu Sans Mono:size=10
+k10,k10rk,\
+9x12,\
+xft:mplus_j10r, \
+-gnu-unifont-medium-r-normal--0-0-75-75-c-0-iso10646-1,\
+-gnu-unifont-medium-r-normal--16-160-75-75-c-80-iso10646-1,\
+-misc-code2001-medium-r-normal--0-0-0-0-p-0-iso10646-1, \
+-misc-code2001-medium-r-normal--0-0-0-0-p-0-iso8859-1, \
+-misc-code2001-medium-r-normal--0-0-0-0-p-0-iso8859-15, \
+xft:Symbola
 
