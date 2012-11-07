@@ -17,15 +17,18 @@ function! s:trimspacelisp()
   ''
 endfunction
 
-autocmd! bufwritepost       {*.scm,*.ss,*.sls,*sps}            call s:trimspacelisp()
+augroup ftplugin_scheme
+  autocmd! 
+  autocmd! bufwritepost       {*.scm,*.ss,*.sls,*sps}            call s:trimspacelisp()
+augroup END
 
 setlocal lisp
 setlocal cindent&
 setlocal iskeyword=@,33,35-38,42-43,45-58,60-64,94,_,126,.
 if executable('scmindent.scm')
-if executable('racket')
-setlocal equalprg=scmindent.scm
-endif
+  if executable('racket')
+    setlocal equalprg=scmindent.scm
+  endif
 endif
 
 " paredit

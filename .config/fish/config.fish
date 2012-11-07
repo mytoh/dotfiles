@@ -47,7 +47,7 @@ set fish_pager_color_progress    green
 # shellar
 set shellar ~/.shellar
 # plugins
-set plugins gauche pikkukivi panna talikko lol loitsu ypsilon mosh # z-fish
+set plugins gauche napa pikkukivi panna talikko lol loitsu ypsilon mosh lehti # z-fish
 # theme
 set shellar_theme default
 # source oh-my-fish

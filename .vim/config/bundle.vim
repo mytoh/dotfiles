@@ -52,6 +52,7 @@ else
   NeoBundle 'github:mattn/gist-vim'
   NeoBundle 'github:mattn/sonictemplate-vim'
   NeoBundle 'github:mattn/togetter-vim'
+  NeoBundle 'github:mattn/streamer-vim'
   " NeoBundle 'github:rson/vim-bufstat'
   NeoBundle 'github:scrooloose/nerdcommenter'
   NeoBundle 'github:chikatoike/activefix.vim'
@@ -138,6 +139,7 @@ else
   NeoBundle 'github:tomtom/tcomment_vim'
   NeoBundle 'bash-support.vim'
   NeoBundle 'rhysd/accelerated-jk'
+  NeoBundle 'paradigm/SkyBison'
 
   " tmux
   NeoBundle 'github:zaiste/tmux.vim'
@@ -253,6 +255,7 @@ else
   " NeoBundle 'genie.vim'
 
   " colorscheme {{{
+  NeoBundle 'colorer-color-scheme'
   NeoBundle 'github:paulwib/vim-colorschemes'
   NeoBundle 'github:w0ng/vim-hybrid'
   NeoBundle 'github:altercation/vim-colors-solarized'

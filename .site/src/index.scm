@@ -202,7 +202,7 @@
              ,(make-paren-link "crunchbang"
                                "//crunchbanglinux.org"
                                "#!"
-                               '(("//crunchbanglinux.org/forums/forum/6/artwork-screenshots"
+                               '(("//crunchbanglinux.org/forums/viewforum.php?id=6"
                                   "artwork_screenshots")))
 
              ,(make-paren-link "freebsd"

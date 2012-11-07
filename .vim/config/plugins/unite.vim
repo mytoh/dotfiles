@@ -1,3 +1,6 @@
+let s:V = vital#of('vital')
+let s:P = s:V.import('Prelude')
+
 
 " unite{{{
 
@@ -23,23 +26,17 @@ nmap     <localleader>u [unite]
 nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 nnoremap <silent> [unite]b :<c-u>Unite buffer<cr>
 nnoremap <silent> [unite]c :<c-u>UniteWithCurrentDir -buffer-name=files buffer file file/new<CR>
-nnoremap <silent> [unite]d :<c-u>Unite menu:directory<cr>
 nnoremap <silent> [unite]f :<c-u>UniteWithBufferDir -buffer-name=files -prompt=%\  file file/new<CR>
 nnoremap <silent> [unite]k :<c-u>Unite bookmark<cr>
 " nnoremap <silent> [unite]r :<c-u>Unite launcher<cr>
+nnoremap <silent> [unite]nr :<c-u>Unite menu:repos<cr>
 nnoremap <silent> [unite]m :<c-u>Unite -buffer-name=files file_mru<cr>
 nnoremap <silent> [unite]o :<c-u>Unite outline<cr>
-noremap  <silent> [unite]p :<c-u>call <SID>unite_project('-start-insert')<cr>
 noremap  <silent> [unite]s :<c-u>Unite ack --nogroup<cr>
 nnoremap <silent> [unite]t :<c-u>Unite tab<cr>
 nnoremap <silent> [unite]/ :<c-u>Unite -buffer-name=search line -start-insert<CR>
 " }}}
-
-function! s:unite_project(...)
-  let opts = (a:0 ? join(a:000, ' ') : '')
-  let dir  = unite#util#path2project_directory(expand('%'))
-  execute 'Unite' opts 'file_rec:' . dir
-endfunction
+" 
 
 augroup unite_my_settings
 autocmd  FileType unite call s:unite_my_settings()
@@ -64,32 +61,40 @@ function! s:unite_my_settings() "{{{
 endfunction "}}}
 
 " unite-menu {{{
-if !exists("g:unite_source_menu_menus")
-  let g:unite_source_menu_menus = {}
-endif
-
-" menu description
-let s:commands = {
-      \   'description' : 'directory shortcut',
+let g:unite_source_menu_menus = {}
+let g:unite_source_menu_menus.repos = {}
+let g:unite_source_menu_menus.repos = {
+      \     'description' : 'github repos',
       \ }
-" set commands
-let s:commands.candidates = {
-      \   "quatre" : "VimFiler /nfs/quatre",
-      \   "deskstar" : "VimFiler /nfs/deskstar",
-      \   "mypassport" : "VimFiler /nfs/mypassport",
+let g:unite_source_menu_menus.repos.candidates = {}
+for path in s:P.globpath(expand('~/local/repo'), '*')
+  let repo =  fnamemodify(path, ':t')
+  let g:unite_source_menu_menus.repos.candidates[repo] = path
+endfor
+" let g:unite_source_menu_menus.repos.candidates = {
+"       \  'dotfiles' : "$HOME/local/repo/dotfiles",
+"       \  'loitsu'   : "$HOME/local/repo/loitsu",
       \ }
-
-" register function
-function s:commands.map(key, value)
+function! g:unite_source_menu_menus.repos.map(key, values)
   return {
-        \   'word' : a:key,
-        \   'kind' : 'command',
-        \   'action__command' : a:value,
-        \ }
+        \ 'word': a:key,
+        \ 'kind': 'command',
+        \ 'action__command': printf('Unite file_rec/async:%s', expand(a:values))
+        \}
 endfunction
 
-let g:unite_source_menu_menus["directory"] = deepcopy(s:commands)
-unlet s:commands
+let g:unite_source_menu_menus.ack = {}
+let g:unite_source_menu_menus.ack = {
+      \     'description' : 'ack',
+      \ }
+let g:unite_source_menu_menus.ack = deepcopy(g:unite_source_menu_menus.repos)
+function! g:unite_source_menu_menus.ack.map(key,value)
+  return {
+        \ 'word': a:key,
+        \ 'kind': 'command',
+        \ 'action__command': printf('Unite ack:%s', expand(a:value))
+        \}
+endfunction
 
 " }}}
 

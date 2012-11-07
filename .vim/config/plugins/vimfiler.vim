@@ -14,7 +14,7 @@ nnoremap <silent> <c-e> :VimFilerExplorer <cr>
 let g:vimfiler_as_default_explorer  = 1
 let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_sort_type = "Time"
-let g:vimfiler_edit_action = 'tabopen'
+let g:vimfiler_edit_action = 'open'
 
 augroup vimfiler
   autocmd myautocommands filetype vimfiler call g:my_vimfiler_settings()
