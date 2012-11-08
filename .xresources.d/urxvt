@@ -28,7 +28,6 @@ urxvt.mousewheelscrollpage: false
 urxvt.urgentOnBell: true
 urxvt.modifier: alt
 urxvt.inputMethod: uim
-! urxvt.preeditType: OnTheSpot
 urxvt.preeditType: OverTheSpot
 !urxvt.backgroundPixmap: .wallpapers/background
 

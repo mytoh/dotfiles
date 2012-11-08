@@ -26,7 +26,8 @@ FONT
 #define FONT \
 k10,k10rk,\
 9x12,\
-xft:mplus_j10r, \
+mplus_j10r, \
+xft:MinorinAA+,\
 -gnu-unifont-medium-r-normal--0-0-75-75-c-0-iso10646-1,\
 -gnu-unifont-medium-r-normal--16-160-75-75-c-80-iso10646-1,\
 -misc-code2001-medium-r-normal--0-0-0-0-p-0-iso10646-1, \

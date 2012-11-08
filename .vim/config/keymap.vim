@@ -5,6 +5,9 @@ nmap     n nzz
 nmap     N Nzz
 
 inoremap <c-c> <esc>
+inoremap <esc> <nop>
+nnoremap <c-c> <esc>
+nnoremap <esc> <nop>
 
 nnoremap ; :
 nnoremap : ;
@@ -13,7 +16,6 @@ nnoremap : ;
 nnoremap <space>  i<space><esc>
 nnoremap <silent> <esc><esc> :nohlsearch<cr><esc>
 nnoremap <silent> <tab> :<c-u>bnext<cr>
-nnoremap <c-c> <esc>
 nnoremap / /\v
 nnoremap Q <nop>
 
