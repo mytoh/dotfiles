@@ -19,6 +19,9 @@ nnoremap <silent> <tab> :<c-u>bnext<cr>
 nnoremap / /\v
 nnoremap Q <nop>
 
+" sudo write
+command! W :w !sudo tee % > /dev/null
+
 " 
 nnoremap H ^
 nnoremap L g_

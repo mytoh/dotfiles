@@ -68,7 +68,7 @@ let s:watchdogs_config["javascript/watchdogs_checker"] = {
 " watchdog hook
 let g:watchdogs_check_BufWritePost_enables = {
       \ 'haskell' : 1,
-      \ 'javascript': 1,
+      \ 'javascript': 0,
       \}
 
 

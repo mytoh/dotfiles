@@ -93,3 +93,16 @@ snippet module
 
 snippet utf8
         ;; -*- coding: utf-8 -*-
+
+
+snippet lib
+        (library (${1})
+          (export
+             ${2})
+          (import
+            (scheme base)
+            ${3})
+
+        (begin
+          ${4}
+          ))
