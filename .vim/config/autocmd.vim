@@ -31,7 +31,6 @@ augroup cch
   autocmd winenter,bufread * set cursorline
 augroup end
 
-
 " augroup tmux
 "   if !has('gui_running') && $TMUX !=# ''
 "     autocmd!
@@ -63,7 +62,7 @@ augroup JumpCursorOnEdit
         \ endif |
         \ unlet b:doopenfold |
         \ endif
-augroup END
+  augroup end
 
 
 " utility from tyru's autochmodx

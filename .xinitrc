@@ -50,7 +50,7 @@ xbindkeys &
 Thunar --daemon &
 spiffy &
 #parcellite &
-gosh ~/.site/makiki-server.scm &
+gosh -I~/.site ~/.site/makiki-server.scm &
 synergys --name $(hostname -s)
 mpd
 sudo /etc/netstart
