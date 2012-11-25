@@ -37,6 +37,7 @@ set display+=lastline
 set timeoutlen=10000
 set wildignorecase
 set visualbell
+set noerrorbells visualbell t_vb=
 
 " indent {{{
 

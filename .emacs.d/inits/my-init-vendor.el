@@ -17,7 +17,7 @@
    ))
 
 ;; update plugins
-(my-vendor-update-packages *user-emacs-vendor-directory*)
+;(my-vendor-update-packages *user-emacs-vendor-directory*)
 ;; powerline, github.com/jonathanchu/emacs-powrline
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
                              "emacs-powerline"))

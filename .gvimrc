@@ -3,6 +3,10 @@
 set guioptions-=e
 colorscheme Monokai
 
+set guioptions-=T
+set noerrorbells visualbell t_vb=
+set guifont=Terminus
+
 if has('mac')
   let $PATH = $HOME . '/local/homebrew/sbin:' . $HOME . '/local/homebrew/bin:' . $PATH
 

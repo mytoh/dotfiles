@@ -4263,6 +4263,9 @@
 
 ;; scheme mode recognition
 (add-to-list 'auto-mode-alist '("\\.leh\\'" .  scheme-mode))
+(add-to-list 'auto-mode-alist '("\\.sls\\'" .  scheme-mode))
+(add-to-list 'auto-mode-alist '("\\.sps\\'" .  scheme-mode))
+(add-to-list 'auto-mode-alist '("\\.ss\\'" .  scheme-mode))
 
 ;;http://d.hatena.ne.jp/kobapan/20091205/1259972925
 ;; scheme-mode-hook

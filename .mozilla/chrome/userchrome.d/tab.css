@@ -1,0 +1,27 @@
+/* //github.com/marcoscan/Linux-configs */
+
+.tabbrowser-tab {
+  -moz-appearance: none !important;
+  border-radius: 0px !important;
+  font-family: Dejavu Sans !important;
+  font-size: 11px !important;
+  color: #808080 !important;
+  background: #dbdbdb !important;
+  max-height: 20px !important;
+  min-height: 20px !important;
+  border: none !important;
+  margin: 0 !important;
+  max-width: 100px !important;
+  min-width: 100px !important;
+  padding: 1 !important;
+  padding-left: 3px !important;
+  padding-right: 3px !important;
+  -moz-margin-end: 3px !important;
+}
+
+.tabbrowser-tab[selected] {
+ -moz-appearance: none !important;
+ background: #afd700 !important;
+ color: #303030 !important;
+ -moz-margin-end: 3px !important;
+}

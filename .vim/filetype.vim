@@ -8,6 +8,7 @@ augroup filetypedetect
   autocmd! bufread,bufnewfile *.ss                      setfiletype scheme
   autocmd! bufread,bufnewfile *.sls                      setfiletype scheme
   autocmd! bufread,bufnewfile *.sps                      setfiletype scheme
+  autocmd! bufread,bufnewfile *.sld                      setfiletype scheme
   autocmd! bufread,bufnewfile *.scss                    setfiletype scheme.scss
   autocmd! bufread,bufnewfile *.stub                    setfiletype scheme.c
   autocmd! bufread,bufnewfile scheme.snip               setfiletype snippet.scheme

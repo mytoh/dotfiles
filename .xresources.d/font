@@ -24,7 +24,8 @@ FONT
 
 
 #define FONT \
-xft:MinorinAA+:pixelsize=8,\
+xft:Neep:pixelsize=8,\
+! xft:MinorinAA+:pixelsize=8,\
 k10,k10rk,\
 9x12,\
 mplus_j10r, \

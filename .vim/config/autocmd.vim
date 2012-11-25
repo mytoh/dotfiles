@@ -22,7 +22,7 @@ augroup myautocommands
   autocmd filetype           *                         setl formatoptions-=ro
 
   autocmd bufreadpre,bufnewfile *.scm                     let is_gauche=1
-  autocmd bufreadpre,bufnewfile {*.ss,*.sps,*.sls}        let is_r7rs=1
+  autocmd bufreadpre,bufnewfile {*.ss,*.sps,*.sls,*.sld}        let is_r7rs=1
 augroup end
 
 augroup cch

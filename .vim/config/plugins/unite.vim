@@ -8,7 +8,7 @@ let g:unite_enable_start_insert=1
 let g:unite_split_rule = "belowright"
 " fnamemodify() format
 " :help filename-modifiers
-let g:unite_source_file_mru_filename_format = ''
+let g:unite_source_file_mru_filename_format = ':p:~'
 let g:unite_source_file_mru_time_format = ''
 let g:unite_cursor_line_highlight = 'uniteTabLineSel'
 let g:unite_source_file_mru_limit = 1000
@@ -58,6 +58,8 @@ function! s:unite_my_settings() "{{{
   call unite#custom_default_action('bookmark', 'tabopen')
   " call unite#custom_default_action('directory', 'tabvimfiler')
   call unite#custom_default_action('directory_mru', 'vimfiler')
+  " substitute patterns
+  call unite#set_substitute_pattern('file', '/usr'.escape($HOME, '\'), '^\~',   -2)
 endfunction "}}}
 
 " unite-menu {{{

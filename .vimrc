@@ -8,22 +8,7 @@
 "
 "
 
-" NeoBundle and bundles configuration {{{
-if filereadable(expand('~/.vim/config/bundle.vim'))
-source $HOME/.vim/config/bundle.vim
-endif
-"}}}
-
-filetype plugin indent on " required
-syntax enable
-
- " if isdirectory(expand('~/.vim/config'))
- "   source ~/.vim/config/global.vim
- "   source ~/.vim/config/plugins.vim
- "   source ~/.vim/config/tabpage.vim
- " endif
-
- runtime! config/*.vim
+runtime! config/init.vim
 
 set secure
 " hg clone https://vim.googlecode.com/hg/ vim

@@ -57,6 +57,8 @@
 
 (defmacro* my-vendor-install-packages (packages)
   `(dolist (p ,packages)
+     (if (not (file-exists-p *user-emacs-vendor-directory*))
+         (make-directory *user-emacs-vendor-directory*))
      (unless (file-exists-p (concat *user-emacs-vendor-directory* (car p)))
        (cond ((%url-is-git-p (cadr p))
               (cd-absolute *user-emacs-vendor-directory* )
