@@ -8,6 +8,8 @@ inoremap <c-c> <esc>
 inoremap <esc> <nop>
 nnoremap <c-c> <esc>
 nnoremap <esc> <nop>
+vnoremap <c-c> <esc>
+vnoremap <esc> <nop>
 
 nnoremap ; :
 nnoremap : ;

@@ -34,7 +34,7 @@ else
   NeoBundle 'github:Shougo/neocomplcache-clang_complete'
   NeoBundle 'github:Shougo/vimfiler',
         \ {'depends' : 'github:Shougo/unite.vim' }
-  NeoBundle 'github:Shougo/vimproc'
+  NeoBundle 'github:Shougo/vimproc', { 'stay_same' : 1 }
   NeoBundle 'github:Shougo/vimshell'
   NeoBundle 'github:Shougo/vinarise'
   NeoBundle 'github:Shougo/echodoc'
