@@ -61,9 +61,8 @@ highlight StatusLine     ctermfg=gray  ctermbg=235 cterm=none
 highlight ActiveBuffer   ctermfg=232   ctermbg=244 cterm=none
 highlight InactiveBuffer ctermfg=gray  ctermbg=235 cterm=none
 highlight Comment        ctermfg=244   ctermbg=234 cterm=bold
-highlight ColorColumn    ctermfg=white ctermbg=234
+highlight ColorColumn    ctermfg=white ctermbg=235
 highlight MatchParen     cterm=bold,reverse
-
 
 highlight Pmenu          ctermfg=110    ctermbg=235
 highlight PmenuSel      ctermfg=189    ctermbg=238

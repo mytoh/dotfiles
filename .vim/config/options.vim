@@ -119,7 +119,7 @@ set imdisable
 set formatoptions=q
 
 " columns {{{
-set textwidth=80
+set textwidth=72
 " vertical line on column 81
 set colorcolumn=+1
 

@@ -5,11 +5,11 @@ nmap     n nzz
 nmap     N Nzz
 
 inoremap <c-c> <esc>
-inoremap <esc> <nop>
+" inoremap <esc> <nop>
 nnoremap <c-c> <esc>
-nnoremap <esc> <nop>
+" nnoremap <esc> <nop>
 vnoremap <c-c> <esc>
-vnoremap <esc> <nop>
+" vnoremap <esc> <nop>
 
 nnoremap ; :
 nnoremap : ;
