@@ -17,7 +17,7 @@ Xcursor.theme: whiteglass
 !----------------------------------
 !
 ! relative path from $HOME
-#include ".xcolours/colorshot"
+#include ".xcolours/solarized"
 !*color0: black
 !*color1: red3
 !*color2: green3

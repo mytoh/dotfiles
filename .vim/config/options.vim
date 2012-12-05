@@ -87,9 +87,14 @@ set showfulltag
 
 " colors
 set t_Co=256
-" set background=dark
-colorscheme mycolour
-let g:molokai_original = 0
+set background=dark
+" colorscheme mycolour
+" let g:molokai_original = 0
+
+" solarized
+colorscheme solarized
+let g:solarized_termcolors = 256
+let g:solarized_contrast = 'low'
 
 " set mouse
 set mouse=a

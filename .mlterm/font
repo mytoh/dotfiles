@@ -1,0 +1,10 @@
+#DEFAULT = -kochi-mincho-medium-*--%d-*-
+#DEC_SPECIAL = 10,a10;12,6x12;14,7x14;16,8x16;
+ISO8859_1 = mplus_f12r-iso;
+ISO8859_1_BOLD = mplus_f12r-iso;
+JISX0201_KATA = mplus_f12r-jisx;
+JISX0201_KATA_BOLD = mplus_f12r-jisx;
+JISX0201_ROMAN = mplus_f12r-jisx;
+JISX0208_1983 = mplus_f12r;
+JISX0208_1983_BOLD = mplus_f12r;
+# TCVN5712 = 14,-*-.vntime-*--14-*-iso8859-1;

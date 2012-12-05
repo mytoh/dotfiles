@@ -1,16 +1,13 @@
 
-("~/local/repo/dotfiles"
  ( ".vim"
   ".config/fish/config.fish"
-  ".config/fish/freebsd.fish"
-  ".config/fish/mac.fish"
-  ".config/fish/voi-minun-fish.fish"
-  ".config/fish/lib"
-  ".config/fish/plugins"
   ".config/fish/themes"
   ".config/feh/buttons"
   ".config/feh/keys"
   ".config/feh/themes"
+  ".mlterm/color"
+  ".mlterm/font"
+  ".mlterm/main"
   ".aa"
   ".dwm"
   ".ncmpc"
@@ -56,8 +53,7 @@
   ".zshrc"
   ".dzen"
   ".rlwrap/gosh_completions"
-  ".sheller"
   ".xombrero.conf"
-  ))
+  )
 
 ;; vim:filetype=scheme
