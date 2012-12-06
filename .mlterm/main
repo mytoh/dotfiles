@@ -9,9 +9,9 @@
 # geometry =
 
 # app_name = mlterm
-  
+
 # title = mlterm
-  
+
 # icon_name = mlterm
 
 # icon_path =
@@ -20,13 +20,13 @@
 
 # screen_height_ratio = 100
 
-# inner_border = 2
+inner_border = 0
 
 # -- Terminal --
 # use_login_shell = false
 
 # (xterm,mlterm,kterm)
-# termtype = xterm
+termtype = xterm-256color
 
 # max_ptys = 32
 
@@ -38,16 +38,16 @@
 #  EUC-JP, EUC-JISX0213, Shift_JIS, Shift_JISX0213, ISO-2022-JP[1-3],
 #  EUC-KR, UHC, JOHAB, ISO-2022-KR, GB2312 (EUC-CN), GBK, GB18030,
 #  ISO-2022-CN, HZ, EUC-TW, BIG5, BIG5HKSCS, UTF-8, AUTO)
-# ENCODING = auto
+ENCODING = utf-8
 
-# use_bidi = true
+use_bidi = true
 
 # (normal,cmd_l,cmd_r)
 # bidi_mode = normal
 
 # use_ind = false
 
-# use_combining = true
+use_combining = true
 
 # use_dynamic_comb = false
 
@@ -56,47 +56,49 @@
 
 # big5_buggy = false
 
-# col_size_of_width_a = 1
+col_size_of_width_a = 2
 
 # (none,cjk,mongol)
 # vertical_mode = none
 
 # use_vertical_cursor = false
 
-# use_multi_column_char = false
+# use_multi_column_char = true
 
-# receive_string_via_ucs = false
+# receive_string_via_ucs = true
 
 # -- Font --
-fontsize = 12
+fontsize = 10
 
 # font_size_range = 6-30
 
-# step_in_changing_font_size = 1
-  
-# use_variable_column_width = false 
+step_in_changing_font_size = 2
 
-# type_engine = xcore
+use_variable_column_width = true
+
+type_engine = cairo
 
 # use_anti_alias = false
 
 # use_cp932_ucs_for_xft = true
 
-# not_use_unicode_font = false
+not_use_unicode_font = true
 
 # only_use_unicode_font = false
 
-# iso88591_font_for_usascii = false
+iso88591_font_for_usascii = true
 
 # compose_dec_special_font = false
 
-# -- Appearance --
-use_transbg = true
+use_bold_font = false
 
-alpha = 240
+# -- Appearance --
+# use_transbg = true
+
+# alpha = 240
 
 # (8,16,24,32)
-# depth = 0
+depth = 32
 
 use_scrollbar = false
 
@@ -106,15 +108,15 @@ use_scrollbar = false
 # scrollbar_view_name = simple
 scrollbar_view_name = sample
 
-fg_color = #839496 
+fg_color = #839496
 
-bg_color = #002b36 
+bg_color = #002b36
 
 # sb_fg_color =
 
 # sb_bg_color =
 
-# cursor_fg_color = 
+# cursor_fg_color =
 
 # cursor_bg_color =
 
@@ -144,9 +146,9 @@ borderless = true
 
 # -- Others --
 # use_xim = true
-  
+
 # (xim,uim,scim,m17n-lib,ibus,none)
-input_method = uim
+# input_method = uim
 
 # tabsize = 8
 
@@ -162,7 +164,7 @@ input_method = uim
 
 # (none,sound,visual)
 bel_mode = none
-  
+
 # conf_menu_path_1
 
 # conf_menu_path_2
@@ -177,7 +179,7 @@ bel_mode = none
 # init_str =
 
 # click_interval = 250
-  
+
 # static_backscroll_mode = false
 
 # logging_vt_seq = false
@@ -195,9 +197,9 @@ bel_mode = none
 
 # default_server =
 
-# ssh_public_key = 
+# ssh_public_key =
 
-# ssh_private_key = 
+# ssh_private_key =
 
 # cipher_list =
 

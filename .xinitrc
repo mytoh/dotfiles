@@ -45,7 +45,7 @@ xset +fp /usr/local/lib/X11/fonts/jmk
 xset +fp $HOME/.fonts
 xset +fp $HOME/.fonts/jmk
 xset fp rehash
-urxvtcd &
+# urxvtcd &
 xbindkeys &
 Thunar --daemon &
 spiffy &

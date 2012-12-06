@@ -326,6 +326,8 @@ else
   NeoBundle 'github:mytoh/vim-jfbterm'
   NeoBundle 'github:mytoh/scheme.vim'
   NeoBundle 'github:mytoh/vim-vala'
+  " NeoBundle 'github:mytoh/vim-mlterm'
+  NeoBundle 'vim-mlterm', {'type' : 'nosync', 'base' : '~/local/repo'}
   " NeoBundleLocal '~/.vim/dev'
   " }}}
 

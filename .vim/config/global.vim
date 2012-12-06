@@ -60,7 +60,7 @@ highlight cursorline                   ctermbg=237  gui=underline guibg=black
 highlight StatusLine     ctermfg=gray  ctermbg=235 cterm=none
 highlight ActiveBuffer   ctermfg=232   ctermbg=244 cterm=none
 highlight InactiveBuffer ctermfg=gray  ctermbg=235 cterm=none
-highlight Comment        ctermfg=244   ctermbg=234 cterm=bold
+" highlight Comment        ctermfg=244   ctermbg=234 cterm=bold
 highlight ColorColumn    ctermfg=white ctermbg=235
 highlight MatchParen     cterm=bold,reverse
 
