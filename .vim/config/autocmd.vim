@@ -10,7 +10,6 @@ augroup myautocommands
   autocmd bufwritepost       .zshrc                    Silent !zcompile ~/.zshrc
   autocmd bufwritepost       .conkyrc                  Silent !killall -SIGUSR1  conky
   autocmd bufwritepost       xmonad.hs                 Silent !xmonad --recompile
-  autocmd bufwritepost       *.c                       call vimrc.trimspace()
   " autocmd filetype           xdefaults                 call vimrc.xrdb()
   autocmd filetype           help                      nnoremap q :<c-u>q<cr>
   autocmd filetype           haskell                       ColorHighlight

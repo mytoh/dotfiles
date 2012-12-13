@@ -13,13 +13,6 @@ if vimrc.isos('haiku')
   set rtp^=~/.vim/
 endif
 
-" remove trailing spaces {{{
-function! vimrc.trimspace() dict
-  silent! %s/\s\+$//
-  let @/=''
-endfunction
-" }}}
-
 
 " vital {{{
 let vimrc.V  = vital#of('vital')
@@ -76,7 +69,6 @@ command! -nargs=1 Silent
 
 command! -complete=command EditUtf8 :e ++enc=utf-8
 
-command! -complete=command TrimSpace :call vimrc.trimspace()
 
 " rename current buffer
 " :Rename newfilename

@@ -140,6 +140,7 @@ else
   NeoBundle 'bash-support.vim'
   NeoBundle 'rhysd/accelerated-jk'
   NeoBundle 'paradigm/SkyBison'
+  " NeoBundle 'HiCursorWords'
 
   " tmux
   NeoBundle 'github:zaiste/tmux.vim'
@@ -174,6 +175,8 @@ else
   " NeoBundle 'github:tungd/unite-session'
   NeoBundle 'github:mytoh/unite-highlight'
   " NeoBundle 'github:raduwen/unite-peercast'
+  NeoBundle 'github:daisuzu/rainbowcyclone.vim'
+  NeoBundle 'github:tokuhirom/unite-git'
 
   " quickrun
   NeoBundle 'github:osyo-manga/unite-quickfix'
@@ -186,7 +189,6 @@ else
   NeoBundle 'github:thinca/vim-github'
   NeoBundle 'github:tpope/vim-fugitive'
   NeoBundle 'github:tpope/vim-rhubarb'
-  NeoBundle 'github:taka84u9/unite-git'
   NeoBundle 'github:gmarik/github-search.vim'
   NeoBundle 'github:gregsexton/gitv'
   NeoBundle 'github:yomi322/vim-gitq'
@@ -284,7 +286,6 @@ else
   NeoBundle 'Gentooish'
   NeoBundle '256-jungle'
   NeoBundle 'desert256.vim'
-  NeoBundle 'git://gist.github.com/187578.git' " <- h2u_black
   NeoBundle 'github:tristen/superman' " <- h2u_black
   NeoBundle 'github:jelera/vim-nazca-colorscheme'
   NeoBundle 'bitbucket:abudden/easycolour'
@@ -293,6 +294,7 @@ else
   NeoBundle 'github:nielsmadan/harlequin'
   NeoBundle 'freya'
   "}}}
+
   " NeoBundle 'http://voikko.svn.sourceforge.net/svnroot/voikko/', {'type' : 'svn', 'rtp' : 'trunk/tools/vim'}
   " bitbucket
   " NeoBundle 'https://bitbucket.org/kovisoft/slimv'

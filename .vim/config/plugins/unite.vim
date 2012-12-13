@@ -27,6 +27,7 @@ nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files buffer fi
 nnoremap <silent> [unite]b :<c-u>Unite buffer<cr>
 nnoremap <silent> [unite]c :<c-u>UniteWithCurrentDir -buffer-name=files buffer file file/new<CR>
 nnoremap <silent> [unite]f :<c-u>UniteWithBufferDir -buffer-name=files -prompt=%\  file file/new<CR>
+nnoremap <silent> [unite]g :<c-u>Unite git<cr>
 nnoremap <silent> [unite]k :<c-u>Unite bookmark<cr>
 " nnoremap <silent> [unite]r :<c-u>Unite launcher<cr>
 nnoremap <silent> [unite]nr :<c-u>Unite menu:repos<cr>

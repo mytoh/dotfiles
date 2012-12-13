@@ -10,11 +10,14 @@ let b:did_ftplugin_scheme = 1
 
 function! s:trimspacelisp()
   " trim space for lisp file
+  let _s=@/
   silent! %s/(\s\+/(/
   silent! %s/)\s\+)/))/
   silent! %s/\(\w\)\s\+\()\+\)$/\1\2/
   silent! %s/\s\+$//
-  ''
+  let @/=_s
+  nohl
+  retab
 endfunction
 
 augroup ftplugin_scheme
