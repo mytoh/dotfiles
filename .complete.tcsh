@@ -142,5 +142,3 @@ complete sysctl 'c/-/(b d e h N n o x a)/' \
 set panna_cmds = (install ase asentaa update up list ls cat edit rm remove uninstall unlink)
 complete {panna,pan} 'p/1/$panna_cmds/'
 
-set talikko_cmds = (up update srcup info deinstall remove reinstall install search )
-complete {talikko,tk} 'p/1/$talikko_cmds/'

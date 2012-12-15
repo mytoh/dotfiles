@@ -1,5 +1,6 @@
 
 " kien/rainbow_parentheses {{{
+if neobundle#is_installed('rainbow_parentheses.vim')
 augroup rainbow_parentheses
   autocmd!
   autocmd vimenter * RainbowParenthesesToggle
@@ -29,5 +30,6 @@ let g:rbpt_colorpairs = [
 	\ ]
 " (1 (2 (3 (4 (5 (6 (7 (8 (9 (10 (11 (12 (13 (14 (15 (16 (17 (18 (19)))))))))))))))))))
 " }
+endif
 
 " }}}

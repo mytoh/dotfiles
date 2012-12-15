@@ -53,6 +53,7 @@ else
   NeoBundle 'github:mattn/sonictemplate-vim'
   NeoBundle 'github:mattn/togetter-vim'
   NeoBundle 'github:mattn/streamer-vim'
+  NeoBundle 'github:mattn/excitetranslate-vim'
   " NeoBundle 'github:rson/vim-bufstat'
   NeoBundle 'github:scrooloose/nerdcommenter'
   NeoBundle 'github:chikatoike/activefix.vim'
@@ -101,7 +102,8 @@ else
   " NeoBundle 'github:haruyama/scheme.vim'
   NeoBundle 'github:Lokaltog/vim-easymotion'
   " NeoBundle 'github:Lokaltog/vim-powerline'
-  NeoBundle 'github:kien/rainbow_parentheses.vim'
+  " NeoBundle 'github:kien/rainbow_parentheses.vim'
+  NeoBundle 'github:oblitum/rainbow'
   NeoBundle 'github:kien/tabman.vim'
   NeoBundle 'github:kergoth/fish.vim'
   NeoBundle 'github:kana/vim-textobj-user'
@@ -325,9 +327,9 @@ else
   " }}}
 
   "personal repo
-  NeoBundle 'github:mytoh/vim-jfbterm'
-  NeoBundle 'github:mytoh/scheme.vim'
-  NeoBundle 'github:mytoh/vim-vala'
+  NeoBundle 'vim-jfbterm', {'type' : 'nosync', 'base' : '~/local/repo'}
+  NeoBundle 'scheme.vim', {'type' : 'nosync', 'base' : '~/local/repo'}
+  NeoBundle 'vim-vala', {'type' : 'nosync', 'base' : '~/local/repo'}
   " NeoBundle 'github:mytoh/vim-mlterm'
   NeoBundle 'vim-mlterm', {'type' : 'nosync', 'base' : '~/local/repo'}
   " NeoBundleLocal '~/.vim/dev'
