@@ -1,0 +1,18 @@
+
+
+ISO8859_1 = 10,mplus_h10r:110;12,mplus_h12r:110;
+ISO8859_1_BOLD = 10,mplus_h10r:110;12,mplus_h12r:110;
+
+JISX0201_KATA = 10,mplus_h10r-jisx:110;12,mplus_h12r-jisx:110;
+JISX0201_KATA_BOLD = 10,mplus_h10r-jisx:110;12,mplus_h12r-jisx:110;
+
+JISX0201_ROMAN = 10,mplus_h10r:110;12,mplus_h12r:110;
+JISX0201_ROMAN_BOLD = 10,mplus_h10r:110;12,mplus_h12r:110;
+
+JISX0208_1983 = 10,-mplus-gothic-medium-r-normal--10-100-75-75-c-100-jisx0208.1983-0:110;12,-mplus-gothic-medium-r-normal--12-120-75-75-c-120-jisx0208.1983-0:110;
+JISX0208_1983_BOLD = 10,-mplus-gothic-medium-r-normal--10-100-75-75-c-100-jisx0208.1983-0:110;12,-mplus-gothic-medium-r-normal--12-120-75-75-c-120-jisx0208.1983-0:110;
+
+JISX0208_1990 = 10,mplus_j10r:110;12,mplus_j12r:110;
+JISX0208_1990_BOLD = 10,mplus_j10r:110;12,mplus_j12r:110;
+
+
