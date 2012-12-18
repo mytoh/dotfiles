@@ -1,7 +1,5 @@
 
 
-
-
 function! mystatus#segment(seg)
   return get(s:segments, a:seg)
 endfunction

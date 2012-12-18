@@ -61,7 +61,25 @@ function! s:unite_my_settings() "{{{
   call unite#custom_default_action('directory_mru', 'vimfiler')
   " substitute patterns
   call unite#set_substitute_pattern('file', '/usr'.escape($HOME, '\'), '^\~',   -2)
+  " vimfiler
+  call unite#custom_default_action('source/bookmark/directory', 'vimfiler')
 endfunction "}}}
+
+" open git files http://qiita.com/items/a62297104827e2f04201 {{{
+let s:git_repo_action = { 'description' : 'all file in the git repository' }
+function! s:git_repo_action.func(candidate)
+    if(system('git rev-parse --is-inside-work-tree') ==# "true\n" )
+        execute 'args'
+                \ join( filter(split(system('git ls-files `git rev-parse --show-cdup`'), '\n')
+                        \ , 'empty(v:val) || isdirectory(v:val) || filereadable(v:val)') )
+    else
+        echoerr 'Not a git repository!'
+    endif
+endfunction
+
+call unite#custom_action('file', 'git_repo_files', s:git_repo_action)
+unlet s:git_repo_action
+"}}}
 
 " unite-menu {{{
 let g:unite_source_menu_menus = {}

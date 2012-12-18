@@ -18,15 +18,18 @@ let g:vimfiler_edit_action = 'open'
 
 augroup vimfiler
   autocmd myautocommands filetype vimfiler call g:my_vimfiler_settings()
+	" autocmd VimEnter * VimFilerExplorer
 augroup end
+
 function! g:my_vimfiler_settings() "{{{
   nmap     <buffer><expr><cr>        vimfiler#smart_cursor_map("\<plug>(vimfiler_expand_tree)", "\<plug>(vimfiler_edit_file)")
   nmap     <buffer> q         <plug>(vimfiler_exit)
   nmap     <buffer> Q         <plug>(vimfiler_hide)
   nnoremap <buffer><localleader><silent>s    :call vimfiler#mappings#do_action('my_split')<cr>
   nnoremap <buffer><localleader><silent>S    :call vimfiler#mappings#do_action('my_vsplit')<cr>
+  nnoremap <buffer><silent>/ :<c-u>Unite file -default-action=vimfiler<cr>
   call vimfiler#set_execute_file('mkv,mpg,mp4', 'mplayer')
-  call vimfiler#set_execute_file('jpg,JPG,jpeg,png,gif,bmp,cbz,cbr,cbx', 'mplayer')
+  call vimfiler#set_execute_file('jpg,JPG,jpeg,png,gif,bmp,cbz,cbr,cbx', 'kuv')
   if exists('*vimfiler#set_extensions')
     call vimfiler#set_extensions('archive', 'xz,txz,cbz,cbr,lzh,zip,gz,bz2,cab,rar,7z,tgz,tar')
   endif

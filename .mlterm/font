@@ -1,10 +1,13 @@
-DEFAULT = -kochi-mincho-medium-*--%d-*-
-DEC_SPECIAL = 10,a10;12,6x12;14,7x14;16,8x16;
-ISO8859_1 = -kochi-mincho-medium-*--%d-*-iso8859-1;10,a10;12,6x12;
-ISO8859_1_BOLD = 10,a10;14,7x14;
-JISX0201_KATA = 10,r10;12,r12;14,r14;16,r16;
-JISX0201_KATA_BOLD = 10,r10;
-JISX0201_ROMAN = 10,r10;12,r12;14,r14;16,r16;
-JISX0208_1983 = 10,k10;12,k12;14,k14;16,kanji16;
-JISX0208_1983_BOLD = 10,k10;
-#TCVN5712 = 14,-*-.vntime-*--14-*-iso8859-1;
+
+DEC_SPECIAL = 10,mplus_j10r-iso;12,mplus_j12r-iso;
+ISO8859_1 = 10,mplus_j10r-iso;11,mplus_f10r;12,mplus_j12r-iso;
+ISO8859_1_BOLD = 10,mplus_j10r-iso;mplus_f10r;12,mplus_j12r-iso;
+JISX0201_KATA = 10,mplus_j10r-jisx;12,mplus_j12r-jisx;
+JISX0201_KATA_BOLD = 10,mplus_j10r-jisx;12,mplus_j12r-jisx;
+JISX0201_ROMAN = 10,mplus_j10r-jisx;12,mplus_j12r-jisx;
+JISX0201_ROMAN_BOLD = 10,mplus_j10r-jisx;12,mplus_j12r-jisx;
+JISX0208_1983 = 10,-mplus-gothic-medium-r-normal--10-100-75-75-c-100-jix0208.1983-0;12,-mplus-gothic-medium-r-normal--12-120-75-75-c-120-jix0208.1983-0;
+JISX0208_1983_BOLD = 10,-mplus-gothic-medium-r-normal--10-100-75-75-c-100-jix0208.1983-0;12,-mplus-gothic-medium-r-normal--12-120-75-75-c-120-jix0208.1983-0;
+JISX0208_1990 = 10,mplus_j10r;12,mplus_j12r;
+JISX0208_1990_BOLD = 10,mplus_j10r;12,mplus_j12r;
+

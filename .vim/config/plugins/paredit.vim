@@ -4,7 +4,7 @@ let g:paredit_leader = '\'
 let g:paredit_mode = 1
 let g:paredit_electric_return = 1
 let g:paredit_smartjump = 1 
-let g:paredit_matchlines = 100
+let g:paredit_matchlines = 300
 let g:paredit_shortmaps = 0
 
 function! s:enable_shortmaps()

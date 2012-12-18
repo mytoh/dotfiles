@@ -44,6 +44,7 @@
   '("linuxactionshow"
     "scheme"
     "lisp_ja"
+    "lua"
     "lisp"
     "clojure"
     "emacs"
@@ -71,6 +72,7 @@
 (define github-tags
   '("clojure"
     "common lisp"
+    "lua"
     "scheme"
     "viml"
     "ruby"
@@ -157,6 +159,7 @@
         (div (@ (class "bookmark"))
              ,(delicious "//d.me"
                          '("zsh"
+                           "lua"
                            "emacs"
                            "vim"
                            "scheme"
@@ -172,6 +175,7 @@
                            ))
              ,(hatena "//b.hatena.ne.jp"
                       '("vim"
+                        "lua"
                         "emacs"
                         "zsh"
                         "scheme"

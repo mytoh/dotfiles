@@ -6,13 +6,12 @@ termtype = xterm-256color
 
 # -- Encoding --
 ENCODING = utf-8
-use_dynamic_comb = true
 col_size_of_width_a = 2
 
 # -- Font --
- fontsize = 10
+fontsize = 10
 use_variable_column_width = false 
- use_anti_alias = false
+use_anti_alias = false
 not_use_unicode_font = true
 use_bold_font = false
 

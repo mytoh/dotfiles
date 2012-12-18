@@ -132,7 +132,6 @@ else
   NeoBundle 'vim2ansi'
   NeoBundle 'github:majutsushi/tagbar'
   " NeoBundle 'github:nefo-mi/nyan-modoki.vim'
-  NeoBundle 'github:mytoh/nyan-modoki.vim'
   " NeoBundle 'github:coderifous/textobj-word-column.vim'
   NeoBundle 'github:spolu/dwm.vim'
   NeoBundle 'sherlock.vim'
@@ -166,7 +165,6 @@ else
   NeoBundle 'github:osyo-manga/unite-homo'
   NeoBundle 'github:osyo-manga/unite-u-nya-'
   NeoBundle 'github:osyo-manga/unite-env'
-  NeoBundle 'github:mytoh/unite-sa-nya-'
   NeoBundle 'github:jceb/vim-hier'
   NeoBundle 'github:tsukkee/unite-tag'
   " NeoBundle 'github:Sixeight/unite-grep'
@@ -175,10 +173,9 @@ else
   NeoBundle 'github:t9md/vim-unite-ack'
   NeoBundle 'github:Shougo/unite-ssh'
   " NeoBundle 'github:tungd/unite-session'
-  NeoBundle 'github:mytoh/unite-highlight'
   " NeoBundle 'github:raduwen/unite-peercast'
   NeoBundle 'github:daisuzu/rainbowcyclone.vim'
-  NeoBundle 'github:tokuhirom/unite-git'
+  " NeoBundle 'github:tokuhirom/unite-git'
 
   " quickrun
   NeoBundle 'github:osyo-manga/unite-quickfix'
@@ -330,8 +327,11 @@ else
   NeoBundle 'vim-jfbterm', {'type' : 'nosync', 'base' : '~/local/repo'}
   NeoBundle 'scheme.vim', {'type' : 'nosync', 'base' : '~/local/repo'}
   NeoBundle 'vim-vala', {'type' : 'nosync', 'base' : '~/local/repo'}
-  " NeoBundle 'github:mytoh/vim-mlterm'
   NeoBundle 'vim-mlterm', {'type' : 'nosync', 'base' : '~/local/repo'}
+  NeoBundle 'unite-git', {'type' : 'nosync', 'base' : '~/local/repo'}
+  NeoBundle 'unite-sa-nya-', {'type' : 'nosync', 'base' : '~/local/repo'}
+  NeoBundle 'unite-highlight', {'type' : 'nosync', 'base' : '~/local/repo'}
+  NeoBundle 'nyan-modoki.vim', {'type' : 'nosync', 'base' : '~/local/repo'}
   " NeoBundleLocal '~/.vim/dev'
   " }}}
 
