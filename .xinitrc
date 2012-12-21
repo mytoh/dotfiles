@@ -24,7 +24,7 @@ uim-toolbar-gtk-systray &
 export QT_PLUGIN_PATH="/usr/local/kde4/lib/kde4/plugins"
 
 export PATH="$HOME/local/bin:$PATH"
-export VTE_CJK_WIDTH=1
+export VTE_CJK_WIDTH=auto
 xrdb -merge $HOME/.Xresources
 setxkbmap dvorak
 xmodmap $HOME/.xmodmaprc
@@ -67,6 +67,8 @@ if [ "$1" = "twm"  -o "$1" = "flwm" ]; then
   tint2 &
 fi
 
+
+
 DEFAULT_SESSION="dwm"
 if [ -n $1 ]; then
   export USERWM=$1
@@ -80,7 +82,7 @@ if [ -n $1 ]; then
   gnome) exec gnome-session ;;
   mate) exec ck-launch-session mate-session ;;
   rox) exec rox -S ;;
-lainwm) exec lainwm ;;
+  lainwm) exec lainwm ;;
   *) exec dbus-launch --exit-with-session ck-launch-session $1 ;;
  esac
 else

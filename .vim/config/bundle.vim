@@ -49,14 +49,13 @@ else
   NeoBundle 'github:mattn/wwwrenderer-vim'
   NeoBundle 'github:mattn/learn-vimscript'
   NeoBundle 'github:mattn/hahhah-vim'
-  NeoBundle 'github:mattn/gist-vim'
   NeoBundle 'github:mattn/sonictemplate-vim'
   NeoBundle 'github:mattn/togetter-vim'
   NeoBundle 'github:mattn/streamer-vim'
   NeoBundle 'github:mattn/excitetranslate-vim'
   " NeoBundle 'github:rson/vim-bufstat'
   NeoBundle 'github:scrooloose/nerdcommenter'
-  NeoBundle 'github:chikatoike/activefix.vim'
+  " NeoBundle 'github:chikatoike/activefix.vim'
   NeoBundle 'github:thinca/vim-ambicmd'
   NeoBundle 'github:thinca/vim-openbuf'
   NeoBundle 'github:thinca/vim-singleton'
@@ -66,12 +65,12 @@ else
   NeoBundle 'github:thinca/vim-localrc'
   NeoBundle 'github:tpope/vim-surround'
   NeoBundle 'github:tpope/vim-afterimage'
-  NeoBundle 'github:tpope/vim-markdown'
   NeoBundle 'github:tpope/vim-unimpaired'
   NeoBundle 'github:tpope/vim-repeat'
   NeoBundle 'github:tpope/vim-eunuch'
   "dont map <cr> if install vim-endwise
   NeoBundle 'github:tpope/vim-endwise'
+  NeoBundle 'github:tpope/vim-rsi'
   NeoBundle 'github:tyru/eskk.vim'
   NeoBundle 'github:tyru/skkdict.vim'
   NeoBundle 'github:tyru/open-browser.vim'
@@ -127,7 +126,6 @@ else
   NeoBundle 'github:godlygeek/tabular'
   NeoBundle 'github:sjl/gundo.vim'
   NeoBundle 'github:vim-jp/vital.vim'
-  NeoBundle 'github:vim-jp/cpp-vim'
   NeoBundle 'github:Twinside/vim-codeoverview'
   NeoBundle 'vim2ansi'
   NeoBundle 'github:majutsushi/tagbar'
@@ -141,6 +139,7 @@ else
   NeoBundle 'bash-support.vim'
   NeoBundle 'rhysd/accelerated-jk'
   NeoBundle 'paradigm/SkyBison'
+  NeoBundle 'github:daisuzu/rainbowcyclone.vim'
   " NeoBundle 'HiCursorWords'
 
   " tmux
@@ -151,7 +150,7 @@ else
   " ref
   NeoBundle 'github:thinca/vim-ref'
   NeoBundle 'github:h1mesuke/ref-dicts-en'
-  
+
   "unite
   NeoBundle 'github:Shougo/unite.vim'
   NeoBundle 'github:hakobe/unite-script'
@@ -174,7 +173,6 @@ else
   NeoBundle 'github:Shougo/unite-ssh'
   " NeoBundle 'github:tungd/unite-session'
   " NeoBundle 'github:raduwen/unite-peercast'
-  NeoBundle 'github:daisuzu/rainbowcyclone.vim'
   " NeoBundle 'github:tokuhirom/unite-git'
 
   " quickrun
@@ -192,6 +190,7 @@ else
   NeoBundle 'github:gregsexton/gitv'
   NeoBundle 'github:yomi322/vim-gitq'
   NeoBundle 'github:hrsh7th/vim-unite-vcs'
+  NeoBundle 'github:mattn/gist-vim'
 
   " others
   NeoBundle 'github:Rykka/colorv.vim'
@@ -199,61 +198,148 @@ else
   " NeoBundle 'github:dahu/vim-fanfingtastic'
 
   " syntax
-  "c
-  NeoBundle 'github:cg433n/better-c'
+  " c
+  NeoBundleLazy 'github:cg433n/better-c'
+  augroup NeoBundleLazyLoadC
+    autocmd!
+    autocmd filetype c NeoBundleSource
+          \ better-c
+  augroup END
+
+  " cpp
+  NeoBundleLazy 'github:vim-jp/cpp-vim'
+  augroup NeoBundleLazyLoadCpp
+    autocmd!
+    autocmd filetype cpp NeoBundleSource
+          \ cpp-vim
+  augroup END
+
   "lisp
-  NeoBundle 'bitbucket:kovisoft/paredit'
+  NeoBundleLazy 'bitbucket:kovisoft/paredit'
   " NeoBundle 'github:aharisu/vim-gdev'
   " NeoBundle 'github:aharisu/Gauche-Complete'
+  augroup NeoBundleLazyLoadLisp
+    autocmd!
+    autocmd filetype scheme,lisp NeoBundleSource
+          \ paredit
+  augroup END
+
   " clojure
-  " NeoBundle 'bitbucket:kotarak/vimclojure', {'rtp': 'vim/src/main/vim'}
-  " NeoBundle 'VimClojure'
-  " NeoBundle 'github:emanon001/fclojure.vim'
-  NeoBundle 'github:thinca/vim-ft-clojure'
+  " NeoBundleLazy 'bitbucket:kotarak/vimclojure', {'rtp': 'vim/src/main/vim'}
+  " NeoBundleLazy 'VimClojure'
+  " NeoBundleLazy 'github:emanon001/fclojure.vim'
+  NeoBundleLazy 'github:thinca/vim-ft-clojure'
+  augroup NeoBundleLazyLoadClojure
+    autocmd!
+    autocmd filetype clojure NeoBundleSource
+          \ vim-ft-clojure
+  augroup END
 
   "haskell
   " NeoBundle 'github:Twinside/vim-haskellConceal'
-  NeoBundle 'github:Twinside/vim-syntax-haskell-cabal'
-  NeoBundle 'github:zenzike/vim-haskell-unicode'
-  NeoBundle 'github:haskell.vim'
+  NeoBundleLazy 'github:Twinside/vim-syntax-haskell-cabal'
+  NeoBundleLazy 'github:zenzike/vim-haskell-unicode'
+  NeoBundleLazy 'github:haskell.vim'
   " NeoBundle 'github:lukerandall/haskellmode-vim'
-  NeoBundle 'github:kana/vim-filetype-haskell'
-  NeoBundle 'github:eagletmt/ghcmod-vim'
-  NeoBundle 'ujihisa/neco-ghc'
-  NeoBundle 'github:ujihisa/ref-hoogle'
-  NeoBundle 'github:dag/vim2hs'
-  NeoBundle 'github:eagletmt/unite-haddock'
+  NeoBundleLazy 'github:kana/vim-filetype-haskell'
+  NeoBundleLazy 'github:eagletmt/ghcmod-vim'
+  NeoBundleLazy 'ujihisa/neco-ghc'
+  NeoBundleLazy 'github:ujihisa/ref-hoogle'
+  NeoBundleLazy 'github:dag/vim2hs'
+  NeoBundleLazy 'github:eagletmt/unite-haddock'
+  augroup NeoBundleLazyLoadHaskell
+    autocmd!
+    autocmd filetype haskell NeoBundleSource
+          \ vim-syntax-haskell-cabal
+          \ vim-haskell-unicode
+          \ haskell.vim
+          \ vim-filetype-haskell
+          \ ghcmod-vim
+          \ neco-ghc
+          \ ref-hoogle
+          \ vim2hs
+          \ unite-haddock
+  augroup END
 
   "javascript
-  NeoBundle 'github:jelera/vim-javascript-syntax'
-  NeoBundle 'github:pangloss/vim-javascript'
-  NeoBundle 'github:teramako/jscomplete-vim'
-  NeoBundle 'github:einars/js-beautify'
-  NeoBundle 'github:maksimr/vim-jsbeautify'
-  NeoBundle 'JSON.vim'
+  NeoBundleLazy 'github:jelera/vim-javascript-syntax'
+  NeoBundleLazy 'github:pangloss/vim-javascript'
+  NeoBundleLazy 'github:teramako/jscomplete-vim'
+  NeoBundleLazy 'github:einars/js-beautify'
+  NeoBundleLazy 'JSON.vim'
+  " NeoBundleLazy 'github:maksimr/vim-jsbeautify'
+  " NeoBundleLazy 'vim-jsbeautify'
+  augroup NeoBundleLazyLoadJS
+    autocmd!
+    autocmd filetype javascript NeoBundleSource
+          \ vim-javascript-syntax
+          \ vim-javascript
+          \ jscomplete-vim
+          \ js-beautify
+          \ JSON.vim
+  augroup END
+
   " css
-  NeoBundle 'github:hail2u/vim-css3-syntax'
-  NeoBundle 'github:skammer/vim-css-color'
+  NeoBundleLazy 'github:hail2u/vim-css3-syntax'
+  NeoBundleLazy 'github:skammer/vim-css-color'
+  augroup NeoBundleLazyLoadCSS
+    autocmd!
+    autocmd filetype css NeoBundleSource
+          \ vim-css3-syntax
+          \ vim-css-color
+  augroup END
+
   " svg
-  NeoBundle 'svg.vim'
+  NeoBundleLazy 'svg.vim'
+  augroup NeoBundleLazyLoadSVG
+    autocmd!
+    autocmd filetype svg NeoBundleSource
+          \ svg.vim
+  augroup END
+
   " rst
-  NeoBundle 'github:Rykka/riv.vim'
-  " markdow
-  NeoBundle 'github:hallison/vim-markdown'
+  NeoBundleLazy 'github:Rykka/riv.vim'
+  augroup NeoBundleLazyLoadRst
+    autocmd!
+    autocmd filetype rst NeoBundleSource
+          \ riv.vim
+  augroup END
+
+  " markdown
+  NeoBundleLazy 'github:hallison/vim-markdown'
+  " NeoBundleLazy 'github:tpope/vim-markdown'
+  augroup NeoBundleLazyLoadMarkdown
+    autocmd!
+    autocmd filetype mkd NeoBundleSource
+          \ vim-markdown
+  augroup END
+
   " obj-c
-  NeoBundle 'github:msanders/cocoa.vim'
+  NeoBundleLazy 'github:msanders/cocoa.vim'
+  augroup NeoBundleLazyLoadObjc
+    autocmd!
+    autocmd filetype obj-c NeoBundleSource
+          \ cocoa.vim
+  augroup END
+
   " supercollider
   NeoBundle 'github:sbl/scvim'
+
   " brainfuck
   NeoBundle 'brainfuck-syntax'
+
   " python
   NeoBundle 'python.vim'
+
   " mml
   NeoBundle 'stephencelis/vim-mml'
 
   " genie
   NeoBundle 'github:GrAndSE/genie-script-vim-syntax'
   " NeoBundle 'genie.vim'
+
+  " coffeescript
+  NeoBundle 'github:kchmck/vim-coffee-script'
 
   " colorscheme {{{
   NeoBundle 'colorer-color-scheme'
@@ -314,7 +400,6 @@ else
   NeoBundle 'autoproto.vim'
   NeoBundle 'matchparenpp'
   NeoBundle 'AnsiEsc.vim'
-  NeoBundle 'vim-jsbeautify'
   NeoBundle 'Source-Explorer-srcexpl.vim'
   NeoBundle 'Vimchant'
   NeoBundle 'copypath.vim'
@@ -328,9 +413,11 @@ else
   NeoBundle 'scheme.vim', {'type' : 'nosync', 'base' : '~/local/repo'}
   NeoBundle 'vim-vala', {'type' : 'nosync', 'base' : '~/local/repo'}
   NeoBundle 'vim-mlterm', {'type' : 'nosync', 'base' : '~/local/repo'}
+  NeoBundle 'vim-qvwm', {'type' : 'nosync', 'base' : '~/local/repo'}
   NeoBundle 'unite-git', {'type' : 'nosync', 'base' : '~/local/repo'}
   NeoBundle 'unite-sa-nya-', {'type' : 'nosync', 'base' : '~/local/repo'}
   NeoBundle 'unite-highlight', {'type' : 'nosync', 'base' : '~/local/repo'}
+  NeoBundle 'unite-autocmd', {'type' : 'nosync', 'base' : '~/local/repo'}
   NeoBundle 'nyan-modoki.vim', {'type' : 'nosync', 'base' : '~/local/repo'}
   " NeoBundleLocal '~/.vim/dev'
   " }}}

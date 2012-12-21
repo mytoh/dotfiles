@@ -58,6 +58,7 @@
     "unix"
     "rust"
     "vim"
+    "coffeescript"
     "programming"))
 
 (define hatena
@@ -71,6 +72,7 @@
 
 (define github-tags
   '("clojure"
+    "coffeescript"
     "common lisp"
     "lua"
     "scheme"
@@ -159,6 +161,7 @@
         (div (@ (class "bookmark"))
              ,(delicious "//d.me"
                          '("zsh"
+                           "coffeescript"
                            "lua"
                            "emacs"
                            "vim"
@@ -188,6 +191,7 @@
                         "ruby"
                         "javascript"
                         "css"
+                        "coffeescript"
                         "xmonad"
                         "python"
                         ))

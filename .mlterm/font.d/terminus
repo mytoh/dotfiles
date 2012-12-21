@@ -1,7 +1,7 @@
 
-DEC_SPECIAL = -xos4-terminus-medium-r-normal--0-0-72-72-c-0-iso8859-1,10,mplus_j10r-iso;12,mplus_j12r-iso;
-ISO8859_1 = -xos4-terminus-medium-r-normal--0-0-72-72-c-0-iso8859-1,10,mplus_j10r-iso;11,mplus_f10r;12,mplus_j12r-iso;
-ISO8859_1_BOLD = -xos4-terminus-medium-r-normal--0-0-72-72-c-0-iso8859-1,10,mplus_j10r-iso;mplus_f10r;12,mplus_j12r-iso;
+DEC_SPECIAL = 10,mplus_j10r-iso;12,mplus_j12r-iso;
+ISO8859_1 = -xos4-terminus-medium-r-normal--0-0-72-72-c-0-iso8859-1,,mplus_j10r-iso;11,mplus_f10r;12,mplus_j12r-iso;
+ISO8859_1_BOLD = -xos4-terminus-medium-r-normal--0-0-72-72-c-0-iso8859-1,mplus_j10r-iso;mplus_f10r;12,mplus_j12r-iso;
 JISX0201_KATA = 10,mplus_j10r-jisx;12,mplus_j12r-jisx;
 JISX0201_KATA_BOLD = 10,mplus_j10r-jisx;12,mplus_j12r-jisx;
 JISX0201_ROMAN = 10,mplus_j10r-jisx;12,mplus_j12r-jisx;

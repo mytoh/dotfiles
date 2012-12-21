@@ -10,8 +10,9 @@ let g:vimshell_prompt = '>> '
 "endif
 
 let g:vimshell_execute_file_list = {}
-let g:vimshell_execute_file_list['pl'] = 'perl'
-let g:vimshell_execute_file_list['scm'] = 'gosh'
+for ext in split('txt,vim,c,h,cxx,d,xml,java,', ',')
+  let g:vimshell_execute_file_list[ext] = 'vim'
+endfor
 
 
 let g:vimshell_enable_smart_case = 1
