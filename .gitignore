@@ -3,8 +3,10 @@
 .vim/sessions
 .vim/.vim
 .vim/doc
+.vim/undo
 *.zwc
 *.swp
+
 .directory
 *~
 \#*\#

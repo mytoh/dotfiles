@@ -80,7 +80,7 @@ set splitbelow
 set splitright
 
 set list
-set listchars=tab:\|\ ,trail:-,eol:¬,extends:»,precedes:«,nbsp:%
+set listchars=tab:^\ ,trail:-,eol:¬,extends:»,precedes:«,nbsp:%
 
 " tags
 set showfulltag
