@@ -226,7 +226,7 @@ else
   augroup END
 
   " clojure
-  NeoBundleLazy 'bitbucket:kotarak/vimclojure', {'rtp': 'vim/src/main/vim'}
+  NeoBundleLazy 'bitbucket:kotarak/vimclojure', {'rtp': 'vim'}
   " NeoBundleLazy 'VimClojure'
   " NeoBundleLazy 'github:emanon001/fclojure.vim'
   NeoBundleLazy 'github:thinca/vim-ft-clojure'
