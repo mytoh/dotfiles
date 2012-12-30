@@ -47,7 +47,7 @@ endfunction "}}}
 
 function! GetCharHighlightGroup()
   redir => highlights
-  silent! echo map(synstack(line('.'),col('.')),'synIDattr(synIDtrans(v:val),"name")')
+  silent! echo reverse(map(synstack(line('.'),col('.')),'synIDattr(synIDtrans(v:val),"name")'))
   redir END
 
   return highlights

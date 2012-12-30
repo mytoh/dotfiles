@@ -36,6 +36,8 @@ else
         \ {'depends' : 'github:Shougo/unite.vim' }
   NeoBundle 'github:Shougo/vimproc', { 'stay_same' : 1 }
   NeoBundle 'github:Shougo/vimshell'
+  NeoBundle 'github:ujihisa/vimshell-ssh',
+        \ {'depends': 'github:Shougo/vimshell'}
   NeoBundle 'github:Shougo/vinarise'
   NeoBundle 'github:Shougo/echodoc'
   NeoBundle 'github:koron/nyancat-vim'
@@ -80,7 +82,6 @@ else
   " NeoBundle 'github:tyru/caw.vim'
   " NeoBundle 'github:tyru/autochmodx.vim'
   NeoBundle 'github:ujihisa/neco-look'
-  NeoBundle 'github:ujihisa/vimshell-ssh'
   NeoBundle 'github:mfumi/mpc.vim'
   NeoBundle 'github:mileszs/ack.vim'
   NeoBundle 'github:epmatsw/ag.vim'
@@ -140,6 +141,8 @@ else
   NeoBundle 'rhysd/accelerated-jk'
   NeoBundle 'paradigm/SkyBison'
   NeoBundle 'github:daisuzu/rainbowcyclone.vim'
+  NeoBundle 'github:vimtaku/hl_matchit.vim'
+  NeoBundle 'github:roman/golden-ratio'
   " NeoBundle 'HiCursorWords'
 
   " tmux
@@ -217,6 +220,7 @@ else
 
   "lisp
   NeoBundleLazy 'bitbucket:kovisoft/paredit'
+  NeoBundleLazy     'bitbucket:kovisoft/slimv'
   " NeoBundle 'github:aharisu/vim-gdev'
   " NeoBundle 'github:aharisu/Gauche-Complete'
   augroup NeoBundleLazyLoadLisp
@@ -383,7 +387,6 @@ else
 
   " NeoBundle 'http://voikko.svn.sourceforge.net/svnroot/voikko/', {'type' : 'svn', 'rtp' : 'trunk/tools/vim'}
   " bitbucket
-  " NeoBundle 'https://bitbucket.org/kovisoft/slimv'
   " }}}
 
   " official vim-scripts repo {{{
