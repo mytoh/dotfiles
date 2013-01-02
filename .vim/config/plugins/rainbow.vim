@@ -12,17 +12,14 @@ if neobundle#is_installed('rainbow')
 
   let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick',]
   let g:rainbow_ctermfgs = [
-        \ 'darkblue', 'green', 'yellow', 'red', 'darkyellow', 
-        \ 'darkgreen', 'blue', 'magenta', 'darkcyan', 'lightgreen',
+        \ 'darkblue', 'green', 'yellow', 'blue', 'darkyellow', 'red', 
+        \ 'darkgreen', 'magenta', 'darkcyan', 'lightgreen',
         \ 'darkyellow', 'cyan', 'lightred', 'brown' , 'gray',
-        \ 'darkblue', 'green', 'yellow', 'red', 'darkyellow', 
-        \ 'darkgreen', 'blue', 'magenta', 'darkcyan', 'lightgreen',
+        \ 'darkblue', 'green', 'yellow', 'blue', 'darkyellow', 'red', 
+        \ 'darkgreen', 'magenta', 'darkcyan', 'lightgreen',
         \ 'darkyellow', 'cyan', 'lightred', 'brown' , 'gray',
-        \ 'darkblue', 'green', 'yellow', 'red', 'darkyellow', 
-        \ 'darkgreen', 'blue', 'magenta', 'darkcyan', 'lightgreen',
-        \ 'darkyellow', 'cyan', 'lightred', 'brown' , 'gray',
-        \ 'darkblue', 'green', 'yellow', 'red', 'darkyellow', 
-        \ 'darkgreen', 'blue', 'magenta', 'darkcyan', 'lightgreen',
+        \ 'darkblue', 'green', 'yellow', 'blue', 'darkyellow', 'red', 
+        \ 'darkgreen', 'magenta', 'darkcyan', 'lightgreen',
         \ 'darkyellow', 'cyan', 'lightred', 'brown' , 'gray',
         \ ]
 

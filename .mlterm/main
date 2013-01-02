@@ -10,7 +10,7 @@ col_size_of_width_a = 2
 
 # -- Font --
 fontsize = 10
-use_variable_column_width = false 
+use_variable_column_width = false
 use_anti_alias = false
 not_use_unicode_font = true
 use_bold_font = false
@@ -21,10 +21,11 @@ alpha = 250
 depth = 32
 use_scrollbar = false
 scrollbar_view_name = sample
-fg_color = #839496
-bg_color = #002b36
+fg_color = #CACACA
+bg_color = #242222
 borderless = true
 
 
 # -- Others --
 bel_mode = none
+use_alt_buffer = true

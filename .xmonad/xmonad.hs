@@ -104,7 +104,7 @@ myLayoutHook =  avoidStruts                $
                 onWorkspace "kolme" full   $
                 (collectiveLayouts)
 
-                 where
+                  where
 
 --                 collectiveLayouts = tabbed ||| twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex
                    collectiveLayouts = twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex
@@ -152,7 +152,7 @@ myKeys = [ -- M4 for Super key
        , ("M-q", spawn myRestart)
        , ("M-S-p", unsafeSpawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/local/tmp/'")
          ]
-          where
+           where
              notSP = (return $ ("SP" /=) . W.tag) :: X (WindowSpace -> Bool)
 
              scratchFiler = namedScratchpadAction myScratchPads "dolphin"
@@ -207,13 +207,13 @@ myManageHook = -- insertPosition End Newer <+> composeAll
          <+> manageDocks
          <+> manageHook defaultConfig
 
-       where
+           where
          viewShift = doF . liftM2 (.) W.greedyView W.shift
          myFloats = ["Main.py","Gimp","DTA","Gcolor2","Switch2","Uim-pref-gtk"]
 
 myScratchPads = [ NS "dolphin" spawnFiler findFiler manageFiler
                 ]
-                   where
+                  where
                      spawnFiler  = "dolphin"
                      findFiler   = className =? "Dolphin"
                      manageFiler = customFloating $ W.RationalRect l t w h
@@ -266,7 +266,7 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
               , ppSort            = fmap (namedScratchpadFilterOutWorkspace.) (ppSort dzenPP)
               , ppOutput          = hPutStrLn h
                 }
-                where
+                  where
                   wrapBitmap bitmap = "^i(" ++ myIconsDirectory ++ bitmap ++ ")"
                   iconPad    a      = "^i(" ++ myIconsDirectory ++ a ++ " "
 
@@ -278,15 +278,15 @@ myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 420 -h 11 -bg \"#212122\" -fn " ++ m
 myRightBar  = "~/.dzen/bin/status.scm | exec dzen2 -p -ta r -x 420 -y 0 -w 710 -h 11 -bg \"#212122\" -fn " ++ myDzenFont
 -- }}}
 trayer      = "exec trayer --expand true --alpha 10  --tint 0x232324 --transparent true --padding 0 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 11 --widthtype pixel --width 150 "
--- stalonetray = "exec stalonetray -i 1 --dockapp-mode simple --icon-gravity W --grow-gravity E --geometry 8x1-0+0 --max-geometry 40x13 -bg '#333333' --sticky --skip-taskbar"
-mail        = "gmail-notifier"
+              -- stalonetray = "exec stalonetray -i 1 --dockapp-mode simple --icon-gravity W --grow-gravity E --geometry 8x1-0+0 --max-geometry 40x13 -bg '#333333' --sticky --skip-taskbar"
+                               mail        = "gmail-notifier"
 compmgr     = "xcompmgr -c -C -I1 -O1 -Ff"
 -- bgmgr       = "feh --bg-scale ~/.wallpapers/images.4chan.org-1268382153153.jpg"
-bgmgr       = "hsetroot -fill ~/.wallpapers/images.4chan.org-1268382267394.jpg"
+                 bgmgr       = "hsetroot -fill ~/.wallpapers/images.4chan.org-1268382267394.jpg"
 clipmgr     = "parcellite"
 volumemgr   = "gnome-volume-control-applet"
 uimPanel    = "uim-toolbar-gtk-systray"
-mlterm      = "mlterm --daemon=genuine -P 0"
+mlterm      = "mlclient"
 -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 
 myStartupHook :: X ()
@@ -323,4 +323,3 @@ myConfig = do
 
 
 
--- vim: fenc=utf-8

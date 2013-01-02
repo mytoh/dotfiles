@@ -1,17 +1,20 @@
-black=#073642
-red=#dc322f
-green=#859900
-yellow=#b58900
-blue=#268bd2
-magenta=#d33682
-cyan=#2aa198
-white=#fdf6e3
-hl_black=#002b36
-hl_red=#cb4b16
-hl_green=#586e75
-hl_yellow=#657b83
-hl_blue=#839496
-hl_magenta=#6c71c4
-hl_cyan=#93a1a1
-hl_white=#fdf6e3
+black=#1C1C1C
+red=#D81860
+green=#B7CE42
+yellow=#FEA63C
+blue=#66AABB
+magenta=#B7416E
+cyan=#5E7175
+white=#DDEEDD
+hl_black=#4D4D4D
+hl_red=#F00060
+hl_green=#BDE077
+hl_yellow=#FFE863
+hl_blue=#AACCBB
+hl_magenta=#BB4466
+hl_cyan=#A3BABF
+hl_white=#6C887A
 
+
+#fg_color = #CACACA
+#bg_color = #121212

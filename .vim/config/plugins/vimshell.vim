@@ -18,7 +18,7 @@ endfor
 let g:vimshell_enable_smart_case = 1
 let g:vimshell_enable_auto_slash = 1
 let g:vimshell_split_height = 20
-let g:vimshell_split_command = 'split'
+" let g:vimshell_split_command = 'split'
 augroup vimshell
   autocmd!
   autocmd filetype vimshell  call vimshell#hook#set('chpwd', ['g:my_chpwd'])
@@ -40,5 +40,6 @@ nmap     <silent> [vimshell]s <Plug>(vimshell_split_create)
 nmap     <silent> [vimshell]c <Plug>(vimshell_create)
 nnoremap <silent> [vimshell]p :<c-u>VimShellPop<cr>
 nnoremap <silent> [vimshell]t :<c-u>VimShellTab<cr>
+nnoremap <silent> [vimshell]v :<c-u>VimShellCreate -split -split-command='vsplit'<cr>
 " }}}
 "}}}

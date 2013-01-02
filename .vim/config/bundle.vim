@@ -116,6 +116,7 @@ else
   NeoBundle 'github:kana/vim-operator-user'
   NeoBundle 'github:kana/vim-operator-replace'
   NeoBundle 'github:lucapette/vim-textobj-underscore'
+  NeoBundle 'github:h1mesuke/textobj-wiw'
   " NeoBundle 'github:Raimondi/delimitMate'
   NeoBundle 'github:hobbestigrou/Vim-wmfs'
   NeoBundle 'github:bronson/vim-trailing-whitespace'
@@ -197,7 +198,7 @@ else
   NeoBundle 'github:mattn/gist-vim'
 
   " others
-  NeoBundle 'github:Rykka/colorv.vim'
+  " NeoBundle 'github:Rykka/colorv.vim'
   NeoBundle 'Highlight-UnMatched-Brackets'
   " NeoBundle 'github:dahu/vim-fanfingtastic'
 
@@ -382,6 +383,7 @@ else
   NeoBundle 'tropikos'
   NeoBundle 'github:sickill/vim-monokai'
   NeoBundle 'github:nielsmadan/harlequin'
+  NeoBundle 'github:noprompt/lite-brite'
   NeoBundle 'freya'
   "}}}
 

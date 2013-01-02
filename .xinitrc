@@ -52,6 +52,7 @@ spiffy &
 #parcellite &
 gosh -I~/.site ~/.site/makiki-server.scm &
 synergys --name $(hostname -s)
+mlterm --daemon &
 mpd
 sudo /etc/netstart
 
