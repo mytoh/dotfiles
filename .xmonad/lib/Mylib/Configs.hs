@@ -2,7 +2,7 @@ module Mylib.Configs where
   import XMonad
 
   myTerminal       :: String
-  myTerminal       = "mlterm"
+  myTerminal       = "mlclient"
 
   myBorderWidth    :: Dimension
   myBorderWidth    = 2

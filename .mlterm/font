@@ -1,13 +1,10 @@
 
-DEC_SPECIAL = -xos4-terminus-medium-r-normal--0-0-72-72-c-0-iso8859-1,10,mplus_j10r-iso;12,mplus_j12r-iso;
-ISO8859_1 = -xos4-terminus-medium-r-normal--0-0-72-72-c-0-iso8859-1,10,mplus_j10r-iso;11,mplus_f10r;12,mplus_j12r-iso;
-ISO8859_1_BOLD = -xos4-terminus-medium-r-normal--0-0-72-72-c-0-iso8859-1,10,mplus_j10r-iso;mplus_f10r;12,mplus_j12r-iso;
-JISX0201_KATA = 10,mplus_j10r-jisx;12,mplus_j12r-jisx;
-JISX0201_KATA_BOLD = 10,mplus_j10r-jisx;12,mplus_j12r-jisx;
-JISX0201_ROMAN = 10,mplus_j10r-jisx;12,mplus_j12r-jisx;
-JISX0201_ROMAN_BOLD = 10,mplus_j10r-jisx;12,mplus_j12r-jisx;
-JISX0208_1983 = 10,-mplus-gothic-medium-r-normal--10-100-75-75-c-100-jix0208.1983-0;12,-mplus-gothic-medium-r-normal--12-120-75-75-c-120-jix0208.1983-0;
-JISX0208_1983_BOLD = 10,-mplus-gothic-medium-r-normal--10-100-75-75-c-100-jix0208.1983-0;12,-mplus-gothic-medium-r-normal--12-120-75-75-c-120-jix0208.1983-0;
-JISX0208_1990 = 10,mplus_j10r;12,mplus_j12r;
-JISX0208_1990_BOLD = 10,mplus_j10r;12,mplus_j12r;
+ISO8859_1 = -jmk-neep-medium-r-normal--10-80-75-75-c-50-*,-mplus-fxd-medium-r-semicondensed--10-120-75-75-c-60-iso8859-1;
+ISO8859_1_BOLD = -jmk-neep-medium-r-normal--10-80-75-75-c-50-*,-mplus-fxd-medium-r-semicondensed--10-120-75-75-c-60-iso8859-1;
+JISX0201_KATA = -mplus-gothic-medium-r-normal--10-120-75-75-c-60-jisx0201.1976-0;
+JISX0201_KATA_BOLD = -mplus-gothic-medium-r-normal--10-120-75-75-c-60-jisx0201.1976-0;
+JISX0201_ROMAN = -mplus-gothic-medium-r-normal--10-120-75-75-c-60-jisx0201.1976-0;
+JISX0201_ROMAN_BOLD = -mplus-gothic-medium-r-normal--10-120-75-75-c-60-jisx0201.1976-0;
+JISX0208_1983 = -mplus-gothic-medium-r-normal--10-120-75-75-c-120-jisx0208.1990-0;
+JISX0208_1983_BOLD = -mplus-gothic-medium-r-normal--10-120-75-75-c-120-jisx0208.1990-0;
 

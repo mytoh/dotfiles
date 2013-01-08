@@ -10,10 +10,13 @@ col_size_of_width_a = 2
 
 # -- Font --
 fontsize = 10
+type_engine = xcore
 use_variable_column_width = false
 use_anti_alias = false
 not_use_unicode_font = true
 use_bold_font = false
+use_multi_column_char = true
+only_use_unicode_font = false
 
 # -- Appearance --
 use_transbg = true

@@ -26,18 +26,20 @@ else
   " my bundles here {{{
   "
   " github repo {{{
-  NeoBundle 'github:Shougo/neocomplcache', {'depends' :
+  NeoBundle 'github:Shougo/neocomplcache', {
+        \ 'depends' : 
         \ [ 'github:Shougo/neosnippet',
         \ ['github:rstacruz/sparkup', {'rtp': 'vim'}],
         \ ]}
   NeoBundle 'github:Shougo/neocomplcache-clang'
   NeoBundle 'github:Shougo/neocomplcache-clang_complete'
-  NeoBundle 'github:Shougo/vimfiler',
-        \ {'depends' : 'github:Shougo/unite.vim' }
+  NeoBundleLazy 'github:Shougo/vimfiler', {
+        \  'depends' : 'github:Shougo/unite.vim',
+        \  'autoload': { 'commands': ['VimFilerTab', 'VimFiler', 'VimFilerExplorer'] }
+        \}
   NeoBundle 'github:Shougo/vimproc', { 'stay_same' : 1 }
-  NeoBundle 'github:Shougo/vimshell'
-  NeoBundle 'github:ujihisa/vimshell-ssh',
-        \ {'depends': 'github:Shougo/vimshell'}
+  NeoBundle'github:Shougo/vimshell'
+  NeoBundle'github:ujihisa/vimshell-ssh'
   NeoBundle 'github:Shougo/vinarise'
   NeoBundle 'github:Shougo/echodoc'
   NeoBundle 'github:koron/nyancat-vim'
@@ -204,31 +206,22 @@ else
 
   " syntax
   " c
-  NeoBundleLazy 'github:cg433n/better-c'
-  augroup NeoBundleLazyLoadC
-    autocmd!
-    autocmd filetype c NeoBundleSource
-          \ better-c
-  augroup END
+  NeoBundleLazy 'github:cg433n/better-c' , {
+        \ 'autoload' : { 'filetypes' : 'c', },
+        \ }
 
   " cpp
-  NeoBundleLazy 'github:vim-jp/cpp-vim'
-  augroup NeoBundleLazyLoadCpp
-    autocmd!
-    autocmd filetype cpp NeoBundleSource
-          \ cpp-vim
-  augroup END
+  NeoBundleLazy 'github:vim-jp/cpp-vim', {
+        \ 'autoload': { 'filetypes': 'cpp'},
+        \ }
 
   "lisp
-  NeoBundleLazy 'bitbucket:kovisoft/paredit'
+  NeoBundleLazy 'bitbucket:kovisoft/paredit', {
+        \ 'autoload': {'filetypes': ['lisp', 'scheme'] },
+        \ }
   NeoBundleLazy     'bitbucket:kovisoft/slimv'
   " NeoBundle 'github:aharisu/vim-gdev'
   " NeoBundle 'github:aharisu/Gauche-Complete'
-  augroup NeoBundleLazyLoadLisp
-    autocmd!
-    autocmd filetype scheme,lisp NeoBundleSource
-          \ paredit
-  augroup END
 
   " clojure
   NeoBundleLazy 'bitbucket:kotarak/vimclojure', {'rtp': 'vim'}
@@ -268,57 +261,50 @@ else
   augroup END
 
   "javascript
-  NeoBundleLazy 'github:jelera/vim-javascript-syntax'
-  NeoBundleLazy 'github:pangloss/vim-javascript'
-  NeoBundleLazy 'github:teramako/jscomplete-vim'
-  NeoBundleLazy 'github:einars/js-beautify'
-  NeoBundleLazy 'JSON.vim'
+  NeoBundleLazy 'github:jelera/vim-javascript-syntax' , {
+        \ 'autoload' : { 'filetypes' : 'javascript', },
+        \ }
+  NeoBundleLazy 'github:pangloss/vim-javascript' , {
+        \ 'autoload' : { 'filetypes' : 'javascript', },
+        \ }
+  NeoBundleLazy 'github:teramako/jscomplete-vim' , {
+        \ 'autoload' : { 'filetypes' : 'javascript', },
+        \ }
+  NeoBundleLazy 'github:einars/js-beautify' , {
+        \ 'autoload' : { 'filetypes' : 'javascript', },
+        \ }
+  NeoBundleLazy 'JSON.vim' , {
+        \ 'autoload' : { 'filetypes' : 'javascript', },
+        \ }
   " NeoBundleLazy 'github:maksimr/vim-jsbeautify'
   " NeoBundleLazy 'vim-jsbeautify'
-  augroup NeoBundleLazyLoadJS
-    autocmd!
-    autocmd filetype javascript NeoBundleSource
-          \ vim-javascript-syntax
-          \ vim-javascript
-          \ jscomplete-vim
-          \ js-beautify
-          \ JSON.vim
-  augroup END
 
   " css
-  NeoBundleLazy 'github:hail2u/vim-css3-syntax'
-  NeoBundleLazy 'github:skammer/vim-css-color'
-  augroup NeoBundleLazyLoadCSS
-    autocmd!
-    autocmd filetype css NeoBundleSource
-          \ vim-css3-syntax
-          \ vim-css-color
-  augroup END
+  NeoBundleLazy 'github:hail2u/vim-css3-syntax' , {
+        \ 'autoload' : { 'filetypes' : 'css', }, }
+  NeoBundleLazy 'github:skammer/vim-css-color' , {
+        \ 'autoload' : { 'filetypes' : 'css', }, }
 
   " svg
-  NeoBundleLazy 'svg.vim'
-  augroup NeoBundleLazyLoadSVG
-    autocmd!
-    autocmd filetype svg NeoBundleSource
-          \ svg.vim
-  augroup END
+  NeoBundleLazy 'svg.vim' , {
+        \ 'autoload' : {
+        \     'filetypes' : 'svg',
+        \    },
+        \ }
 
   " rst
-  NeoBundleLazy 'github:Rykka/riv.vim'
-  augroup NeoBundleLazyLoadRst
-    autocmd!
-    autocmd filetype rst NeoBundleSource
-          \ riv.vim
-  augroup END
+  NeoBundleLazy 'github:Rykka/riv.vim' , {
+        \ 'autoload' : {
+        \     'filetypes' : 'rst',
+        \    },
+        \ }
 
   " markdown
-  NeoBundleLazy 'github:hallison/vim-markdown'
-  " NeoBundleLazy 'github:tpope/vim-markdown'
-  augroup NeoBundleLazyLoadMarkdown
-    autocmd!
-    autocmd filetype mkd NeoBundleSource
-          \ vim-markdown
-  augroup END
+  NeoBundleLazy 'github:hallison/vim-markdown' , {
+        \ 'autoload' : {
+        \     'filetypes' : 'mkd',
+        \    },
+        \ }
 
   " obj-c
   NeoBundleLazy 'github:msanders/cocoa.vim'
@@ -425,6 +411,7 @@ else
   NeoBundle 'unite-highlight', {'type' : 'nosync', 'base' : '~/local/repo'}
   NeoBundle 'unite-autocmd', {'type' : 'nosync', 'base' : '~/local/repo'}
   NeoBundle 'nyan-modoki.vim', {'type' : 'nosync', 'base' : '~/local/repo'}
+  NeoBundle 'vim-kernel-config', {'type' : 'nosync', 'base' : '~/local/repo'}
   " NeoBundleLocal '~/.vim/dev'
   " }}}
 

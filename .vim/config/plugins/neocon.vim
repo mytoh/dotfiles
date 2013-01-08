@@ -9,7 +9,7 @@ let g:neocomplcache_enable_fuzzy_completion        = 1
 let g:neocomplcache_enable_auto_select             = 0
 let g:neocomplcache_use_vimproc                    = 1
 let g:neocomplcache_enable_prefetch                = 1
-let g:neocomplcache_max_list                       = 1000
+let g:neocomplcache_max_list                       = 50
 let g:neocomplcache_dictionary_filetype_lists      = {
       \ 'default'  : '',
       \ 'scheme'   : $RLWRAP_HOME . '/gosh_completions',
