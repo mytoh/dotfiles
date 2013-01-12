@@ -72,6 +72,7 @@ else
   NeoBundle 'github:tpope/vim-unimpaired'
   NeoBundle 'github:tpope/vim-repeat'
   NeoBundle 'github:tpope/vim-eunuch'
+  NeoBundle 'github:tpope/vim-abolish'
   "dont map <cr> if install vim-endwise
   NeoBundle 'github:tpope/vim-endwise'
   NeoBundle 'github:tpope/vim-rsi'
@@ -105,7 +106,8 @@ else
   NeoBundle 'github:Lokaltog/vim-easymotion'
   " NeoBundle 'github:Lokaltog/vim-powerline'
   " NeoBundle 'github:kien/rainbow_parentheses.vim'
-  NeoBundle 'github:oblitum/rainbow'
+  " NeoBundle 'github:oblitum/rainbow'
+  NeoBundle 'github:joshuarh/rainbow'
   NeoBundle 'github:kien/tabman.vim'
   NeoBundle 'github:kergoth/fish.vim'
   NeoBundle 'github:kana/vim-textobj-user'
@@ -144,8 +146,9 @@ else
   NeoBundle 'rhysd/accelerated-jk'
   NeoBundle 'paradigm/SkyBison'
   NeoBundle 'github:daisuzu/rainbowcyclone.vim'
-  NeoBundle 'github:vimtaku/hl_matchit.vim'
+  " NeoBundle 'github:vimtaku/hl_matchit.vim'
   NeoBundle 'github:roman/golden-ratio'
+  NeoBundle 'github:chreekat/vim-paren-crosshairs'
   " NeoBundle 'HiCursorWords'
 
   " tmux
@@ -333,9 +336,13 @@ else
   " coffeescript
   NeoBundle 'github:kchmck/vim-coffee-script'
 
+  " tex
+  NeoBundleLazy 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+  " NeoBundle 'github:coot/atp_vim'
+  " NeoBundle 'github:LaTeX-Box-Team/LaTeX-Box'
+
   " colorscheme {{{
   NeoBundle 'colorer-color-scheme'
-  NeoBundle 'github:paulwib/vim-colorschemes'
   NeoBundle 'github:w0ng/vim-hybrid'
   NeoBundle 'github:altercation/vim-colors-solarized'
   NeoBundle 'github:jelera/vim-gummybears-colorscheme'
@@ -371,6 +378,7 @@ else
   NeoBundle 'github:nielsmadan/harlequin'
   NeoBundle 'github:noprompt/lite-brite'
   NeoBundle 'freya'
+  NeoBundle 'github:flazz/vim-colorschemes'
   "}}}
 
   " NeoBundle 'http://voikko.svn.sourceforge.net/svnroot/voikko/', {'type' : 'svn', 'rtp' : 'trunk/tools/vim'}
@@ -401,8 +409,16 @@ else
   " }}}
 
   "personal repo
-  NeoBundle 'vim-jfbterm', {'type' : 'nosync', 'base' : '~/local/repo'}
-  NeoBundle 'scheme.vim', {'type' : 'nosync', 'base' : '~/local/repo'}
+  NeoBundle 'vim-jfbterm', {
+        \ 'type' : 'nosync', 
+        \ 'base' : '~/local/repo',
+        \ 'autoload' : { 'filetypes' : 'scheme', },
+        \}
+  NeoBundle 'scheme.vim', {
+        \ 'type' : 'nosync',
+        \ 'base' : '~/local/repo',
+        \ 'autoload' : { 'filetypes' : 'scheme', },
+        \}
   NeoBundle 'vim-vala', {'type' : 'nosync', 'base' : '~/local/repo'}
   NeoBundle 'vim-mlterm', {'type' : 'nosync', 'base' : '~/local/repo'}
   NeoBundle 'vim-qvwm', {'type' : 'nosync', 'base' : '~/local/repo'}

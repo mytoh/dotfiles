@@ -36,6 +36,8 @@ nnoremap <silent> [unite]o :<c-u>Unite outline<cr>
 noremap  <silent> [unite]s :<c-u>Unite ack --nogroup<cr>
 nnoremap <silent> [unite]t :<c-u>Unite tab<cr>
 nnoremap <silent> [unite]/ :<c-u>Unite -buffer-name=search line -start-insert<CR>
+" nnoremap <silent> <c-p>  :<C-u>Unite
+"   \ -buffer-name=files buffer file_mru bookmark file<CR>
 " }}}
 " 
 

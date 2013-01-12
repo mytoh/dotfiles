@@ -99,7 +99,8 @@ hi Visual                      ctermbg=235
 hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
 hi WildMenu        ctermfg=81  ctermbg=16
 
-hi Comment         ctermfg=59  ctermbg=none
+" hi Comment         ctermfg=59  ctermbg=none
+hi Comment         ctermfg=241  ctermbg=none
 hi CursorColumn                ctermbg=234
 hi ColorColumn                 ctermbg=234
 hi LineNr          ctermfg=250 ctermbg=234

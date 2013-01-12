@@ -123,6 +123,9 @@ set nomore
 set imdisable
 set formatoptions=q
 
+" adjust keycode timeout length
+set ttimeoutlen=100
+
 " columns {{{
 set textwidth=72
 " vertical line on column 81

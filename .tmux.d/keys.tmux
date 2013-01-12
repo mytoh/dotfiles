@@ -55,6 +55,9 @@ bind BTab select-pane -t:.-
 unbind C-r
 bind C-r source-file $HOME/.tmux.conf; display-message "*** tmux.conf reloaded"
 
+# split window and execute command
+bind e command-prompt "split-window -p 65 'exec %%'"
+
 # resize keys
 unbind C-h
 unbind C-l
@@ -69,6 +72,7 @@ bind -r C-k resize-pane -U 3
 # d.hatena.ne.jp/bannyan/20111204
 bind -r H select-layout main-vertical \; swap-pane -s : -t 0 \; select-pane -t 0 \; resize-pane -R 9
 bind -r K select-layout main-horizontal \; swap-pane -s : -t 0 \; select-pane -t 0 \; resize-pane -D 18
+
 
 # toggle maximize window
 bind } run "if [[ $(tmux list-window) =~ tmux-zoom ]]; then tmux last-window; tmux swap-pane -s tmux-zoom.0; tmux kill-window -t tmux-zoom; else tmux new-window -d -n tmux-zoom 'clear && echo TMUX ZOOM && read'; tmux swap-pane -s tmux-zoom.0; tmux select-window -t tmux-zoom;fi"
