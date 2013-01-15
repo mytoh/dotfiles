@@ -1,16 +1,13 @@
 
-
 set shellar=$HOME/.shellar
 set plugins=(gauche lehti panna loitsu pikkukivi fasd nopea napa \
              vim lista nyan ypsilon mosh talikko brew npm)
 set shellar_theme='default'
 source $shellar/shellar/shellar.tcsh
 
-
-
 foreach f ($HOME/.complete.tcsh $HOME/perl5/perlbrew/etc/cshrc)
-if (-f $f) then
-source $f
-endif
+  if (-f $f) then
+    source $f
+  endif
 end
 
