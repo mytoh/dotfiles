@@ -151,11 +151,6 @@ else
   NeoBundle 'github:chreekat/vim-paren-crosshairs'
   " NeoBundle 'HiCursorWords'
 
-  " tmux
-  NeoBundle 'github:zaiste/tmux.vim'
-  " NeoBundle 'github:peterhoeg/vim-tmux'
-  " NeoBundle 'github:anekos/runes-vim'
-
   " ref
   NeoBundle 'github:thinca/vim-ref'
   NeoBundle 'github:h1mesuke/ref-dicts-en'
@@ -208,6 +203,14 @@ else
   " NeoBundle 'github:dahu/vim-fanfingtastic'
 
   " syntax
+
+  " tmux
+  NeoBundle 'github:zaiste/tmux.vim', {
+          \ 'autoload': { 'filetypes': ['tmux'] },
+          \ }
+  " NeoBundle 'github:peterhoeg/vim-tmux'
+  " NeoBundle 'github:anekos/runes-vim'
+
   " c
   NeoBundleLazy 'github:cg433n/better-c' , {
         \ 'autoload' : { 'filetypes' : 'c', },
