@@ -92,12 +92,10 @@ else
   NeoBundle 'github:groenewege/vim-less'
   NeoBundle 'github:othree/html5.vim'
   NeoBundle 'github:gregsexton/MatchTag'
-  NeoBundle 'github:djjcast/mirodark'
   NeoBundle 'github:houtsnip/vim-emacscommandline'
   " NeoBundle 'github:acustodioo/vim-cmdline-completion'
   NeoBundle 'github:acustodioo/vim-enter-indent'
   NeoBundle 'github:h1mesuke/vim-alignta'
-  NeoBundle 'github:baskerville/bubblegum'
   NeoBundle 'github:basyura/twibill.vim'
   NeoBundle 'github:basyura/bitly.vim'
   NeoBundle 'github:basyura/TweetVim'
@@ -242,29 +240,34 @@ else
 
   "haskell
   " NeoBundle 'github:Twinside/vim-haskellConceal'
-  NeoBundleLazy 'github:Twinside/vim-syntax-haskell-cabal'
-  NeoBundleLazy 'github:zenzike/vim-haskell-unicode'
-  NeoBundleLazy 'github:haskell.vim'
+  NeoBundleLazy 'github:Twinside/vim-syntax-haskell-cabal' , {
+        \ 'autoload': { 'filetypes': 'haskell', }
+        \ }
+  NeoBundleLazy 'github:zenzike/vim-haskell-unicode' , {
+        \ 'autoload': { 'filetypes': 'haskell', }
+        \ }
+  NeoBundleLazy 'github:haskell.vim' , {
+        \ 'autoload': { 'filetypes': 'haskell', }
+        \ }
   " NeoBundle 'github:lukerandall/haskellmode-vim'
-  NeoBundleLazy 'github:kana/vim-filetype-haskell'
-  NeoBundleLazy 'github:eagletmt/ghcmod-vim'
-  NeoBundleLazy 'ujihisa/neco-ghc'
-  NeoBundleLazy 'github:ujihisa/ref-hoogle'
-  NeoBundleLazy 'github:dag/vim2hs'
-  NeoBundleLazy 'github:eagletmt/unite-haddock'
-  augroup NeoBundleLazyLoadHaskell
-    autocmd!
-    autocmd filetype haskell NeoBundleSource
-          \ vim-syntax-haskell-cabal
-          \ vim-haskell-unicode
-          \ haskell.vim
-          \ vim-filetype-haskell
-          \ ghcmod-vim
-          \ neco-ghc
-          \ ref-hoogle
-          \ vim2hs
-          \ unite-haddock
-  augroup END
+  NeoBundleLazy 'github:kana/vim-filetype-haskell' , {
+        \ 'autoload': { 'filetypes': 'haskell', }
+        \ }
+  NeoBundleLazy 'github:eagletmt/ghcmod-vim' , {
+        \ 'autoload': { 'filetypes': 'haskell', }
+        \ }
+  NeoBundleLazy 'ujihisa/neco-ghc' , {
+        \ 'autoload': { 'filetypes': 'haskell', }
+        \ }
+  NeoBundleLazy 'github:ujihisa/ref-hoogle' , {
+        \ 'autoload': { 'filetypes': 'haskell', }
+        \ }
+  NeoBundleLazy 'github:dag/vim2hs' , {
+        \ 'autoload': { 'filetypes': 'haskell', }
+        \ }
+  NeoBundleLazy 'github:eagletmt/unite-haddock' , {
+        \ 'autoload': { 'filetypes': 'haskell', }
+        \ }
 
   "javascript
   NeoBundleLazy 'github:jelera/vim-javascript-syntax' , {
@@ -287,29 +290,25 @@ else
 
   " css
   NeoBundleLazy 'github:hail2u/vim-css3-syntax' , {
-        \ 'autoload' : { 'filetypes' : 'css', }, }
+        \ 'autoload' : { 'filetypes' : 'css', }, 
+        \ }
   NeoBundleLazy 'github:skammer/vim-css-color' , {
-        \ 'autoload' : { 'filetypes' : 'css', }, }
+        \ 'autoload' : { 'filetypes' : 'css', },
+        \ }
 
   " svg
   NeoBundleLazy 'svg.vim' , {
-        \ 'autoload' : {
-        \     'filetypes' : 'svg',
-        \    },
+        \ 'autoload' : { 'filetypes' : 'svg', },
         \ }
 
   " rst
   NeoBundleLazy 'github:Rykka/riv.vim' , {
-        \ 'autoload' : {
-        \     'filetypes' : 'rst',
-        \    },
+        \ 'autoload' : { 'filetypes' : 'rst', },
         \ }
 
   " markdown
   NeoBundleLazy 'github:hallison/vim-markdown' , {
-        \ 'autoload' : {
-        \     'filetypes' : 'mkd',
-        \    },
+        \ 'autoload' : { 'filetypes' : 'mkd', },
         \ }
 
   " obj-c
@@ -345,7 +344,9 @@ else
   " NeoBundle 'github:LaTeX-Box-Team/LaTeX-Box'
 
   " colorscheme {{{
+  NeoBundle 'github:djjcast/mirodark'
   NeoBundle 'colorer-color-scheme'
+  NeoBundle 'github:baskerville/bubblegum'
   NeoBundle 'github:w0ng/vim-hybrid'
   NeoBundle 'github:altercation/vim-colors-solarized'
   NeoBundle 'github:jelera/vim-gummybears-colorscheme'

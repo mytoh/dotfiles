@@ -54,6 +54,7 @@
   ".dzen"
   ".rlwrap/gosh_completions"
   ".xombrero.conf"
+  ".agignore"
   )
 
 ;; vim:filetype=scheme
