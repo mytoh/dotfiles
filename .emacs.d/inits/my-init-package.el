@@ -7,7 +7,9 @@
                  '("melpa" . "http://melpa.milkbox.net/packages/") t)
   (add-to-list 'package-archives
                '("marmalade" . "http://marmalade-repo.org/packages/"))
-  (package-initialize))
+  (package-initialize)
+  (color-theme-initialize)
+  (color-theme-ld-dark))
 
 ;; install packages
 (setq *my-package-list*
@@ -38,11 +40,12 @@
         flex-autopair
         yasnippet
         w3m
+        paredit
         ))
 
+(package-refresh-contents)
 (dolist (p *my-package-list*)
   (unless (package-installed-p p)
-    (package-refresh-contents)
     (package-install p)
     (message "install %s"  p)))
 
@@ -51,7 +54,7 @@
     (add-hook 'scheme-mode-hook       'rainbow-delimiters-mode)
   (add-hook 'lisp-mode-hook         'rainbow-delimiters-mode)
   (add-hook 'emacs-lisp-mode-hook   'rainbow-delimiters-mode)
-  (set-face-attribute 'rainbow-delimiters-depth-1-face nil :foreground "gray")
+  (set-face-attribute 'rainbow-delimiters-depth-1-face nil :foreground "green")
   (set-face-attribute 'rainbow-delimiters-depth-2-face nil :foreground "dodger blue")
   (set-face-attribute 'rainbow-delimiters-depth-3-face nil :foreground "orange")
   (set-face-attribute 'rainbow-delimiters-depth-4-face nil :foreground "RoyalBlue3")
@@ -60,6 +63,7 @@
   (set-face-attribute 'rainbow-delimiters-depth-7-face nil :foreground "purple")
   (set-face-attribute 'rainbow-delimiters-depth-8-face nil :foreground "khaki")
   (set-face-attribute 'rainbow-delimiters-depth-9-face nil :foreground "salmon"))
+
 
 ;; auto-complete
 (my-req 'auto-complete
@@ -176,10 +180,11 @@
 (defalias 'ack-find-file 'ack-and-a-half-find-file)
 (defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
 
-;; ;; yasnippet
-;; ;;(my-req 'yasnippet
-;; ;;    (yas/global-mode 1))
-
+;;yasnippet
+; (my-req 'yasnippet
+;         (yas-global-mode t)
+;         (yas/load-directory "~/.emacs.d/snippets"))
+; 
 ;; flex-autopair
 (my-req 'flex-autopair
     (flex-autopair-mode 1))
@@ -203,6 +208,20 @@
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
+;; paredit
+(autoload 'enable-paredit-mode "paredit"
+     "Turn on pseudo-structural editing of Lisp code."
+     t)
+(add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode t)))
+(add-hook 'lisp-mode-hook             (lambda () (paredit-mode t)))
+(add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode t)))
+(add-hook 'scheme-mode-hook           (lambda () (paredit-mode t)))
+
+;; uniquify
+(my-req 'uniquify
+    (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
 
 
- (provide 'my-init-package)
+
+
+(provide 'my-init-package)

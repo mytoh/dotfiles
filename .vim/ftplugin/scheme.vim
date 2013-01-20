@@ -21,7 +21,7 @@ function! s:trimspacelisp()
 endfunction
 
 augroup ftplugin_scheme
-  autocmd! 
+  autocmd!
   autocmd! bufwritepost       {*.scm,*.ss,*.sls,*sps}            call s:trimspacelisp()
 augroup END
 
@@ -33,10 +33,6 @@ if executable('scmindent.scm')
     setlocal equalprg=scmindent.scm
   endif
 endif
-
-" lisp keywords for minikanren
-setlocal lispwords+=lambdag@,lambdaf@,rhs,lhs,var,var?,size-s
-setlocal lispwords+=run,case-inf,mzero,unit,choice,bindi,mplusi
 
 " paredit
 let g:paredit_mode = 1

@@ -38,8 +38,8 @@ else
         \  'autoload': { 'commands': ['VimFilerTab', 'VimFiler', 'VimFilerExplorer'] }
         \}
   NeoBundle 'github:Shougo/vimproc', { 'stay_same' : 1 }
-  NeoBundle'github:Shougo/vimshell'
-  NeoBundle'github:ujihisa/vimshell-ssh'
+  NeoBundle 'github:Shougo/vimshell'
+  NeoBundle 'github:ujihisa/vimshell-ssh'
   NeoBundle 'github:Shougo/vinarise'
   NeoBundle 'github:Shougo/echodoc'
   NeoBundle 'github:koron/nyancat-vim'
@@ -103,9 +103,9 @@ else
   " NeoBundle 'github:haruyama/scheme.vim'
   NeoBundle 'github:Lokaltog/vim-easymotion'
   " NeoBundle 'github:Lokaltog/vim-powerline'
-  " NeoBundle 'github:kien/rainbow_parentheses.vim'
+  NeoBundle 'github:kien/rainbow_parentheses.vim'
   " NeoBundle 'github:oblitum/rainbow'
-  NeoBundle 'github:joshuarh/rainbow'
+  " NeoBundle 'github:joshuarh/rainbow'
   NeoBundle 'github:kien/tabman.vim'
   NeoBundle 'github:kergoth/fish.vim'
   NeoBundle 'github:kana/vim-textobj-user'
@@ -148,6 +148,7 @@ else
   NeoBundle 'github:roman/golden-ratio'
   NeoBundle 'github:chreekat/vim-paren-crosshairs'
   " NeoBundle 'HiCursorWords'
+  NeoBundle 'github:tomasv/vim-scmdiff'
 
   " ref
   NeoBundle 'github:thinca/vim-ref'

@@ -1,2 +1,4 @@
 # for mosh scheme source
 baselib.scmc-e
+baselib.scm
+psyntax-mosh-image.scmc-e

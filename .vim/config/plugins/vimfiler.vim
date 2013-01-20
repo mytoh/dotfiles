@@ -33,7 +33,7 @@ function! g:my_vimfiler_settings() "{{{
   nmap     <buffer> Q         <plug>(vimfiler_hide)
   nnoremap <buffer><localleader><silent>s    :call vimfiler#mappings#do_action('my_split')<cr>
   nnoremap <buffer><localleader><silent>S    :call vimfiler#mappings#do_action('my_vsplit')<cr>
-  nnoremap <buffer><silent>/ :<c-u>Unite file -default-action=vimfiler<cr>
+  " nnoremap <buffer><silent>/ :<c-u>Unite file -default-action=vimfiler<cr>
   call vimfiler#set_execute_file('mkv,mpg,mp4', 'mplayer')
   call vimfiler#set_execute_file('jpg,JPG,jpeg,png,gif,bmp,cbz,cbr,cbx', 'kuv')
   if exists('*vimfiler#set_extensions')

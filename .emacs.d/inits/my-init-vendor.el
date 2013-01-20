@@ -1,28 +1,31 @@
 
 ;;; plugins under vendor directory
 ;; github repositories
-(my-vendor-install-packages 
- '(("emacs-powerline" "jonathanchu/emacs-powerline")
-   ("nyan-mode" "TeMPOraL/nyan-mode")
-   ("highlight-sexp" "daimrod/highlight-sexp")
-   ("emux-el" "m2ym/emux-el")
-   ("auto-highlight-symbol-mode" "mitsuo-saito/auto-highlight-symbol-mode")
-   ("helm-delicious" "emacs-helm/helm-delicious")
-   ("helm-descbinds" "emacs-helm/helm-descbinds")
-   ("seijiseikana-el" "moriyamahiroshi/seijiseikana-el")
+(defun *my-vendor-packages*
+  '(("emacs-powerline" "jonathanchu/emacs-powerline")
+    ("nyan-mode" "TeMPOraL/nyan-mode")
+    ("highlight-sexp" "daimrod/highlight-sexp")
+    ("emux-el" "m2ym/emux-el")
+    ("auto-highlight-symbol-mode" "mitsuo-saito/auto-highlight-symbol-mode")
+    ("helm-delicious" "emacs-helm/helm-delicious")
+    ("helm-descbinds" "emacs-helm/helm-descbinds")
+    ("seijiseikana-el" "moriyamahiroshi/seijiseikana-el")
    
-   ("highlight-cl" "emacsmirror/highlight-cl")
-   ("eldoc-extension" "emacsmirror/eldoc-extension")
-;   ("emacs-evernote-mode" "http://emacs-evernote-mode.google.com/svn/trunk")
-   ))
+    ("highlight-cl" "emacsmirror/highlight-cl")
+    ("eldoc-extension" "emacsmirror/eldoc-extension")
+   ;("emacs-evernote-mode" "http://emacs-evernote-mode.google.com/svn/trunk")
+    ))
+'(my-vendor-install-packages 
+  *my-vendor-packages*)
 
 ;; update plugins
 ;(my-vendor-update-packages *user-emacs-vendor-directory*)
 ;; powerline, github.com/jonathanchu/emacs-powrline
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
                              "emacs-powerline"))
+
 (my-req 'powerline
-    (setq powerline-arrow-shape 'arrow14)   ;; arrow, curve, arrow14
+  (setq powerline-arrow-shape 'arrow14) ;; arrow, curve, arrow14
   (setq powerline-color1 "grey22")
   (setq powerline-color2 "grey40")
   (set-face-attribute 'mode-line nil

@@ -21,7 +21,9 @@
 
 ;; start server
 (if window-system
-      (server-start))
+(my-req 'server
+    (unless (server-running-p)
+      (server-start))))
 
 ;; use space instead of tab
 (setq-default tab-width 4 indent-tabs-mode nil)
@@ -98,6 +100,8 @@
 ;; undo
 (setq undo-limit 100000)
 (setq undo-string-limit 1300000)
+;; reload buffer
+(global-auto-revert-mode t)
 
 
 (provide 'my-init-setting)
