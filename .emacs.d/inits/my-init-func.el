@@ -13,6 +13,12 @@
     (while (re-search-forward (rx (submatch (syntax open-parenthesis))
                                   (submatch (one-or-more (in  " \t")))
                                   (submatch (syntax open-parenthesis))) nil t)
-      (replace-match  "((" nil nil))))
+      (replace-match  "((" nil nil))
+    (indent-region (point-min) (point-max))))
+
+(defun my-indent-buffer ()
+  "milkypostman/dotemacs/defun.el"
+  (interactive)
+  (indent-region (point-min) (point-max)))
 
 (provide 'my-init-func)

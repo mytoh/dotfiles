@@ -9,7 +9,7 @@
                '("marmalade" . "http://marmalade-repo.org/packages/"))
   (package-initialize)
   (color-theme-initialize)
-  (color-theme-ld-dark))
+  (color-theme-molokai))
 
 ;; install packages
 (setq *my-package-list*
@@ -41,6 +41,9 @@
         yasnippet
         w3m
         paredit
+        ack-and-a-half
+        powerline
+        popwin
         ))
 
 (package-refresh-contents)
@@ -180,11 +183,12 @@
 (defalias 'ack-find-file 'ack-and-a-half-find-file)
 (defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
 
-;;yasnippet
+;; yasnippet
 ; (my-req 'yasnippet
-;         (yas-global-mode t)
-;         (yas/load-directory "~/.emacs.d/snippets"))
-; 
+;         (yas/global-mode t)
+;         (yas/load-directory "~/.emacs.d/snippets")
+;         (fset 'yes-or-no-p 'y-or-n-p))
+
 ;; flex-autopair
 (my-req 'flex-autopair
     (flex-autopair-mode 1))
@@ -195,6 +199,34 @@
 ;; w3m
 (setq w3m-command "/usr/local/bin/w3m")
 (my-req 'w3m-load)
+
+;; ack-and-a-half
+(my-req 'ack-and-a-half
+    (defalias 'ack 'ack-and-a-half)
+  (defalias 'ack-same 'ack-and-a-half-same)
+  (defalias 'ack-find-file 'ack-and-a-half-find-file)
+  (defalias 'ack-find-file-same 'ack-and-a-half-find-file-same))
+
+;; powerline 2
+(my-req 'powerline
+    (powerline-default))
+
+;; popwin
+(my-req 'popwin
+    (setq display-buffer-function 'popwin:display-buffer)
+  ;(add-to-list popwin:special-display-config
+  ;               '(("*Warnings*") ("*Compile-log")))
+)
+
+;; paredit
+(autoload 'enable-paredit-mode "paredit"
+     "Turn on pseudo-structural editing of Lisp code."
+     t)
+(add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode t)))
+(add-hook 'lisp-mode-hook             (lambda () (paredit-mode t)))
+(add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode t)))
+(add-hook 'scheme-mode-hook           (lambda () (paredit-mode t)))
+
 
 ;; save curosr position
 (my-req 'saveplace
@@ -208,19 +240,12 @@
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
-;; paredit
-(autoload 'enable-paredit-mode "paredit"
-     "Turn on pseudo-structural editing of Lisp code."
-     t)
-(add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode t)))
-(add-hook 'lisp-mode-hook             (lambda () (paredit-mode t)))
-(add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode t)))
-(add-hook 'scheme-mode-hook           (lambda () (paredit-mode t)))
+;; checkdoc
+(my-req 'checkdoc)
 
 ;; uniquify
 (my-req 'uniquify
     (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
-
 
 
 

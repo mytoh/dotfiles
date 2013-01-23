@@ -15,24 +15,13 @@
     ("eldoc-extension" "emacsmirror/eldoc-extension")
    ;("emacs-evernote-mode" "http://emacs-evernote-mode.google.com/svn/trunk")
     ))
+
+;; install packages
 '(my-vendor-install-packages 
   *my-vendor-packages*)
 
 ;; update plugins
-;(my-vendor-update-packages *user-emacs-vendor-directory*)
-;; powerline, github.com/jonathanchu/emacs-powrline
-(my-add-to-load-path (concat-path *user-emacs-vendor-directory*
-                             "emacs-powerline"))
-
-(my-req 'powerline
-  (setq powerline-arrow-shape 'arrow14) ;; arrow, curve, arrow14
-  (setq powerline-color1 "grey22")
-  (setq powerline-color2 "grey40")
-  (set-face-attribute 'mode-line nil
-                      :background"#8db6cd"
-                      :box nil)
-  (set-face-attribute 'mode-line-inactive nil
-                      :box nil))
+;;(my-vendor-update-packages *user-emacs-vendor-directory*)
 
 ;; nyan-mode, github.com/TeMPOraL/nyan-mode
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*

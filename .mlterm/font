@@ -1,6 +1,6 @@
 
-ISO8859_1 = -jmk-neep-medium-r-normal--10-80-75-75-c-50-*,-mplus-fxd-medium-r-semicondensed--10-120-75-75-c-60-iso8859-1;
-ISO8859_1_BOLD = -jmk-neep-medium-r-normal--10-80-75-75-c-50-*,-mplus-fxd-medium-r-semicondensed--10-120-75-75-c-60-iso8859-1;
+ISO8859_1 = -jmk-neep-medium-r-normal--10-80-75-75-c-50-iso8859-1;
+ISO8859_1_BOLD = -jmk-neep-medium-r-normal--10-80-75-75-c-50-iso8859-1;
 JISX0201_KATA = -mplus-gothic-medium-r-normal--10-120-75-75-c-60-jisx0201.1976-0;
 JISX0201_KATA_BOLD = -mplus-gothic-medium-r-normal--10-120-75-75-c-60-jisx0201.1976-0;
 JISX0201_ROMAN = -mplus-gothic-medium-r-normal--10-120-75-75-c-60-jisx0201.1976-0;

@@ -58,6 +58,9 @@ bind C-r source-file $HOME/.tmux.conf; display-message "*** tmux.conf reloaded"
 # split window and execute command
 bind e command-prompt "split-window -p 65 'exec %%'"
 
+# cycle window or pane
+bind C-z run "tmux last-pane || tmux last-window || tmux new-window"
+
 # resize keys
 unbind C-h
 unbind C-l
