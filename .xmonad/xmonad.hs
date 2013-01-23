@@ -196,7 +196,7 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         , [className  =? "V2C"                                   -->  viewShift "kaksi"]
         , [className  =? "Firefox"                               -->  viewShift "kaksi"]
         , [(className =? "Firefox" <&&> appName =? "Dialog")     --> (doFloat <+> viewShift "kaksi")]
-       , [className   =? "Emacs"                                 --> viewShift "neljä"]
+       , [className   =? "Emacs"                                 --> viewShift "emacs"]
         , [className  =? "Xfce4-notifyd"                         --> doIgnore]
         , [className  =? "trayer"                                --> doIgnore]
         , [className  =? "stalonetray"                           --> doIgnore]

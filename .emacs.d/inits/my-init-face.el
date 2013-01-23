@@ -1,6 +1,9 @@
 ;;; faces
 (progn
 
+  ;; colour theme
+  (load-theme 'sanityinc-solarized-dark t)
+
   ;; font
   (set-face-attribute 'default nil :font "Neep-9")
 

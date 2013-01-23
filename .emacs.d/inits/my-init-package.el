@@ -7,9 +7,7 @@
                  '("melpa" . "http://melpa.milkbox.net/packages/") t)
   (add-to-list 'package-archives
                '("marmalade" . "http://marmalade-repo.org/packages/"))
-  (package-initialize)
-  (color-theme-initialize)
-  (color-theme-molokai))
+  (package-initialize))
 
 ;; install packages
 (setq *my-package-list*
@@ -44,6 +42,7 @@
         ack-and-a-half
         powerline
         popwin
+        ghc
         ))
 
 (package-refresh-contents)
@@ -71,7 +70,7 @@
 ;; auto-complete
 (my-req 'auto-complete
     (my-req 'auto-complete-config )
-;  (ac-config-default)
+                                        ;  (ac-config-default)
   (global-auto-complete-mode t)
   (define-key ac-completing-map (kbd "C-n") 'ac-next)
   (define-key ac-completing-map (kbd "C-p") 'ac-previous)
@@ -184,10 +183,10 @@
 (defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
 
 ;; yasnippet
-; (my-req 'yasnippet
-;         (yas/global-mode t)
-;         (yas/load-directory "~/.emacs.d/snippets")
-;         (fset 'yes-or-no-p 'y-or-n-p))
+                                        ; (my-req 'yasnippet
+                                        ;         (yas/global-mode t)
+                                        ;         (yas/load-directory "~/.emacs.d/snippets")
+                                        ;         (fset 'yes-or-no-p 'y-or-n-p))
 
 ;; flex-autopair
 (my-req 'flex-autopair
@@ -214,23 +213,30 @@
 ;; popwin
 (my-req 'popwin
     (setq display-buffer-function 'popwin:display-buffer)
-  ;(add-to-list popwin:special-display-config
-  ;               '(("*Warnings*") ("*Compile-log")))
-)
+  (setq popwin:special-display-config
+        ( append  popwin:special-display-config
+                  '(("*Warnings*") ("*Compile-log") ("*Help*"))))
+  )
 
 ;; paredit
 (autoload 'enable-paredit-mode "paredit"
-     "Turn on pseudo-structural editing of Lisp code."
-     t)
+  "Turn on pseudo-structural editing of Lisp code."
+  t)
 (add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode t)))
 (add-hook 'lisp-mode-hook             (lambda () (paredit-mode t)))
 (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode t)))
 (add-hook 'scheme-mode-hook           (lambda () (paredit-mode t)))
 
+;; ghc
+(autoload 'ghc-init "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+
+
+;;; builtins
 
 ;; save curosr position
 (my-req 'saveplace
-   (setq-default save-place t))
+    (setq-default save-place t))
 
 ;; eldoc
 (my-req 'eldoc
@@ -246,6 +252,11 @@
 ;; uniquify
 (my-req 'uniquify
     (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
+
+;; term/bobcat
+(load "term/bobcat")
+(when (fboundp 'terminal-init-bobcat)
+  (terminal-init-bobcat))
 
 
 

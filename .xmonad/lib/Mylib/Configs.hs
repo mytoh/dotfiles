@@ -24,6 +24,7 @@ module Mylib.Configs where
     , "kaksi"
     , "kolme"
     , "neljä"
+      , "emacs"
  -- , wrapBitmap "sm4tik/bug_01.xbm"
  -- , wrapBitmap "sm4tik/fox.xbm"
  -- , wrapBitmap "sm4tik/dish.xbm"
@@ -50,7 +51,7 @@ module Mylib.Configs where
   myXPFont   :: String
   myXPFont   = "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1"
   myDzenFont :: String
-  myDzenFont = "-nil-profont-medium-r-normal--10-100-72-72-c-50-iso8859-1"
+  -- myDzenFont = "-nil-profont-medium-r-normal--10-100-72-72-c-50-iso8859-1"
   -- myDzenFont = "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1"
-  -- myDzenFont = "-jmk-neep-medium-r-normal--10-80-75-75-c-50-*"
+  myDzenFont = "-jmk-neep-medium-r-normal--10-80-75-75-c-50-*"
   
