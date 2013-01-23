@@ -24,6 +24,9 @@
         image-dired+
         helm
         helm-git
+        helm-themes
+        helm-c-moccur
+        helm-c-yasnippet
         icicles
         magit
         rainbow-mode
@@ -43,6 +46,12 @@
         powerline
         popwin
         ghc
+        emms
+        color-moccur
+        ;; themes
+        molokai-theme
+        monokai-theme
+        late-night-theme
         ))
 
 (package-refresh-contents)
@@ -50,6 +59,34 @@
   (unless (package-installed-p p)
     (package-install p)
     (message "install %s"  p)))
+
+;;; builtins
+
+;; save curosr position
+(my-req 'saveplace
+    (setq-default save-place t))
+
+;; eldoc
+(my-req 'eldoc
+    (setq eldoc-idle-dely 0.20)
+  (setq eldoc-echo-area-use-multiline-p t)
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
+
+;; checkdoc
+(my-req 'checkdoc)
+
+;; uniquify
+(my-req 'uniquify
+    (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
+
+;; term/bobcat
+(load "term/bobcat")
+(when (fboundp 'terminal-init-bobcat)
+  (terminal-init-bobcat))
+
+;; melpa or marmalade
 
 ;; rainbow-delimiters
 (my-req 'rainbow-delimiters
@@ -89,9 +126,17 @@
     (global-set-key (kbd "C-c h") 'helm-mini)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (helm-mode t))
+;; helm-themes
+(my-req 'helm-themes)
+;; helm-c-moccur
+(my-req 'color-moccur
+    (my-req 'helm-c-moccur))
+;; helm-c-yasnippet
+(my-req 'helm-c-yasnippet)
 ;; helm-git depends on magit
 (my-req 'magit
     (my-req 'helm-git))
+
 
 ;; ;; icicles
 ;;                                         ;(my-req 'icicles
@@ -231,32 +276,10 @@
 (autoload 'ghc-init "ghc" nil t)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 
+;; emms
+(my-req 'emms-setup
+    (emms-all))
 
-;;; builtins
-
-;; save curosr position
-(my-req 'saveplace
-    (setq-default save-place t))
-
-;; eldoc
-(my-req 'eldoc
-    (setq eldoc-idle-dely 0.20)
-  (setq eldoc-echo-area-use-multiline-p t)
-  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
-
-;; checkdoc
-(my-req 'checkdoc)
-
-;; uniquify
-(my-req 'uniquify
-    (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
-
-;; term/bobcat
-(load "term/bobcat")
-(when (fboundp 'terminal-init-bobcat)
-  (terminal-init-bobcat))
 
 
 

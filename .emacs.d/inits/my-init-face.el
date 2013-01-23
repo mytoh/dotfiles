@@ -2,7 +2,7 @@
 (progn
 
   ;; colour theme
-  (load-theme 'sanityinc-solarized-dark t)
+  (load-theme 'molokai t)
 
   ;; font
   (set-face-attribute 'default nil :font "Neep-9")
