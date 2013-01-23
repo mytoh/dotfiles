@@ -139,8 +139,8 @@
 
 
 ;; ;; icicles
-;;                                         ;(my-req 'icicles
-;;                                         ;    (icy-mode t))
+;;(my-req 'icicles
+;;   (icy-mode t))
 
 ;; rainbow-mode
 (my-req 'rainbow-mode
@@ -228,10 +228,10 @@
 (defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
 
 ;; yasnippet
-                                        ; (my-req 'yasnippet
-                                        ;         (yas/global-mode t)
-                                        ;         (yas/load-directory "~/.emacs.d/snippets")
-                                        ;         (fset 'yes-or-no-p 'y-or-n-p))
+;; (my-req 'yasnippet
+;;         (yas/global-mode t)
+;;         (yas/load-directory "~/.emacs.d/snippets")
+;;         (fset 'yes-or-no-p 'y-or-n-p))
 
 ;; flex-autopair
 (my-req 'flex-autopair
@@ -278,8 +278,12 @@
 
 ;; emms
 (my-req 'emms-setup
-    (emms-standard)
-  (emms-default-players))
+    (emms-devel)
+  (emms-default-players)
+  (add-hook 'emms-player-standard-hook 'emms-show)
+  (setq emms-show-format "NP: %s")
+  (my-req 'emms-info-libtag))
+
 
 
 
