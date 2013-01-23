@@ -1,8 +1,11 @@
 
 (when (string-equal system-type "darwin")
-  (let ((my-paths `("~/local/homebrew/bin")))
-    (setq exec-path (append my-paths exec-path))
-    (setenv "PATH" (mapconcat 'identity my-paths ":")))
+  (let ((my-paths `(,(expand-file-name "~/local/homebrew/bin"))))
+    (dolist (dir my-paths)
+      ;; sakito.jp/emacs/emacsshell.html
+      (when (and (file-exists-p dir) (not (member dir exec-path)))
+        (setenv "PATH" (concat dir ":" (getenv "PATH")))
+        (setq exec-path (append `(,dir) exec-path)))))
   (define-key global-map (kbd "<s-return>") 'darwin-toggle-fullscreen))
 
 (defun darwin-toggle-fullscreen ()

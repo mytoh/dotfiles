@@ -278,7 +278,8 @@
 
 ;; emms
 (my-req 'emms-setup
-    (emms-all))
+    (emms-standard)
+  (emms-default-players))
 
 
 
