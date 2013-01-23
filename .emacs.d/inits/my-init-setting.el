@@ -47,7 +47,7 @@
 (setq redisplay-dont-pause t
       scroll-margin 1
       scroll-step 1
-      scroll-conservatively 10000
+      scroll-conservatively 35
       scroll-preserve-screen-position 1)
 ;; disable bars
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))

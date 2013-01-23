@@ -6,7 +6,11 @@
   (load-theme 'molokai t)
 
   ;; font
-  (set-face-attribute 'default nil :font "Neep-9")
+  (cond (window-system
+         (set-default-font "Neep-9")
+         (set-fontset-font (frame-parameter nil 'font)
+                           'japanese-jisx0208
+                           '("IPAGothic" . "unicode-bmp"))))
 
   ;; (create-fontset-from-ascii-font "Neep Alt-9:weight=normal:slant=normal" nil "myfont")
   ;; (set-fontset-font "fontset-myfont"

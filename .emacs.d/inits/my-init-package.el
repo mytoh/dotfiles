@@ -3,10 +3,9 @@
 ;; package.el
 (my-req 'package
     ;; load MELPA
-    (add-to-list 'package-archives
-                 '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (add-to-list 'package-archives
-               '("marmalade" . "http://marmalade-repo.org/packages/"))
+    (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                             ("melpa" . "http://melpa.milkbox.net/packages/")
+                             ("marmalade" . "http://marmalade-repo.org/packages/")))
   (package-initialize))
 
 ;; install packages
@@ -63,7 +62,9 @@
     (package-install p)
     (message "install %s"  p)))
 
+;;;
 ;;; builtins
+;;;
 
 ;; save curosr position
 (my-req 'saveplace
@@ -89,7 +90,22 @@
 (when (fboundp 'terminal-init-bobcat)
   (terminal-init-bobcat))
 
-;; melpa or marmalade
+;; eshell
+(setq eshell-cmpl-ignore-case t)
+(setq eshell-ask-to-save-history (quote always))
+(setq eshell-cmpl-cycle-completions t)
+(setq eshell-cmpl-cycle-cutoff-length 5)
+(setq eshell-hist-ignoredups t)
+(add-hook 'eshell-mode-hook
+          '(lambda ()
+             (progn
+               (define-key eshell-mode-map (kbd "C-a") 'eshell-bol)
+               (define-key eshell-mode-map (kbd "C-p") 'eshell-previous-matching-input-from-input)
+               (define-key eshell-mode-map (kbd "C-n") 'eshell-next-matching-input-from-input))))
+
+;;;
+;;; melpa or marmalade
+;;;
 
 ;; rainbow-delimiters
 (my-req 'rainbow-delimiters
@@ -262,9 +278,8 @@
 (my-req 'popwin
     (setq display-buffer-function 'popwin:display-buffer)
   (setq popwin:special-display-config
-        ( append  popwin:special-display-config
-                  '(("*Warnings*") ("*Compile-log") ("*Help*"))))
-  )
+        ( append  '(("*Warnings*") ("*Compile-log") ("*Help*"))
+                  popwin:special-display-config)))
 
 ;; paredit
 (autoload 'enable-paredit-mode "paredit"
