@@ -1,3 +1,4 @@
+ ;;; -*- coding: utf-8; lexical-binding: t -*-
 
 (when (string-equal system-type "darwin")
   (let ((my-paths `(,(expand-file-name "~/local/homebrew/bin"))))

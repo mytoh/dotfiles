@@ -1,3 +1,4 @@
+ ;;; -*- coding: utf-8; lexical-binding: t -*-
 
 (when (string-equal system-type "berkeley-unix")
   (let ((my-paths `("~/local/bin")))

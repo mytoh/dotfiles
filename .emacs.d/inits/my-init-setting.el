@@ -21,9 +21,9 @@
 
 ;; start server
 (if window-system
-(my-req 'server
-    (unless (server-running-p)
-      (server-start))))
+    (my-req 'server
+        (unless (server-running-p)
+          (server-start))))
 
 ;; use space instead of tab
 (setq-default tab-width 4 indent-tabs-mode nil)
@@ -50,8 +50,9 @@
       scroll-conservatively 10000
       scroll-preserve-screen-position 1)
 ;; disable bars
-(menu-bar-mode t)
-(tool-bar-mode -1)
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 ;; delete whole line with C-k once
 (setq kill-whole-line t)
 ;; enable rectangular mode
@@ -86,7 +87,7 @@
 ;; disable autosave
 (setq auto-save-default nil)
 ;; delete auto save file when exit
-;(setq delete-auto-save-files t)
+                                        ;(setq delete-auto-save-files t)
 
 ;; (setq auto-save-file-name-transforms
 ;;       `((".*" ,temporary-file-directory t)))
@@ -102,6 +103,9 @@
 (setq undo-string-limit 1300000)
 ;; reload buffer
 (global-auto-revert-mode t)
+;; also reload dired, and quiet
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
 
 
 (provide 'my-init-setting)

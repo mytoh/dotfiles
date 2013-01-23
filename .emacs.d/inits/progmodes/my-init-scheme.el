@@ -1,5 +1,4 @@
-
-
+ ;;; -*- coding: utf-8; lexical-binding: t -*-
 
 (defun my-scheme-add-keywords (face-name keyword-rules)
   (let* ((keyword-list (mapcar #'(lambda (x)

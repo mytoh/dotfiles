@@ -1,3 +1,4 @@
+ ;;; -*- coding: utf-8; lexical-binding: t -*-
 
 (defun my-after-init-hook ()
                                         ;(setq debug-on-error t))

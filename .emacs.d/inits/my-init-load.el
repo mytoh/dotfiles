@@ -1,3 +1,4 @@
+ ;;; -*- coding: utf-8; lexical-binding: t -*-
 
 (eval-when-compile (require 'my-init-macro))
 (require 'my-init-func)

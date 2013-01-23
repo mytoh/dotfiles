@@ -1,3 +1,4 @@
+ ;;; -*- coding: utf-8; lexical-binding: t -*-
                                         ;http://practical-scheme.net/wiliki/wiliki.cgi?Gauche%3aEditingWithEmacs
                                         ; gauche
 (setq process-coding-system-alist
