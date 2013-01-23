@@ -29,7 +29,7 @@ set editor="vim"
 
 " plugin_loader
 let g:plugin_loader_roots = "~/.vimperator/vimperator-plugins, caisui-vimperator/plugins"
-let g:plugin_loader_plugins = "_libly,delicious_search,stella,autoIgnoreKey,direct_bookmark,prevent-pseudo-domain,statusline-toolbar,unload-tab,walk-input,stylish,auto_source,hints-ext"
+let g:plugin_loader_plugins = "_libly,delicious_search,stella,autoIgnoreKey,direct_bookmark,prevent-pseudo-domain,statusline-toolbar,unload-tab,walk-input,stylish,auto_source,hints-ext,opener-ex"
 
 "direct_bookmark.js
 let g:direct_sbm_use_services_by_tag = "hd"
