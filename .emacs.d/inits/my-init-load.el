@@ -8,4 +8,8 @@
 (require 'my-init-face)
 (require 'my-init-vendor)
 
+;; system
+(require 'my-init-darwin)
+(require 'my-init-freebsd)
+
 (require 'my-init-progmodes)
