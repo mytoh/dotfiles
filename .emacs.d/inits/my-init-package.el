@@ -180,7 +180,7 @@
 (my-req 'helm-themes)
 ;; helm-c-moccur
 (my-req 'color-moccur
-    (my-req 'helm-c-moccur))
+    ppp    (my-req 'helm-c-moccur))
 ;; helm-c-yasnippet
 (my-req 'helm-c-yasnippet)
 ;; helm-git depends on magit
@@ -365,11 +365,12 @@
 
 ;; emms
 (my-req 'emms-setup
-    (emms-devel)
+    (my-req 'emms-info-libtag)
+  (emms-devel)
   (emms-default-players)
   (add-hook 'emms-player-standard-hook 'emms-show)
   (setq emms-show-format "NP: %s")
-  (my-req 'emms-info-libtag))
+  (setq emms-source-file-default-directory "~/local/var/musiikki"))
 
 ;; git-gutter
 (my-req 'git-gutter
