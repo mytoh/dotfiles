@@ -142,6 +142,7 @@ myKeys = [ -- M4 for Super key
        -- , ("M-p g", gotoMenu ) -- window goto prompt wth dmenu
        , ("M-p d", AL.launchApp myXPConfig { defaultText = "~" } "dolphin" ) -- filer prompt
        , ("M-p f", scratchFiler)
+         , ("M-p e", runOrRaise "emacsclient" (className =? "Emacs"))
 
        , ("M-f", sendMessage $ Toggle NBFULL)
        , ("M-x", sendMessage $ Toggle REFLECTX)

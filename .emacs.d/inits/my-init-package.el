@@ -340,6 +340,14 @@
   (setq emms-show-format "NP: %s")
   (my-req 'emms-info-libtag))
 
+;; git-gutter
+(my-req 'git-gutter
+    ;; bind git-gutter toggle command
+    (define-key global-map (kbd "C-x C-g") 'git-gutter:toggle)
+  (add-hook 'after-save-hook
+            (lambda ()
+              (when (zerop (call-process-shell-command "git rev-parse --show-toplevel" ))
+                (git-gutter)))))
 
 
 

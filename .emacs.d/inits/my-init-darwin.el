@@ -7,7 +7,16 @@
       (when (and (file-exists-p dir) (not (member dir exec-path)))
         (setenv "PATH" (concat dir ":" (getenv "PATH")))
         (setq exec-path (append `(,dir) exec-path)))))
-  (define-key global-map (kbd "<s-return>") 'darwin-toggle-fullscreen))
+  )
+
+(defun darwin-keymaps ()
+  (define-key global-map (kbd "<s-return>") 'darwin-toggle-fullscreen)
+  ;; command to meta
+  (setq mac-command-modifier 'meta)
+  ;; option to super
+  (setq mac-option-modifier 'super)
+  ;; function to hyper
+  (setq ns-function-modifier 'hyper))
 
 (defun darwin-toggle-fullscreen ()
   "Toggle full scree on darwin"
