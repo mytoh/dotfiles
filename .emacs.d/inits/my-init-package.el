@@ -96,12 +96,24 @@
 (setq eshell-cmpl-cycle-completions t)
 (setq eshell-cmpl-cycle-cutoff-length 5)
 (setq eshell-hist-ignoredups t)
+;; prompt
+'(setq eshell-prompt-function
+       (lambda ()
+         (concat
+          "[" (format-time-string "%Y/%m/%d(%a) %H:%M") "]"
+          "[" (user-login-name) "@" (system-name) " "
+          "]\n"
+          (if (= (user-uid) 0)
+              "#" "$")
+          " ")))
+
 (add-hook 'eshell-mode-hook
           '(lambda ()
              (progn
                (define-key eshell-mode-map (kbd "C-a") 'eshell-bol)
                (define-key eshell-mode-map (kbd "C-p") 'eshell-previous-matching-input-from-input)
                (define-key eshell-mode-map (kbd "C-n") 'eshell-next-matching-input-from-input))))
+
 
 ;;;
 ;;; melpa or marmalade
@@ -132,7 +144,26 @@
   (define-key ac-completing-map (kbd "C-p") 'ac-previous)
   (setq ac-dwim t)
 
-  (my-req 'ac-ja))
+  (my-req 'ac-ja)
+
+  ;; completion for eshell
+  ;; from valvallow.blogspot.jp/2011/02/eshell.html
+  (my-req 'pcomplete
+      (add-to-list 'ac-modes 'eshell-mode)
+    (ac-define-source pcomplete
+      '((candidates . pcomplete-completions)))
+    (defun my-ac-eshell-mode ()
+      (setq ac-sources
+            '(ac-source-pcomplete
+              ac-source-words-in-buffer
+              ac-source-dictionary)))
+    (add-hook 'eshell-mode-hook
+              (lambda ()
+                (lambda ()
+                  (my-ac-eshell-mode)
+                  (define-key eshell-mode-map (kbd "C-i") 'auto-complete))))
+    (custom-set-faces
+     '(eshell-prompt-face ((t (:foreground "maroon2" :bold nil)))))))
 
 
 ;; dired+
@@ -344,10 +375,10 @@
 (my-req 'git-gutter
     ;; bind git-gutter toggle command
     (define-key global-map (kbd "C-x C-g") 'git-gutter:toggle)
-  (add-hook 'after-save-hook
-            (lambda ()
-              (when (zerop (call-process-shell-command "git rev-parse --show-toplevel" ))
-                (git-gutter)))))
+  '(add-hook 'after-save-hook
+             (lambda ()
+               (when (zerop (call-process-shell-command "git rev-parse --show-toplevel" ))
+                 (git-gutter)))))
 
 
 
