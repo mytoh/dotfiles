@@ -180,7 +180,7 @@
 (my-req 'helm-themes)
 ;; helm-c-moccur
 (my-req 'color-moccur
-    ppp    (my-req 'helm-c-moccur))
+    (my-req 'helm-c-moccur))
 ;; helm-c-yasnippet
 (my-req 'helm-c-yasnippet)
 ;; helm-git depends on magit
