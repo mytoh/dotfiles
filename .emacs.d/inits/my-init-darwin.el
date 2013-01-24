@@ -7,9 +7,6 @@
       (when (and (file-exists-p dir) (not (member dir exec-path)))
         (setenv "PATH" (concat dir ":" (getenv "PATH")))
         (setq exec-path (append `(,dir) exec-path)))))
-  (darwin-keymaps))
-
-(defun darwin-keymaps ()
   (define-key global-map (kbd "<s-return>") 'darwin-toggle-fullscreen)
   ;; command to meta
   (setq mac-command-modifier 'meta)
