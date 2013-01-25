@@ -55,6 +55,7 @@
   ".rlwrap/gosh_completions"
   ".xombrero.conf"
   ".agignore"
+  ".keysnail.js"
   )
 
 ;; vim:filetype=scheme
