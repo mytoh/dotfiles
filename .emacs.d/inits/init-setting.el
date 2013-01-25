@@ -21,13 +21,15 @@
 
 ;; start server
 (if window-system
-    (my-req 'server
-        (unless (server-running-p)
-          (server-start))))
+    (req 'server
+         (unless (server-running-p)
+           (server-start))))
 
 ;; use space instead of tab
 (setq-default tab-width 4 indent-tabs-mode nil)
 (setq indent-line-function 'indent-relative-maybe)
+;; mouse
+(setq mouse-avoidance-mode 'banish)
 ;; show info on mode-line
 (progn
   (setq display-time-24hr-format t)
@@ -103,9 +105,11 @@
 (setq undo-string-limit 1300000)
 ;; reload buffer
 (global-auto-revert-mode t)
+;; confirmation when visit new file or buffer
+(setq confirm-nonexistent-file-or-buffer nil)
 ;; also reload dired, and quiet
 (setq global-auto-revert-non-file-buffers t)
 (setq auto-revert-verbose nil)
 
 
-(provide 'my-init-setting)
+(provide 'init-setting)

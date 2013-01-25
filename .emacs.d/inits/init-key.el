@@ -15,4 +15,4 @@
 
 
 
-(provide 'my-init-key)
+(provide 'init-key)

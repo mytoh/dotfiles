@@ -7,4 +7,4 @@
         (setenv "PATH" (concat dir ":" (getenv "PATH")))
         (setq exec-path (append `(,dir) exec-path))))))
 
-(provide 'my-init-freebsd)
+(provide 'init-freebsd)

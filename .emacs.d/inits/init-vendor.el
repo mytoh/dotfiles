@@ -22,7 +22,7 @@
   *my-vendor-packages*)
 
 ;; update plugins
-;;(my-vendor-update-packages *user-emacs-vendor-directory*)
+;; (my-vendor-update-packages *user-emacs-vendor-directory*)
 
 ;; nyan-mode, github.com/TeMPOraL/nyan-mode
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
@@ -30,23 +30,23 @@
 ;; emux-el github.com/m2ym/emux-el
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
                                   "emux-el"))
-(my-req 'emux
-    ;; prefix C-c
-    ;; "C-n" ' emux:term-next
-    ;; "SPC" 'emux:term-next
-    ;; "C-p"  'emux:term-previous
-    ;; "C-t"   'emux:term-new
-    ;; "A"      'emux:term-rename
-    ;; "k"      'emux:term-kill
-    ;; "d"      'emux:term-cd
-    ;; "~"     'emux:term-sync
-    )
+(req 'emux
+     ;; prefix C-c
+     ;; "C-n" ' emux:term-next
+     ;; "SPC" 'emux:term-next
+     ;; "C-p"  'emux:term-previous
+     ;; "C-t"   'emux:term-new
+     ;; "A"      'emux:term-rename
+     ;; "k"      'emux:term-kill
+     ;; "d"      'emux:term-cd
+     ;; "~"     'emux:term-sync
+     )
 
 ;; highlight-sexp
 (my-add-to-load-path
     (concat-path *user-emacs-vendor-directory*
                  "highlight-sexp"))
-;; (my-req 'highlight-sexp
+;; (req 'highlight-sexp
 ;;     (add-hook 'lisp-mode-hook 'highlight-sexp-mode)
 ;;   (add-hook 'emacs-lisp-mode-hook 'highlight-sexp-mode)
 ;;   (add-hook 'scheme-mode-hook 'highlight-sexp)
@@ -56,43 +56,43 @@
 ;; auto-highlight-symbol-mode
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
                                   "auto-highlight-symbol-mode"))
-(my-req 'auto-highlight-symbol
-    (global-auto-highlight-symbol-mode t))
+(req 'auto-highlight-symbol
+     (global-auto-highlight-symbol-mode t))
 
 ;; highlight-cl
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
                                   "highlight-cl"))
-(my-req 'highlight-cl
-    (add-hook 'emacs-lisp-mode-hook 'highlight-cl-add-font-lock-keywords)
-  (add-hook 'lisp-interaction-mode-hook 'highlight-cl-add-font-lock-keywords))
+(req 'highlight-cl
+     (add-hook 'emacs-lisp-mode-hook 'highlight-cl-add-font-lock-keywords)
+     (add-hook 'lisp-interaction-mode-hook 'highlight-cl-add-font-lock-keywords))
 
 ;; stumpwm
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
                                   "stumpwm-mode"))
-(my-req 'stumpwm-mode)
+(req 'stumpwm-mode)
 
 ;; helm-delicious
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
                                   "helm-delicious"))
-(my-req 'helm-delicious
-    (my-req 'auth-source
-        (if (file-exists-p "~/.authinfo.gpg")
-            (setq auth-sources '((:source "~/.authinfo.gpg" :host t :protocol t)))
-          (setq auth-sources '((:source "~/.authinfo" :host t :protocol t))))))
+(req 'helm-delicious
+     (req 'auth-source
+          (if (file-exists-p "~/.authinfo.gpg")
+              (setq auth-sources '((:source "~/.authinfo.gpg" :host t :protocol t)))
+            (setq auth-sources '((:source "~/.authinfo" :host t :protocol t))))))
 
 ;; helm-descbinds
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
                                   "helm-descbinds"))
-(my-req 'helm-descbinds)
+(req 'helm-descbinds)
 
 ;; seijiseikana
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
                                   "seijiseikana-el"))
-(my-req 'seijiseikana)
+(req 'seijiseikana)
 
 ;; eldoc-extension
 (my-add-to-load-path (concat-path *user-emacs-vendor-directory*
                                   "eldoc-extension"))
-(my-req 'eldoc-extension)
+(req 'eldoc-extension)
 
-(provide 'my-init-vendor)
+(provide 'init-vendor)

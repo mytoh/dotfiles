@@ -14,4 +14,4 @@
 (add-hook 'emacs-lisp-mode-hook 'checkdoc-minor-mode)
 
 
-(provide 'my-init-elisp)
+(provide 'init-elisp)

@@ -3,12 +3,24 @@
   (require 'cl))
 
 ;; http://e-arrows.sakura.ne.jp/2010/03/macros-in-emacs-el.html
-(defmacro* my-req (lib &rest body)
+(defmacro* req (lib &rest body)
   "load library if file is exits"
-  (declare (indent 2))
+  (cl-declare (indent 1))
   `(when (locate-library (symbol-name ,lib))
      (require ,lib nil 'noerror)
      ,@body))
+
+(defmacro* add-hook-fn (name &rest body)
+  "(add-hook-fn 'php-mode-hook
+                  (require 'symfony)
+                  (setq tab-width 2)"
+  `(add-hook ,name #'(lambda () ,@body)))
+
+;; (append-to-list exec-path
+;;                 '("/usr/bin" "/bin"
+;;                   "/usr/sbin" "/sbin"))
+(defmacro* append-to-list (to lst)
+  `(setq ,to (append ,lst ,to)))
 
 (defmacro* my-add-to-load-path (path)
   (declare (indent 1))
@@ -39,20 +51,20 @@
          (t nil)))
 
 
-        
+
 (defmacro* my-vendor-update-packages (path)
   `(when (file-exists-p ,path)
      (lexical-let ((paths (directory-files ,path t "[^\.]")))
        (labels ( (directory-is-git-p (p)
                                      (if (directory-files p nil "\.git$") t nil)))
-         (mapc (function* (lambda (d)
-                            (when (directory-is-git-p d)
-                              (progn
-                                (cd-absolute d)
-                                (message "updating vendor plugin %s" d)
-                                (shell-command "git pull")
-                                (cd user-emacs-directory)))))
-               paths)))))
+         (cl-mapc #'(lambda (d)
+                      (when (directory-is-git-p d)
+                        (progn
+                          (cd-absolute d)
+                          (message "updating vendor plugin %s" d)
+                          (shell-command "git pull")
+                          (cd user-emacs-directory))))
+                  paths)))))
 
 
 (defmacro* my-vendor-install-packages (packages)
@@ -71,7 +83,7 @@
                (message "installing %s from github " (car p))
                (shell-command  (concat "git clone git://github.com/" (cadr p) " " (car p)) )
                (byte-recompile-directory (concat *user-emacs-vendor-directory* (car p))))
-       (cd user-emacs-directory)))))
+             (cd user-emacs-directory)))))
 
 
-(provide 'my-init-macro)
+(provide 'init-macro)

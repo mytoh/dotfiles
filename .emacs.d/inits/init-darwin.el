@@ -22,4 +22,4 @@
    nil 'fullscreen
    (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
 
-(provide 'my-init-darwin)
+(provide 'init-darwin)

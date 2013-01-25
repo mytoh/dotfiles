@@ -27,4 +27,4 @@
  'my-font-lock-scheme-syntax-face
  '((2 . define-library)))
 
-(provide 'my-init-scheme)
+(provide 'init-scheme)

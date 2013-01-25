@@ -22,4 +22,5 @@
   (interactive)
   (indent-region (point-min) (point-max)))
 
-(provide 'my-init-func)
+(provide 'init-func)
+

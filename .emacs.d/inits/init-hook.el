@@ -26,4 +26,4 @@
                 line-end)
           "kuva")))
 
-(provide 'my-init-hook)
+(provide 'init-hook)

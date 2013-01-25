@@ -4282,4 +4282,4 @@
 
 
 
-(provide 'my-init-gauche)
+(provide 'init-gauche)

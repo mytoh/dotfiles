@@ -67,4 +67,4 @@
 ;;(load-theme 'sanityinc-solarized-dark t)
 
 
-(provide 'my-init-face)
+(provide 'init-face)
