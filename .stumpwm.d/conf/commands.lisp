@@ -1,7 +1,7 @@
 
-;;; commands {{{
+;;; commands
 
-;;{{{ menu
+;; menu
 ;; from wiki tips_and_tricks page
 (defcommand mymenu () ()
   (labels ((pick (options)
@@ -30,7 +30,7 @@
                             ;;sub menu
                             ("gimp" "gimp"))))
 
-;; from simias {{{
+;; from simias
 ;; paste.lisp.org/display/95891
 (defvar *swap-selected-frame* nil)
 
@@ -83,10 +83,5 @@
                            (hsplit))))
                 (message "Works only with 2 frames"))))
 
-;;}}}
-
-;;}}}
-
-;;;}}}
 
 
