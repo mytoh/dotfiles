@@ -11,107 +11,17 @@
 (defparameter terminal "mlterm")
 
 
-(defun my-setup-options ()
-  (message "setup options")
-  ;; message window
-  (set-bg-color "gray14")
-  (set-fg-color "orange")
-  (set-border-color "grey10")
-  (set-msg-border-width 1)
-  ;; (set-font "-mplus-goth_p-medium-r-normal-*-10-*-*-*-*-*-iso10646-*")
-  (set-font  "-artwiz-lime-medium-r-normal--10-*-75-75-m-50-iso10646-1")
-  ;;(set-font "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1")
-  ;; windows
-  (set-focus-color "khaki")
-  (set-unfocus-color "grey10")
-  (set-win-bg-color "grey20")
-  (set-normal-gravity :top-right)
-  (set-transient-gravity :top-right)
-  (set-frame-outline-width 1)
 
-  ;; options
-  (setf
-   *startup-message*                 nil
-                                        ; border
-   *normal-border-width*             1
-   *maxsize-border-width*            1
-   *transient-border-width*          1
-   *window-border-style*             :tight ;; thick,thin,none,tight
-                                        ; number map
-   *frame-number-map*                "aoeuidhtnspyfgcrlqjkxbmwvz"
-   *window-number-map*               "aoeuidhtns"
-   *group-number-map*                "aoeuidhtns"
-                                        ; focus
-   *mouse-focus-policy*              :sloppy
-   *run-or-raise-all-groups*         t
-   *new-window-preferred-frame*      '(:empty :focused)
-                                        ; gravity
-   *message-window-gravity*          :bottom-left
-   *input-window-gravity*            :bottom-left
-   *input-history-ignore-duplicates* t
-
-                                        ; formats
-   *window-format*                   "^7*(^9*%n%m%15t^7*)^n" ;;^5 magenta
-   *group-format*                    "^7*%t%s^n" ;;^7 white
-   ))
-
-
-
-
-(defun my-start-programs ()
-  (message "starting up programs")
-  ;; (run-shell-command "exec trayer --expand true --alpha 100  --tint 0x303030 --transparent true --padding 1 --margin 0 --edge bottom --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 8 --widthtype request --width 100 " )
-  ;;(run-shell-command "stalonetray" )
-  (run-shell-command "exec feh --bg-scale ~/.wallpaper" )
-  ;; (run-shell-command "exec compton -i 0.9 -e 0.9" )
-  (run-shell-command "exec ~/.stumpwm.d/dzen.sh" )
-  (run-shell-command "exec unclutter -idle 1 -jitter 2 -root")
-  (run-shell-command "exec wmname LG3D"))
-
-
-(defun my-setup-groups ()
-  (message "setup groups")
-  ;; rename the first group to main
-  ;;(setf (group-name (first (screen (current-screen)))) "main")
-  ;; create the other group
-  ;; gnewbg, gnewbg-float
-  (grename "main")
-  (let ((main (current-group))
-        (web (gnewbg "web"))
-        (dev (gnewbg "dev"))
-        (media (gnewbg "media")))
-    (defparameter *main-group* main)
-    (defparameter *web-group*  web)
-    (defparameter *dev-group*  dev)
-    (defparameter *media-group* media)
-
-;;;; window placement rules
-    (clear-window-placement-rules) ; clear rules
-
-    (define-frame-preference "web"
-      ;; fnumber raise lock (lock AND raise == jumpto)
-      (0 t t :class "Opera")
-      (0 t t :class "Firefox")
-      (0 t t :class "V2C"))
-
-    (define-frame-preference "media"
-      (0 t t :class "Audacious")
-      (0 t t :class "MPlayer")
-                                        ;(0 t t :class "feh")
-      (0 t t :class "jd-Main")
-      )))
 
 (defun my-setup-load-configs ()
-  (loop for file in '("keymaps" "hooks" "commands" "modeline")
+  (loop for file in '("keymaps" "hooks" "commands" "modeline" "groups" "options" "programs")
         do (load (merge-pathnames (make-pathname :name file :type "lisp"
                                                  :directory '(:relative "conf" )) *data-dir*))))
 
 (defun my-init ()
   (when *initializing*
-    (my-setup-options)
-    (my-setup-groups)
     (my-setup-load-configs)
-    (my-start-programs)))
+    (message "*** intialize finished ***")))
 
 
 (my-init)
