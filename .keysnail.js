@@ -614,3 +614,9 @@ key.setViewKey('C-t', function (ev, arg) {
     gBrowser.selectedTab = gBrowser.addTab();
     command.focusToById("urlbar");
 }, 'タブを開く');
+
+
+// my keybindings
+key.setGlobalKey("d", function (ev) {
+                BrowserCloseTabOrWindow();
+            }, 'Close tab / window', false);
