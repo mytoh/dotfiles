@@ -617,6 +617,6 @@ key.setViewKey('C-t', function (ev, arg) {
 
 
 // my keybindings
-key.setGlobalKey("d", function (ev) {
+key.setViewKey("d", function (ev) {
                 BrowserCloseTabOrWindow();
             }, 'Close tab / window', false);
