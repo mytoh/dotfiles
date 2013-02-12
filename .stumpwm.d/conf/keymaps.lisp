@@ -4,13 +4,14 @@
 ;;;  modifier keys are defined in
 ;;;  keytrans.lisp
 ;;;
-                                        ; applications
+
+;; applications
 (defun my-keymap-shortcut ()
   (defparameter *shortcut-map*
     (let ((map (make-sparse-keymap)))
-      (defprogram-shortcut terminal :command "exec mlterm" :key (kbd "t") :map map)
+      (defprogram-shortcut terminal :command "exec mlterm" :key (kbd "t") :map map :props '(:class "mlterm"))
       (defprogram-shortcut browser :command "exec firefox" :key (kbd "b") :map map)
-      (defprogram-shortcut filer   :command "exec rox" :key (kbd "f") :map map)
+      (defprogram-shortcut filer   :command "exec rox" :key (kbd "f") :map map :props '(:class "ROX-Filer"))
       (defprogram-shortcut dmenu :command "exec dmenu_run -i -b -nb 'grey14' -nf 'orange' -sb 'grey10' -sf '#4d3e41' "
         :key (kbd "d") :map map)
       (defprogram-shortcut emacs :command "emacs" :key (kbd "e") :map map)

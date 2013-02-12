@@ -11,8 +11,17 @@
 (defparameter terminal "mlterm")
 
 
+(defparameter my-configs
+  '("keymaps"
+    "hooks"
+    "commands" 
+    "modeline" 
+    "groups"
+    "options"
+    "programs"))
+
 (defun my-setup-load-configs ()
-  (loop for file in '("keymaps" "hooks" "commands" "modeline" "groups" "options" "programs")
+  (loop for file in my-configs
         do (load (merge-pathnames (make-pathname :name file :type "lisp"
                                                  :directory '(:relative "conf" )) *data-dir*))))
 
