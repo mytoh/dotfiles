@@ -53,7 +53,7 @@ spiffy &
 gosh -I~/.site ~/.site/makiki-server.scm &
 synergys --name $(hostname -s)
 mpd
-sudo /etc/netstart
+pulseaudio -D &
 
 if [ "$1" = "twm"  -o "$1" = "flwm" ]; then
   $HOME/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 13 -bg gray15 -fn '-*-terminus-medium-r-normal--12-*' -e 'onexit=ungrabmouse' &
