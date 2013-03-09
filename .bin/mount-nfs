@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+server=192.168.1.11
+user=$1
+
+
+echo "mount MyPassport" 
+sudo mount $server:/Volumes/MyPassport /nfs/mypassport
+echo "mount Deskstar"
+sudo mount $server:/Volumes/Deskstar   /nfs/deskstar
+echo "mount quatre"
+sudo mount $server:/Users/$user /nfs/quatre

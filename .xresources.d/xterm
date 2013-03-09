@@ -3,7 +3,7 @@
 ! xterm
 ! ------------
 
-xterm*font: FONT
+! xterm*font: FONT
 
 xterm*utf8: always
 xterm*utf8Fonts: always
