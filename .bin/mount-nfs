@@ -5,8 +5,8 @@ user=$1
 
 
 echo "mount MyPassport" 
-sudo mount $server:/Volumes/MyPassport /nfs/mypassport
+sudo mount -o soft $server:/Volumes/MyPassport /nfs/mypassport
 echo "mount Deskstar"
-sudo mount $server:/Volumes/Deskstar   /nfs/deskstar
+sudo mount -o soft $server:/Volumes/Deskstar   /nfs/deskstar
 echo "mount quatre"
-sudo mount $server:/Users/$user /nfs/quatre
+sudo mount -o soft $server:/Users/$user /nfs/quatre
