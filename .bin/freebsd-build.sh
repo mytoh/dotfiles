@@ -1,6 +1,16 @@
 #!/usr/bin/env sh
 
 
+log()
+{
+local message=$1
+cat <<EOF
+-------------------------------------------
+>> $message <<"
+-------------------------------------------
+EOF
+}
+
 
 first()
 {
@@ -8,51 +18,43 @@ cd /usr/src
 make -s cleandir
 make -s cleandir
 rm -rf /usr/obj
+log "building world"
 make -s -j 4 buildworld
+log "building kernel"
 make -s -j 4 buildkernel
+log "installing kernel"
 make -s installkernel
-echo "REBOOT"
-
+log "please reboot"
 }
 
 second() 
 {
-echo "-------------------------------------------"
-echo ">> mounting disks <<"
-echo "-------------------------------------------"
+log "mounting disks"
 mount -u /
 mount -a -t ufs
-echo "-------------------------------------------"
-echo ">> mergemaster -p <<"
-echo "-------------------------------------------"
+
+log "mergemaster -p"
 mergemaster -p
 cd /usr/src
-echo "-------------------------------------------"
-echo ">> make installworld <<"
-echo "-------------------------------------------"
+
+log "make installworld"
 make -s installworld
 make -DBATCH_DELETE_OLD_FILES delete-old
-echo "-------------------------------------------"
-echo ">> mergemaster <<"
-echo "-------------------------------------------"
+
+log "mergemaster"
 mergemaster
-echo "-------------------------------------------"
-echo ">> please reboot"
-echo "-------------------------------------------"
+
+log "please reboot"
 }
 
 third()
 {
-echo "-------------------------------------------"
-echo ">> mounting fs <<"
-echo "-------------------------------------------"
+log "mounting disks"
 mount -u /
 mount -a -t ufs
-
 cd /usr/src
-echo "-------------------------------------------"
-echo ">> delete old libs <<"
-echo "-------------------------------------------"
+
+log "delete old libs"
 yes y | make delete-old-libs
 }
 
