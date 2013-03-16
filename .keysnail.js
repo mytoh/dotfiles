@@ -632,11 +632,3 @@ key.setViewKey('C-t', function (ev, arg) {
 key.setViewKey("d", function (ev) {
     BrowserCloseTabOrWindow();
 }, 'Close tab / window', false);
-
-// disable keys in some sites
-local["^https?://([0-9a-zA-Z]+\\.)?tumblr\\.com/"] = [
-    // navigation
-    ['k', null],
-    ['j', null]
-];
-
