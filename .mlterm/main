@@ -24,7 +24,7 @@ alpha = 250
 depth = 32
 use_scrollbar = false
 scrollbar_view_name = sample
-fg_color = #5ada7a
+fg_color = #00ff00
 bg_color = #242222
 borderless = true
 
