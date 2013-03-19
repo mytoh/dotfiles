@@ -33,6 +33,12 @@ plugins.options["tanything_opt.keymap"] = {
 // History
 plugins.options['history.max-results'] = 10000;
 
+// KKK
+plugins.options["kkk.sites"] = ["^https?://([0-9a-zA-Z])+\\.)?github\\.com/",
+                                "^https?://([0-9a-zA-Z])+\\.)?google\\.co\\.jp/",
+                                "^https?://([0-9a-zA-Z])+\\.)?tumblr\\.com/",
+                                ]
+
 //}}%PRESERVE%
 // ========================================================================= //
 
