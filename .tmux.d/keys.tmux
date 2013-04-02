@@ -53,7 +53,7 @@ bind BTab select-pane -t:.-
 
 # reload setting
 unbind C-r
-bind C-r source-file $HOME/.tmux.conf; display-message "*** tmux.conf reloaded"
+bind C-r source-file $HOME/.tmux.conf
 
 # split window and execute command
 bind e command-prompt "split-window -p 65 'exec %%'"
