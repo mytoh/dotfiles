@@ -1,7 +1,14 @@
 
 set shellar=$HOME/.shellar
-    set shellar_plugins=(mytoh emacs gauche loitsu  fasd nopea napa \
+
+if ( "$OSTYPE" == "FreeBSD" ) then
+set shellar_plugins=(mytoh emacs gauche loitsu  fasd nopea napa \
+               vim lista nyan ypsilon mosh talikko brew npm )
+else
+set shellar_plugins=(mytoh emacs gauche loitsu  fasd nopea napa \
                vim lista nyan ypsilon mosh talikko brew npm  panna pikkukivi)
+endif
+
 set shellar_theme='default'
 source $shellar/shellar/shellar.tcsh
 
