@@ -195,6 +195,7 @@
                           "coffeescript"
                           "xmonad"
                           "python"
+                          "haskell"
                           ))
 
                ,(tumblr "//tumblr.com"
