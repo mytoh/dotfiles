@@ -5,7 +5,7 @@ if ( "$OSTYPE" == "FreeBSD" ) then
 set shellar_plugins=(mytoh emacs gauche loitsu  fasd nopea napa \
                vim lista nyan ypsilon mosh talikko brew npm )
 else
-set shellar_plugins=(mytoh emacs gauche loitsu  fasd nopea napa \
+set shellar_plugins=(mytoh emacs gauche loitsu lehti fasd nopea napa \
                vim lista nyan ypsilon mosh talikko brew npm  panna pikkukivi)
 endif
 
