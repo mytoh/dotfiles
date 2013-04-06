@@ -11,9 +11,9 @@
 # }}}
 
 # uim {{{
-export GTK_IM_MODULE="uim"
-export QT_IM_MODULE="uim"
-export XMODIFIERS=@im=uim
+export GTK_IM_MODULE='uim'
+export QT_IM_MODULE='uim'
+export XMODIFIERS=@im='uim'
 # export UIM_CANDWIN_PROG=uim-candwin-gtk
 uim-xim &
 uim-toolbar-gtk-systray &
@@ -73,17 +73,17 @@ DEFAULT_SESSION="dwm"
 if [ -n $1 ]; then
   export USERWM=$1
  case $1 in
-  xfce) exec dbus-launch ck-launch-session startxfce4 ;;
-  fluxbox) exec startfluxbox ;;
-  fvwm|fvwm2) exec fvwm2 ;;
+  xfce)         exec dbus-launch ck-launch-session startxfce4 ;;
+  fluxbox)      exec startfluxbox ;;
+  fvwm|fvwm2)   exec fvwm2 ;;
   fvwm-themes*) exec fvwm-themes-start -s sa ;;
-  dwm) exec $HOME/.dwm/startdwm ;;
-  kde) exec startkde4 ;;
-  gnome) exec gnome-session ;;
-  mate) exec ck-launch-session mate-session ;;
-  rox) exec rox -S ;;
-  lainwm) exec lainwm ;;
-  *) exec dbus-launch --exit-with-session ck-launch-session $1 ;;
+  dwm)          exec $HOME/.dwm/startdwm ;;
+  kde)          exec startkde4 ;;
+  gnome)        exec gnome-session ;;
+  mate)         exec ck-launch-session mate-session ;;
+  rox)          exec rox -S ;;
+  lainwm)       exec lainwm ;;
+  *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
  esac
 else
   exec $DEFAULT_SESSION
