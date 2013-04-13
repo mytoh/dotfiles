@@ -9,7 +9,7 @@ set shellar_plugins=(mytoh emacs gauche loitsu lehti fasd nopea napa \
                vim lista nyan ypsilon mosh talikko brew npm  panna pikkukivi)
 endif
 
-set shellar_theme='default'
+set shellar_theme='kehote'
 source $shellar/shellar/shellar.tcsh
 
 foreach f ($HOME/.complete.tcsh $HOME/perl5/perlbrew/etc/cshrc)
