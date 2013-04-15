@@ -4,12 +4,13 @@ set shellar=$HOME/.shellar
 if ( "$OSTYPE" == "FreeBSD" ) then
 set shellar_plugins=(mytoh emacs gauche loitsu  fasd nopea napa \
                vim lista nyan ypsilon mosh talikko brew npm )
+set shellar_theme='kehote'
 else
 set shellar_plugins=(mytoh emacs gauche loitsu lehti fasd nopea napa \
                vim lista nyan ypsilon mosh talikko brew npm  panna pikkukivi)
+set shellar_theme='default'
 endif
 
-set shellar_theme='kehote'
 source $shellar/shellar/shellar.tcsh
 
 foreach f ($HOME/.complete.tcsh $HOME/perl5/perlbrew/etc/cshrc)
