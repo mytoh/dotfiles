@@ -1,0 +1,40 @@
+;;; dot.skk --- SKK init file -*- mode: emacs-lisp; coding: utf-8 -*-
+
+;; show annotation
+(setq skk-show-annotation
+      ;; t                                 ; always show
+      ;; '(not list)                       ; not show on *candidate* buffer
+      '(not minibuf)                    ; not show on minibuffer
+      ;; '(not list minibuf)               ; not show both
+      )
+
+;; show verbose messages
+(setq skk-verbose t)
+
+;; show icon on mode-line
+(setq skk-show-icon t)
+
+;; show inline candidates
+(setq skk-show-inline 'vertical)
+
+;; when press Enter
+;; nil => return and newline
+;; non-nil => return
+(setq skk-egg-like-newline t)
+
+;; use look command
+(setq skk-use-look t)
+
+
+;; show candidate and annotation
+;; using tooltip
+;; (setq skk-show-tooltip t)
+
+;; use act for dvorak
+(setq skk-use-act t)
+
+;; use dynamic completion
+(setq skk-dcomp-activate t)
+
+;; automatically insert parentheses
+(setq skk-auto-insert-paren t)
