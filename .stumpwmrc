@@ -1,4 +1,4 @@
-;; -*- common-lisp -*-
+;; -*- mode: common-lisp -*-
 ;; vim:filetype=lisp
 
 ;; settings taken from "http://aperturefever.wordpress.com/2010/05/10/updating-stumpwm-conf/"
@@ -14,8 +14,8 @@
 (defparameter my-configs
   '("keymaps"
     "hooks"
-    "commands" 
-    "modeline" 
+    "commands"
+    "modeline"
     "groups"
     "options"
     "programs"))
@@ -34,4 +34,3 @@
 (my-init)
 
 (setf *debug-level* 10)
-

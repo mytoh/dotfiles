@@ -1,3 +1,5 @@
+### -*- coding: utf-8; mode: conf -*-
+
 # -- Window --
 inner_border = 0
 
@@ -8,14 +10,16 @@ termtype = xterm-256color
 ENCODING = utf-8
 
 # -- Font --
+type_engine = xcore
 fontsize = 8
 use_anti_alias = false
 use_variable_column_width = false
+use_multi_column_char = true
 receive_string_via_ucs = true
 col_size_of_width_a = 2
 not_use_unicode_font = false
 only_use_unicode_font = false
-iso88591_font_for_usascii = false
+#iso88591_font_for_usascii = false
 
 
 # -- Appearance --
@@ -24,8 +28,8 @@ alpha = 250
 depth = 32
 use_scrollbar = false
 scrollbar_view_name = sample
-fg_color = #eeeeee
-bg_color = #242222
+fg_color = #bea492
+bg_color = #1b2023
 borderless = true
 
 

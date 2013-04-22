@@ -10,6 +10,11 @@ dht_port = 6881
 peer_exchange = yes
 encryption = allow_incoming,try_outgoing,enable_retry
 
+# for emacs mentor
+scgi_port = 127.0.0.1:5000
+xmlrpc_dialect = i8
+encoding_list = UTF-8
+
 system.method.set_key = event.download.finished,move_complete,"execute=mv,-n,$d.get_base_path=,~/.torrent/in/;d.set_directory=~/.torrent/in/"
 
 
