@@ -1,6 +1,7 @@
 
 gtk-theme-name = "FlatStudioDark"
 gtk-icon-theme-name = "Faenza"
+gtk-fallback-icon-theme = "Tango"
 # ggtk-icon-sizes = "gtk-small-toolbar=12,12"
 gtk-cursor-theme-name = "whiteglass"
 gtk-cursor-theme-size = "12"
