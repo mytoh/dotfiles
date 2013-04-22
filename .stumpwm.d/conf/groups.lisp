@@ -20,13 +20,14 @@
     (clear-window-placement-rules) ; clear rules
 
     (define-frame-preference "web"
-      ;; fnumber raise lock (lock AND raise == jumpto)
+      ;; (fnumber raise lock), lock AND raise == jumpto
       (0 t t :class "Opera")
       (0 t t :class "Firefox")
+      (0 t t :class "Midori")
       (0 t t :class "V2C"))
 
     (define-frame-preference "dev"
-      ;; fnumber raise lock (lock AND raise == jumpto)
+      ;; (fnumber raise lock), lock AND raise == jumpto
       (0 t t :class "Emacs"))
 
     (define-frame-preference "media"
