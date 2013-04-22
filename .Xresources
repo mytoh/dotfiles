@@ -1,7 +1,3 @@
-xft.dpi: 98
-xft.antialias: true
-xft.hinting: true
-xft.hintstyle: hintslight
 
 Xcursor.theme: whiteglass
 
@@ -10,6 +6,7 @@ Xcursor.theme: whiteglass
 #include ".xresources.d/xterm"
 #include ".xresources.d/xfontsel"
 #include ".xresources.d/fontforge"
+#include ".xresources.d/emacs"
 
 
 !-------------------------------------

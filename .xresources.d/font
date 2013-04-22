@@ -1,4 +1,11 @@
 
+! font setting
+xft.dpi: 98
+xft.antialias: true
+xft.hinting: true
+xft.hintstyle: hintslight
+
+
 ! #define FONT \
 ! -jmk-neep-medium-r-normal--10-80-75-75-c-50-*, \
 ! k10,k10rk,\
