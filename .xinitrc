@@ -45,6 +45,9 @@ xset +fp /usr/local/lib/X11/fonts/jmk
 xset +fp $HOME/.fonts
 xset +fp $HOME/.fonts/jmk
 xset fp rehash
+# audio volume
+mixer vol 10
+mixer pcm 15
 # urxvtcd &
 xbindkeys &
 Thunar --daemon &

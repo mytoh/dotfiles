@@ -1,3 +1,3 @@
 
 dir=$(dirname $1)
-feh -Z -F $dir
+feh -Z -F -B black $dir
