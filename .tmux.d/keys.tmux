@@ -59,7 +59,7 @@ bind C-r source-file $HOME/.tmux.conf
 bind e command-prompt "split-window -p 65 'exec %%'"
 
 # cycle window or pane
-bind C-z run "tmux last-pane || tmux last-window || tmux new-window"
+#bind C-z run "tmux last-pane || tmux last-window || tmux new-window"
 
 # resize keys
 unbind C-h
@@ -78,5 +78,5 @@ bind -r K select-layout main-horizontal \; swap-pane -s : -t 0 \; select-pane -t
 
 
 # toggle maximize window
-bind } run "if [[ $(tmux list-window) =~ tmux-zoom ]]; then tmux last-window; tmux swap-pane -s tmux-zoom.0; tmux kill-window -t tmux-zoom; else tmux new-window -d -n tmux-zoom 'clear && echo TMUX ZOOM && read'; tmux swap-pane -s tmux-zoom.0; tmux select-window -t tmux-zoom;fi"
+#bind } run "if [[ $(tmux list-window) =~ tmux-zoom ]]; then tmux last-window; tmux swap-pane -s tmux-zoom.0; tmux kill-window -t tmux-zoom; else tmux new-window -d -n tmux-zoom 'clear && echo TMUX ZOOM && read'; tmux swap-pane -s tmux-zoom.0; tmux select-window -t tmux-zoom;fi"
 

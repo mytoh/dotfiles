@@ -19,6 +19,9 @@
     ;; window placement rules
     (clear-window-placement-rules) ; clear rules
 
+    (define-frame-preference "main"
+      (0 t t :class "mltern"))
+
     (define-frame-preference "web"
       ;; (fnumber raise lock), lock AND raise == jumpto
       (0 t t :class "Opera")

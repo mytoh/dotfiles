@@ -23,11 +23,19 @@ keycode 211 = grave asciitilde
 ! }}}
 
 ! hyper , super  {{{
-! ctrl to hyper
-keycode 37 = Hyper_L
 ! windows to super
 keycode 115 = Super_L
+! add Mod2 = Supur_L
+! ctrl to hyper
+keycode 37 = Hyper_L
+!add Mod3 = Hyper_L
 ! }}}
+
+! muhenkan = Control_L {{{
+keycode 131 = Control_L
+add Control = Control_L
+! }}}
+
 
 ! audio keys {{{
 ! insert to audio-mute

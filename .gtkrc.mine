@@ -4,7 +4,7 @@ gtk-icon-theme-name = "Faenza"
 gtk-fallback-icon-theme = "Tango"
 # ggtk-icon-sizes = "gtk-small-toolbar=12,12"
 gtk-cursor-theme-name = "whiteglass"
-gtk-cursor-theme-size = "12"
+gtk-cursor-theme-size = 12
 
 # gtk-color-scheme = "bg_color: #383838\nfg_color: #fff\nbase_color: #575757\ntext_color: #C2C2C2\nselected_bg_color: #DDFF95\nselected_fg_color: #000\ntooltip_bg_color: #DDFF95\ntooltip_fg_color: #000"
 
