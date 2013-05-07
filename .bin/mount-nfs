@@ -2,11 +2,11 @@
 
 server=192.168.1.11
 user=$1
-
+root=/Volumes
 
 echo "mount MyPassport" 
-sudo mount -o soft $server:/Volumes/MyPassport /nfs/mypassport
+sudo mount -o soft $server:/Volumes/MyPassport $root/mypassport
 echo "mount Deskstar"
-sudo mount -o soft $server:/Volumes/Deskstar   /nfs/deskstar
+sudo mount -o soft $server:/Volumes/Deskstar   $root/deskstar
 echo "mount quatre"
-sudo mount -o soft $server:/Users/$user /nfs/quatre
+sudo mount -o soft $server:/Users/$user $root/quatre
