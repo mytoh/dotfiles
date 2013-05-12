@@ -50,7 +50,7 @@ mixer vol 10
 mixer pcm 15
 # urxvtcd &
 xbindkeys &
-Thunar --daemon &
+thunar --daemon &
 spiffy &
 #parcellite &
 gosh -I~/.site ~/.site/makiki-server.scm &
