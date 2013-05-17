@@ -1,14 +1,11 @@
 
 set shellar=$HOME/.shellar
+set shellar_custom=$HOME/.shellar_custom
 
 if ( "$OSTYPE" == "FreeBSD" ) then
 set shellar_plugins=(mytoh emacs loitsu lehti fasd nopea napa \
                vim lista nyan ypsilon mosh talikko brew npm freebsd firefox)
-if ( { ( type kehote >& /dev/null ) } ) then
-set shellar_theme='kehote'
-else
 set shellar_theme='default'
-endif
 else
 set shellar_plugins=(mytoh emacs gauche loitsu lehti fasd nopea napa \
                vim lista nyan ypsilon mosh talikko brew npm  panna pikkukivi \
