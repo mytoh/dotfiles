@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+fbsd_freq() {
+freq=$(sysctl -n dev.cpu.0.freq)
+printf "freq:%s" $freq
+}
+
+case $OSTYPE in
+  FreeBSD*) fbsd_freq
+esac

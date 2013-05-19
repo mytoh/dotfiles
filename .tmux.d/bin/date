@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+fbsd_date() {
+d=$(date)
+echo $d
+}
+
+fbsd_date
