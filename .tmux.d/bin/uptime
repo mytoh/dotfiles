@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 fbsd_uptime() {
-up=$(uptime | awk 'FS="," {print $2}')
+time=$(uptime | awk 'FS="," {print $2}')
 printf "up:%s" $up
 }
 

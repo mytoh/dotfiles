@@ -32,4 +32,4 @@ set-window-option -g clock-mode-colour colour64 #green
 
 # statusline
 set -g status-left '#(tumx set status-interval 10 && tmux refresh)#[fg=colour105]>#S '
-set -g status-right ' #[fg=red]#T #[fg=yellow]#(~/.tmux.d/bin/memory) #[fg=colour92]#(~/.tmux.d/bin/uptime) #[fg=colour133]#(~/.tmux.d/bin/freq) #[fg=yellow]#(~/.tmux.d/bin/date)#[fg=colour238]'
+set -g status-right ' #[fg=red]#T #[fg=colour152]#(~/.tmux.d/bin/memory) #[fg=colour133]#(~/.tmux.d/bin/freq) #[fg=yellow]#(~/.tmux.d/bin/date)#[fg=colour238]'
