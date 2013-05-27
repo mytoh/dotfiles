@@ -1,15 +1,27 @@
 
-theme_load("mono");
-
 require("tab-bar.js");
+require("favicon");
+
+theme_load("mono");
 
 // auto completion in mini buffer
 minibuffer_auto_complete_default = true;
 url_completion_use_history = true;
 url_completion_use_bookmarks = true;
 
+// favicon in minibuffer
+read_buffer_show_icons = true;
+
 // use alpaha for hints
 hint_digits="aoeuidhtnspyfgcrl";
 
 // delicious
 define_delicious_webjumps("heinahattu");
+
+/// modeline
+// add buttons
+load_paths.unshift("chrome://conkeror-contrib/content/");
+require("mode-line-buttons.js");
+mode_line_add_buttons(standard_mode_line_buttons, true);
+// favicon
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);

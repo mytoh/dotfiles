@@ -26,6 +26,7 @@
       ;; (fnumber raise lock), lock AND raise == jumpto
       (0 t t :class "Opera")
       (0 t t :class "Firefox")
+      (0 t t :class "Conkeror")
       (0 t t :class "Midori")
       (0 t t :class "V2C"))
 

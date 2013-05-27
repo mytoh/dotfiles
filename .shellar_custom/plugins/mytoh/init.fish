@@ -47,12 +47,12 @@ set -x LESS_TERMCAP_ue "[0m"
 set -x LESS_TERMCAP_us "[01;32m"
 
 # set default browser
-if which w3m 1>  /dev/null
+if type -f w3m >/dev/null
   set -x BROWSER w3m
 end
 
 # editor
-if which vim 1> /dev/null
+if type -f vim >/dev/null
 set -x EDITOR vim
 end
 
@@ -149,13 +149,13 @@ function pd
   popd
 end
 
-if which dfc 1>&-
+if type -f dfc >/dev/null
   function df
     dfc
   end
 else
   function df
-    df -h
+    command df -h
   end
 end
 function single
