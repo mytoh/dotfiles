@@ -8,7 +8,7 @@ set shellar_plugins=(mytoh emacs loitsu lehti fasd nopea napa \
 set shellar_theme='default'
 else
 set shellar_plugins=(mytoh emacs gauche loitsu lehti fasd nopea napa \
-               vim lista nyan ypsilon mosh talikko brew npm  panna pikkukivi \
+               vim lista nyan ypsilon mosh talikko brew npm pikkukivi \
                firefox)
 set shellar_theme='default'
 endif
