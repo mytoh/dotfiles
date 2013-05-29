@@ -17,7 +17,8 @@ first()
 cd /usr/src
 make -s cleandir
 make -s cleandir
-rm -rf /usr/obj
+chflags -R noschg /usr/obj
+rm -rf /usr/obj/*
 log "building world"
 make -s -j 4 buildworld
 log "building kernel"
