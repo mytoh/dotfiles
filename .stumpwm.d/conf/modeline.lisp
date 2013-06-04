@@ -16,7 +16,7 @@
 
 (defun my-setup-modeline ()
   (setf
-   *mode-line-background-color*      "grey12"
+   *mode-line-background-color*      "grey20"
    *mode-line-foreground-color*      "DarkKhaki"
    *mode-line-border-color*          "pink"
    *mode-line-position*              :top

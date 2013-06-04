@@ -37,7 +37,7 @@
     (define-frame-preference "media"
       (0 t t :class "Audacious")
       (0 t t :class "MPlayer")
-      ;;(0 t t :class "feh")
+      (0 t t :class "feh")
       (0 t t :class "jd-Main")
       (0 t t :class "Pcmanfm")
       (0 t t :class "Thunar")

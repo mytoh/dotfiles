@@ -31,6 +31,10 @@ set-option -g display-panes-colour colour166 #orange
 # clock
 set-window-option -g clock-mode-colour colour64 #green
 
+# window options
+setw -g window-status-format '#W#F'
+setw -g window-status-current-format '#W#[fg=green]#F'
+
 # statusline
 set-option -g status-left "#(gosh tmux/schemeline/status-left.scm)"
 set-option -g status-right "#(gosh tmux/schemeline/status-right.scm)"

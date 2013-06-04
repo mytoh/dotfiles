@@ -30,6 +30,11 @@ set-option -g display-panes-colour colour166 #orange
 # clock
 set-window-option -g clock-mode-colour colour64 #green
 
+# window options
+setw -g window-status-format '#[fg=white,bg=blue]#I#[fg=black,bg=cyan]#W '
+setw -g window-status-current-format '#[fg=blue,bg=white]#I#[fg=black,bg=yellow]#W'
+
+
 # statusline
 set -g status-left '#(tumx set status-interval 10 && tmux refresh)#[fg=colour105]>#S '
 set -g status-right ' #[fg=red]#T #[fg=colour152]#(~/.tmux.d/bin/memory) #[fg=colour133]#(~/.tmux.d/bin/freq) #[fg=yellow]#(~/.tmux.d/bin/date)#[fg=colour238]'
