@@ -15,7 +15,7 @@ setenv NLSPATH ~/local/lib/tcsh/%N
 setenv RLWRAP_HOME ~/.rlwrap
 
 ## java
-setenv CLASSPATH /usr/local/share/java/rhino
+#setenv CLASSPATH /usr/local/share/java/rhino
 setenv _JAVA_OPTIONS '-Dawt.useSystemAAFontSettings=on'
 
 # for shellar

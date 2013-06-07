@@ -20,11 +20,11 @@ make -s cleandir
 chflags -R noschg /usr/obj
 rm -rf /usr/obj/*
 log "building world"
-make -s -j 4 buildworld
-log "building kernel"
-make -s -j 4 buildkernel
-log "installing kernel"
-make -s installkernel
+make -s -j 4 buildworld && \
+log "building kernel" && \
+make -s -j 4 buildkernel && \
+log "installing kernel" && \
+make -s installkernel  && \
 log "please reboot"
 }
 
