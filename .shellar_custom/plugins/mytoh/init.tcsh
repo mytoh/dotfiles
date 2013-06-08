@@ -41,7 +41,7 @@ set color
 set colorcat
 set autoexpand
 set complete=enhance
-set path=(~/.cabal/bin ~/.bin ~/local/apps/{v2c} ~/local/bin ~/local/homebrew/bin /usr/local/kde4/{sbin,bin} /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} $path)
+set path=(~/.cabal/bin ~/.bin ~/local/apps/{v2c} ~/local/bin /usr/local/kde4/{sbin,bin} /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} $path)
 set cdpath=(~/local/ ~/local/var/)
 set noclobber
 set notify

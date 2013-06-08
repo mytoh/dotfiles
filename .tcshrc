@@ -4,11 +4,11 @@ set shellar_custom=$HOME/.shellar_custom
 
 if ( "$OSTYPE" == "FreeBSD" ) then
 set shellar_plugins=(mytoh emacs loitsu lehti fasd nopea napa \
-               vim lista nyan ypsilon mosh talikko brew npm freebsd firefox)
+               vim lista nyan ypsilon mosh talikko pikkukivi brew npm freebsd firefox)
 set shellar_theme='default'
 else
-set shellar_plugins=(mytoh emacs gauche loitsu lehti fasd nopea napa \
-               vim lista nyan ypsilon mosh talikko brew npm pikkukivi \
+set shellar_plugins=(mytoh brew emacs gauche loitsu lehti fasd nopea napa \
+               vim lista nyan ypsilon mosh talikko npm pikkukivi \
                firefox)
 set shellar_theme='default'
 endif
