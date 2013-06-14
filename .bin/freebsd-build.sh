@@ -4,9 +4,12 @@
 log()
 {
 local message=$1
+local m_colour="[38;5;39m"
+local s_colour="[38;5;169m"
+local reset="[0m"
 cat <<EOF
 -------------------------------------------
->> $message <<
+$s_colour>>$reset $m_colour $message $reset $s_colour<<$reset
 -------------------------------------------
 EOF
 }

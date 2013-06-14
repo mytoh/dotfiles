@@ -48,10 +48,10 @@ push-to-path $HOME/local/bin
 # shellar
 set shellar ~/.shellar
 # plugins
-set shellar_plugins mytoh freebsd loitsu lehti nopea talikko emacs napa 
+set shellar_plugins mytoh freebsd loitsu lehti nopea talikko emacs napa
 # theme
 set shellar_theme default
-# custom 
+# custom
 set shellar_custom ~/.shellar_custom
 # source oh-my-fish
 . $shellar/shellar/shellar.fish
