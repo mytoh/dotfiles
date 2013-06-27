@@ -158,21 +158,18 @@ else
     command df -h
   end
 end
+
 function single
   sudo shutdown now
 end
+
 function halt
   sync
   sync
   sync
   sudo shutdown -p now
 end
-function reboot
-  sync
-  sync
-  sync
-  sudo shutdown -r now
-end
+
 
 #function sudo
 #  sudo -E $argv

@@ -1,5 +1,5 @@
 
-gtk-theme-name = "elementary"
+#gtk-theme-name = "elementary"
 gtk-icon-theme-name = "elementary"
 gtk-fallback-icon-theme = "Tango"
 # ggtk-icon-sizes = "gtk-small-toolbar=12,12"
