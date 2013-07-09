@@ -4,8 +4,7 @@
 
 ulimit -c 0
 
-set -ge PATH
-set -gx PATH $HOME/.bin $HOME/local/bin /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/ $PATH
+push-to-path $HOME/.bin $HOME/local/bin /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/ $PATH
 
 set -x CURRENT_SHELL fish
 
@@ -72,6 +71,7 @@ set -x IGNOREEOF 1
 # keybindings {{{
 #bind --erase \cd
 bind \cd 'delete-char'
+bind \cm 'kill-line'
 
 #}}}
 
@@ -204,48 +204,6 @@ function openports
 nc -z 127.0.0.1 1-10000
 end
 
-function load_lol_aliases
-        # taken from oh-my-zsh
-        # Source: http://aur.archlinux.org/packages/lolbash/lolbash/lolbash.sh
-
-        alias wtf 'dmesg'
-        alias onoz 'cat /var/log/errors.log'
-        alias rtfm 'man'
-
-        alias visible 'echo'
-        alias invisible 'cat'
-        alias moar 'more'
-        alias tldr 'less'
-        alias alwayz 'tail -f'
-
-        alias icanhas 'mkdir'
-        alias gimmeh 'touch'
-        alias donotwant 'rm'
-        alias dowant 'cp'
-        alias gtfo 'mv'
-        alias nowai 'chmod'
-
-        alias hai 'cd'
-        alias iz 'ls'
-        alias plz 'pwd'
-        alias ihasbucket 'df -h'
-
-        alias inur 'locate'
-        alias iminurbase 'finger'
-
-        alias btw 'nice'
-        alias obtw 'nohup'
-
-        alias nomz 'ps -aux'
-        alias nomnom 'killall'
-
-        alias byes 'exit'
-        alias cya 'reboot'
-        alias kthxbai 'halt'
-end
-load_lol_aliases
-
-
 # screen {{{
 set -x SCREENDIR $HOME/.screen.d/tmp
 function sc
@@ -259,18 +217,6 @@ function starwars
 end
 function jblive
   mplayer rtsp://videocdn-us.geocdn.scaleengine.net/jblive/jblive.stream
-end
-function sumo
-  mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_haishin/asx/sumolive.asx
-end
-function sumo
-  mplayer -playlist http://sumo.goo.ne.jp/hon_basho/torikumi/eizo_haishin/asx/sumolive.asx
-end
-function sumo2
-  mplayer mms://a776.l12513450775.c125134.a.lm.akamaistream.net/D/776/125134/v0001/reflector:50775
-end
-function sumo3
-  mplayer mms://a792.l12513450791.c125134.a.lm.akamaistream.net/D/792/125134/v0001/reflector:50791
 end
 
 function load-radio-functions 

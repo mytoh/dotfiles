@@ -10,7 +10,7 @@ termtype = xterm-256color
 ENCODING = utf-8
 
 # -- Font --
-type_engine = xcore
+#type_engine = xcore
 fontsize = 8
 use_anti_alias = false
 use_variable_column_width = false

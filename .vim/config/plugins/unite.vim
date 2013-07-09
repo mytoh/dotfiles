@@ -62,7 +62,7 @@ function! s:unite_my_settings() "{{{
   " call unite#custom_default_action('directory', 'tabvimfiler')
   call unite#custom_default_action('directory_mru', 'vimfiler')
   " substitute patterns
-  call unite#set_substitute_pattern('file', '/usr'.escape($HOME, '\'), '^\~',   -2)
+  call unite#custom#substitute('file', '/usr'.escape($HOME, '\'), '^\~',   -2)
   " vimfiler
   call unite#custom_default_action('source/bookmark/directory', 'vimfiler')
 endfunction "}}}

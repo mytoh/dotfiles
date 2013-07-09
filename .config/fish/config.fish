@@ -43,13 +43,13 @@ set fish_pager_color_progress green
 push-to-path $HOME/local/bin
 
 # shellar
-set shellar ~/.shellar
+set -gx shellar ~/.shellar
 # plugins
-set shellar_plugins mytoh freebsd loitsu lehti nopea talikko emacs napa pikkukivi brew lol
+set -gx shellar_plugins mytoh freebsd loitsu lehti nopea talikko emacs napa pikkukivi brew lol
 # theme
-set shellar_theme default
+set -gx shellar_theme default
 # custom
-set shellar_custom ~/.shellar_custom
+set -gx shellar_custom ~/.shellar_custom
 # source oh-my-fish
 . {$shellar}/shellar/shellar.fish
 
