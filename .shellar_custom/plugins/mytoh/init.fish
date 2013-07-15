@@ -4,31 +4,31 @@
 
 ulimit -c 0
 
-push-to-path $HOME/.bin $HOME/local/bin /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/ $PATH
+push-to-path {$HOME}/.bin {$HOME}/local/bin /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/ {$PATH}
 
 set -x CURRENT_SHELL fish
 
-push-to-path $HOME/.config/fish/bin
+push-to-path {$HOME}/.config/fish/bin
 
 
 # gentoo prefix {{{
-set -x EPREFIX $HOME/local/gentoo
-push-to-path $EPREFIX/tmp/bin $EPREFIX/tmp/usr/bin $EPREFIX/bin $EPREFIX/usr/bin
+set -x EPREFIX {$HOME}/local/gentoo
+push-to-path {$EPREFIX}/tmp/bin {$EPREFIX}/tmp/usr/bin {$EPREFIX}/bin {$EPREFIX}/usr/bin
 # }}}
 
-push-to-path /usr/local/kde4/bin $HOME/local/homebrew/{sbin,bin} $HOME/local/{sbin,bin}
+push-to-path /usr/local/kde4/bin {$HOME}/local/homebrew/{sbin,bin} {$HOME}/local/{sbin,bin}
 push-to-path ~/local/app/v2c
 
 # haskell package {{{
-push-to-path $HOME/.cabal/bin
+push-to-path {$HOME}/.cabal/bin
 # }}}
 
 # disable home directory completion
 set CDPATH .
 
 set -x MANWIDTH 80
-if test -d $HOME/local/stow
-  set -x STOW $HOME/local/stow
+if test -d {$HOME}/local/stow
+  set -x STOW {$HOME}/local/stow
 end
 set -x LANG       fi_FI.UTF-8
 set -x LC_ALL     fi_FI.UTF-8
@@ -78,11 +78,11 @@ bind \cm 'kill-line'
 
 # complete {{{
 function push-to-comp-path
-set  comp-directory ~/local/git
-  for p in $argv
-    if test -d $comp-directory/$p
-      if not contains $comp-directory/$p $fish_complete_path
-        set fish_complete_path $comp-directory/$p $fish_complete_path
+set  comp_directory ~/local/git
+  for p in {$argv}
+    if test -d {$comp_directory}/{$p}
+      if not contains {$comp_directory}/{$p} {$fish_complete_path}
+        set fish_complete_path {$comp_directory}/{$p} {$fish_complete_path}
       end
     end
   end
@@ -92,7 +92,7 @@ push-to-comp-path fish-nuggets/completions fish_completions/ fishystuff/completi
 
 # h function {{{
 complete -x -c h -a "(__fish_complete_cd)"
-complete -x -c h -a "(__fish_complete_directories $HOME)"
+complete -x -c h -a "(__fish_complete_directories {$HOME})"
 complete -c h -s h -l help --description 'Display help and exit'
 # }}}
 
@@ -102,11 +102,11 @@ complete -c h -s h -l help --description 'Display help and exit'
 
 
 function cdl -d 'cd to the last path'
-  cd $last_cwd
+  cd {$last_cwd}
 end
 
 function h -d 'cd to directory under home'
-  builtin cd $HOME/$argv[1]
+  builtin cd {$HOME}/{$argv[1]}
 end
 
 function ggr
@@ -120,7 +120,7 @@ end
 
 
 function recent-file
-  command ls -c -t -1 |   head -n $argv[1] |  tail -n 1
+  command ls -c -t -1 |   head -n {$argv[1]} |  tail -n 1
 end
 
 function :w
@@ -136,12 +136,12 @@ exit
 end
 
 function em
-	emacsclient -n -a emacs $argv
+	emacsclient -n -a emacs {$argv}
 end
 
 function mps
  #play hd h.264 on slow computer
-   mplayer -vfm ffmpeg -lavdopts lowres=2:fast:skiploopfilter=all:threads=2 $argv
+   mplayer -vfm ffmpeg -lavdopts lowres=2:fast:skiploopfilter=all:threads=2 {$argv}
 end
 
 
@@ -172,7 +172,7 @@ end
 
 
 #function sudo
-#  sudo -E $argv
+#  sudo -E {$argv}
 #end
 
 function xfont
@@ -187,7 +187,7 @@ end
 
 
 function stow
-  stow --verbose=3 $argv
+  stow --verbose=3 {$argv}
 end
 
 
@@ -196,8 +196,8 @@ exit
 end
 
 function take
-	mkdir -p $argv
-	cd $argv
+	mkdir -p {$argv}
+	cd {$argv}
 end
 
 function openports
@@ -205,7 +205,7 @@ nc -z 127.0.0.1 1-10000
 end
 
 # screen {{{
-set -x SCREENDIR $HOME/.screen.d/tmp
+set -x SCREENDIR {$HOME}/.screen.d/tmp
 function sc
  screen -U -D -RR -a -A -m
 end
@@ -841,7 +841,7 @@ end
 #}}}
 
 function colour-dump  #{{{
-  set xdef $HOME/.xcolours/(grep "xcolours" $HOME/.Xresources | sed -re '/^!/d; /^$/d; s/^#include//; s/.*\/([a-z]+)\"$/\1/g;')
+  set xdef {$HOME}/.xcolours/(grep "xcolours" {$HOME}/.Xresources | sed -re '/^!/d; /^$/d; s/^#include//; s/.*\/([a-z]+)\"$/\1/g;')
   set colours (sed -re '/^!/d; /^$/d; /^#/d; s/(\*colour)([0-9]):/\10\2:/g;' $xdef | grep 'colour[01][0-9]:' | sort |sed 's/^.*: *//g' )
 
   echo "[37m

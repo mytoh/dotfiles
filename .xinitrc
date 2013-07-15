@@ -58,11 +58,10 @@ mixer pcm 15
 # urxvtcd &
 xbindkeys &
 thunar --daemon &
-spiffy &
+#spiffy &
 #parcellite &
-gosh -I~/.site ~/.site/makiki-server.scm &
-synergys --name $(hostname -s)
-mpd
+#synergys --name $(hostname -s)
+#mpd
 pulseaudio -D &
 
 if [ "$1" = "twm"  -o "$1" = "flwm" ]; then

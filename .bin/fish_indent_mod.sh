@@ -1,24 +1,38 @@
 #!/bin/sh
 
+file_is_fish() {
+    local file="${1##*/}"
+    local ext="${file##*.}"
+    test "${ext}" = "fish"
+}
+
 indent() {
-orig=$1
-fish_indent -s < $orig > $(dirname $orig)/tmp_$(basename $orig).fish
+    local orig="${1}"
+    local temp=$(dirname ${orig})/tmp_"${orig##*/}"
+    fish_indent -s < "${orig}" > "${temp}"
 }
 
 remove() {
-rm $1
+    rm "${1}"
 }
 
 move() {
-tmp=$(dirname $1)/tmp_$(basename $1).fish
-mv $tmp $1
+    local orig="${1}"
+    local temp=$(dirname ${orig})/tmp_"${orig##*/}"
+    mv "${temp}" "${orig}"
 }
 
 
 main() {
-indent $1
-remove $1
-move $1
+    local file="${1}"
+    if (file_is_fish "${file}"); then
+        indent "${file}"
+        remove "${file}"
+        move "${file}"
+    else
+        echo "${file} is not fish file!" >&2
+        exit 1
+    fi
 }
 
-main $1
+main "${1}"

@@ -5,8 +5,8 @@ user=$1
 root=/Volumes
 
 echo "mount MyPassport" 
-sudo mount_nfs -o soft $server:/Volumes/MyPassport $root/mypassport
+sudo mount_oldnfs -o soft $server:/Volumes/MyPassport $root/mypassport
 echo "mount Deskstar"
-sudo mount_nfs -o soft $server:/Volumes/Deskstar   $root/deskstar
+sudo mount_oldnfs -o soft $server:/Volumes/Deskstar   $root/deskstar
 echo "mount quatre"
-sudo mount_nfs -o soft $server:/Users/$user $root/quatre
+sudo mount_oldnfs -o soft $server:/Users/$user $root/quatre
