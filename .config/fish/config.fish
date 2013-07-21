@@ -40,7 +40,6 @@ set fish_pager_color_description yellow
 set fish_pager_color_prefix magenta
 set fish_pager_color_progress green
 
-push-to-path $HOME/local/bin
 
 # shellar
 set -gx shellar ~/.shellar
