@@ -39,6 +39,7 @@ xset +fp /usr/local/lib/X11/fonts/webfonts
 xset +fp /usr/local/lib/X11/fonts/Droid
 xset +fp /usr/local/lib/X11/fonts/Myanmar
 xset +fp /usr/local/lib/X11/fonts/URW
+xset +fp /usr/local/lib/X11/fonts/suxus
 xset +fp $HOME/.fonts
 xset fp rehash
 #xset +fp /usr/local/share/fonts/amsfonts
