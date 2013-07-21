@@ -39,8 +39,6 @@ ulimit -c 0
 register_paths {$HOME}/local
 push-to-path {$HOME}/.bin
 
-#push-to-path {$HOME}/.bin /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} /usr/games/ {$PATH}
-
 register_paths {$HOME}/.config/fish
 
 # gentoo prefix {{{
@@ -48,7 +46,8 @@ set -x EPREFIX {$HOME}/local/gentoo
 push-to-path {$EPREFIX}/tmp/bin {$EPREFIX}/tmp/usr/bin {$EPREFIX}/bin {$EPREFIX}/usr/bin
 # }}}
 
-push-to-path /usr/local/kde4/bin {$HOME}/local/homebrew/{sbin,bin} 
+register_paths {$HOME}/local/homebrew
+push-to-path /usr/local/kde4/bin
 push-to-path ~/local/app/v2c
 
 # haskell package {{{
