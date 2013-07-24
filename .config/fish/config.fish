@@ -44,7 +44,7 @@ set fish_pager_color_progress green
 # shellar
 set -gx shellar ~/.shellar
 # plugins
-set -gx shellar_plugins mytoh freebsd loitsu lehti nopea talikko emacs napa pikkukivi brew lol
+set -gx shellar_plugins mytoh freebsd loitsu lehti nopea talikko emacs napa pikkukivi brew lol radio
 # theme
 set -gx shellar_theme default
 # custom
