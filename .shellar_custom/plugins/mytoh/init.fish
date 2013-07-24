@@ -4,17 +4,17 @@
 ulimit -c 0
 
 shellar_register_paths {$HOME}/local
-shellar_push-to-path {$HOME}/.bin
+shellar_push_to_path {$HOME}/.bin
 shellar_register_paths {$HOME}/.config/fish
 
 # gentoo prefix {{{
 set -x EPREFIX {$HOME}/local/gentoo
-shellar_push-to-path {$EPREFIX}/tmp/bin {$EPREFIX}/tmp/usr/bin {$EPREFIX}/bin {$EPREFIX}/usr/bin
+shellar_push_to_path {$EPREFIX}/tmp/bin {$EPREFIX}/tmp/usr/bin {$EPREFIX}/bin {$EPREFIX}/usr/bin
 # }}}
 
 shellar_register_paths {$HOME}/local/homebrew
-shellar_push-to-path /usr/local/kde4/bin
-shellar_push-to-path ~/local/app/v2c
+shellar_push_to_path /usr/local/kde4/bin
+shellar_push_to_path ~/local/app/v2c
 
 # haskell package {{{
 shellar_register_paths {$HOME}/.cabal
