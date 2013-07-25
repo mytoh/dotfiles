@@ -1,0 +1,14 @@
+
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=application/zip;application/x-rar;
+Actions=Convert;
+# X-KDE-Submenu=Convert To
+# X-KDE-Submenu[fi]=Muunna muotoon
+
+[Desktop Action Convert]
+Exec=archive2comic.sh %f
+Icon=ark
+Name=Convert to cbz/cbr
+Name[fi]=Muunna muotoon cbz/cbr
