@@ -34,6 +34,7 @@ xset r rate 200 40
 xsetroot -cursor_name right_ptr
 xset +fp /usr/local/lib/X11/fonts/artwiz-aleczapka-en
 xset +fp /usr/local/lib/X11/fonts/artwiz-fonts
+xset +fp /usr/local/lib/X11/fonts/artwiz-ru
 xset +fp /usr/local/lib/X11/fonts/misc
 xset +fp /usr/local/lib/X11/fonts/webfonts
 xset +fp /usr/local/lib/X11/fonts/Droid

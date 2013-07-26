@@ -43,12 +43,13 @@ set -x LESS_TERMCAP_ue "[0m"
 set -x LESS_TERMCAP_us "[01;32m"
 
 # set default browser
-if type -f w3m >  /dev/null
+if shellar_command_exists w3m
   set -x BROWSER w3m
 end
 
+
 # editor
-if type -f vim >  /dev/null
+if shellar_command_exists vim
   set -x EDITOR vim
 end
 
@@ -138,7 +139,7 @@ function pd
   popd
 end
 
-if type -f dfc >  /dev/null
+if shellar_command_exists dfc
   function df
     dfc
   end
