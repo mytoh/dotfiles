@@ -150,6 +150,11 @@ else
   " NeoBundle 'HiCursorWords'
   NeoBundle 'github:tomasv/vim-scmdiff'
 
+  "" org-mode
+  NeoBundle 'github:jceb/vim-orgmode', {
+        \ 'depends': 'github:tpope/vim-speeddating'
+        \}
+
   " ref
   NeoBundle 'github:thinca/vim-ref'
   NeoBundle 'github:h1mesuke/ref-dicts-en'
