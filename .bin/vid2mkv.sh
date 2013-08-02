@@ -45,7 +45,8 @@ move() {
 }
 
 main() {
-    if test -f "${1}"; then
+    if test -f "${1}"
+    then
         convert "${1}"
     else
         log "${1} doesn't exist!"

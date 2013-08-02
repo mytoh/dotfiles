@@ -25,7 +25,9 @@ move() {
 
 main() {
     local file="${1}"
-    if (file_is_fish "${file}"); then
+    echo "${file}"
+    if (file_is_fish "${file}")
+    then
         indent "${file}"
         remove "${file}"
         move "${file}"

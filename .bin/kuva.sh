@@ -12,9 +12,11 @@ open_dir() {
 
 
 main() {
-    if test -f "${1}"; then
+    if test -f "${1}"
+    then
         open_file "${1}"
-    elif test -d "${1}"; then
+    elif test -d "${1}"
+    then
         open_dir "${1}"
     fi
 }

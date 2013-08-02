@@ -17,6 +17,9 @@ EOF
 
 first()
 {
+log "mount devices"
+mount -u /
+mount -a -t ufs
 cd /usr/src
 make -s cleandir
 make -s cleandir
