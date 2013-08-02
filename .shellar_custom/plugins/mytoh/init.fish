@@ -1,23 +1,31 @@
 
+function mytoh_read_local
+set -l current_script (status --current-filename)
+set -l current_directory (dirname {$current_script})
+set -l file {$argv[1]}
+. {$current_directory}/{$file}.fish
+end
+
+
 # environment {{{
 
 ulimit -c 0
 
-shellar_register_paths {$HOME}/local
-shellar_push_to_path {$HOME}/.bin
-shellar_register_paths {$HOME}/.config/fish
+shellar.register_paths {$HOME}/local
+shellar.push_to_path {$HOME}/.bin
+shellar.register_paths {$HOME}/.config/fish
 
 # gentoo prefix {{{
 set -x EPREFIX {$HOME}/local/gentoo
-shellar_push_to_path {$EPREFIX}/tmp/bin {$EPREFIX}/tmp/usr/bin {$EPREFIX}/bin {$EPREFIX}/usr/bin
+shellar.push_to_path {$EPREFIX}/tmp/bin {$EPREFIX}/tmp/usr/bin {$EPREFIX}/bin {$EPREFIX}/usr/bin
 # }}}
 
-shellar_register_paths {$HOME}/local/homebrew
-shellar_push_to_path /usr/local/kde4/bin
-shellar_push_to_path ~/local/app/v2c
+shellar.register_paths {$HOME}/local/homebrew
+shellar.push_to_path /usr/local/kde4/bin
+shellar.push_to_path ~/local/app/v2c
 
 # haskell package {{{
-shellar_register_paths {$HOME}/.cabal
+shellar.register_paths {$HOME}/.cabal
 # }}}
 
 # disable home directory completion
@@ -43,13 +51,13 @@ set -x LESS_TERMCAP_ue "[0m"
 set -x LESS_TERMCAP_us "[01;32m"
 
 # set default browser
-if shellar_command_exists w3m
+if shellar.command_exists w3m
   set -x BROWSER w3m
 end
 
 
 # editor
-if shellar_command_exists vim
+if shellar.command_exists vim
   set -x EDITOR vim
 end
 
@@ -68,7 +76,6 @@ set -x IGNOREEOF 1
 # keybindings {{{
 #bind --erase \cd
 bind \cd 'delete-char'
-bind \cm 'kill-line'
 
 #}}}
 
@@ -93,26 +100,12 @@ complete -c h -s h -l help --description 'Display help and exit'
 
 #}}}
 
-function cdl -d 'cd to the last path'
-  cd {$last_cwd}
-end
 
 function h -d 'cd to directory under home'
   builtin cd {$HOME}/{$argv[1]}
 end
 
-function ggr
-  # Search Google
-  w3m "http://www.google.co.jp/search?&num=100&q=$argv"
-end
 
-function 4ch
-  w3m "http://boards.4chan.org/$argv[1]/"
-end
-
-function recent-file
-  command ls -c -t -1  | head -n {$argv[1]}  | tail -n 1
-end
 
 function :w
   echo sorry, but this isnt vim
@@ -126,31 +119,8 @@ function :q
   exit
 end
 
-function em
-  emacsclient -n -a emacs {$argv}
-end
-
-function mps
-  #play hd h.264 on slow computer
-  mplayer -vfm ffmpeg -lavdopts lowres=2:fast:skiploopfilter=all:threads=2 {$argv}
-end
-
 function pd
   popd
-end
-
-if shellar_command_exists dfc
-  function df
-    dfc
-  end
-else
-  function df
-    command df -h
-  end
-end
-
-function single
-  sudo shutdown now
 end
 
 function halt
@@ -181,37 +151,12 @@ function q
   exit
 end
 
-function take
-  mkdir -p {$argv}
-  cd {$argv}
-end
-
-function openports
-  nc -z 127.0.0.1 1-10000
-end
 
 # screen {{{
 set -x SCREENDIR {$HOME}/.screen.d/tmp
 function sc
   screen -U -D -RR -a -A -m
 end
-#}}}
-
-#net {{{
-function starwars
-  telnet towel.blinkenlights.nl
-end
-function jblive
-  mplayer rtsp://videocdn-us.geocdn.scaleengine.net/jblive/jblive.stream
-end
-
-
-# command line fu
-# torrent search
-function tpb
-  wget -U Mozilla -qO - (echo "http://thepiratebay.org/search/$argv/0/7/0" | sed 's/ /\%20/g')  | grep -o 'http\:\/\/torrents\.thepiratebay\.se\/.*\.torrent'  # | tac
-end
-
 #}}}
 
 # color functions {{{

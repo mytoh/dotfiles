@@ -1,7 +1,7 @@
 function reboot
-  sync
-  sync
-  sync
+  sudo sync
+  sudo sync
+  sudo sync
   sudo shutdown -r now
 end
 
