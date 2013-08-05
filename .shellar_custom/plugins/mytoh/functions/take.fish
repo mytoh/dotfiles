@@ -1,5 +1,5 @@
-function take
-  mkdir -p {$argv}
-  cd {$argv}
+function take --argument dir
+  mkdir -p {$dir}
+  cd {$dir}
 end
 

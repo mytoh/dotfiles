@@ -15,6 +15,7 @@ main() {
     local day="${2}"
     local url="rtsp:qt.web-radio.biz:1935/lantisnet/mp4:minori_${number}_${day}_h.mp4"
     local file="minori_${number}_${day}_h.mp4"
+
     save ${url} ${file}
 }
 
