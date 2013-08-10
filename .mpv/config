@@ -1,7 +1,8 @@
 # Write your default config options here!
 
 ## audio
-alang = jpn,ja
+alang=Japanese,jpn,ja
+slang=English,eng,en
 ## subs
 no-sub
 
