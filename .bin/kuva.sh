@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -o nounset
+
 open_file() {
     local dir=$(dirname "${1}")
     feh -Z -F -B black "${dir}"

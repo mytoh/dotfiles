@@ -1,12 +1,4 @@
 
-function mytoh_read_local
-set -l current_script (status --current-filename)
-set -l current_directory (dirname {$current_script})
-set -l file {$argv[1]}
-. {$current_directory}/{$file}.fish
-end
-
-
 # environment {{{
 
 ulimit -c 0
@@ -16,7 +8,7 @@ shellar.push_to_path {$HOME}/.bin
 shellar.register_paths {$HOME}/.config/fish
 
 # gentoo prefix {{{
-set -x EPREFIX {$HOME}/local/gentoo
+shellar.add_variable EPREFIX {$HOME}/local/gentoo
 shellar.push_to_path {$EPREFIX}/tmp/bin {$EPREFIX}/tmp/usr/bin {$EPREFIX}/bin {$EPREFIX}/usr/bin
 # }}}
 
@@ -278,6 +270,7 @@ $f1▐███              $f2▐███             $f3▐███        
 $f1 ▀▀▀              $f2 ▀▀▀             $f3 ▀▀▀             $f4 ▀▀▀             $f5 ▀▀▀             $f6 ▀▀▀
 $rst
 "
-end#}}}
+end
+#}}}
 
 # }}}

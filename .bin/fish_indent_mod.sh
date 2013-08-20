@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -o nounset
+
 file_is_fish() {
     local file="${1##*/}"
     local ext="${file##*.}"

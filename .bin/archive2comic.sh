@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -o nounset
+
 message() {
     local str="${1}"
 
