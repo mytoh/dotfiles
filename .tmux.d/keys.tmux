@@ -5,6 +5,7 @@ unbind C-b
 set -g prefix C-z
 unbind C-z
 unbind z
+bind C-z last-pane
 #bind C-z send-prefix
 
 # screen ^C c

@@ -10,6 +10,8 @@ set -gx shellar_plugins mytoh freebsd loitsu lehti nopea talikko emacs napa pikk
 set -gx shellar_theme default
 # custom
 set -gx shellar_custom ~/.shellar_custom
+# debug
+# set -gx shellar_debug 
 # source shellar
 source {$shellar}/shellar/shellar.fish
 
