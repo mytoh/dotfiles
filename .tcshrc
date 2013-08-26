@@ -1,23 +1,27 @@
 
-set shellar=$HOME/.shellar
-set shellar_custom=$HOME/.shellar_custom
+setenv shellar ${HOME}/.shellar
+setenv shellar_custom ${HOME}/.shellar_custom
 
-if ( "$OSTYPE" == "FreeBSD" ) then
-set shellar_plugins=(mytoh emacs loitsu lehti fasd nopea napa \
-               vim lista nyan ypsilon mosh talikko pikkukivi brew npm freebsd firefox)
-set shellar_theme='default'
-else
-set shellar_plugins=(mytoh brew emacs gauche loitsu lehti fasd nopea napa \
-               vim lista nyan ypsilon mosh talikko npm pikkukivi \
-               firefox)
-set shellar_theme='default'
-endif
+setenv shellar_theme 'default'
 
-source $shellar/shellar/shellar.tcsh
+set shellar_plugins=( mytoh emacs loitsu lehti fasd nopea napa \
+    vim lista nyan ypsilon mosh talikko pikkukivi brew npm freebsd firefox )
 
-foreach f ($HOME/.complete.tcsh $HOME/perl5/perlbrew/etc/cshrc)
-  if (-f $f) then
-    source $f
-  endif
-end
+setenv shellar_plugins "${shellar_plugins}"
 
+# if ( "$OSTYPE" == "FreeBSD" ) then
+#     setenv shellar_plugins (mytoh emacs loitsu lehti fasd nopea napa \
+#         vim lista nyan ypsilon mosh talikko pikkukivi brew npm freebsd firefox)
+# else
+#     setenv shellar_plugins (mytoh brew emacs gauche loitsu lehti fasd nopea napa \
+#         vim lista nyan ypsilon mosh talikko npm pikkukivi \
+#         firefox)
+#     endif
+
+#     source ${shellar}/shellar/shellar.tcsh
+
+#     foreach f (${HOME}/.complete.tcsh ${HOME}/perl5/perlbrew/etc/cshrc)
+#     if (-f ${f}) then
+#         source ${f}
+#         endif
+#         end

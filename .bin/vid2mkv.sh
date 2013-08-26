@@ -48,9 +48,15 @@ main() {
     if test -f "${1}"
     then
         convert "${1}"
+        notify "conversion of ${1} finished"
     else
         log "${1} doesn't exist!"
     fi
+}
+
+notify() {
+    local desc="${1}"
+    notify-send -a test -t 6000 -i /usr/local/share/icons/elementary/devices/128/media-optical.svg desc
 }
 
 main "${1}"

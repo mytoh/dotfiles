@@ -2,6 +2,9 @@ editors/emacs
 textproc/the_silver_searcher
 www/midori
 ftp/wget
+multimedia/mpv
+multimedia/mkvtoolnix
 multimedia/mimms
 audio/gmusicbrowser
-multimedia/mpv
+x11-themes/gtk3-unico-engine
+net-p2p/gnunet

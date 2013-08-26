@@ -1,7 +1,6 @@
 
 set fish_greeting "🐟"
 
-
 # shellar
 set -gx shellar ~/.shellar
 # plugins
@@ -11,9 +10,11 @@ set -gx shellar_theme default
 # custom
 set -gx shellar_custom ~/.shellar_custom
 # debug
-# set -gx shellar_debug 
+# set -gx shellar_debug
 # source shellar
 source {$shellar}/shellar/shellar.fish
+
+shellar.init
 
 # memo
 # redirect
