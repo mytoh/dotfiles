@@ -4,11 +4,11 @@ set -o nounset
 
 log()
 {
-local message=$1
-local m_colour="[38;5;39m"
-local s_colour="[38;5;169m"
-local reset="[0m"
-cat <<EOF
+    local message=$1
+    local m_colour="[38;5;39m"
+    local s_colour="[38;5;169m"
+    local reset="[0m"
+    cat <<EOF
 -------------------------------------------
 $s_colour>>$reset $m_colour $message $reset $s_colour<<$reset
 -------------------------------------------
@@ -18,58 +18,58 @@ EOF
 
 first()
 {
-log "mount devices"
-mount -u /
-mount -a -t ufs
-cd /usr/src
-make -s cleandir
-make -s cleandir
-chflags -R noschg /usr/obj
-rm -rf /usr/obj/*
-log "building world"
-make -s -j 4 buildworld && \
-log "building kernel" && \
-make -s -j 4 buildkernel && \
-log "installing kernel" && \
-make -s installkernel  && \
-log "please reboot"
+    log "mount devices"
+    mount -u /
+    mount -a -t ufs
+    chdir /usr/src
+    make -s cleandir
+    make -s cleandir
+    chflags -R noschg /usr/obj
+    rm -rf /usr/obj/*
+    log "building world"
+    make -s -j 4 buildworld && \
+        log "building kernel" && \
+        make -s -j 4 buildkernel && \
+        log "installing kernel" && \
+        make -s installkernel  && \
+        log "please reboot"
 }
 
-second() 
+second()
 {
-log "mounting disks"
-mount -u /
-mount -a -t ufs
+    log "mounting disks"
+    mount -u /
+    mount -a -t ufs
 
-log "mergemaster -p"
-mergemaster -p
-cd /usr/src
+    log "mergemaster -p"
+    mergemaster -p
+    chdir /usr/src
 
-log "make installworld"
-make -s installworld
-make -DBATCH_DELETE_OLD_FILES delete-old
+    log "make installworld"
+    make -s installworld
+    make -DBATCH_DELETE_OLD_FILES delete-old
 
-log "mergemaster"
-mergemaster
+    log "mergemaster"
+    mergemaster
 
-log "please reboot"
+    log "please reboot"
 }
 
 third()
 {
-log "mounting disks"
-mount -u /
-mount -a -t ufs
-cd /usr/src
+    log "mounting disks"
+    mount -u /
+    mount -a -t ufs
+    chdir /usr/src
 
-log "delete old libs"
-yes y | make delete-old-libs
+    log "delete old libs"
+    yes y | make delete-old-libs
 }
 
 if [ $1 == "first" ]; then
-first
+    first
 elif [ $1 == "second" ]; then
-second
+    second
 elif [ $1 == "third" ]; then
-third
+    third
 fi

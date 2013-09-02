@@ -1,5 +1,5 @@
 
-set fish_greeting "🐟"
+set fish_greeting "><>"
 
 # shellar
 set -gx shellar ~/.shellar
@@ -24,4 +24,4 @@ shellar.init
 
 # vim: foldmethod=marker
 # 🐟  \U1f41f
-
+# ➤   \U27A4
