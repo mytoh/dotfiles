@@ -21,7 +21,7 @@ convert() {
 remove_space() {
     local num="${1}"
     local org="SS${num}.org"
-    local sedf="SS${num}.org.sed"
+    local sedf="SS${num}.org.seded"
 
     gsed -E 's/\s+$//g'  ${org} > ${sedf}
 
@@ -35,12 +35,12 @@ main() {
     do
         echo ${num}
         remove_space ${num}
-        # if test ! -e SS${num}.html
-        # then
-        #     get_html ${num}
-        #     remove_space ${num}
-        #     convert ${num}
-        # fi
+        if test ! -e SS${num}.html
+        then
+            get_html ${num}
+            convert ${num}
+            remove_space ${num}
+        fi
     done
 }
 
