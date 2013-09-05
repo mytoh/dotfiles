@@ -10,11 +10,13 @@
   (let ((main (current-group))
         (web (gnewbg "web"))
         (dev (gnewbg "dev"))
-        (media (gnewbg "media")))
+        (media (gnewbg "media"))
+        (file (gnewbg "file")))
     (defparameter *main-group* main)
     (defparameter *web-group*  web)
     (defparameter *dev-group*  dev)
     (defparameter *media-group* media)
+    (defparameter *file-group* file)
 
     ;; window placement rules
     (clear-window-placement-rules) ; clear rules
@@ -38,9 +40,13 @@
       (0 t t :class "Audacious")
       (0 t t :class "MPlayer")
       (0 t t :class "feh")
-      (0 t t :class "jd-Main")
+      (0 t t :class "jd-Main"))
+
+    (define-frame-preference "file"
       (0 t t :class "Pcmanfm")
       (0 t t :class "Thunar")
-      (0 t t :class "Dolphin"))))
+      (0 t t :class "Dolphin")
+      (0 t t :class "Rodent"))
+    ))
 
 (my-setup-groups)

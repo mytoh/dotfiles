@@ -62,6 +62,7 @@
  ("s-2" "gselect web")
  ("s-3" "gselect dev")
  ("s-4" "gselect media")
+ ("s-5" "gselect file")
  ("s-C-1" "gmove 1")
  ("s-C-2" "gmove 2")
  ("s-C-3" "gmove 3")

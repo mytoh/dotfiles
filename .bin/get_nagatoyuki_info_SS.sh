@@ -33,8 +33,6 @@ main() {
 
     for num in `seq 1 1200`;
     do
-        echo ${num}
-        remove_space ${num}
         if test ! -e SS${num}.html
         then
             get_html ${num}

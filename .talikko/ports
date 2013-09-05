@@ -1,5 +1,6 @@
 editors/emacs
 textproc/the_silver_searcher
+textproc/fi-aspell
 textproc/hs-pandoc
 www/midori
 ftp/wget
@@ -29,3 +30,16 @@ sysutils/agedu
 devel/git
 net/tcptraceroute
 japanese/nkf
+x11-fonts/gbdfed
+games/gnomekiss
+graphics/xpx
+deskutils/clipit
+graphics/gliv
+graphics/gcolor2
+sysutils/gdmap
+x11-themes/lxappearance
+graphics/pinta
+x11-fm/rodent
+security/py-fail2ban
+japanese/ibus-skk
+security/py-fail2ban
