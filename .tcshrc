@@ -1,4 +1,6 @@
 
+setenv PATH ${HOME}/local/bin:${PATH}
+
 setenv shellar ${HOME}/.shellar
 setenv shellar_custom ${HOME}/.shellar_custom
 
@@ -18,7 +20,7 @@ setenv shellar_plugins "${shellar_plugins}"
 #         firefox)
 #     endif
 
-#     source ${shellar}/shellar/shellar.tcsh
+    source ${shellar}/shellar/shellar.tcsh
 
 #     foreach f (${HOME}/.complete.tcsh ${HOME}/perl5/perlbrew/etc/cshrc)
 #     if (-f ${f}) then

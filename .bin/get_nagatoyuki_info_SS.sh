@@ -31,7 +31,7 @@ remove_space() {
 
 main() {
 
-    for num in `seq 1 1200`;
+    for num in $(seq 1 1200)
     do
         if test ! -e SS${num}.html
         then
