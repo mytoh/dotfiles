@@ -1,5 +1,4 @@
 
-
 ## shellar
 export shellar="${HOME}/.shellar"
 ## theme
@@ -8,9 +7,7 @@ export shellar_theme='default'
 export shellar_plugins="mytoh freebsd"
 ## custom
 export shellar_custom="$HOME/.shellar_custom"
+
 source ${shellar}/shellar/shellar.mksh
-
-
-unset p
-
+shellar.init
 # vim:foldmethod=marker

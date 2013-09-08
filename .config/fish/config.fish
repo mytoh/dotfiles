@@ -1,6 +1,5 @@
 
 set fish_greeting "><>"
-echo fuuuuuuuuuuuuuuuuuuuuuck
 
 ## shellar
 set -gx shellar ~/.shellar

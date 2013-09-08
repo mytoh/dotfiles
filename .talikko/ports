@@ -64,4 +64,13 @@ japanese/font-std
 japanese/font-takao
 japanese/font-ume
 japanese/font-vlgothic
+japanese/monafonts
+japanese/monafonts-ttf
 x11-themes/gnome-icons-elementary
+/usr/ports/sysutils/slack
+www/aria2
+www/linux-f10-flashplugin11
+www/nspluginwrapper
+x11-fonts/roboto-fonts-ttf
+security/ca_root_nss
+graphics/gnash
