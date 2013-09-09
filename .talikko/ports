@@ -74,3 +74,5 @@ www/nspluginwrapper
 x11-fonts/roboto-fonts-ttf
 security/ca_root_nss
 graphics/gnash
+devel/rlwrap
+net-mgmt/bwm-ng
