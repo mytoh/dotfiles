@@ -4,7 +4,7 @@ export shellar="${HOME}/.shellar"
 ## theme
 export shellar_theme='default'
 ## plugins
-export shellar_plugins="mytoh freebsd"
+export shellar_plugins="mytoh loitsu lehti pikkukivi nopea freebsd "
 ## custom
 export shellar_custom="$HOME/.shellar_custom"
 

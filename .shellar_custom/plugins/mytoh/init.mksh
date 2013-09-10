@@ -1,12 +1,12 @@
 
-# options {{{
-set -o utf8-mode
-set -o ignoreeof
-set -o physical
-set -o trackall
-#}}}
+    # options {{{
+    set -o utf8-mode
+    set -o ignoreeof
+    set -o physical
+    set -o trackall
+    #}}}
 
-xsource() { # {{{
+    xsource() { # {{{
   # from grml zshrc
   # Check if we can read given files and source those we can.
   if (( $# < 1 )) ; then
@@ -19,18 +19,13 @@ xsource() { # {{{
     shift
   done
   return 0
-} #}}}
+    } #}}}
 
 
 
 
-# variables
-blue="[38;5;004m"
-normal_color="[38;5;8m"
-green="[38;5;6m"
-reset_color="[0m"
-
-# key bindings
-bind '^P'=search-history-up
-bind '^U'=kill-line
-
+    # variables
+    blue="[38;5;004m"
+    normal_color="[38;5;8m"
+    green="[38;5;6m"
+    reset_color="[0m"
