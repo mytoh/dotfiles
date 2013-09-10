@@ -76,3 +76,6 @@ security/ca_root_nss
 graphics/gnash
 devel/rlwrap
 net-mgmt/bwm-ng
+devel/doxygen
+sysutils/bsdinfo
+www/mitmproxy
