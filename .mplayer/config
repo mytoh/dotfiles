@@ -3,10 +3,10 @@
 [default]
 #vo=x11
 ao=oss
-fstype=fullscreen
+#fstype=fullscreen
 #cache=8192
 #cache-min = 6
-autosync=100
+#autosync=100
 #speed=0.80
 #af = scaletempo
 softvol=yes
