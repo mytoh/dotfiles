@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-server=192.168.1.11
+server=lammas
 user=$1
 root=/Volumes
 
@@ -8,5 +8,5 @@ echo "mount MyPassport"
 sudo mount_nfs -o soft $server:/Volumes/MyPassport $root/mypassport
 echo "mount Deskstar"
 sudo mount_nfs -o soft $server:/Volumes/Deskstar   $root/deskstar
-echo "mount quatre"
-sudo mount_nfs -o soft $server:/Users/$user $root/quatre
+echo "mount lammas"
+sudo mount_nfs -o soft $server:/Users/$user $root/lammas

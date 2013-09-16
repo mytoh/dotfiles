@@ -4,7 +4,7 @@ set -o nounset
 
 log()
 {
-    local message=$1
+    local message=${1}
     local m_colour="[38;5;39m"
     local s_colour="[38;5;169m"
     local reset="[0m"
