@@ -54,6 +54,8 @@ add_font_paths() {
     xset +fp /usr/local/lib/X11/fonts/jisx0213
     xset +fp /usr/local/lib/X11/fonts/jmk
     xset +fp /usr/local/lib/X11/fonts/local
+    xset +fp /usr/local/lib/X11/fonts/SourceCodePro
+xset +fp /usr/local/lib/X11/fonts/anonymous-pro
 
     xset +fp $HOME/.fonts
     xset fp rehash
@@ -85,22 +87,27 @@ fi
 
 
 
-DEFAULT_SESSION="dwm"
-if [ -n $1 ]; then
-    export USERWM=$1
-    case $1 in
-        xfce)         exec dbus-launch ck-launch-session startxfce4 ;;
-        fluxbox)      exec dbus-launch startfluxbox ;;
-        fvwm|fvwm2)   exec dbus-launch fvwm2 ;;
-        fvwm-themes*) exec dbus-launch fvwm-themes-start -s sa ;;
-        dwm)          exec dbus-launch $HOME/.dwm/startdwm ;;
-        kde)          exec dbus-launch startkde4 ;;
-        gnome)        exec dbus-launch gnome-session ;;
-        mate)         exec dbus-launch ck-launch-session mate-session ;;
-        rox)          exec dbus-launch rox -S ;;
-        lainwm)       exec dbus-launch lainwm ;;
-        *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
-    esac
-else
-    exec $DEFAULT_SESSION
-fi
+start_wm() {
+    local wm="${1}"
+    local DEFAULT_SESSION="dwm"
+    if [ -n ${wm} ]; then
+        export USERWM=${wm}
+        case ${USERWM} in
+            xfce)         exec dbus-launch ck-launch-session startxfce4 ;;
+            fluxbox)      exec dbus-launch startfluxbox ;;
+            fvwm|fvwm2)   exec dbus-launch fvwm2 ;;
+            fvwm-themes*) exec dbus-launch fvwm-themes-start -s sa ;;
+            dwm)          exec dbus-launch $HOME/.dwm/startdwm ;;
+            kde)          exec dbus-launch startkde4 ;;
+            gnome)        exec dbus-launch gnome-session ;;
+            mate)         exec dbus-launch ck-launch-session mate-session ;;
+            rox)          exec dbus-launch rox -S ;;
+            lainwm)       exec dbus-launch lainwm ;;
+            *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
+        esac
+    else
+        exec $DEFAULT_SESSION
+    fi
+}
+
+start_wm ${1}

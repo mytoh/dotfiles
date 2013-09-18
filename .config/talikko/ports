@@ -108,10 +108,6 @@ graphics/feh
 editors/vim
 www/firefox
 www/chromium
-x11-clocks/xfce4-datetime-plugin
-x11-clocks/xfce4-timer-out-plugin
-x11-clocks/xfce4-timer-plugin
-sysutils/xfce4-wavelan-plugin
 sysutils/xfce4-battery-plugin
 sysutils/xfce4-systemload-plugin
 sysutils/xfce4-netload-plugin
@@ -123,8 +119,6 @@ sysutils/xfce4-mount-plugin
 sysutils/xfce4-minicmd-plugin
 textproc/xfce4-dict-plugin
 science/xfce4-equake-plugin
-net-im/xfce4-messenger-plugin
-multimedia/xfce4-xmms-plugin
 misc/xfce4-weather-plugin
 audio/xfce4-mpc-plugin
 deskutils/xfce4-xkb-plugin
@@ -137,5 +131,8 @@ x11/xfce4-verve-plugin
 x11/xfce4-embed-plugin
 x11/xfce4-screenshooter-plugin
 x11/xfce4-whiskermenu-plugin
-mail/xfce4-mailwatch-plugin
 www/xfce4-smartbookmark-plugin
+x11-fonts/droid-fonts-ttf
+archivers/unrar
+x11-fonts/sourcecodepro-ttf
+x11-fonts/anonymous-pro
