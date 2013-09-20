@@ -1,4 +1,4 @@
-editors/emacs
+editors/emacs-devel
 textproc/the_silver_searcher
 textproc/fi-aspell
 textproc/hs-pandoc
@@ -136,3 +136,4 @@ x11-fonts/droid-fonts-ttf
 archivers/unrar
 x11-fonts/sourcecodepro-ttf
 x11-fonts/anonymous-pro
+dns/unbound
