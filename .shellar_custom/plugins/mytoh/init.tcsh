@@ -87,6 +87,7 @@ alias single 'sudo shutdown now'
 alias halt 'sync;sync;sync;sudo shutdown -p now'
 alias reboot 'sync;sync;sync;sudo shutdown -r now'
 alias sudo 'sudo -E '
+alias take 'mkdir -p \!:1; chdir \!:1'
 
 
 ## bindkeys

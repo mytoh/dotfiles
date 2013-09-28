@@ -1,6 +1,6 @@
 
 ## shellar
-export shellar="${HOME}/.shellar"
+export shellar="${HOME}/.config/shellar"
 ## theme
 export shellar_theme='default'
 ## plugins

@@ -1,3 +1,3 @@
 #!/bin/sh
 
-mono --llvm --server ~/local/ohjelmat/peercaststation/PeerCastStation.exe
+mono --server ~/local/ohjelmat/peercaststation/PeerCastStation.exe

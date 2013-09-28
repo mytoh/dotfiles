@@ -1,23 +1,28 @@
 #!/bin/sh
 
 # ibus {{{
-export XIM=ibus
-export GTK_IM_MODULE=ibus
-export QT_IM_MODULE=xim
-export XMODIFIERS=@im=ibus
-export XIM_PROGRAM="ibus-daemon"
-export XIM_ARGS=" --daemonize --xim"
-ibus-daemon -d
-sleep 1
+setup_ibus() {
+    export XIM=ibus
+    export GTK_IM_MODULE=ibus
+    export QT_IM_MODULE=xim
+    export XMODIFIERS=@im=ibus
+    export XIM_PROGRAM="ibus-daemon"
+    export XIM_ARGS=" --daemonize --xim"
+    ibus-daemon -d
+    sleep 1
+}
+setup_ibus
 # }}}
 
 # uim {{{
-#export GTK_IM_MODULE='uim'
-#export QT_IM_MODULE='uim'
-#export XMODIFIERS=@im='uim'
-# export UIM_CANDWIN_PROG=uim-candwin-gtk
-#uim-xim &
-#uim-toolbar-gtk-systray &
+setup_uim() {
+    export GTK_IM_MODULE='uim'
+    export QT_IM_MODULE='uim'
+    export XMODIFIERS=@im='uim'
+    export UIM_CANDWIN_PROG=uim-candwin-gtk
+    uim-xim &
+    uim-toolbar-gtk-systray &
+}
 #}}}
 
 # kde
@@ -55,23 +60,29 @@ add_font_paths() {
     xset +fp /usr/local/lib/X11/fonts/jmk
     xset +fp /usr/local/lib/X11/fonts/local
     xset +fp /usr/local/lib/X11/fonts/SourceCodePro
-xset +fp /usr/local/lib/X11/fonts/anonymous-pro
+    xset +fp /usr/local/lib/X11/fonts/anonymous-pro
+    xset +fp /usr/local/lib/X11/fonts/GentiumPlus
+    xset +fp /usr/local/lib/X11/fonts/terminus-font
 
     xset +fp $HOME/.fonts
     xset fp rehash
 }
 add_font_paths
-# audio volume
-mixer vol 10
-mixer pcm 15
-# urxvtcd &
-xbindkeys &
-thunar --daemon &
-#spiffy &
-#parcellite &
-#synergys --name $(hostname -s)
-#mpd
-pulseaudio -D &
+
+start_apps() {
+    # audio volume
+    mixer vol 10
+    mixer pcm 15
+    # urxvtcd &
+    xbindkeys &
+    thunar --daemon &
+    #spiffy &
+    #parcellite &
+    #synergys --name $(hostname -s)
+    #mpd
+    pulseaudio -D &
+}
+start_apps
 
 if [ "$1" = "twm"  -o "$1" = "flwm" ]; then
     $HOME/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 13 -bg gray15 -fn '-*-terminus-medium-r-normal--12-*' -e 'onexit=ungrabmouse' &
@@ -84,8 +95,6 @@ if [ "$1" = "twm"  -o "$1" = "flwm" ]; then
     fi
     tint2 &
 fi
-
-
 
 start_wm() {
     local wm="${1}"
@@ -103,6 +112,7 @@ start_wm() {
             mate)         exec dbus-launch ck-launch-session mate-session ;;
             rox)          exec dbus-launch rox -S ;;
             lainwm)       exec dbus-launch lainwm ;;
+            openbox)  exec openbox-session ;;
             *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
         esac
     else

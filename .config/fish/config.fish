@@ -2,7 +2,7 @@
 set fish_greeting "><>"
 
 ## shellar
-set -gx shellar ~/.shellar
+set -gx shellar ~/.config/shellar
 ## plugins
 set -gx shellar_plugins mytoh freebsd loitsu lehti nopea talikko emacs napa pikkukivi brew lol radio mosh
 ## theme
