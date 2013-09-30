@@ -1,29 +1,30 @@
 
-    setenv PATH ${HOME}/local/bin:${PATH}
+ setenv PATH ${HOME}/local/bin:${PATH}
 
-    setenv shellar ${HOME}/.config/shellar
-    setenv shellar_custom ${HOME}/.shellar_custom
+ setenv shellar ${HOME}/.config/shellar
+ setenv shellar_custom ${HOME}/.shellar_custom
 
-    setenv shellar_theme 'default'
+ setenv shellar_theme 'default'
 
-    set shellar_plugins=( mytoh emacs loitsu lehti fasd nopea napa \
-    cask vim nyan ypsilon mosh talikko pikkukivi brew npm freebsd firefox )
+ set shellar_plugins=( mytoh emacs loitsu lehti fasd nopea napa \
+ radio cask vim nyan ypsilon mosh talikko \
+ pikkukivi brew npm freebsd firefox )
 
-    setenv shellar_plugins "${shellar_plugins}"
+ setenv shellar_plugins "${shellar_plugins}"
 
-    # if ( "$OSTYPE" == "FreeBSD" ) then
-    #     setenv shellar_plugins (mytoh emacs loitsu lehti fasd nopea napa \
-    #         vim lista nyan ypsilon mosh talikko pikkukivi brew npm freebsd firefox)
-    # else
-    #     setenv shellar_plugins (mytoh brew emacs gauche loitsu lehti fasd nopea napa \
-    #         vim lista nyan ypsilon mosh talikko npm pikkukivi \
-    #         firefox)
-    #     endif
+ # if ( "$OSTYPE" == "FreeBSD" ) then
+ #     setenv shellar_plugins (mytoh emacs loitsu lehti fasd nopea napa \
+ #         vim lista nyan ypsilon mosh talikko pikkukivi brew npm freebsd firefox)
+ # else
+ #     setenv shellar_plugins (mytoh brew emacs gauche loitsu lehti fasd nopea napa \
+ #         vim lista nyan ypsilon mosh talikko npm pikkukivi \
+ #         firefox)
+ #     endif
 
-    source ${shellar}/shellar/shellar.tcsh
+ source ${shellar}/shellar/shellar.tcsh
 
-    #     foreach f (${HOME}/.complete.tcsh ${HOME}/perl5/perlbrew/etc/cshrc)
-    #     if (-f ${f}) then
-    #         source ${f}
-    #         endif
-    #         end
+ #     foreach f (${HOME}/.complete.tcsh ${HOME}/perl5/perlbrew/etc/cshrc)
+ #     if (-f ${f}) then
+ #         source ${f}
+ #         endif
+ #         end

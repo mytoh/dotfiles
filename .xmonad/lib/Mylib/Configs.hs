@@ -12,7 +12,7 @@ module Mylib.Configs where
   myModMask        = mod4Mask
  
   myIconsDirectory :: String
-  myIconsDirectory = "/home/mytoh/.dzen/icons/"
+  myIconsDirectory = "/home/mytoh/.xmonad/icons/"
 
   myFocusFollowsMouse :: Bool
   myFocusFollowsMouse = False

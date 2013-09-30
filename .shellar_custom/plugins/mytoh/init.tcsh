@@ -27,7 +27,8 @@ set nobeep
 set history=100000
 set savehist=(100000 merge)
 set autolist=ambiguous
-set autocorrect
+unset autocorrect
+set addsuffix
 set ignoreeof
 set filec
 set histdup=erase

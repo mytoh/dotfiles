@@ -1,7 +1,7 @@
 ;; -*- mode: common-lisp -*-
 ;; vim:filetype=lisp
 
-;; settings taken from "http://aperturefever.wordpress.com/2010/05/10/updating-stumpwm-conf/"
+;; settings taken from [[http://aperturefever.wordpress.com/2010/05/10/updating-stumpwm-conf/]]
 
 (in-package #:stumpwm)
 
@@ -9,7 +9,6 @@
 ;;(load-module "notifications")
 
 (defparameter terminal "mlterm")
-
 
 (defparameter my-configs
   '("keymaps"

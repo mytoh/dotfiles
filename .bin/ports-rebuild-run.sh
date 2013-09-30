@@ -4,7 +4,7 @@ set -o nounset
 
 rebuild() {
 	local dir="/usr/ports/${1}"
-        local depends=$(make -C "${dir}" run-depends-list)
+        local depends="$(make -C ${dir} run-depends-list)"
         for p in ${depends}
 	do
 	sudo make -C ${p} clean reinstall clean

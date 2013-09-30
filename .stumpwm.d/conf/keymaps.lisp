@@ -15,6 +15,7 @@
       (defprogram-shortcut dmenu    :command "exec dmenu_run -i -b -nb 'grey14' -nf 'orange' -sb 'grey10' -sf '#4d3e41' "
         :key (kbd "d") :map map)
       (defprogram-shortcut emacs :command "emacs" :key (kbd "e") :map map)
+      (defprogram-shortcut v2c :command "v2c" :key (kbd "v") :map map)
       map))
   (bind "e" '*shortcut-map*))
 

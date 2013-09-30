@@ -4,7 +4,7 @@
 
 rebuild_all() {
     local dir="/usr/ports/${1}"
-    local depends=$(make -C "${dir}" build-depends-list)
+    local depends="$(make -C ${dir} build-depends-list)"
     for p in ${depends}
     do
         sudo make -C ${p} reinstall clean
