@@ -63,6 +63,8 @@ add_font_paths() {
     xset +fp /usr/local/lib/X11/fonts/anonymous-pro
     xset +fp /usr/local/lib/X11/fonts/GentiumPlus
     xset +fp /usr/local/lib/X11/fonts/terminus-font
+    xset +fp /usr/local/lib/X11/fonts/SourceCodePro
+    xset +fp /usr/local/lib/X11/fonts/Roboto
 
     xset +fp $HOME/.fonts
     xset fp rehash

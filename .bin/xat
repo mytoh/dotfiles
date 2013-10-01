@@ -1,0 +1,104 @@
+#!/bin/sh
+
+DEFAULT_NAMESPACE="user"
+
+get_attr() {
+    local name="${1}"
+    local file="${2}"
+    local value="$(getextattr -q ${DEFAULT_NAMESPACE} ${name} ${file})"
+
+    if test -n "${value}"
+    then
+        printf "%s -> %s\n" ${name} ${value}
+    fi
+}
+
+set_attr() {
+    local name="${1}"
+    local value="${2}"
+    local file="${3}"
+
+    setextattr -q ${DEFAULT_NAMESPACE} ${name} ${value} ${file}
+}
+
+ls_attr() {
+    local file="${1}"
+    ls_attr_system ${file}
+    ls_attr_user ${file}
+}
+
+ls_attr_system() {
+    local file="${1}"
+    local ns="system"
+    local attrs="$(lsextattr -q ${ns} ${file})"
+
+    if test -n "${attr}"
+    then
+        printf "system:\n"
+
+        for i in ${attrs}
+        do
+            printf "%s -> %s\n" "${i}" "$(getextattr -q ${ns} ${i} ${file})"
+        done
+    fi
+}
+
+ls_attr_user() {
+    local file="${1}"
+    local attrs="$(lsextattr -q ${DEFAULT_NAMESPACE} ${file})"
+
+    if test -n "${attrs}"
+    then
+        printf "user:\n"
+
+        for i in ${attrs}
+        do
+            printf "     %s -> %s\n" "${i}" "$(getextattr -q ${DEFAULT_NAMESPACE} ${i} ${file})"
+        done
+    fi
+}
+
+rm_attr() {
+    local name="${1}"
+    local file="${2}"
+
+    rmextattr -q ${DEFAULT_NAMESPACE} ${name}  ${file}
+}
+
+usage() {
+    printf "subcommands:\n"
+    printf "\tset name value file\n"
+    printf "\tget name file\n"
+    printf "\tls file\n"
+    printf "\trm name file\n"
+    printf "example:\n"
+    printf "\txat set lang tcsh .tcshrc\n"
+    printf "\txat get lang .tcshrc\n"
+    printf "\txat set place home .tcshrc\n"
+    printf "\txat ls .tcshrc\n"
+    printf "\txat rm lang .tcshrc\n"
+    printf "\txat ls .tcshrc\n"
+}
+
+main() {
+    local command="${1}"
+    shift 1
+    if test -z ${command}
+    then
+        usage
+    elif test ${command} == "get"
+    then
+        get_attr ${@}
+    elif test ${command} == "set"
+    then
+        set_attr ${@}
+    elif  test ${command} == "ls"
+    then
+        ls_attr ${@}
+    elif test ${command} == "rm"
+    then
+        rm_attr ${@}
+    fi
+}
+
+main ${@}

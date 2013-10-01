@@ -192,3 +192,9 @@ devel/hs-cabal-install
 net-mgmt/bwm-ng
 www/opera
 ports-mgmt/pkg_replace
+devel/xdg-user-dirs
+www/opera-linuxplugins
+devel/deheader
+www/opera-devel
+textproc/minised
+sysutils/eiciel
