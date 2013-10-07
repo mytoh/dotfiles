@@ -123,3 +123,4 @@ start_wm() {
 }
 
 start_wm ${1}
+xset +fp /usr/local/X11/fonts/ChromeOS/
