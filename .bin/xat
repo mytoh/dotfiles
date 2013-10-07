@@ -1,68 +1,69 @@
 #!/bin/sh
 
-DEFAULT_NAMESPACE="user"
+set -o nounset
 
+DEFAULT_NAMESPACE="user"
+GETEXTATTR="getextattr -q ${DEFAULT_NAMESPACE}"
+SETEXTATTR="setextattr -q ${DEFAULT_NAMESPACE}"
+LSEXTATTR="lsextattr -q ${DEFAULT_NAMESPACE}"
+RMEXTATTR="rmextattr -q ${DEFAULT_NAMESPACE}"
+
+# get attribute
 get_attr() {
     local name="${1}"
     local file="${2}"
-    local value="$(getextattr -q ${DEFAULT_NAMESPACE} ${name} ${file})"
+    local value="$(${GETEXTATTR} ${name} ${file})"
 
     if test -n "${value}"
     then
-        printf "%s -> %s\n" ${name} ${value}
+        printf "%s -> %s\n" "${name}" "${value}"
     fi
 }
 
+# set attribute
 set_attr() {
     local name="${1}"
     local value="${2}"
     local file="${3}"
 
-    setextattr -q ${DEFAULT_NAMESPACE} ${name} ${value} ${file}
+    ${SETEXTATTR} "${name}" "${value}" "${file}"
 }
 
+# list attributes
 ls_attr() {
     local file="${1}"
-    ls_attr_system ${file}
-    ls_attr_user ${file}
-}
-
-ls_attr_system() {
-    local file="${1}"
-    local ns="system"
-    local attrs="$(lsextattr -q ${ns} ${file})"
-
-    if test -n "${attr}"
-    then
-        printf "system:\n"
-
-        for i in ${attrs}
-        do
-            printf "%s -> %s\n" "${i}" "$(getextattr -q ${ns} ${i} ${file})"
-        done
-    fi
+    ls_attr_user "${file}"
 }
 
 ls_attr_user() {
     local file="${1}"
-    local attrs="$(lsextattr -q ${DEFAULT_NAMESPACE} ${file})"
+    local attrs="$(${LSEXTATTR}  ${file})"
 
     if test -n "${attrs}"
     then
-        printf "user:\n"
+        printf "${DEFAULT_NAMESPACE}:\n"
 
-        for i in ${attrs}
+        for n in ${attrs}
         do
-            printf "     %s -> %s\n" "${i}" "$(getextattr -q ${DEFAULT_NAMESPACE} ${i} ${file})"
+            ls_attr_user_print "${n}" "${file}"
         done
     fi
 }
 
+ls_attr_user_print() {
+    local name="${1}"
+    local file="${2}"
+    local value="$(${GETEXTATTR}  ${name} ${file})"
+
+    printf "     %s -> %s\n" "${name}" "${value}"
+}
+
+# remove attribute
 rm_attr() {
     local name="${1}"
     local file="${2}"
 
-    rmextattr -q ${DEFAULT_NAMESPACE} ${name}  ${file}
+    ${RMEXTATTR}  ${name}  "${file}"
 }
 
 usage() {
@@ -86,19 +87,18 @@ main() {
     if test -z ${command}
     then
         usage
-    elif test ${command} == "get"
-    then
-        get_attr ${@}
-    elif test ${command} == "set"
-    then
-        set_attr ${@}
-    elif  test ${command} == "ls"
-    then
-        ls_attr ${@}
-    elif test ${command} == "rm"
-    then
-        rm_attr ${@}
+    else
+        case ${command} in
+            get)
+                get_attr "${@}" ;;
+            set)
+                set_attr "${@}" ;;
+            ls)
+                ls_attr "${@}";;
+            rm)
+                rm_attr "${@}";;
+        esac
     fi
 }
 
-main ${@}
+main "${@}"
