@@ -12,7 +12,7 @@
       (defprogram-shortcut terminal :command "exec mlterm" :key (kbd "t") :map map :props '(:class "mlterm"))
       (defprogram-shortcut browser  :command "exec firefox" :key (kbd "b") :map map)
       (defprogram-shortcut filer    :command "exec rox" :key (kbd "f") :map map :props '(:class "ROX-Filer"))
-      (defprogram-shortcut dmenu    :command "exec dmenu_run -i -b -nb 'grey14' -nf 'orange' -sb 'grey10' -sf '#4d3e41' "
+      (defprogram-shortcut dmenu    :command "exec dmenu_run -p '> ' -i -b -nb 'grey14' -nf 'orange' -sb 'grey10' -sf '#4d3e41' "
         :key (kbd "d") :map map)
       (defprogram-shortcut emacs :command "emacs" :key (kbd "e") :map map)
       (defprogram-shortcut v2c :command "v2c" :key (kbd "v") :map map)

@@ -45,6 +45,7 @@
     (define-frame-preference "file"
       (0 t t :class "Pcmanfm")
       (0 t t :class "Thunar")
+      (0 t t :class "Doublecmd")
       (0 t t :class "Dolphin")
       (0 t t :class "Rodent"))
     ))
