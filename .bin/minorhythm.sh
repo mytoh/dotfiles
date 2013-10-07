@@ -7,7 +7,7 @@ save() {
     local url="${1}"
     local file="${2}"
 
-    ffmpeg1 -i ${url} -vcodec copy -acodec copy -scodec copy ${file}
+    ffmpeg2 -i ${url} -vcodec copy -acodec copy -scodec copy ${file}
 }
 
 main() {

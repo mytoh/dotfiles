@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#set -o nounset
+set -o nounset
 
 rebuild_all() {
     local dir="/usr/ports/${1}"
