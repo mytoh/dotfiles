@@ -7,8 +7,8 @@
  setenv shellar_theme 'default'
 
  set shellar_plugins=( mytoh emacs loitsu lehti fasd nopea napa \
- radio cask vim nyan ypsilon mosh talikko \
- pikkukivi brew npm freebsd firefox )
+                      radio cask vim nyan ypsilon mosh talikko \
+                      pikkukivi brew npm freebsd firefox please percol)
 
  setenv shellar_plugins "${shellar_plugins}"
 
