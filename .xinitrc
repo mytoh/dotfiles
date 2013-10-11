@@ -75,7 +75,7 @@ start_apps() {
     # audio volume
     mixer vol 10
     mixer pcm 15
-    # urxvtcd &
+    urxvtcd &
     xbindkeys &
     thunar --daemon &
     #spiffy &
