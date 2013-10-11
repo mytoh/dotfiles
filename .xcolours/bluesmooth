@@ -1,0 +1,29 @@
+!http://termendous.org/xterm/shr/8b9499:0d1319:3d3d3d:7691b8:66a18d:666294:4763d1:776880:679da6:8b8e91:5c5c5c:8aa8d4:80c9b0:8580c2:5172e8:9784a3:83b9d6:b3b6ba::
+
+*background: #0d1319
+*foreground: #8b9499
+!Black
+*color0: #3d3d3d
+*color8: #5c5c5c
+!Red
+*color1: #7691b8
+*color9: #8aa8d4
+!Green
+*color2: #66a18d
+*color10: #80c9b0
+!Yellow
+*color3: #666294
+*color11: #8580c2
+!Blue
+*color4: #4763d1
+*color12: #5172e8
+!Magenta
+*color5: #776880
+*color13: #9784a3
+!Cyan
+*color6: #679da6
+*color14: #83b9d6
+!White
+*color7: #8b8e91
+*color15: #b3b6ba
+
