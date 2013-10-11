@@ -47,6 +47,7 @@
       (0 t t :class "Thunar")
       (0 t t :class "Doublecmd")
       (0 t t :class "Dolphin")
+      (0 t t :class "ROX-Filer")
       (0 t t :class "Rodent"))
     ))
 
