@@ -14,7 +14,8 @@ Xcursor.theme: whiteglass
 !----------------------------------
 !
 ! relative path from $HOME
-#include ".xcolours/colorshot"
+#define COLOURSCHEME ".xcolours/navy_and_ivory"
+#include COLOURSCHEME
 !*color0: black
 !*color1: red3
 !*color2: green3
