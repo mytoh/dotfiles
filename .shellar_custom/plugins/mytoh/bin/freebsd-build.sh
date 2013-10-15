@@ -15,6 +15,15 @@ $s_colour>>$reset $m_colour $message $reset $s_colour<<$reset
 EOF
 }
 
+clean_obj() {
+    log "clean /usr/obj/usr directory"
+    chflags -R noschg /usr/obj/usr
+    rm -rf /usr/obj/usr
+    chdir /usr/src
+    make -s cleandir
+    make -s cleandir
+}
+
 
 first()
 {
@@ -22,10 +31,7 @@ first()
     mount -u /
     mount -a -t ufs
     chdir /usr/src
-    make -s cleandir
-    make -s cleandir
-    chflags -R noschg /usr/obj
-    rm -rf /usr/obj/*
+    clean_obj
     log "building world"
     make -s -j 4 buildworld && \
         log "building kernel" && \

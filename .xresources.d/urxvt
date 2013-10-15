@@ -3,7 +3,7 @@
 
 !urxvt.termName: xterm-256color
 urxvt.depth: 32
-! urxvt.background: [90]#222222
+urxvt.background: [90]#222222
 ! urxvt.foreground: #cdccbc
 urxvt.geometry: 100x40+100+100
 urxvt.multichar_encoding: utf-8

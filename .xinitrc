@@ -1,5 +1,14 @@
 #!/bin/sh
 
+load_xinitrcd() {
+    if [ -d ~/.xinitrc.d ]; then
+        for f in ~/.xinitrc.d/*; do
+            [ -x "$f" ] && . "$f"
+        done
+        unset f
+    fi
+}
+
 # ibus {{{
 setup_ibus() {
     export XIM=ibus
@@ -11,7 +20,6 @@ setup_ibus() {
     ibus-daemon -d
     sleep 1
 }
-setup_ibus
 # }}}
 
 # uim {{{
@@ -25,18 +33,6 @@ setup_uim() {
 }
 #}}}
 
-# kde
-# export XDG_DATA_DIRS="/usr/local/kde4/share:/usr/local/share/:$XDG_DATA_DIRS"
-export QT_PLUGIN_PATH="/usr/local/kde4/lib/kde4/plugins"
-
-export PATH="$HOME/local/bin:$PATH"
-export VTE_CJK_WIDTH=auto
-xrdb -merge $HOME/.Xresources
-setxkbmap dvorak
-xmodmap $HOME/.xmodmaprc
-xset b off # turn off beep
-xset r rate 200 40
-xsetroot -cursor_name right_ptr
 add_font_paths() {
     xset +fp /usr/local/lib/X11/fonts/artwiz-aleczapka-en
     xset +fp /usr/local/lib/X11/fonts/artwiz-fonts
@@ -69,9 +65,20 @@ add_font_paths() {
     xset +fp $HOME/.fonts
     xset fp rehash
 }
-add_font_paths
 
 start_apps() {
+    # kde
+    # export XDG_DATA_DIRS="/usr/local/kde4/share:/usr/local/share/:$XDG_DATA_DIRS"
+    export QT_PLUGIN_PATH="/usr/local/kde4/lib/kde4/plugins"
+
+    export PATH="$HOME/local/bin:$PATH"
+    export VTE_CJK_WIDTH=auto
+    xrdb -merge $HOME/.Xresources
+    setxkbmap dvorak
+    xmodmap $HOME/.xmodmaprc
+    xset b off # turn off beep
+    xset r rate 200 40
+    xsetroot -cursor_name right_ptr
     # audio volume
     mixer vol 10
     mixer pcm 15
@@ -84,19 +91,18 @@ start_apps() {
     #mpd
     pulseaudio -D &
 }
-start_apps
 
-if [ "$1" = "twm"  -o "$1" = "flwm" ]; then
-    $HOME/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 13 -bg gray15 -fn '-*-terminus-medium-r-normal--12-*' -e 'onexit=ungrabmouse' &
-    trayer --expand false --alpha 20  --tint 0x606060 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 7 --widthtype pixel --width 120 &
-    #sleep 20 && wbar -above-desk -bpress -isize 45 -balfa 20 -nanim 9 &
-    if [ -f $HOME/.fehbg ]; then
-        $HOME/.fehbg &
-    else
-        feh --bg-max ~/.wallpaper &
-    fi
-    tint2 &
-fi
+# if [ "$1" = "twm"  -o "$1" = "flwm" ]; then
+#     $HOME/.dzen/bin/status | dzen2 -p -ta l -w 1160 -h 13 -bg gray15 -fn '-*-terminus-medium-r-normal--12-*' -e 'onexit=ungrabmouse' &
+#     trayer --expand false --alpha 20  --tint 0x606060 --transparent true --padding 1 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 7 --widthtype pixel --width 120 &
+#     #sleep 20 && wbar -above-desk -bpress -isize 45 -balfa 20 -nanim 9 &
+#     if [ -f $HOME/.fehbg ]; then
+#         $HOME/.fehbg &
+#     else
+#         feh --bg-max ~/.wallpaper &
+#     fi
+#     tint2 &
+# fi
 
 start_wm() {
     local wm="${1}"
@@ -114,13 +120,18 @@ start_wm() {
             mate)         exec dbus-launch ck-launch-session mate-session ;;
             rox)          exec dbus-launch rox -S ;;
             lainwm)       exec dbus-launch lainwm ;;
-            openbox)  exec openbox-session ;;
+            openbox)      exec openbox-session ;;
             *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
         esac
     else
         exec $DEFAULT_SESSION
     fi
 }
+
+load_xinitrcd
+setup_ibus
+add_font_paths
+start_apps
 
 start_wm ${1}
 xset +fp /usr/local/X11/fonts/ChromeOS/

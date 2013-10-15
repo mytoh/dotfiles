@@ -1,5 +1,5 @@
 
-setw -g mode-keys vi
+setw -g mode-keys emacs
 
 unbind C-b
 set -g prefix C-z

@@ -218,3 +218,17 @@ x11/rxvt-unicode
 x11/urxvt-perls
 japanese/k10
 japanese/k12
+www/w3m-m17n-img
+misc/sls
+sysutils/anacron
+sysutils/most
+www/httrack
+sysutils/lsof
+net/l2tpd
+security/openvpn
+games/ninix-aya
+devel/valgrind
+shells/osh
+games/nethack34
+misc/cmatrix
+x11-fm/thunar
