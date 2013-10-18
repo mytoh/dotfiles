@@ -232,3 +232,8 @@ shells/osh
 games/nethack34
 misc/cmatrix
 x11-fm/thunar
+sysutils/ezjail
+audio/beep
+textproc/fi-aspell
+lang/ypsilon
+sysutils/vils
