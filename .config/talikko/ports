@@ -237,3 +237,5 @@ audio/beep
 textproc/fi-aspell
 lang/ypsilon
 sysutils/vils
+audio/gogglesmm
+net-mgmt/ipcalc
