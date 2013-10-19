@@ -1,7 +1,7 @@
 
 ## aliases
 alias cwdcmd ls-F
-alias postcmd 'echo -n "]2;\!#:q"'
+#alias postcmd 'echo -n "]2;\!#:q"'
 alias mv 'mv -iv'
 alias .. 'cd ..'
 alias single 'sudo shutdown now'
