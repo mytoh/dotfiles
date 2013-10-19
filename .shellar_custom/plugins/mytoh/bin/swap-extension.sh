@@ -1,9 +1,12 @@
 #!/bin/sh
 
+set -o errexit
+set -o nounset
+
 empty_string() {
     local s="${1}"
 
-    test -n "${s}"
+    test -z "${s}"
 }
 
 main() {
@@ -11,7 +14,7 @@ main() {
     local file="${2}"
     local base="${file%.*}"
 
-    if empty_string "${base}"
+    if ! empty_string "${base}"
     then
         mv ${file} "${base}.${newext}"
     fi

@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
+set -o errexit
+set -o nounset
+
 log()
 {
     local message="${1}"
