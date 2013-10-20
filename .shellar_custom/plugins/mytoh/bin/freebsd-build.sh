@@ -1,27 +1,35 @@
 #!/bin/sh
 
 set -o nounset
+set -o errexit
 
 log()
 {
-    local message=${1}
+    local message="${1}"
     local m_colour="[38;5;39m"
     local s_colour="[38;5;169m"
     local reset="[0m"
     cat <<EOF
 -------------------------------------------
-$s_colour>>$reset $m_colour $message $reset $s_colour<<$reset
+$s_colour>>$reset $m_colour ${message} $reset $s_colour<<$reset
 -------------------------------------------
 EOF
 }
 
 clean_obj() {
-    log "clean /usr/obj/usr directory"
-    chflags -R noschg /usr/obj/usr
-    rm -rf /usr/obj/usr
-    chdir /usr/src
-    make -s cleandir
-    make -s cleandir
+    if test -d "/usr/obj"
+    then
+        log "clean /usr/obj/usr directory"
+	if test -d "/usr/obj/usr"
+	then
+        chflags -R noschg /usr/obj/usr
+        rm -rf /usr/obj/usr
+	fi
+        chdir /usr/src
+        make -s cleandir
+        make -s cleandir
+        rm -rf /usr/obj
+    fi
 }
 
 
