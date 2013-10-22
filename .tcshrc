@@ -1,16 +1,20 @@
 
- setenv PATH ${HOME}/local/bin:${PATH}
+set -f path=(${HOME}/local/bin ${path})
 
- setenv shellar ${HOME}/.config/shellar
- setenv shellar_custom ${HOME}/.shellar_custom
+setenv shellar ${HOME}/.config/shellar
+setenv shellar_custom ${HOME}/.shellar_custom
 
- setenv shellar_theme 'default'
+setenv shellar_theme 'default'
 
- set shellar_plugins=( mytoh emacs loitsu lehti fasd nopea napa \
-                      radio bbc cask vim nyan ypsilon mosh talikko \
-                      pikkukivi brew npm freebsd firefox please percol \
+set -f bottle_radio=(radio bbc)
+set -f bottle_scheme=(loitsu lehti nopea napa mosh ypsilon talikko pikkukivi)
+set -f shellar_bottles=( mytoh emacs ${bottle_scheme} fasd \
+                      ${bottle_radio} cask vim nyan \
+                       brew npm freebsd firefox please percol \
                       sls)
 
- setenv shellar_plugins "${shellar_plugins}"
+setenv shellar_bottles "${shellar_bottles}"
 
- source ${shellar}/shellar/shellar.tcsh
+set -f path=(${shellar}/bin ${path})
+
+eval "`shellar init`"

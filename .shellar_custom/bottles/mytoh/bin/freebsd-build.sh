@@ -20,11 +20,11 @@ clean_obj() {
     if test -d "/usr/obj"
     then
         log "clean /usr/obj/usr directory"
-	if test -d "/usr/obj/usr"
-	then
-        chflags -R noschg /usr/obj/usr
-        rm -rf /usr/obj/usr
-	fi
+	    if test -d "/usr/obj/usr"
+	    then
+            chflags -R noschg /usr/obj/usr
+            rm -rf /usr/obj/usr
+	    fi
         chdir /usr/src
         make -s cleandir
         make -s cleandir
@@ -80,10 +80,18 @@ third()
     yes y | make delete-old-libs
 }
 
-if [ $1 == "first" ]; then
-    first
-elif [ $1 == "second" ]; then
-    second
-elif [ $1 == "third" ]; then
-    third
-fi
+main() {
+    local func="${1}"
+    if [ ${func} == "first" ]
+    then
+        first
+    elif [ ${func} == "second" ]
+    then
+        second
+    elif [ ${func} == "third" ]
+    then
+        third
+    fi
+}
+
+main ${1}

@@ -4,12 +4,12 @@ set -o nounset
 
 open_file() {
     local dir=$(dirname "${1}")
-    feh -Z -F -B black "${dir}"
+    exec feh -Z -F -B black "${dir}"
 }
 
 open_dir() {
     local dir="${1}"
-    feh -Z -F -B black "${dir}"
+    exec feh -Z -F -B black "${dir}"
 }
 
 

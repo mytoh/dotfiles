@@ -26,7 +26,7 @@ session_remote() {
     local window="sdf"
 
 
-    tmux new-session -s ${session} -n ${window} -d 'dbclient sdf.org' \; set-window-option -q -t :0 remain-on-exit on
+    tmux new-session -s ${session} -n ${window} -d 'dbclient -K 30 sdf.org' \; set-window-option -q -t :0 remain-on-exit on
     tmux detach -s ${session}
 }
 
