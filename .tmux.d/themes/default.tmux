@@ -31,8 +31,8 @@ set-option -g display-panes-colour colour166 #orange
 set-window-option -g clock-mode-colour colour64 #green
 
 # window options
-setw -g window-status-format '#[fg=white,bg=blue]#I#[fg=black,bg=cyan]#W '
-setw -g window-status-current-format '#[fg=blue,bg=white]#I#[fg=black,bg=yellow]#W'
+setw -g window-status-format '#[fg=colour98,bg=colour237] #I#[fg=colour244]:#W#[fg=colour98,bg=colour237]#F'
+setw -g window-status-current-format '#[fg=colour159,bg=blue] #I#[fg=white]:#[fg=white]#W#[fg=colour159,bg=blue]#F'
 
 
 # statusline
