@@ -140,7 +140,7 @@ open_tab_dl_list 1
 open_tab_blank 0
 target_self 0
 frame 1
-pixel_per_line 13
-pixel_per_char 12
+pixel_per_line 10
+pixel_per_char 5
 indent_incr 4
 tabstop 8
