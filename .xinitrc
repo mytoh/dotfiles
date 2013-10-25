@@ -3,7 +3,10 @@
 load_xinitrcd() {
     if [ -d ~/.xinitrc.d ]; then
         for f in ~/.xinitrc.d/*; do
-            [ -x "$f" ] && . "$f"
+            if [ -f "$f" ]
+            then
+                . "$f"
+            fi
         done
         unset f
     fi
@@ -33,38 +36,6 @@ setup_uim() {
 }
 #}}}
 
-add_font_paths() {
-    xset +fp /usr/local/lib/X11/fonts/artwiz-aleczapka-en
-    xset +fp /usr/local/lib/X11/fonts/artwiz-fonts
-    xset +fp /usr/local/lib/X11/fonts/artwiz-ru
-    xset +fp /usr/local/lib/X11/fonts/misc
-    xset +fp /usr/local/lib/X11/fonts/webfonts
-    xset +fp /usr/local/lib/X11/fonts/Droid
-    xset +fp /usr/local/lib/X11/fonts/Myanmar
-    xset +fp /usr/local/lib/X11/fonts/URW
-    xset +fp /usr/local/lib/X11/fonts/suxus
-    xset +fp /usr/local/lib/X11/fonts/std.ja_JP
-    xset +fp /usr/local/lib/X11/fonts/amsfonts
-    xset +fp /usr/local/lib/X11/fonts/cantarell
-    xset +fp /usr/local/lib/X11/fonts/mplus
-    xset +fp /usr/local/lib/X11/fonts/shinonome
-    xset +fp /usr/local/lib/X11/fonts/proggy_fonts-ttf
-    xset +fp /usr/local/lib/X11/fonts/bitstream-vera
-    xset +fp /usr/local/lib/X11/fonts/cyrillic
-    xset +fp /usr/local/lib/X11/fonts/dejavu
-    xset +fp /usr/local/lib/X11/fonts/jisx0213
-    xset +fp /usr/local/lib/X11/fonts/jmk
-    xset +fp /usr/local/lib/X11/fonts/local
-    xset +fp /usr/local/lib/X11/fonts/SourceCodePro
-    xset +fp /usr/local/lib/X11/fonts/anonymous-pro
-    xset +fp /usr/local/lib/X11/fonts/GentiumPlus
-    xset +fp /usr/local/lib/X11/fonts/terminus-font
-    xset +fp /usr/local/lib/X11/fonts/SourceCodePro
-    xset +fp /usr/local/lib/X11/fonts/Roboto
-
-    xset +fp $HOME/.fonts
-    xset fp rehash
-}
 
 start_apps() {
     # kde
