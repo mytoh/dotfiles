@@ -56,9 +56,9 @@ main() {
 
     while true
     do
-        date=$(stat.date)
+        stat_date=$(stat.date)
 
-        cpu=$(stat.cpu)
+        stat_cpu=$(stat.cpu)
 
         rx=$(stat.net.rx)
 
@@ -101,16 +101,16 @@ main() {
 
         printf "%s %s %s %s %s %s %s %s %s %s %s\n" \
             "${colour_icon}^bg(${bgcolour})^i(${icons}/right_arrow.xbm)" \
-            "${colour_icon}^i(${icons}/sm4tik/xbm/cpu.xbm)${colour_str} ${cpu}" \
+            "${colour_icon}^i(${icons}/sm4tik/xbm/cpu.xbm)${colour_str} ${stat_cpu}" \
             "${colour_icon}^i($icons/sm4tik/xbm/mem.xbm)${colour_str} ${freemem}" \
             "${openparen}" \
-            "${colour_icon}^i($icons/sm4tik/xbm/net_up_02.xbm)${colour_str} $tx" \
-            "${colour_icon}^i($icons/sm4tik/xbm/net_down_02.xbm)${colour_str} $rx" \
+            "${colour_icon}^i($icons/sm4tik/xbm/net_up_02.xbm)${colour_str} ${tx}" \
+            "${colour_icon}^i($icons/sm4tik/xbm/net_down_02.xbm)${colour_str} ${rx}" \
             "${colour_icon}@ ${host}" \
             "${closeparen}" \
             "${colour_icon}^i($icons/sm4tik/xbm/spkr_01.xbm)${colour_str} ${vol} ${pcm}" \
             "${colour_icon}^i($icons/sm4tik/xbm/diskette.xbm)${colour_str} ${diskused}/${disktotal}B" \
-            "${colour_icon}^i($icons/sm4tik/xbm/clock.xbm)${colour_str} $date"
+            "${colour_icon}^i($icons/sm4tik/xbm/clock.xbm)${colour_str} ${stat_date}"
 
 
         sleep $interval
