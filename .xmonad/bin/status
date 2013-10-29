@@ -5,52 +5,104 @@
 # disable color wrapper for some utils
 export NOCOLOR=true
 
-date_format='%a %d/%m %H:%M'
-icons="$HOME/.dzen/icons"
-interval=1
 
-while true
-do
-    date=$(date +"$date_format")
 
-    cpu=`top -b -d 2 | grep ^CPU | awk '{print $2,$6}'`
+stat.cpu() {
 
-    rx=`bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | awk '{print $2,$3}'`
+    top -b -d 2 | grep ^CPU | awk '{print $2,$6}'
+}
 
-    tx=`bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | awk '{print $4,$5}'`
+stat.net.rx() {
+    bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | awk '{print $2,$3}'
+}
 
-    freemem=`vmstat -h |grep -n 2| awk '{print $6}'`
+stat.net.tx() {
+    bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | awk '{print $4,$5}'
+}
 
-    #set battery=`sysctl -n hw.acpi.battery.life`
-    #if ( "$battery" <= 100  && "$battery" > 50 ) then
-    #set baticon="$icons/sm4tik/bat_full_01.xbm"
-    #else if ( "$battery" >= 10 && "$battery" <= 50 ) then
-    #set baticon="$icons/sm4tik/bat_low_01.xbm"
-    #else
-    #set baticon="$icons/sm4tik/bat_empty_01.xbm"
-    #endif
+stat.date() {
+    local date_format='%a %d/%m %H:%M'
 
-    # set batstate=`sysctl -n hw.acpi.battery.state`
-    # set batcolour="#ffffff"
-    # if ( "$batstate" == 1 ) then
-    #     set batcolour="#ff4500"
-    # else if ( "$batstate" == 2 ) then
-    #     set batcolour="#00ff00"
-    # endif
+    date +"$date_format"
+}
 
-    diskused=`df -ch | grep total | awk '{print $3}' | cut -c 1-3`
-    disktotal=`df -ch | grep total | awk '{print $2}'`
+stat.memory() {
+    vmstat -h |grep -n 2| awk '{print $6}'
+}
 
-    ip=`ifconfig em0 | grep inet\  | awk '{print $2}'`
 
-    iconcolour="#808080"
-    strcolour="#ffffff"
-    openparen="^fg(#656565)("
-    closeparen="^fg(#656565))"
+stat.disk.used() {
+    df -ch | grep total | awk '{print $3}' | cut -c 1-3
+}
 
-    echo "^fg($iconcolour)^bg(#333333)^i($icons/right_arrow.xbm) ^fg($iconcolour)^i($icons/sm4tik/xbm/cpu.xbm)^fg($strcolour) $cpu ^fg($iconcolour)^i($icons/sm4tik/xbm/mem.xbm)^fg($strcolour) $freemem $openparen ^fg($iconcolour)^i($icons/sm4tik/xbm/net_up_02.xbm)^fg($strcolour) $tx ^fg($iconcolour)^i($icons/sm4tik/xbm/net_down_02.xbm)^fg($strcolour) $rx ^fg($iconcolour)@ $ip $closeparen ^fg($iconcolour)^i($icons/sm4tik/xbm/diskette.xpm)^fg($strcolour) ${diskused}/${disktotal}B  ^fg($iconcolour)^i($icons/sm4tik/xbm/clock.xbm)^fg($strcolour) $date "
+stat.disk.total() {
+    df -ch | grep total | awk '{print $2}'
+}
 
-    #  sleep $interval
+stat.vol.vol() {
+    mixer -s vol
+}
 
-done
-##dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'
+stat.vol.pcm() {
+    mixer -s pcm
+}
+
+main() {
+
+    local icons="$HOME/.xmonad/icons"
+    local interval=1
+
+    while true
+    do
+        date=$(stat.date)
+
+        cpu=$(stat.cpu)
+
+        rx=$(stat.net.rx)
+
+        tx=$(stat.net.tx)
+
+        freemem=$(stat.memory)
+
+        vol=$(stat.vol.vol)
+        pcm=$(stat.vol.pcm)
+
+        #set battery=`sysctl -n hw.acpi.battery.life`
+        #if ( "$battery" <= 100  && "$battery" > 50 ) then
+        #set baticon="$icons/sm4tik/bat_full_01.xbm"
+        #else if ( "$battery" >= 10 && "$battery" <= 50 ) then
+        #set baticon="$icons/sm4tik/bat_low_01.xbm"
+        #else
+        #set baticon="$icons/sm4tik/bat_empty_01.xbm"
+        #endif
+
+        # set batstate=`sysctl -n hw.acpi.battery.state`
+        # set batcolour="#ffffff"
+        # if ( "$batstate" == 1 ) then
+        #     set batcolour="#ff4500"
+        # else if ( "$batstate" == 2 ) then
+        #     set batcolour="#00ff00"
+        # endif
+
+        diskused=$(stat.disk.used)
+        disktotal=$(stat.disk.total)
+
+        ip=`ifconfig em0 | grep inet\  | awk '{print $2}'`
+        host=$(hostname)
+
+        iconcolour="#64323E"
+        strcolour="#CACACA"
+        openparen="^fg(#656565)("
+        closeparen="^fg(#656565))"
+        bgcolour="#212122"
+
+        echo "^fg($iconcolour)^bg(${bgcolour})^i($icons/right_arrow.xbm) ^fg($iconcolour)^i($icons/sm4tik/xbm/cpu.xbm)^fg($strcolour) $cpu ^fg($iconcolour)^i($icons/sm4tik/xbm/mem.xbm)^fg($strcolour) $freemem $openparen ^fg($iconcolour)^i($icons/sm4tik/xbm/net_up_02.xbm)^fg($strcolour) $tx ^fg($iconcolour)^i($icons/sm4tik/xbm/net_down_02.xbm)^fg($strcolour) $rx ^fg($iconcolour)@ ${host} $closeparen ^fg($iconcolour)^i($icons/sm4tik/xbm/spkr_01.xbm)^fg($strcolour) ${vol} ${pcm} ^fg($iconcolour)^i($icons/sm4tik/xbm/diskette.xbm)^fg($strcolour) ${diskused}/${disktotal}B  ^fg($iconcolour)^i($icons/sm4tik/xbm/clock.xbm)^fg($strcolour) $date "
+
+        sleep $interval
+
+    done
+    ##dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'
+
+}
+
+main
