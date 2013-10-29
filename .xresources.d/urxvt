@@ -11,6 +11,7 @@ urxvt.scrollBar: false
 urxvt.buffered: true
 urxvt.borderLess: false
 urxvt.internalBorder: 0
+urxvt.intensityStyles: false
 urxvt.cursorUnderline: false
 urxvt.iso14755: false
 urxvt.iso14755_52: false
