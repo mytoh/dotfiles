@@ -1,14 +1,5 @@
 #!/bin/sh
 
-new-session() {
-    local session="${1}"
-    local window="${2}"
-}
-
-new-window() {
-    local session="${1}"
-}
-
 attach() {
     local session="${1}"
 
