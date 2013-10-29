@@ -197,15 +197,20 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         -- [ [isFullscreen                                       --> (doF W.focusDown <+> doFullFloat) ]
         [ [isFullscreen                                          --> doFullFloat ]
         , [isDialog                                              --> doFloat]
-        , [className  =? "feh"                                   --> viewShift "kolme"]
+        , 
         , [(className =? c <||> title =? c <||> appName =? c)    --> doFloat | c <- myFloats ]
+          [className  =? "feh"                                   --> viewShift "kolme"]
         , [className  =? "MPlayer"                               --> (doFullFloat <+> viewShift "kolme")]
         , [className  =? "mplayer2"                              --> (doFullFloat <+> viewShift "kolme")]
-        , [className  =? "mpv"                              --> (doFullFloat <+> viewShift "kolme")]
-        , [className  =? "V2C"                                   -->  viewShift "kaksi"]
+        , [className  =? "mpv"                                   --> (doFullFloat <+> viewShift "kolme")]
+          
+        , [className  =? "V2C"                                   --> (doFullFloat <+> viewShift "kaksi")]
+        , [className  =? "Opera"                               -->  viewShift "kaksi"]
         , [className  =? "Firefox"                               -->  viewShift "kaksi"]
         , [(className =? "Firefox" <&&> appName =? "Dialog")     --> (doFloat <+> viewShift "kaksi")]
+          
         , [className   =? "Emacs"                                --> viewShift "emacs"]
+          
         , [className  =? "Xfce4-notifyd"                         --> doIgnore]
         , [className  =? "trayer"                                --> doIgnore]
         , [className  =? "stalonetray"                           --> doIgnore]
@@ -219,7 +224,7 @@ myManageHook = -- insertPosition End Newer <+> composeAll
            where
          viewShift = doF . liftM2 (.) W.greedyView W.shift
          myFloats = ["Main.py","Gimp","DTA","Gcolor2","Switch2","Uim-pref-gtk"]
-
+         
 myScratchPads = [ NS "dolphin" spawnFiler findFiler manageFiler
                 ]
                   where
@@ -235,7 +240,7 @@ myScratchPads = [ NS "dolphin" spawnFiler findFiler manageFiler
 -- log hooks --------------------------------------------------------------
 myLogHook h =  dynamicLogWithPP $ dzenPP {
                 ppCurrent         = (dzenColor "#fe974f" "") . pad
-              , ppHidden          = (dzenColor "#909090" "") . pad
+              , ppHidden          = (dzenColor "#a0a0a0" "") . pad
               , ppHiddenNoWindows = (dzenColor "#606060" "") . pad
               , ppLayout          = (dzenColor "#77a8bf" "") .
                                     (\x -> case x of
