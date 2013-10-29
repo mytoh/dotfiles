@@ -1,4 +1,4 @@
-module Mylib.Configs where
+module Mytoh.Config where
   import XMonad
 
   myTerminal       :: String
@@ -12,7 +12,7 @@ module Mylib.Configs where
   myModMask        = mod4Mask
  
   myIconsDirectory :: String
-  myIconsDirectory = "/home/mytoh/.xmonad/icons/"
+  myIconsDirectory = "~/.xmonad/icons/"
 
   myFocusFollowsMouse :: Bool
   myFocusFollowsMouse = False
@@ -24,7 +24,7 @@ module Mylib.Configs where
     , "kaksi"
     , "kolme"
     , "neljä"
-      , "emacs"
+    , "emacs"
  -- , wrapBitmap "sm4tik/bug_01.xbm"
  -- , wrapBitmap "sm4tik/fox.xbm"
  -- , wrapBitmap "sm4tik/dish.xbm"
@@ -50,8 +50,15 @@ module Mylib.Configs where
   myTabFont  = "-*-terminus-medium-r-normal-*-12-*-*-*-*-*-iso10646-*"
   myXPFont   :: String
   myXPFont   = "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1"
+
+  myFontK10 :: String
+  myFontK10 = "-misc-fixed-medium-r-normal--10-90-75-75-c-50-iso8859-1"
+  myFontPro :: String
+  myFontPro = "-nil-profont-medium-r-normal--10-100-72-72-c-50-iso8859-1"
+  myFontArtwiz :: String
+  myFontArtwiz = "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1"
+  myFontNeep :: String
+  myFontNeep = "-jmk-neep-medium-r-normal--10-80-75-75-c-50-*"
+
   myDzenFont :: String
-  -- myDzenFont = "-nil-profont-medium-r-normal--10-100-72-72-c-50-iso8859-1"
-  -- myDzenFont = "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1"
-  myDzenFont = "-jmk-neep-medium-r-normal--10-80-75-75-c-50-*"
-  
+  myDzenFont = myFontK10

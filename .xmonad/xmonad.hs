@@ -90,7 +90,8 @@ import XMonad.Util.NamedWindows (getName)
 import XMonad.Util.WindowProperties
 import XMonad.Util.NamedScratchpad
 
-import Mylib.Configs
+import Mytoh.Config
+import Mytoh.Config.App
 -- }}}
 
 
@@ -120,19 +121,11 @@ myLayoutHook =  avoidStruts                $
                    gratio      = toRational goldenratio
                    goldenratio = 2 / (1 + sqrt(5)::Double);
 
--- tabbar theme config ----------------------------------------
-myTheme = defaultTheme {
-                activeTextColor     = "#909090"
-              , activeColor         = "#303030"
-              , fontName            = myTabFont
-              , decoHeight          = 13
-}
 
 -- keybindings --------------------------------------------
 myKeys = [ -- M4 for Super key
          ("Tab",   windows W.focusDown)
 
-       , ("M-p r", spawn $ "dmenu_run -b -p \">\" -fn " ++ myDzenFont) -- dzen prompt
        -- , ("M-p r", spawn ("yeganesh -x -- -b -p \">\" -fn " ++ myDzenFont)) -- dzen prompt
     -- , ("M-p r", shellPrompt myXPConfig) -- shell prompt
        -- , ("M-p t", prompt (myTerminal ++ " -e") myXPConfig) -- run in term
@@ -140,9 +133,7 @@ myKeys = [ -- M4 for Super key
        , ("M-p b", windowPromptBring myWaitSP ) -- window bring prompt
        -- , ("M-p b", bringMenu ) -- window bring prompt wth dmenu
        -- , ("M-p g", gotoMenu ) -- window goto prompt wth dmenu
-       , ("M-p d", AL.launchApp myXPConfig { defaultText = "~" } "dolphin" ) -- filer prompt
        , ("M-p f", scratchFiler)
-         , ("M-p e", runOrRaise "emacsclient" (className =? "Emacs"))
 
        , ("M-f", sendMessage $ Toggle NBFULL)
        , ("M-x", sendMessage $ Toggle REFLECTX)
@@ -152,6 +143,11 @@ myKeys = [ -- M4 for Super key
        , ("M-b", withFocused $ windows . W.sink)
        , ("M-q", spawn myRestart)
        , ("M-S-p", unsafeSpawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/local/tmp/'")
+         
+       , ("C-t e e", runOrRaise "emacs" (className =? "Emacs"))
+       , ("C-t e d", AL.launchApp myXPConfig { defaultText = "~" } "dolphin" ) -- filer prompt
+       , ("C-t e r", spawn $ "dmenu_run -b -p \">\" -fn " ++ myDzenFont) -- dzen prompt
+
          ]
            where
              notSP = (return $ ("SP" /=) . W.tag) :: X (WindowSpace -> Bool)
@@ -184,6 +180,16 @@ myXPConfig = defaultXPConfig {
 myWaitSP = myXPConfig { autoComplete   = Just 1000000 }
 
 
+-- tabbar theme config ----------------------------------------
+myTheme = defaultTheme {
+activeTextColor     = "#909090"
+, activeColor         = "#303030"
+, fontName            = myTabFont
+, decoHeight          = 13
+}
+
+
+
 
 -- manage hooks -------------------------------------------------------
 myManageHook = -- insertPosition End Newer <+> composeAll
@@ -194,10 +200,12 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         , [className  =? "feh"                                   --> viewShift "kolme"]
         , [(className =? c <||> title =? c <||> appName =? c)    --> doFloat | c <- myFloats ]
         , [className  =? "MPlayer"                               --> (doFullFloat <+> viewShift "kolme")]
+        , [className  =? "mplayer2"                              --> (doFullFloat <+> viewShift "kolme")]
+        , [className  =? "mpv"                              --> (doFullFloat <+> viewShift "kolme")]
         , [className  =? "V2C"                                   -->  viewShift "kaksi"]
         , [className  =? "Firefox"                               -->  viewShift "kaksi"]
         , [(className =? "Firefox" <&&> appName =? "Dialog")     --> (doFloat <+> viewShift "kaksi")]
-       , [className   =? "Emacs"                                 --> viewShift "emacs"]
+        , [className   =? "Emacs"                                --> viewShift "emacs"]
         , [className  =? "Xfce4-notifyd"                         --> doIgnore]
         , [className  =? "trayer"                                --> doIgnore]
         , [className  =? "stalonetray"                           --> doIgnore]
@@ -273,21 +281,6 @@ myLogHook h =  dynamicLogWithPP $ dzenPP {
 
 
 myEventHook = ewmhDesktopsEventHook
-
--- dzen bars {{{
-myLeftBar   = "dzen2 -p -ta l  -x 0 -y 0 -w 420 -h 11 -bg \"#212122\" -fn " ++ myDzenFont
-myRightBar  = "~/.xmonad/bin/status | exec dzen2 -p -ta r -x 420 -y 0 -w 710 -h 11 -bg \"#212122\" -fn " ++ myDzenFont
--- }}}
-trayer      = "exec trayer --expand true --alpha 10  --tint 0x232324 --transparent true --padding 0 --margin 0 --edge top --align right --SetDockType true --SetPartialStrut true --heighttype pixel --height 11 --widthtype pixel --width 150 "
--- stalonetray = "exec stalonetray -i 1 --dockapp-mode simple --icon-gravity W --grow-gravity E --geometry 8x1-0+0 --max-geometry 40x13 -bg '#333333' --sticky --skip-taskbar"
-mail        = "gmail-notifier"
-compmgr     = "xcompmgr -c -C -I1 -O1 -Ff"
--- bgmgr       = "feh --bg-scale ~/.wallpapers/images.4chan.org-1268382153153.jpg"
-bgmgr       = "sh ~/.fehbg"
-clipmgr     = "parcellite"
-volumemgr   = "gnome-volume-control-applet"
-uimPanel    = "uim-toolbar-gtk-systray"
--- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
 
 myStartupHook :: X ()
 myStartupHook = do
