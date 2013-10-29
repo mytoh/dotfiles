@@ -241,3 +241,7 @@ x11-wm/wmanager
 sysutils/wmcube
 sysutils/wmcube-gdk
 net/mtr
+security/arm
+x11/xbindkeys
+x11/hs-xmobar
+x11/xsel
