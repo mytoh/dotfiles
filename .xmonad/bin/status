@@ -47,6 +47,8 @@ stat.vol.pcm() {
     mixer -s pcm
 }
 
+##
+
 main() {
 
     local icons="$HOME/.xmonad/icons"
@@ -90,13 +92,26 @@ main() {
         ip=`ifconfig em0 | grep inet\  | awk '{print $2}'`
         host=$(hostname)
 
-        iconcolour="#64323E"
-        strcolour="#CACACA"
+        colour_icon="^fg(#64323E)"
+        colour_str="^fg(#CACACA)"
         openparen="^fg(#656565)("
         closeparen="^fg(#656565))"
         bgcolour="#212122"
 
-        echo "^fg($iconcolour)^bg(${bgcolour})^i($icons/right_arrow.xbm) ^fg($iconcolour)^i($icons/sm4tik/xbm/cpu.xbm)^fg($strcolour) $cpu ^fg($iconcolour)^i($icons/sm4tik/xbm/mem.xbm)^fg($strcolour) $freemem $openparen ^fg($iconcolour)^i($icons/sm4tik/xbm/net_up_02.xbm)^fg($strcolour) $tx ^fg($iconcolour)^i($icons/sm4tik/xbm/net_down_02.xbm)^fg($strcolour) $rx ^fg($iconcolour)@ ${host} $closeparen ^fg($iconcolour)^i($icons/sm4tik/xbm/spkr_01.xbm)^fg($strcolour) ${vol} ${pcm} ^fg($iconcolour)^i($icons/sm4tik/xbm/diskette.xbm)^fg($strcolour) ${diskused}/${disktotal}B  ^fg($iconcolour)^i($icons/sm4tik/xbm/clock.xbm)^fg($strcolour) $date "
+
+        printf "%s %s %s %s %s %s %s %s %s %s %s\n" \
+            "${colour_icon}^bg(${bgcolour})^i(${icons}/right_arrow.xbm)" \
+            "${colour_icon}^i(${icons}/sm4tik/xbm/cpu.xbm)${colour_str} ${cpu}" \
+            "${colour_icon}^i($icons/sm4tik/xbm/mem.xbm)${colour_str} ${freemem}" \
+            "${openparen}" \
+            "${colour_icon}^i($icons/sm4tik/xbm/net_up_02.xbm)${colour_str} $tx" \
+            "${colour_icon}^i($icons/sm4tik/xbm/net_down_02.xbm)${colour_str} $rx" \
+            "${colour_icon}@ ${host}" \
+            "${closeparen}" \
+            "${colour_icon}^i($icons/sm4tik/xbm/spkr_01.xbm)${colour_str} ${vol} ${pcm}" \
+            "${colour_icon}^i($icons/sm4tik/xbm/diskette.xbm)${colour_str} ${diskused}/${disktotal}B" \
+            "${colour_icon}^i($icons/sm4tik/xbm/clock.xbm)${colour_str} $date"
+
 
         sleep $interval
 
