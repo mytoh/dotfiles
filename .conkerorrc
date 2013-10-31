@@ -1,9 +1,9 @@
-// -*- mode: javascript -*-
+// -*- mode: js3 -*-
 
 require("tab-bar.js");
 require("favicon");
 
-theme_load("mono");
+theme_load("gesso");
 
 // load urls from the command line in new buffers instead
 // of new windows.
@@ -28,6 +28,11 @@ hint_digits="aoeuidhtnspyfgcrl";
 
 // delicious
 define_delicious_webjumps("heinahattu");
+
+// keymap
+require("global-overlay-keymap");
+define_key_alias("C-m", "return");
+define_key_alias("C-i", "tab");
 
 /// modeline
 // add buttons
