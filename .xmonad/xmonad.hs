@@ -145,8 +145,9 @@ myKeys = [ -- M4 for Super key
        , ("M-S-p", unsafeSpawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/local/tmp/'")
          
        , ("C-t e e", runOrRaise "emacs" (className =? "Emacs"))
-       , ("C-t e d", AL.launchApp myXPConfig { defaultText = "~" } "dolphin" ) -- filer prompt
+       , ("C-t e f", runOrRaise "thunar" (className =? "Thunar"))
        , ("C-t e r", spawn $ "dmenu_run -b -p \">\" -fn " ++ myDzenFont) -- dzen prompt
+       , ("C-t e t", spawn $ "urxvtcd")
 
          ]
            where
@@ -197,17 +198,20 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         -- [ [isFullscreen                                       --> (doF W.focusDown <+> doFullFloat) ]
         [ [isFullscreen                                          --> doFullFloat ]
         , [isDialog                                              --> doFloat]
-        , 
+         
         , [(className =? c <||> title =? c <||> appName =? c)    --> doFloat | c <- myFloats ]
-          [className  =? "feh"                                   --> viewShift "kolme"]
+        , [className  =? "feh"                                   --> viewShift "kolme"]
         , [className  =? "MPlayer"                               --> (doFullFloat <+> viewShift "kolme")]
         , [className  =? "mplayer2"                              --> (doFullFloat <+> viewShift "kolme")]
         , [className  =? "mpv"                                   --> (doFullFloat <+> viewShift "kolme")]
           
-        , [className  =? "V2C"                                   --> (doFullFloat <+> viewShift "kaksi")]
-        , [className  =? "Opera"                               -->  viewShift "kaksi"]
-        , [className  =? "Firefox"                               -->  viewShift "kaksi"]
+        , [className  =? "V2C"                                   --> viewShift "kaksi"]
+        , [className  =? "Opera"                                 --> viewShift "kaksi"]
+        , [className  =? "Conkeror"                               --> viewShift "kaksi"]
+        , [className  =? "Firefox"                               --> viewShift "kaksi"]
         , [(className =? "Firefox" <&&> appName =? "Dialog")     --> (doFloat <+> viewShift "kaksi")]
+
+        , [className  =? "Thunar"                               --> viewShift "neljä"]
           
         , [className   =? "Emacs"                                --> viewShift "emacs"]
           
