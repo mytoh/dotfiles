@@ -84,6 +84,7 @@ $version = "v0.11";
 use MP3::Info;
 use File::Find ();
 use File::Basename;
+use File::Path qw(make_path remove_tree);
 use Getopt::Long;
 use String::ShellQuote;
 
@@ -214,7 +215,10 @@ sub ConvertFile() {
     $newdir = dirname($oggoutputfile);
 
     # until i find a way to make perl's mkdir work like mkdir -p...
-    system("mkdir -p $newdir");
+    # system("mkdir -p $newdir");
+    make_path($newdir);
+
+
 
 
     $infostring = "";
