@@ -90,10 +90,10 @@ use String::ShellQuote;
 
 use_winamp_genres();
 
-$oggenc  = "/usr/local/bin/oggenc";
-$ogginfo = "/usr/local/bin/ogginfo";
-$mpg123  = "/usr/local/bin/mpg123";
-$mpg321  = "/usr/local/bin/mpg321";
+$oggenc  = "oggenc";
+$ogginfo = "ogginfo";
+# $mpg123  = "/usr/local/bin/mpg123";
+$mpg321  = "mpg321";
 
 print "mp32ogg $version\n";
 print "(c) 2000-2002 Nathan Walp\n";
@@ -123,8 +123,6 @@ sub showhelp() {
     exit;
 
 }
-
-
 
 
 sub checkfile() {
