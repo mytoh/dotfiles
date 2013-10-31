@@ -245,3 +245,5 @@ security/arm
 x11/xbindkeys
 x11/hs-xmobar
 x11/xsel
+x11/xfce4-whiskermenu-plugin
+sysutils/py-ranger
