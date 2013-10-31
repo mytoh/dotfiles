@@ -6,13 +6,13 @@ attach() {
     tmux attach -t ${session}
 }
 
-session_päälinja() {
-    local session="päälinja"
+session.main() {
+    local session="main"
     local window="main"
     tmux new-session -s ${session} -n ${window} -d
 }
 
-session_remote() {
+session.remote() {
     local session="remote"
     local window="sdf"
 
@@ -21,7 +21,7 @@ session_remote() {
     tmux detach -s ${session}
 }
 
-session_daemon() {
+session.daemon() {
     local session="daemon"
     local window="peca"
 
@@ -29,14 +29,23 @@ session_daemon() {
     tmux detach -s ${session}
 }
 
+session.stats() {
+    local session="stats"
+    local window="top"
+
+    tmux new-session -s ${session} -n ${window} -d 'top' \; set-window-option -q -t :0 remain-on-exit on
+    tmux detach -s ${session}
+}
+
 
 main() {
 
-    session_päälinja
-    session_remote
-    session_daemon
+    session.main
+    session.remote
+    session.daemon
+    session.stats
 
-    attach päälinja
+    attach main
 }
 
 main
