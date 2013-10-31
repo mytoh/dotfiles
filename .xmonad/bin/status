@@ -9,7 +9,7 @@ export NOCOLOR=true
 
 stat.cpu() {
 
-    top -b -d 2 | grep ^CPU | awk '{print $2,$6}'
+    top -b -d 2 | grep ^CPU | awk '{print $2}'
 }
 
 stat.net.rx() {
