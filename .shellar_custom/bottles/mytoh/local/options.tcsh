@@ -5,7 +5,7 @@ set savehist=(100000 merge)
 set autolist=ambiguous
 unset autocorrect
 set addsuffix
-set ignoreeof
+# set ignoreeof
 set filec
 set histdup=erase
 set rmstar
@@ -17,7 +17,7 @@ set implicitcd=verbose
 set color
 set colorcat
 set autoexpand
-set complete=enhance
+set complete=Enhance
 set path=(~/.cabal/bin ~/.local/bin ~/local/ohjelmat/{v2c} ~/local/bin /usr/local/kde4/{sbin,bin} /usr/local/{sbin,bin} /{sbin,bin} /usr/{sbin,bin} $path)
 set cdpath=(~/local/)
 set noclobber

@@ -10,6 +10,9 @@ alias reboot 'sync;sync;sync;sudo shutdown -r now'
 alias take 'mkdir -p \!:1 && chdir \!:1'
 alias pam 'rm -rf'
 alias globalip 'fetch -q -o - http://ifconfig.me/ip'
+alias clip-fetch 'xclip -o | xargs fetch'
+alias clip-base 'xclip -o | xargs basename'
+alias clip-mkdir 'clip-base | xargs mkdir -v -p'
 
 if (-X dfc) then
     alias df 'dfc'
