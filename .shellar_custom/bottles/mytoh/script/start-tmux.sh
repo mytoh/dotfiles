@@ -6,13 +6,13 @@ attach() {
     tmux attach -t ${session}
 }
 
-session.main() {
+session::main() {
     local session="main"
     local window="main"
     tmux new-session -s ${session} -n ${window} -d
 }
 
-session.remote() {
+session::remote() {
     local session="remote"
     local window="sdf"
 
@@ -21,7 +21,7 @@ session.remote() {
     tmux detach -s ${session}
 }
 
-session.daemon() {
+session::daemon() {
     local session="daemon"
     local window="peca"
 
@@ -29,7 +29,7 @@ session.daemon() {
     tmux detach -s ${session}
 }
 
-session.stats() {
+session::stats() {
     local session="stats"
     local window="top"
 
@@ -40,10 +40,10 @@ session.stats() {
 
 main() {
 
-    session.main
-    session.remote
-    session.daemon
-    session.stats
+    session::main
+    session::remote
+    # session::daemon
+    session::stats
 
     attach main
 }

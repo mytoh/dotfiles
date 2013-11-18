@@ -1,0 +1,256 @@
+﻿/**
+ * 
+ * Minimalism for Twitter ver 1.0
+ *
+ * 画像を含むこのスタイルはパブリックドメインです。
+ */
+
+<PROPERTY>
+Name=Minimalism for Twitter
+</PROPERTY>
+
+/* ============================================================
+ * スタイルの定義
+ */
+<STYLE>
+.root, .popuproot {
+    background-color: #232f2d;
+    font-size: normal;
+    font-weight: normal;
+    color: #d2e0ed;
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+    topbar-margin-offset:0px;
+    bottombar-margin-offset:0px;
+
+/**
+* ThreadView.DefaultBackground=#232f2d
+* ThreadView.LinkFG=#71bdf1
+* ThreadView.DefaultForeground=#d2e0ed
+* ThreadView.PopupAltBG=#1d1d26
+* ItemList.EvenBG=#303234
+* ThreadView.ResNumberFG=#9797eb
+* ItemList.NewItemBG=#73606d
+* ItemList.OddBG=#323024
+* ThreadView.NameFG=#86e784
+* ThreadView.IDFG=#c2c9a7
+* ThreadView.PopupBG=#39392f
+* ThreadView.TimeFG=#947d7d
+* ThreadGraph.Cond=:B#ffffff	C#2222aa	F#000000	G#808080	I#f7f7f7	L#ff0000	N#66dd00	R#808080	S#c0c0ff	T#0000ff
+* ThreadView.TimeHighlightColor=#88FF88
+* ThreadView.ThreadPanelBG=#212225
+**/
+
+}
+/*
+ * 背景画像の透過塗り
+ */
+.overlay {
+    /* background-color: rgba(222, 222, 222, 0.6); */
+}
+/*
+ * レス、NGレスの矩形
+ */
+.res, .ngres {
+    /* background-color: rgba(255, 255, 255, 0.6); */
+    background-color: #232f2d;
+    border-radius: 0px;
+    margin: 0.2ex 1em 0.5ex 1em;
+    padding: 0.5ex 0ex 0.5ex 0ex;
+}
+.res {}
+.ngres {
+    color: #888 !important;
+    font-size: small;
+    text-align: right;
+    padding: 0ex 1ex;
+}
+/*
+ * アイコン
+ */
+.icon {
+    text-align: center;
+    width: 1ZW;
+    margin: 0.5ex 1ex 0.5ex 1ex;
+}
+/*
+ * レス本文
+ */
+.content {
+    margin: 0.5ex 1ex 0ex 0ex;
+}
+.message {
+    color: #d2e0ed;
+}
+.thumbs {}
+/*
+ * ユーザー名、日付など
+ */
+.info {
+    color: #444 !important;
+    font-size: small !important;
+    width: 14em;
+}
+.name {
+    color: #676 !important;
+}
+.username {}
+.source {
+    color: #888;
+}
+.time {
+    color: #888 !important;
+}
+/* 未使用 */
+.irt_rtb {
+    font-size: small !important;
+}
+.irt{
+    color: #c00 !important;
+}
+.rtb {
+    color: #888 !important;
+}
+.twreltime {
+    color: #888 !important;
+    font-size: x-small;
+    width: 5em;
+}
+/* ブックマーク、新着、プレビュー */
+.bookmark, .newmark, .preview {
+    background-gradation: left rgba(255,192,192,.1) 30% rgba(255,192,192,.1) 20% rgba(255,192,192,.6) 20% rgba(255,192,192,.1) 30% rgba(255,192,192,.1);
+    text-align: center;
+    padding: 0ex;
+}
+/* ヘッダーとフッター */
+.header_footer {
+    text-align: center;
+    padding: 1em 2em;
+}
+.header {}
+.footer {}
+/* トップバーとボトムバー */
+.bar {
+    background-color: rgba(192, 192, 192, 0.6);
+    font-size: small;
+    text-align: right;
+    padding: 0em 1em;
+}
+.topbar {}
+.bottombar {}
+.bottombartext {
+    text-align: left;
+    width: 75%;
+}
+/* その他 */
+.boardname {
+    font-size: small;
+    color: #666;
+}
+.bbsname {
+    font-size: small;
+    color: #666;
+}
+.threadname {
+    color: #222222;
+}
+/*
+ * ポップアップのスタイル定義
+ *
+ * ポップアップは基本的に通常のレス表示のスタイルを使用し、必要に応じ
+ * 追加的な処置を記述します。
+ */
+.popuproot {}
+.popupres {
+    font-size: small;
+}
+.popupicon {}
+.popupcontent {
+    width: 30em;
+}
+.popupinfo {}
+
+</STYLE>
+
+/* ============================================================
+ * 要素のテンプレート
+ */
+/* レス表示 */
+<RES class="overlay">
+  <HBOX class="res">
+    <DIV class="icon"><USERICON></DIV>
+    <VBOX class="content">
+      <DIV class="message"><MESSAGE></DIV>
+      <DIV class="thumbs" option="thumbnail"><THUMBNAIL></DIV>
+    </VBOX>
+    <VBOX class="info">
+      <DIV><SPAN class="name"><NAME></SPAN></DIV>
+      <DIV><SPAN class="username"><USERNAME></SPAN><SPAN class="source"> <SOURCE></SPAN><STATEICONS><CONTRIBUTORSSET></DIV>
+      <DIV><SPAN class="time"><TIME></SPAN></DIV>
+    </VBOX>
+  </HBOX>
+</RES>
+/* NGレス表示 */
+<NGRES class="overlay">
+  <HBOX>
+    <DIV class="ngres">&dagger; <NGREASON> <TIME></DIV>
+  </HBOX>
+</NGRES>
+/* しおり表示 */
+<BOOKMARK class="overlay">
+  <DIV class="bookmark">Bookmark</DIV>
+</BOOKMARK>
+/* 新着表示 */
+<NEWMARK class="overlay">
+  <DIV class="newmark">NEW <SPAN class="newrescount"><NEWRESCOUNT></SPAN></DIV>
+</NEWMARK>
+/* プレビュー表示 */
+<PREVIEWMARK class="overlay">
+  <DIV class="preview">Preview</DIV>
+</PREVIEWMARK>
+/* ヘッダー表示 */
+<HEADER class="overlay">
+  <DIV class="header_footer header"><SPAN class="bbsname"><BBSNAME></SPAN><BR><SPAN class="threadname"><THREADNAME></SPAN></DIV>
+</HEADER>
+/* フッター表示 */
+<FOOTER class="overlay">
+  <DIV class="header_footer footer"><SPAN class="bbsname"><BBSNAME></SPAN> <SPAN class="threadname"><THREADNAME></SPAN></DIV>
+</FOOTER>
+/* トップバー表示 */
+<TOPBAR class="bar topbar">
+</TOPBAR>
+/* ボトムバー表示 */
+<BOTTOMBAR class="bar bottombar">
+  <HBOX>
+    <DIV class="bottombartext"><SPAN class="threadname"><THREADNAME></SPAN></DIV>
+    <DIV>新着<SPAN class="newrescount"><NEWRESCOUNT></SPAN>件 全<SPAN class="allrescount"><ALLRESCOUNT></SPAN>件 </DIV>
+  </HBOX>
+</BOTTOMBAR>
+/* アンカー */
+<ANCHORED option="noexbg">
+</ANCHORED>
+/* ポップアップ表示 */
+<POPUP>
+  <RES>
+    <HBOX class="res popupres">
+      <DIV class="icon popupicon"><USERICON></DIV>
+      <VBOX class="content popupcontent">
+        <DIV class="message"><MESSAGE></DIV>
+        <DIV class="thumbs" option="thumbnail"><THUMBNAIL></DIV>
+      </VBOX>
+      <VBOX class="info popupinfo">
+        <DIV><SPAN class="name"><NAME></SPAN></DIV>
+        <DIV><SPAN class="username"><USERNAME></SPAN><SPAN class="source"> <SOURCE></SPAN><STATEICONS><CONTRIBUTORSSET></DIV>
+        <DIV><SPAN class="time"><TIME></SPAN></DIV>
+      </VBOX>
+    </HBOX>
+  </RES>
+</POPUP>
+
+
+/** 
+ * Local Variables:
+ * mode: css-mode
+ * End:
+** /

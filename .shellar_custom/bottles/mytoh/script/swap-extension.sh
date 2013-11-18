@@ -13,12 +13,14 @@ main() {
     local newext="${1}"
     local file="${2}"
     local base="${file%.*}"
+    local newfile="${base}.${newext}"
 
     if ! empty_string "${base}"
     then
-        mv ${file} "${base}.${newext}"
+        mv "${file}" "${newfile}"
+        printf "rename %s to %s \n" "${file}" "${newfile}"
     fi
 
 }
 
-main ${@}
+main "${@}"

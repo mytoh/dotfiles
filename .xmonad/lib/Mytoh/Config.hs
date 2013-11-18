@@ -2,10 +2,10 @@ module Mytoh.Config where
   import XMonad
 
   myTerminal       :: String
-  myTerminal       = "mlclient"
+  myTerminal       = "urxvtcd"
 
   myBorderWidth    :: Dimension
-  myBorderWidth    = 2
+  myBorderWidth    = 3
 
   myModMask        :: KeyMask
   -- mod1 = alt , mod4 = windows key
@@ -19,8 +19,7 @@ module Mytoh.Config where
 
   myWorkspaces  :: [[Char]]
   myWorkspaces  =
-    [
-     "yksi"
+    [ "yksi"
     , "kaksi"
     , "kolme"
     , "neljä"
@@ -42,7 +41,7 @@ module Mytoh.Config where
   myNormalBorderColor  :: String
   myNormalBorderColor  = "#111111"
   myFocusedBorderColor :: String
-  myFocusedBorderColor = "#3d7df5"
+  myFocusedBorderColor = "#4d8de5"
   -- }}}
 
   -- Fonts -------------------------------------------

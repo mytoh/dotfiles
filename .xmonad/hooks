@@ -1,0 +1,20 @@
+#!/bin/sh
+
+
+hooks::startup() {
+
+    compton &
+
+}
+
+
+main() {
+    local hook="${1}"
+
+    case ${hook} in
+        startup)   hooks::startup ;;
+    esac
+
+}
+
+main "${1}"

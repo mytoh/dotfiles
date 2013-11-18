@@ -1,6 +1,6 @@
 #!/bin/sh
 
-unarchive.untar() {
+unarchive::untar() {
     local file="${1}"
 
     tar xvf "${file}"
@@ -12,11 +12,11 @@ unarchive() {
     then
         case "${file}" in
             *.tar.bz2)
-                unarchive.untar "${file}" ;;
+                unarchive::untar "${file}" ;;
             *.tar.gz)
-                unarchive.untar "${file}" ;;
+                unarchive::untar "${file}" ;;
             *.tar.xz)
-                unarchive.untar "${file}" ;;
+                unarchive::untar "${file}" ;;
             *.xz)
                 unxz "${file}";;
             *.bz2)
@@ -26,11 +26,11 @@ unarchive() {
             *.gz)
                 gunzip "${file}" ;;
             *.tar)
-                unarchive.untar "${file}" ;;
+                unarchive::untar "${file}" ;;
             *.tbz2)
-                unarchive.untar "${file}" ;;
+                unarchive::untar "${file}" ;;
             *.tgz)
-                unarchive.untar "${file}" ;;
+                unarchive::untar "${file}" ;;
             *.zip)
                 unzip "${file}" ;;
             *.Z)

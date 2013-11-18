@@ -1,0 +1,286 @@
+﻿/**
+ * 
+ * Minimalism ver 1.1
+ *
+ * 特徴
+ *  本文の可読性を最重視した3カラムのスタイルです。
+ *  フォントサイズベースのレイアウトなので、フォントのサイズを変更すると
+ *  レイアウトの幅、高さも揃って拡大縮小します。
+ *
+ * 画像を含むこのスタイルはパブリックドメインです。
+ */
+
+<PROPERTY>
+Name=Minimalism
+</PROPERTY>
+
+/* ============================================================
+ * スタイルの定義
+ *
+ * 要素とクラスの構造関係はだいたい以下のようになります。
+ *
+ * root            全体
+ *   + res         レス
+ *     + miniinfo  レス番、新着
+ *     + content   本文
+ *     + info      名前、メール、ID、日付
+ *   + ngres       NGレス
+ *
+ * 背景画像の濃さが気にいらない場合、.overlay .res .ngres の
+ * background-color の値を調整します。
+ */
+<STYLE>
+.root, .popuproot {
+    /* background-color: #eee;*/
+    /* font-size: normal;*/
+    /* font-weight: normal;*/
+    /* color: #444;*/
+    /* margin: 0px;*/
+    /* padding: 0px;*/
+    /* text-align: left;*/
+    /* topbar-margin-offset:0px;*/
+    /* bottombar-margin-offset:0px;*/
+
+    background-color: #26292c;
+    font-size: normal;
+    font-weight: normal;
+    color: #d2e0ed;
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+    topbar-margin-offset:0px;
+    bottombar-margin-offset:0px;
+}
+/*
+ * 背景画像の透過塗り
+ *
+ * V2Cの背景画像の色設定でなくスタイルで設定する場合 background-color を
+ * 有効にします。
+ */
+.overlay {
+    /* background-color: rgba(222, 222, 222, 0.6); */
+}
+/*
+ * レス、NGレスの矩形
+ *
+ * フチを角丸にする場合は .res, .ngres の
+ * border-radius を 0px 以上に設定します。
+ *
+ * レス間の隙間はこの margin のみで決定され、
+ * margin: 0em 1em 0em 1em; であれば隙間は完全に消失します。
+ */
+.res, .ngres {
+    /* background-color: rgba(255, 255, 255, 0.6);*/
+    background-color: #26292c;
+    border-radius: 0px;
+    margin: 0.2ex 1em 0.5ex 1em;
+    padding: 0.5ex 0ex 0.5ex 0ex;
+}
+.res {}
+.ngres {
+    color: #888 !important;
+    font-size: small;
+    text-align: right;
+    padding: 0ex 1ex;
+}
+/*
+ * レス番号
+ *
+ * レス番号が途中で改行されてしまう場合、.miniinfo の width を調整します。
+ */
+.miniinfo {
+    text-align: left;
+    width: 4em;
+}
+.number {
+    color: rgba(127, 127, 127, 0.5) !important;
+    font-size: medium;
+    font-weight: bold !important;
+    overflow: visible;
+}
+.newicon {}
+/*
+ * レス本文
+ */
+.content {
+    margin: 0.5ex 1ex 0ex 0ex;
+}
+.message {
+    /* color: #222;*/
+    color: #d2e0ed;
+}
+.thumbs {}
+/*
+ * 名前、メール、ID、日付など
+ *
+ * 余計な折り返しが発生する場合 width の値を調整します。
+ */
+.info {
+    color: #444 !important;
+    font-size: normal;
+    width: 15em;
+}
+.name {
+    color: #676 !important;
+    font-weight: normal !important;
+}
+.id {
+    color: #666 !important;
+}
+.refcount {
+    color: #c00 !important;
+}
+.mail {
+    color: #888 !important;
+}
+.date {
+    color: #888 !important;
+}
+/* ブックマーク、新着、プレビュー */
+.bookmark, .newmark, .preview {
+    background-gradation: left rgba(255,192,192,.1) 30% rgba(255,192,192,.1) 20% rgba(255,192,192,.6) 20% rgba(255,192,192,.1) 30% rgba(255,192,192,.1);
+    text-align: center;
+    padding: 0ex;
+}
+/* ヘッダーとフッター */
+.header_footer {
+    text-align: center;
+    padding: 1em 2em;
+}
+.header {}
+.footer {}
+/* トップバーとボトムバー */
+.bar {
+    background-color: rgba(192, 192, 192, 0.6);
+    font-size: small;
+    text-align: right;
+    padding: 0em 1em;
+}
+.topbar {}
+.bottombar {}
+.bottombartext {
+    text-align: left;
+    width: 75%;
+}
+/* その他 */
+.year {}
+.month {}
+.day {}
+.dayofweek {}
+.timeofday {}
+.newrescount {
+    color: #c00;
+}
+.allrescount {}
+.sizekb {}
+.boardname {
+    font-size: small;
+    color: #666;
+}
+.bbsname {
+    font-size: small;
+    color: #666;
+}
+.threadname {
+    color: #222;
+}
+/*
+ * ポップアップのスタイル定義
+ *
+ * ポップアップは基本的に通常のレス表示のスタイルを使用し、必要に応じ
+ * 追加的な処置を記述します。
+ */
+.popuproot {
+    font-size: small;
+}
+.popupres {}
+.popupminiinfo {}
+.popupcontent {
+    width: 30em;
+}
+.popupinfo {}
+
+</STYLE>
+
+/* ============================================================
+ * 要素のテンプレート
+ */
+/* レス表示 */
+<RES class="overlay">
+  <HBOX class="res">
+    <VBOX class="miniinfo">
+      <DIV><SPAN class="number"><NUMBER></SPAN></DIV>
+      <DIV class="newicon"><IMG src="image/icon_[N].png"></DIV>
+    </VBOX>
+    <VBOX class="content">
+      <DIV class="message"><MESSAGE></DIV>
+      <DIV class="thumbs" option="thumbnail"><THUMBNAIL></DIV>
+    </VBOX>
+    <VBOX class="info">
+      <DIV><SPAN class="id"><ID option="nolabel"><STOCK><BE><AUXSET></SPAN><SPAN class="refcount">+<REFCOUNT></SPAN><SPAN class="mail"><MAIL></SPAN></DIV>
+      <DIV><SPAN class="name"><NAME></SPAN></DIV>
+      <DIV class="date"><SPAN class="year"><YEAR>/</SPAN><SPAN class="month"><MONTH>/</SPAN><SPAN class="day"><DAY></SPAN><SPAN class="dayofweek"> <DAYOFWEEK> </SPAN><SPAN class="timeofday"><TIMEOFDAY></SPAN></DIV>
+    </VBOX>
+  </HBOX>
+</RES>
+/* NGレス表示 */
+<NGRES class="overlay">
+  <DIV class="ngres">&dagger; <NGREASON> <TIME></DIV>
+</NGRES>
+/* しおり表示 */
+<BOOKMARK class="overlay">
+  <DIV class="bookmark">Bookmark</DIV>
+</BOOKMARK>
+/* 新着表示 */
+<NEWMARK class="overlay">
+  <DIV class="newmark">NEW <SPAN class="newrescount"><NEWRESCOUNT></SPAN></DIV>
+</NEWMARK>
+/* プレビュー表示 */
+<PREVIEWMARK class="overlay">
+  <DIV class="preview">Preview</DIV>
+</PREVIEWMARK>
+/* ヘッダー表示 */
+<HEADER class="overlay">
+  <DIV class="header_footer header"><SPAN class="bbsname"><BBSNAME></SPAN> <SPAN class="boardname"><BOARDNAME></SPAN><BR><SPAN class="threadname"><THREADNAME></SPAN></DIV>
+</HEADER>
+/* フッター表示 */
+<FOOTER class="overlay">
+  <DIV class="header_footer footer"><SPAN class="bbsname"><BBSNAME></SPAN> <SPAN class="boardname"><BOARDNAME></SPAN></DIV>
+</FOOTER>
+/* トップバー表示 */
+<TOPBAR class="bar topbar">
+</TOPBAR>
+/* ボトムバー表示 */
+<BOTTOMBAR class="bar bottombar">
+  <HBOX>
+    <DIV class="bottombartext"><SPAN class="threadname"><THREADNAME></SPAN></DIV>
+    <DIV>新着<SPAN class="newrescount"><NEWRESCOUNT></SPAN>件 全<SPAN class="allrescount"><ALLRESCOUNT></SPAN>件 <SPAN class="sizekb"><SIZEKB></SPAN>KB</DIV>
+  </HBOX>
+</BOTTOMBAR>
+/* ポップアップ表示 */
+<POPUP>
+  <RES>
+  <HBOX class="res popupres">
+    <VBOX class="miniinfo popupminiinfo">
+      <DIV><SPAN class="number"><NUMBER></SPAN></DIV>
+      <DIV class="newicon"><IMG src="image/icon_[N].png"></DIV>
+    </VBOX>
+    <VBOX class="content popupcontent">
+      <DIV class="message"><MESSAGE></DIV>
+      <DIV class="thumbs" option="thumbnail"><THUMBNAIL></DIV>
+    </VBOX>
+    <VBOX class="info popupinfo">
+      <DIV><SPAN class="id"><ID option="nolabel"><STOCK><BE><AUXSET></SPAN><SPAN class="refcount">+<REFCOUNT></SPAN><SPAN class="mail"><MAIL></SPAN></DIV>
+      <DIV><SPAN class="name"><NAME></SPAN></DIV>
+      <DIV class="date"><SPAN class="year"><YEAR>/</SPAN><SPAN class="month"><MONTH>/</SPAN><SPAN class="day"><DAY></SPAN><SPAN class="dayofweek"> <DAYOFWEEK> </SPAN><SPAN class="timeofday"><TIMEOFDAY></SPAN></DIV>
+    </VBOX>
+  </HBOX>
+  </RES>
+</POPUP>
+
+
+/** 
+ * Local Variables:
+ * mode: css-mode
+ * End:
+** /

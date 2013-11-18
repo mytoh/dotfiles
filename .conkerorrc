@@ -2,8 +2,16 @@
 
 require("tab-bar.js");
 require("favicon");
+require("clicks-in-new-buffer.js");
 
-theme_load("gesso");
+
+theme_load("default");
+
+// default directory for downloads and shell commands.
+cwd = get_home_directory();
+cwd.append("local");
+cwd.append("lataukset");
+
 
 // load urls from the command line in new buffers instead
 // of new windows.
@@ -33,11 +41,40 @@ define_delicious_webjumps("heinahattu");
 require("global-overlay-keymap");
 define_key_alias("C-m", "return");
 define_key_alias("C-i", "tab");
+define_key_alias("C-[", "escape");
 
 /// modeline
 // add buttons
 load_paths.unshift("chrome://conkeror-contrib/content/");
 require("mode-line-buttons.js");
 mode_line_add_buttons(standard_mode_line_buttons, true);
+// download
+add_hook("mode_line_hook", mode_line_adder(downloads_status_widget));
 // favicon
 add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
+
+// let xkcd-mode put the funny alt text into the page.
+xkcd_add_title = true;
+
+
+/// click-in-new-buffer
+// You can control whether buffers are created in the foreground or background (foreground is default).
+// Set to either OPEN_NEW_BUFFER or OPEN_NEW_BUFFER_BACKGROUND
+clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND; // Now buffers open in background.
+
+// You can control the mouse button which triggers buffer creation (middle is default).
+// Set to 0 = left mouse, 1 = middle mouse, 2 = right mouse
+clicks_in_new_buffer_button = 1; //  Now middle mouse follows links in new buffers.
+
+
+
+// display profile name in title window
+function my_title_format (window) {
+    return '{'+get_current_profile()+'} '+window.buffers.current.description;
+}
+
+title_format_fn = my_title_format;
+
+
+user_pref("browser.tabs.animate", false);
+user_pref("browser.download.animateNotifications", false);

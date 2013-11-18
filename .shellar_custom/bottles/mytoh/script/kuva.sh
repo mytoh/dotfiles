@@ -1,6 +1,8 @@
 #!/bin/sh
 
+set -o errexit
 set -o nounset
+
 
 open_file() {
     local dir=$(dirname "${1}")
@@ -23,4 +25,4 @@ main() {
     fi
 }
 
-main "${1}"
+main "${@}"

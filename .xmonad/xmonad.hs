@@ -55,6 +55,8 @@ import XMonad.Layout.MosaicAlt
 import XMonad.Layout.OneBig
 import XMonad.Layout.TwoPane
 import XMonad.Layout.Reflect
+import XMonad.Layout.Spacing  (spacing)
+
 
 -- <layout helpers>
 import XMonad.Layout.Master
@@ -108,10 +110,11 @@ myLayoutHook =  avoidStruts                $
                   where
 
 --                 collectiveLayouts = tabbed ||| twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex
-                   collectiveLayouts = twopane ||| full ||| tile ||| onebig ||| mosaic ||| sprl ||| Roledex
+                   collectiveLayouts = twopane ||| full ||| tile ||| stile ||| onebig ||| mosaic ||| sprl ||| Roledex
 
                    full    = renamed [Replace "*"] $ smartBorders $ withBorder 1 $ dwmStyle shrinkText myTheme Full
                    tile    = renamed [Replace "+"] $ smartBorders $ withBorder 1 $ limitWindows 5 $ ResizableTall 1 0.03 0.5 []
+                   stile    = renamed [Replace "/+/"] $ smartBorders $ withBorder 1 $ limitWindows 5 $ spacing 3 $ ResizableTall 1 0.03 0.5 []
                    -- tabbed  = renamed [Replace "="] (smartBorders (noBorders (mastered 0.02 0.4 $ tabbedBottomAlways shrinkText myTheme)))
                    twopane = renamed [Replace "-"] $ smartBorders $ withBorder 1 $ TwoPane 0.02 0.4
                    mosaic  = renamed [Replace "%"] $ smartBorders $ withBorder 1 $ MosaicAlt M.empty
@@ -198,23 +201,26 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         -- [ [isFullscreen                                       --> (doF W.focusDown <+> doFullFloat) ]
         [ [isFullscreen                                          --> doFullFloat ]
         , [isDialog                                              --> doFloat]
-         
+
         , [(className =? c <||> title =? c <||> appName =? c)    --> doFloat | c <- myFloats ]
         , [className  =? "feh"                                   --> viewShift "kolme"]
-        , [className  =? "MPlayer"                               --> (doFullFloat <+> viewShift "kolme")]
-        , [className  =? "mplayer2"                              --> (doFullFloat <+> viewShift "kolme")]
-        , [className  =? "mpv"                                   --> (doFullFloat <+> viewShift "kolme")]
-          
+        , [className  =? "MPlayer"                               --> (doFloat <+> viewShift "kolme")]
+        , [className  =? "mplayer2"                              --> (doFloat <+> viewShift "kolme")]
+        , [className  =? "mpv"                                   --> (doFloat <+> viewShift "kolme")]
+        , [className  =? "Qmmp"                                  --> (doFloat <+> viewShift "kolme")]
+        , [className  =? "Audacious"                             --> (doFloat <+> viewShift "kolme")]
+        , [className  =? "gogglesmm"                             --> (doFloat <+> viewShift "kolme")]
+
         , [className  =? "V2C"                                   --> viewShift "kaksi"]
         , [className  =? "Opera"                                 --> viewShift "kaksi"]
-        , [className  =? "Conkeror"                               --> viewShift "kaksi"]
+        , [className  =? "Conkeror"                              --> viewShift "kaksi"]
         , [className  =? "Firefox"                               --> viewShift "kaksi"]
         , [(className =? "Firefox" <&&> appName =? "Dialog")     --> (doFloat <+> viewShift "kaksi")]
 
         , [className  =? "Thunar"                               --> viewShift "neljä"]
-          
+
         , [className   =? "Emacs"                                --> viewShift "emacs"]
-          
+
         , [className  =? "Xfce4-notifyd"                         --> doIgnore]
         , [className  =? "trayer"                                --> doIgnore]
         , [className  =? "stalonetray"                           --> doIgnore]
@@ -228,7 +234,7 @@ myManageHook = -- insertPosition End Newer <+> composeAll
            where
          viewShift = doF . liftM2 (.) W.greedyView W.shift
          myFloats = ["Main.py","Gimp","DTA","Gcolor2","Switch2","Uim-pref-gtk"]
-         
+
 myScratchPads = [ NS "dolphin" spawnFiler findFiler manageFiler
                 ]
                   where

@@ -92,6 +92,8 @@ start_wm() {
             rox)          exec dbus-launch rox -S ;;
             lainwm)       exec dbus-launch lainwm ;;
             openbox)      exec openbox-session ;;
+            windowmaker)  exec wmaker ;;
+	    metisse)      exec metisse-start-fvwm ;;
             *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
         esac
     else

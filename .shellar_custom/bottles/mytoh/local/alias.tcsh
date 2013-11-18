@@ -13,6 +13,8 @@ alias globalip 'fetch -q -o - http://ifconfig.me/ip'
 alias clip-fetch 'xclip -o | xargs fetch'
 alias clip-base 'xclip -o | xargs basename'
 alias clip-mkdir 'clip-base | xargs mkdir -v -p'
+alias clip 'xclip -o'
+alias k 'killall -9'
 
 if (-X dfc) then
     alias df 'dfc'
