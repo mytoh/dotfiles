@@ -150,7 +150,8 @@ parse_cmdline() {
                 ;;
             *)
                 if [ $# -gt 1 ]; then usage; fi
-                if echo ${COMMANDS} | grep -vq extract; then
+                if echo ${COMMANDS} | grep -vq extract
+                then
                     usage
                 fi
                 EXTRACTPATH="$1"
@@ -159,7 +160,8 @@ parse_cmdline() {
         shift
     done
 
-    if [ -z "${COMMANDS}" ]; then
+    if [ -z "${COMMANDS}" ]
+    then
         usage
     fi
 }
@@ -167,7 +169,8 @@ parse_cmdline() {
 # If CONFFILE was specified at the command-line, make
 # sure that it exists and is readable.
 sanity_conffile() {
-    if [ ! -z "${CONFFILE}" ] && [ ! -r "${CONFFILE}" ]; then
+    if test ! -z "${CONFFILE}" && test ! -r "${CONFFILE}"
+    then
         echo -n "File does not exist "
         echo -n "or is not readable: "
         echo ${CONFFILE}
@@ -178,7 +181,8 @@ sanity_conffile() {
 # If a configuration file hasn't been specified, use
 # the default value (/etc/portsnap.conf)
 default_conffile() {
-    if [ -z "${CONFFILE}" ]; then
+    if test -z "${CONFFILE}"
+    then
         CONFFILE="/etc/portsnap.conf"
     fi
 }
@@ -189,23 +193,27 @@ default_conffile() {
 # Also read REFUSE (which cannot be set via the command line) if it is
 # present in the configuration file.
 parse_conffile() {
-    if [ -r "${CONFFILE}" ]; then
+    if test -r "${CONFFILE}"
+    then
         for X in KEYPRINT WORKDIR PORTSDIR SERVERNAME; do
             eval _=\$${X}
-            if [ -z "${_}" ]; then
+            if test -z "${_}"
+            then
                 eval ${X}=`grep "^${X}=" "${CONFFILE}" |
                     cut -f 2- -d '=' | tail -1`
             fi
         done
 
-        if grep -qE "^REFUSE[[:space:]]" ${CONFFILE}; then
+        if grep -qE "^REFUSE[[:space:]]" ${CONFFILE}
+        then
             REFUSE="^(`
                 grep -E "^REFUSE[[:space:]]" "${CONFFILE}" |
                     cut -c 7- | xargs echo | tr ' ' '|'
                 `)"
         fi
 
-        if grep -qE "^INDEX[[:space:]]" ${CONFFILE}; then
+        if grep -qE "^INDEX[[:space:]]" ${CONFFILE}
+        then
             INDEXPAIRS="`
                 grep -E "^INDEX[[:space:]]" "${CONFFILE}" |
                     cut -c 7- | tr ' ' '|' | xargs echo`"
@@ -227,7 +235,8 @@ default_params() {
         NDEBUG LOCALDESC FETCHPROGRAM; do
         eval _=\$${X}
         eval __=\$_${X}
-        if [ -z "${_}" ]; then
+        if [ -z "${_}" ]
+        then
             eval ${X}=${__}
         fi
     done
@@ -245,23 +254,27 @@ _KEYPRINT_z="Key must be given via -k option or configuration file."
 _KEYPRINT_bad="Invalid key fingerprint: "
 _WORKDIR_bad="Directory does not exist or is not writable: "
 
-if [ -z "${SERVERNAME}" ]; then
+if test -z "${SERVERNAME}"
+then
     echo -n "$(basename $0): "
     echo "${_SERVERNAME_z}"
     exit 1
 fi
-if [ -z "${KEYPRINT}" ]; then
+if test -z "${KEYPRINT}"
+then
     echo -n "$(basename $0): "
     echo "${_KEYPRINT_z}"
     exit 1
 fi
-if ! echo "${KEYPRINT}" | grep -qE "^[0-9a-f]{64}$"; then
+if ! echo "${KEYPRINT}" | grep -qE "^[0-9a-f]{64}$"
+then
     echo -n "$(basename $0): "
     echo -n "${_KEYPRINT_bad}"
     echo ${KEYPRINT}
     exit 1
 fi
-if ! [ -d "${WORKDIR}" -a -w "${WORKDIR}" ]; then
+if test ! -d "${WORKDIR}" && test -w "${WORKDIR}"
+then
     echo -n "$(basename $0): "
     echo -n "${_WORKDIR_bad}"
     echo ${WORKDIR}
@@ -282,13 +295,15 @@ extract_check_params() {
     _WORKDIR_bad="Directory does not exist: "
     _PORTSDIR_bad="Directory is not writable: "
 
-    if ! [ -d "${WORKDIR}" ]; then
+    if test ! -d "${WORKDIR}"
+    then
         echo -n "$(basename $0): "
         echo -n "${_WORKDIR_bad}"
         echo ${WORKDIR}
         exit 1
     fi
-    if [ -d "${PORTSDIR}" ] && ! [ -w "${PORTSDIR}" ]; then
+    if test -d "${PORTSDIR}" && test ! -w "${PORTSDIR}"
+    then
         echo -n "$(basename $0): "
         echo -n "${_PORTSDIR_bad}"
         echo ${PORTSDIR}
@@ -296,13 +311,14 @@ extract_check_params() {
     fi
 
     if ! [ -d "${WORKDIR}/files" -a -r "${WORKDIR}/tag"     \
-        -a -r "${WORKDIR}/INDEX" -a -r "${WORKDIR}/tINDEX" ]; then
+        -a -r "${WORKDIR}/INDEX" -a -r "${WORKDIR}/tINDEX" ]
+    then
         echo "No snapshot available.  Try running"
         echo "# $(basename $0) fetch"
-            exit 1
-        fi
+        exit 1
+    fi
 
-        MKINDEX=/usr/libexec/make_index
+    MKINDEX=/usr/libexec/make_index
 }
 
 # Perform sanity checks and set some final parameters
@@ -310,7 +326,8 @@ extract_check_params() {
 update_check_params() {
     extract_check_params
 
-    if ! [ -r ${PORTSDIR}/.portsnap.INDEX ]; then
+    if test ! -r ${PORTSDIR}/.portsnap.INDEX
+    then
         echo "${PORTSDIR} was not created by portsnap."
         echo -n "You must run '$(basename $0) extract' before "
         echo "running '$(basename ${0}) update'."
@@ -344,7 +361,7 @@ fetch_pick_server_init() {
         return 1
     fi
 
-    printf "Looking up ${SERVERNAME} mirrors... "
+    log_message_nonl "Looking up ${SERVERNAME} mirrors... "
 
     # Issue the SRV query and pull out the Priority, Weight, and Target fields.
     # BIND 9 prints "$name has SRV record ..." while BIND 8 prints
@@ -357,7 +374,8 @@ fetch_pick_server_init() {
     sort > serverlist_full
 
     # If no records, give up -- we'll just use the server name we were given.
-    if [ $(wc -l < serverlist_full) -eq 0 ]; then
+    if test $(wc -l < serverlist_full) -eq 0
+    then
         echo "none found."
         return 1
     fi
@@ -368,7 +386,8 @@ fetch_pick_server_init() {
     # Generate a random seed for use in picking mirrors.  If HTTP_PROXY
     # is set, this will be used to generate the seed; otherwise, the seed
     # will be random.
-    if [ -n "${HTTP_PROXY}${http_proxy}" ]; then
+    if test -n "${HTTP_PROXY}${http_proxy}"
+    then
         RANDVALUE=`sha256 -qs "${HTTP_PROXY}${http_proxy}" |
             tr -d 'a-f' |
             cut -c 1-9`
@@ -384,7 +403,8 @@ fetch_pick_server() {
     comm -23 serverlist_full - > serverlist
 
     # Have we run out of mirrors?
-    if [ $(wc -l < serverlist) -eq 0 ]; then
+    if test $(wc -l < serverlist) -eq 0
+    then
         echo "No mirrors remaining, giving up."
         return 1
     fi
@@ -394,7 +414,8 @@ fetch_pick_server() {
 
     # Add up the weights of the response lines at that priority level.
     SRV_WSUM=0;
-    while read X; do
+    while read X
+    do
         case "$X" in
             ${SRV_PRIORITY}\ *)
                 SRV_W=$(echo $X | cut -f 2 -d ' ')
@@ -418,7 +439,8 @@ fetch_pick_server() {
     # Read through the list of mirrors and set SERVERNAME.  Write the line
     # corresponding to the mirror we selected into serverlist_tried so that
     # we won't try it again.
-    while read X; do
+    while read X
+    do
         case "$X" in
             ${SRV_PRIORITY}\ *)
                 SRV_W=$(echo $X | cut -f 2 -d ' ')
@@ -440,11 +462,12 @@ fetch_pick_server() {
 # fetch the key if it doesn't exist.  Returns 1 if the key has
 # not yet been fetched.
 fetch_key() {
-    if [ -r pub.ssl ] && [ $(${SHA256} -q pub.ssl) = ${KEYPRINT} ]; then
+    if test -r pub.ssl && test $(${SHA256} -q pub.ssl) = ${KEYPRINT}
+    then
         return 0
     fi
 
-    echo -n "Fetching public key from ${SERVERNAME}... "
+    log_fetch "Fetching public key from ${SERVERNAME}... "
     rm -f pub.ssl
     ${FETCHPROGRAM} ${QUIETFLAG} http://${SERVERNAME}/pub.ssl \
         2>${QUIETREDIR} || true
@@ -464,10 +487,12 @@ fetch_key() {
 fetch_tag() {
     rm -f snapshot.ssl tag.new
 
-    echo ${NDEBUG} "Fetching snapshot tag from ${SERVERNAME}... "
+    # echo ${NDEBUG} "Fetching snapshot tag from ${SERVERNAME}... "
+    log_fetch "Fetching snapshot tag from ${SERVERNAME}... "
     ${FETCHPROGRAM} ${QUIETFLAG} http://${SERVERNAME}/$1.ssl      \
         2>${QUIETREDIR} || true
-    if ! [ -r $1.ssl ]; then
+    if test ! -r $1.ssl
+    then
         echo "failed."
         return 1
     fi
@@ -477,7 +502,8 @@ fetch_tag() {
     rm $1.ssl
 
     if ! [ $(wc -l < tag.new) = 1 ] ||
-        ! grep -qE "^portsnap\|[0-9]{10}\|[0-9a-f]{64}" tag.new; then
+        ! grep -qE "^portsnap\|[0-9]{10}\|[0-9a-f]{64}" tag.new
+    then
         echo "invalid snapshot tag."
         return 1
     fi
@@ -490,13 +516,15 @@ fetch_tag() {
 
 # Sanity-check the date on a snapshot tag
 fetch_snapshot_tagsanity() {
-    if [ $(date "+%s") -gt $(expr ${SNAPSHOTDATE} + 31536000) ]; then
+    if test $(date "+%s") -gt $(expr ${SNAPSHOTDATE} + 31536000)
+    then
         echo "Snapshot appears to be more than a year old!"
         echo "(Is the system clock correct?)"
         echo "Cowardly refusing to proceed any further."
         return 1
     fi
-    if [ $(date "+%s") -lt $(expr ${SNAPSHOTDATE} - 86400) ]; then
+    if test $(date "+%s") -lt $(expr ${SNAPSHOTDATE} - 86400)
+    then
         echo -n "Snapshot appears to have been created more than "
         echo "one day into the future!"
         echo "(Is the system clock correct?)"
@@ -509,10 +537,11 @@ fetch_snapshot_tagsanity() {
 fetch_update_tagsanity() {
     fetch_snapshot_tagsanity || return 1
 
-    if [ ${OLDSNAPSHOTDATE} -gt ${SNAPSHOTDATE} ]; then
-        echo -n "Latest snapshot on server is "
-        echo "older than what we already have!"
-        echo -n "Cowardly refusing to downgrade from "
+    if test ${OLDSNAPSHOTDATE} -gt ${SNAPSHOTDATE}
+    then
+        log_message_nonl "Latest snapshot on server is "
+        printf "older than what we already have!\n"
+        log_message_nonl "Cowardly refusing to downgrade from "
         date -r ${OLDSNAPSHOTDATE}
         echo "to $(date -r ${SNAPSHOTDATE})."
         return 1
@@ -521,17 +550,19 @@ fetch_update_tagsanity() {
 
 # Compare old and new tags; return 1 if update is unnecessary
 fetch_update_neededp() {
-    if [ ${OLDSNAPSHOTDATE} -eq ${SNAPSHOTDATE} ]; then
-        echo -n "Latest snapshot on server matches "
-        echo "what we already have."
-        echo "No updates needed."
+    if test ${OLDSNAPSHOTDATE} -eq ${SNAPSHOTDATE}
+    then
+        log_message_nonl "Latest snapshot on server matches "
+        printf "what we already have.\n"
+        log_message "No updates needed."
         rm tag.new
         return 1
     fi
-    if [ ${OLDSNAPSHOTHASH} = ${SNAPSHOTHASH} ]; then
-        echo -n "Ports tree hasn't changed since "
-        echo "last snapshot."
-        echo "No updates needed."
+    if test ${OLDSNAPSHOTHASH} = ${SNAPSHOTHASH}
+    then
+        log_message_nonl "Ports tree hasn't changed since "
+        printf "last snapshot.\n"
+        log_message "No updates needed."
         rm tag.new
         return 1
     fi
@@ -546,7 +577,8 @@ fetch_metadata() {
     echo ${NDEBUG} "Fetching snapshot metadata... "
     ${FETCHPROGRAM} ${QUIETFLAG} http://${SERVERNAME}/t/${SNAPSHOTHASH} \
         2>${QUIETREDIR} || return
-    if [ "$(${SHA256} -q ${SNAPSHOTHASH})" != ${SNAPSHOTHASH} ]; then
+    if test "$(${SHA256} -q ${SNAPSHOTHASH})" != ${SNAPSHOTHASH}
+    then
         echo "snapshot metadata corrupt."
         return 1
     fi
@@ -564,11 +596,13 @@ fetch_metadata_freakout() {
 
 # Sanity-check a snapshot metadata file
 fetch_metadata_sanity() {
-    if grep -qvE "^[0-9A-Z.]+\|[0-9a-f]{64}$" tINDEX.new; then
+    if grep -qvE "^[0-9A-Z.]+\|[0-9a-f]{64}$" tINDEX.new
+    then
         fetch_metadata_freakout
         return 1
     fi
-    if [ $(look INDEX tINDEX.new | wc -l) != 1 ]; then
+    if test $(look INDEX tINDEX.new | wc -l) != 1
+    then
         echo
         echo "Portsnap metadata appears bogus."
         echo "Cowardly refusing to proceed any further."
@@ -576,10 +610,10 @@ fetch_metadata_sanity() {
     fi
 }
 
-# Take a list of ${oldhash}|${newhash} and output a list of needed patches
 fetch_make_patchlist() {
     grep -vE "^([0-9a-f]{64})\|\1$" |
-    while read LINE; do
+    while read LINE
+    do
         X=$(echo ${LINE} | cut -f 1 -d '|')
         Y=$(echo ${LINE} | cut -f 2 -d '|')
         if [ -f "files/${Y}.gz" ]; then continue; fi
@@ -591,11 +625,14 @@ fetch_make_patchlist() {
 # Print user-friendly progress statistics
 fetch_progress() {
     LNC=0
-    while read x; do
+    while read x
+    do
         LNC=$(($LNC + 1))
-        if [ $(($LNC % 10)) = 0 ]; then
+        if test $(($LNC % 10)) = 0
+        then
             echo -n $LNC
-        elif [ $(($LNC % 2)) = 0 ]; then
+        elif test $(($LNC % 2)) = 0
+        then
             echo -n .
         fi
     done
@@ -605,7 +642,8 @@ fetch_progress() {
 # Sanity-check an index file
 fetch_index_sanity() {
     if grep -qvE "^[-_+./@0-9A-Za-z]+\|[0-9a-f]{64}$" INDEX.new ||
-        fgrep -q "./" INDEX.new; then
+        fgrep -q "./" INDEX.new
+    then
         fetch_metadata_freakout
         return 1
     fi
@@ -613,8 +651,10 @@ fetch_index_sanity() {
 
 # Verify a list of files
 fetch_snapshot_verify() {
-    while read F; do
-        if [ "$(gunzip -c snap/${F} | ${SHA256} -q)" != ${F} ]; then
+    while read F
+    do
+        if test "$(gunzip -c snap/${F} | ${SHA256} -q)" != ${F}
+        then
             echo "snapshot corrupt."
             return 1
         fi
@@ -624,7 +664,8 @@ fetch_snapshot_verify() {
 
 # Fetch a snapshot tarball, extract, and verify.
 fetch_snapshot() {
-    while ! fetch_tag snapshot; do
+    while ! fetch_tag snapshot
+    do
         fetch_pick_server || return 1
     done
     fetch_snapshot_tagsanity || return 1
@@ -674,7 +715,8 @@ fetch_update() {
     OLDSNAPSHOTDATE=$(cut -f 2 -d '|' < tag)
     OLDSNAPSHOTHASH=$(cut -f 3 -d '|' < tag)
 
-    while ! fetch_tag latest; do
+    while ! fetch_tag latest
+    do
         fetch_pick_server || return 1
     done
     fetch_update_tagsanity || return 1
@@ -690,7 +732,7 @@ fetch_update() {
     fetch_make_patchlist > patchlist
 
     # Attempt to fetch metadata patches
-    echo -n "Fetching $(wc -l < patchlist | tr -d ' ') "
+    log_fetch "Fetching $(wc -l < patchlist | tr -d ' ') "
     echo ${NDEBUG} "metadata patches.${DDSTATS}"
     tr '|' '-' < patchlist |
     lam -s "tp/" - -s ".gz" |
@@ -709,7 +751,8 @@ fetch_update() {
         cut -c 2- diff | join -t '|' -v 2 - OLD > ptmp
         grep '^\+' diff | cut -c 2- |
         sort -k 1,1 -t '|' -m - ptmp > NEW
-        if [ $(${SHA256} -q NEW) = ${Y} ]; then
+        if test $(${SHA256} -q NEW) = ${Y}
+        then
             mv NEW files/${Y}
             gzip -n files/${Y}
         fi
@@ -721,18 +764,20 @@ fetch_update() {
     join -t '|' -v 2 tINDEX tINDEX.new |
     cut -f 2 -d '|' /dev/stdin patchlist |
     while read Y; do
-        if [ ! -f "files/${Y}.gz" ]; then
+        if test ! -f "files/${Y}.gz"
+        then
             echo ${Y};
         fi
     done > filelist
-    echo -n "Fetching $(wc -l < filelist | tr -d ' ') "
+    log_fetch "Fetching $(wc -l < filelist | tr -d ' ') "
     echo ${NDEBUG} "metadata files... "
     lam -s "f/" - -s ".gz" < filelist |
     xargs ${XARGST} ${PHTTPGET} ${SERVERNAME}   \
         2>${QUIETREDIR}
 
     while read Y; do
-        if [ $(gunzip -c < ${Y}.gz | ${SHA256} -q) = ${Y} ]; then
+        if test $(gunzip -c < ${Y}.gz | ${SHA256} -q) = ${Y}
+        then
             mv ${Y}.gz files/${Y}.gz
         else
             echo "metadata is corrupt."
@@ -751,7 +796,8 @@ fetch_update() {
     # update, and equal to the new index for parts of the tree which gets updates.
     # This means that we should always have a "complete snapshot" of the ports
     # tree -- with the caveat that it isn't actually a snapshot.
-    if [ ! -z "${REFUSE}" ]; then
+    if test ! -z "${REFUSE}"
+    then
         echo "Refusing to download updates for ${REFUSE}"   \
             >${QUIETREDIR}
 
@@ -766,7 +812,7 @@ fetch_update() {
     fetch_make_patchlist > patchlist
 
     # Attempt to fetch ports patches
-    echo -n "Fetching $(wc -l < patchlist | tr -d ' ') "
+    log_fetch "Fetching $(wc -l < patchlist | tr -d ' ') "
     echo ${NDEBUG} "patches.${DDSTATS}"
     tr '|' '-' < patchlist | lam -s "bp/" - |
     xargs ${XARGST} ${PHTTPGET} ${SERVERNAME}   \
@@ -774,14 +820,15 @@ fetch_update() {
     echo "done."
 
     # Attempt to apply ports patches
-    printf "Applying patches... \n"
+    printf "Applying patches... "
     while read LINE; do
         X=$(echo ${LINE} | cut -f 1 -d '|')
         Y=$(echo ${LINE} | cut -f 2 -d '|')
         if [ ! -f "${X}-${Y}" ]; then continue; fi
         gunzip -c < files/${X}.gz > OLD
         ${BSPATCH} OLD NEW ${X}-${Y}
-        if [ $(${SHA256} -q NEW) = ${Y} ]; then
+        if test $(${SHA256} -q NEW) = ${Y}
+        then
             mv NEW files/${Y}
             gzip -n files/${Y}
         fi
@@ -792,19 +839,23 @@ fetch_update() {
     # Update ports without patches
     join -t '|' -v 2 INDEX INDEX.new |
     cut -f 2 -d '|' /dev/stdin patchlist |
-    while read Y; do
-        if [ ! -f "files/${Y}.gz" ]; then
+    while read Y
+    do
+        if test ! -f "files/${Y}.gz"
+        then
             echo ${Y};
         fi
     done > filelist
-    echo -n "Fetching $(wc -l < filelist | tr -d ' ') "
+    log_fetch "Fetching $(wc -l < filelist | tr -d ' ') "
     echo ${NDEBUG} "new ports or files... "
     lam -s "f/" - -s ".gz" < filelist |
     xargs ${XARGST} ${PHTTPGET} ${SERVERNAME}   \
         2>${QUIETREDIR}
 
-    while read Y; do
-        if [ $(gunzip -c < ${Y}.gz | ${SHA256} -q) = ${Y} ]; then
+    while read Y
+    do
+        if [ $(gunzip -c < ${Y}.gz | ${SHA256} -q) = ${Y} ]
+        then
             mv ${Y}.gz files/${Y}.gz
         else
             echo "snapshot is corrupt."
@@ -831,11 +882,13 @@ fetch_update() {
 fetch_run() {
     fetch_pick_server_init && fetch_pick_server
 
-    while ! fetch_key; do
+    while ! fetch_key
+    do
         fetch_pick_server || return 1
     done
 
-    if ! [ -d files -a -r tag -a -r INDEX -a -r tINDEX ]; then
+    if ! [ -d files -a -r tag -a -r INDEX -a -r tINDEX ]
+    then
         fetch_snapshot || return 1
     fi
     fetch_update || return 1
@@ -843,7 +896,8 @@ fetch_run() {
 
 # Build a ports INDEX file
 extract_make_index() {
-    if ! look $1 ${WORKDIR}/tINDEX > /dev/null; then
+    if ! look $1 ${WORKDIR}/tINDEX > /dev/null
+    then
         echo -n "$1 not provided by portsnap server; "
         echo "$2 not being generated."
     else
@@ -857,7 +911,8 @@ extract_make_index() {
 # Create INDEX, INDEX-5, INDEX-6
 extract_indices() {
     echo -n "Building new INDEX files... "
-    for PAIR in ${INDEXPAIRS}; do
+    for PAIR in ${INDEXPAIRS}
+    do
         INDEXFILE=$(echo ${PAIR} | cut -f 1 -d '|')
         DESCRIBEFILE=$(echo ${PAIR} | cut -f 2 -d '|')
         extract_make_index ${DESCRIBEFILE} ${INDEXFILE} || return 1
@@ -871,7 +926,7 @@ extract_metadata() {
     if test -z "${REFUSE}"
     then
         sort ${WORKDIR}/INDEX > ${PORTSDIR}/.portsnap.INDEX
-    elif [ -f ${PORTSDIR}/.portsnap.INDEX ]
+    elif test -f ${PORTSDIR}/.portsnap.INDEX
     then
         grep -E "${REFUSE}" ${PORTSDIR}/.portsnap.INDEX     \
             > ${PORTSDIR}/.portsnap.INDEX.tmp
@@ -942,7 +997,7 @@ update_run() {
     if sort ${WORKDIR}/INDEX |
         cmp -s ${PORTSDIR}/.portsnap.INDEX -
     then
-        echo "Ports tree is already up to date."
+        log_message "Ports tree is already up to date."
         return 0
     fi
 
@@ -967,16 +1022,18 @@ update_run() {
     # Install new files
     echo "Extracting new files:"
     if !
-        if ! [ -z "${REFUSE}" ]; then
+        if test ! -z "${REFUSE}"
+        then
             grep -vE "${REFUSE}" ${WORKDIR}/INDEX | sort
         else
             sort ${WORKDIR}/INDEX
         fi |
         comm -13 ${PORTSDIR}/.portsnap.INDEX - |
-        while read LINE; do
+        while read LINE
+        do
             FILE=$(echo ${LINE} | cut -f 1 -d '|')
             HASH=$(echo ${LINE} | cut -f 2 -d '|')
-            echo ${PORTSDIR}/${FILE}
+            log_new_ports "${PORTSDIR}/${FILE}"
             if ! [ -r "${WORKDIR}/files/${HASH}.gz" ]
             then
                 echo "files/${HASH}.gz not found -- snapshot corrupt."
@@ -1002,6 +1059,44 @@ update_run() {
     extract_indices
 }
 
+
+#### Log functions
+
+log_fetch() {
+    local message="${1}"
+    local colour="[38;5;79m"
+    local reset="[0m"
+
+    printf "${colour}::${reset} %s"  "${message}"
+}
+
+log_message() {
+    local message="${1}"
+    local colour="[38;5;32m"
+    local reset="[0m"
+
+    printf "${colour}::${reset} %s\n"  "${message}"
+}
+
+log_message_nonl() {
+    local message="${1}"
+    local colour="[38;5;32m"
+    local reset="[0m"
+
+    printf "${colour}::${reset} %s"  "${message}"
+}
+
+
+log_new_ports()
+{
+    local message="${1}"
+    local colour="[38;5;132m"
+    local reset="[0m"
+
+    printf "${colour}   %s${reset}\n"  "${message}"
+}
+
+
 #### Main functions -- call parameter-handling and core functions
 
 # Using the command line, configuration file, and defaults,
@@ -1018,7 +1113,8 @@ get_params() {
 # Fetch command.  Make sure that we're being called
 # interactively, then run fetch_check_params and fetch_run
 cmd_fetch() {
-    if [ ! -t 0 ]; then
+    if test ! -t 0
+    then
         echo -n "$(basename ${0}) fetch should not "
         echo "be run non-interactively."
         echo "Run $(basename $0) cron instead."
@@ -1037,7 +1133,8 @@ cmd_cron() {
     sleep $(jot -r 1 0 3600)
 
     TMPFILE=$(mktemp /tmp/portsnap.XXXXXX) || exit 1
-    if ! fetch_run >> ${TMPFILE}; then
+    if ! fetch_run >> ${TMPFILE}
+    then
         cat ${TMPFILE}
         rm ${TMPFILE}
         exit 1
@@ -1064,13 +1161,14 @@ cmd_update() {
 # whether stdin is a terminal; then run 'update' or
 # 'extract' depending on whether ${PORTSDIR} exists.
 cmd_alfred() {
-    if [ -t 0 ]
+    if test -t 0
     then
         cmd_fetch
     else
         cmd_cron
     fi
-    if [ -d ${PORTSDIR} ]; then
+    if test -d ${PORTSDIR}
+    then
         cmd_update
     else
         cmd_extract
@@ -1085,7 +1183,8 @@ export PATH=/sbin:/bin:/usr/sbin:/usr/bin:${PATH}
 # Set LC_ALL in order to avoid problems with character ranges like [A-Z].
 export LC_ALL=C
 
-get_params $@
-for COMMAND in ${COMMANDS}; do
+get_params ${@}
+for COMMAND in ${COMMANDS}
+do
     cmd_${COMMAND}
 done
