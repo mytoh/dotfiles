@@ -41,7 +41,7 @@ module Mytoh.Config where
   myNormalBorderColor  :: String
   myNormalBorderColor  = "#111111"
   myFocusedBorderColor :: String
-  myFocusedBorderColor = "#4d8de5"
+  myFocusedBorderColor = "#22ee22"
   -- }}}
 
   -- Fonts -------------------------------------------

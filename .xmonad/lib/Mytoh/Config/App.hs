@@ -12,7 +12,7 @@ module Mytoh.Config.App where
   compmgr     = "xcompmgr -c -C -I1 -O1 -Ff"
   -- bgmgr       = "feh --bg-scale ~/.wallpapers/images.4chan.org-1268382153153.jpg"
   bgmgr       = "sh ~/.fehbg"
-  clipmgr     = "parcellite"
+  
   volumemgr   = "gnome-volume-control-applet"
   uimPanel    = "uim-toolbar-gtk-systray"
   -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"

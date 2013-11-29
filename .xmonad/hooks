@@ -3,7 +3,8 @@
 
 hooks::startup() {
 
-    compton &
+    parcellite &
+    # compton &
 
 }
 
