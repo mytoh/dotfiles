@@ -149,7 +149,7 @@ parse_cmdline() {
                 COMMANDS="${COMMANDS} update"
                 ;;
             *)
-                if [ $# -gt 1 ]; then usage; fi
+                if test $# -gt 1 ; then usage; fi
                 if echo ${COMMANDS} | grep -vq extract
                 then
                     usage
@@ -200,8 +200,8 @@ parse_conffile() {
             eval _=\$${X}
             if test -z "${_}"
             then
-                eval ${X}=`grep "^${X}=" "${CONFFILE}" |
-                    cut -f 2- -d '=' | tail -1`
+                eval ${X}=$(grep "^${X}=" "${CONFFILE}" |
+                    cut -f 2- -d '=' | tail -1)
             fi
         done
 
@@ -311,8 +311,8 @@ extract_check_params() {
         exit 1
     fi
 
-    if ! [ -d "${WORKDIR}/files" -a -r "${WORKDIR}/tag"     \
-        -a -r "${WORKDIR}/INDEX" -a -r "${WORKDIR}/tINDEX" ]
+    if ! test -d "${WORKDIR}/files" && test -r "${WORKDIR}/tag"     \
+        && test -r "${WORKDIR}/INDEX" && test -r "${WORKDIR}/tINDEX"
     then
         echo "No snapshot available.  Try running"
         echo "# $(basename $0) fetch"
@@ -389,9 +389,9 @@ fetch_pick_server_init() {
     # will be random.
     if test -n "${HTTP_PROXY}${http_proxy}"
     then
-        RANDVALUE=`sha256 -qs "${HTTP_PROXY}${http_proxy}" |
+        RANDVALUE=$(sha256 -qs "${HTTP_PROXY}${http_proxy}" |
             tr -d 'a-f' |
-            cut -c 1-9`
+            cut -c 1-9)
     else
         RANDVALUE=$(jot -r 1 0 999999999)
     fi
@@ -444,15 +444,15 @@ fetch_pick_server() {
     do
         case "$X" in
             ${SRV_PRIORITY}\ *)
-                SRV_W=$(echo $X | cut -f 2 -d ' ')
-                SRV_W=$(($SRV_W + $SRV_W_ADD))
-                if test $SRV_RND -lt $SRV_W
+                SRV_W=$(echo ${X} | cut -f 2 -d ' ')
+                SRV_W=$((${SRV_W} + ${SRV_W_ADD}))
+                if test ${SRV_RND} -lt ${SRV_W}
                 then
                     SERVERNAME=$(echo $X | cut -f 3 -d ' ')
                     echo "$X" >> serverlist_tried
                     break
                 else
-                    SRV_RND=$(($SRV_RND - $SRV_W))
+                    SRV_RND=$((${SRV_RND} - ${SRV_W}))
                 fi
                 ;;
         esac
@@ -494,7 +494,7 @@ fetch_tag() {
     log_fetch_debug "Fetching snapshot tag from ${SERVERNAME}... "
     ${FETCHPROGRAM} ${QUIETFLAG} http://${SERVERNAME}/$1.ssl      \
         2>${QUIETREDIR} || true
-    if test ! -r $1.ssl
+    if test ! -r ${1}.ssl
     then
         echo "failed."
         return 1
@@ -504,7 +504,7 @@ fetch_tag() {
         < $1.ssl > tag.new 2>${QUIETREDIR} || true
     rm $1.ssl
 
-    if ! [ $(wc -l < tag.new) = 1 ] ||
+    if test ! $(wc -l < tag.new) = 1 ||
         ! grep -qE "^portsnap\|[0-9]{10}\|[0-9a-f]{64}" tag.new
     then
         echo "invalid snapshot tag."
@@ -634,7 +634,7 @@ fetch_progress() {
         LNC=$(($LNC + 1))
         if test $(($LNC % 10)) = 0
         then
-            echo -n $LNC
+            log_number "$LNC"
         elif test $(($LNC % 2)) = 0
         then
             echo -n .
@@ -694,8 +694,7 @@ fetch_snapshot() {
     cut -f 2 -d '|' tINDEX.new | fetch_snapshot_verify || return 1
     # Extract the index
     rm -f INDEX.new
-    gunzip -c snap/`look INDEX tINDEX.new |
-        cut -f 2 -d '|'`.gz > INDEX.new
+    gunzip -c snap/$(look INDEX tINDEX.new | cut -f 2 -d '|').gz > INDEX.new
     fetch_index_sanity || return 1
     # Verify the snapshot contents
     cut -f 2 -d '|' INDEX.new | fetch_snapshot_verify || return 1
@@ -736,13 +735,17 @@ fetch_update_apply_metadata_patches() {
 }
 
 fetch_update_fetch_ports_patches() {
+
+    local patch_num
+
     # Generate a list of wanted ports patches
     join -t '|' -o 1.2,2.2 INDEX INDEX.new |
     fetch_make_patchlist > patchlist
 
+    patch_num="$(wc -l < patchlist | tr -d ' ')"
     # Attempt to fetch ports patches
-    log_fetch "Fetching $(wc -l < patchlist | tr -d ' ') "
-    # echo ${NDEBUG} "patches.${DDSTATS}"
+    log_fetch "Fetching "
+    log_number "${patch_num} "
     log_message_debug "patches.${DDSTATS}"
     tr '|' '-' < patchlist | lam -s "bp/" - |
     xargs ${XARGST} ${PHTTPGET} ${SERVERNAME}   \
@@ -752,6 +755,8 @@ fetch_update_fetch_ports_patches() {
 }
 
 fetch_update_fetch_metadata_files() {
+    local metadata
+
     # Update metadata without patches
     join -t '|' -v 2 tINDEX tINDEX.new |
     cut -f 2 -d '|' /dev/stdin patchlist |
@@ -763,7 +768,10 @@ fetch_update_fetch_metadata_files() {
         fi
     done > filelist
 
-    log_fetch "Fetching $(wc -l < filelist | tr -d ' ') "
+    metadata="$(wc -l < filelist | tr -d ' ')"
+
+    log_fetch "Fetching"
+    log_number " ${metadata} "
     log_message_debug "metadata files... "
     lam -s "f/" - -s ".gz" < filelist |
     xargs ${XARGST} ${PHTTPGET} ${SERVERNAME}   \
@@ -805,13 +813,17 @@ fetch_update_apply_patches() {
 }
 
 fetch_update_fetch_metadata_patches() {
+
+    local patch_num
+
     # Generate a list of wanted metadata patches
     join -t '|' -o 1.2,2.2 tINDEX tINDEX.new |
     fetch_make_patchlist > patchlist
 
+    patch_num="$(wc -l < patchlist | tr -d ' ')"
     # Attempt to fetch metadata patches
-    log_fetch "Fetching $(wc -l < patchlist | tr -d ' ') "
-    # echo ${NDEBUG} "metadata patches.${DDSTATS}"
+    log_fetch "Fetching"
+    log_number " ${patch_num} "
     log_message_debug "metadata patches.${DDSTATS}"
     tr '|' '-' < patchlist |
     lam -s "tp/" - -s ".gz" |
@@ -821,6 +833,9 @@ fetch_update_fetch_metadata_patches() {
 }
 
 fetch_update_fetch_new_ports_or_files() {
+
+    local filenum
+
     # Update ports without patches
     join -t '|' -v 2 INDEX INDEX.new |
     cut -f 2 -d '|' /dev/stdin patchlist |
@@ -831,7 +846,11 @@ fetch_update_fetch_new_ports_or_files() {
             echo ${Y};
         fi
     done > filelist
-    log_fetch "Fetching $(wc -l < filelist | tr -d ' ') "
+
+    filenum="$(wc -l < filelist | tr -d ' ')"
+
+    log_fetch "Fetching"
+    log_number " ${filenum} "
     log_message_debug "new ports or files... "
     lam -s "f/" - -s ".gz" < filelist |
     xargs ${XARGST} ${PHTTPGET} ${SERVERNAME}   \
@@ -849,6 +868,16 @@ fetch_update_fetch_new_ports_or_files() {
     done < filelist
     echo "done."
 }
+
+fetch_update_remove_oldfiles() {
+    # Remove files which are no longer needed
+    cut -f 2 -d '|' tINDEX INDEX | sort -u > oldfiles
+    cut -f 2 -d '|' tINDEX.new INDEX.new | sort -u | comm -13 - oldfiles |
+    lam -s "files/" - -s ".gz" | xargs rm -f
+    rm patchlist filelist oldfiles
+}
+
+
 
 # Update a compressed snapshot
 fetch_update() {
@@ -876,8 +905,8 @@ fetch_update() {
     fetch_update_fetch_metadata_files
 
     # Extract the index
-    gunzip -c files/`look INDEX tINDEX.new |
-        cut -f 2 -d '|'`.gz > INDEX.new
+    gunzip -c files/$(look INDEX tINDEX.new |
+        cut -f 2 -d '|').gz > INDEX.new
     fetch_index_sanity || return 1
 
     # If we have decided to refuse certain updates, construct a hybrid index which
@@ -902,11 +931,7 @@ fetch_update() {
 
     fetch_update_fetch_new_ports_or_files
 
-    # Remove files which are no longer needed
-    cut -f 2 -d '|' tINDEX INDEX | sort -u > oldfiles
-    cut -f 2 -d '|' tINDEX.new INDEX.new | sort -u | comm -13 - oldfiles |
-    lam -s "files/" - -s ".gz" | xargs rm -f
-    rm patchlist filelist oldfiles
+    fetch_update_remove_oldfiles
 
     # We're done!
     mv INDEX.new INDEX
@@ -939,8 +964,8 @@ extract_make_index() {
         log_message_nonl "$1 not provided by portsnap server; "
         echo "$2 not being generated."
     else
-        gunzip -c "${WORKDIR}/files/`look $1 ${WORKDIR}/tINDEX |
-        cut -f 2 -d '|'`.gz" |
+        gunzip -c "${WORKDIR}/files/$(look $1 ${WORKDIR}/tINDEX |
+        cut -f 2 -d '|').gz" |
         cat - ${LOCALDESC} |
         ${MKINDEX} /dev/stdin > ${PORTSDIR}/$2
     fi
@@ -1027,7 +1052,7 @@ extract_run() {
 
 ## update
 
-update_remove_old_files() {
+update_run_remove_old_files() {
     # If we are REFUSEing to touch certain directories, don't remove files
     # from those directories (even if they are out of date)
     log_message_nonl "Removing old files and directories... "
@@ -1047,7 +1072,7 @@ update_remove_old_files() {
     echo "done."
 }
 
-update_extract_new_files() {
+update_run_extract_new_files() {
     # Install new files
     log_message "Extracting new files:"
     if !
@@ -1100,9 +1125,9 @@ update_run() {
         return 0
     fi
 
-    update_remove_old_files
+    update_run_remove_old_files
 
-    update_extract_new_files
+    update_run_extract_new_files
 
     extract_metadata
     extract_indices
@@ -1120,19 +1145,23 @@ log_fetch() {
 }
 
 log_patch() {
-    local message="${1}"
-    local colour="[38;5;57m"
-    local reset="[0m"
+    local  message  colour  reset
+    message="${1}"
+    colour="[38;5;57m"
+    reset="[0m"
+    char="::"
 
-    printf "${colour}::${reset} %s"  "${message}"
+    printf "${colour}${char}${reset} %s"  "${message}"
 }
 
 log_message() {
-    local message="${1}"
-    local colour="[38;5;32m"
-    local reset="[0m"
+    local  message   colour  reset char
+    message="${1}"
+    colour="[38;5;32m"
+    reset="[0m"
+    char="::"
 
-    printf "${colour}::${reset} %s\n"  "${message}"
+    printf "${colour}${char}${reset} %s\n"  "${message}"
 }
 
 log_message_debug() {
@@ -1150,25 +1179,28 @@ log_message_debug() {
 
 
 log_fetch_debug() {
-    local message="${1}"
-    local colour="[38;5;79m"
-    local reset="[0m"
-    local ndebug=""
+    local message colour reset  char
+    message="${1}"
+    colour="[38;5;79m"
+    reset="[0m"
+    char="::"
 
     if test "${NDEBUG}" = "-n"
     then
-        printf "${colour}::${reset} %s"  "${message}"
+        printf "${colour}${char}${reset} %s"  "${message}"
     else
-        printf "${colour}::${reset} %s \n"  "${message}"
+        printf "${colour}${char}${reset} %s \n"  "${message}"
     fi
 }
 
 log_message_nonl() {
-    local message="${1}"
-    local colour="[38;5;32m"
-    local reset="[0m"
+    local  message colour reset char
+    message="${1}"
+    colour="[38;5;32m"
+    reset="[0m"
+    char="::"
 
-    printf "${colour}::${reset} %s"  "${message}"
+    printf "${colour}${char}${reset} %s"  "${message}"
 }
 
 
@@ -1181,13 +1213,22 @@ log_new_ports() {
 }
 
 log_command() {
-
-    local message colour reset
+    local message colour reset char
     message="${1}"
     colour="[38;5;172m"
     reset="[0m"
+    char=":"
 
-    printf "${colour}:${reset} %s\n"  "${message}"
+    printf "${colour}${char}${reset} %s\n"  "${message}"
+}
+
+log_number() {
+    local message colour reset
+    message="${1}"
+    colour="[38;5;42m"
+    reset="[0m"
+
+    printf "${colour}%s${reset}"  "${message}"
 }
 
 
