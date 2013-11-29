@@ -43,6 +43,39 @@ xft.hintstyle: hintslight
 ! xft:Symbola
 
 #define FONT \
-k10, k10rk
+K10
+
 #define FONT_BOLD \
-k10, k10rk
+K10
+
+#define K10 \
+k10, k10rk,\
+-source code pro -*-*-*-*-*-*-*-*-iso10646-*
+
+
+#define COSMIC \
+xft:CosmicSansNeueMono:pixelsize=9
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

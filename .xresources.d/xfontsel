@@ -45,7 +45,7 @@ XFontsel*MenuButton*MenuButtonStyle: select
 .xfontsel.pane.fieldBox.field12.foreground: snow
 .xfontsel.pane.fieldBox.field13.background: #777777
 .xfontsel.pane.fieldBox.field13.foreground: snow
-.xfontsel.pane.fieldBox*foreground: #000000
+.xfontsel.pane.fieldBox*foreground: snow
 .xfontsel.pane.fieldBox.MenuButton.borderWidth: 1
 .xfontsel.pane.fieldBox.MenuButton.internalHeight: 1
 .xfontsel.pane.fieldBox.MenuButton.internalWidth: 2

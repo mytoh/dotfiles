@@ -2,7 +2,7 @@
 !! urxvt
 
 !urxvt.termName: xterm-256color
-!urxvt.depth: 32
+urxvt.depth: 24
 urxvt.background: [93]#222222
 urxvt.foreground: #cdccbc
 urxvt.geometry: 100x40+100+100
