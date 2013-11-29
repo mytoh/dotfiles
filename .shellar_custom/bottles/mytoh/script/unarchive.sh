@@ -1,13 +1,16 @@
 #!/bin/sh
 
 unarchive::untar() {
-    local file="${1}"
+    local file
+    file="${1}"
 
     tar xvf "${file}"
 }
 
 unarchive() {
-    local file="${1}"
+    local file
+    file="${1}"
+
     if test -f "${file}"
     then
         case "${file}" in
@@ -22,7 +25,7 @@ unarchive() {
             *.bz2)
                 bunzip2 "${file}";;
             *.rar)
-                unrar e "${file}" ;;
+                unrar x "${file}" ;;
             *.gz)
                 gunzip "${file}" ;;
             *.tar)

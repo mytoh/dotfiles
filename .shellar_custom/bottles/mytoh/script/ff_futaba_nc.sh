@@ -1,20 +1,28 @@
 #!/bin/sh
 
+set -o errexit
+set -o nounset
+
 get_url() {
-    local res=$(echo 'window.location.toString()' | nc localhost 32000)
-    local url=$(echo ${res} | awk -F":" '{ printf "%s", $3}' | tr -d "\"" |tr -d "}")
+    local res
+    local url
+
+    res=$(echo 'window.location.toString()' | nc localhost 32000)
+    url=$(echo ${res} | awk -F":" '{ printf "%s", $3}' | tr -d "\"" |tr -d "}")
 
     echo $url
 }
 
 get_num_from_url() {
-    local num=$(basename ${1} '.htm')
+    local num
+    num=$(basename ${1} '.htm')
 
     echo $num
 }
 
 make_directory() {
-    local dir=${1}
+    local dir
+    dir="${1}"
 
     if ! test ${dir} == ".htm"
     then
