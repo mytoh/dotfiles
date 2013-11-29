@@ -48,6 +48,9 @@ Options:
                   (default: /usr/ports/)
   -s server    -- Server from which to fetch updates.
                   (default: portsnap.FreeBSD.org)
+  --interactive -- interactive: override auto-detection of calling process
+                  (use this when calling portsnap from an interactive, non-
+                  terminal application AND NEVER ELSE).
   path         -- Extract only parts of the tree starting with the given
                   string.  (extract command only)
 Commands:
@@ -58,6 +61,8 @@ Commands:
                   files and directories.
   update       -- Update ports tree to match current snapshot, replacing
                   files and directories which have changed.
+  auto         -- Fetch updates, and either extract a new ports tree or
+                  update an existing tree.
 EOF
     exit 0
 }
@@ -84,6 +89,7 @@ init_params() {
     SERVERNAME=""
     REFUSE=""
     LOCALDESC=""
+	INTERACTIVE=""
 
     FETCHPROGRAM=""
 }
@@ -93,8 +99,8 @@ parse_cmdline() {
     while [ $# -gt 0 ]; do
         case "$1" in
             -d)
-                if [ $# -eq 1 ]; then usage; fi
-                if [ ! -z "${WORKDIR}" ]; then usage; fi
+                if test $# -eq 1 ; then usage; fi
+                if test ! -z "${WORKDIR}" ; then usage; fi
                 shift; WORKDIR="$1"
                 ;;
             --debug)
@@ -105,9 +111,12 @@ parse_cmdline() {
                 XARGST="-t"
                 DDSTATS=".."
                 ;;
+            --interactive)
+                INTERACTIVE="YES"
+                ;;
             -f)
-                if [ $# -eq 1 ]; then usage; fi
-                if [ ! -z "${CONFFILE}" ]; then usage; fi
+                if test $# -eq 1 ; then usage; fi
+                if test ! -z "${CONFFILE}" ; then usage; fi
                 shift; CONFFILE="$1"
                 ;;
             -h | --help | help)
@@ -142,12 +151,16 @@ parse_cmdline() {
                 if [ ! -z "${SERVERNAME}" ]; then usage; fi
                 shift; SERVERNAME="$1"
                 ;;
-            cron | extract | fetch | update | alfred)
+            cron | extract | fetch | update | auto)
                 COMMANDS="${COMMANDS} $1"
                 ;;
             up)
                 COMMANDS="${COMMANDS} update"
                 ;;
+            alfred)
+                COMMANDS="${COMMANDS} auto"
+                ;;
+
             *)
                 if test $# -gt 1 ; then usage; fi
                 if echo ${COMMANDS} | grep -vq extract
@@ -241,6 +254,13 @@ default_params() {
             eval ${X}=${__}
         fi
     done
+    if [ -z "${INTERACTIVE}" ]; then
+        if [ -t 0 ]; then
+            INTERACTIVE="YES"
+        else
+            INTERACTIVE="NO"
+        fi
+	fi
 }
 
 # Perform sanity checks and set some final parameters
@@ -274,7 +294,7 @@ then
     echo ${KEYPRINT}
     exit 1
 fi
-if test ! -d "${WORKDIR}" && test -w "${WORKDIR}"
+if ! test -d "${WORKDIR}" && test -w "${WORKDIR}"
 then
     echo -n "$(basename $0): "
     echo -n "${_WORKDIR_bad}"
@@ -329,7 +349,7 @@ update_check_params() {
 
     if test ! -r ${PORTSDIR}/.portsnap.INDEX
     then
-        echo "${PORTSDIR} was not created by portsnap."
+        printf "${PORTSDIR} was not created by portsnap.\n"
         echo -n "You must run '$(basename $0) extract' before "
         echo "running '$(basename ${0}) update'."
         exit 1
@@ -615,15 +635,15 @@ fetch_metadata_sanity() {
 }
 
 fetch_make_patchlist() {
-    grep -vE "^([0-9a-f]{64})\|\1$" |
-    while read LINE
-    do
-        X=$(echo ${LINE} | cut -f 1 -d '|')
-        Y=$(echo ${LINE} | cut -f 2 -d '|')
-        if [ -f "files/${Y}.gz" ]; then continue; fi
-        if [ ! -f "files/${X}.gz" ]; then continue; fi
-        echo "${LINE}"
-    done
+	local IFS='|'
+	echo "" 1>${QUIETREDIR}
+	grep -vE "^([0-9a-f]{64})\|\1$" |
+	while read X Y; do
+		printf "Processing: $X $Y ...\r" 1>${QUIETREDIR}
+		if test -f "files/${Y}.gz" || test ! -f "files/${X}.gz" ; then continue; fi
+		echo "${X}|${Y}"
+	done
+	echo "" 1>${QUIETREDIR}
 }
 
 # Print user-friendly progress statistics
@@ -642,6 +662,29 @@ fetch_progress() {
     done
     echo -n " "
 }
+
+pct_fmt()
+{
+	printf "                                     \r"
+	printf "($1/$2) %02.2f%% " $(echo "scale=4;${LNC} / ${TOTAL} * 100"|bc)
+}
+
+fetch_progress_percent() {
+	TOTAL=$1
+	LNC=0
+	pct_fmt $LNC $TOTAL
+	while read x; do
+		LNC=$(($LNC + 1))
+		if [ $(($LNC % 100)) = 0 ]; then
+            pct_fmt $LNC $TOTAL
+		elif [ $(($LNC % 10)) = 0 ]; then
+			echo -n .
+		fi
+	done
+	pct_fmt $LNC $TOTAL
+	echo " done. "
+}
+
 
 # Sanity-check an index file
 fetch_index_sanity() {
@@ -713,45 +756,46 @@ fetch_snapshot() {
 
 fetch_update_apply_metadata_patches() {
     # Attempt to apply metadata patches
-    log_patch "Applying metadata patches... "
-    while read LINE
-    do
-        X=$(echo ${LINE} | cut -f 1 -d '|')
-        Y=$(echo ${LINE} | cut -f 2 -d '|')
+    echo -n "Applying metadata patches... "
+    local oldifs="$IFS" IFS='|'
+    while read X Y; do
         if [ ! -f "${X}-${Y}.gz" ]; then continue; fi
         gunzip -c < ${X}-${Y}.gz > diff
         gunzip -c < files/${X}.gz > OLD
         cut -c 2- diff | join -t '|' -v 2 - OLD > ptmp
         grep '^\+' diff | cut -c 2- |
         sort -k 1,1 -t '|' -m - ptmp > NEW
-        if test $(${SHA256} -q NEW) = ${Y}
-        then
+        if [ `${SHA256} -q NEW` = ${Y} ]; then
             mv NEW files/${Y}
             gzip -n files/${Y}
         fi
         rm -f diff OLD NEW ${X}-${Y}.gz ptmp
     done < patchlist 2>${QUIETREDIR}
+    IFS="$oldifs"
     echo "done."
 }
 
 fetch_update_fetch_ports_patches() {
 
-    local patch_num
+    local patchcnt
 
     # Generate a list of wanted ports patches
+    echo -n "Generating list of wanted patches..." 1>${QUIETREDIR}
     join -t '|' -o 1.2,2.2 INDEX INDEX.new |
     fetch_make_patchlist > patchlist
+    echo " done." 1>${QUIETREDIR}
 
-    patch_num="$(wc -l < patchlist | tr -d ' ')"
+
+    patchcnt="$(wc -l < patchlist | tr -d ' ')"
     # Attempt to fetch ports patches
     log_fetch "Fetching "
-    log_number "${patch_num} "
+    log_number "${patchcnt} "
     log_message_debug "patches.${DDSTATS}"
+    printf " \n"
     tr '|' '-' < patchlist | lam -s "bp/" - |
     xargs ${XARGST} ${PHTTPGET} ${SERVERNAME}   \
-        2>${STATSREDIR} | fetch_progress
+        2>${STATSREDIR} | fetch_progress_percent ${patchcnt}
     echo "done."
-
 }
 
 fetch_update_fetch_metadata_files() {
@@ -779,6 +823,7 @@ fetch_update_fetch_metadata_files() {
 
     while read Y
     do
+        echo -n "Verifying ${Y}... " 1>${QUIETREDIR}
         if test $(gunzip -c < ${Y}.gz | ${SHA256} -q) = ${Y}
         then
             mv ${Y}.gz files/${Y}.gz
@@ -786,29 +831,39 @@ fetch_update_fetch_metadata_files() {
             echo "metadata is corrupt."
             return 1
         fi
+        echo "ok." 1>${QUIETREDIR}
     done < filelist
     echo "done."
 
 }
 
 fetch_update_apply_patches() {
-    # Attempt to apply ports patches
-    log_patch "Applying patches... "
-    while read LINE
+    # # Attempt to apply ports patches
+	PATCHCNT=$(wc -l patchlist)
+	echo "Applying patches... "
+	local oldifs="$IFS" IFS='|'
+	I=0
+	while read X Y
     do
-        X=$(echo ${LINE} | cut -f 1 -d '|')
-        Y=$(echo ${LINE} | cut -f 2 -d '|')
-        if [ ! -f "${X}-${Y}" ]; then continue; fi
-        gunzip -c < files/${X}.gz > OLD
-        ${BSPATCH} OLD NEW ${X}-${Y}
-        if test $(${SHA256} -q NEW) = ${Y}
+		I=$(($I + 1))
+		F="${X}-${Y}"
+		if test ! -f "${F}"
         then
-            mv NEW files/${Y}
-            gzip -n files/${Y}
-        fi
-        rm -f diff OLD NEW ${X}-${Y}
-    done < patchlist 2>${QUIETREDIR}
-    printf "done.\n"
+			printf "  Skipping ${F} (${I} of ${PATCHCNT}).\r"
+			continue;
+		fi
+		echo "  Processing ${F}..." 1>${QUIETREDIR}
+		gunzip -c < files/${X}.gz > OLD
+		${BSPATCH} OLD NEW ${X}-${Y}
+		if test $(${SHA256} -q NEW) = ${Y}
+        then
+			mv NEW files/${Y}
+			gzip -n files/${Y}
+		fi
+		rm -f diff OLD NEW ${X}-${Y}
+	done < patchlist 2>${QUIETREDIR}
+	IFS="$oldifs"
+	printf "done.\n"
 
 }
 
@@ -856,8 +911,11 @@ fetch_update_fetch_new_ports_or_files() {
     xargs ${XARGST} ${PHTTPGET} ${SERVERNAME}   \
         2>${QUIETREDIR}
 
+	I=0
     while read Y
     do
+        I=$(($I + 1))
+        printf "   Processing ${Y} (${I} of ${PATCHCNT}).\r" 1>${QUIETREDIR}
         if test $(gunzip -c < ${Y}.gz | ${SHA256} -q) = ${Y}
         then
             mv ${Y}.gz files/${Y}.gz
@@ -877,7 +935,31 @@ fetch_update_remove_oldfiles() {
     rm patchlist filelist oldfiles
 }
 
+fetch_update_refuse_index() {
+    # If we have decided to refuse certain updates, construct a hybrid index which
+    # is equal to the old index for parts of the tree which we don't want to
+    # update, and equal to the new index for parts of the tree which gets updates.
+    # This means that we should always have a "complete snapshot" of the ports
+    # tree -- with the caveat that it isn't actually a snapshot.
+    if test ! -z "${REFUSE}"
+    then
+        echo "Refusing to download updates for ${REFUSE}"   \
+            >${QUIETREDIR}
 
+        grep -Ev "${REFUSE}" INDEX.new > INDEX.tmp
+        grep -E "${REFUSE}" INDEX |
+        sort -m -k 1,1 -t '|' - INDEX.tmp > INDEX.new
+        rm -f INDEX.tmp
+    fi
+}
+
+fetch_update_extract_index() {
+    # Extract the index
+    echo -n "Extracting index... " 1>${QUIETREDIR}
+    gunzip -c files/$(look INDEX tINDEX.new |
+        cut -f 2 -d '|').gz > INDEX.new
+    fetch_index_sanity || return 1
+}
 
 # Update a compressed snapshot
 fetch_update() {
@@ -904,26 +986,9 @@ fetch_update() {
 
     fetch_update_fetch_metadata_files
 
-    # Extract the index
-    gunzip -c files/$(look INDEX tINDEX.new |
-        cut -f 2 -d '|').gz > INDEX.new
-    fetch_index_sanity || return 1
+    fetch_update_extract_index
 
-    # If we have decided to refuse certain updates, construct a hybrid index which
-    # is equal to the old index for parts of the tree which we don't want to
-    # update, and equal to the new index for parts of the tree which gets updates.
-    # This means that we should always have a "complete snapshot" of the ports
-    # tree -- with the caveat that it isn't actually a snapshot.
-    if test ! -z "${REFUSE}"
-    then
-        echo "Refusing to download updates for ${REFUSE}"   \
-            >${QUIETREDIR}
-
-        grep -Ev "${REFUSE}" INDEX.new > INDEX.tmp
-        grep -E "${REFUSE}" INDEX |
-        sort -m -k 1,1 -t '|' - INDEX.tmp > INDEX.new
-        rm -f INDEX.tmp
-    fi
+    fetch_update_refuse_index
 
     fetch_update_fetch_ports_patches
 
@@ -1005,6 +1070,7 @@ extract_metadata() {
 
 # Do the actual work involved in "extract"
 extract_run() {
+    local oldifs="$IFS" IFS='|'
     mkdir -p ${PORTSDIR} || return 1
 
     if !
@@ -1016,9 +1082,9 @@ extract_run() {
             grep -vE "${REFUSE}" ${WORKDIR}/INDEX
         else
             cat ${WORKDIR}/INDEX
-        fi | tr '|' ' ' | while read FILE HASH; do
+        fi | while read FILE HASH; do
             echo ${PORTSDIR}/${FILE}
-            if test ! -r "${WORKDIR}/files/${HASH}.gz"
+            if ! [ -s "${WORKDIR}/files/${HASH}.gz" ]
             then
                 echo "files/${HASH}.gz not found -- snapshot corrupt."
                 return 1
@@ -1045,6 +1111,8 @@ extract_run() {
         return 0;
     fi
 
+    +	IFS="$oldifs"
+    +
     extract_metadata
     extract_indices
 }
@@ -1072,23 +1140,23 @@ update_run_remove_old_files() {
     echo "done."
 }
 
-update_run_extract_new_files() {
+update_run_extract() {
+    local IFS='|'
+
     # Install new files
-    log_message "Extracting new files:"
+    echo "Extracting new files:"
     if !
-        if test ! -z "${REFUSE}"
+        if ! [ -z "${REFUSE}" ]
         then
             grep -vE "${REFUSE}" ${WORKDIR}/INDEX | sort
         else
             sort ${WORKDIR}/INDEX
         fi |
         comm -13 ${PORTSDIR}/.portsnap.INDEX - |
-        while read LINE
+        while read FILE HASH
         do
-            FILE=$(echo ${LINE} | cut -f 1 -d '|')
-            HASH=$(echo ${LINE} | cut -f 2 -d '|')
-            log_new_ports "${PORTSDIR}/${FILE}"
-            if ! [ -r "${WORKDIR}/files/${HASH}.gz" ]
+            echo ${PORTSDIR}/${FILE}
+            if ! [ -s "${WORKDIR}/files/${HASH}.gz" ]
             then
                 echo "files/${HASH}.gz not found -- snapshot corrupt."
                 return 1
@@ -1107,8 +1175,9 @@ update_run_extract_new_files() {
         done
     then
         return 1
-    fi
+	fi
 }
+
 
 # Do the actual work involved in "update"
 update_run() {
@@ -1127,7 +1196,7 @@ update_run() {
 
     update_run_remove_old_files
 
-    update_run_extract_new_files
+    update_run_extract || return 1
 
     extract_metadata
     extract_indices
@@ -1248,11 +1317,11 @@ get_params() {
 # Fetch command.  Make sure that we're being called
 # interactively, then run fetch_check_params and fetch_run
 command_fetch() {
-    if test ! -t 0
+    if test "${INTERACTIVE}" != "YES"
     then
         echo -n "$(basename ${0}) fetch should not "
         echo "be run non-interactively."
-        echo "Run $(basename $0) cron instead."
+        echo "Run $(basename $0) cron instead"
         exit 1
     fi
     fetch_check_params
@@ -1292,22 +1361,21 @@ command_update() {
     update_run || exit 1
 }
 
-# Alfred command.  Run 'fetch' or 'cron' depending on
+# Auto command.  Run 'fetch' or 'cron' depending on
 # whether stdin is a terminal; then run 'update' or
 # 'extract' depending on whether ${PORTSDIR} exists.
-command_alfred() {
-    if test -t 0
+command_auto() {
+	if test "${INTERACTIVE}" = "YES"
     then
         command_fetch
-    else
+	else
         command_cron
-    fi
-    if test -d ${PORTSDIR}
-    then
+	fi
+	if [ -r ${PORTSDIR}/.portsnap.INDEX ]; then
         command_update
-    else
+	else
         command_extract
-    fi
+	fi
 }
 
 #### Entry point
