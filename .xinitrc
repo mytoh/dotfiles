@@ -1,11 +1,13 @@
 #!/bin/sh
 
 load_xinitrcd() {
-    if [ -d ~/.xinitrc.d ]; then
-        for f in ~/.xinitrc.d/*; do
-            if [ -f "$f" ]
+    if test -d ${HOME}/.xinitrc.d
+    then
+        for f in ${HOME}/.xinitrc.d/*
+        do
+            if test -f "${f}"
             then
-                . "$f"
+                . "${f}"
             fi
         done
         unset f
@@ -81,19 +83,20 @@ start_wm() {
     if [ -n ${wm} ]; then
         export USERWM=${wm}
         case ${USERWM} in
-            xfce)         exec dbus-launch ck-launch-session startxfce4 ;;
-            fluxbox)      exec dbus-launch startfluxbox ;;
-            fvwm|fvwm2)   exec dbus-launch fvwm2 ;;
-            fvwm-themes*) exec dbus-launch fvwm-themes-start -s sa ;;
-            dwm)          exec dbus-launch $HOME/.dwm/startdwm ;;
-            kde)          exec dbus-launch startkde4 ;;
-            gnome)        exec dbus-launch gnome-session ;;
-            mate)         exec dbus-launch ck-launch-session mate-session ;;
-            rox)          exec dbus-launch rox -S ;;
-            lainwm)       exec dbus-launch lainwm ;;
-            openbox)      exec openbox-session ;;
-            windowmaker)  exec wmaker ;;
-	    metisse)      exec metisse-start-fvwm ;;
+            xfce)         exec dbus-launch --exit-with-session ck-launch-session startxfce4 ;;
+            fluxbox)      exec dbus-launch --exit-with-session ck-launch-session startfluxbox ;;
+            fvwm|fvwm2)   exec dbus-launch --exit-with-session ck-launch-session fvwm2 ;;
+            fvwm-themes*) exec dbus-launch --exit-with-session ck-launch-session fvwm-themes-start -s sa ;;
+            dwm)          exec dbus-launch --exit-with-session ck-launch-session $HOME/.dwm/startdwm ;;
+            kde)          exec dbus-launch --exit-with-session ck-launch-session startkde5 ;;
+            gnome)        exec dbus-launch --exit-with-session ck-launch-session gnome-session ;;
+            mate)         exec dbus-launch --exit-with-session ck-launch-session mate-session ;;
+            rox)          exec dbus-launch --exit-with-session ck-launch-session rox -S ;;
+            lainwm)       exec dbus-launch --exit-with-session ck-launch-session lainwm ;;
+            openbox)      exec dbus-launch --exit-with-session ck-launch-session openbox-session ;;
+            windowmaker)  exec dbus-launch --exit-with-session ck-launch-session wmaker ;;
+            mate)         exec dbus-launch --exit-with-session ck-launch-session mate-session ;;
+            metisse)      exec dbus-launch --exit-with-session ck-launch-session metisse-start-fvwm ;;
             *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
         esac
     else
@@ -101,10 +104,19 @@ start_wm() {
     fi
 }
 
+sound() {
+    local login
+    login="${HOME}/.sounds/desktop-login.ogg"
+    if test -f ${login}
+    then
+        play --no-show-progress ${login} &
+    fi
+}
+
+sound
 load_xinitrcd
 setup_ibus
 add_font_paths
 start_apps
 
 start_wm ${1}
-xset +fp /usr/local/X11/fonts/ChromeOS/

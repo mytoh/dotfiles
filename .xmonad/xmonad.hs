@@ -210,14 +210,17 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         , [className  =? "Qmmp"                                  --> (doFloat <+> viewShift "kolme")]
         , [className  =? "Audacious"                             --> (doFloat <+> viewShift "kolme")]
         , [className  =? "gogglesmm"                             --> (doFloat <+> viewShift "kolme")]
+        , [className  =? "Qmmp"                             --> (doFloat <+> viewShift "kolme")]
 
         , [className  =? "V2C"                                   --> viewShift "kaksi"]
         , [className  =? "Opera"                                 --> viewShift "kaksi"]
         , [className  =? "Conkeror"                              --> viewShift "kaksi"]
+        , [className  =? "Chrome"                               --> viewShift "kaksi"]
         , [className  =? "Firefox"                               --> viewShift "kaksi"]
         , [(className =? "Firefox" <&&> appName =? "Dialog")     --> (doFloat <+> viewShift "kaksi")]
 
         , [className  =? "Thunar"                               --> viewShift "neljä"]
+        , [className  =? "Caja"                               --> viewShift "neljä"]
 
         , [className   =? "Emacs"                                --> viewShift "emacs"]
 
@@ -303,9 +306,7 @@ myStartupHook = do
                 spawn trayer
                 spawn mail
                 spawn bgmgr
-                spawn clipmgr
                 spawn volumemgr
-                -- spawn compmgr
                 {- spawn uimPanel -}
                 execScriptHook "startup"
 

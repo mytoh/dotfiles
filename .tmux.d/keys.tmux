@@ -4,9 +4,9 @@ setw -g mode-keys emacs
 unbind C-b
 set -g prefix C-z
 unbind C-z
-unbind z
 bind C-z last-pane
-#bind C-z send-prefix
+unbind z
+bind z send-prefix
 
 # screen ^C c
 unbind ^C
@@ -54,7 +54,7 @@ bind BTab select-pane -t:.-
 
 # reload setting
 unbind C-r
-bind C-r source-file $HOME/.tmux.conf
+bind C-r run "tmux source-file $HOME/.tmux.conf && tmux display-message 'reload setting'"
 
 # split window and execute command
 bind e command-prompt "split-window -p 65 'exec %%'"
