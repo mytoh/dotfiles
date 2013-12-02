@@ -89,14 +89,24 @@ init_params() {
     SERVERNAME=""
     REFUSE=""
     LOCALDESC=""
-	INTERACTIVE=""
+    INTERACTIVE=""
 
     FETCHPROGRAM=""
+    FETCHFLAGCONTINUE=""
+
+    TMP_PATCHLIST="patchlist"
+    TMP_DIFF="diff"
+    TMP_OLD="OLD"
+    TMP_NEW="NEW"
+    TMP_FILELIST="filelist"
+    TMP_INDEX_NEW="INDEX.new"
+
 }
 
 # Parse the command line
 parse_cmdline() {
-    while [ $# -gt 0 ]; do
+    while test $# -gt 0
+    do
         case "$1" in
             -d)
                 if test $# -eq 1 ; then usage; fi
@@ -245,22 +255,25 @@ default_params() {
     _NDEBUG="-n"
     _LOCALDESC="/dev/null"
     _FETCHPROGRAM="aria2c"
+    _FETCHFLAGCONTINUE="-c"
     for X in QUIETREDIR QUIETFLAG STATSREDIR WORKDIR PORTSDIR   \
-        NDEBUG LOCALDESC FETCHPROGRAM; do
+        NDEBUG LOCALDESC FETCHPROGRAM FETCHFLAGCONTINUE; do
         eval _=\$${X}
         eval __=\$_${X}
-        if [ -z "${_}" ]
+        if test -z "${_}"
         then
             eval ${X}=${__}
         fi
     done
-    if [ -z "${INTERACTIVE}" ]; then
-        if [ -t 0 ]; then
+    if test -z "${INTERACTIVE}"
+    then
+        if test -t 0
+        then
             INTERACTIVE="YES"
         else
             INTERACTIVE="NO"
         fi
-	fi
+    fi
 }
 
 # Perform sanity checks and set some final parameters
@@ -635,15 +648,16 @@ fetch_metadata_sanity() {
 }
 
 fetch_make_patchlist() {
-	local IFS='|'
-	echo "" 1>${QUIETREDIR}
-	grep -vE "^([0-9a-f]{64})\|\1$" |
-	while read X Y; do
-		printf "Processing: $X $Y ...\r" 1>${QUIETREDIR}
-		if test -f "files/${Y}.gz" || test ! -f "files/${X}.gz" ; then continue; fi
-		echo "${X}|${Y}"
-	done
-	echo "" 1>${QUIETREDIR}
+    local IFS='|'
+    echo "" 1>${QUIETREDIR}
+    grep -vE "^([0-9a-f]{64})\|\1$" |
+    while read X Y
+    do
+        printf "Processing: $X $Y ...\r" 1>${QUIETREDIR}
+        if test -f "files/${Y}.gz" || test ! -f "files/${X}.gz" ; then continue; fi
+        echo "${X}|${Y}"
+    done
+    echo "" 1>${QUIETREDIR}
 }
 
 # Print user-friendly progress statistics
@@ -665,31 +679,34 @@ fetch_progress() {
 
 pct_fmt()
 {
-	printf "                                     \r"
-	printf "($1/$2) %02.2f%% " $(echo "scale=4;${LNC} / ${TOTAL} * 100"|bc)
+    printf "                                     \r"
+    printf "($1/$2) %02.2f%% " $(echo "scale=4;${LNC} / ${TOTAL} * 100"|bc)
 }
 
 fetch_progress_percent() {
-	TOTAL=$1
-	LNC=0
-	pct_fmt $LNC $TOTAL
-	while read x; do
-		LNC=$(($LNC + 1))
-		if [ $(($LNC % 100)) = 0 ]; then
+    TOTAL=$1
+    LNC=0
+    pct_fmt $LNC $TOTAL
+    while read x
+    do
+        LNC=$(($LNC + 1))
+        if test $(($LNC % 100)) = 0
+        then
             pct_fmt $LNC $TOTAL
-		elif [ $(($LNC % 10)) = 0 ]; then
-			echo -n .
-		fi
-	done
-	pct_fmt $LNC $TOTAL
-	echo " done. "
+        elif test $(($LNC % 10)) = 0
+        then
+            echo -n .
+        fi
+    done
+    pct_fmt $LNC $TOTAL
+    echo " done. "
 }
 
 
 # Sanity-check an index file
 fetch_index_sanity() {
-    if grep -qvE "^[-_+./@0-9A-Za-z]+\|[0-9a-f]{64}$" INDEX.new ||
-        fgrep -q "./" INDEX.new
+    if grep -qvE "^[-_+./@0-9A-Za-z]+\|[0-9a-f]{64}$" ${TMP_INDEX_NEW} ||
+        fgrep -q "./" ${TMP_INDEX_NEW}
     then
         fetch_metadata_freakout
         return 1
@@ -725,7 +742,7 @@ fetch_snapshot() {
     # probably take a while, so the progrees reports that fetch(1) generates
     # will be useful for keeping the users' attention from drifting.
     echo "Fetching snapshot generated at $(date -r ${SNAPSHOTDATE}):"
-    ${FETCHPROGRAM} -c http://${SERVERNAME}/s/${SNAPSHOTHASH}.tgz || return 1
+    ${FETCHPROGRAM} ${FETCHFLAGCONTINUE} http://${SERVERNAME}/s/${SNAPSHOTHASH}.tgz || return 1
 
     log_message_nonl "Extracting snapshot... "
     tar -xz --numeric-owner -f ${SNAPSHOTHASH}.tgz snap/ || return 1
@@ -736,11 +753,11 @@ fetch_snapshot() {
     # Verify the metadata files
     cut -f 2 -d '|' tINDEX.new | fetch_snapshot_verify || return 1
     # Extract the index
-    rm -f INDEX.new
-    gunzip -c snap/$(look INDEX tINDEX.new | cut -f 2 -d '|').gz > INDEX.new
+    rm -f ${TMP_INDEX_NEW}
+    gunzip -c snap/$(look INDEX tINDEX.new | cut -f 2 -d '|').gz > ${TMP_INDEX_NEW}
     fetch_index_sanity || return 1
     # Verify the snapshot contents
-    cut -f 2 -d '|' INDEX.new | fetch_snapshot_verify || return 1
+    cut -f 2 -d '|' ${TMP_INDEX_NEW} | fetch_snapshot_verify || return 1
     echo "done."
 
     # Move files into their proper locations
@@ -748,7 +765,7 @@ fetch_snapshot() {
     rm -rf files
     mv tag.new tag
     mv tINDEX.new tINDEX
-    mv INDEX.new INDEX
+    mv ${TMP_INDEX_NEW} INDEX
     mv snap/ files/
 
     return 0
@@ -756,21 +773,23 @@ fetch_snapshot() {
 
 fetch_update_apply_metadata_patches() {
     # Attempt to apply metadata patches
-    echo -n "Applying metadata patches... "
+    log_patch "Applying metadata patches... "
     local oldifs="$IFS" IFS='|'
-    while read X Y; do
-        if [ ! -f "${X}-${Y}.gz" ]; then continue; fi
-        gunzip -c < ${X}-${Y}.gz > diff
-        gunzip -c < files/${X}.gz > OLD
-        cut -c 2- diff | join -t '|' -v 2 - OLD > ptmp
-        grep '^\+' diff | cut -c 2- |
-        sort -k 1,1 -t '|' -m - ptmp > NEW
-        if [ `${SHA256} -q NEW` = ${Y} ]; then
-            mv NEW files/${Y}
+    while read X Y
+    do
+        if test ! -f "${X}-${Y}.gz" ; then continue; fi
+        gunzip -c < ${X}-${Y}.gz > ${TMP_DIFF}
+        gunzip -c < files/${X}.gz > ${TMP_OLD}
+        cut -c 2- ${TMP_DIFF} | join -t '|' -v 2 - ${TMP_OLD} > ptmp
+        grep '^\+' ${TMP_DIFF} | cut -c 2- |
+        sort -k 1,1 -t '|' -m - ptmp > ${TMP_NEW}
+        if test $(${SHA256} -q ${TMP_NEW}) = ${Y}
+        then
+            mv ${TMP_NEW} files/${Y}
             gzip -n files/${Y}
         fi
-        rm -f diff OLD NEW ${X}-${Y}.gz ptmp
-    done < patchlist 2>${QUIETREDIR}
+        rm -f ${TMP_DIFF} ${TMP_OLD} ${TMP_NEW} ${X}-${Y}.gz ptmp
+    done < ${TMP_PATCHLIST} 2>${QUIETREDIR}
     IFS="$oldifs"
     echo "done."
 }
@@ -781,43 +800,48 @@ fetch_update_fetch_ports_patches() {
 
     # Generate a list of wanted ports patches
     echo -n "Generating list of wanted patches..." 1>${QUIETREDIR}
-    join -t '|' -o 1.2,2.2 INDEX INDEX.new |
-    fetch_make_patchlist > patchlist
+    join -t '|' -o 1.2,2.2 INDEX ${TMP_INDEX_NEW} |
+    fetch_make_patchlist > ${TMP_PATCHLIST}
     echo " done." 1>${QUIETREDIR}
 
+    patchcnt="$(wc -l < ${TMP_PATCHLIST} | tr -d ' ')"
 
-    patchcnt="$(wc -l < patchlist | tr -d ' ')"
     # Attempt to fetch ports patches
     log_fetch "Fetching "
     log_number "${patchcnt} "
     log_message_debug "patches.${DDSTATS}"
     printf " \n"
-    tr '|' '-' < patchlist | lam -s "bp/" - |
+    tr '|' '-' < ${TMP_PATCHLIST} | lam -s "bp/" - |
     xargs ${XARGST} ${PHTTPGET} ${SERVERNAME}   \
         2>${STATSREDIR} | fetch_progress_percent ${patchcnt}
     echo "done."
 }
 
-fetch_update_fetch_metadata_files() {
-    local metadata
 
+fetch_update_update_meadata_no_patches() {
     # Update metadata without patches
     join -t '|' -v 2 tINDEX tINDEX.new |
-    cut -f 2 -d '|' /dev/stdin patchlist |
+    cut -f 2 -d '|' /dev/stdin ${TMP_PATCHLIST} |
     while read Y
     do
         if test ! -f "files/${Y}.gz"
         then
             echo ${Y};
         fi
-    done > filelist
+    done > ${TMP_FILELIST}
+}
 
-    metadata="$(wc -l < filelist | tr -d ' ')"
+fetch_update_fetch_metadata_files() {
+    local metadatacnt
+
+    fetch_update_update_meadata_no_patches
+
+    metadatacnt="$(wc -l < ${TMP_FILELIST} | tr -d ' ')"
 
     log_fetch "Fetching"
-    log_number " ${metadata} "
+    log_number " ${metadatacnt} "
     log_message_debug "metadata files... "
-    lam -s "f/" - -s ".gz" < filelist |
+    lam -s "f/" - -s ".gz" < ${TMP_FILELIST} |
     xargs ${XARGST} ${PHTTPGET} ${SERVERNAME}   \
         2>${QUIETREDIR}
 
@@ -832,38 +856,40 @@ fetch_update_fetch_metadata_files() {
             return 1
         fi
         echo "ok." 1>${QUIETREDIR}
-    done < filelist
+    done < ${TMP_FILELIST}
     echo "done."
 
 }
 
 fetch_update_apply_patches() {
     # # Attempt to apply ports patches
-	PATCHCNT=$(wc -l patchlist)
-	echo "Applying patches... "
-	local oldifs="$IFS" IFS='|'
-	I=0
-	while read X Y
+    PATCHCNT=$(wc -l ${TMP_PATCHLIST})
+
+    log_patch "Applying patches... "
+
+    local oldifs="$IFS" IFS='|'
+    I=0
+    while read X Y
     do
-		I=$(($I + 1))
-		F="${X}-${Y}"
-		if test ! -f "${F}"
+        I=$(($I + 1))
+        F="${X}-${Y}"
+        if test ! -f "${F}"
         then
-			printf "  Skipping ${F} (${I} of ${PATCHCNT}).\r"
-			continue;
-		fi
-		echo "  Processing ${F}..." 1>${QUIETREDIR}
-		gunzip -c < files/${X}.gz > OLD
-		${BSPATCH} OLD NEW ${X}-${Y}
-		if test $(${SHA256} -q NEW) = ${Y}
+            printf "  Skipping ${F} (${I} of ${PATCHCNT}).\r"
+            continue;
+        fi
+        echo "  Processing ${F}..." 1>${QUIETREDIR}
+        gunzip -c < files/${X}.gz > ${TMP_OLD}
+        ${BSPATCH} ${TMP_OLD} ${TMP_NEW} ${X}-${Y}
+        if test $(${SHA256} -q ${TMP_NEW}) = ${Y}
         then
-			mv NEW files/${Y}
-			gzip -n files/${Y}
-		fi
-		rm -f diff OLD NEW ${X}-${Y}
-	done < patchlist 2>${QUIETREDIR}
-	IFS="$oldifs"
-	printf "done.\n"
+            mv ${TMP_NEW} files/${Y}
+            gzip -n files/${Y}
+        fi
+        rm -f ${TMP_DIFF} ${TMP_OLD} ${TMP_NEW} ${X}-${Y}
+    done < ${TMP_PATCHLIST} 2>${QUIETREDIR}
+    IFS="$oldifs"
+    printf "done.\n"
 
 }
 
@@ -873,14 +899,14 @@ fetch_update_fetch_metadata_patches() {
 
     # Generate a list of wanted metadata patches
     join -t '|' -o 1.2,2.2 tINDEX tINDEX.new |
-    fetch_make_patchlist > patchlist
+    fetch_make_patchlist > ${TMP_PATCHLIST}
 
-    patch_num="$(wc -l < patchlist | tr -d ' ')"
+    patch_num="$(wc -l < ${TMP_PATCHLIST} | tr -d ' ')"
     # Attempt to fetch metadata patches
     log_fetch "Fetching"
     log_number " ${patch_num} "
     log_message_debug "metadata patches.${DDSTATS}"
-    tr '|' '-' < patchlist |
+    tr '|' '-' < ${TMP_PATCHLIST} |
     lam -s "tp/" - -s ".gz" |
     xargs ${XARGST} ${PHTTPGET} ${SERVERNAME}   \
         2>${STATSREDIR} | fetch_progress
@@ -889,29 +915,29 @@ fetch_update_fetch_metadata_patches() {
 
 fetch_update_fetch_new_ports_or_files() {
 
-    local filenum
+    local filecnt
 
     # Update ports without patches
-    join -t '|' -v 2 INDEX INDEX.new |
-    cut -f 2 -d '|' /dev/stdin patchlist |
+    join -t '|' -v 2 INDEX ${TMP_INDEX_NEW} |
+    cut -f 2 -d '|' /dev/stdin ${TMP_PATCHLIST} |
     while read Y
     do
         if test ! -f "files/${Y}.gz"
         then
             echo ${Y};
         fi
-    done > filelist
+    done > ${TMP_FILELIST}
 
-    filenum="$(wc -l < filelist | tr -d ' ')"
+    filecnt="$(wc -l < ${TMP_FILELIST} | tr -d ' ')"
 
     log_fetch "Fetching"
-    log_number " ${filenum} "
+    log_number " ${filecnt} "
     log_message_debug "new ports or files... "
-    lam -s "f/" - -s ".gz" < filelist |
+    lam -s "f/" - -s ".gz" < ${TMP_FILELIST} |
     xargs ${XARGST} ${PHTTPGET} ${SERVERNAME}   \
         2>${QUIETREDIR}
 
-	I=0
+    I=0
     while read Y
     do
         I=$(($I + 1))
@@ -923,16 +949,16 @@ fetch_update_fetch_new_ports_or_files() {
             echo "snapshot is corrupt."
             return 1
         fi
-    done < filelist
+    done < ${TMP_FILELIST}
     echo "done."
 }
 
 fetch_update_remove_oldfiles() {
     # Remove files which are no longer needed
     cut -f 2 -d '|' tINDEX INDEX | sort -u > oldfiles
-    cut -f 2 -d '|' tINDEX.new INDEX.new | sort -u | comm -13 - oldfiles |
+    cut -f 2 -d '|' tINDEX.new ${TMP_INDEX_NEW} | sort -u | comm -13 - oldfiles |
     lam -s "files/" - -s ".gz" | xargs rm -f
-    rm patchlist filelist oldfiles
+    rm ${TMP_PATCHLIST} ${TMP_FILELIST} oldfiles
 }
 
 fetch_update_refuse_index() {
@@ -946,24 +972,25 @@ fetch_update_refuse_index() {
         echo "Refusing to download updates for ${REFUSE}"   \
             >${QUIETREDIR}
 
-        grep -Ev "${REFUSE}" INDEX.new > INDEX.tmp
+        grep -Ev "${REFUSE}" ${TMP_INDEX_NEW} > INDEX.tmp
         grep -E "${REFUSE}" INDEX |
-        sort -m -k 1,1 -t '|' - INDEX.tmp > INDEX.new
+        sort -m -k 1,1 -t '|' - INDEX.tmp > ${TMP_INDEX_NEW}
         rm -f INDEX.tmp
     fi
 }
 
 fetch_update_extract_index() {
     # Extract the index
-    echo -n "Extracting index... " 1>${QUIETREDIR}
+    log_message_nonl "Extracting index... " 1>${QUIETREDIR}
     gunzip -c files/$(look INDEX tINDEX.new |
-        cut -f 2 -d '|').gz > INDEX.new
+        cut -f 2 -d '|').gz > ${TMP_INDEX_NEW}
     fetch_index_sanity || return 1
 }
 
 # Update a compressed snapshot
 fetch_update() {
-    rm -f patchlist diff OLD NEW filelist INDEX.new
+    local tmpfiles="${TMP_PATCHLIST} ${TMP_DIFF} ${TMP_OLD} ${TMP_NEW} ${TMP_FILELIST} ${TMP_INDEX_NEW}"
+    rm -f ${tmpfiles}
 
     OLDSNAPSHOTDATE=$(cut -f 2 -d '|' < tag)
     OLDSNAPSHOTHASH=$(cut -f 3 -d '|' < tag)
@@ -999,7 +1026,7 @@ fetch_update() {
     fetch_update_remove_oldfiles
 
     # We're done!
-    mv INDEX.new INDEX
+    mv ${TMP_INDEX_NEW} INDEX
     mv tINDEX.new tINDEX
     mv tag.new tag
 
@@ -1084,7 +1111,7 @@ extract_run() {
             cat ${WORKDIR}/INDEX
         fi | while read FILE HASH; do
             echo ${PORTSDIR}/${FILE}
-            if ! [ -s "${WORKDIR}/files/${HASH}.gz" ]
+            if ! test -s "${WORKDIR}/files/${HASH}.gz"
             then
                 echo "files/${HASH}.gz not found -- snapshot corrupt."
                 return 1
@@ -1108,11 +1135,11 @@ extract_run() {
     fi
     if test ! -z "${EXTRACTPATH}"
     then
-        return 0;
+        return 0
     fi
 
-    +	IFS="$oldifs"
-    +
+    IFS="$oldifs"
+
     extract_metadata
     extract_indices
 }
@@ -1146,7 +1173,7 @@ update_run_extract() {
     # Install new files
     echo "Extracting new files:"
     if !
-        if ! [ -z "${REFUSE}" ]
+        if ! test -z "${REFUSE}"
         then
             grep -vE "${REFUSE}" ${WORKDIR}/INDEX | sort
         else
@@ -1155,8 +1182,8 @@ update_run_extract() {
         comm -13 ${PORTSDIR}/.portsnap.INDEX - |
         while read FILE HASH
         do
-            echo ${PORTSDIR}/${FILE}
-            if ! [ -s "${WORKDIR}/files/${HASH}.gz" ]
+            log_new_ports ${PORTSDIR}/${FILE}
+            if ! test -s "${WORKDIR}/files/${HASH}.gz"
             then
                 echo "files/${HASH}.gz not found -- snapshot corrupt."
                 return 1
@@ -1175,7 +1202,7 @@ update_run_extract() {
         done
     then
         return 1
-	fi
+    fi
 }
 
 
@@ -1206,9 +1233,10 @@ update_run() {
 #### Log functions
 
 log_fetch() {
-    local message="${1}"
-    local colour="[38;5;79m"
-    local reset="[0m"
+    local message colour reset
+    message="${1}"
+    colour="[38;5;79m"
+    reset="[0m"
 
     printf "${colour}::${reset} %s"  "${message}"
 }
@@ -1234,9 +1262,10 @@ log_message() {
 }
 
 log_message_debug() {
-    local message="${1}"
-    local colour="[38;5;32m"
-    local reset="[0m"
+    local message colour reset
+    message="${1}"
+    colour="[38;5;32m"
+    reset="[0m"
 
     if test "${NDEBUG}" = "-n"
     then
@@ -1365,17 +1394,18 @@ command_update() {
 # whether stdin is a terminal; then run 'update' or
 # 'extract' depending on whether ${PORTSDIR} exists.
 command_auto() {
-	if test "${INTERACTIVE}" = "YES"
+    if test "${INTERACTIVE}" = "YES"
     then
         command_fetch
-	else
+    else
         command_cron
-	fi
-	if [ -r ${PORTSDIR}/.portsnap.INDEX ]; then
+    fi
+    if test -r ${PORTSDIR}/.portsnap.INDEX
+    then
         command_update
-	else
+    else
         command_extract
-	fi
+    fi
 }
 
 #### Entry point
@@ -1387,7 +1417,7 @@ main() {
     # Set LC_ALL in order to avoid problems with character ranges like [A-Z].
     export LC_ALL=C
 
-    get_params ${@}
+    get_params $@
     for COMMAND in ${COMMANDS}
     do
         log_command ${COMMAND}
