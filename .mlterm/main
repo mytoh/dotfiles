@@ -1,25 +1,64 @@
 ### -*- coding: utf-8; mode: conf -*-
 
-# -- Window --
-inner_border = 0
+# -- Encoding 関連 --
+# エンコーディングの指定
+# (ISO-8859-[1-11], ISO-8859-[13-16], TIS-620 (same as ISO-8859-11),
+#  KOI8-[RUT], ISCII, VISCII, TCVN5712, GEORGIAN_PS, CP1251, CP1255,
+#  EUC-JP, EUC-JISX0213, Shift_JIS, Shift_JISX0213, ISO-2022-JP[1-3],
+#  EUC-KR, UHC, JOHAB, ISO-2022-KR, GB2312 (EUC-CN), GBK, GB18030,
+#  ISO-2022-CN, HZ, EUC-TW, BIG5, BIG5HKSCS, UTF-8, AUTO)
+ENCODING = auto
 
-# -- Terminal --
-termtype = xterm-256color
+# -- Font 関連 --
+# デフォルトフォントサイズ
+fontsize = 10
 
-# -- Encoding --
-ENCODING = utf-8
+# 変更可能なフォントサイズの範囲
+font_size_range = 6-30
 
-# -- Font --
-#type_engine = xcore
-fontsize = 8
+# larger,smaller ボタンでのフォントサイズの変化量(*1*)      
+step_in_changing_font_size = 1
+
+# 可変長コラム幅を使用する
+use_variable_column_width = false 
+
+# アンチエイリアスフォントを使用する
 use_anti_alias = false
-use_variable_column_width = false
-use_multi_column_char = true
-receive_string_via_ucs = true
-col_size_of_width_a = 2
-not_use_unicode_font = false
+
+# アンチエイリアス(Xft)時、JISX0208 の Unicode 変換に CP932 の変換テーブル
+# を使う
+use_cp932_ucs_for_xft = true
+
+# UNICODE を適当な文字集合にmapして、UNICODE フォントを使わずに表示する
+not_use_unicode_font = true
+
+# すべての文字を UNICODE フォントだけを使って表示する
 only_use_unicode_font = false
-#iso88591_font_for_usascii = false
+
+# US_ASCII の表示には、必ず ISO8859-1 フォントを使用する
+iso88591_font_for_usascii = false
+
+# -- その他 --
+# XIM を使う
+use_xim = true
+
+# インプットメソッド
+# (xim,uim,iiimf,scim,m17n-lib,none)
+input_method = xim
+
+# タブ幅
+tabsize = 4
+
+# ログの行数 
+logsize = 1024
+
+# バックスクロール時に端末出力があっても画面が流れないようにする。
+static_backscroll_mode = true
+
+# Meta key : alt, meta, hyper, super, mod1, mod2, mod3, mod4, [none]
+mod_meta_key = alt
+# Meta behaviour : esc, none, [8bit]
+mod_meta_mode = esc
 
 
 # -- Appearance --
@@ -27,11 +66,10 @@ use_transbg = true
 alpha = 250
 depth = 32
 use_scrollbar = false
-scrollbar_view_name = sample
 fg_color = #bea492
 bg_color = #1b2023
 borderless = true
-
+inner_border = 0
 
 # -- Others --
 bel_mode = none
