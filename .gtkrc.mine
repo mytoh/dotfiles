@@ -39,3 +39,4 @@ style "rox" = "default"
 }
 
 widget_class "*Collection" style "rox"
+

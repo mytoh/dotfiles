@@ -1,8 +1,6 @@
 module Mytoh.Config where
   import XMonad
 
-  myTerminal       :: String
-  myTerminal       = "urxvtcd"
 
   myBorderWidth    :: Dimension
   myBorderWidth    = 3
@@ -41,7 +39,7 @@ module Mytoh.Config where
   myNormalBorderColor  :: String
   myNormalBorderColor  = "#111111"
   myFocusedBorderColor :: String
-  myFocusedBorderColor = "#22ee22"
+  myFocusedBorderColor = "#F92672"
   -- }}}
 
   -- Fonts -------------------------------------------

@@ -16,9 +16,12 @@
 auto-save-list
 tramp
 .\#*
-*.o
-*.hi
+*fontconfig*
 
 # Org-mode
 .org-id-locations
 *_archive
+
+# haskell
+*.o
+*.hi

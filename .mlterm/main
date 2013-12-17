@@ -16,6 +16,8 @@ fontsize = 10
 # 変更可能なフォントサイズの範囲
 font_size_range = 6-30
 
+col_size_of_width_a = 2
+
 # larger,smaller ボタンでのフォントサイズの変化量(*1*)      
 step_in_changing_font_size = 1
 
@@ -36,7 +38,7 @@ not_use_unicode_font = true
 only_use_unicode_font = false
 
 # US_ASCII の表示には、必ず ISO8859-1 フォントを使用する
-iso88591_font_for_usascii = false
+iso88591_font_for_usascii = true
 
 # -- その他 --
 # XIM を使う

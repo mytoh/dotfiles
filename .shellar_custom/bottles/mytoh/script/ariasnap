@@ -224,7 +224,8 @@ parse_conffile() {
             if test -z "${_}"
             then
                 eval ${X}=$(grep "^${X}=" "${CONFFILE}" \
-                    | cut -f 2- -d '=' | tail -1)
+                    | cut -f 2- -d '=' \
+                    | tail -1)
             fi
         done
 
@@ -401,11 +402,11 @@ fetch_pick_server_init() {
     # BIND 9 prints "$name has SRV record ..." while BIND 8 prints
     # "$name server selection ..."; we allow either format.
     MLIST="_http._tcp.${SERVERNAME}"
-    host -t srv "${MLIST}" |
-    sed -nE "s/${MLIST} (has SRV record|server selection) //p" |
-    cut -f 1,2,4 -d ' ' |
-    sed -e 's/\.$//' |
-    sort > serverlist_full
+    host -t srv "${MLIST}" \
+        | sed -nE "s/${MLIST} (has SRV record|server selection) //p" \
+        | awk '{print $1, $2, $4}' \
+        | sed -e 's/\.$//' \
+        | sort > serverlist_full
 
     # If no records, give up -- we'll just use the server name we were given.
     if test $(wc -l < serverlist_full) -eq 0
@@ -422,9 +423,9 @@ fetch_pick_server_init() {
     # will be random.
     if test -n "${HTTP_PROXY}${http_proxy}"
     then
-        RANDVALUE=$(sha256 -qs "${HTTP_PROXY}${http_proxy}" |
-            tr -d 'a-f' |
-            cut -c 1-9)
+        RANDVALUE=$(sha256 -qs "${HTTP_PROXY}${http_proxy}" \
+            | tr -d 'a-f' \
+            | cut -c 1-9)
     else
         RANDVALUE=$(jot -r 1 0 999999999)
     fi
@@ -444,7 +445,8 @@ fetch_pick_server() {
     fi
 
     # Find the highest priority level (lowest numeric value).
-    SRV_PRIORITY=$(cut -f 1 -d ' ' serverlist | sort -n | head -1)
+    # SRV_PRIORITY=$(cut -f 1 -d ' ' serverlist | sort -n | head -1)
+    SRV_PRIORITY=$(awk '{print $1}' serverlist | sort -n | head -1)
 
     # Add up the weights of the response lines at that priority level.
     SRV_WSUM=0;
@@ -452,7 +454,8 @@ fetch_pick_server() {
     do
         case "$X" in
             ${SRV_PRIORITY}\ *)
-                SRV_W=$(echo $X | cut -f 2 -d ' ')
+                # SRV_W=$(echo $X | cut -f 2 -d ' ')
+                SRV_W=$(echo $X | awk '{print $2}')
                 SRV_WSUM=$(($SRV_WSUM + $SRV_W))
                 ;;
         esac
@@ -461,7 +464,8 @@ fetch_pick_server() {
     # If all the weights are 0, pretend that they are all 1 instead.
     if test ${SRV_WSUM} -eq 0
     then
-        SRV_WSUM=$(grep -E "^${SRV_PRIORITY} " serverlist | wc -l)
+        # SRV_WSUM=$(grep -E "^${SRV_PRIORITY} " serverlist | wc -l)
+        SRV_WSUM=$(awk "/^${SRV_PRIORITY} /" serverlist | wc -l)
         SRV_W_ADD=1
     else
         SRV_W_ADD=0
@@ -477,11 +481,13 @@ fetch_pick_server() {
     do
         case "$X" in
             ${SRV_PRIORITY}\ *)
-                SRV_W=$(echo ${X} | cut -f 2 -d ' ')
+                # SRV_W=$(echo ${X} | cut -f 2 -d ' ')
+                SRV_W=$(echo ${X} | awk '{print $2}')
                 SRV_W=$((${SRV_W} + ${SRV_W_ADD}))
                 if test ${SRV_RND} -lt ${SRV_W}
                 then
-                    SERVERNAME=$(echo $X | cut -f 3 -d ' ')
+                    # SERVERNAME=$(echo $X | cut -f 3 -d ' ')
+                    SERVERNAME=$(echo ${X} | awk '{print $3}')
                     echo "$X" >> serverlist_tried
                     break
                 else
@@ -792,7 +798,7 @@ fetch_update_apply_metadata_patches() {
         gunzip -c < ${X}-${Y}.gz > ${FILE_DIFF}
         gunzip -c < files/${X}.gz > ${FILE_OLD}
         cut -c 2- ${FILE_DIFF} | join -t '|' -v 2 - ${FILE_OLD} > ptmp
-        grep '^\+' ${FILE_DIFF} \
+        awk '/^\+/' ${FILE_DIFF} \
             | cut -c 2- \
             |  sort -k 1,1 -t '|' -m - ptmp > ${FILE_NEW}
         if test $(${SHA256} -q ${FILE_NEW}) = ${Y}
@@ -835,8 +841,8 @@ fetch_update_fetch_ports_patches() {
 fetch_update_update_meadata_no_patches() {
     # Update metadata without patches
     join -t '|' -v 2 tINDEX tINDEX.new \
-        | cut -f 2 -d '|' /dev/stdin ${FILE_PATCHLIST} |
-    while read Y
+        | cut -f 2 -d '|' /dev/stdin ${FILE_PATCHLIST} \
+        | while read Y
     do
         if test ! -f "files/${Y}.gz"
         then
@@ -935,9 +941,9 @@ fetch_update_fetch_new_ports_or_files() {
     local filecnt
 
     # Update ports without patches
-    join -t '|' -v 2 INDEX ${FILE_INDEX_NEW} |
-    cut -f 2 -d '|' /dev/stdin ${FILE_PATCHLIST} |
-    while read Y
+    join -t '|' -v 2 INDEX ${FILE_INDEX_NEW} \
+        | cut -f 2 -d '|' /dev/stdin ${FILE_PATCHLIST} \
+        | while read Y
     do
         if test ! -f "files/${Y}.gz"
         then

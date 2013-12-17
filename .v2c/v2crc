@@ -2,3 +2,4 @@
 auxargs=-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel
 #auxargs=-Dswing.boldMetal=false
 auxargs=-Dawt.useSystemAAFontSettings=on
+javacmd=/usr/local/linux-sun-jre1.7.0/bin/java

@@ -9,9 +9,11 @@ setenv shellar_theme 'default'
 set -f bottle_radio=(radio bbc)
 #set -f bottle_scheme=(loitsu lehti nopea napa mosh gauche talikko pikkukivi)
 set -f bottle_scheme=(gauche lehti pikkukivi)
-set -f bottles=( mytoh emacs qjail ${bottle_scheme} fasd \
-                      ${bottle_radio} cask vim nyan \
-                       brew npm freebsd firefox please percol )
+set -f bottle_emacs=(emacs cask)
+set -f bottle_freebsd=(freebsd qjail)
+set -f bottles=( mytoh ${bottle_freebsd} ${bottle_scheme} ${bottle_emacs} fasd \
+                       ${bottle_radio}  vim nyan \
+                       brew npm firefox please percol )
 
 setenv shellar_bottles "${bottles}"
 
