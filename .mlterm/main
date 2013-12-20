@@ -18,11 +18,11 @@ font_size_range = 6-30
 
 col_size_of_width_a = 2
 
-# larger,smaller ボタンでのフォントサイズの変化量(*1*)      
+# larger,smaller ボタンでのフォントサイズの変化量(*1*)
 step_in_changing_font_size = 1
 
 # 可変長コラム幅を使用する
-use_variable_column_width = false 
+use_variable_column_width = false
 
 # アンチエイリアスフォントを使用する
 use_anti_alias = false
