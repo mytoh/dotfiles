@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-xulrunner ~/local/git/conkeror/application.ini $@
