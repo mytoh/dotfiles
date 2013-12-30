@@ -64,7 +64,7 @@ mod_meta_mode = esc
 
 
 # -- Appearance --
-use_transbg = true
+use_transbg = false
 alpha = 250
 depth = 32
 use_scrollbar = false
