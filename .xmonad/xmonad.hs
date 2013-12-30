@@ -147,10 +147,11 @@ myKeys = [ -- M4 for Super key
        , ("M-b", withFocused $ windows . W.sink)
        , ("M-q", spawn myRestart)
        , ("M-S-p", unsafeSpawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/local/tmp/'")
-       , ("C-t e e", runOrRaise "emacs" (className =? "Emacs"))
-       , ("C-t e f", runOrRaise "thunar" (className =? "Thunar"))
+       , ("C-t e e", runOrRaise "emacs" $ className =? "Emacs")
+       , ("C-t e f", runOrRaise "thunar" $ className =? "Thunar")
        , ("C-t e r", spawn $ "dmenu_run -b -p \">\" -fn " ++ myDzenFont) -- dzen prompt
        , ("C-t e t", spawn $ myTerminal)
+       , ("C-t e v", runOrRaise "v2c" $ className =? "V2C")
          ]
            where
              notSP = (return $ ("SP" /=) . W.tag) :: X (WindowSpace -> Bool)
