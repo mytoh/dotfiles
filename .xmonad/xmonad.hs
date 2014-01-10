@@ -40,6 +40,7 @@ import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.XPropManage
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.Script
+import XMonad.Hooks.ICCCMFocus
 
 -- <layout>
 import XMonad.Layout hiding ( (|||) )
@@ -152,6 +153,7 @@ myKeys = [ -- M4 for Super key
        , ("C-t e r", spawn $ "dmenu_run -b -p \">\" -fn " ++ myDzenFont) -- dzen prompt
        , ("C-t e t", spawn $ myTerminal)
        , ("C-t e v", runOrRaise "v2c" $ className =? "V2C")
+       , ("C-t e b", runOrRaise "conkeror" $ className =? "Conkeror")
          ]
            where
              notSP = (return $ ("SP" /=) . W.tag) :: X (WindowSpace -> Bool)
@@ -221,6 +223,7 @@ myManageHook = -- insertPosition End Newer <+> composeAll
 
         , [className  =? "Thunar"                               --> viewShift "neljä"]
         , [className  =? "Caja"                               --> viewShift "neljä"]
+        , [className  =? "Pcmanfm"                               --> viewShift "neljä"]
 
         , [className   =? "Emacs"                                --> viewShift "emacs"]
 
@@ -325,7 +328,7 @@ myConfig = do
         , layoutHook         = myLayoutHook
         , manageHook         = myManageHook
         , handleEventHook    = myEventHook
-        , logHook            = myLogHook d >> setWMName "LG3D"
+        , logHook            = myLogHook d >> takeTopFocus
         , startupHook        = myStartupHook
     } `additionalKeysP` myKeys
 
