@@ -321,3 +321,13 @@ deskutils/recoll
 print/texinfo
 print/tex
 print/tex
+security/gnupg
+net/miniupnpc
+devel/py-cheetah
+graphics/pngnq
+graphics/pngcrush
+audio/decibel-audio-player
+x11-toolkits/Xaw3d
+audio/pms
+sysutils/cpdup
+graphics/webp
