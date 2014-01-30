@@ -148,18 +148,19 @@ myKeys = [ -- M4 for Super key
        , ("M-b", withFocused $ windows . W.sink)
        , ("M-q", spawn myRestart)
        , ("M-S-p", unsafeSpawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/local/tmp/'")
-       , ("C-t e e", runOrRaise "emacs" $ className =? "Emacs")
-       , ("C-t e f", runOrRaise "thunar" $ className =? "Thunar")
-       , ("C-t e r", spawn $ "dmenu_run -b -p \">\" -fn " ++ myDzenFont) -- dzen prompt
-       , ("C-t e t", spawn $ myTerminal)
-       , ("C-t e v", runOrRaise "v2c" $ className =? "V2C")
-       , ("C-t e b", runOrRaise "conkeror" $ className =? "Conkeror")
+       , ((myprefix "e"), runOrRaise "emacs" $ className =? "Emacs")
+       -- , ("C-t e e", runOrRaise "emacs" $ className =? "Emacs")
+       , ((myappkey "f"), runOrRaise "thunar" $ className =? "Thunar")
+       , ((myappkey "r"), spawn $ "dmenu_run -b -p \">\" -fn " ++ myDzenFont) -- dzen prompt
+       , ((myappkey "t"), spawn $ myTerminal)
+       , ((myappkey "v"), runOrRaise "v2c" $ className =? "V2C")
+       , ((myappkey "b"), runOrRaise "conkeror" $ className =? "Conkeror")
          ]
            where
              notSP = (return $ ("SP" /=) . W.tag) :: X (WindowSpace -> Bool)
 
              scratchFiler = namedScratchpadAction myScratchPads "dolphin"
-
+             myappkey  key = "C-t e " ++ key
              myRestart = "for pid in `pgrep trayer`; do kill -9 $pid; done ;" ++
                          "for pid in `pgrep stalonetray`; do kill -9 $pid; done ;" ++
                          "for pid in `pgrep dzen2`; do kill -9 $pid; done ;" ++
@@ -308,7 +309,6 @@ myStartupHook = do
                 spawn myRightBar
                 spawn trayer
                 spawn mail
-                spawn bgmgr
                 spawn volumemgr
                 {- spawn uimPanel -}
                 execScriptHook "startup"
