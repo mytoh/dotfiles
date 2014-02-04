@@ -18,9 +18,6 @@ module Mytoh.Config.App where
   mail        = "gmail-notifier"
   compmgr     :: String
   compmgr     = "xcompmgr -c -C -I1 -O1 -Ff"
-  bgmgr       :: String
-  -- bgmgr       = "feh --bg-scale ~/.wallpapers/images.4chan.org-1268382153153.jpg"
-  bgmgr       = "sh ~/.fehbg"
 
   volumemgr   :: String
   volumemgr   = "gnome-volume-control-applet"

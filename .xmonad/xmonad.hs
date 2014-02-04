@@ -148,7 +148,7 @@ myKeys = [ -- M4 for Super key
        , ("M-b", withFocused $ windows . W.sink)
        , ("M-q", spawn myRestart)
        , ("M-S-p", unsafeSpawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/local/tmp/'")
-       , ((myprefix "e"), runOrRaise "emacs" $ className =? "Emacs")
+       , ((myappkey "e"), runOrRaise "emacs" $ className =? "Emacs")
        -- , ("C-t e e", runOrRaise "emacs" $ className =? "Emacs")
        , ((myappkey "f"), runOrRaise "thunar" $ className =? "Thunar")
        , ((myappkey "r"), spawn $ "dmenu_run -b -p \">\" -fn " ++ myDzenFont) -- dzen prompt

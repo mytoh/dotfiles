@@ -1,8 +1,23 @@
 #!/bin/sh
 
+hook::fehbg() {
+    if test -f ~/.fehbg
+    then
+        ~/.fehbg
+        # feh --bg-scale ~/.wallpapers/images.4chan.org-1268382153153.jpg
+    else
+        curl http://www.reddit.com/r/wallpapers.rss | grep -Eo 'http:[^ & ]+ ( jpg | png | bmp ) ' | grep imgur | head -1 | xargs feh --bg-fill
+    fi
+}
 
-hooks::startup() {
 
+rand() {
+    local value="$1"
+    echo $value |awk 'BEGIN {srand();} {print rand()t-tcsh}' | sort -k1 -n | cut -f2 | head -n 1
+}
+
+hook::startup() {
+    hook::fehbg
     # parcellite &
     # compton &
 
@@ -13,7 +28,7 @@ main() {
     local hook="${1}"
 
     case ${hook} in
-        startup)   hooks::startup ;;
+        startup)   hook::startup ;;
     esac
 
 }
