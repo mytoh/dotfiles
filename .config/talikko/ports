@@ -331,3 +331,14 @@ x11-toolkits/Xaw3d
 audio/pms
 sysutils/cpdup
 graphics/webp
+x11/xbindkeys
+x11-fonts/fantasque-sans-mono
+japanese/font-koruri
+misc/lv
+japanese/elisa8x8
+x11-fonts/font-manager
+textproc/jq
+sysutils/moreutils
+net-im/tox
+x11-fonts/gnu-unifont
+x11-fonts/gnu-unifont-ttf
