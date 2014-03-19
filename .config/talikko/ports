@@ -342,3 +342,13 @@ sysutils/moreutils
 net-im/tox
 x11-fonts/gnu-unifont
 x11-fonts/gnu-unifont-ttf
+sysutils/ncdu
+textproc/pdfgrep
+deskutils/kupfer
+graphics/mozjpeg
+graphics/pngquant
+graphics/optipng
+archivers/advancecomp
+sysutils/cpdup
+www/netsurf
+net/get_iplayer

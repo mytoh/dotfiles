@@ -5,69 +5,73 @@
 # disable color wrapper for some utils
 export NOCOLOR=true
 
-
-
-stat.cpu() {
+stat:cpu() {
 
     top -b -d 2 | grep ^CPU | awk '{print $2}'
 }
 
-stat.net.rx() {
+stat:net.rx() {
     bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | awk '{print $2,$3}'
 }
 
-stat.net.tx() {
+stat:net.tx() {
     bwm-ng -o plain -c 1 -I em0 -T avg| grep em0 | awk '{print $4,$5}'
 }
 
-stat.date() {
+stat:date() {
     local date_format='%a %d/%m %H:%M'
 
     date +"$date_format"
 }
 
-stat.memory() {
+stat:memory() {
     vmstat -h |grep -n 2| awk '{print $6}'
 }
 
 
-stat.disk.used() {
+stat:disk.used() {
     df -ch | grep total | awk '{print $3}' | cut -c 1-3
 }
 
-stat.disk.total() {
+stat:disk.total() {
     df -ch | grep total | awk '{print $2}'
 }
 
-stat.vol.vol() {
+stat:vol.vol() {
     mixer -s vol
 }
 
-stat.vol.pcm() {
+stat:vol.pcm() {
     mixer -s pcm
+}
+
+stat:pkg() {
+    pkg stats -q -l| grep packages | awk '{print $3}'
 }
 
 ##
 
-main() {
+stat:main() {
 
     local icons="$HOME/.xmonad/icons"
     local interval=1
 
     while true
     do
-        stat_date=$(stat.date)
+        stat_date=$(stat:date)
 
-        stat_cpu=$(stat.cpu)
+        stat_cpu=$(stat:cpu)
 
-        rx=$(stat.net.rx)
+        start_rx=$(stat:net.rx)
 
-        tx=$(stat.net.tx)
+        stat_tx=$(stat:net.tx)
 
-        freemem=$(stat.memory)
+        stat_freemem=$(stat:memory)
 
-        vol=$(stat.vol.vol)
-        pcm=$(stat.vol.pcm)
+        stat_vol=$(stat:vol.vol)
+        stat_pcm=$(stat:vol.pcm)
+
+        stat_pkg=$(stat:pkg)
 
         #set battery=`sysctl -n hw.acpi.battery.life`
         #if ( "$battery" <= 100  && "$battery" > 50 ) then
@@ -86,11 +90,11 @@ main() {
         #     set batcolour="#00ff00"
         # endif
 
-        diskused=$(stat.disk.used)
-        disktotal=$(stat.disk.total)
+        stat_diskused=$(stat:disk.used)
+        stat_disktotal=$(stat:disk.total)
 
-        ip=`ifconfig em0 | grep inet\  | awk '{print $2}'`
-        host=$(hostname)
+        stat_ip=`ifconfig em0 | grep inet\  | awk '{print $2}'`
+        stat_host=$(hostname)
 
         colour_icon="^fg(#64323E)"
         colour_str="^fg(#CACACA)"
@@ -99,19 +103,19 @@ main() {
         bgcolour="#212122"
 
 
-        printf "%s %s %s %s %s %s %s %s %s %s %s\n" \
-            "${colour_icon}^bg(${bgcolour})^i(${icons}/right_arrow.xbm)" \
-            "${colour_icon}^i(${icons}/sm4tik/xbm/cpu.xbm)${colour_str} ${stat_cpu}" \
-            "${colour_icon}^i($icons/sm4tik/xbm/mem.xbm)${colour_str} ${freemem}" \
-            "${openparen}" \
-            "${colour_icon}^i($icons/sm4tik/xbm/net_up_02.xbm)${colour_str} ${tx}" \
-            "${colour_icon}^i($icons/sm4tik/xbm/net_down_02.xbm)${colour_str} ${rx}" \
-            "${colour_icon}@ ${host}" \
-            "${closeparen}" \
-            "${colour_icon}^i($icons/sm4tik/xbm/spkr_01.xbm)${colour_str} ${vol} ${pcm}" \
-            "${colour_icon}^i($icons/sm4tik/xbm/diskette.xbm)${colour_str} ${diskused}/${disktotal}B" \
-            "${colour_icon}^i($icons/sm4tik/xbm/clock.xbm)${colour_str} ${stat_date}"
-
+        printf "%s %s %s %s %s %s %s %s %s %s %s %s\n" \
+               "${colour_icon}^i(${icons}/sm4tik/xbm/plug.xbm) ${colour_str}${stat_pkg} pkgs" \
+               "${colour_icon}^bg(${bgcolour})^i(${icons}/right_arrow.xbm)" \
+               "${colour_icon}^i(${icons}/sm4tik/xbm/cpu.xbm)${colour_str} ${stat_cpu}" \
+               "${colour_icon}^i($icons/sm4tik/xbm/mem.xbm)${colour_str} ${stat_freemem}" \
+               "${openparen}" \
+               "${colour_icon}^i($icons/sm4tik/xbm/net_up_02.xbm)${colour_str} ${stat_tx}" \
+               "${colour_icon}^i($icons/sm4tik/xbm/net_down_02.xbm)${colour_str} ${start_rx}" \
+               "${colour_icon}@ ${stat_host}" \
+               "${closeparen}" \
+               "${colour_icon}^i($icons/sm4tik/xbm/spkr_01.xbm)${colour_str} ${stat_vol} ${stat_pcm}" \
+               "${colour_icon}^i($icons/sm4tik/xbm/diskette.xbm)${colour_str} ${stat_diskused}/${stat_disktotal}B" \
+               "${colour_icon}^i($icons/sm4tik/xbm/clock.xbm)${colour_str} ${stat_date}"
 
         sleep $interval
 
@@ -120,4 +124,4 @@ main() {
 
 }
 
-main
+stat:main

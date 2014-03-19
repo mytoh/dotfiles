@@ -155,6 +155,7 @@ myKeys = [ -- M4 for Super key
        , ((myappkey "t"), spawn $ myTerminal)
        , ((myappkey "v"), runOrRaise "v2c" $ className =? "V2C")
        , ((myappkey "b"), runOrRaise "conkeror" $ className =? "Conkeror")
+       , ((myappkey "<Space>"), unsafeSpawn "kupfer")
          ]
            where
              notSP = (return $ ("SP" /=) . W.tag) :: X (WindowSpace -> Bool)
