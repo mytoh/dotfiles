@@ -352,3 +352,5 @@ archivers/advancecomp
 sysutils/cpdup
 www/netsurf
 net/get_iplayer
+x11-wm/cwm
+textproc/hs-pandoc
