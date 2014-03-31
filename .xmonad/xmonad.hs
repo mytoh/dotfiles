@@ -107,7 +107,7 @@ myLayoutHook =  avoidStruts                $
                 mkToggle (single REFLECTX) $
                 mkToggle (single REFLECTY) $
                 onWorkspace "kolme" full   $
-                (collectiveLayouts)
+                collectiveLayouts
 
                   where
 
@@ -207,7 +207,6 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         , [isDialog                                              --> doFloat]
 
         , [(className =? c <||> title =? c <||> appName =? c)    --> doFloat | c <- myFloats ]
-        , [className  =? "feh"                                   --> viewShift "kolme"]
         , [className  =? "MPlayer"                               --> (doFloat <+> viewShift "kolme")]
         , [className  =? "mplayer2"                              --> (doFloat <+> viewShift "kolme")]
         , [className  =? "mpv"                                   --> (doFloat <+> viewShift "kolme")]
@@ -223,6 +222,9 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         , [className  =? "Firefox"                               --> viewShift "kaksi"]
         , [(className =? "Firefox" <&&> appName =? "Dialog")     --> (doFloat <+> viewShift "kaksi")]
 
+        , [className  =? "feh"                                   --> viewShift "neljä"]
+        , [className  =? "Mcomix"                                   --> viewShift "neljä"]
+        , [className  =? "Comix"                                   --> viewShift "neljä"]
         , [className  =? "Thunar"                               --> viewShift "neljä"]
         , [className  =? "Caja"                               --> viewShift "neljä"]
         , [className  =? "Pcmanfm"                               --> viewShift "neljä"]

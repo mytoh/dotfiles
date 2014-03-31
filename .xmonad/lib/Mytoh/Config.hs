@@ -8,14 +8,14 @@ module Mytoh.Config where
   myModMask        :: KeyMask
   -- mod1 = alt , mod4 = windows key
   myModMask        = mod4Mask
- 
+
   myIconsDirectory :: String
   myIconsDirectory = "~/.xmonad/icons/"
 
   myFocusFollowsMouse :: Bool
   myFocusFollowsMouse = False
 
-  myWorkspaces  :: [[Char]]
+  myWorkspaces  :: [String]
   myWorkspaces  =
     [ "yksi"
     , "kaksi"
@@ -33,7 +33,7 @@ module Mytoh.Config where
  -- , wrapBitmap "sm4tik/ac.xbm"
      ]
      where
-        -- wrapBitmap bitmap = "^i(" ++ myIconsDirectory ++ bitmap ++ ")"
+        wrapBitmap bitmap = "^i(" ++ myIconsDirectory ++ bitmap ++ ")"
 
   -- colors {{{
   myNormalBorderColor  :: String
@@ -59,3 +59,4 @@ module Mytoh.Config where
 
   myDzenFont :: String
   myDzenFont = myFontK10
+

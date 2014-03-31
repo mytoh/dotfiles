@@ -1,6 +1,5 @@
 module Mytoh.Config.App where
   import Mytoh.Config
-  import XMonad
 
   myTerminal :: String
   myTerminal = "mlterm"
@@ -21,5 +20,6 @@ module Mytoh.Config.App where
 
   volumemgr   :: String
   volumemgr   = "gnome-volume-control-applet"
+  uimPanel   :: String
   uimPanel    = "uim-toolbar-gtk-systray"
   -- myConkyBar  = "conky -c ~/.conkyrc | dzen2 -p -ta r -x 400 -y 0 -w 880 -h 12 -fn '-adobe-helvetica-medium-r-normal--11-*' -e 'onexit=ungrabmouse'"
