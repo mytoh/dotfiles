@@ -100,8 +100,7 @@ stat:main() {
         colour_str="^fg(#CACACA)"
         openparen="^fg(#656565)("
         closeparen="^fg(#656565))"
-        bgcolour="#212122"
-
+        bgcolour="#252628"
 
         printf "%s %s %s %s %s %s %s %s %s %s %s %s\n" \
                "${colour_icon}^i(${icons}/sm4tik/xbm/plug.xbm) ${colour_str}${stat_pkg} pkgs" \
