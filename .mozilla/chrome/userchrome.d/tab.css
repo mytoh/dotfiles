@@ -15,21 +15,21 @@
     font-size: 11px !important;
     color:      #eeeeee !important;
     background: #1b1b1b !important;
-    max-height: 17px !important;
-    min-height: 17px !important;
+    max-height: 15px !important;
+    min-height: 15px !important;
     border: none !important;
     margin: 0 !important;
     max-width: 100px !important;
     min-width: 100px !important;
     padding: 1 !important;
-    padding-left: 3px !important;
-    padding-right: 3px !important;
-    -moz-margin-end: 3px !important;
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+    -moz-margin-end: 2px !important;
 }
 
 .tabbrowser-tab[selected] {
     -moz-appearance: none !important;
     color: #ffffff !important;
-    background: #bbbbee !important;
+    background: #FD971F !important;
 }
 

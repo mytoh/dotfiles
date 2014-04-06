@@ -355,3 +355,5 @@ net/get_iplayer
 x11-wm/cwm
 textproc/hs-pandoc
 x11-fonts/linuxlibertine
+multimedia/smtube
+ports-mgmt/portless

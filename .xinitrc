@@ -57,7 +57,7 @@ start_apps() {
     mixer pcm 15
     # urxvtcd &
     xbindkeys &
-    thunar --daemon &
+    #thunar --daemon &
     #spiffy &
     #parcellite &
     #synergys --name $(hostname -s)
