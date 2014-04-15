@@ -18,3 +18,6 @@ hl_white=#fdf6e3
 
 #fg_color = #839496
 #bg_color = #002b36
+
+cursor_fg_color = #cb4b16
+cursor_bg_color = #002b36

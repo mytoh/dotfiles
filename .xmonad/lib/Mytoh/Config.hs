@@ -49,7 +49,8 @@ module Mytoh.Config where
   myXPFont   = "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1"
 
   myFontK10 :: String
-  myFontK10 = "-misc-fixed-medium-r-normal--10-90-75-75-c-50-iso8859-1"
+  myFontK10 = "-misc-fixed-medium-r-normal--10-*-75-75-c-50-*"
+ 
   myFontPro :: String
   myFontPro = "-nil-profont-medium-r-normal--10-100-72-72-c-50-iso8859-1"
   myFontArtwiz :: String

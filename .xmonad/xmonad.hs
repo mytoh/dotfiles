@@ -1,4 +1,3 @@
-
 -- imports {{{
 import XMonad hiding ( (|||) )
 import System.Exit
@@ -149,12 +148,11 @@ myKeys = [ -- M4 for Super key
        , ("M-q", spawn myRestart)
        , ("M-S-p", unsafeSpawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/local/tmp/'")
        , ((myappkey "e"), runOrRaise "emacs" $ className =? "Emacs")
-       -- , ("C-t e e", runOrRaise "emacs" $ className =? "Emacs")
-       , ((myappkey "f"), runOrRaise "thunar" $ className =? "Thunar")
+       , ((myappkey "f"), runOrRaise myFilemgr $ resource =? myFilemgr)
        , ((myappkey "r"), spawn $ "dmenu_run -b -p \">\" -fn " ++ myDzenFont) -- dzen prompt
        , ((myappkey "t"), spawn $ myTerminal)
        , ((myappkey "v"), runOrRaise "v2c" $ className =? "V2C")
-       , ((myappkey "b"), runOrRaise "conkeror" $ className =? "Conkeror")
+       , ((myappkey "b"), runOrRaise myBrowser $ resource =? myBrowser)
        , ((myappkey "<Space>"), unsafeSpawn "kupfer")
          ]
            where
@@ -334,7 +332,4 @@ myConfig = do
         , logHook            = myLogHook d >> takeTopFocus
         , startupHook        = myStartupHook
     } `additionalKeysP` myKeys
-
-
-
 

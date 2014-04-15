@@ -357,3 +357,13 @@ textproc/hs-pandoc
 x11-fonts/linuxlibertine
 multimedia/smtube
 ports-mgmt/portless
+net-mgmt/iftop
+net/nload
+net/bmon
+net-mgmt/tcptrack
+net/trafshow
+net/ifstat
+net/chrony
+audio/mps
+japanese/font-koruri
+graphics/pqiv

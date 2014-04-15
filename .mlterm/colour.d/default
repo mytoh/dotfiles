@@ -15,6 +15,8 @@ hl_magenta=#BB4466
 hl_cyan=#A3BABF
 hl_white=#6C887A
 
+cursor_fg_color = #CACACA
+cursor_bg_color = #121212
 
 #fg_color = #CACACA
 #bg_color = #121212
