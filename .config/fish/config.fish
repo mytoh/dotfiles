@@ -4,14 +4,14 @@ set fish_greeting "><>"
 ## shellar
 set -gx shellar ~/.config/shellar
 ## plugins
-set -gx shellar_plugins mytoh freebsd loitsu lehti nopea talikko emacs napa pikkukivi brew lol radio mosh
+set -gx shellar_bottles mytoh freebsd loitsu lehti nopea talikko emacs napa pikkukivi brew lol radio mosh
 ## theme
 set -gx shellar_theme default
 ## custom
 set -gx shellar_custom ~/.shellar_custom
 ## debug
-#set -gx shellar_debug
-# source shellar
+# set -gx shellar_debug
+## sourcing shellar
 source {$shellar}/shellar/shellar.fish
 
 shellar.init

@@ -367,3 +367,8 @@ net/chrony
 audio/mps
 japanese/font-koruri
 graphics/pqiv
+security/denyhosts
+net/bsdproxy
+graphics/qcomicbook
+multimedia/mkclean
+multimedia/mkvalidator

@@ -77,6 +77,11 @@ bind -r C-k resize-pane -U 3
 bind -r H select-layout main-vertical \; swap-pane -s : -t 0 \; select-pane -t 0 \; resize-pane -R 9
 bind -r K select-layout main-horizontal \; swap-pane -s : -t 0 \; select-pane -t 0 \; resize-pane -D 18
 
+# EMACS-like window stuff
+bind 0 kill-pane
+bind 1 resize-pane -Z # Toggles maximization of the current pane
+bind 2 split-window
+bind 3 split-window -h
 
 # toggle maximize window
 #bind } run "if [[ $(tmux list-window) =~ tmux-zoom ]]; then tmux last-window; tmux swap-pane -s tmux-zoom.0; tmux kill-window -t tmux-zoom; else tmux new-window -d -n tmux-zoom 'clear && echo TMUX ZOOM && read'; tmux swap-pane -s tmux-zoom.0; tmux select-window -t tmux-zoom;fi"
