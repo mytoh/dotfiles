@@ -40,6 +40,11 @@ bind l refresh-client
 unbind L
 bind L list-sessions
 
+# list sessions
+unbind t
+bind t choose-tree
+
+
 # split window
 unbind S
 bind S split-window -h
