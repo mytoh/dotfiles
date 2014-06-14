@@ -372,3 +372,6 @@ net/bsdproxy
 graphics/qcomicbook
 multimedia/mkclean
 multimedia/mkvalidator
+sysutils/monitorix
+graphics/libsixel
+ftp/axel
