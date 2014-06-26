@@ -3,6 +3,7 @@
 set -g @tpm_plugins "              \
   bruno-/tpm                       \
   bruno-/tmux_pain_control         \
+  bruno-/tmux_online_status         \
 "
 # Other examples:
 # github_username/plugin_name    \

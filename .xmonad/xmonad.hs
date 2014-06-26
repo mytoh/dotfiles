@@ -226,6 +226,7 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         , [className  =? "Thunar"                               --> viewShift "neljä"]
         , [className  =? "Caja"                               --> viewShift "neljä"]
         , [className  =? "Pcmanfm"                               --> viewShift "neljä"]
+        , [className  =? "MComix"                               --> viewShift "neljä"]
 
         , [className   =? "Emacs"                                --> viewShift "emacs"]
 

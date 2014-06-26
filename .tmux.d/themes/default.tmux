@@ -37,4 +37,4 @@ setw -g window-status-current-format '#[fg=colour159,bg=blue] #I#[fg=white]:#[fg
 
 # statusline
 set -g status-left '#(tumx set status-interval 10 && tmux refresh)#[fg=colour105]>#S '
-set -g status-right ' #[fg=red]#T #[fg=colour152]#(~/.tmux.d/bin/memory) #[fg=colour133]#(~/.tmux.d/bin/freq) #[fg=yellow]#(~/.tmux.d/bin/date)#[fg=colour238]'
+set -g status-right '#{online_status} #[fg=red]#T #[fg=colour152]#(~/.tmux.d/bin/memory) #[fg=colour133]#(~/.tmux.d/bin/freq) #[fg=yellow]#(~/.tmux.d/bin/date)#[fg=colour238]'
