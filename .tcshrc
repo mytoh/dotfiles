@@ -14,7 +14,8 @@
     set -f bottles=( mytoh  \
     ${bottle_freebsd} ${bottle_scheme} ${bottle_emacs} fasd \
                        ${bottle_radio}  vim nyan \
-                       brew npm firefox please percol )
+                        brew npm firefox go percol \
+                       abduco dvtm)
 
     setenv shellar_bottles "${bottles}"
 
