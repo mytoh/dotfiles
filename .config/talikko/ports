@@ -378,3 +378,16 @@ ftp/axel
 x11-themes/thewidgetfactory
 sysutils/dtpstree/work/dtpstree-1.0.3
 sysutils/dtpstree
+security/arm
+audio/thunar-media-tags-plugin
+devel/thunar-vcs-plugin
+net/relayd
+japanese/uim-tomoe-gtk
+textproc/uim-gtk3
+sysutils/password-store
+security/openssh-portable
+emulators/pipelight
+sysutils/dvtm
+textproc/peco
+textproc/peco
+x11-fonts/noto

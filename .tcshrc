@@ -1,5 +1,5 @@
 
-    set -f path=(${HOME}/local/bin ${path})
+    set -f path=(${HOME}/huone/bin ${path})
 
     setenv shellar ${HOME}/.config/shellar
     setenv shellar_custom ${HOME}/.shellar_custom
@@ -14,8 +14,8 @@
     set -f bottles=( mytoh  \
     ${bottle_freebsd} ${bottle_scheme} ${bottle_emacs} fasd \
                        ${bottle_radio}  vim nyan \
-                        brew npm firefox go percol \
-                       abduco dvtm)
+                        brew npm firefox go \
+                       abduco dvtm peco)
 
     setenv shellar_bottles "${bottles}"
 

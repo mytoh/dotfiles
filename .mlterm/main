@@ -22,14 +22,14 @@ col_size_of_width_a = 2
 step_in_changing_font_size = 1
 
 # 可変長コラム幅を使用する
-use_variable_column_width = false
+use_variable_column_width = true
 
 # アンチエイリアスフォントを使用する
-use_anti_alias = false
+use_anti_alias = true
 
 # アンチエイリアス(Xft)時、JISX0208 の Unicode 変換に CP932 の変換テーブル
 # を使う
-use_cp932_ucs_for_xft = true
+use_cp932_ucs_for_xft = false
 
 # UNICODE を適当な文字集合にmapして、UNICODE フォントを使わずに表示する
 not_use_unicode_font = true
@@ -76,3 +76,5 @@ inner_border = 0
 # -- Others --
 bel_mode = none
 use_alt_buffer = true
+
+logging_msg = false

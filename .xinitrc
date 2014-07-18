@@ -35,6 +35,7 @@ setup_uim() {
     export UIM_CANDWIN_PROG=uim-candwin-gtk
     uim-xim &
     uim-toolbar-gtk-systray &
+# uim-toolbar-qt4 &
 }
 #}}}
 
@@ -115,7 +116,7 @@ sound() {
 
 sound
 load_xinitrcd
-setup_ibus
+setup_uim
 add_font_paths
 start_apps
 

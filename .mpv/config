@@ -3,9 +3,15 @@
 ## audio
 alang=Japanese,jpn,ja
 slang=English,eng,en
+
 ## subs
 no-sub
 
-
 ## Drop frames to preserve audio/video sync.
-framedrop = yes
+framedrop=yes
+
+vf=scale=640:480
+
+softvol=auto
+
+volume=100

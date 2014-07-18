@@ -208,10 +208,10 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         , [className  =? "MPlayer"                               --> (doFloat <+> viewShift "kolme")]
         , [className  =? "mplayer2"                              --> (doFloat <+> viewShift "kolme")]
         , [className  =? "mpv"                                   --> (doFloat <+> viewShift "kolme")]
+        , [className  =? "Vlc"                                   --> (doFloat <+> viewShift "kolme")]
         , [className  =? "Qmmp"                                  --> (doFloat <+> viewShift "kolme")]
         , [className  =? "Audacious"                             --> (doFloat <+> viewShift "kolme")]
         , [className  =? "gogglesmm"                             --> (doFloat <+> viewShift "kolme")]
-        , [className  =? "Qmmp"                             --> (doFloat <+> viewShift "kolme")]
 
         , [className  =? "V2C"                                   --> viewShift "kaksi"]
         , [className  =? "Opera"                                 --> viewShift "kaksi"]
@@ -242,7 +242,8 @@ myManageHook = -- insertPosition End Newer <+> composeAll
 
            where
          viewShift = doF . liftM2 (.) W.greedyView W.shift
-         myFloats = ["Main.py","Gimp","DTA","Gcolor2","Switch2","Uim-pref-gtk"]
+         myFloats = ["Main.py","Gimp","DTA","Gcolor2","Switch2","Uim-pref-gtk"
+                    ,"Anki"]
 
 myScratchPads = [ NS "dolphin" spawnFiler findFiler manageFiler
                 ]
