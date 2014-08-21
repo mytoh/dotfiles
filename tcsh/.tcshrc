@@ -1,5 +1,5 @@
 
-    set -f path=(${HOME}/huone/bin ${path})
+    set path=(${HOME}/huone/työkalupakki/bin ${path})
 
     setenv shellar ${HOME}/.config/shellar
     setenv shellar_custom ${HOME}/.shellar_custom

@@ -4,7 +4,7 @@ set fish_greeting "><>"
 ## shellar
 set -gx shellar ~/.config/shellar
 ## plugins
-set -gx shellar_bottles mytoh freebsd loitsu lehti nopea talikko emacs napa pikkukivi brew lol radio mosh
+set -gx shellar_bottles mytoh freebsd loitsu lehti nopea talikko emacs napa pikkukivi brew lol radio 
 ## theme
 set -gx shellar_theme default
 ## custom

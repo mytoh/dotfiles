@@ -51,8 +51,8 @@ input_method = xim
 # タブ幅
 tabsize = 4
 
-# ログの行数 
-logsize = 1024
+# ログの行数
+logsize = 256
 
 # バックスクロール時に端末出力があっても画面が流れないようにする。
 static_backscroll_mode = true

@@ -55,6 +55,9 @@ keycode  47 = s S odiaeresis Odiaeresis
 keycode  48 = minus underscore adiaeresis Adiaeresis
 
 
+! Menu key
+keycode 117 = Control_L
+
 !! switch number key and shited symbols
 ! keycode 10 = exclam 1
 ! keycode 11 = at 2

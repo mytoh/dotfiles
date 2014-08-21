@@ -204,6 +204,8 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         [ [isFullscreen                                          --> doFullFloat ]
         , [isDialog                                              --> doFloat]
 
+        , [className  =? "mlterm"                               --> viewShift "yksi"]
+
         , [(className =? c <||> title =? c <||> appName =? c)    --> doFloat | c <- myFloats ]
         , [className  =? "MPlayer"                               --> (doFloat <+> viewShift "kolme")]
         , [className  =? "mplayer2"                              --> (doFloat <+> viewShift "kolme")]
@@ -217,15 +219,19 @@ myManageHook = -- insertPosition End Newer <+> composeAll
         , [className  =? "Opera"                                 --> viewShift "kaksi"]
         , [className  =? "Conkeror"                              --> viewShift "kaksi"]
         , [className  =? "Chrome"                               --> viewShift "kaksi"]
+        , [className  =? "Xombrero"                               --> viewShift "kaksi"]
         , [className  =? "Firefox"                               --> viewShift "kaksi"]
         , [(className =? "Firefox" <&&> appName =? "Dialog")     --> (doFloat <+> viewShift "kaksi")]
 
         , [className  =? "feh"                                   --> viewShift "neljä"]
+        , [appName    =? "sxiv"                                   --> viewShift "neljä"]
         , [className  =? "Mcomix"                                   --> viewShift "neljä"]
         , [className  =? "Comix"                                   --> viewShift "neljä"]
         , [className  =? "Thunar"                               --> viewShift "neljä"]
+        , [className  =? "Dolphin"                               --> viewShift "neljä"]
         , [className  =? "Caja"                               --> viewShift "neljä"]
         , [className  =? "Pcmanfm"                               --> viewShift "neljä"]
+        , [className  =? "ROX-Filer"                               --> viewShift "neljä"]
         , [className  =? "MComix"                               --> viewShift "neljä"]
 
         , [className   =? "Emacs"                                --> viewShift "emacs"]
@@ -334,4 +340,3 @@ myConfig = do
         , logHook            = myLogHook d >> takeTopFocus
         , startupHook        = myStartupHook
     } `additionalKeysP` myKeys
-

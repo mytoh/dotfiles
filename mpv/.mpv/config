@@ -1,0 +1,75 @@
+# Write your default config options here!
+
+## audio
+alang=Japanese,jpn,ja
+slang=English,eng,en
+
+## subs
+no-sub
+
+## Drop frames to preserve audio/video sync.
+framedrop=yes
+
+vf=scale=640:480
+
+softvol=auto
+
+volume=100
+
+# volume normalization
+af=drc
+
+use-filedir-conf=yes
+# correct-pts=yes
+
+#
+# mpv configuration file from 4chan
+#
+
+################################################################################
+# General
+################################################################################
+# use-filedir-conf=yes
+# correct-pts=yes
+# screenshot-template=/Users/USERNAME/Desktop/mpv-screenshot%n
+# title="${filename}"
+# softvol=yes
+# softvol-max=200
+# volume=100
+# fs-missioncontrol=yes
+
+################################################################################
+# Subtitles
+################################################################################
+# embeddedfonts=yes
+# ass-force-style=Kerning=yes
+# osd-font="Helvetica Neue Light"
+# sub-text-font="Myriad Pro Semibold"
+# sub-text-font-size=48
+
+################################################################################
+# Languages & containers
+################################################################################
+# alang=jp,jpn,Japanese,es,spa,Spanish,en,eng,English
+# slang=jp,jpn,Japanese,en,eng,English,es,spa,Spanish
+
+################################################################################
+# Video Output
+################################################################################
+# vo=opengl-hq:icc-profile-auto:approx-gamma
+# framedrop=no
+# screen=0
+# autofit-larger=85%
+# mkv-subtitle-preroll
+
+################################################################################
+# OSD/C
+################################################################################
+# force-rgba-osd-rendering=yes
+# osd-bar-align-y=-0.5
+# osd-bar-h=7
+# osd-border-size=1
+# osd-color="#CCFFFFFF"
+# osd-border-color="#99000000"
+# osd-duration=2000
+# osc=yes
