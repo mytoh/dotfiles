@@ -5,14 +5,14 @@
 ;; from wiki tips_and_tricks page
 (defcommand mymenu () ()
   (labels ((pick (options)
-                 (let ((selection (select-from-menu (current-screen) options "")))
-                   (cond
-                    ((null selection)
-                     (throw 'stumpwm::error "Abort."))
-                    ((stringp (second selection))
-                     (second selection))
-                    (t
-                     (pick (cdr selection)))))))
+             (let ((selection (select-from-menu (current-screen) options "")))
+               (cond
+                 ((null selection)
+                  (throw 'stumpwm::error "Abort."))
+                 ((stringp (second selection))
+                  (second selection))
+                 (t
+                  (pick (cdr selection)))))))
     (let ((choice (pick *app-menu*)))
       (run-shell-command choice))))
 
@@ -31,6 +31,10 @@
      ;;sub menu
      ("gimp" "gimp"))))
 
+;; dmenu
+(defcommand mydmenu () ()
+  (run-shell-command "dmenu_run"))
+
 ;; from simias
 ;; paste.lisp.org/display/95891
 (defvar *swap-selected-frame* nil)
@@ -43,7 +47,7 @@
           (when win1 (pull-window win1 frame))
           (when win2 (pull-window win2 *swap-selected-frame*)))
         (setf *swap-selected-frame* nil))
-    (setf *swap-selected-frame* frame)))
+      (setf *swap-selected-frame* frame)))
 
 ;; paste.lisp.org/+21ZP
 (defun shift-windows-forward (frames win)
@@ -79,7 +83,7 @@
                    (progn
                      (only)
                      (vsplit))
-                 (progn
-                   (only)
-                   (hsplit))))
-      (message "Works only with 2 frames"))))
+                   (progn
+                     (only)
+                     (hsplit))))
+        (message "Works only with 2 frames"))))

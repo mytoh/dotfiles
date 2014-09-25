@@ -2,8 +2,9 @@
 # List of plugins
 # Supports `github_username/repo` or full git URLs
 set -g @tpm_plugins "              \
-    tmux-plugins/tpm                 \
-   tmux-plugins/tmux-sensible       \
+  tmux-plugins/tpm                 \
+  tmux-plugins/tmux-sensible       \
+  tmux-plugins/tmux-resurrect      \
 "
 # Other examples:
 # github_username/plugin_name    \

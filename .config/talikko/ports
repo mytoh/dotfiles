@@ -406,3 +406,9 @@ multimedia/tunapie
 audio/tagutil
 multimedia/playd
 x11-fonts/fira
+sysutils/hfsexplorer
+sysutils/ccze
+security/tinc
+irc/quassel
+print/a2ps
+graphics/mupdf
