@@ -1,0 +1,15 @@
+
+DEC_SPECIAL = 10,a10;12,6x12;14,7x14;16,8x16;
+ISO8859_1 = -benis-lemon-medium-r-normal--10-*-75-75-m-50-iso8859-1
+ISO8859_1_BOLD =  -benis-lemon-medium-r-normal--10-*-75-75-m-50-iso8859-1
+JISX0201_KATA = 10,r10;12,r12;14,r14;16,r16;
+JISX0201_KATA_BOLD = 10,r10;
+JISX0201_ROMAN = 10,r10;12,r12;14,r14;16,r16;
+JISX0208_1983 = 10,k10;12,k12;14,k14;16,kanji16;
+JISX0208_1983_BOLD = 10,k10;
+ISO10646_UCS4_1=Symbola:100;
+ISO10646_UCS4_1_BIWIDTH=Symbola:100;
+
+# ISO10646_UCS4_1=-misc-fixed-medium-r-normal--10-100-75-75-c-60-iso10646-1,-xos4-terminus-bold-r-normal--12-120-72-72-c-60-iso10646-1;
+# # Japanese speakers may want to enable the following setting.
+# ISO10646_UCS4_1_BIWIDTH=-misc-fixed-medium-r-normal--10-100-75-75-c-60-iso10646-1;

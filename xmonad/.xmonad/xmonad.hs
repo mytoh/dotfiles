@@ -295,6 +295,7 @@ myManageHook = insertPosition End Newer <+>
         , [className  =? "Xfe"                               --> viewShift "neljä"]
         , [className  =? "Worker"                               --> viewShift "neljä"]
         , [className  =? "mpv"                                   --> (doFloat <+> viewShift "neljä")]
+        , [className  =? "baka-mplayer"                                   --> (doFloat <+> viewShift "neljä")]
 
         , [className   =? "Emacs"                                --> viewShift "emacs"]
 
@@ -310,7 +311,7 @@ myManageHook = insertPosition End Newer <+>
            where
          viewShift = doF . liftM2 (.) W.greedyView W.shift
          myFloats  = ["Main.py","Gimp","DTA","Gcolor2","Switch2","Uim-pref-gtk"
-                    ,"Anki", "Install user style"]
+                    ,"Anki", "Install user style", "Vidalia"]
 
 myScratchPads = [ NS "dolphin" spawnFiler findFiler manageFiler
                 ]

@@ -18,7 +18,7 @@ add_font_paths() {
     xset +fp /usr/local/lib/X11/fonts/cyrillic
     xset +fp /usr/local/lib/X11/fonts/dejavu
     xset +fp /usr/local/lib/X11/fonts/jisx0213
-    xset +fp /usr/local/lib/X11/fonts/jmk
+    xset +fp /usr/local/lib/X11/fonts/jmk-x11-fonts
     xset +fp /usr/local/lib/X11/fonts/local
     xset +fp /usr/local/lib/X11/fonts/SourceCodePro
     xset +fp /usr/local/lib/X11/fonts/anonymous-pro
@@ -28,6 +28,7 @@ add_font_paths() {
     xset +fp /usr/local/lib/X11/fonts/Roboto
     xset +fp /usr/local/X11/fonts/ChromeOS/
     xset +fp /usr/local/X11/fonts/kaname12/
+    xset +fp /usr/local/X11/fonts/ecofont/
 
     xset +fp $HOME/.fonts
     xset fp rehash

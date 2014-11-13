@@ -412,3 +412,16 @@ security/tinc
 irc/quassel
 print/a2ps
 graphics/mupdf
+mail/offlineimap
+x11-fonts/fantasque-sans-mono
+audio/kid3-qt5
+audio/picard
+multimedia/quodlibet
+audio/kid3-qt5
+security/nmap
+net/fping
+multimedia/baka-mplayer
+x11-fonts/ecofont
+x11-fonts/jmk-x11-fonts
+security/lastpass-cli
+graphics/openimageio

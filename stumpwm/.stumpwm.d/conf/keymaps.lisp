@@ -6,19 +6,18 @@
 ;;;
 
 ;; applications
-(defun my-keymap-shortcut ()
+(defun my-keymap-shortcut (prefix)
   (defparameter *shortcut-map*
     (let ((map (make-sparse-keymap)))
       (defprogram-shortcut terminal :command "exec mlterm" :key (kbd "t") :map map :props '(:class "mlterm"))
-      (defprogram-shortcut browser  :command "exec firefox" :key (kbd "b") :map map)
+      (defprogram-shortcut browser  :command "exec conkeror" :key (kbd "b") :map map)
       (defprogram-shortcut filer    :command "exec rox" :key (kbd "f") :map map :props '(:class "ROX-Filer"))
       (defprogram-shortcut dmenu    :command "exec dmenu_run -p '> ' -i -b -nb 'grey14' -nf 'orange' -sb 'grey10' -sf '#4d3e41' "
-        :key (kbd "d") :map map)
-      (defprogram-shortcut emacs :command "emacs" :key (kbd "e") :map map)
-      (defprogram-shortcut v2c :command "v2c" :key (kbd "v") :map map)
+        :key (kbd "r") :map map)
+      (defprogram-shortcut emacs :command "exec emacs" :key (kbd "e") :map map :props '(:class "Emacs"))
+      (defprogram-shortcut v2c :command "exec v2c" :key (kbd "v") :map map)
       map))
-  (bind "e" '*shortcut-map*))
-
+  (bind prefix '*shortcut-map*))
 
 (defmacro my-defkeys (name f)
   `(defmacro ,name (&rest keys)
@@ -62,13 +61,14 @@
  ("s-1" "gselect main")
  ("s-2" "gselect web")
  ("s-3" "gselect dev")
- ("s-4" "gselect media")
- ("s-5" "gselect file")
- ("s-C-1" "gmove 1")
- ("s-C-2" "gmove 2")
- ("s-C-3" "gmove 3")
- ("s-C-4" "gmove 4")
- ("s-C-5" "gmove 5")
+ ("s-4" "gselect pc")
+ ("s-5" "gselect media")
+ ("s-6" "gselect file")
+ ("s-C-1" "gmove main")
+ ("s-C-2" "gmove web")
+ ("s-C-3" "gmove dev")
+ ("s-C-4" "gmove pc")
+ ("s-C-5" "gmove media")
  )
 
 ;;input window keymap
@@ -77,7 +77,7 @@
  ("C-m" 'input-submit)
  ("C-h" 'input-delete-backward-char))
 
-(my-keymap-shortcut)
+(my-keymap-shortcut "e")
 
 ;; group key map
 ;; (defkeys-group

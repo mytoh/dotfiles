@@ -1,10 +1,11 @@
+#!/usr/bin/env mksh
 
 ## shellar
 export shellar="${HOME}/.config/shellar"
 ## theme
 export shellar_theme='default'
 ## plugins
-export shellar_plugins="mytoh loitsu lehti pikkukivi nopea freebsd "
+export shellar_bottles="mytoh loitsu lehti pikkukivi nopea freebsd peco pikkukivi"
 ## custom
 export shellar_custom="$HOME/.shellar_custom"
 

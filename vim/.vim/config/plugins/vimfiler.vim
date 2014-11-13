@@ -23,11 +23,11 @@ let g:vimfiler_readonly_file_icon = 'x'
 let g:vimfiler_marked_file_icon = 'v'
 
 augroup vimfiler
-  autocmd myautocommands filetype vimfiler call g:my_vimfiler_settings()
-	" autocmd VimEnter * VimFilerExplorer
+  autocmd myautocommands filetype vimfiler call g:My_vimfiler_settings()
+    " autocmd VimEnter * VimFilerExplorer
 augroup end
 
-function! g:my_vimfiler_settings() "{{{
+function! g:My_vimfiler_settings() "{{{
   nmap     <buffer><expr><cr>        vimfiler#smart_cursor_map("\<plug>(vimfiler_expand_tree)", "\<plug>(vimfiler_edit_file)")
   nmap     <buffer> q         <plug>(vimfiler_exit)
   nmap     <buffer> Q         <plug>(vimfiler_hide)

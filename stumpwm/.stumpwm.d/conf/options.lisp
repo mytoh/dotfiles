@@ -9,7 +9,8 @@
   ;; (set-font "-mplus-goth_p-medium-r-normal--10-*-75-75-p-50-iso8859-1")
   ;; (set-font  "-artwiz-lime-normal-normal-normal-*-10-*-*-*-m-50-iso10646-1")
   ;; (set-font "-artwiz-limemod-medium-r-normal--10-110-75-75-m-50-iso8859-1")
-  (set-font "-mplus-fxd-medium-r-normal--10-*-75-75-c-60-iso8859-1")
+  ;; (set-font "-mplus-fxd-medium-r-normal--10-*-75-75-c-60-iso8859-1")
+  (set-font "-benis-lemon-medium-r-normal--10-*-75-75-m-50-iso8859-1")
   ;; windows
   (set-focus-color "khaki")
   (set-unfocus-color "grey10")
@@ -41,7 +42,7 @@
 
    ;; formats
    *window-format*                   "^7*(^9*%n%m%15t^7*)^n" ;;^5 magenta
-   *group-format*                    "^7*%t%s^n" ;;^7 white
+   *group-format*                    "^7*%t^3%s^n" ;;^7 white
    ))
 
 (my-setup-options)

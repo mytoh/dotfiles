@@ -21,9 +21,9 @@ let g:vimshell_split_height = 20
 " let g:vimshell_split_command = 'split'
 augroup vimshell
   autocmd!
-  autocmd filetype vimshell  call vimshell#hook#set('chpwd', ['g:my_chpwd'])
+  autocmd filetype vimshell  call vimshell#hook#set('chpwd', ['s:my_chpwd'])
   autocmd filetype vimshell  call unite#custom_default_action('vimshell/history', 'insert')
-  function! g:my_chpwd(args, context)
+  function! s:my_chpwd(args, context)
     call vimshell#execute('ls')
   endfunction
   "inoremap <buffer> <expr><silent> <C-l>  unite#sources#vimshell_history#start_complete()

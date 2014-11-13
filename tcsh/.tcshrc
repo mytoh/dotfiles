@@ -1,3 +1,4 @@
+    #!/usr/bin/env csh
 
     set path=(${HOME}/huone/työkalupakki/bin ${path})
 

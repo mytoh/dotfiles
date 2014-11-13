@@ -6,7 +6,7 @@
                        "lightblue"     ; 2 green
                        "bisque"        ; 3 yellow
                        "lightskyblue"  ; 4 blue
-                       "slateblue"     ; 5 magenta
+                       "magenta"     ; 5 magenta
                        "aquamarine"    ; 6 cyan
                        "honeydew"      ; 7 white
                        "thistle"       ; 8 user
@@ -34,7 +34,7 @@
         (list "%g"
               " ^2*%w "
               ;; '(:eval (run-shell-command "~/.stumpwm.d/modeline.scm" t))
-              " ^4*:date ^n%d "
+              " ^5*:date ^n%d "
               )))
 
 (my-setup-colours)

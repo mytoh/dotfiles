@@ -58,11 +58,12 @@ start_apps() {
     mixer pcm 15
     # urxvtcd &
     xbindkeys &
+    dunst &
     #thunar --daemon &
     #spiffy &
     #parcellite &
     #synergys --name $(hostname -s)
-    #mpd
+    mpd
     # pulseaudio -D &
 }
 
