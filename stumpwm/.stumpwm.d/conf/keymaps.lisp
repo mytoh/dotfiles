@@ -9,8 +9,8 @@
 (defun my-keymap-shortcut (prefix)
   (defparameter *shortcut-map*
     (let ((map (make-sparse-keymap)))
-      (defprogram-shortcut terminal :command "exec mlterm" :key (kbd "t") :map map :props '(:class "mlterm"))
-      (defprogram-shortcut browser  :command "exec conkeror" :key (kbd "b") :map map)
+      (defprogram-shortcut terminal :command "exec mlc" :key (kbd "t") :map map :props '(:class "mlterm"))
+      (defprogram-shortcut browser  :command "exec conkeror" :key (kbd "w") :map map)
       (defprogram-shortcut filer    :command "exec rox" :key (kbd "f") :map map :props '(:class "ROX-Filer"))
       (defprogram-shortcut dmenu    :command "exec dmenu_run -p '> ' -i -b -nb 'grey14' -nf 'orange' -sb 'grey10' -sf '#4d3e41' "
         :key (kbd "r") :map map)
