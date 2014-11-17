@@ -425,3 +425,4 @@ x11-fonts/ecofont
 x11-fonts/jmk-x11-fonts
 security/lastpass-cli
 graphics/openimageio
+sysutils/xvidcap
