@@ -5,8 +5,8 @@
 
 (in-package #:stumpwm)
 
-;;(load-module "mpd")
-;;(load-module "notifications")
+(load-module "mpd")
+(load-module "notifications")
 ;;(load-module "stumptray")
 
 (defparameter terminal "mlterm")
@@ -20,10 +20,14 @@
     "options"
     "programs"))
 
+(defparameter *my-rc-dir*
+  (make-pathname :directory (append (pathname-directory (user-homedir-pathname))
+                                    (list ".stumpwmrc.d"))))
+
 (defun my-setup-load-configs ()
   (loop for file in my-configs
         do (load (merge-pathnames (make-pathname :name file :type "lisp"
-                                                 :directory '(:relative "conf" )) *data-dir*))))
+                                                 :directory '(:relative "conf" )) *my-rc-dir*))))
 
 (defun my-init ()
   (when *initializing*
