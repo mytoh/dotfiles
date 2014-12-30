@@ -5,11 +5,13 @@
 
 (in-package #:stumpwm)
 
-(load-module "mpd")
-(load-module "notifications")
+;;(load-module "mpd")
+;;(load-module "notifications")
+;;(load-module "net")
+;;(load-module "cpu")
 ;;(load-module "stumptray")
 
-(defparameter terminal "mlterm")
+(defparameter terminal "mlc")
 
 (defparameter my-configs
   '("keymaps"

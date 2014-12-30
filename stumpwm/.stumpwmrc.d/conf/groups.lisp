@@ -10,7 +10,8 @@
   (let ((main (current-group))
         (web (gnewbg "web"))
         (dev (gnewbg "dev"))
-        (pc  (gnewbg "pc"))
+         (pc  (gnewbg "pc"))
+        ;; (pc  (gnewbg-float "pc"))
         (media (gnewbg "media"))
         (file (gnewbg "file")))
 
@@ -40,9 +41,9 @@
         ;; (fnumber raise lock), lock AND raise == jumpto
         (0 t t :class "Emacs"))
 
-    (define-frame-preference "pc"
-        (0 t t :class "MPlayer")
-      (0 t t :class "mplayer2"))
+     (define-frame-preference "pc"
+         (0 t t :class "MPlayer")
+       (0 t t :class "mplayer2"))
 
     (define-frame-preference "media"
         (0 t t :class "Audacious")
@@ -52,14 +53,18 @@
       (0 t t :class "Qmmp")
       (0 t t :class "Audacious")
       (0 t t :class "mpv")
+      (0 t t :class "baka-mplayer")
       (0 t t :class "MComix")
-      (0 t t :class "gogglesmm"))
+      (0 t t :class "gogglesmm")
+
+      (0 t t :class "Caja"))
 
     (define-frame-preference "file"
         (0 t t :class "Pcmanfm")
       (0 t t :class "Thunar")
       (0 t t :class "Doublecmd")
       (0 t t :class "Dolphin")
+      (0 t t :class "Nemo")
       (0 t t :class "ROX-Filer")
       (0 t t :class "Rodent"))
     ))

@@ -9,4 +9,7 @@
   (run-shell-command "exec unclutter -idle 1 -jitter 2 -root")
   (run-shell-command "exec wmname LG3D"))
 
+(defun my-set-cursor ()
+(stumpwm:run-shell-command "xsetroot -cursor_name left_ptr"))
+
 (my-start-programs)

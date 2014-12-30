@@ -7,6 +7,7 @@ Xcursor.theme: whiteglass
 #include ".xresources.d/xfontsel"
 #include ".xresources.d/fontforge"
 #include ".xresources.d/emacs"
+#include ".xresources.d/cursor"
 
 
 !-------------------------------------
@@ -33,6 +34,3 @@ Xcursor.theme: whiteglass
 !*color14: cyan
 !*color15: white
 !--------------------------------------
-
-
-

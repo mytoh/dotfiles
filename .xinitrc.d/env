@@ -1,0 +1,4 @@
+#My mouse wheel doesn't work with gtk3 applications
+#
+#Add the following to your .xinitrc:
+export GDK_CORE_DEVICE_EVENTS=1

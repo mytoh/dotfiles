@@ -25,7 +25,7 @@ step_in_changing_font_size = 1
 use_variable_column_width = true
 
 # アンチエイリアスフォントを使用する
-use_anti_alias = false
+use_anti_alias = true
 
 # アンチエイリアス(Xft)時、JISX0208 の Unicode 変換に CP932 の変換テーブル
 # を使う

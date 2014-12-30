@@ -1,3 +1,4 @@
+erdgeist.org/opentracker
 git.code.sf.net/p/ecls/ecl
 git.code.sf.net/p/tmux/tmux-code
 git.gnome.org/byzanz
@@ -7,12 +8,12 @@ git.kernel.org/pub/scm/editors/uemacs/uemacs.git
 git.lxde.org/git/lxde/pcmanfm.git
 git.mplayer2.org/mplayer2.git
 git.musicpd.org/master/mpd.git
-git.savannah.gnu.org/emacs.git
+git.randomsample.de/cedet.git
+git.savannah.gnu.org/emacs
 git.savannah.gnu.org/stow.git
 git.savannah.gnu.org/tramp.git
 git.savannah.nongnu.org/gzochi.git
 git.savannah.nongnu.org/ranger.git
-git.sv.gnu.org/emms.git
 git.sv.gnu.org/ranger.git
 git.sv.gnu.org/screen.git
 github.com/86me/pentadactyl-scripts
@@ -31,7 +32,7 @@ github.com/Nenuphar/Dyod
 github.com/NitruxSA/flattr-icons
 github.com/Raynes/fs
 github.com/Russell91/sshrc
-github.com/SanskritFritz/fish_completions
+github.com/Shougo/vimshell.vim
 github.com/Swordfish90/cool-retro-term
 github.com/TBRSS/serapeum
 github.com/UniversalMediaServer/UniversalMediaServer
@@ -39,11 +40,14 @@ github.com/agtorre/gocolorize
 github.com/alebcay/awesome-shell
 github.com/alice0775/userChrome.js
 github.com/altercation/solarized
+github.com/andsens/homeshick
 github.com/aredridel/es-shell
+github.com/aziz/tmuxinator
 github.com/bamos/dotfiles
 github.com/blakemcbride/POS
 github.com/bmizerany/roundup
 github.com/bookdraft/QPeerCastYP
+github.com/brpocock/shelltoys
 github.com/btpd/btpd
 github.com/buntine/Fractals
 github.com/caleb-/evilvte
@@ -60,6 +64,7 @@ github.com/clojure/clojure
 github.com/clojure/clojure-contrib
 github.com/clojure/core.logic
 github.com/clvv/fasd
+github.com/cmus/cmus
 github.com/coderholic/pyradio
 github.com/conformal/xombrero
 github.com/copiousfreetime/launchy
@@ -84,6 +89,8 @@ github.com/greghendershott/rackjure
 github.com/haskell/haskell-mode
 github.com/hchbaw/auto-fu.zsh
 github.com/huyz/less.vim
+github.com/ingydotnet/...
+github.com/isohuntto/openbay
 github.com/itchyny/lightline.vim
 github.com/ivmai/bdwgc
 github.com/ivmai/libatomic_ops
@@ -93,6 +100,7 @@ github.com/jedisct1/dnscrypt-proxy
 github.com/jgm/pandoc
 github.com/jhawthorn/meh
 github.com/joelagnel/stumpwm-goodies
+github.com/jstolarek/why-dependent-types-matter
 github.com/kahua/Kahua
 github.com/kahun/awesome-sysadmin
 github.com/kidd/org-protocol-github-lines
@@ -100,6 +108,7 @@ github.com/kidd/radios
 github.com/knopwob/dunst
 github.com/koron/chalice
 github.com/koron/cmigemo.git
+github.com/kovisoft/paredit
 github.com/kumaryu/peercaststation
 github.com/lastpass/lastpass-cli
 github.com/laurikari/tre
@@ -118,11 +127,14 @@ github.com/mpv-player/mpv
 github.com/muennich/sxiv
 github.com/myimouto/myimouto
 github.com/ninjaaron/bitocra
+github.com/norton/chibi-scheme
+github.com/ok100/lyvi
 github.com/okuoku/mosh
 github.com/okuoku/r7rs-bridge
 github.com/pallet/thread-expr
 github.com/pannon/iocage
 github.com/pasky/speedread
+github.com/pavoljuhas/smart-change-directory
 github.com/phallus/fonts
 github.com/pkgng/pkgng
 github.com/psyrendust/alf
@@ -141,6 +153,7 @@ github.com/samirahmed/fu
 github.com/sboli/twmn
 github.com/scottjad/cons
 github.com/scottjad/dotfiles
+github.com/sdegutis/mjolnir
 github.com/seebi/tmux-colors-solarized
 github.com/sgrove/tehila
 github.com/sgymtic/sl
@@ -156,6 +169,7 @@ github.com/stumpwm/stumpwm-contrib
 github.com/syl20bnr/oh-my-fish-theme-syl20bnr
 github.com/t9md/vim-ezbar
 github.com/tatsuhiro-t/aria2
+github.com/technicalpickles/homesick
 github.com/tekknolagi/carp
 github.com/tlatsas/xcolors
 github.com/tmbinc/bgrep
@@ -179,9 +193,15 @@ github.com/xorg62/wmfs
 github.com/xyl0n/iris-light
 github.com/yascentur/RictyDiminished
 github.com/zmalltalker/fish-nuggets
+github.com/zoppo/plugins
+github.com/zoppo/zoppo
 github.com/zsh-users/zsh-completions
 github.com/zsh-users/zsh-syntax-highlighting
+gitorious.org/dss-project/stumpmacs.git
 gitorious.org/sly/sly
+gitorious.org/src-vcs/src-vcs.git
+llvm.org/git/clang.git
+llvm.org/git/llvm.git
 orgmode.org/org-mode.git
 orgmode.org/worg.git
 repo.or.cz/abduco.git

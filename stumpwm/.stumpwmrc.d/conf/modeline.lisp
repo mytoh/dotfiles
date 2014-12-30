@@ -34,7 +34,10 @@
         (list "%g"
               " ^2*%w "
               ;; '(:eval (run-shell-command "~/.stumpwm.d/modeline.scm" t))
-              " ^5*:date ^n%d "
+              ;;" ^5*:music ^n%m"
+              ;;              " ^5*:cpu ^n%c %t"
+              ;;              " ^5*:net ^n%l"
+              " ^5*%d "
               )))
 
 (my-setup-colours)
