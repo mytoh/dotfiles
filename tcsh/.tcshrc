@@ -9,7 +9,7 @@
 
     set -f bottle_radio=(radio bbc)
     #set -f bottle_scheme=(loitsu lehti nopea napa mosh gauche talikko pikkukivi)
-    set -f bottle_scheme=(gauche lehti pikkukivi stumpwm firefox)
+    set -f bottle_scheme=(gauche lehti pikkukivi stumpwm firefox e2ansi)
     set -f bottle_emacs=(emacs cask)
     set -f bottle_freebsd=(freebsd qjail)
     set -f bottles=( mytoh  \
