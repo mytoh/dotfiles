@@ -26,9 +26,10 @@ add_font_paths() {
     xset +fp /usr/local/lib/X11/fonts/terminus-font
     xset +fp /usr/local/lib/X11/fonts/SourceCodePro
     xset +fp /usr/local/lib/X11/fonts/Roboto
-    xset +fp /usr/local/X11/fonts/ChromeOS/
-    xset +fp /usr/local/X11/fonts/kaname12/
-    xset +fp /usr/local/X11/fonts/ecofont/
+    xset +fp /usr/local/X11/fonts/ChromeOS
+    xset +fp /usr/local/X11/fonts/kaname12
+    xset +fp /usr/local/X11/fonts/ecofont
+    xset +fp /usr/local/X11/fonts/wqy
 
     xset +fp $HOME/.fonts
     xset fp rehash
