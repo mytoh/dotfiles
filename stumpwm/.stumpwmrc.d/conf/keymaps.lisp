@@ -12,7 +12,10 @@
       (defprogram-shortcut terminal :command "exec mlc" :key (kbd "t") :map map :props '(:class "mlterm"))
       (defprogram-shortcut browser  :command "exec conkeror" :key (kbd "w") :map map)
       (defprogram-shortcut filer    :command "exec rox" :key (kbd "f") :map map :props '(:class "ROX-Filer"))
-      (defprogram-shortcut dmenu    :command "exec dmenu_run -p '> ' -i -b -nb 'grey14' -nf 'orange' -sb 'grey10' -sf '#4d3e41' "
+      ;; (defprogram-shortcut dmenu    :command "exec dmenu_run -p '> ' -i -b -nb 'grey14' -nf 'orange' -sb 'grey10' -sf '#4d3e41' "
+      ;;   :key (kbd "r") :map map)
+      ;;; rofi -now -font “snap 10” -fg “#505050” -bg “#000000” -hlfg “#ffb964” -hlbg “#000000” -o 85
+      (defprogram-shortcut dmenu    :command "exec rofi -show run -p '> ' -fg '#505050' -bg '#000000' -hlfg '#ffb964' -hlbg '#000000'"
         :key (kbd "r") :map map)
       (defprogram-shortcut emacs :command "exec emacs" :key (kbd "e") :map map :props '(:class "Emacs"))
       (defprogram-shortcut v2c :command "exec v2c" :key (kbd "v") :map map)
