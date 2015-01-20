@@ -1,2 +1,2 @@
-
-
+;; add sld file
+(set! *load-suffixes* (cons ".sld" *load-suffixes*))

@@ -30,6 +30,8 @@ add_font_paths() {
     xset +fp /usr/local/X11/fonts/kaname12
     xset +fp /usr/local/X11/fonts/ecofont
     xset +fp /usr/local/X11/fonts/wqy
+    xset +fp /usr/local/X11/fonts/fantasque-sans-mono
+    xset +fp /usr/local/X11/fonts/Liberation
 
     xset +fp $HOME/.fonts
     xset fp rehash
