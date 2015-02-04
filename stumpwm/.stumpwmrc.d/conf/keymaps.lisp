@@ -72,6 +72,10 @@
  ("s-C-3" "gmove dev")
  ("s-C-4" "gmove pc")
  ("s-C-5" "gmove media")
+ ("s-[" "gprev")
+ ("s-]" "gnext")
+ ("s-{" "gprev-with-window")
+ ("s-}" "gnext-with-window")
  )
 
 ;;input window keymap
