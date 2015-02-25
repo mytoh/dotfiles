@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=conkeror
+Comment=conkeror
+Exec=conkeror
+Icon=/home/mytoh/huone/lataukset/conkeror/conkeror_logo.png
+Path=
+Terminal=false
+StartupNotify=true

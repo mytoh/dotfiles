@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=v2c
+Comment=v2c
+Exec=v2c
+Icon=/home/mytoh/huone/ohjelmat/v2c/v2cicon.png
+Path=
+Terminal=false
+StartupNotify=true

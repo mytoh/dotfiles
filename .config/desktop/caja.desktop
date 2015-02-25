@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=caja
+Comment=caja
+Exec=caja
+Icon=caja
+Path=
+Terminal=false
+StartupNotify=false
