@@ -35,7 +35,7 @@ setup_uim() {
     export UIM_CANDWIN_PROG=uim-candwin-gtk
     uim-xim &
     uim-toolbar-gtk-systray &
-# uim-toolbar-qt4 &
+    # uim-toolbar-qt4 &
 }
 #}}}
 
@@ -57,13 +57,12 @@ start_apps() {
     mixer vol 10
     mixer pcm 15
     # urxvtcd &
-    xbindkeys &
     dunst &
     #thunar --daemon &
     #spiffy &
     #parcellite &
     #synergys --name $(hostname -s)
-    mpd
+    ##musicpd
     # pulseaudio -D &
 }
 
@@ -99,6 +98,11 @@ start_wm() {
             windowmaker)  exec dbus-launch --exit-with-session ck-launch-session wmaker ;;
             mate)         exec dbus-launch --exit-with-session ck-launch-session mate-session ;;
             metisse)      exec dbus-launch --exit-with-session ck-launch-session metisse-start-fvwm ;;
+            lxde)      exec dbus-launch --exit-with-session ck-launch-session startlxde ;;
+            bspwm) 
+              sxhkd &
+              exec bspwm 
+              ;;
             *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
         esac
     else

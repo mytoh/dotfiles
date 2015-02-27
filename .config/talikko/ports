@@ -170,3 +170,11 @@ audio/csound6
 ports-mgmt/portbuilder
 x11-fonts/hanazono-fonts-ttf
 x11-fonts/liberation-fonts-ttf
+graphics/libbpg
+audio/lollypop
+x11/9menu
+japanese/mecab
+devel/plan9port
+deskutils/caja-extensions
+x11-wm/obkey
+x11-wm/lxmed
