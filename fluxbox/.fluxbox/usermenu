@@ -1,0 +1,6 @@
+
+[submenu] (My Tools)
+      [exec]   (conkeror) {conkeror}
+      [exec]   (pcmanfm) {pcmanfm --no-desktop }
+      [exec]   (v2c) {v2c}
+[end]
