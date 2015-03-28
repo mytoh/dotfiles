@@ -1,4 +1,6 @@
-add_font_paths() {
+#!/bin/sh
+
+    add_font_paths() {
     xset +fp /usr/local/lib/X11/fonts/artwiz-aleczapka-en
     xset +fp /usr/local/lib/X11/fonts/artwiz-fonts
     xset +fp /usr/local/lib/X11/fonts/artwiz-ru
@@ -26,13 +28,15 @@ add_font_paths() {
     xset +fp /usr/local/lib/X11/fonts/terminus-font
     xset +fp /usr/local/lib/X11/fonts/SourceCodePro
     xset +fp /usr/local/lib/X11/fonts/Roboto
-    xset +fp /usr/local/X11/fonts/ChromeOS
-    xset +fp /usr/local/X11/fonts/kaname12
-    xset +fp /usr/local/X11/fonts/ecofont
-    xset +fp /usr/local/X11/fonts/wqy
-    xset +fp /usr/local/X11/fonts/fantasque-sans-mono
-    xset +fp /usr/local/X11/fonts/Liberation
-
+    xset +fp /usr/local/lib/X11/fonts/ChromeOS
+    xset +fp /usr/local/lib/X11/fonts/kaname12
+    xset +fp /usr/local/lib/X11/fonts/ecofont
+    xset +fp /usr/local/lib/X11/fonts/wqy
+    xset +fp /usr/local/lib/X11/fonts/fantasque-sans-mono
+    xset +fp /usr/local/lib/X11/fonts/Liberation
+    xset +fp /usr/local/lib/X11/fonts/code2000
+    xset +fp /usr/local/lib/X11/fonts/comic-neue
+    xset +fp /usr/local/lib/X11/fonts/Cyberbit
     xset +fp $HOME/.fonts
     xset fp rehash
-}
+    }

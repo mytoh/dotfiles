@@ -1,27 +1,27 @@
-#!/usr/bin/env csh
+    #!/usr/bin/env csh
 
-set path=(${HOME}/huone/työkalupakki/bin ${path})
+    set path=(${HOME}/huone/työkalupakki/bin ${path})
 
-setenv shellar ${HOME}/.config/shellar
-setenv shellar_custom ${HOME}/.shellar_custom
+    setenv shellar ${HOME}/.config/shellar
+    setenv shellar_custom ${HOME}/.shellar_custom
 
-setenv shellar_theme 'default'
+    setenv shellar_theme 'default'
 
-set -f bottle_radio=(radio bbc)
-#set -f bottle_scheme=(loitsu lehti nopea napa mosh gauche talikko pikkukivi)
-set -f bottle_scheme=(gauche lehti pikkukivi stumpwm firefox e2ansi)
-set -f bottle_emacs=(emacs cask)
-set -f bottle_freebsd=(freebsd qjail)
-set -f bottles=( mytoh  \
-${bottle_freebsd} ${bottle_scheme} ${bottle_emacs} fasd \
+    set -f bottle_radio=(radio bbc)
+    #set -f bottle_scheme=(loitsu lehti nopea napa mosh gauche talikko pikkukivi)
+    set -f bottle_scheme=(gauche lehti pikkukivi stumpwm firefox e2ansi)
+    set -f bottle_emacs=(emacs cask)
+    set -f bottle_freebsd=(freebsd qjail)
+    set -f bottles=( mytoh  \
+    ${bottle_freebsd} ${bottle_scheme} ${bottle_emacs} fasd \
                    ${bottle_radio}  vim nyan \
                     brew npm firefox go \
-                   abduco dvtm peco)
+                   abduco dvtm peco sbcl)
 
-setenv shellar_bottles "${bottles}"
+    setenv shellar_bottles "${bottles}"
 
-unset bottles bottles_radio bottles_scheme
+    unset bottles bottles_radio bottles_scheme
 
-set -f path=(${shellar}/bin ${path})
+    set -f path=(${shellar}/bin ${path})
 
-eval "`shellar init`"
+    eval "`shellar init`"

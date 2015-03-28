@@ -51,11 +51,11 @@ start_apps() {
     setxkbmap dvorak
     xmodmap $HOME/.xmodmaprc
     xset b off # turn off beep
-    xset r rate 200 40
+    xset r rate 200 25
     xsetroot -cursor_name right_ptr
     # audio volume
-    mixer vol 10
-    mixer pcm 15
+    mixer vol 50
+    mixer pcm 20
     # urxvtcd &
     dunst &
     #thunar --daemon &
@@ -99,10 +99,10 @@ start_wm() {
             mate)         exec dbus-launch --exit-with-session ck-launch-session mate-session ;;
             metisse)      exec dbus-launch --exit-with-session ck-launch-session metisse-start-fvwm ;;
             lxde)      exec dbus-launch --exit-with-session ck-launch-session startlxde ;;
-            bspwm) 
-              sxhkd &
-              exec bspwm 
-              ;;
+            bspwm)
+                sxhkd &
+                exec bspwm
+                ;;
             *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
         esac
     else
