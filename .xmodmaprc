@@ -1,5 +1,18 @@
-! all keys with
-! xmodmap -pke
+
+! output taken from:
+! xmodmap -pke | egrep '(Control|Super|Alt|Menu)'
+! Use to set keycodes correctly below. List reordered to match
+! keys from left to right.
+!
+! keycode  64 = Alt_L Meta_L Alt_L Meta_L
+! keycode  66 = Control_L NoSymbol Control_L
+! keycode 109 = Control_R NoSymbol Control_R
+! keycode 115 = Super_L NoSymbol Super_L
+! keycode 116 = Super_R NoSymbol Super_R
+! keycode 117 = Control_L NoSymbol Control_L
+! keycode 125 = NoSymbol Alt_L NoSymbol Alt_L
+! keycode 127 = NoSymbol Super_L NoSymbol Super_L
+! keycode 131 = Control_L NoSymbol Control_L
 
 ! clear Mod1
 ! clear Mod2

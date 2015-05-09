@@ -28,8 +28,8 @@ remove     d   Delete
 delete     D C-Delete
 
 # toggle_fullscreen f
-# toggle_filenames  v
-# toggle_info       i
+ toggle_filenames  i
+ toggle_info       I
 
 zoom_in  C-Up plus
 zoom_out C-Down minus
