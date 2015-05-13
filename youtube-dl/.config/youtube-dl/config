@@ -1,0 +1,4 @@
+
+--external-downloader aria2c
+--prefer-avconv
+# --ffmpeg-location /usr/local/bin/ffmpeg26
