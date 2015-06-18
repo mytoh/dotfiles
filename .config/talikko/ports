@@ -136,6 +136,7 @@ multimedia/mediabrowser
 audio/umix
 devel/plan9port
 x11-fm/nemo
+deskutils/nemo-extensions
 games/minetest
 x11/slop
 security/i2p
@@ -187,3 +188,5 @@ www/choqok
 sysutils/pick
 multimedia/livestreamer
 textproc/hgrep
+x11-fonts/freefont-ttf
+x11-fm/sushi

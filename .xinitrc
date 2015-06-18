@@ -84,20 +84,20 @@ start_wm() {
     if [ -n ${wm} ]; then
         export USERWM=${wm}
         case ${USERWM} in
-            xfce)         exec dbus-launch --exit-with-session ck-launch-session startxfce4 ;;
-            fluxbox)      exec dbus-launch --exit-with-session ck-launch-session startfluxbox ;;
-            fvwm|fvwm2)   exec dbus-launch --exit-with-session ck-launch-session fvwm2 ;;
-            fvwm-themes*) exec dbus-launch --exit-with-session ck-launch-session fvwm-themes-start -s sa ;;
-            dwm)          exec dbus-launch --exit-with-session ck-launch-session $HOME/.dwm/startdwm ;;
-            kde)          exec dbus-launch --exit-with-session ck-launch-session startkde5 ;;
-            gnome)        exec dbus-launch --exit-with-session ck-launch-session gnome-session ;;
-            mate)         exec dbus-launch --exit-with-session ck-launch-session mate-session ;;
-            rox)          exec dbus-launch --exit-with-session ck-launch-session rox -S ;;
-            lainwm)       exec dbus-launch --exit-with-session ck-launch-session lainwm ;;
-            openbox)      exec dbus-launch --exit-with-session ck-launch-session openbox-session ;;
-            windowmaker)  exec dbus-launch --exit-with-session ck-launch-session wmaker ;;
-            mate)         exec dbus-launch --exit-with-session ck-launch-session mate-session ;;
-            metisse)      exec dbus-launch --exit-with-session ck-launch-session metisse-start-fvwm ;;
+            xfce)         exec ck-launch-session dbus-launch --exit-with-session startxfce4 ;;
+            fluxbox)      exec ck-launch-session dbus-launch --exit-with-session startfluxbox ;;
+            fvwm|fvwm2)   exec ck-launch-session dbus-launch --exit-with-session fvwm2 ;;
+            fvwm-themes*) exec ck-launch-session dbus-launch --exit-with-session fvwm-themes-start -s sa ;;
+            dwm)          exec ck-launch-session dbus-launch --exit-with-session $HOME/.dwm/startdwm ;;
+            kde)          exec ck-launch-session dbus-launch --exit-with-session startkde5 ;;
+            gnome)        exec ck-launch-session dbus-launch --exit-with-session gnome-session ;;
+            mate)         exec ck-launch-session dbus-launch mate-session ;;
+            rox)          exec ck-launch-session dbus-launch --exit-with-session rox -S ;;
+            lainwm)       exec ck-launch-session dbus-launch --exit-with-session lainwm ;;
+            openbox)      exec ck-launch-session dbus-launch --exit-with-session openbox-session ;;
+            windowmaker)  exec ck-launch-session dbus-launch --exit-with-session wmaker ;;
+            mate)         exec ck-launch-session dbus-launch --exit-with-session mate-session ;;
+            metisse)      exec ck-launch-session dbus-launch --exit-with-session metisse-start-fvwm ;;
             lxde)      exec dbus-launch --exit-with-session ck-launch-session startlxde ;;
             bspwm)
                 sxhkd &
