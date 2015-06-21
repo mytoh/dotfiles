@@ -1,0 +1,12 @@
+
+DEFAULT = Source Han Code JP Normal
+ISO8859_1 = Source Han Code JP Normal
+ISO8859_1_BOLD = Source Han Code JP Normal
+JISX0201_KATA =  Source Han Code JP Normal
+JISX0201_ROMAN = Source Han Code JP Normal
+JISX0208_1983 = Source Han Code JP Normal
+ISO10646_UCS4_1= Source Han Code JP Normal
+ISO10646_UCS4_1_BIWIDTH= Source Han Code JP Normal
+
+#ISO10646_UCS4_1=Symbola
+#ISO10646_UCS4_1_BIWIDTH=Symbola
