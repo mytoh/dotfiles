@@ -42,7 +42,7 @@ hardstatus alwayslastline "%{= dd} %-Lw%40L>%{= ck} %t %{-}%+Lw%-055=%{= dg} %`%
 sorendition "= dd"
 
 # launch windows
-screen 1 vim
+screen 1 nvim
 screen 2 w3m http://google.com
 screen 0
 
