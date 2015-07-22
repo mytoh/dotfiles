@@ -1,4 +1,5 @@
 
 --external-downloader aria2c
 --prefer-avconv
+--prefer-free-formats        # Prefer free video formats unless a specific one is requested
 # --ffmpeg-location /usr/local/bin/ffmpeg26
