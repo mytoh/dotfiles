@@ -12,11 +12,11 @@
     set -f bottle_scheme=(gauche lehti pikkukivi stumpwm firefox e2ansi)
     set -f bottle_emacs=(emacs cask)
     set -f bottle_freebsd=(freebsd qjail)
-    set -f bottles=( mytoh  \
+    set -f bottles=( mytoh  huone \
     ${bottle_freebsd} ${bottle_scheme} ${bottle_emacs} fasd \
                    ${bottle_radio}  vim nyan \
                     brew npm firefox go \
-                   abduco dvtm peco sbcl)
+                   abduco dvtm peco sbcl luarocks)
 
     setenv shellar_bottles "${bottles}"
 
