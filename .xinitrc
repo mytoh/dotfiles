@@ -106,7 +106,7 @@ start_wm() {
             *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
         esac
     else
-        exec $DEFAULT_SESSION
+             exec ck-launch-session dbus-launch --exit-with-session  $DEFAULT_SESSION
     fi
 }
 
