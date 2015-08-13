@@ -1,0 +1,18 @@
+! -*- conf-xdefaults -*-
+
+!! spacecadet
+! HYPER SUPER META CTRL SPC CTRL META SUPER HYPER
+! 37    115   64   131      129  208  113   116
+keycode 37  = Hyper_L
+keycode 115 = Super_L
+keycode 64  = Meta_L
+keycode 131 = Control_L
+keycode 129 = Control_R
+keycode 208 = Meta_R
+keycode 113 = Super_R
+keycode 116 = Hyper_R
+add Control = Control_L Control_R
+add Mod1 = Meta_L Meta_R Alt_L Alt_R
+add Mod2 = Mode_switch
+add Mod3 = Super_L Super_R
+add Mod4 = Hyper_L Hyper_R

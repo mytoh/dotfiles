@@ -21,10 +21,12 @@
 ! add Mod1 = Meta_L
 ! add Mod2 = Mode_switch
 
+clear Control
+
 ! remove capslock key {{{
-keycode 66 = Control_L
 clear Lock
-add Control = Control_L
+keycode 66 = Control_L
+! add Control = Control_L
 !}}}
 
 ! left handed mouse {{{
@@ -46,7 +48,8 @@ keycode 37 = Hyper_L
 
 ! muhenkan = Control_L {{{
 keycode 131 = Control_L
-add Control = Control_L
+keycode 129 = Control_R
+add Control = Control_L Control_R
 ! }}}
 
 
