@@ -192,4 +192,8 @@ x11-fonts/freefont-ttf
 x11-fm/sushi
 adobe-fonts/source-han-code-jp
 sysutils/tracker
-net/httpry  
+net/httpry
+textproc/pugixml
+net/lft
+graphics/synfigstudio     # Vector-based 2D animation software package
+x11-servers/x2x
