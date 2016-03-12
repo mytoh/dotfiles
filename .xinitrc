@@ -51,7 +51,7 @@ start_apps() {
     setxkbmap dvorak
     xmodmap $HOME/.xmodmaprc
     xset b off # turn off beep
-    xset r rate 200 25
+    xset r rate 200 60
     xsetroot -cursor_name right_ptr
     # audio volume
     mixer vol 50
@@ -106,7 +106,7 @@ start_wm() {
             *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
         esac
     else
-             exec ck-launch-session dbus-launch --exit-with-session  $DEFAULT_SESSION
+        exec ck-launch-session dbus-launch --exit-with-session  $DEFAULT_SESSION
     fi
 }
 

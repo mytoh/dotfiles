@@ -1,11 +1,14 @@
 
 --external-downloader aria2c
 
+--prefer-ffmpeg
 # --prefer-avconv
 
 --prefer-free-formats        # Prefer free video formats unless a specific one is requested
 
 # https://github.com/rg3/youtube-dl/issues/6018
---format best[ext=webm]/best
+# --format best[ext=webm]/best
+--format bestvideo+bestaudio
 
-# --ffmpeg-location /usr/local/bin/ffmpeg26
+--ffmpeg-location /home/mytoh/huone/työkaluvaja/bin
+
