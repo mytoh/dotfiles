@@ -37,6 +37,6 @@
     xset +fp /usr/local/lib/X11/fonts/code2000
     xset +fp /usr/local/lib/X11/fonts/comic-neue
     xset +fp /usr/local/lib/X11/fonts/Cyberbit
-    xset +fp $HOME/.fonts
+    #xset +fp $HOME/.fonts
     xset fp rehash
     }

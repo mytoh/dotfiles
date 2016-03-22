@@ -8,6 +8,7 @@ Xcursor.theme: whiteglass
 #include ".xresources.d/fontforge"
 #include ".xresources.d/emacs"
 #include ".xresources.d/cursor"
+#include ".xresources.d/rofi"
 
 
 !-------------------------------------
