@@ -1,0 +1,11 @@
+[keybindings]
+n  { goto_file_relative(1) } 
+p  { goto_file_relative(-1) } 
+b  { toggle_info_box() } 
+=  { toggle_fullscreen() }
+w  { toggle_fullscreen() }
+
+[options]
+fullscreen=1
+hide-info-box=1
+scale-images-up=1
