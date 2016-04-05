@@ -70,7 +70,7 @@ depth = 32
 use_scrollbar = false
 fg_color = #bea492
 bg_color = #1b2023
-borderless = true
+borderless = false
 inner_border = 0
 
 # -- Others --
