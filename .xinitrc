@@ -99,6 +99,7 @@ start_wm() {
             mate)         exec ck-launch-session dbus-launch --exit-with-session mate-session ;;
             metisse)      exec ck-launch-session dbus-launch --exit-with-session metisse-start-fvwm ;;
             lxde)      exec dbus-launch --exit-with-session ck-launch-session startlxde ;;
+            wm)   exec sbcl --script ~/.emacs.d/vendor/github.com/mgi/wm/wm.lisp ;;
             bspwm)
                 sxhkd &
                 exec bspwm
