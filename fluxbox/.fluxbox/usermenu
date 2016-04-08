@@ -6,6 +6,7 @@
       [exec]   (v2c) {v2c}
       [exec]   (emacs) {emacs}
       [exec] (Run) {fbrun}
+[include] (~/.fluxbox/xdg_menu)
 [submenu] (Fluxbox)
 [config] (configuration)
 [reconfig] (Reload configuration)
