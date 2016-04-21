@@ -122,7 +122,7 @@ sound() {
 
 sound
 load_xinitrcd
-setup_uim
+# setup_uim
 add_font_paths
 start_apps
 
