@@ -1,8 +1,8 @@
 
 --external-downloader aria2c
 
---prefer-ffmpeg
-# --prefer-avconv
+#--prefer-ffmpeg
+--prefer-avconv
 
 --prefer-free-formats        # Prefer free video formats unless a specific one is requested
 
