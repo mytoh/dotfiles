@@ -94,7 +94,7 @@ start_wm() {
             mate)         exec ck-launch-session dbus-launch mate-session ;;
             rox)          exec ck-launch-session dbus-launch --exit-with-session rox -S ;;
             lainwm)       exec ck-launch-session dbus-launch --exit-with-session lainwm ;;
-            openbox)      exec ck-launch-session dbus-launch --exit-with-session openbox-session ;;
+            openbox)      exec openbox-session ;;
             windowmaker)  exec ck-launch-session dbus-launch --exit-with-session wmaker ;;
             mate)         exec ck-launch-session dbus-launch --exit-with-session mate-session ;;
             metisse)      exec ck-launch-session dbus-launch --exit-with-session metisse-start-fvwm ;;
