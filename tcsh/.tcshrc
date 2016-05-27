@@ -17,7 +17,7 @@
                    ${bottle_radio}  vim nyan \
                     brew npm firefox go \
                    abduco dvtm peco sbcl luarocks \
-                   epiki hoarder herd)
+                   epiki hoarder herd emb)
 
     setenv shellar_bottles "${bottles}"
 

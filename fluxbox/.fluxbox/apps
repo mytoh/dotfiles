@@ -1,56 +1,44 @@
 [app] (name=fbrun)
-  [Position]    (WINCENTER)     {0 0}
-  [Layer]   {2}
+  [Position]	(CENTER)	{0 0}
+  [Layer]	{2}
 [end]
-
-
-## workspace 0
 [app] (class=mlterm)
-  [Workspace] {0}
+  [Workspace]	{0}
 [end]
 [app] (class=URxvt)
-  [Workspace] {0}
+  [Workspace]	{0}
 [end]
-
-## workspace 1
 [app] (class=Conkeror)
-  [Workspace] {1}
+  [Workspace]	{1}
 [end]
 [app] (class=Firefox)
-  [Workspace] {1}
+  [Workspace]	{1}
 [end]
-
-## workspace 2
 [app] (class=Emacs)
-  [Workspace] {2}
+  [Workspace]	{2}
 [end]
-
-## workspace 3
 [app] (class=MPlayer)
-  [Workspace] {3}
+  [Workspace]	{3}
 [end]
 [app] (class=mpv)
-  [Workspace] {3}
-[Dimensions]  {500 279}
+  [Workspace]	{3}
+  [Dimensions]	{500 279}
 [end]
-
-## workspace 4
 [app] (class=Pcmanfm)
-  [Workspace] {4}
+  [Workspace]	{4}
 [end]
 [app] (class=ROX-Filer)
-  [Workspace] {4}
+  [Workspace]	{4}
 [end]
 [app] (class=MComix)
-  [Workspace] {4}
+  [Workspace]	{4}
 [end]
 [app] (class=feh)
-  [Workspace] {4}
+  [Workspace]	{4}
 [end]
 [app] (class=Sxiv)
-  [Workspace] {4}
+  [Workspace]	{4}
 [end]
 [app] (class=Pqiv)
-  [Workspace] {4}
+  [Workspace]	{4}
 [end]
-

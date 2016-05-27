@@ -104,6 +104,8 @@ start_wm() {
                 sxhkd &
                 exec bspwm
                 ;;
+            lumina)
+                exec Lumina-DE ;;
             *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
         esac
     else
