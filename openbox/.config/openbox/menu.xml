@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<openbox_menu xmlns="http://openbox.org/3.4/menu">
+<openbox_menu xmlns="http://openbox.org/3.6/menu">
 
+<menu id="apps-obmenu" label="Global Apps" execute="cat ~/.cache/menu.xml" />
 
 <menu id="apps-fav-menu" label="Favs">
-  <item label="Emacs">
+  <item label="Emacs" icon="/usr/local/share/emacs/24.3/etc/images/icons/hicolor/scalable/apps/emacs.svg">
     <action name="Execute">
       <command>emacs</command>
       <startupnotify>
@@ -12,7 +13,7 @@
       </startupnotify>
     </action>
   </item>
-  <item label="Conkeror">
+  <item label="Conkeror" icon="~/huone/ohjelmat/conkeror/contrib/art/conkeror.svg">
     <action name="Execute">
       <command>conkeror</command>
       <startupnotify>
@@ -20,7 +21,7 @@
       </startupnotify>
     </action>
   </item>
-  <item label="mlterm">
+  <item label="mlterm" icon="/usr/local/share/icons/Adwaita/scalable/apps/utilities-terminal-symbolic.svg">
     <action name="Execute">
       <command>mlterm</command>
       <startupnotify>
@@ -75,15 +76,10 @@
 
 <menu id="root-menu" label="Openbox 3">
   <separator label="Applications" />
-  <menu id="apps-accessories-menu"/>
-  <menu id="apps-editors-menu"/>
-  <menu id="apps-graphics-menu"/>
-  <menu id="apps-net-menu"/>
-  <menu id="apps-office-menu"/>
-  <menu id="apps-multimedia-menu"/>
-  <menu id="apps-term-menu"/>
-  <menu id="apps-fileman-menu"/>
+
+  <menu id="apps-obmenu"/>
   <menu id="apps-fav-menu"/>
+
   <separator label="System" />
   <menu id="system-menu"/>
   <separator />

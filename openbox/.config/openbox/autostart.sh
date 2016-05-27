@@ -1,5 +1,5 @@
 
-tint2 &
+# tint2 &
 
 if test -d ~/huone/kuvat/sivusto/4chan/a
 then
@@ -12,3 +12,5 @@ else
     fi
 
 fi
+
+openbox-menu -p -o menu.xml &
