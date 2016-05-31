@@ -1,0 +1,23 @@
+-*- mode: fvwm -*-
+
+######################## Menus ###################
+DestroyMenu MenuFvwmRoot
+AddToMenu MenuFvwmRoot  "$[gt.Root Menu]"             Title
++                       "&1. XTerm"             Exec exec xterm
++                       "&2. URxvt"              Exec exec urxvt
++                       "&3. mlterm"              Exec exec mlterm
++                       "&4. conkeror"              Exec exec conkeror
++                       "&5. emacs"              Exec exec emacs
++                       ""              Nop
++                       "&R. $[gt.Remote Logins]"     Popup MenuFvwmLogins
++                       ""              Nop
++                       "&U. $[gt.Utilities]"         Popup MenuFvwmUtilities
++                       ""              Nop
++                       "&M. $[gt.Fvwm Modules]"      Popup MenuFvwmModules
++                       "&W. $[gt.Fvwm Window Ops]"   Popup MenuFvwmWindowOps
++                       "&S. $[gt.Fvwm Config Ops]"   Popup MenuFvwmConfig
++                       ""              Nop
++                       "&F. $[gt.Refresh Screen]"   Refresh
++                       "&C. $[gt.Recapture Screen]" Recapture
++                       ""              Nop
++                       "&X. $[gt.Exit Fvwm]" Popup MenuFvwmQuitVerify

@@ -1,0 +1,17 @@
+-*- mode: fvwm -*-
+
+read ConfigFvwmSetup
+
+
+# Reading configs
+
+DeskTopSize 5x1
+
+Style * ClickToFocus
+
+read keys
+read mouse
+read menu
+read apps
+read style
+read func

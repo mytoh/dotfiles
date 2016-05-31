@@ -1,0 +1,7 @@
+-*- mode: fvwm -*-
+
+# http://fvwmforums.org/phpBB3/viewtopic.php?t=2874
+DestroyFunc MyGotoPage
+AddToFunc MyGotoPage
++ I GotoPage $0 $1
++ I Next (CurrentPage, !Iconic, !Sticky, !Shaded, !Focused, !Overlapped) Focus
