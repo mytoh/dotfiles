@@ -39,7 +39,7 @@
                   'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>cathexis</name>
+    <name>yellow</name>
     <titleLayout>NLIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -73,20 +73,20 @@
     </font>
     <font place="MenuHeader">
       <name>sans</name>
-      <size>9</size>
+      <size>8</size>
       <!-- font size in points -->
-      <weight>normal</weight>
+      <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
-      <slant>normal</slant>
+      <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="MenuItem">
       <name>sans</name>
-      <size>9</size>
+      <size>8</size>
       <!-- font size in points -->
-      <weight>normal</weight>
+      <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
-      <slant>normal</slant>
+      <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="ActiveOnScreenDisplay">
@@ -179,8 +179,6 @@
     <keybind key="W-d">
       <action name="ToggleShowDesktop"/>
     </keybind>
-    
-    
     <!-- added -->
     <!-- workspace -->
     <keybind key="W-1">
@@ -263,7 +261,6 @@
       </action>
     </keybind>
   </keyboard>
-
   <mouse>
     <dragThreshold>1</dragThreshold>
     <!-- number of pixels the mouse must move before a drag begins -->
