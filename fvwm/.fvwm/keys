@@ -8,6 +8,13 @@ Key 1 A 4  MyGotoPage 0 0
 Key 2 A 4  MyGotoPage 1 0
 Key 3 A 4  MyGotoPage 2 0
 Key 4 A 4  MyGotoPage 3 0
+Key 5 A 4  MyGotoPage 4 0
+
+Key 1 A s4 MoveToPage 0 0 
+Key 2 A s4 MoveToPage 1 0
+Key 3 A s4 MoveToPage 2 0
+Key 4 A s4 MoveToPage 3 0
+Key 5 A s4 MoveToPage 4 0
 
 # Super-shift-c
 key c A S4 Close

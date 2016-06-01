@@ -2,7 +2,7 @@
 
 # some simple default mouse bindings:
 #   for the root window:
-# Mouse 1 R       A       Menu MenuFvwmRoot Nop
+Mouse 1 R       A       Nop
 Mouse 2 R       A       Menu MenuFvwmWindowOps Nop
 # Mouse 3 R       A       WindowList
 Mouse 3 R       A       Menu MenuFvwmRoot Nop

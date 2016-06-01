@@ -10,3 +10,9 @@ Style Emacs*     StartsOnPage 2 0, SkipMapping
 
 ## desktop 4
 Style mpv*     StartsOnPage 3 0, SkipMapping
+
+## desktop 5
+Style Sxiv*     StartsOnPage 4 0, SkipMapping
+Style feh*     StartsOnPage 4 0, SkipMapping
+Style Pqiv*     StartsOnPage 4 0, SkipMapping
+Style Pcmanfm*     StartsOnPage 4 0, SkipMapping

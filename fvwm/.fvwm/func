@@ -1,7 +1,13 @@
 -*- mode: fvwm -*-
 
+
+DestroyFunc StartFunction
+AddToFunc StartFunction
+# + I Module FvwmPager * *
+
 # http://fvwmforums.org/phpBB3/viewtopic.php?t=2874
 DestroyFunc MyGotoPage
 AddToFunc MyGotoPage
 + I GotoPage $0 $1
-+ I Next (CurrentPage, !Iconic, !Sticky, !Shaded, !Focused, !Overlapped) Focus
++ I Next (CurrentPage, AcceptsFocus) Focus
+# + I None (CirculateHit, CurrentPage, Focused, Raised) Next (AcceptsFocus, CurrentPage, Raised, ...) Focus

@@ -1,5 +1,7 @@
 -*- mode: fvwm -*-
 
+#
+Style * ResizeHintOverride
 
 # Keep the last focus while in root window
 Style "*" SloppyFocus

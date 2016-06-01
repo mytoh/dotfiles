@@ -2,7 +2,6 @@
 
 read ConfigFvwmSetup
 
-
 # Reading configs
 
 DeskTopSize 5x1
@@ -14,4 +13,6 @@ read mouse
 read menu
 read apps
 read style
+read pager
+read titlebar
 read func
