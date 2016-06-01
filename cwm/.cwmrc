@@ -18,6 +18,10 @@ autogroup 2 Conkeror
 autogroup 3 Emacs
 ## 4
 autogroup 4 mpv
+## 5
+autogroup 5 Pqiv
+autogroup 5 feh
+autogroup 5 Sxiv
 
 # keys
 bind 4-0 nogroup
