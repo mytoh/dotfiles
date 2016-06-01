@@ -94,12 +94,13 @@ start_wm() {
             mate)         exec ck-launch-session dbus-launch mate-session ;;
             rox)          exec ck-launch-session dbus-launch --exit-with-session rox -S ;;
             lainwm)       exec ck-launch-session dbus-launch --exit-with-session lainwm ;;
-            openbox)      exec openbox-session ;;
+            openbox)      exec ck-launch-session dbus-launch --exit-with-session openbox-session ;;
             windowmaker)  exec ck-launch-session dbus-launch --exit-with-session wmaker ;;
             mate)         exec ck-launch-session dbus-launch --exit-with-session mate-session ;;
             metisse)      exec ck-launch-session dbus-launch --exit-with-session metisse-start-fvwm ;;
             lxde)      exec dbus-launch --exit-with-session ck-launch-session startlxde ;;
             wm)   exec sbcl --script ~/.emacs.d/vendor/github.com/mgi/wm/wm.lisp ;;
+            cwm)   exec dbus-launch --exit-with-session ck-launch-session cwm ;;
             bspwm)
                 sxhkd &
                 exec bspwm
