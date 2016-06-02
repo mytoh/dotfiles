@@ -1,8 +1,27 @@
 
 # menu
+# Any entry here is shown in the application menu
 command conkeror conkeror
 command emacs    emacs
-command mlterm   mlterm
+command xterm   xterm
+command urxvt   urxvt
+command rofi     "rofi -show run -font 'k10 10' -fg '#505050' -bg '#000000' -hlfg '#ffb964' -hlbg '#000000'"
+command term  mlterm
+command pcmanfm  pcmanfm
+
+
+# Ignore programs by that name by not drawing borders around them.
+ignore XMMS
+ignore xwi
+ignore xapm
+ignore xclock
+ignore conky
+ignore dzen2
+ignore dmenu
+ignore rofi
+
+# gap top bottom left right
+gap 12 0 0 0
 
 # group
 
@@ -48,3 +67,17 @@ bind 4S-9 movetogroup9
 bind 4S-c  delete
 bind 4-f   maximize
 bind 4-Tab cycle
+
+#     restart             Restart the running cwm(1).
+bind 4-q restart
+#     quit                Quit cwm(1).
+bind 4S-q quit
+
+#     htile               Current window is placed at the top of the screen and maximized horizontally, other windows in its group share remaining screen space.
+bind 4-t htile
+#     vtile               Current window is placed on the left of the screen and maximized vertically, other windows in its group share remaining screen space.
+bind 4S-t vtile
+
+
+# memo
+# [[http://vsido.org/index.php?topic=410.0]]
