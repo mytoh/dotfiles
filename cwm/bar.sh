@@ -5,10 +5,11 @@
 groups() {
     cur=`xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}'`
     tot=`xprop -root _NET_NUMBER_OF_DESKTOPS | awk '{print $3}'`
+    cw="^fg(#ffaaaa)*^fg()"
 
     if test ${cur} -eq 1
     then
-        line="|"
+        line="${cw}"
         for w in $(seq 2 ${tot})
         do
             line="${line}="
@@ -18,13 +19,18 @@ groups() {
 
         # Desktop numbers start at 0. if you want desktop 2 to be in second place,
         # start counting from 1 instead of 0. But wou'll lose a group ;)
-        for w in `seq 1 $((cur - 1))`; do line="${line}="; done
+        for w in $(seq 1 $((cur - 1)))
+        do
+            line="${line}="
+        done
 
         # enough =, let's print the current desktop
-        line="${line}|"
-
+        line="${line}${cw}"
         # En then the other groups
-        for w in `seq $((cur + 1)) $tot`; do line="${line}="; done
+        for w in $(seq $((cur + 1)) $tot)
+        do
+            line="${line}="
+        done
 
         # don't forget to print that line!
         echo $line
