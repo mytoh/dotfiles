@@ -34,6 +34,9 @@ start_wm() {
             lxde)      exec dbus-launch --exit-with-session ck-launch-session startlxde ;;
             wm)   exec sbcl --script ~/.emacs.d/vendor/github.com/mgi/wm/wm.lisp ;;
             cwm)   exec dbus-launch --exit-with-session ck-launch-session cwm ;;
+            twm)   
+            vdesk &
+            exec dbus-launch --exit-with-session ck-launch-session twm ;;
             bspwm)
                 sxhkd &
                 exec bspwm
