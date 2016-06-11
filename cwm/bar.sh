@@ -42,7 +42,11 @@ bar::groups() {
 bar::title() {
     local wactive wtitle
     wactive=$(xprop -root -notype _NET_ACTIVE_WINDOW | awk '{print $5}')
-    wtitle=$(xprop -notype -id 0x140002c WM_NAME | cut -d = -f 2 | tr -d '"')
+
+    case ${wactive} in
+        0x0) wtitle="-" ;;
+        *) wtitle=$(xprop -notype -id ${wactive} WM_NAME | cut -d = -f 2 | tr -d '"') ;;
+    esac
     echo "${wtitle}"
 }
 
