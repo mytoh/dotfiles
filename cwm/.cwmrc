@@ -1,10 +1,32 @@
 
+# border
+borderwidth 2
+
+# colours
+## window colour
+color activeborder   '#93e6ab'
+color inactiveborder '#456472'
+## font colour
+color font           '#c0c5ce'
+## menu colour
+color menubg         '#1d2a30'
+color menufg         '#c0c5ce'
+## group colour
+color groupborder    '#a66363'
+color ungroupborder  '#a6a663'
+## urgency colour
+color urgencyborder  '#ef9a89'
+
+# gap top bottom left right
+gap 12 0 0 0
+
 # menu
 # Any entry here is shown in the application menu
 command conkeror conkeror
 command emacs    emacs
 command xterm   xterm
 command urxvt   urxvt
+command mlterm   mlterm
 command rofi     "rofi -show run -font 'k10 10' -fg '#505050' -bg '#000000' -hlfg '#ffb964' -hlbg '#000000'"
 command term  mlterm
 command pcmanfm  pcmanfm
@@ -20,8 +42,6 @@ ignore dzen2
 ignore dmenu
 ignore rofi
 
-# gap top bottom left right
-gap 12 0 0 0
 
 # group
 
@@ -34,6 +54,9 @@ autogroup 1 "urxvt,URxvt"
 ## 2
 autogroup 2 Conkeror
 autogroup 2 Corebird
+autogroup 2 Midori
+autogroup 2 Vimb
+autogroup 2 Firefox
 ## 3
 autogroup 3 Emacs
 ## 4
@@ -42,6 +65,7 @@ autogroup 4 mpv
 autogroup 5 Pqiv
 autogroup 5 feh
 autogroup 5 Sxiv
+autogroup 5 Pcmanfm
 
 # keys
 

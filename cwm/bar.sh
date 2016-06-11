@@ -4,7 +4,7 @@
 
 TOTAL_DESKTOPS=$(xprop -root _NET_NUMBER_OF_DESKTOPS | awk '{print $3}')
 
-groups() {
+bar::groups() {
     cur=$(xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}')
     cw="^fg(#ffaaaa)*^fg()"
 
@@ -39,14 +39,26 @@ groups() {
 
 }
 
-# This loop will fill a buffer with our infos, and output it to stdout.
-while :; do
-    buf=""
-    buf="${buf} [$(groups)]   --  "
-    dt="$(date)"
+bar::title() {
+    local wactive wtitle
+    wactive=$(xprop -root -notype _NET_ACTIVE_WINDOW | awk '{print $5}')
+    wtitle=$(xprop -notype -id 0x140002c WM_NAME | cut -d = -f 2 | tr -d '"')
+    echo "${wtitle}"
+}
 
-    echo $buf ${dt}
-    # use `nowplaying scroll` to get a scrolling output!
-    sleep 1 # The HUD will be updated every second
-done | dzen2 -p -ta l -h 12 -bg gray15 -fn '-misc-fixed-medium-r-normal--10-*-75-75-c-*-*-*' -e 'onexit=ungrabmouse'
-# done | dzen2 -p -ta l -h 12 -bg gray15 -fn 'Bitstream Vera Sans-12' -e 'onexit=ungrabmouse'
+main() {
+    # This loop will fill a buffer with our infos, and output it to stdout.
+    while :; do
+        buf=""
+        buf="${buf} [$(bar::groups)] "
+        tl="$(bar::title)"
+        dt="$(date)"
+
+        echo "${buf} | ${tl} | ${dt}"
+        # use `nowplaying scroll` to get a scrolling output!
+        sleep 1 # The HUD will be updated every second
+    done | dzen2 -p -ta l -h 12 -bg gray15 -fn '-misc-fixed-medium-r-normal--10-*-75-75-c-*-*-*' -e 'onexit=ungrabmouse'
+    # done | dzen2 -p -ta l -h 12 -bg gray15 -fn 'Bitstream Vera Sans-12' -e 'onexit=ungrabmouse'
+}
+
+main
