@@ -44,6 +44,8 @@ start_wm() {
                 ;;
             lumina)
                 exec Lumina-DE ;;
+           maxwelm)
+           exec maxwelm ;;
             *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
         esac
     else
