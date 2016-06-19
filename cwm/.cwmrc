@@ -153,6 +153,10 @@ bind 4-t htile
 #     vtile               Current window is placed on the left of the screen and maximized vertically, other windows in its group share remaining screen space.
 bind 4S-t vtile
 
+## mouse
+mousebind 4-1 window_move
+mousebind 4-3 window_resize
+
 
 # memo
 # [[http://vsido.org/index.php?topic=410.0]]
