@@ -35,17 +35,18 @@ start_wm() {
             lxde)      exec dbus-launch --exit-with-session ck-launch-session startlxde ;;
             wm)   exec sbcl --script ~/.emacs.d/vendor/github.com/mgi/wm/wm.lisp ;;
             cwm)   exec dbus-launch --exit-with-session ck-launch-session cwm ;;
-            twm)   
-            vdesk &
-            exec dbus-launch --exit-with-session ck-launch-session twm ;;
+            i3)   exec dbus-launch --exit-with-session ck-launch-session i3 ;;
+            twm)
+                vdesk &
+                exec dbus-launch --exit-with-session ck-launch-session twm ;;
             bspwm)
                 sxhkd &
                 exec bspwm
                 ;;
             lumina)
                 exec Lumina-DE ;;
-           maxwelm)
-           exec maxwelm ;;
+            maxwelm)
+                exec maxwelm ;;
             *)            exec dbus-launch --exit-with-session ck-launch-session $1 ;;
         esac
     else
