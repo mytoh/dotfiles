@@ -1,6 +1,6 @@
     #!/usr/bin/env csh
 
-    set path=(${HOME}/huone/työkalupakki/bin ${path})
+    set path=(${HOME}/huone/komero/bin ${path})
 
     setenv shellar ${HOME}/.config/shellar
     setenv shellar_custom ${HOME}/.shellar_custom
