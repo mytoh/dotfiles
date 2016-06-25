@@ -74,7 +74,7 @@ bind CM-n unmap
 bind CM-p unmap
 bind CM-Return unmap
 bind CM-Delete unmap
-bind C-/ unmap
+#bind C-/ unmap
 bind CM-n unmap
 bind CM-x unmap
 bind CM-1 unmap
@@ -92,13 +92,13 @@ bind CMS-f unmap
 bind CM-s unmap
 bind CM-f unmap
 bind CM-m unmap
-bind CM-= unmap
-bind CMS-= unmap
+#bind CM-= unmap
+#bind CMS-= unmap
 bind CM-w unmap
 bind CMS-r unmap
 bind CMS-q unmap
-bind CM-M1 unmap
-bind CMS-M3 unmap
+#bind CM-M1 unmap
+#bind CMS-M3 unmap
 bind CM-h unmap
 bind CM-j unmap
 bind CM-k unmap
@@ -152,6 +152,9 @@ bind 4S-q quit
 bind 4-t htile
 #     vtile               Current window is placed on the left of the screen and maximized vertically, other windows in its group share remaining screen space.
 bind 4S-t vtile
+
+# launcher
+bind 4-p "rofi -show run -font 'k10 10' -fg '#505050' -bg '#000000' -hlfg '#ffb964' -hlbg '#000000'"
 
 ## mouse
 mousebind 4-1 window_move
