@@ -51,6 +51,8 @@ sticky yes
 ## 1
 autogroup 1 "mlterm,mlterm"
 autogroup 1 "urxvt,URxvt"
+autogroup 1 st-256color
+autogroup 1 st
 ## 2
 autogroup 2 Conkeror
 autogroup 2 Corebird
