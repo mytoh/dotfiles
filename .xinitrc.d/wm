@@ -32,6 +32,7 @@ start_wm() {
             windowmaker)  exec ck-launch-session dbus-launch --exit-with-session wmaker ;;
             mate)         exec ck-launch-session dbus-launch --exit-with-session mate-session ;;
             metisse)      exec ck-launch-session dbus-launch --exit-with-session metisse-start-fvwm ;;
+            monsterwm)      exec ck-launch-session dbus-launch --exit-with-session monsterwm ;;
             lxde)      exec dbus-launch --exit-with-session ck-launch-session startlxde ;;
             wm)   exec sbcl --script ~/.emacs.d/vendor/github.com/mgi/wm/wm.lisp ;;
             cwm)   exec dbus-launch --exit-with-session ck-launch-session cwm ;;
