@@ -10,6 +10,6 @@
 # --format best[ext=webm]/best
 # --format bestvideo+bestaudio
 
---ffmpeg-location /home/mytoh/huone/työkaluvaja/bin
+# --ffmpeg-location /home/mytoh/huone/työkaluvaja/bin
 
---netrc
+# --netrc
