@@ -27,6 +27,7 @@ command emacs    emacs
 command xterm   xterm
 command urxvt   urxvt
 command mlterm   mlterm
+command st   "st -c st"
 command rofi     "rofi -show run -font 'k10 10' -fg '#505050' -bg '#000000' -hlfg '#ffb964' -hlbg '#000000'"
 command term  mlterm
 command pcmanfm  pcmanfm
