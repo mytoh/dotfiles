@@ -1,0 +1,12 @@
+
+
+! These options only take effect on startup.
+st.termname:     xterm-256color
+st.shell:        /bin/tcsh
+
+! These options can be reloaded live.
+st.font: Source Han Code JP:pixelsize=8:antialias=true:autohint=true
+st.xfps:         120
+st.actionfps:    60
+
+
