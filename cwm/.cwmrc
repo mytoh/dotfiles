@@ -60,6 +60,7 @@ autogroup 2 Corebird
 autogroup 2 Midori
 autogroup 2 Vimb
 autogroup 2 Firefox
+autogroup 2 "xwidget-emacs,Emacs"
 ## 3
 autogroup 3 Emacs
 ## 4
@@ -69,6 +70,7 @@ autogroup 5 Pqiv
 autogroup 5 feh
 autogroup 5 Sxiv
 autogroup 5 Pcmanfm
+autogroup 5 MComix
 
 # keys
 
