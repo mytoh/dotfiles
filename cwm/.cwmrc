@@ -31,6 +31,8 @@ command st   "st -c st"
 command rofi     "rofi -show run -font 'k10 10' -fg '#505050' -bg '#000000' -hlfg '#ffb964' -hlbg '#000000'"
 command term  mlterm
 command pcmanfm  pcmanfm
+command firefox  firefox
+command mcomix  mcomix 
 
 
 # Ignore programs by that name by not drawing borders around them.
@@ -42,6 +44,7 @@ ignore conky
 ignore dzen2
 ignore dmenu
 ignore rofi
+ignore tabbed
 
 
 # group
@@ -54,6 +57,7 @@ autogroup 1 "mlterm,mlterm"
 autogroup 1 "urxvt,URxvt"
 autogroup 1 st-256color
 autogroup 1 st
+autogroup 1 "xterm,XTerm"
 ## 2
 autogroup 2 Conkeror
 autogroup 2 Corebird
@@ -61,6 +65,10 @@ autogroup 2 Midori
 autogroup 2 Vimb
 autogroup 2 Firefox
 autogroup 2 "xwidget-emacs,Emacs"
+autogroup 2 Surf
+autogroup 2 "surf,tabbed"
+autogroup 2 "tabbed-surf,tabbed"
+
 ## 3
 autogroup 3 Emacs
 ## 4
@@ -75,95 +83,97 @@ autogroup 5 MComix
 # keys
 
 ## reset some bindings
-bind CM-n unmap
-bind CM-p unmap
-bind CM-Return unmap
-bind CM-Delete unmap
+unbind-key M-Return 
+unbind-key CM-n 
+unbind-key CM-p 
+unbind-key CM-Return 
+unbind-key CM-Delete 
 #bind C-/ unmap
-bind CM-n unmap
-bind CM-x unmap
-bind CM-1 unmap
-bind CM-2 unmap
-bind CM-3 unmap
-bind CM-4 unmap
-bind CM-5 unmap
-bind CM-6 unmap
-bind CM-7 unmap
-bind CM-8 unmap
-bind CM-9 unmap
-bind CM-0 unmap
-bind CM-g unmap
-bind CMS-f unmap
-bind CM-s unmap
-bind CM-f unmap
-bind CM-m unmap
+unbind-key CM-n 
+unbind-key CM-x 
+unbind-key CM-1 
+unbind-key CM-2 
+unbind-key CM-3 
+unbind-key CM-4 
+unbind-key CM-5 
+unbind-key CM-6 
+unbind-key CM-7 
+unbind-key CM-8 
+unbind-key CM-9 
+unbind-key CM-0 
+unbind-key CM-g 
+unbind-key CMS-f 
+unbind-key CM-s 
+unbind-key CM-f 
+unbind-key CM-m 
 #bind CM-= unmap
 #bind CMS-= unmap
-bind CM-w unmap
-bind CMS-r unmap
-bind CMS-q unmap
+unbind-key CM-w 
+unbind-key CMS-r 
+unbind-key CMS-q 
 #bind CM-M1 unmap
 #bind CMS-M3 unmap
-bind CM-h unmap
-bind CM-j unmap
-bind CM-k unmap
-bind CM-l unmap
-bind CMS-h unmap
-bind CMS-j unmap
-bind CMS-k unmap
-bind CMS-l unmap
+unbind-key CM-h 
+unbind-key CM-j 
+unbind-key CM-k 
+unbind-key CM-l 
+unbind-key CMS-h 
+unbind-key CMS-j 
+unbind-key CMS-k 
+unbind-key CMS-l 
 
-bind C-Up unmap
-bind C-Down unmap
-bind C-Left unmap
-bind C-Right unmap
-bind CS-Up unmap
-bind CS-Down unmap
-bind CS-Left unmap
-bind CS-Right unmap
+unbind-key C-Up 
+unbind-key C-Down 
+unbind-key C-Left 
+unbind-key C-Right 
+unbind-key CS-Up 
+unbind-key CS-Down 
+unbind-key CS-Left 
+unbind-key CS-Right 
 
 ## groups
-bind 4-0 nogroup
-bind 4-1 grouponly1
-bind 4-2 grouponly2
-bind 4-3 grouponly3
-bind 4-4 grouponly4
-bind 4-5 grouponly5
-bind 4-6 grouponly6
-bind 4-7 grouponly7
-bind 4-8 grouponly8
-bind 4-9 grouponly9
+#bind 4-0 nogroup
+bind-key 4-1 group-only-1
+bind-key 4-2 group-only-2
+bind-key 4-3 group-only-3
+bind-key 4-4 group-only-4
+bind-key 4-5 group-only-5
+bind-key 4-6 group-only-6
+bind-key 4-7 group-only-7
+bind-key 4-8 group-only-8
+bind-key 4-9 group-only-9
 
-bind 4S-1 movetogroup1
-bind 4S-2 movetogroup2
-bind 4S-3 movetogroup3
-bind 4S-4 movetogroup4
-bind 4S-5 movetogroup5
-bind 4S-6 movetogroup6
-bind 4S-7 movetogroup7
-bind 4S-8 movetogroup8
-bind 4S-9 movetogroup9
+bind-key 4S-1 window-movetogroup-1
+bind-key 4S-2 window-movetogroup-2
+bind-key 4S-3 window-movetogroup-3
+bind-key 4S-4 window-movetogroup-4
+bind-key 4S-5 window-movetogroup-5
+bind-key 4S-6 window-movetogroup-6
+bind-key 4S-7 window-movetogroup-7
+bind-key 4S-8 window-movetogroup-8
+bind-key 4S-9 window-movetogroup-9
 
 ## windows
-bind 4S-c  delete
-bind 4-f   maximize
-bind 4-Tab cycle
+bind-key 4S-c  window-delete
+bind-key 4-f   window-maximize
+bind-key 4S-f   window-fullscreen
+bind-key 4-Tab window-cycle
 
 ##     restart             Restart the running cwm(1).
-bind 4-q restart
+bind-key 4-q restart
 ##     quit                Quit cwm(1).
-bind 4S-q quit
+bind-key 4S-q quit
 ##     htile               Current window is placed at the top of the screen and maximized horizontally, other windows in its group share remaining screen space.
-bind 4-t htile
+bind-key 4-t window-htile
 #     vtile               Current window is placed on the left of the screen and maximized vertically, other windows in its group share remaining screen space.
-bind 4S-t vtile
+bind-key 4S-t window-vtile
 
 # launcher
-bind 4-p "rofi -show run -font 'k10 10' -fg '#505050' -bg '#000000' -hlfg '#ffb964' -hlbg '#000000'"
+bind-key 4-p "rofi -show run -font 'k10 10' -fg '#505050' -bg '#000000' -hlfg '#ffb964' -hlbg '#000000'"
 
 ## mouse
-mousebind 4-1 window_move
-mousebind 4-3 window_resize
+bind-mouse 4-1 window-move
+bind-mouse 4-3 window-resize
 
 
 # memo

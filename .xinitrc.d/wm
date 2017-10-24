@@ -37,6 +37,7 @@ start_wm() {
             wm)   exec sbcl --script ~/.emacs.d/vendor/github.com/mgi/wm/wm.lisp ;;
             cwm)   exec dbus-launch --exit-with-session ck-launch-session cwm ;;
             i3)   exec dbus-launch --exit-with-session ck-launch-session i3 ;;
+            jwm)   exec jwm ;;
             twm)
                 vdesk &
                 exec dbus-launch --exit-with-session ck-launch-session twm ;;

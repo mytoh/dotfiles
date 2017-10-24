@@ -18,6 +18,9 @@ set-option -g pane-border-bg default
 set-option -g pane-border-fg colour238
 set-option -g pane-active-border-bg default
 set-option -g pane-active-border-fg colour31
+set -g pane-border-status top
+set -g pane-border-format " #{pane_current_command} "
+
 
 # message text
 set-option -g message-bg colour235 #base02

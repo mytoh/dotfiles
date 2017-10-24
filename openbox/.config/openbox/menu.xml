@@ -13,7 +13,7 @@
       </startupnotify>
     </action>
   </item>
-  <item label="Conkeror" icon="~/huone/ohjelmat/conkeror/contrib/art/conkeror.svg">
+  <item label="Conkeror" icon="~/huone/ohjelmat/conkeror/contrib/art/nut.svg">
     <action name="Execute">
       <command>conkeror</command>
       <startupnotify>
@@ -24,6 +24,22 @@
   <item label="mlterm" icon="/usr/local/share/icons/Adwaita/scalable/apps/utilities-terminal-symbolic.svg">
     <action name="Execute">
       <command>mlterm</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="mcomix" icon="/usr/local/share/icons/hicolor/16x16/apps/mcomix.png">
+    <action name="Execute">
+      <command>mcomix</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="pcmanfm" icon="/usr/local/share/icons/Adwaita/scalable/apps/system-file-manager-symbolic.svg">
+    <action name="Execute">
+      <command>pcmanfm</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>

@@ -1,15 +1,41 @@
 
---external-downloader aria2c
+# --external-downloader aria2c
+# --external-downloader-args '--download-result=hide'
+
+--proxy proxy.koti:3128
+
+# --merge-output-format mkv
 
 #--prefer-ffmpeg
---prefer-avconv
+#--prefer-avconv
 
---prefer-free-formats        # Prefer free video formats unless a specific one is requested
+#--prefer-free-formats        # Prefer free video formats unless a specific one is requested
 
 # https://github.com/rg3/youtube-dl/issues/6018
 # --format best[ext=webm]/best
-# --format bestvideo+bestaudio
+ # --format medium
+ # --format [protocol!=http_dash_segments]
 
 --ffmpeg-location /home/mytoh/huone/komero/bin
 
 --netrc
+
+# --audio-format opus
+
+    # --console-title
+    # --default-search ytsearch
+    # --external-downloader aria2c
+    # --external-downloader-args '--download-result=hide'
+    # --hls-prefer-native
+    # --hls-use-mpegts
+    # --merge-output-format mkv
+    # --no-cache-dir
+    # --no-call-home
+    # --no-mtime
+    # --no-part
+    # --output /tmp/ytdl/%(id)s_%(title)s.%(ext)s
+    # --prefer-ffmpeg
+    # --prefer-free-formats
+    # --proxy http://127.0.0.1:8118
+    # --restrict-filenames
+    # --youtube-skip-dash-manifest

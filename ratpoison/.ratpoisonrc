@@ -34,11 +34,11 @@ definekey top s-3 exec ratpoison -c "gselect 2" -c "select -" -c "only" -c "next
 definekey top s-4 exec ratpoison -c "gselect 3" -c "select -" -c "only" -c "next" -c "info [%n] %t"
 definekey top s-5 exec ratpoison -c "gselect 4" -c "select -" -c "only" -c "next" -c "info [%n] %t"
 
-definekey top s-exclam     gmove default
-definekey top s-quotedbl   gmove web
-definekey top s-numbersign gmove dev
-definekey top s-dollar     gmove media
-definekey top s-percent     gmove media
+definekey top S-s-1     gmove default
+definekey top S-s-2 gmove web
+definekey top S-s-3 gmove dev
+definekey top S-s-4     gmove media
+definekey top S-s-5     gmove media
 
 ##
 definekey top s-q restart

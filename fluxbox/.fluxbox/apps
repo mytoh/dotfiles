@@ -16,6 +16,8 @@
 [end]
 [app] (class=Emacs)
   [Workspace]	{2}
+  [Maximized]	{yes}
+  [Alpha]	{255}
 [end]
 [app] (class=MPlayer)
   [Workspace]	{3}

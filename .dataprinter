@@ -1,0 +1,32 @@
+# -*- mode: cperl -*-
+# [[https://github.com/kablamo/dotfiles/blob/master/copy/.dataprinter][dotfiles/.dataprinter at master · kablamo/dotfiles · GitHub]]
+{
+    indent  => 2,
+    filters => {
+        -external => [ qw/DB DateTime/ ],
+         'Catalyst::Request' => sub {
+             my $req = shift;
+             return "Cookies: " . p($req->cookies)
+         },
+    },
+    colored => 1,
+    color => {
+        array       => 'white',   # array index numbers
+        number      => 'bright_blue',   # numbers
+        string      => 'bright_blue',   # strings
+        class       => 'bright_green',   # class names
+        method      => 'white',   # method names
+        undef       => 'bright_blue',   # the 'undef' value
+        hash        => 'magenta',   # hash keys
+        regex       => 'bright_blue',   # regular expressions
+        code        => 'bright_blue',   # code references
+        glob        => 'bright_blue',   # globs (usually file handles)
+        vstring     => 'bright_blue',   # version strings (v5.16.0, etc)
+        repeated    => 'white',   # references to seen values
+        caller_info => 'white',   # details on what's being printed
+        weak        => 'white',   # weak references
+        tainted     => 'white',   # tainted content
+        escaped     => 'bright_blue',   # escaped characters (\t, \n, 
+    },
+
+};

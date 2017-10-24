@@ -51,11 +51,11 @@ start_apps() {
     setxkbmap dvorak
     xmodmap $HOME/.xmodmaprc
     xset b off # turn off beep
-    xset r rate 200 60
+    # xset r rate 200 60
     xsetroot -cursor_name right_ptr
     # audio volume
-    mixer vol 50
-    mixer pcm 20
+    mixer vol 10
+    mixer pcm 10
     # urxvtcd &
     dunst &
     #thunar --daemon &

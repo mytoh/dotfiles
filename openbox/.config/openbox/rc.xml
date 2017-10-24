@@ -4,7 +4,7 @@
 <openbox_config xmlns="http://openbox.org/3.4/rc" xmlns:xi="http://www.w3.org/2001/XInclude">
   <resistance>
     <strength>10</strength>
-    <screen_edge_strength>20</screen_edge_strength>
+    <screen_edge_strength>0</screen_edge_strength>
   </resistance>
   <focus>
     <focusNew>yes</focusNew>
@@ -39,7 +39,7 @@
                   'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>yellow</name>
+    <name>Flattastic-Red</name>
     <titleLayout>NLIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -266,7 +266,7 @@
     <!-- number of pixels the mouse must move before a drag begins -->
     <doubleClickTime>500</doubleClickTime>
     <!-- in milliseconds (1000 = 1 second) -->
-    <screenEdgeWarpTime>400</screenEdgeWarpTime>
+    <screenEdgeWarpTime>0</screenEdgeWarpTime>
     <!-- Time before changing desktops when the pointer touches the edge of the
        screen while moving a window, in milliseconds (1000 = 1 second).
        Set this to 0 to disable warping -->
@@ -718,12 +718,14 @@
     <!-- added -->
     <application class="mlterm">
       <desktop>1</desktop>
+      <fullscreen>yes</fullscreen>
     </application>
     <application class="URxvt">
       <desktop>1</desktop>
     </application>
     <application class="Conkeror*">
       <desktop>2</desktop>
+      <fullscreen>yes</fullscreen>
     </application>
     <application class="Firefox*">
       <desktop>2</desktop>
@@ -731,6 +733,7 @@
     <application class="Emacs">
       <desktop>3</desktop>
       <focus>yes</focus>
+      <fullscreen>yes</fullscreen>
     </application>
     <application class="mpv">
       <desktop>4</desktop>

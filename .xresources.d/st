@@ -1,4 +1,4 @@
-
+! -*- firestarter: "xrdb ~/.Xresources" -* -
 
 ! These options only take effect on startup.
 st.termname:     xterm-256color
@@ -6,7 +6,14 @@ st.shell:        /bin/tcsh
 
 ! These options can be reloaded live.
 ! st.font: Source Han Code JP:pixelsize=8:antialias=true:autohint=true
-st.font: Fira Code:pixelsize=8:antialias=true:autohint=true
+! st.font: Fira Code:pixelsize=10:antialias=true:autohint=true
+! st.font: M+ 2m:pixelsize=10:antialias=true:autohint=true
+! st.font: Comic Sans MS:pixelsize=10:antialias=true:autohint=true
+
+st.font: yuki:pixelsize=9
+st.chscale: 1.2
+st.cwscale: 1.0
+
 st.xfps:         120
 st.actionfps:    60
 
