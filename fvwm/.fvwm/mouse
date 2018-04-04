@@ -1,4 +1,4 @@
--*- mode: fvwm -*-
+# -*- mode: fvwm -*-
 
 # some simple default mouse bindings:
 #   for the root window:

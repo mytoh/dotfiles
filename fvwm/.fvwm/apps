@@ -1,7 +1,8 @@
--*- mode: fvwm -*-
+# -*- mode: fvwm -*-
 
 ## desktop 1
-Style mlterm     StartsOnPage 0 0, SkipMapping
+Style mlterm     StartsOnPage 0 0, SkipMapping, NoTitle, StaysPut, BorderWidth 0, !Borders
+Style urxvt     StartsOnPage 0 0, SkipMapping, NoTitle, StaysPut, BorderWidth 0, !Borders
 ## desktop 2
 Style Firefox*   StartsOnPage 1 0, SkipMapping
 Style Conkeror*   StartsOnPage 1 0, SkipMapping
@@ -9,10 +10,10 @@ Style Conkeror*   StartsOnPage 1 0, SkipMapping
 Style Emacs*     StartsOnPage 2 0, SkipMapping
 
 ## desktop 4
-Style mpv*     StartsOnPage 3 0, SkipMapping
+Style mpv*     StartsOnPage 3 0, SkipMapping, NoTitle, StaysPut, BorderWidth 0, !Borders
 
 ## desktop 5
-Style Sxiv*     StartsOnPage 4 0, SkipMapping
-Style feh*     StartsOnPage 4 0, SkipMapping
-Style Pqiv*     StartsOnPage 4 0, SkipMapping
-Style Pcmanfm*     StartsOnPage 4 0, SkipMapping
+Style Sxiv*     StartsOnPage 4 0, SkipMapping, NoTitle, StaysPut, BorderWidth 0, !Borders
+Style feh*     StartsOnPage 4 0, SkipMapping, NoTitle, StaysPut, BorderWidth 0, !Borders
+Style Pqiv*     StartsOnPage 4 0, SkipMapping, NoTitle, StaysPut, BorderWidth 0, !Borders
+Style Pcmanfm*     StartsOnPage 4 0, SkipMapping, NoTitle, StaysPut, BorderWidth 0, !Borders

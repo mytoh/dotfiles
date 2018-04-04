@@ -1,4 +1,4 @@
--*- mode: fvwm -*-
+# -*- mode: fvwm -*-
 
 #Active
 # Colorset 1 NoShape,  bg #181512, fg #9a875f
@@ -77,11 +77,11 @@
 # Style * UseDecor DefaultDecor
 # Style * !Title
 
-ButtonStyle 3 \
-        ActiveUp (AdjustedPixmap gearfolder_32.png) \
-        ActiveDown (AdjustedPixmap Xx.png) \
-        Inactive (AdjustedPixmap gearfolder_32.png) 
-ButtonStyle 4 \
-        ActiveUp (AdjustedPixmap Jupiter_32.png) \
-        ActiveDown (AdjustedPixmap Xx.png) \
-        Inactive (AdjustedPixmap Jupiter_32.png) 
+# ButtonStyle 3 \
+#         ActiveUp (AdjustedPixmap gearfolder_32.png) \
+#         ActiveDown (AdjustedPixmap Xx.png) \
+#         Inactive (AdjustedPixmap gearfolder_32.png) 
+# ButtonStyle 4 \
+#         ActiveUp (AdjustedPixmap Jupiter_32.png) \
+#         ActiveDown (AdjustedPixmap Xx.png) \
+#         Inactive (AdjustedPixmap Jupiter_32.png) 

@@ -1,16 +1,24 @@
--*- mode: fvwm -*-
+# -*- mode: fvwm -*-
 
 # Super-Tab:
-Key Tab A 4 WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Super_L
+# Key Tab A 4 WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Super_L
+
+# [[https://www.shuangrimu.com/posts/fvwm-and-alt-tab.html][Shuang Rimu]]
+DestroyFunc WindowListFunc
+AddToFunc WindowListFunc
++ I Iconify off
++ I FlipFocus
++ I Raise
+Key Tab A 4 WindowList (CurrentPage) Root c c CurrentDesk, NoGeometry, CurrentAtEnd, IconifiedAtEnd, SelectOnRelease Super_L
 
 # Super-#:
-Key 1 A 4  MyGotoPage 0 0 
+Key 1 A 4  MyGotoPage 0 0
 Key 2 A 4  MyGotoPage 1 0
 Key 3 A 4  MyGotoPage 2 0
 Key 4 A 4  MyGotoPage 3 0
 Key 5 A 4  MyGotoPage 4 0
 
-Key 1 A s4 MoveToPage 0 0 
+Key 1 A s4 MoveToPage 0 0
 Key 2 A s4 MoveToPage 1 0
 Key 3 A s4 MoveToPage 2 0
 Key 4 A s4 MoveToPage 3 0
