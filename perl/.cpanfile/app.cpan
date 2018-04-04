@@ -1,0 +1,32 @@
+
+requires 'App::cpm';
+requires 'Carton';
+requires 'Carmel';
+requires 'Perl::PrereqDistributionGatherer', git => 'https://github.com/skaji/Perl-PrereqDistributionGatherer';
+requires 'Carl', git => 'https://github.com/skaji/Carl';
+requires 'Minilla';
+requires 'App::cpanoutdated';
+requires 'App::GitGot';
+requires 'App::WatchLater';
+requires 'App::Critique';
+
+requires 'App::PRT';
+requires 'App::GitHooks';
+requires 'App::PPE';
+requires 'App::Monastery', git => 'https://github.com/ccakes/p5-app-monastery';
+requires 'App::cpanmodules';
+
+requires 'Pod::Cpandoc';
+requires 'Pod::Minicpandoc';
+requires 'pmtools';
+
+requires 'Daiku';
+requires 'App::LJ';
+requires 'App::Greple';
+requires 'App::pmuninstall';
+requires 'App::p';
+requires 'Pod::Webserver';
+requires 'App::RemoteCommand', git => 'https://github.com/skaji/App-RemoteCommand';
+requires 'Filesys::DiskUsage'; # fdu command
+
+requires 'App::CmdDirs';

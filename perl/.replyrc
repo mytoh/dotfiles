@@ -1,0 +1,41 @@
+; -*- mode: conf -*-
+ ; [[http://perladvent.org/2015/2015-12-08.html][Perl Advent Calendar 2015 - Live programming perl with Reply]]
+
+script_line1 = use strict
+script_line2 = use warnings
+script_line3 = use utf8
+script_line4 = use warnings qw<FATAL utf8>
+script_line5 = use feature ":5.28"
+script_line6 = use open qw<:std :encoding(UTF-8)>
+script_line7 = use experimental qw<signatures re_strict>
+script_line8 = use re 'strict'
+script_line9 = use Unicode::UTF8 qw<decode_utf8 encode_utf8>
+
+
+
+[AutoRefresh]
+[Interrupt]
+[Colors]
+[ReadLine]
+[Hints]
+[Packages]
+[LexicalPersistence]
+[ResultCache]
+[Autocomplete::Packages]
+[Autocomplete::Lexicals]
+[Autocomplete::Functions]
+[Autocomplete::Globals]
+[Autocomplete::Methods]
+[Autocomplete::Commands]
+
+; [DataDumper]
+[DataPrinter]
+
+ ; in your .replyrc use following instead of [FancyPrompt] (or other prompt plugin)
+[FancyPrompt]
+; [ConfigurablePrompt]
+; prompt="reply $history_count \$ "
+
+[LoadClass]
+[Timer]
+[TypeTiny]

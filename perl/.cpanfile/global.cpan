@@ -1,0 +1,94 @@
+#  perl -MExtUtils::Installed -e 'print "$_\n" for ExtUtils::Installed->new->modules' > modules.txt
+
+requires "Data::Printer";
+requires 'Data::Show';
+
+# [[https://www.youtube.com/watch?v=ob6YHpcXmTg][Keynote by Damian Conway - "Three Little Words" - YouTube]]
+requires 'Data::Dx';
+requires "File::chdir";
+
+requires "Perl::Tidy";
+requires "Perl::Tidy::Sweetened";
+requires 'Code::TidyAll';
+requires "Module::FromPerlVer";
+requires "FindBin::libs", '== 2.12';
+requires "Project::Libs";
+requires 'Class::Tiny';
+requires 'File::HomeDir';
+requires 'List::AllUtils';
+requires 'List::MoreUtils';
+requires 'List::SomeUtils';
+requires 'List::UtilsBy';
+requires 'Object::Simple';
+
+requires 'Path::Tiny';
+requires 'PerlIO::utf8_strict';
+
+requires 'File::Next';
+requires 'File::Find::Rule';
+requires 'File::Find::Rule::LibMagic';
+requires 'File::MimeInfo';
+
+requires 'Perl::Lint';
+requires 'Archive::Extract';
+requires 'Archive::Any';
+requires 'Archive::Any::Plugin::Rar';
+requires 'Archive::Rar';
+requires 'IO::Uncompress::UnXz';
+requires 'Imager';
+requires 'Proc::ProcessTable::Colorizer';
+requires 'Term::Size';
+requires 'Time::HiRes';
+requires 'Unicode::UTF8';
+requires 'perlsecret';
+requires 'L';
+requires 'Rex';
+requires 'Ref::Util';
+requires 'Const::Fast';
+requires 'File::Rename';
+requires 'PlSense', dist =>
+'https://github.com/aki2o/plsense/releases/download/v0.3.4/PlSense-0.3.4.tar.gz';
+requires 'HTTP::Parser::XS';
+requires 'WWW::YouTube::Download';
+requires 'LWP::Protocol::https';
+requires 'Smart::Args::TypeTiny';
+requires 'Regexp::Debugger';
+requires 'Carp::Always';
+requires 'Cwd::utf8';
+requires 'File::Basename::Extra';
+requires 'Moxie';
+requires 'Ref::Util';
+requires 'Import::Into';
+requires 'IPC::System::Simple';
+requires 'Desktop::Notify';
+requires 'File::Slurper';
+requires 'Config::PL';
+requires 'List::Flatten::XS';
+requires 'Web::Query';
+requires 'XML::LibXML';
+requires 'autovivification';
+requires 'Cpanel::JSON::XS';
+requires 'JSON::XS';
+requires 'JSON::MaybeXS';
+requires 'JSON::MaybeUTF8';
+requires 'Image::JpegTran';
+
+requires 'IO::Socket::SSL';
+requires 'Net::DNS::Lite';
+requires 'Cache::LRU';
+requires 'Furl';
+requires 'File::XDG';
+requires 'File::ConfigDir';
+
+# for ls--
+requires 'Term::ExtendedColor';
+
+# strictures 2
+requires 'strictures';
+## PERL_STRICTURES_EXTRA
+requires 'indirect';
+requires 'multidimensional';
+requires 'bareword::filehandles';
+requires 'URI::Fast';
+requires 'URI::Escape::XS';
+requires 'Any::URI::Escape';

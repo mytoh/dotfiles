@@ -28,5 +28,7 @@
         tainted     => 'white',   # tainted content
         escaped     => 'bright_blue',   # escaped characters (\t, \n, 
     },
+    deparse => 1,
+    use_prototypes => 0,
 
 };

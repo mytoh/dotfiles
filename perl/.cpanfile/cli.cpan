@@ -1,0 +1,6 @@
+
+requires 'App::Cmd';
+requires 'CLI::Helpers';
+requires 'Getopt::Long::Descriptive';
+requires 'Smart::Options';
+requires 'Getopt::Kingpin'; 

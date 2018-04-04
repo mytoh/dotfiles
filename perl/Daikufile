@@ -1,0 +1,132 @@
+use feature ':5.28';
+use File::Path qw<remove_tree>;
+use File::Spec::Functions qw<catfile catdir rel2abs>;
+
+namespace build => sub {
+
+  desc 'build blead perl';
+  task blead => sub {
+    sh 'perlbrew clean';
+    sh "echo Building perl";
+    sh "perlbrew list";
+    #sh "perlbrew install --notest -DSILENT_NO_TAINT_SUPPORT --thread --clang --ld --multi -Duseshrplib -Dusedevel -Doptimize='-O2 -pipe -fstack-protector -fno-strict-aliasing' blead";
+    sh "perlbrew install --notest -DSILENT_NO_TAINT_SUPPORT --clang --ld --multi -Duseshrplib -Dusedevel -Doptimize='-O2 -pipe -fstack-protector -fno-strict-aliasing' blead";
+    sh 'perlbrew lib create perl-blead@dev';
+    sh 'perlbrew clean';
+    sh 'echo run perlbrew switch perl-blead@dev and cpanm Daiku';
+  };
+ 
+  desc 'build blead perl as latest';
+  task latest => sub {
+    sh 'perlbrew clean';
+    sh "echo Building perl";
+    #sh "perlbrew install --notest -DSILENT_NO_TAINT_SUPPORT --thread --clang --ld --multi -Duseshrplib --as perl-latest blead";
+    sh "perlbrew install --notest -DSILENT_NO_TAINT_SUPPORT --clang --ld --multi -Duseshrplib --as perl-latest blead";
+    sh 'perlbrew lib create perl-latest@dev';
+    sh 'perlbrew clean';
+    sh 'echo run \'perlbrew switch perl-latest@dev\' and \'cpanm Daiku\'';
+  };
+
+  desc 'installing cpm';
+  task cpm => sub {
+    sh "cpanm --metacpan App::cpm";
+  };
+  
+  desc 'install cpanoutdated';
+  task cpanoutdated => 'build:cpm' => sub {
+    sh 'cpm install --global --no-prebuilt --workers=2 --dev --with-recommends --with-suggests App::cpanoutdated'; 
+   };
+};
+
+namespace cpanm => sub {
+
+  desc 'clean cpanm work directories';
+  task clean => sub {
+    my $dir = catfile(<~>, '.cpanm/work');
+    if ( -e $dir ) {
+      say "Deleting $dir";
+      remove_tree($dir);
+    }
+  };
+
+
+};
+
+
+namespace cpm => sub {
+
+  desc "clean cpm work directories";
+  task clean => 'build:cpm' => sub {
+    my $dirs = [catfile(<~>, '.perl-cpm/builds'),
+                catfile(<~>, '.perl-cpm/cache'),
+                catfile(<~>, '.perl-cpm/work' )];
+    foreach my $dir ( $dirs->@* ) {
+      if ( -d $dir) {
+        say "Deleting $dir";
+        remove_tree($dir);
+      }
+    } 
+  };
+
+  desc "install global modules";
+  task global => 'build:cpm' => sub {
+    my $cpanfile = catfile(<~>, '.cpanfile/global.cpan');
+    build 'cpm:clean';
+    build 'cpanm:clean';
+    sh "cpm install --global --no-prebuilt --workers=1 --dev --with-recommends --with-suggests --cpanfile=$cpanfile";
+    build 'cpm:clean';
+    build 'cpanm:clean';
+  };
+  
+  desc "install modules from cpanfile";
+  task cpanfile => 'build:cpm' => sub {
+    my ($task, @args) = @_;
+    foreach my $cpan (@args) {
+      my $cpanfile = catfile(<~>, '.cpanfile',$cpan . ".cpan");
+    build 'cpm:clean';
+    build 'cpanm:clean';
+      sh "cpm install --global --no-prebuilt --workers=1 --dev --with-recommends --with-suggests --cpanfile=$cpanfile";
+    build 'cpm:clean';
+    build 'cpanm:clean';
+    }
+  };
+  
+  desc "install dot perl modules";
+  task dotperl => 'build:cpm' => sub {
+    my $cpanfile = catfile(<~>, '.perl/cpanfile');
+    build 'cpm:clean';
+    build 'cpanm:clean';
+       sh "cpm install --global --no-prebuilt --workers=1 --dev --with-recommends --with-suggests --cpanfile=$cpanfile";
+    build 'cpm:clean';
+    build 'cpanm:clean';
+  };
+  
+  desc 'update outdated packages';
+  task update => 'build:cpanoutdated' => sub {
+    build 'cpm:clean';
+    build 'cpanm:clean';
+    sh 'cpan-outdated | xargs -n 1 cpm install --global --no-prebuilt --workers=2 --dev --with-recommends --with-suggests';
+    build 'cpm:clean';
+    build 'cpanm:clean';
+  };
+  
+  desc 'update outdated packages with all perls';
+  task updateall => 'build:cpanoutdated' => sub {
+    build 'cpm:clean';
+    build 'cpanm:clean';
+    sh "perlbrew exec --with latest\@dev,blead\@dev 'cpan-outdated | xargs -n 1 cpm install --global --no-prebuilt --workers=2 --dev --with-recommends --with-suggests'";
+    build 'cpm:clean';
+    build 'cpanm:clean';
+  };
+
+  desc "install modules for all installed perl versions";
+  task all => 'build:cpm' => sub {
+    my ($task, @modules) = @_;
+    build 'cpm:clean';
+    build 'cpanm:clean';
+      sh "perlbrew exec --with latest\@dev,blead\@dev cpm install --global --no-prebuilt --workers=1 --dev --with-recommends --with-suggests @{modules}";
+    build 'cpm:clean';
+    build 'cpanm:clean';
+  };
+
+};

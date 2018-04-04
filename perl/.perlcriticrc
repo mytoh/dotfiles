@@ -1,42 +1,72 @@
 ## [[https://metacpan.org/pod/Perl::Critic][Perl::Critic - Critique Perl source code for best-practices. - metacpan.org]]
 
+#Integer or named level
+severity  = 3
+#Zero or One
+only      = 1
+#Zero or One
+force     = 0
+#Integer or format spec
+verbose   = 4
+#A positive integer
+top       = 50
+#A theme expression
+theme     = pbp || security || bugs || freenode
+#Space-delimited list
+include   = NamingConventions ClassHierarchies
+#Space-delimited list
+exclude   = Variables  Modules::RequirePackage
+#Zero or One
+criticism-fatal = 1
+#Zero or One
+color     = 1
+#Zero or One
+allow-unsafe = 1
+#pager to pipe output to
+#pager     = less
+
 #--------------------------------------------------------------
 # I think these are really important, so always load them
- 
+
 [TestingAndDebugging::RequireUseStrict]
 severity = 5
- 
+
 [TestingAndDebugging::RequireUseWarnings]
 severity = 5
- 
+
 #--------------------------------------------------------------
 # I think these are less important, so only load when asked
- 
+
 [Variables::ProhibitPackageVars]
 severity = 2
- 
+
 [ControlStructures::ProhibitPostfixControls]
 # My custom configuration
-allow = if unless  
+allow = if unless
 # Same as "severity = 2"
-severity = cruel   
- 
+severity = cruel
+
 #--------------------------------------------------------------
 # Give these policies a custom theme.  I can activate just
 # these policies by saying `perlcritic -theme larry`
- 
+
 [Modules::RequireFilenameMatchesPackage]
 add_themes = larry
- 
+
 [TestingAndDebugging::RequireTestLabels]
 add_themes = larry curly moe
- 
+
 #--------------------------------------------------------------
 # I do not agree with these at all, so never load them
- 
+
 [-NamingConventions::Capitalization]
 [-ValuesAndExpressions::ProhibitMagicNumbers]
- 
+
 #--------------------------------------------------------------
 # For all other Policies, I accept the default severity,
 # so no additional configuration is required for them.
+
+## edit
+[Modules::ProhibitMultiplePackages]
+
+[Perl::Critic::Policy::Variables::ProhibitLoopOnHash]

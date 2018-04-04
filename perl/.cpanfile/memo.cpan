@@ -1,0 +1,53 @@
+requires 'Geo::IPinfo';
+requires 'StreamFinder';
+requires 'File::HomeDir::Tiny';
+requires 'Alt-File-HomeDir-Tiny-Pretty', git => 'https://github.com/Grinnz/Alt-File-HomeDir-Tiny-Pretty';
+requires 'Test::Against::Dev';
+
+# [[https://www.youtube.com/watch?v=IG425RMEkRo][Ricardo Signes (‎rjbs‎) - ‎1.21 Gigawatts‎ - YouTube]]
+requires 'List::AllUtils';
+requires 'aliased';
+requires 'PerlIO::gzip';
+requires 'if';
+requires 'Process::Status';
+requires 'Future::AsyncAwait';
+requires 'Config::Pit';
+
+requires 'Task::Kensho';
+requires 'Task::Perl::Critic';
+requires 'Moxie';
+requires 'XML::LibXML';
+
+requires ' Getopt::Kingpin';
+requires 'Wx::Perl::IconDepot';
+requires 'String::Tagged::Terminal';
+requires 'Directory::Scanner';
+requires 'Term::Twiddle';
+requires 'File::LibMagic';
+requires 'Hash::Merge::Simple';
+requires 'Data::Compare';
+requires 'File-Globstar';
+requires 'App::Prove::Plugin::CumulativeTimer';
+requires 'Defined::KV ';
+requires 'roles';
+requires 'Web::Query::LibXML';
+requires 'Role::Tiny';
+requires 'Getopt::Long::Descriptive';
+requires 'CLI::Startup';
+requires 'Lingua::EN::Inflexion';
+requires 'App::find2perl';
+requires 'App::s2p';
+requires 'IO::All::LWP';
+
+# [[https://www.youtube.com/watch?v=5P2eVaPj694][Array programming for mere mortals 4009 - YouTube]]
+requires 'Array::APX';
+requires 'Array::DeepUtils';
+
+#  [[https://www.youtube.com/watch?v=QgzcqxlVIVQ&t=2540s][‎Modern web scraping, Sawyer X - ‎YAPC::Russia 2015 - YouTube]] 
+requires 'Lingua::EN::Words2Nums';
+
+
+requires 'String::Glob::Permute';
+requires 'Time::Out'; #a [[http://perlmonks.org/index.pl?node_id=1209569][timer in perl]]
+
+requires 'https://metacpan.org/pod/Net::Traceroute::PurePerl' # [[https://www.perl.com/article/how-does-traceroute-work-/][How does traceroute work?]] [[https://www.reddit.com/r/perl/comments/80xbqq/how_does_traceroute_work/][How does traceroute work? : perl]]

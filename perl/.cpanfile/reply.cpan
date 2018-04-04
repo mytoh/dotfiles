@@ -1,0 +1,10 @@
+
+## repl
+requires 'Term::ReadLine::Gnu';
+requires 'Term::ReadLine::Perl';
+requires 'File::Next';
+requires 'Reply';
+requires 'Reply::Plugin::ConfigurablePrompt';
+requires 'Devel::REPL';
+requires 'Eval::WithLexicals';    # tinyrepl
+requires 'Class::Refresh';        # Reply::Plugin::AutoRefresh
