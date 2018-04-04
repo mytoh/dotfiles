@@ -4,11 +4,28 @@
 ! ------------
 
 ! xterm*font: FONT
+XTerm.termName: xterm-256color
+
+! Fonts ====================================================
+! set font and fontsize
+XTerm*faceName: DejaVu Sans Mono
+! xterm*faceName: terminus:pixelsize=10
+XTerm*faceSize: 10
+
+! VT Font Menu: Unreadable
+xterm*faceSize1: 8
+! VT font menu: Tiny
+xterm*faceSize2: 10
+! VT font menu: Medium
+xterm*faceSize3: 12
+! VT font menu: Large
+xterm*faceSize4: 16
+! VT font menu: Huge
+xterm*faceSize5: 22
 
 xterm*utf8: always
 xterm*utf8Fonts: always
 xterm*title: xterm
-xterm*faceName: terminus:pixelsize=10
 xterm*geometry: 90x25
 xterm*boldMode: false
 xterm*cutNewline: false

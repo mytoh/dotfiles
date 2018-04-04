@@ -2,14 +2,14 @@
 # --external-downloader aria2c
 # --external-downloader-args '--download-result=hide'
 
---proxy proxy.koti:3128
+# --proxy proxy.koti:3128
 
 # --merge-output-format mkv
 
 #--prefer-ffmpeg
 #--prefer-avconv
 
-#--prefer-free-formats        # Prefer free video formats unless a specific one is requested
+--prefer-free-formats        # Prefer free video formats unless a specific one is requested
 
 # https://github.com/rg3/youtube-dl/issues/6018
 # --format best[ext=webm]/best

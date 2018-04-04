@@ -2,11 +2,11 @@
 setw -g mode-keys emacs
 
 unbind C-b
-set -g prefix C-z
-unbind C-z
-bind C-z last-pane
-unbind z
-bind z send-prefix
+set -g prefix C-t
+unbind C-t
+bind C-t last-pane
+unbind t
+bind t send-prefix
 
 # screen ^C c
 unbind ^C

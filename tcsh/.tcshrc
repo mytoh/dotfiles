@@ -18,8 +18,9 @@
                     brew npm firefox go \
                    abduco dvtm peco sbcl luarocks \
                    epiki hoarder herd emb \
-    mosh surf perlbrew cpanm \
-    cpm)
+                   mosh surf \
+                   perlbrew perl cpanm  cpm \
+                   fasd)
 
     setenv shellar_bottles "${bottles}"
 

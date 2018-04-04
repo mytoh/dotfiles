@@ -1,6 +1,6 @@
 
 # border
-borderwidth 2
+borderwidth 1
 
 # colours
 ## window colour
@@ -45,12 +45,13 @@ ignore dzen2
 ignore dmenu
 ignore rofi
 ignore tabbed
+ignore mpv
 
 
 # group
 
-## assign group# to new windows automatically
-sticky yes
+## assign group# to new windows automatically to currently selected group
+sticky no
 
 ## 1
 autogroup 1 "mlterm,mlterm"
