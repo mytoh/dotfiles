@@ -10,6 +10,7 @@
       <Program icon="emacs.png" label="Emacs">emacs</Program>
       <Program icon="terminal.png" label="st">st</Program>
       <Program icon="conkeror.png" label="Conkeror">conkeror</Program>
+      <Program label="Ptkyp">ptkyp.pl</Program>
       <Program icon="pcmanfm.png" label="Pcmanfm">pcmanfm</Program>
       <Program icon="mcomix.png" label="Mcomix">mcomix</Program>
       <Program icon="terminal.png" label="URxvt">urxvt</Program>
