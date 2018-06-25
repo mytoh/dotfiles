@@ -20,7 +20,7 @@
                    epiki hoarder herd emb \
                    mosh surf \
                    perlbrew perl cpanm  cpm \
-                   fasd)
+                   fasd rxvt-unicode sopcast)
 
     setenv shellar_bottles "${bottles}"
 

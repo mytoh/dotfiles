@@ -1,0 +1,9 @@
+# [[http://qiita.com/karupanerura/items/e765b23bd3bff806cc27]]
+
+requires 'HTTP::Parser::XS';
+requires 'Time::TZOffset';
+requires 'Cookie::Baker::XS';
+requires 'WWW::Form::UrlEncoded::XS';
+requires 'JSON::XS';
+requires 'Cpanel::JSON::XS';
+requires 'YAML::XS';

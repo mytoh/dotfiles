@@ -1,2 +1,2 @@
 
-# requires 'HTML::Tidy5';
+# requires 'HTML::Tidy5'; # cpanm --configure-args='CCFLAGS=-I/home/mytoh/huone/ohjelmat/tidy-html5/include' HTML::Tidy5

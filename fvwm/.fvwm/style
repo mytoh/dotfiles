@@ -6,6 +6,10 @@ Style * ResizeHintOverride
 # Keep the last focus while in root window
 Style "*" SloppyFocus
 
+Style * ClickToFocus
+Style * ResizeOpaque
+Style * OpaqueMoveSize unlimited
+
 # Button Styles
 ButtonStyle All -- UseTitleStyle flat
 ButtonStyle 1 14 20x20@1 20x70@1 70x70@0 70x20@0 20x20@1 60x60@0 60x50@0 60x60@0 50x60@0 60x60@0 60x80@0 80x80@0 80x60@0 60x60@0

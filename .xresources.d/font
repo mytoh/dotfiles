@@ -7,7 +7,7 @@
 
 ! [[http://lists.gnu.org/archive/html/emacs-devel/2016-12/msg00315.html][freetype rgba font rendering]]
 ! [[http://lists.gnu.org/archive/html/bug-gnu-emacs/2016-12/msg00424.html][bug#25147: 25.1; rgba font rendering not honoring fontconfig]]
-Xft.rgba: rgb
+! Xft.rgba: rgb
 
 ! #define FONT \
 ! -jmk-neep-medium-r-normal--10-80-75-75-c-50-*, \

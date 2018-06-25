@@ -2,12 +2,13 @@
 
 read ConfigFvwmSetup
 
-# Reading configs
 
+ImagePath $[fvwm_icons]:${HOME}/.icons:/usr/local/share/icons:/usr/local/share/pixmaps:+
 DeskTopSize 5x1
 
-Style * ClickToFocus
 
+# Reading configs
+read func
 read keys
 read mouse
 read menu
@@ -15,4 +16,3 @@ read apps
 read style
 read pager
 read titlebar
-read func

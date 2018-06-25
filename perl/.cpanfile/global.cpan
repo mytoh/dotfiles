@@ -10,7 +10,6 @@ requires "File::chdir";
 requires "Perl::Tidy";
 requires "Perl::Tidy::Sweetened";
 requires 'Code::TidyAll';
-requires "Module::FromPerlVer";
 requires "FindBin::libs", '== 2.12';
 requires "Project::Libs";
 requires 'Class::Tiny';
@@ -46,8 +45,7 @@ requires 'Rex';
 requires 'Ref::Util';
 requires 'Const::Fast';
 requires 'File::Rename';
-requires 'PlSense', dist =>
-'https://github.com/aki2o/plsense/releases/download/v0.3.4/PlSense-0.3.4.tar.gz';
+requires 'PlSense', url => 'https://github.com/aki2o/plsense/releases/download/v0.3.4/PlSense-0.3.4.tar.gz';
 requires 'HTTP::Parser::XS';
 requires 'WWW::YouTube::Download';
 requires 'LWP::Protocol::https';
@@ -92,3 +90,7 @@ requires 'bareword::filehandles';
 requires 'URI::Fast';
 requires 'URI::Escape::XS';
 requires 'Any::URI::Escape';
+
+requires 'WWW::Mechanize';
+requires 'Mozilla::PublicSuffix';
+requires 'HTTP::CookieJar::LWP';

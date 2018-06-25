@@ -17,3 +17,4 @@ Style Sxiv*     StartsOnPage 4 0, SkipMapping, NoTitle, StaysPut, BorderWidth 0,
 Style feh*     StartsOnPage 4 0, SkipMapping, NoTitle, StaysPut, BorderWidth 0, !Borders
 Style Pqiv*     StartsOnPage 4 0, SkipMapping, NoTitle, StaysPut, BorderWidth 0, !Borders
 Style Pcmanfm*     StartsOnPage 4 0, SkipMapping, NoTitle, StaysPut, BorderWidth 0, !Borders
+Style MComix*     StartsOnPage 4 0, SkipMapping, NoTitle, StaysPut, BorderWidth 0, !Borders

@@ -5,7 +5,7 @@
 urxvt.depth: 24
 urxvt.background: [93]#222222
 urxvt.foreground: #cdccbc
-urxvt.geometry: 100x40+100+100
+! urxvt.geometry: 100x40+100+100
 urxvt.multichar_encoding: utf-8
 urxvt.scrollBar: false
 urxvt.buffered: true
@@ -32,7 +32,8 @@ urxvt.inputMethod: ibus
 urxvt.preeditType: OverTheSpot
 !urxvt.backgroundPixmap: .wallpapers/background
 
-urxvt.perl-ext-common: default,matcher,clipboard-osc,tabbbed,xim-onthespot
+! urxvt.perl-ext-common: default,matcher,clipboard-osc,tabbbed,xim-onthespot,background,fullscreen,newterm
+urxvt.perl-ext-common: default,matcher,fullscreen,newterm,cursortail
 urxvt.urlLauncher: firefox
 urxvt.matcher.button: 1
 urxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-].[\\w/-]
@@ -45,3 +46,10 @@ urxvt.font: FONT
 urxvt.boldFont: FONT_BOLD
 ! urxvt.letterSpace: -1
 
+! URxvt.background.expr: scale keep { load "$HOME/.wallpapers/cell_opt.png" }
+
+! fullscreen
+URxvt.keysym.F1: perl:fullscreen:switch
+
+! newterm
+URxvt.keysym.C-S-N: perl:newterm

@@ -1,5 +1,10 @@
 # -*- mode: fvwm -*-
 
+# move window with Super + Left button
+Mouse 1 W 4 Move
+# resize window with Super + right button
+Mouse 3 W 4 Resize
+
 # some simple default mouse bindings:
 #   for the root window:
 Mouse 1 R       A       Nop

@@ -27,6 +27,15 @@ requires 'App::pmuninstall';
 requires 'App::p';
 requires 'Pod::Webserver';
 requires 'App::RemoteCommand', git => 'https://github.com/skaji/App-RemoteCommand';
-requires 'Filesys::DiskUsage'; # fdu command
+requires 'Filesys::DiskUsage';  # fdu command
 
 requires 'App::CmdDirs';
+requires 'App::perlfind';
+requires 'App::find2perl';
+requires 'App::a2p';
+requires 'App::s2p';
+requires 'App::diffwc';
+requires 'App::CPANRepo';
+requires 'Perl::PrereqScanner::NotQuiteLite'
+  # requires 'App::CPANGhq'; # requires ghq binary
+  # requires 'App::rhich', git => 'https://github.com/briandfoy/app-rhich';

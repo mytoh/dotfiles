@@ -16,9 +16,9 @@
  # --format medium
  # --format [protocol!=http_dash_segments]
 
---ffmpeg-location /home/mytoh/huone/komero/bin
+#--ffmpeg-location /home/mytoh/huone/komero/bin
 
---netrc
+# --netrc
 
 # --audio-format opus
 

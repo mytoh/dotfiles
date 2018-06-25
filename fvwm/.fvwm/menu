@@ -8,6 +8,7 @@ AddToMenu MenuFvwmRoot  "$[gt.Root Menu]"             Title
 +                       "&3. mlterm"              Exec exec mlterm
 +                       "&4. conkeror"              Exec exec conkeror
 +                       "&5. emacs"              Exec exec emacs
++                       "&5. Run"              Exec exec dmenu_run
 +                       ""              Nop
 +                       "&R. $[gt.Remote Logins]"     Popup MenuFvwmLogins
 +                       ""              Nop

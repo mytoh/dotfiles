@@ -26,3 +26,12 @@ Key 5 A s4 MoveToPage 4 0
 
 # Super-shift-c
 key c A S4 Close
+
+# maximize
+key f A 4 Maximize 100 100
+
+# restart
+key q A 4 Restart
+
+# dmenu
+key r A 4 Exec exec dmenu_run

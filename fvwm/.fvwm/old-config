@@ -1,3 +1,5 @@
+# -*- mode: fvwm -*-
+
 #xterm this is a bare bones sample .fvwm2rc/system.fvwm2rc file for fvwm.
 # It should be customized before install.  See other sample .fvwm2rc files
 # for hints, as well as pointers from the various links on the official
@@ -85,30 +87,30 @@ Colorset 9 fg black, bg white, sh white
 # }}}
 
 # Cursorstyle {{{
-CursorStyle ROOT         right_ptr		black	white
-CursorStyle POSITION     right_ptr	black	white
-CursorStyle TITLE        right_ptr		black	white
-CursorStyle DEFAULT      right_ptr		black	white
-CursorStyle SYS          hand2			black	white
-CursorStyle MOVE         fleur			black	white
-CursorStyle RESIZE       sizing			black	white
-CursorStyle WAIT         watch			black	white
-CursorStyle MENU         right_ptr		black	white
-CursorStyle SELECT       crosshair		black	white
-CursorStyle DESTROY      pirate			black	white
-CursorStyle TOP          top_side		black	white
-CursorStyle RIGHT        right_side		black	white
-CursorStyle BOTTOM       bottom_side		black	white
-CursorStyle LEFT         left_side		black	white
-CursorStyle TOP_LEFT     top_left_corner	black	white
-CursorStyle TOP_RIGHT    top_right_corner	black	white
-CursorStyle BOTTOM_LEFT  bottom_left_corner	black	white
-CursorStyle BOTTOM_RIGHT bottom_right_corner	black	white
-CursorStyle TOP_EDGE     top_side		black	white
-CursorStyle RIGHT_EDGE   right_side		black	white
-CursorStyle BOTTOM_EDGE  bottom_side		black	white
-CursorStyle LEFT_EDGE    left_side		black	white
-CursorStyle STROKE       plus			black	white
+CursorStyle ROOT         right_ptr      black   white
+CursorStyle POSITION     right_ptr  black   white
+CursorStyle TITLE        right_ptr      black   white
+CursorStyle DEFAULT      right_ptr      black   white
+CursorStyle SYS          hand2          black   white
+CursorStyle MOVE         fleur          black   white
+CursorStyle RESIZE       sizing         black   white
+CursorStyle WAIT         watch          black   white
+CursorStyle MENU         right_ptr      black   white
+CursorStyle SELECT       crosshair      black   white
+CursorStyle DESTROY      pirate         black   white
+CursorStyle TOP          top_side       black   white
+CursorStyle RIGHT        right_side     black   white
+CursorStyle BOTTOM       bottom_side        black   white
+CursorStyle LEFT         left_side      black   white
+CursorStyle TOP_LEFT     top_left_corner    black   white
+CursorStyle TOP_RIGHT    top_right_corner   black   white
+CursorStyle BOTTOM_LEFT  bottom_left_corner black   white
+CursorStyle BOTTOM_RIGHT bottom_right_corner    black   white
+CursorStyle TOP_EDGE     top_side       black   white
+CursorStyle RIGHT_EDGE   right_side     black   white
+CursorStyle BOTTOM_EDGE  bottom_side        black   white
+CursorStyle LEFT_EDGE    left_side      black   white
+CursorStyle STROKE       plus           black   white
 # }}}
 
 # default Styles {{{

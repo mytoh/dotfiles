@@ -39,15 +39,52 @@ requires 'App::find2perl';
 requires 'App::s2p';
 requires 'IO::All::LWP';
 
+requires 'Template::Nest';
+requires 'Struct::Match';
+requires 'Ithumb::XS';
+requires 'Data::BLNS';
+requires 'App::Netsync';
+requires 'AnyEvent::SOCKS::Client';
+
 # [[https://www.youtube.com/watch?v=5P2eVaPj694][Array programming for mere mortals 4009 - YouTube]]
 requires 'Array::APX';
 requires 'Array::DeepUtils';
 
-#  [[https://www.youtube.com/watch?v=QgzcqxlVIVQ&t=2540s][‎Modern web scraping, Sawyer X - ‎YAPC::Russia 2015 - YouTube]] 
+#  [[https://www.youtube.com/watch?v=QgzcqxlVIVQ&t=2540s][‎Modern web scraping, Sawyer X - ‎YAPC::Russia 2015 - YouTube]]
 requires 'Lingua::EN::Words2Nums';
 
 
 requires 'String::Glob::Permute';
 requires 'Time::Out'; #a [[http://perlmonks.org/index.pl?node_id=1209569][timer in perl]]
 
-requires 'https://metacpan.org/pod/Net::Traceroute::PurePerl' # [[https://www.perl.com/article/how-does-traceroute-work-/][How does traceroute work?]] [[https://www.reddit.com/r/perl/comments/80xbqq/how_does_traceroute_work/][How does traceroute work? : perl]]
+requires 'Net::Traceroute::PurePerl' # [[https://www.perl.com/article/how-does-traceroute-work-/][How does traceroute work?]] [[https://www.reddit.com/r/perl/comments/80xbqq/how_does_traceroute_work/][How does traceroute work? : perl]]
+
+# [[https://grep.metacpan.org/search?p=3&qd=&qft=&qci=&q=App::Cmd&qls=][App::Cmd results from the CPAN]]
+requires 'Bash::Completion::Plugins::App::Cmd'; # App::Cmd
+requires 'App::Standby'; # App::Cmd
+requires 'App::Rcsync'; # App::Cmd
+requires 'App::Munner'; # App::Cmd
+
+requires 'CPAN::cpanminus::reporter::RetainReports';
+
+# [[https://www.youtube.com/watch?v=Y1I1KcKvz9Q][2016 -‎Perl's Worst Best Practices‎ - Daina Pettit - YouTube]]
+requires 'Sub::Exporter';
+requires 'Exporter::Tiny';
+requires 'Exporter::Simple';
+
+requires 'CLI::Startup';
+requires 'MooX::Async::Console';
+requires 'IPC::Cmd';
+
+requires 'Term::Animation'
+
+ # [[https://www.youtube.com/watch?v=N8UDW9DJTvY&feature=youtu.be][Tatsuhiko Miyagawa - Writing Pluggable software - YouTube]]
+requires 'File::Extract';
+requires 'File::MMagic::XS';
+
+requires 'Text::Tags::Parser';
+
+# [[https://www.reddit.com/r/perl/comments/8lzvze/module_for_converting_strings_to_safe_filenames/][Too Many Requests]]
+requires 'pod/Encode::Safename';
+
+requires 'IO::Uncompress'; # IO::Uncompress::AnyUncompress

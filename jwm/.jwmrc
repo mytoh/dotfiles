@@ -13,6 +13,8 @@
       <Program icon="pcmanfm.png" label="Pcmanfm">pcmanfm</Program>
       <Program icon="mcomix.png" label="Mcomix">mcomix</Program>
       <Program icon="terminal.png" label="URxvt">urxvt</Program>
+      <Program icon="terminal.png" label="URxvtc">urxvtc</Program>
+    <Program icon="terminal.png" label="Urxvtcd">urxvtcd</Program>
     </Menu>
     <Menu icon="folder.png" label="Utilities">
       <Program icon="font.png" label="Fonts">xfontsel</Program>
@@ -55,6 +57,7 @@
   <!-- desktop 1 -->
   <Group>
     <Name>xterm</Name>
+    <Name>xterm-256color</Name>
     <Class>xterm</Class>
     <Class>URxvt</Class>
     <Option>desktop:1</Option>
@@ -269,8 +272,12 @@
   <Key mask="4" key="Down">ddesktop</Key>
   <Key mask="4" key="q">restart</Key>
   <Key mask="4" key="C">close</Key>
+  <Key mask="4" key="r">exec:dmenu_run</Key>
   
-  <Key mask="4" key="!">send#</Key>
-  <Key mask="4" key="@">send#</Key>
+  <Key mask="4" key="j">rdesktop</Key>
+  <Key mask="4" key="k">ldesktop</Key>
+
+   <Key mask="S4" key="#">send#</Key>
+   <Key mask="4" key="Return">exec:urxvtcd</Key>
 
 </JWM>

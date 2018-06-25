@@ -1,4 +1,4 @@
-use feature ':5.28';
+use v5.20;
 use File::Path qw<remove_tree>;
 use File::Spec::Functions qw<catfile catdir rel2abs>;
 
@@ -34,7 +34,7 @@ namespace build => sub {
   
   desc 'install cpanoutdated';
   task cpanoutdated => 'build:cpm' => sub {
-    sh 'cpm install --global --no-prebuilt --workers=2 --dev --with-recommends --with-suggests App::cpanoutdated'; 
+    sh 'cpm install --global --no-prebuilt --workers=2 --dev --without-test --with-recommends --with-suggests App::cpanoutdated'; 
    };
 };
 
@@ -73,7 +73,7 @@ namespace cpm => sub {
     my $cpanfile = catfile(<~>, '.cpanfile/global.cpan');
     build 'cpm:clean';
     build 'cpanm:clean';
-    sh "cpm install --global --no-prebuilt --workers=1 --dev --with-recommends --with-suggests --cpanfile=$cpanfile";
+    sh "cpm install --global --no-prebuilt --workers=2 --dev --without-test --with-recommends --with-suggests --cpanfile=$cpanfile";
     build 'cpm:clean';
     build 'cpanm:clean';
   };
@@ -85,7 +85,7 @@ namespace cpm => sub {
       my $cpanfile = catfile(<~>, '.cpanfile',$cpan . ".cpan");
     build 'cpm:clean';
     build 'cpanm:clean';
-      sh "cpm install --global --no-prebuilt --workers=1 --dev --with-recommends --with-suggests --cpanfile=$cpanfile";
+      sh "cpm install --global --no-prebuilt --workers=2 --dev --without-test --with-recommends --with-suggests --cpanfile=$cpanfile";
     build 'cpm:clean';
     build 'cpanm:clean';
     }
@@ -96,7 +96,7 @@ namespace cpm => sub {
     my $cpanfile = catfile(<~>, '.perl/cpanfile');
     build 'cpm:clean';
     build 'cpanm:clean';
-       sh "cpm install --global --no-prebuilt --workers=1 --dev --with-recommends --with-suggests --cpanfile=$cpanfile";
+       sh "cpm install --global --no-prebuilt --workers=2 --dev --without-test --with-recommends --with-suggests --cpanfile=$cpanfile";
     build 'cpm:clean';
     build 'cpanm:clean';
   };
@@ -105,7 +105,7 @@ namespace cpm => sub {
   task update => 'build:cpanoutdated' => sub {
     build 'cpm:clean';
     build 'cpanm:clean';
-    sh 'cpan-outdated | xargs -n 1 cpm install --global --no-prebuilt --workers=2 --dev --with-recommends --with-suggests';
+    sh 'cpan-outdated | xargs -n 1 cpm install --global --no-prebuilt --workers=2 --dev --without-test --with-recommends --with-suggests';
     build 'cpm:clean';
     build 'cpanm:clean';
   };
@@ -114,7 +114,7 @@ namespace cpm => sub {
   task updateall => 'build:cpanoutdated' => sub {
     build 'cpm:clean';
     build 'cpanm:clean';
-    sh "perlbrew exec --with latest\@dev,blead\@dev 'cpan-outdated | xargs -n 1 cpm install --global --no-prebuilt --workers=2 --dev --with-recommends --with-suggests'";
+    sh "perlbrew exec --with latest\@dev,blead\@dev 'cpan-outdated | xargs -n 1 cpm install --global --no-prebuilt --workers=2 --dev --without-test --with-recommends --with-suggests'";
     build 'cpm:clean';
     build 'cpanm:clean';
   };
@@ -124,7 +124,7 @@ namespace cpm => sub {
     my ($task, @modules) = @_;
     build 'cpm:clean';
     build 'cpanm:clean';
-      sh "perlbrew exec --with latest\@dev,blead\@dev cpm install --global --no-prebuilt --workers=1 --dev --with-recommends --with-suggests @{modules}";
+      sh "perlbrew exec --with latest\@dev,blead\@dev cpm install --global --no-prebuilt --workers=2 --dev --without-test --with-recommends --with-suggests @{modules}";
     build 'cpm:clean';
     build 'cpanm:clean';
   };
