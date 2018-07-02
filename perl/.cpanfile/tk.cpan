@@ -1,2 +1,4 @@
 
 requires 'Tk::CursorControl';
+requires 'Tk::DynaTabFrame';
+requires 'Tk::ObjectHandler';

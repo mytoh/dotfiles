@@ -26,3 +26,4 @@ requires "Perl::Critic::Policy::Variables::ProhibitLoopOnHash";
 requires 'App::PerlCriticUtils';
 requires 'Test::Perl::Critic::Progressive';
 requires 'Perl::Critic::Policy::Variables::ProhibitUnusedVarsStricter';
+requires 'Perl::Critic::TooMuchCode';
