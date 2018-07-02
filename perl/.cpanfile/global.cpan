@@ -1,6 +1,8 @@
 #  perl -MExtUtils::Installed -e 'print "$_\n" for ExtUtils::Installed->new->modules' > modules.txt
 
 requires "Data::Printer";
+requires "Data::Printer::Filter::URI";
+requires "Data::Printer::Filter::JSON";
 requires 'Data::Show';
 
 # [[https://www.youtube.com/watch?v=ob6YHpcXmTg][Keynote by Damian Conway - "Three Little Words" - YouTube]]

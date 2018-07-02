@@ -34,4 +34,4 @@
 #};
 
 deparse = 1
-filters = ContentType, Web
+filters = ContentType, Web, URI, JSON
